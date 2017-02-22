@@ -1,0 +1,68 @@
+//
+//  推送.pch
+//  LSProjectTool
+//
+//  Created by Xcode on 16/8/27.
+//  Copyright © 2016年 Link-Start. All rights reserved.
+//
+
+#ifndef ___pch
+#define ___pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* ___pch */
+
+当用户点击本地推送通知的时候,会自动打开app,这里有2种情况
+######################                                  1111111
+1.app没有关闭,只是一直隐藏在后台,让app进入前台,并会调用AppDelegate的下面的方法(并非重新启动app)
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    // 在这里写跳转代码
+    // 如果是应用程序在前台,依然会收到通知,但是收到通知之后不应该跳转
+    if (application.applicationState == UIApplicationStateActive) return;
+    
+    if (application.applicationState == UIApplicationStateInactive) {
+        // 当应用在后台收到本地通知时执行的跳转代码
+        [self jumpToSession];
+    }
+    
+    NSLog(@"%@", notification);
+}
+
+- (void)jumpToSession
+{
+    UILabel *redView = [[UILabel alloc] init];
+    redView.backgroundColor = [UIColor redColor];
+    redView.frame = CGRectMake(0, 100, 300, 400);
+    redView.numberOfLines = 0;
+    // redView.text = [NSString stringWithFormat:@"%@", launchOptions];
+    [self.window.rootViewController.view addSubview:redView];
+}
+
+######################                                  222222
+2.app已经被关闭(进程被杀死)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

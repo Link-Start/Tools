@@ -1,0 +1,78 @@
+//
+//  定时器.pch
+//  LSProjectTool
+//
+//  Created by Xcode on 16/9/8.
+//  Copyright © 2016年 Link-Start. All rights reserved.
+//
+
+#ifndef ____pch
+#define ____pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* ____pch */
+
+
+
+
+
+
+
+//页面消失，进入后台不显示该页面，暂停定时器
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    //暂停定时器
+    [self.timer setFireDate:[NSDate distantFuture]];
+}
+
+
+//页面将要进入前台，开启定时器
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    //开启定时器
+    [self.timer setFireDate:[NSDate distantPast]];
+}
+
+
+//取消定时器 - 销毁定时器
+[self.timer invalidate];
+self.timer = nil;
+
+
+//定时器 不能在dealloc 释放
+- (void)dealloc {
+}
+
+
+
+
+创建一个定时器：
+NSTimer *t = [NSTimer scheduledTimerWithTimeInterval: 2.0
+                                              target: self
+                                            selector:@selector(onTick:)
+                                            userInfo: nil repeats:NO];
+如果repeats设为NO, 则定时器会等待2秒，然后调用selector ，之后再关闭定时器；
+如果repeats设为YES, 则定时器会立即调用selector，之后每隔2秒调用一次selector；要关闭定时器需要调用 [t invalidate]；
+以上方法创建的定时器，默认是加入到主线程的NSDefaultRunLoopMode模式中。
+当主线程处理某些UI事件时，比如UIScrollView的拖动操作，主线程将会切换成NSEventTrackingRunLoopMode模式，这个模式不会处理NSDefaultRunLoopMode模式中注册的事件。也就是说此时这个Timer就不会执行，直到主线程恢复到NSDefaultRunLoopMode模式。
+若想要主线程处理UI时不影响Timer的执行，可讲Timer加入到NSRunLoopCommonModes模式。这个模式等效于NSDefaultRunLoopMode和NSEventTrackingRunLoopMode的结合。
+另一种方法，将Timer加入到非主线程的运行循环中，则主线程中的操作影响不到Timer的执行。若Timer中需要UI操作，可切换回主线程进行UI操作。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

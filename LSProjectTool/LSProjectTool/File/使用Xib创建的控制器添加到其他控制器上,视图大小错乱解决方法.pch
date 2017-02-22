@@ -1,0 +1,42 @@
+//
+//  使用Xib创建的控制器添加到其他控制器上,视图大小错乱解决方法.pch
+//  LSProjectTool
+//
+//  Created by Xcode on 17/1/12.
+//  Copyright © 2017年 Link-Start. All rights reserved.
+//
+
+#ifndef __Xib___________________________pch
+#define __Xib___________________________pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* __Xib___________________________pch */
+
+
+
+//使用Xib创建的控制器添加到其他控制器上,视图大小错乱解决方法
+
+//在下面的方法中重新设置一下view的frame就可以了()
+- (void)viewWillLayoutSubviews {
+    
+    [super viewWillLayoutSubviews];
+    
+    CGRect frame = self.view.frame;
+    frame.size.width = KScreenWidth;
+    [self.view setFrame:frame];
+}
+
+
+
+
+
+
+
+initWithCoder 是 nib loader 分配并初始化各个控件的时候由系统调用的，由于 xib 或者故事板中的控件加载顺序是不一定的，所以在 initWithCoder 中是无法获取到 outlet（即子视图子控件）的。
+
+
+
+
+awakeFromNib 则是当所有的 outlet 和事件都创建并绑定之后由系统调用的，这是获取 outlet 并且赋予默认值的好地方。

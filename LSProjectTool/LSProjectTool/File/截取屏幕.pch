@@ -1,0 +1,39 @@
+
+//
+//  截取屏幕.pch
+//  LSProjectTool
+//
+//  Created by Xcode on 16/10/17.
+//  Copyright © 2016年 Link-Start. All rights reserved.
+//
+
+#ifndef _____pch
+#define _____pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+
+
+UIImage *image = [self getNormalImage:self.view];
+UIImageWriteToSavedPhotosAlbum(image, self, nil, nil); //保存的路径
+
+
+//获取当前屏幕内容
+- (UIImage *)getNormalImage:(UIView *)view {
+    CGFloat ls_width = [[UIScreen mainScreen] bounds].size.width;//获取屏幕宽度
+    CGFloat ls_height = [UIScreen mainScreen].bounds.size.height;//获取屏幕高度
+    
+    UIGraphicsBeginImageContext(CGSizeMake(ls_width, ls_height));
+    CGContextRef ls_contentRef = UIGraphicsGetCurrentContext();
+    [view.layer renderInContext:ls_contentRef];
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
+
+
+
+#endif /* _____pch */

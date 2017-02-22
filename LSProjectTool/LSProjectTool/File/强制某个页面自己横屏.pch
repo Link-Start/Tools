@@ -1,0 +1,90 @@
+//
+//  强制某个页面自己横屏.pch
+//  LSProjectTool
+//
+//  Created by Xcode on 16/9/5.
+//  Copyright © 2016年 Link-Start. All rights reserved.
+//
+
+#ifndef ___________pch
+#define ___________pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* ___________pch */
+
+
+
+1. General --> Deployment Info -- Device Orientation 设置 Portrait、Landscape Right（根据自己需要设置）
+
+2. 在info.plist文件中,添加View controller-based status bar appearance,属性为bool,设为NO;
+
+3.AppDelegate.h 中
+/***  是否允许横屏的标记 */
+@property (nonatomic,assign) BOOL allowRotation;
+  AppDelegate.m 中
+
+//状态栏设置为白色
+if (IsIOS7) {
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+}
+
+[[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+
+#pragma mark - 禁止横屏
+//强制应用只能响应竖屏
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+    
+    if (self.allowRotation) {
+        return UIInterfaceOrientationMaskLandscapeRight;
+    } else {
+        return UIInterfaceOrientationMaskPortrait;
+    }
+}
+3. 父类 控制器中 (不是Nav 也不是 tabBar 是 VC)
+
+//是否可以旋转
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+//支持的方向
+-(UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+4.要横屏的控制器
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    AppDelegate * appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    appDelegate.allowRotation = YES;
+    
+    //设置物理设备方向
+    NSNumber *orientationUnknown = [NSNumber numberWithInt:UIInterfaceOrientationUnknown];
+    [[UIDevice currentDevice] setValue:orientationUnknown forKey:@"orientation"];
+    NSNumber *orientationTarget = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeRight];
+    [[UIDevice currentDevice] setValue:orientationTarget forKey:@"orientation"];
+    
+    //更新了支持的方向后，记得刷新下控制器，调用：
+    [UIViewController attemptRotationToDeviceOrientation];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    AppDelegate * appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    appDelegate.allowRotation = NO;
+    
+    //更新了支持的方向后，记得刷新下控制器，调用：
+    [UIViewController attemptRotationToDeviceOrientation];
+}
+
+
+
+
+
+
+
+
+

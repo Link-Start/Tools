@@ -1,0 +1,38 @@
+//
+//  swift 中自定义Log.pch
+//  LSProjectTool
+//
+//  Created by Xcode on 16/8/23.
+//  Copyright © 2016年 Link-Start. All rights reserved.
+//
+
+#ifndef swift_____Log_pch
+#define swift_____Log_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* swift_____Log_pch */
+
+
+
+//http://www.jianshu.com/p/db602e716470
+
+
+//1. build setting --> 搜索swift -->设置 other Swift Flags 的Debug值为-DDEBUG ,Release值为空白
+
+
+//swift 实现自己的打印方法
+func LSLog(item: Any...) {
+#if DEBUG
+    print("文件："+"\(NSURL(fileURLWithPath:#file).lastPathComponent!)")
+    print("位置："+"\(#line)")
+    print("内容："+"\(item.last!)")
+    
+#endif
+}
+
+
+
+
+

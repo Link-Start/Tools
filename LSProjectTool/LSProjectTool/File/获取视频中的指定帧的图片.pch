@@ -1,0 +1,120 @@
+//
+//  获取视频中的指定帧的图片.pch
+//  LSProjectTool
+//
+//  Created by Xcode on 17/2/9.
+//  Copyright © 2017年 Link-Start. All rights reserved.
+//
+
+#ifndef _____________pch
+#define _____________pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+
+CMTimeMake(a,b) a当前第几帧, b每秒钟多少帧.当前播放时间a/b
+CMTimeMakeWithSeconds(a,b) a当前时间,b每秒钟多少帧.
+
+
+//同步获取帧图    获取某个时间的帧图
+- (UIImage *)sync_getVideoFrameImageWithVideoURL:(NSURL *)videoURL {
+    //
+    UIImage *image = nil;
+    
+    AVAsset *asset = [AVAsset assetWithURL:videoURL];
+    AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc]initWithAsset:asset];
+    imageGenerator.appliesPreferredTrackTransform = YES;
+    imageGenerator.requestedTimeToleranceAfter = kCMTimeZero;
+    imageGenerator.requestedTimeToleranceBefore = kCMTimeZero;
+    
+    Float64 duration = CMTimeGetSeconds([asset duration]);
+    // 取某个帧的时间，参数一表示哪个时间（秒），参数二表示每秒多少帧
+    // 通常来说，600是一个常用的公共参数，苹果有说明:
+    CMTime midpoint = CMTimeMakeWithSeconds(duration / 1.0, 600);
+    
+    NSError *error = nil;
+    CMTime actualTime;
+    
+    CGImageRef centerFrameImage = [imageGenerator copyCGImageAtTime:midpoint actualTime:&actualTime error:&error];
+    
+    if (centerFrameImage != NULL) {
+        image = [[UIImage alloc]initWithCGImage:centerFrameImage];
+        //
+        CGImageRelease(centerFrameImage);
+    }
+    
+    return image;
+}
+
+//异步获取帧图  获取某个时间的帧图
+// 异步获取帧图片，可以一次获取多帧图片
+- (void)async_getVideoFrameImageWithVideoURL:(NSURL *)videoURL completion:(void (^)(UIImage *image))completion {
+    // AVAssetImageGenerator
+    AVAsset *asset = [AVAsset assetWithURL:videoURL];
+    AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc]initWithAsset:asset];
+    imageGenerator.appliesPreferredTrackTransform = YES;
+    imageGenerator.requestedTimeToleranceAfter = kCMTimeZero;
+    imageGenerator.requestedTimeToleranceBefore = kCMTimeZero;
+    
+    // calculate the midpoint time of video
+    Float64 duration = CMTimeGetSeconds([asset duration]);
+    //CMTimeMake(a,b) a当前第几帧, b每秒钟多少帧.当前播放时间a/b CMTimeMakeWithSeconds(a,b) a当前时间,b每秒钟多少帧.
+    // 取某个帧的时间，参数一表示哪个时间（秒），参数二表示每秒多少帧
+    // 通常来说，600是一个常用的公共参数，苹果有说明:
+    CMTime midpoint = CMTimeMakeWithSeconds(duration / 1.0, 600);
+    
+    // 异步获取多帧图片
+    NSValue *midTime = [NSValue valueWithCMTime:midpoint];
+    [imageGenerator generateCGImagesAsynchronouslyForTimes:@[midTime] completionHandler:^(CMTime requestedTime, CGImageRef  _Nullable image, CMTime actualTime, AVAssetImageGeneratorResult result, NSError * _Nullableerror) {
+        if (result == AVAssetImageGeneratorSucceeded && image != NULL) {
+            UIImage *centerFrameImage = [[UIImage alloc] initWithCGImage:image];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (completion) {
+                    completion(centerFrameImage);
+                }
+            });
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (completion) {
+                    completion(nil);
+                }
+            });
+        }
+    }];
+}
+
+
+
+///获取视频中的指定帧的图片  frame：第几帧
+- (UIImage *)thumbnailImageForVideo:(NSURL *)videoURL atFrame:(NSTimeInterval)frame {
+    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:videoURL options:nil];
+    NSParameterAssert(asset);
+    AVAssetImageGenerator *assetImageGenerator =[[AVAssetImageGenerator alloc] initWithAsset:asset];
+    assetImageGenerator.appliesPreferredTrackTransform = YES;
+    
+    assetImageGenerator.apertureMode =AVAssetImageGeneratorApertureModeEncodedPixels;
+    
+    CGImageRef thumbnailImageRef = NULL;
+    CFTimeInterval thumbnailImageTime = frame;
+    NSError *thumbnailImageGenerationError = nil;
+    
+    //获取第几帧的 帧图
+    thumbnailImageRef = [assetImageGenerator copyCGImageAtTime:CMTimeMake(thumbnailImageTime, 600) actualTime:NULL error:&thumbnailImageGenerationError];
+    
+    if (!thumbnailImageRef) {
+        NSLog(@"获取视频中的指定帧的图片错误： %@",thumbnailImageGenerationError);
+    }
+    UIImage *thumbnailImage = thumbnailImageRef ? [[UIImage alloc]initWithCGImage:thumbnailImageRef] : nil;
+    CGImageRelease(thumbnailImageRef);
+    
+    return thumbnailImage;
+}
+
+
+
+
+
+
+
+#endif /* _____________pch */

@@ -1,0 +1,90 @@
+//
+//  清理缓存.pch
+//  LSProjectTool
+//
+//  Created by Xcode on 16/9/12.
+//  Copyright © 2016年 Link-Start. All rights reserved.
+//
+
+#ifndef _____pch
+#define _____pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* _____pch */
+
+///*********** 清理缓存 方法 1 *****************/
+//使用SDWebImage清理缓存
+- (void)clear {
+    
+    [[SDImageCache sharedImageCache] clearDisk];
+    [[SDImageCache sharedImageCache] clearMemory];
+}
+
+
+//////单个文件的大小
+//- (long long)fileSizeAtPath:(NSString *)filePath {
+//
+//    NSFileManager* manager = [NSFileManager defaultManager];
+//
+//    if ([manager fileExistsAtPath:filePath]){
+//        return [[manager attributesOfItemAtPath:filePath error:nil] fileSize];
+//    }
+//
+//    return 0;
+//}
+//
+////遍历文件夹获得文件夹大小，返回多少M
+////设置folderPath为cache路径。
+//- (float)folderSizeAtPath:(NSString *)folderPath {
+//
+//    NSFileManager *manager = [NSFileManager defaultManager];
+//
+//    if (![manager fileExistsAtPath:folderPath])  {
+//        return 0;
+//    }
+//
+//    NSEnumerator *childFilesEnumerator = [[manager subpathsAtPath:folderPath] objectEnumerator];
+//    NSString *fileName;
+//    long long folderSize = 0;
+//    while ((fileName = [childFilesEnumerator nextObject]) != nil){
+//        NSString *fileAbsolutePath = [folderPath stringByAppendingPathComponent:fileName];
+//        folderSize += [self fileSizeAtPath:fileAbsolutePath];
+//    }
+//
+//    return folderSize / (1024.0 * 1024.0);//得到缓存大小M
+//}
+
+/*********** 清理缓存 方法 3 *****************/
+//3 NSCachesDirectory 存放缓存文件
+- (void)clearCaches {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        NSString *cachPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        
+        NSLog(@"%@", cachPath);
+        
+        NSArray *files = [[NSFileManager defaultManager] subpathsAtPath:cachPath];
+        
+        NSLog(@"files :%d",[files count]); //文件夹的数量
+        
+        for (NSString *p in files) {
+            
+            NSError *error;
+            
+            NSString *path = [cachPath stringByAppendingPathComponent:p];
+            
+            if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+                
+                [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
+            }
+        }
+        [self performSelectorOnMainThread:@selector(clearCacheSuccess) withObject:nil waitUntilDone:YES];
+    });
+}
+
+-(void)clearCacheSuccess {
+    
+    NSLog(@"清理成功");
+}

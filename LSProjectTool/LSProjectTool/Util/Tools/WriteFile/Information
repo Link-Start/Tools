@@ -1,0 +1,112 @@
+iOS开发是在沙盒中开发的，对一些部分的文件的读写进行了限制，只能在几个目录下读写文件：
+
+1. Documents:   应用中用户数据可以放在这里，iTunes备份和恢复的时候会包括此目录
+                苹果建议将程序中创建的或在程序中浏览到的文件数据保存在该目录下
+
+2. tmp:   创建和存放临时文件的地方,iTunes不会备份和恢复此目录，此目录下文件可能会在应用退出后删除
+          .app文件，这个就是可运行的应用文件
+
+3. Library目录:这个目录下有两个子目录：Caches 和 Preferences
+Caches目录:用于存放应用程序专用的支持文件，保存应用程序再次启动过程中需要的信息,存放缓存文件,iTunes不会备份此目录,此目录下文件不会在应用退出删除
+Preferences :包含应用程序的偏好设置文件。您不应该直接创建偏好设置文件，而是应该使用NSUserDefaults类来取得和设置应用程序的偏好
+
+4. AppName.app 目录：这是应用程序的程序包目录，包含应用程序的本身。由于应用程序必须经过签名，所以您在运行时不能对这个目录中的内容进行修改，否则可能会使应用程序无法启动。
+
+
+
+获取路径
+###############################################################################
+获取应用的根目录(获取沙盒路径),也就是Documents的上级目录,当然也是tmp目录的上级目录:NSHomeDirectory()
+获取temp目录: NSTemporaryDirectory()
+获取Documents文件夹目录:NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES)
+获取Library目录: NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES)
+获取Cache目录: NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)
+
+@ NSDocumentDirectory 指程序中对应的Documents文件夹路径
+@ NSUserDomainMask    用户主目录中(说明是在当前应用沙盒中获取,所有应用沙盒目录组成一个数组结构的数据存放)
+@ YES                 展开成完整路径
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+isMemberOfClass    用于判断对象是不是参数提供的类型(参数不可以是父类的class),只有当类型完全匹配的时候才会返回YES
+                   判断一个对象是否是某个类的实例化对象
+
+isSubclassOfClass  判断一个对象是否为某种类型（如果是父类也返回YES）判断对象是否为指定类的子类  是类方法
+isKindOfClass      用于判断对象是不是参数提供的类型(参数可以是父类的class)    对象方法
+
+
+
+
+常用路径工具函数
+______________________________________________________________________________________________________
+NSString * NSUserName（）；               返回当前用户的登录名
+NSString * NSFullUserName（）；           返回当前用户的完整用户名
+NSString * NSHomeDirectory（）；          返回当前用户主目录的路径
+NSString * NSHomeDirectoryForUser（）；   返回用户user的主目录
+NSString * NSTemporaryDirectory（）；     返回可用于创建临时文件的路径目录
+
+
+NSData
+______________________________________________________________________________________________________
+NSData是用来包装数据的
+NSData存储的是二进制数据，屏蔽了数据之间的差异，文本、音频、图像等数据都可用NSData来存储
+
+
+内联函数
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+引入内联函数是为了解决函数调用效率的问题
+由于函数之间的调用，会从一个内存地址调到另外一个内存地址，当函数调用完毕之后还会返回原来函数执行的地址。函数调用会有一定的时间开销，引入内联函数就是为了解决这一问题。
+结论
+1.使用inline修饰的函数，在编译的时候，会把代码直接嵌入调用代码中。就相当于用#define 宏定义来定义一个add 函数那样！与#define的区别是:
+1)#define定义的格式要有要求，而使用inline则就行平常写函数那样，只要加上`inline即可！
+2)使用#define宏定义的代码，编译器不会对其进行参数有效性检查，仅仅只是对符号表进行替换。
+3）#define宏定义的代码，其返回值不能被强制转换成可转换的适合的转换类型。可参考百度文科 关于inline
+2.在inline加上`static修饰符，只是为了表明该函数只在该文件中可见！也就是说，在同一个工程中，就算在其他文件中也出现同名、同参数的函数也不会引起函数重复定义的错误！**
+inline 它的意思是告诉编译器这个函数是一个静态的内联函数
+例如：static inline NSString *cachePath()
+
+
+******************************************************************************************************
+[NSFileManager defaultManager]:  创建文件管理器
+*  fileExistsAtPath:判断一个路径是否存在
+*  fileExistsAtPath:isDirectory:判断一个给定的路径是否为文件夹,bool需要传进,返回的值存在bool中,isDirectory是个传出参数， 用于返回，是文件还是目录
+1.判断文件或者目录是否存在: 只需判断这个API的返回值，YES为存在，NO为不存在即可，isDirectory不需要判断
+ .当传入参数 path不存在时,isDirectory返回的是 undefined,如果不想要判断是否是目录,这个参数可传NULL
+ .当path看起来像是一个目录字符串时， iOS6和7和8，isDirectory返回的值不同。
+ .iOS 6.1对这个的undefined，判断为NO，
+ .而iOS7和8，返回YES
+ .这个问题导致，如果使用isDirectory，在iOS6.1的系统中，是无法判断一个不存在 path， 它是一个文件或者文件夹。仅仅需要根据这个API的返回值判断即可
+2.判断path是文件还是目录: 如果要判断path是文件还是目录,在iOS6.1中,需要确保path是存在的.那么实际应该是两步操作
+ .第一次调用    fileExistsAtPath:isDirectory:根据返回值，判断是否存在
+ .如果存在，进行第二次调用。
+ .第二次调用fileExistsAtPath:isDirectory: 根据 isDirectory，判断是否是目录
+*  removeItemAtPath:error:删除文件
+
+
+__kindof (http://blog.csdn.net/leikezhu1981/article/details/47418011)
+______________________________________________________________________________________________________
+
+__kindof：规定参数为UITableViewCell这个类或者其子类。比如说一个NSArray<UIView *>*,如果不加__kindof，这个数组只能有UIView,即便是其子类也不行。而加了的话，传入UIImageView或者UIButton之类的不会有问题。
+而__typeof会返回对应的类型。
+
+
+nonnull(不为空)、
+nullable(可以为空)、
+null_resettable(声明属性set方法可以为nil，但是get一定不能为nil)
+(http://www.sixstr.me/2016/03/15/ios9新特性－nil/)
+——————————————————————————————————————————————————————————————————————————————————————————————————————
+_nonnull(不为空)和_nullable(可以为空)声明属性是否可以为nil，如果对nonnull属性赋值为nil，则会报警告。
+接口中 nullable 的是少数，所以为了防止写一大堆 nonnull，Foundation 还提供了一对儿宏，包在里面的对象默认加 nonnull 修饰符，只需要把 nullable 的指出来就行
+NS_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_END
+
+
+
+
+
+
+
+
+
+

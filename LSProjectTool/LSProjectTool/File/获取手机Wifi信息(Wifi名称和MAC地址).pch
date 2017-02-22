@@ -1,0 +1,41 @@
+//
+//  获取手机Wifi信息(Wifi名称和MAC地址).pch
+//  LSProjectTool
+//
+//  Created by Xcode on 16/11/2.
+//  Copyright © 2016年 Link-Start. All rights reserved.
+//
+
+#ifndef ____Wifi___Wifi___MAC____pch
+#define ____Wifi___Wifi___MAC____pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import <SystemConfiguration/CaptiveNetwork.h>
+
+//获取信息
+- (NSDictionary *)SSIDInfo {
+    
+    NSArray *ifs = (__bridge_transfer NSArray *)CNCopySupportedInterfaces();
+    NSDictionary *info = nil;
+    for (NSString *ifnam in ifs) {
+        info = (__bridge_transfer NSDictionary *)CNCopyCurrentNetworkInfo((__bridge CFStringRef)ifnam);
+        if (info && [info count]) {
+            break;
+        }
+    }
+    
+    return info;
+}
+
+
+//使用方法
+NSDictionary *dict = [self SSIDInfo];
+NSLog(@"dict:%@",dict);
+NSString *SSID = dict[@"SSID"];//WiFi名称
+NSString *BSSID = dict[@"BSSID"];//无线网的MAC地址
+NSLog(@"WiFi名称:SSID:%@     无线网的MAC地址:BSSID:%@         %@",SSID,BSSID);
+
+
+#endif /* ____Wifi___Wifi___MAC____pch */

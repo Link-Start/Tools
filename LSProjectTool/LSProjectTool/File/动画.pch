@@ -1,0 +1,142 @@
+//
+//  动画.pch
+//  LSProjectTool
+//
+//  Created by Xcode on 16/8/31.
+//  Copyright © 2016年 Link-Start. All rights reserved.
+//
+
+#ifndef ___pch
+#define ___pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* ___pch */
+
+
+
+
+#pragma mark === 永久闪烁的动画 ======
+- (CABasicAnimation *)addGleamAnimationAndintervalTime:(CGFloat)time {
+    //1.创建动画并指定动画属性
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"opacity"];//必须写opacity才行。
+    //2.设置动画属性初始值和结束值
+    animation.fromValue = [NSNumber numberWithFloat:1.0f]; //可以不设置，默认为图层初始状态
+    animation.toValue = [NSNumber numberWithFloat:0.0f];//这是透明度。
+    animation.autoreverses = YES;
+    //动画时间
+    animation.duration = time;
+    //设置重复次数
+    animation.repeatCount = MAXFLOAT;
+    //运行一次是否移除动画
+    animation.removedOnCompletion = NO;
+    animation.fillMode = kCAFillModeForwards;
+    ///没有的话是均匀的动画。
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+    
+    //存储当前位置在动画结束后使用
+    
+    
+    return animation;
+}
+//添加动画
+ [self.view.layer addAnimation:[self addGleamAnimationAndintervalTime:0.5] forKey:nil];
+//移除动画
+[self.view.layer removeAllAnimations];
+
+
+
+
+
+- (void)btnAction:(UIButton *)sender {
+    sender.selected = !sender.selected;
+#pragma mark 动画暂停
+    if (sender.selected) {
+        //取得指定图层动画的媒体时间，后面参数用于指定子图层，这里不需要
+        CFTimeInterval interval=[sender.layer convertTime:CACurrentMediaTime() fromLayer:nil];
+        //设置时间偏移量，保证暂停时停留在旋转的位置
+        [sender.layer setTimeOffset:interval];
+        //速度设置为0，暂停动画
+        sender.layer.speed=0;
+    } else {
+        
+#pragma mark 动画恢复        
+        //获得暂停的时间
+        CFTimeInterval beginTime= CACurrentMediaTime()- sender.layer.timeOffset;
+        //设置偏移量
+        sender.layer.timeOffset=0;
+        //设置开始时间
+        sender.layer.beginTime = beginTime;
+        //设置动画速度，开始运动
+        sender.layer.speed=1.0;
+    }
+    
+    
+    
+}
+
+#pragma mark 动画暂停
+-(void)animationPause{
+    //取得指定图层动画的媒体时间，后面参数用于指定子图层，这里不需要
+    
+    //设置时间偏移量，保证暂停时停留在旋转的位置
+    
+    //速度设置为0，暂停动画
+    
+}
+
+#pragma mark 动画恢复
+-(void)animationResume{
+    //获得暂停的时间
+    
+    //设置偏移量
+    
+    //设置开始时间
+    
+    //设置动画速度，开始运动
+    
+}
+
+
+
+
+
+
+
+///页面缩放动画
+- (void)shakeToShow:(UIView *)aView
+{
+    CAKeyframeAnimation * animation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
+    animation.duration = 0.2;
+    NSMutableArray * values = [NSMutableArray array];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.1, 0.1, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.2, 1.2, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.9, 0.9, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1.0)]];
+    animation.values = values;
+    
+    [aView.layer addAnimation:animation forKey:nil];
+}
+
+///页面缩放动画
+- (void)shakeToShow2:(UIView *)aView2 {
+    CAKeyframeAnimation *popAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
+    popAnimation.duration = 0.35;
+    popAnimation.values = @[[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.01f, 0.01f, 1.0f)],
+                            [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.1f, 1.1f, 1.0f)],
+                            [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.9f, 0.9f, 1.0f)],
+                            [NSValue valueWithCATransform3D:CATransform3DIdentity]];
+    popAnimation.keyTimes = @[@0.0f, @0.5f, @0.75f, @1.0f];
+    popAnimation.timingFunctions = @[[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
+                                     [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
+                                     [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    [aView2.layer addAnimation:popAnimation forKey:nil];
+}
+
+
+
+
+
+
+
