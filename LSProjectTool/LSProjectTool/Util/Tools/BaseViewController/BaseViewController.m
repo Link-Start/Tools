@@ -479,18 +479,11 @@
     
     ReachabilityStatus status = [GLobalRealReachability currentReachabilityStatus];
     
-    if (status == RealStatusNotReachable)
-    {
+    if (status == RealStatusNotReachable) {
         NSLog(@"网络连接已断开，请检查您的网络");
-    }
-    
-    if (status == RealStatusViaWiFi)
-    {
+    } else if (status == RealStatusViaWiFi) {
         NSLog(@"WiFi网络");
-    }
-    
-    if (status == RealStatusViaWWAN)
-    {
+    } else if (status == RealStatusViaWWAN) {
         NSLog(@"蜂窝数据网");
     }
     
@@ -499,15 +492,38 @@
         
         //    返回按钮
         UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"3注册-返回"] style:UIBarButtonItemStyleDone target:self action:@selector(leftButtonItemAction:)];
-        
+
         self.navigationItem.leftBarButtonItem = leftButtonItem;
         
+//        UIImage *backButtonImage = [[UIImage imageNamed:@"icon_tabbar_back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+//        self.navigationController.navigationBar.backIndicatorImage = backButtonImage;
+//        self.navigationController.navigationBar.backIndicatorTransitionMaskImage = backButtonImage;
+
     }
+    
+    
+    if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+    
+    
+    //将prefersLargeTitles 属性设置为ture，navigation bar就会在整个APP中显示大标题
+    if (@available(iOS 11.0, *)) {
+        //如果想要在控制不同页面大标题的显示，可以通过设置当前页面的navigationItem的largeTitleDisplayMode属性
+        //iOS11之后如果设置了prefersLargeTitles = YES导航栏 高度为96pt，默认情况下还是64pt
+        self.navigationController.navigationBar.prefersLargeTitles = NO;
+    } else {
+        // Fallback on earlier versions
+    }
+    
+//    self.tableView.estimatedRowHeight = 0;
+//    self.tableView.estimatedSectionHeaderHeight = 0;
+//    self.tableView.estimatedSectionFooterHeight = 0;
 }
 
 //返回按钮点击事件
 - (void)leftButtonItemAction:(UIBarButtonItem *)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self judge];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -523,6 +539,24 @@
             
             self.view = nil;// 目的是再次进入时能够重新加载调用viewDidLoad函数。
         }
+    }
+}
+
+///判断当前ViewController是push还是present的方式显示的
+- (void)judge {
+    
+    NSArray *viewcontrollers = self.navigationController.viewControllers;
+    
+    if (viewcontrollers.count > 1) {
+        
+        if ([viewcontrollers objectAtIndex:viewcontrollers.count - 1] == self) {
+            //push方式
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        
+    } else {
+        //present方式
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 

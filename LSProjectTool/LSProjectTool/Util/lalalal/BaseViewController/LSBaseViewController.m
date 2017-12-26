@@ -428,11 +428,33 @@
         
         self.navigationItem.leftBarButtonItem = leftButtonItem;
     }
+    
+    if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
 }
 
 //返回按钮点击事件
 - (void)leftButtonItemAction:(UIBarButtonItem *)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self judge];
+}
+
+///判断当前ViewController是push还是present的方式显示的
+- (void)judge {
+    
+    NSArray *viewcontrollers = self.navigationController.viewControllers;
+    
+    if (viewcontrollers.count > 1) {
+        
+        if ([viewcontrollers objectAtIndex:viewcontrollers.count - 1] == self) {
+            //push方式
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        
+    } else {
+        //present方式
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
