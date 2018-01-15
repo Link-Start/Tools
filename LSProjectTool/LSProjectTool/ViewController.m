@@ -16,7 +16,7 @@
 //#import "Person.h"
 #import "YPhotoManager.h"
 
-
+#import "UILabel+ChainSyntax.h"
 #import "FengChe.h"
 
 @interface ViewController ()<UITextFieldDelegate>
@@ -43,6 +43,7 @@
 
 #define kuu @"uu"
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -51,7 +52,13 @@
     
      self.f = [[FengChe alloc] initWithFrame:CGRectMake(20, 100, 200, 200)];
     
-     
+    UILabel *l = [[UILabel alloc] init];
+    l = ({
+        l.text = @"..";
+        l;
+    });
+    
+
     
     //语法糖
     self.f = ({

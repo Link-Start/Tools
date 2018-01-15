@@ -27,5 +27,15 @@ IB_DESIGNABLE // 动态刷新
 /** 可视化设置圆角 */
 @property (nonatomic, assign)IBInspectable CGFloat cornerRadius;
 
+///frame
+@property (nonatomic, copy) MyButton *(^ButtonFrame)(CGRect frame);
+///圆角
+@property (nonatomic, copy) MyButton *(^ButtonCornerRadius)(CGFloat cornerRadius);
+///背景色
+@property (nonatomic, copy) MyButton *(^ButtonBgColor)(UIColor *bgColor);
+
+@property (nonatomic, copy) MyButton *(^ButtonStr)(NSString *str, UIColor *color, CGFloat fontSize);
+
++ (instancetype)buttonInitWith:(void (^)(MyButton *btn))initBlock;
 
 @end

@@ -3,7 +3,7 @@
 //  集合视图之瀑布流
 //
 //  Created by ma c on 15/11/21.
-//  Copyright (c) 2015年 夏远全. All rights reserved.
+//  Copyright (c) 2015年  . All rights reserved.
 //
 
 #import "WaterFlowLayout.h"
@@ -17,6 +17,8 @@
 /** 这个字典用来存储每一列item的高度 */
 @property (strong,nonatomic)NSMutableDictionary *maxYDic;
 /** 存放每一个item的布局属性 */
+// 准备一个用来保存每个计算好的item的属性的数组
+// 数组里面保存的是 一个个的 UIcollectionViewLayoutAttributes类的对象
 @property (strong,nonatomic)NSMutableArray *attrsArray;
 @end
 

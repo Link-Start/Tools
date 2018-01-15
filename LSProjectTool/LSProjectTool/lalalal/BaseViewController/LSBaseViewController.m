@@ -417,6 +417,21 @@
     }
 }
 
+#pragma mark - params --->string 把参数转变成字符串
+- (NSString *)returnStringFromParams:(NSDictionary *)params {
+    // 转变可变数组
+    NSMutableArray *array = [NSMutableArray array];
+    for (NSString *key in params) {// 遍历参数字典 取出value  并加入数组
+        // 取出当前参数
+        NSString *currentString = [NSString stringWithFormat:@"%@=%@", key, params[key]];
+        [array addObject:currentString];
+    }
+    // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+    //将array数组转换为string字符串
+    NSString *resultString = [array componentsJoinedByString:@"&"];
+    NSLog(@"参数：%@", resultString);
+    return resultString;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -437,6 +452,9 @@
 //返回按钮点击事件
 - (void)leftButtonItemAction:(UIBarButtonItem *)sender {
     [self judge];
+    
+//    //或者
+//    [self backOut];
 }
 
 ///判断当前ViewController是push还是present的方式显示的
@@ -454,6 +472,24 @@
     } else {
         //present方式
         [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+- (void)backOut {
+    //presentingViewController: present出来本视图控制器的视图控制器
+    if (self.presentingViewController) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+//返回到指定控制器
+- (void)backToVC:(UIViewController *)VC {
+    for (UIViewController *tempVc in self.navigationController.viewControllers) {
+        if ([tempVc isKindOfClass:[VC class]]) {
+            [self.navigationController popToViewController:tempVc animated:YES];
+        }
     }
 }
 

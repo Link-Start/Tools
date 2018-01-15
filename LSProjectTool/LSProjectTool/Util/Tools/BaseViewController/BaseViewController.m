@@ -524,6 +524,9 @@
 //返回按钮点击事件
 - (void)leftButtonItemAction:(UIBarButtonItem *)sender {
     [self judge];
+    
+    //或者
+//    [self backOut];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -557,6 +560,16 @@
     } else {
         //present方式
         [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+- (void)backOut {
+    
+    //presentingViewController: present出来本视图控制器的视图控制器
+    if (self.presentingViewController) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 

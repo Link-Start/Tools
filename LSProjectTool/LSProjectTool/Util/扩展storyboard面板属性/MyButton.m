@@ -25,4 +25,36 @@
     self.layer.cornerRadius = cornerRadius;
 }
 
++ (instancetype)buttonInitWith:(void (^)(MyButton *))initBlock {
+    MyButton *btn = [[MyButton alloc] init];
+    if (initBlock) {
+        initBlock(btn);
+    }
+    return btn;
+}
+
+- (MyButton *(^)(CGRect))ButtonFrame {
+    return ^MyButton *(CGRect rect) {
+        self.frame = rect;
+        return self;
+    };
+}
+
+- (MyButton *(^)(UIColor *))ButtonBgColor {
+    return ^MyButton *(UIColor *color) {
+        self.backgroundColor = color;
+        return self;
+    };
+}
+
+- (MyButton *(^)(NSString *, UIColor *, CGFloat))ButtonStr {
+    return ^MyButton *(NSString *str, UIColor *color, CGFloat fontSize) {
+        [self setTitle:str forState:UIControlStateNormal];
+        [self setTitleColor:color forState:UIControlStateNormal];
+        self.titleLabel.font = [UIFont systemFontOfSize:fontSize];
+        
+        return self;
+    };
+}
+
 @end
