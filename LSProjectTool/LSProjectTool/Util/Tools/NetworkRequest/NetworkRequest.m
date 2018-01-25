@@ -38,34 +38,36 @@
  */
 
 #import "NetworkRequest.h"
-
+#define kTimeoutInterval 30.0f
 @implementation NetworkRequest
 
 #pragma mark - GET请求
++ (void)GETDataByUrl:(NSString *)url withParameters:(NSDictionary *)parameters graceTime:(CGFloat)graceTime completed:(void(^)(id json))finish failure:(void(^)( NSError *error))failure {
+    [self GETDataByUrl:url withParameters:parameters graceTime:graceTime markedWords:@"加载中..." completed:finish failure:failure];
+}
 //GET请求
-+ (void)GETDataByUrl:(NSString*)url withParameters:(NSDictionary*)parameters completed:(void(^)(id json))finish failure:(void(^)( NSError *error))failure {
++ (void)GETDataByUrl:(NSString *)url withParameters:(NSDictionary *)parameters graceTime:(CGFloat)graceTime markedWords:(NSString *)markedWords completed:(void (^)(id))finish failure:(void (^)(NSError *))failure {
     
     //判断网络是否可用 如果不可用直接返回
     if (![self activeNetwork]) {
         return;
     }
-    
-        //显示加载中
-//        [MBProgressHUD showMessage:@""];
-
+    //显示加载中
+    MBProgressHUD *hud = [MBProgressHUD hud:graceTime];
+    //显示提示语
+    hud.labelText = markedWords;
     
     ////1.创建管理者对象
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     //设置请求超时的时间
-    manager.requestSerializer.timeoutInterval = 30.f;
+    manager.requestSerializer.timeoutInterval = kTimeoutInterval;
     
-    NSURLSessionTask *sessionTask = nil;
     //开始请求
-    sessionTask = [manager GET:url parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
+    [manager GET:url parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
         // 这里可以获取到目前的数据请求的进度
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         //手动关闭MBProgressHUD
-        [MBProgressHUD hideHUD];
+        [self hiddenHud:hud];
         
         ////这种可以打印中文
         //NSString *string = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
@@ -74,35 +76,33 @@
         if (finish) {
             finish([self tryToParseData:responseObject]);
         }
-         
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull   error) {
         //手动关闭MBProgressHUD
-        [MBProgressHUD hideHUD];
-        //根据错误代码显示提示信息
-        [self showFailMarkedWordsWithError:error];
-        
-
+        [self hiddenHud:hud];
         // 请求失败
         NSLog(@"请求失败:%@", [error localizedDescription]);
+        //根据错误代码显示提示信息
+        [self showFailMarkedWordsWithError:error];
         if (failure) {
             failure(error);
         }
- 
     }];
 }
 
 #pragma mark - POST请求
 //请求数据
-+ (void)POSTDataByUrl:(NSString *)url withParameters:(NSDictionary *)parameters completed:(void(^)(id json))finish failure:(void(^)(NSError *))failure {
++ (void)POSTDataByUrl:(NSString *)url withParameters:(NSDictionary *)parameters graceTime:(CGFloat)graceTime completed:(void(^)(id json))finish failure:(void(^)(NSError *))failure {
     //判断网络是否可用 如果不可用直接返回
     if (![self activeNetwork]) {
         return;
     }
     
+    MBProgressHUD *hud = [MBProgressHUD shareHud];
     //如果hud 隐藏了
-    if ([MBProgressHUD shareHud].hidden) {
+    if (hud.hidden) {
         //显示加载中
-        [MBProgressHUD showMessage:@""];
+        hud = [MBProgressHUD hud:graceTime];
     }
     
     ////1.创建管理者对象
@@ -110,7 +110,7 @@
     //申明返回的结果,不加上这句话，会报“Request failed: unacceptable content-type: text/plain”错误，因为我们要获取text/plain类型数据
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     //设置请求超时的时间
-    manager.requestSerializer.timeoutInterval = 10.f;
+    manager.requestSerializer.timeoutInterval = kTimeoutInterval;
     //开始请求
     /*
      第一个参数：请求路径：NSString类型
@@ -118,32 +118,33 @@
      第三个参数：block回调
      在该回调中，需要利用formData拼接即将上传的二进制数据
      第三个参数：上传成功的block回调
-                      task：dataTask(任务)
-                      responseObject:服务器返回的数据
+     task：dataTask(任务)
+     responseObject:服务器返回的数据
      第四个参数：上传失败的block回调
-               error：错误信息，如果上传文件失败，那么error里面包含了错误的描述信息
+     error：错误信息，如果上传文件失败，那么error里面包含了错误的描述信息
      */
-     [manager POST:url parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+    [manager POST:url parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         // 这里可以获取到目前的数据请求的进度
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         //手动关闭MBProgressHUD(必须写在这个位置，不然不会关闭)
-        [MBProgressHUD hideHUD];
+        [self hiddenHud:hud];
+        
         // 请求成功，解析数据
-        [self tryToParseData:responseObject];
+        if (finish) {
+            finish([self tryToParseData:responseObject]);
+        }
         //显示成功
         //        [MBProgressHUD showSuccess:@"数据请求成功"];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         //手动关闭MBProgressHUD
-        [MBProgressHUD hideHUD];
+        [self hiddenHud:hud];
+        //根据错误代码显示提示信息
+        [self showFailMarkedWordsWithError:error];
         // 请求失败
         NSLog(@"请求失败:%@", [error localizedDescription]);
         if (failure) {
             failure(error);
         }
-        
-        //根据错误代码显示提示信息
-        [self showFailMarkedWordsWithError:error];
-        
     }];
 }
 
@@ -159,20 +160,20 @@
  *  @param finish   成功
  *  @param failure  失败
  */
-+ (void)uploadImage:(UIImage *)image toURL:(NSString *)urlString imageKey:(NSString *)imageKey parameters:(NSDictionary *)parameters completed:(void(^)(id json))finish failure:(void(^)(NSError *error))failure {
++ (void)uploadImage:(UIImage *)image toURL:(NSString *)urlString imageKey:(NSString *)imageKey parameters:(NSDictionary *)parameters graceTime:(CGFloat)graceTime completed:(void(^)(id json))finish failure:(void(^)(NSError *error))failure {
     //判断网络是否可用 如果不可用直接返回
     if (![self activeNetwork]) {
         return;
     }
     //显示加载中
-//    [MBProgressHUD showMessage:@""];
+    MBProgressHUD *hud = [MBProgressHUD hud:graceTime];
     
     //要保存在服务器上的[文件名]
     NSString *fileName = [NSString stringWithFormat:@"%@.jpg", [self returnWithATimeStampAsFileName]];
     //1。创建管理者对象
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     //设置请求超时的时间
-    manager.requestSerializer.timeoutInterval = 10.f;
+    manager.requestSerializer.timeoutInterval = kTimeoutInterval;
     //2.上传文件
     [manager POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         // 拼接data到请求体，这个block的参数是遵守AFMultipartFormData协议的。
@@ -192,34 +193,21 @@
         NSLog(@"上传进度：%lf",1.0 *uploadProgress.completedUnitCount / uploadProgress.totalUnitCount);
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         //手动关闭MBProgressHUD
-        [MBProgressHUD hideHUD];
-        
-        NSLog(@"%@", responseObject);
-        
-        //请求成功
-        //NSLog(@"请求成功：%@",responseObject);
-        
-       //解析数据
+        [self hiddenHud:hud];
+        //解析数据
         if (finish) {
             finish([self tryToParseData:responseObject]);
         }
-        
-        
-        //显示成功
-        //[MBProgressHUD showSuccess:@"成功"];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         //请求失败
         NSLog(@"请求失败：%@",error);
         //手动关闭MBProgressHUD
-        [MBProgressHUD hideHUD];
+        [self hiddenHud:hud];
         //根据错误代码显示提示信息
         [self showFailMarkedWordsWithError:error];
-        
-
         if (failure) {
             failure(error);
         }
-        
     }];
 }
 
@@ -232,27 +220,25 @@
  *  @param finish   成功
  *  @param failure  失败
  */
-+ (void)uploadImages:(NSArray<UIImage*>*)images toURL:(NSString *)urlString parameters:(NSDictionary*)parameters imageKey:(NSString *)imageKey completed:(void(^)(id json))finish failure:(void(^)(NSError *error))failure {
++ (void)uploadImages:(NSArray<UIImage*>*)images toURL:(NSString *)urlString parameters:(NSDictionary*)parameters imageKey:(NSString *)imageKey graceTime:(CGFloat)graceTime completed:(void(^)(id json))finish failure:(void(^)(NSError *error))failure {
     //判断网络是否可用 如果不可用直接返回
     if (![self activeNetwork]) {
         return;
     }
     //显示加载中
-//    [MBProgressHUD showMessage:@""];
+    MBProgressHUD *hud = [MBProgressHUD hud:graceTime];
     //要保存在服务器上的[文件名]
     NSString *fileName = [NSString stringWithFormat:@"%@.jpg", [self returnWithATimeStampAsFileName]];
     //1。创建管理者对象
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     //设置请求超时的时间
-    manager.requestSerializer.timeoutInterval = 30.f;
-    //2.上传文件
+    manager.requestSerializer.timeoutInterval = kTimeoutInterval;
     
     for (UIImage *image in images) {
-        
-    [manager POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        // 拼接data到请求体，这个block的参数是遵守AFMultipartFormData协议的。
-        //上传文件参数
-        
+        //2.上传文件
+        [manager POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+            // 拼接data到请求体，这个block的参数是遵守AFMultipartFormData协议的。
+            //上传文件参数
             //在实际使用过程中,比较发现: UIImagePNGRepresentation(UIImage* image) 要比UIImageJPEGRepresentation(UIImage* image, 1.0) 返回的图片数据量大很多.
             //UIImageJPEGRepresentation函数需要两个参数:图片的引用和压缩系数
             //如果对图片的清晰度要求不高,还可以通过设置 UIImageJPEGRepresentation函数的第二个参数,大幅度降低图片数据量.
@@ -266,39 +252,191 @@
              4. mimeType:  上传文件的类型[mimeType] +++
              */
             //服务器上传文件的字段和类型 上传图片，以文件流的格式
-//            [formData appendPartWithFileData:imageData name:imageKey fileName:fileName mimeType:@"image/png/file/jpg"];
-        
-        [formData appendPartWithFormData:imageData name:fileName];
-        
-    } progress:^(NSProgress * _Nonnull uploadProgress) {
-        //打印 上传进度
-        NSLog(@"上传进度：%lf",1.0 * uploadProgress.completedUnitCount / uploadProgress.totalUnitCount);
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        //手动关闭MBProgressHUD
-        [MBProgressHUD hideHUD];
-        
-        NSLog(@"dddddddddddddddddttttt%@", responseObject);
-        
-        //解析数据
-        if (finish) {
-            finish([self tryToParseData:responseObject]);
-        }
-        
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        //手动关闭MBProgressHUD
-        [MBProgressHUD hideHUD];
-        //根据错误代码显示提示信息
-        [self showFailMarkedWordsWithError:error];
+            //            [formData appendPartWithFileData:imageData name:imageKey fileName:fileName mimeType:@"image/png/file/jpg"];
+            
+            [formData appendPartWithFormData:imageData name:fileName];
+            
+        } progress:^(NSProgress * _Nonnull uploadProgress) {
+            //打印 上传进度
+            NSLog(@"上传进度：%lf",1.0 * uploadProgress.completedUnitCount / uploadProgress.totalUnitCount);
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            //手动关闭MBProgressHUD
+            [self hiddenHud:hud];
+            // 请求成功，解析数据
+            if (finish) {
+                finish([self tryToParseData:responseObject]);
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            //手动关闭MBProgressHUD
+            [self hiddenHud:hud];
+            //根据错误代码显示提示信息
+            [self showFailMarkedWordsWithError:error];
+            //请求失败
+            NSLog(@"失败：%@",error);
+            if (failure) {
+                failure(error);
+            }
+        }];
+    }
+}
 
-        //请求失败
-        NSLog(@"失败：%@",error);
-        if (failure) {
-            failure(error);
-        }
++ (void)async_uploadImages:(NSArray<UIImage*>*)images toURL:(NSString *)urlString parameters:(NSDictionary*)parameters imageKey:(NSString *)imageKey graceTime:(CGFloat)graceTime completed:(void(^)(id json))finish failure:(void(^)(NSError *error))failure {
+    //判断网络是否可用 如果不可用直接返回
+    if (![self activeNetwork]) {
+        return;
+    }
+    //显示加载中
+    MBProgressHUD *hud = [MBProgressHUD hud:graceTime];
+    //要保存在服务器上的[文件名]
+    NSString *fileName = [NSString stringWithFormat:@"%@.jpg", [self returnWithATimeStampAsFileName]];
+    //1。创建管理者对象
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    //设置请求超时的时间
+    manager.requestSerializer.timeoutInterval = kTimeoutInterval;
+    
+    dispatch_group_t ls_group_t = dispatch_group_create();
+    //创建信号量，参数：信号量的初值，如果小于0则会返回NULL
+    dispatch_semaphore_t ls_semaphore_t = dispatch_semaphore_create(1);
+    dispatch_queue_t ls_queue_t = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    
+    for (int i = 0; i < images.count; i++) {
+        //等待降低信号量
+        dispatch_semaphore_wait(ls_semaphore_t, DISPATCH_TIME_FOREVER);
+        dispatch_group_async(ls_group_t, ls_queue_t, ^{
+            
+            //提高信号量
+            dispatch_semaphore_signal(ls_semaphore_t);
+            
+            //2.上传文件
+            [manager POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+                // 拼接data到请求体，这个block的参数是遵守AFMultipartFormData协议的。
+                //上传文件参数
+                //在实际使用过程中,比较发现: UIImagePNGRepresentation(UIImage* image) 要比UIImageJPEGRepresentation(UIImage* image, 1.0) 返回的图片数据量大很多.
+                //UIImageJPEGRepresentation函数需要两个参数:图片的引用和压缩系数
+                //如果对图片的清晰度要求不高,还可以通过设置 UIImageJPEGRepresentation函数的第二个参数,大幅度降低图片数据量.
+                //因此,在读取图片数据内容时,建议优先使用UIImageJPEGRepresentation,并可根据自己的实际使用场景,设置压缩系数,进一步降低图片数据量大小.
+                NSData *imageData = UIImageJPEGRepresentation(images[i], 0.1);
+                /*
+                 此方法参数
+                 1. FileData:  要上传的[二进制数据] +++ image转换成的data数据
+                 2. name:      对应网站上[upload.php中]处理文件的[字段"file"] +++ 参数image 对应的key值
+                 3. fileName:  要保存在服务器上的[文件名] ++++ 可以随便写
+                 4. mimeType:  上传文件的类型[mimeType] +++
+                 */
+                //服务器上传文件的字段和类型 上传图片，以文件流的格式
+                //            [formData appendPartWithFileData:imageData name:imageKey fileName:fileName mimeType:@"image/png/file/jpg"];
+                
+                [formData appendPartWithFormData:imageData name:fileName];
+                
+            } progress:^(NSProgress * _Nonnull uploadProgress) {
+                //打印 上传进度
+                NSLog(@"上传进度：%lf",1.0 * uploadProgress.completedUnitCount / uploadProgress.totalUnitCount);
+            } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                NSLog(@"第%d张图片上传成功:%@", i + 1, responseObject);
+                //手动关闭MBProgressHUD
+                [self hiddenHud:hud];
+                // 请求成功，解析数据
+                if (finish) {
+                    finish([self tryToParseData:responseObject]);
+                }
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                //手动关闭MBProgressHUD
+                [self hiddenHud:hud];
+                //根据错误代码显示提示信息
+                [self showFailMarkedWordsWithError:error];
+                //请求失败
+                NSLog(@"失败：%@",error);
+                if (failure) {
+                    failure(error);
+                }
+            }];
+        });;
+        dispatch_group_wait(ls_group_t, DISPATCH_TIME_FOREVER);
+    }
+}
+
+//尽管异步请求的返回先后顺序没有一定，很可能后发出的请求先返回；但是最后回调的时候，请求返回的结果必须要按请求发出的顺序排列
++ (void)yuploadImages:(NSArray<UIImage*>*)images toURL:(NSString *)urlString parameters:(NSDictionary*)parameters imageKey:(NSString *)imageKey graceTime:(CGFloat)graceTime completed:(void(^)(id json))finish failure:(void(^)(NSError *error))failure {
+    //判断网络是否可用 如果不可用直接返回
+    if (![self activeNetwork]) {
+        return;
+    }
+    //显示加载中
+    MBProgressHUD *hud = [MBProgressHUD hud:graceTime];
+    
+    //1.创建管理者对象
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    //设置请求超时的时间
+    manager.requestSerializer.timeoutInterval = kTimeoutInterval;
+    
+    // 准备保存结果的数组，元素个数与上传的图片个数相同，先用 NSNull 占位
+    NSMutableArray *result = [NSMutableArray array];
+    for (NSInteger i = 0; i < images.count; i++) {
+        [result addObject:[NSNull null]];
+    }
+    
+    dispatch_group_t group = dispatch_group_create();
+    
+    for (NSInteger i = 0; i < images.count; i++) {
         
-    }];
+        dispatch_group_enter(group);
+        
+        //2.上传文件
+        [manager POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+            // 拼接data到请求体，这个block的参数是遵守AFMultipartFormData协议的。
+            //上传文件参数
+            //UIImageJPEGRepresentation(image, 1.0) 返回的图片数据较小.
+            NSData *imageData = UIImageJPEGRepresentation(images[i], 0.1);
+            //要保存在服务器上的[文件名]
+            NSString *fileName = [NSString stringWithFormat:@"%@.jpg", [self returnWithATimeStampAsFileName]];
+            /*
+             此方法参数
+             1. FileData:  要上传的[二进制数据] +++ image转换成的data数据
+             2. name:      对应网站上[upload.php中]处理文件的[字段"file"] +++ 参数image 对应的key值
+             3. fileName:  要保存在服务器上的[文件名] ++++ 可以随便写
+             4. mimeType:  上传文件的类型[mimeType] +++
+             */
+            //服务器上传文件的字段和类型 上传图片，以文件流的格式
+            [formData appendPartWithFileData:imageData name:imageKey fileName:fileName mimeType:@"image/png/file/jpg"];
+            
+        } progress:^(NSProgress * _Nonnull uploadProgress) {
+            //打印 上传进度
+            NSLog(@"上传进度：%lf",1.0 * uploadProgress.completedUnitCount / uploadProgress.totalUnitCount);
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            //手动关闭MBProgressHUD
+            [self hiddenHud:hud];
+            // 请求成功，解析数据
+            if (finish) {
+                finish([self tryToParseData:responseObject]);
+            }
+            
+            NSLog(@"第%d张图片上传成功:%@", (NSInteger)i + 1, responseObject);
+            @synchronized (result) { // NSMutableArray 是线程不安全的，所以加个同步锁
+                result[i] = responseObject;
+            }
+            dispatch_group_leave(group);
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            //手动关闭MBProgressHUD
+            [self hiddenHud:hud];
+            //根据错误代码显示提示信息
+            [self showFailMarkedWordsWithError:error];
+            //请求失败
+            NSLog(@"失败：%@",error);
+            if (failure) {
+                failure(error);
+            }
+            
+            NSLog(@"第%d张图片上传失败：%@", (NSInteger)i + 1, error);
+            dispatch_group_leave(group);
+        }];
+    }
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        NSLog(@"上传完成!");
+        for (id response in result) {
+            NSLog(@"%@", response);
         }
+    });
 }
 
 #pragma mark - 第二种 通过URL来获取路径，进入沙盒或者系统相册等等
@@ -329,11 +467,11 @@
     //2.上传文件
     for (NSString *filePath in audioArray) {
         
-    [manager POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        
-        ///上传文件参数
-        // 拼接data到请求体，这个block的参数是遵守AFMultipartFormData协议的。
-        
+        [manager POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+            
+            ///上传文件参数
+            // 拼接data到请求体，这个block的参数是遵守AFMultipartFormData协议的。
+            
             
             /**
              *  appendPartWithFileURL   //  指定上传的文件
@@ -342,31 +480,31 @@
              *  mimeType                //  指定商家文件的MIME类型
              */
             [formData appendPartWithFileURL:[NSURL fileURLWithPath:filePath] name:audioKey fileName:fileName mimeType:@"application/octet+stream" error:nil];
-       
-    } progress:^(NSProgress * _Nonnull uploadProgress) {
-        //打印下上传进度
-        NSLog(@"%lf",1.0 *uploadProgress.completedUnitCount / uploadProgress.totalUnitCount);
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        //请求成功
-        NSLog(@"请求成功：%@",responseObject);
-        //隐藏提示
-        [MBProgressHUD hideHUD];
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        //请求失败
-        NSLog(@"请求失败：%@",error.domain);
-        //隐藏提示
-        [MBProgressHUD hideHUD];
-        
-        //根据错误代码显示提示信息
-        [self showFailMarkedWordsWithError:error];
-        
-        //如果调用了failure
-        if (failure) {
-            failure(error);
-        }
-     }];
-         }
+            
+        } progress:^(NSProgress * _Nonnull uploadProgress) {
+            //打印下上传进度
+            NSLog(@"%lf",1.0 *uploadProgress.completedUnitCount / uploadProgress.totalUnitCount);
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            //请求成功
+            NSLog(@"请求成功：%@",responseObject);
+            //隐藏提示
+            [MBProgressHUD hideHUD];
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            //请求失败
+            NSLog(@"请求失败：%@",error.domain);
+            //隐藏提示
+            [MBProgressHUD hideHUD];
+            
+            //根据错误代码显示提示信息
+            [self showFailMarkedWordsWithError:error];
+            
+            //如果调用了failure
+            if (failure) {
+                failure(error);
+            }
+        }];
+    }
 }
 
 ///返回时间戳
@@ -405,7 +543,7 @@
             NSDictionary *response = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers | NSJSONReadingMutableLeaves | NSJSONReadingAllowFragments error:&error];
             
             //如果有错误 直接返回原数据,如果没有错误 返回解析后的数据
-//            return (error ? responseData : response);
+            //            return (error ? responseData : response);
             
             ////如果 有错误
             if (error != nil) {
@@ -420,6 +558,16 @@
     } else {
         //返回原数据
         return responseData;
+    }
+}
+
+//隐藏hud  移除hud
++ (void)hiddenHud:(MBProgressHUD *)hud {
+    if (hud != nil) {
+        hud.taskInProgress = NO;
+        hud.removeFromSuperViewOnHide = YES;
+        [hud hide:YES];
+        [hud removeFromSuperview];
     }
 }
 
@@ -475,7 +623,7 @@
             }
             case RealStatusNotReachable: {
                 NSLog(@"监测当前网络状态：网络连接已断开，请检查您的网络");
-               
+                
                 break;
             }
             case RealStatusViaWWAN: {
@@ -516,7 +664,7 @@
                 break;
         }
     }];
-   
+    
 }
 
 /**
@@ -564,5 +712,20 @@
     return YES;
 }
 
+#pragma mark - params --->string 把参数转变成字符串
++ (NSString *)returnStringFromParams:(NSDictionary *)params {
+    // 转变可变数组
+    NSMutableArray *array = [NSMutableArray array];
+    for (NSString *key in params) {// 遍历参数字典 取出value  并加入数组
+        // 取出当前参数
+        NSString *currentString = [NSString stringWithFormat:@"%@=%@", key, params[key]];
+        [array addObject:currentString];
+    }
+    // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+    //将array数组转换为string字符串
+    NSString *resultString = [array componentsJoinedByString:@"&"];
+    NSLog(@"参数：%@", resultString);
+    return resultString;
+}
 
 @end

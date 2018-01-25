@@ -439,6 +439,8 @@ typedef void(^LSLoadProgressBlock)(NSProgress *);
                            success:(void (^)(id response))success
                               fail:(void (^)(NSError *error))fail;
 
+///尽管异步请求的返回先后顺序没有一定，很可能后发出的请求先返回；但是最后回调的时候，请求返回的结果必须要按请求发出的顺序排列
++ (void)yuploadImages:(NSArray<UIImage*>*)images toURL:(NSString *)urlString parameters:(NSDictionary*)parameters imageKey:(NSString *)imageKey graceTime:(CGFloat)graceTime completed:(void(^)(id json))finish failure:(void(^)(NSError *error))failure;
 #pragma mark - 上传语音 通过文件路径
 /**
  *  @author Link-Start

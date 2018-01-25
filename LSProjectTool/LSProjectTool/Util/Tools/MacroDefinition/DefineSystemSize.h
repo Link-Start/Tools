@@ -12,14 +12,21 @@
 #define DefineSystemSize_h
 //iOS11之前导航栏默认高度为64pt(这里高度指statusBar + NavigationBar)，iOS11之后如果设置了prefersLargeTitles = YES则为96pt，默认情况下还是64pt，但在iPhoneX上由于刘海的出现statusBar由以前的20pt变成了44pt，所以iPhoneX上高度变为88pt
 
-//状态栏高度 44/20
+//状态栏高度 20/44
 #define kLS_StatusBarHeight [[UIApplication sharedApplication] statusBarFrame].size.height
 //navBar高度
 #define kLS_NavigationBarHeight 44.0
-//tabBar高度 83/49
+//tabBar高度 49/83
 #define kLS_TabBarHeight ([[UIApplication sharedApplication] statusBarFrame].size.height>20?83:49)
 //顶部高度 64/96/88
 #define kLS_TopHeight (kLS_StatusBarHeight + kLS_NavigationBarHeight)
+//底部安全距离(Home Indicator的高度宏定义)
+#ifdef __IPHONE_11_0
+#define kLS_iPhoneX_Home_Indicator_Height 34
+#else
+#define kLS_iPhoneX_Home_Indicator_Height 0
+#endif
+
 
 
 //获取屏幕宽高

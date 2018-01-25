@@ -65,6 +65,8 @@
 -(UIImage *)imageCompressForHeight:(UIImage *)sourceImage targetHeight:(CGFloat)defineHeight;
 ///指定宽度按比例缩放
 -(UIImage *)imageCompressForWidth:(UIImage *)sourceImage targetWidth:(CGFloat)defineWidth;
+//压缩图片 先对图片进行裁剪，然后再压缩
++ (NSData *)compressWithOrgImg:(UIImage *)img;
 @end
 
 

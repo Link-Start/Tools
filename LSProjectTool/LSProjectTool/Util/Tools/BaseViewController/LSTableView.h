@@ -6,9 +6,9 @@
 //  Copyright © 2017年 Link-Start. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "LSBaseViewController.h"
 
-@interface LSTableView : BaseViewController
+@interface LSTableView : LSBaseViewController
 
 
 

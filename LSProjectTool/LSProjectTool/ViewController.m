@@ -9,14 +9,9 @@
 
 
 #import "ViewController.h"
-//#import <AVFoundation/AVFoundation.h>
-//#import "LSCustomCamera.h"
 #import "LSTextView.h"
-#import "LSPhotographVC.h"
-//#import "Person.h"
-#import "YPhotoManager.h"
-
-#import "UILabel+ChainSyntax.h"
+#import "LSCollectionView.h"
+#import "HXPhotoView.h"
 #import "FengChe.h"
 
 @interface ViewController ()<UITextFieldDelegate>
@@ -29,8 +24,8 @@
 
 @property (nonatomic, strong) UIView *demoView;
 
-
-
+@property (nonatomic, strong) LSCollectionView *collection;
+@property (nonatomic, strong) HXPhotoView *photoView;
 @property (nonatomic, strong) FengChe *f;
 
 @end
@@ -47,41 +42,52 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.inputView.ls_placeholder(@"123456789").ls_placeholderColor([UIColor redColor]).ls_maxNumberOfLines(3);
+    self.photoView = [[HXPhotoView alloc] initWithFrame:self.view.bounds];
+    [self.view addSubview:self.photoView];
     
-    
-     self.f = [[FengChe alloc] initWithFrame:CGRectMake(20, 100, 200, 200)];
-    
-    UILabel *l = [[UILabel alloc] init];
-    l = ({
-        l.text = @"..";
-        l;
-    });
-    
+//    self.inputView.ls_placeholder(@"123456789").ls_placeholderColor([UIColor redColor]).ls_maxNumberOfLines(3);
+//
+//
+//     self.f = [[FengChe alloc] initWithFrame:CGRectMake(20, 100, 200, 200)];
+//
+//    UILabel *l = [[UILabel alloc] init];
+//    l = ({
+//        l.text = @"..";
+//        l;
+//    });
+//
+//
+//
+//    //语法糖
+//    self.f = ({
+//
+//        FengChe *f = [[FengChe alloc] init];
+//
+//
+//        f;
+//    });
+//
+//
+//    NSArray *array = @[@1, @2, @3, @4, @5, @6];
+//
+//    NSString *str = [array componentsJoinedByString:@","];
+//
+//
+//    NSLog(@"__________________________：%@", str);
+//
+//    UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
+//    [btn setTitle:@"666666666" forState:UIControlStateNormal];
+//    btn.frame = CGRectMake(20, self.view.frame.size.height - 50, self.view.frame.size.width - 40, 40);
+//    [self.view addSubview:btn];
+//    [btn addTarget:self action:@selector(btnAction) forControlEvents:UIControlEventTouchUpInside];
+}
 
-    
-    //语法糖
-    self.f = ({
-        
-        FengChe *f = [[FengChe alloc] init];
-    
-        
-        f;
-    });
-    
-    
-    NSArray *array = @[@1, @2, @3, @4, @5, @6];
-    
-    NSString *str = [array componentsJoinedByString:@","];
-    
-    
-    NSLog(@"__________________________：%@", str);
+- (void)btnAction {
     
 }
 
 - (IBAction)btnAction:(id)sender {
-    LSPhotographVC *vc = [[LSPhotographVC alloc] init];
-    [self presentViewController:vc animated:YES completion:nil];
+
 }
 
 

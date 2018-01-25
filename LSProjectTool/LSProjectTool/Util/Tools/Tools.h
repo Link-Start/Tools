@@ -58,7 +58,7 @@
 #import "MBProgressHUD+Add.h"
 #import "MBProgressHUD+Extension.h"
 /// 数据请求
-#import "BaseViewController.h"
+#import "LSBaseViewController.h"
 #import "NetworkRequest.h"
 /// 将数据写入plist文件
 #import "NSObject+PlistTool.h"
@@ -72,6 +72,13 @@
 ///检测网络状态
 #import "RealReachability.h"
 
+///宏定义
+#import "DefineColor.h"
+#import "DefineModel.h"
+#import "DefineNSLog.h"
+#import "DefineSystemSize.h"
+
+#import "DefineSystemVersion.h"
 
 /// 使用MJRefresh添加下拉刷新功能,MJ的block块里面必须使用weakSelf
 @interface Tools : NSObject

@@ -31,13 +31,34 @@
     self.ls_tableView.estimatedSectionHeaderHeight = 0;
     self.ls_tableView.estimatedSectionFooterHeight = 0;
     
-    
-//    if (@available(iOS 11.0, *)) {
-//        make.edges.equalTo()(self.view.safeAreaInsets)
-//    } else {
-//        make.edges.equalTo()(self.view)
-//    }
+    //如果你使用了Masonry，那么你需要适配safeArea
 
+//    [self.rightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.height.mas_equalTo(100);
+//        make.left.equalTo(self.leftLabel.mas_right);
+//        make.right.equalTo(self.view);
+//   make.bottom.equalTo(self.view.mas_bottom);
+// 1. 改为 make.bottom.equalTo(self.view.mas_bottomMargin); 或者
+// 2. 改为  if (@available(iOS 11.0, *)) {
+//    make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+//} else {
+//    make.bottom.equalTo(self.view.mas_bottom);
+//}
+//    }];
+
+#ifdef __IPHONE_11_0
+    if ( [self respondsToSelector:@selector(setContentInsetAdjustmentBehavior:)]) {
+        if (@available(iOS 11.0, *)) {
+            self.ls_tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+    if(kDevice_Is_iPhoneX && CGRectGetHeight(self.view.frame) == kLS_ScreenHeight - kLS_TopHeight){
+        self.ls_tableView.contentInset = UIEdgeInsetsMake(0, 0, kLS_iPhoneX_Home_Indicator_Height, 0);
+        self.ls_tableView.scrollIndicatorInsets = self.ls_tableView.contentInset;
+    }
+#endif
     
 }
 
