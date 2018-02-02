@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "Tools.h"
 #import "LSCheckoutNetworkState.h"
-
+/**
+ VC 基类
+ */
 @interface LSBaseViewController : UIViewController
 
 #pragma mark - 数据请求

@@ -91,6 +91,11 @@ static int ls_cacheMaxSize = 10485760;
     ls_httpHeaders = httpHeaders;
 }
 
+- (void)setLs_requestPriority:(LSRequestPriority)ls_requestPriority {
+    _ls_requestPriority = ls_requestPriority;
+    _ls_requestPriority = LSRequestPriorityDefault;
+}
+
 //inline 它的意思是告诉编译器这个函数是一个静态的内联函数
 static inline NSString *cachePath() {
     /**
@@ -537,7 +542,7 @@ static inline NSString *cachePath() {
 }
 
 ///设置请求的优先级
-- (void)ls_configRequestPriority:(__kindof __kindof LSURLSessionTask *)sessionTask {
+- (void)ls_configRequestPriority:(__kindof LSURLSessionTask *)sessionTask {
     
      __weak __typeof(self)weakSelf = self;
     
@@ -883,91 +888,6 @@ static inline NSString *cachePath() {
     return data;
 }
 
-///尽管异步请求的返回先后顺序没有一定，很可能后发出的请求先返回；但是最后回调的时候，请求返回的结果必须要按请求发出的顺序排列
-+ (void)yuploadImages:(NSArray<UIImage*>*)images toURL:(NSString *)urlString parameters:(NSDictionary*)parameters imageKey:(NSString *)imageKey graceTime:(CGFloat)graceTime completed:(void(^)(id json))finish failure:(void(^)(NSError *error))failure {
-    //判断网络是否可用 如果不可用直接返回
-    if (![LSCheckoutNetworkState activeNetwork]) {
-        return;
-    }
-    //显示加载中
-    MBProgressHUD *hud = [MBProgressHUD hud:graceTime];
-    
-    //1.创建管理者对象
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    //设置请求超时的时间
-    manager.requestSerializer.timeoutInterval = 30.f;
-    
-    // 准备保存结果的数组，元素个数与上传的图片个数相同，先用 NSNull 占位
-    NSMutableArray *result = [NSMutableArray array];
-    for (NSInteger i = 0; i < images.count; i++) {
-        [result addObject:[NSNull null]];
-    }
-    
-    dispatch_group_t group = dispatch_group_create();
-    
-    for (NSInteger i = 0; i < images.count; i++) {
-        
-        dispatch_group_enter(group);
-        
-        //2.上传文件
-        [manager POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-            // 拼接data到请求体，这个block的参数是遵守AFMultipartFormData协议的。
-            //上传文件参数
-            //UIImageJPEGRepresentation(image, 1.0) 返回的图片数据较小.
-            NSData *imageData = UIImageJPEGRepresentation(images[i], 0.1);
-            //要保存在服务器上的[文件名]
-            NSString *fileName = [NSString stringWithFormat:@"%@.jpg", [self returnsTheCurrentSystemTimeStamp]];
-            /*
-             此方法参数
-             1. FileData:  要上传的[二进制数据] +++ image转换成的data数据
-             2. name:      对应网站上[upload.php中]处理文件的[字段"file"] +++ 参数image 对应的key值
-             3. fileName:  要保存在服务器上的[文件名] ++++ 可以随便写
-             4. mimeType:  上传文件的类型[mimeType] +++
-             */
-            //服务器上传文件的字段和类型 上传图片，以文件流的格式
-            [formData appendPartWithFileData:imageData name:imageKey fileName:fileName mimeType:@"image/png/file/jpg"];
-            
-        } progress:^(NSProgress * _Nonnull uploadProgress) {
-            //打印 上传进度
-            NSLog(@"上传进度：%lf",1.0 * uploadProgress.completedUnitCount / uploadProgress.totalUnitCount);
-        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            //手动关闭MBProgressHUD
-            [self hiddenHud:hud];
-            // 请求成功，解析数据
-            if (finish) {
-                finish([self tryToParseData:responseObject]);
-            }
-            
-            NSLog(@"第%ld张图片上传成功:%@", i + 1, responseObject);
-            @synchronized (result) { // NSMutableArray 是线程不安全的，所以加个同步锁
-                result[i] = responseObject;
-            }
-            dispatch_group_leave(group);
-            
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            //手动关闭MBProgressHUD
-            [self hiddenHud:hud];
-            //根据错误代码显示提示信息
-            [self showFailMarkedWordsWithError:error];
-            //请求失败
-            NSLog(@"失败：%@",error);
-            if (failure) {
-                failure(error);
-            }
-            
-            NSLog(@"第%ld张图片上传失败：%@", i + 1, error);
-            dispatch_group_leave(group);
-        }];
-    }
-    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-        NSLog(@"上传完成!");
-        for (id response in result) {
-            NSLog(@"%@", response);
-        }
-    });
-}
-
-
 #pragma mark + 上传语音 通过URL来获取路径，进入沙盒或者系统相册等等
 #pragma mark + 上传 通过文件路径
 + (__kindof LSURLSessionTask *)uploadWithAudioPath:(NSString *)audioPath urlStr:(NSString *)urlStr parameters:(NSDictionary *)parameters audioKey:(NSString *)audioKey success:(void(^)(id responseData))success fail:(void(^)(NSError *error))fail {
@@ -1211,6 +1131,19 @@ static inline NSString *cachePath() {
 
 ///根据错误代码显示提示信息
 + (void)showFailMarkedWordsWithError:(NSError *)error {
+    
+    //    NSLog(@"error = %@",error);
+    //    NSLog(@"error.code = %d", error.code);//错误代码
+    //    NSLog(@"error.description = %@", error.description);
+    //    NSLog(@"error.localizedDescription = %@", error.localizedDescription); //错误信息
+    //    NSLog(@"error.userInfo = %@", error.userInfo);
+    //    NSLog(@"error.domain = %@", error.domain);
+    //    NSLog(@"error.localizedFailureReason = %@", error.localizedFailureReason);
+    //    NSLog(@"error.localizedRecoverySuggestion = %@", error.localizedRecoverySuggestion);
+    //    NSLog(@"error.localizedRecoveryOptions = %@", error.localizedRecoveryOptions);
+    //    NSLog(@"error.recoveryAttempter = %@", error.recoveryAttempter);
+    //    NSLog(@"error.helpAnchor = %@", error.helpAnchor);
+    
     switch (error.code) {
         case -404:
             [MBProgressHUD qucickTip:@"服务器错误"];

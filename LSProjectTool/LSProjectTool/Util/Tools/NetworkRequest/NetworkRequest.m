@@ -280,33 +280,35 @@
     }
 }
 
+//有时也会不按照顺序上传
 + (void)async_uploadImages:(NSArray<UIImage*>*)images toURL:(NSString *)urlString parameters:(NSDictionary*)parameters imageKey:(NSString *)imageKey graceTime:(CGFloat)graceTime completed:(void(^)(id json))finish failure:(void(^)(NSError *error))failure {
     //判断网络是否可用 如果不可用直接返回
     if (![self activeNetwork]) {
         return;
     }
     //显示加载中
-    MBProgressHUD *hud = [MBProgressHUD hud:graceTime];
+//    MBProgressHUD *hud = [MBProgressHUD hud:graceTime];
     //要保存在服务器上的[文件名]
     NSString *fileName = [NSString stringWithFormat:@"%@.jpg", [self returnWithATimeStampAsFileName]];
     //1。创建管理者对象
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     //设置请求超时的时间
     manager.requestSerializer.timeoutInterval = kTimeoutInterval;
-    
-    dispatch_group_t ls_group_t = dispatch_group_create();
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",
+                                                         @"text/html",
+                                                         @"image/jpeg",
+                                                         @"image/png",
+                                                         @"application/octet-stream",
+                                                         @"text/json",
+                                                         nil];
+
     //创建信号量，参数：信号量的初值，如果小于0则会返回NULL
     dispatch_semaphore_t ls_semaphore_t = dispatch_semaphore_create(1);
-    dispatch_queue_t ls_queue_t = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     
     for (int i = 0; i < images.count; i++) {
         //等待降低信号量
+        //只要信号量值不大于等于1，就会一直等待，知道>=1，再进行操作
         dispatch_semaphore_wait(ls_semaphore_t, DISPATCH_TIME_FOREVER);
-        dispatch_group_async(ls_group_t, ls_queue_t, ^{
-            
-            //提高信号量
-            dispatch_semaphore_signal(ls_semaphore_t);
-            
             //2.上传文件
             [manager POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
                 // 拼接data到请求体，这个block的参数是遵守AFMultipartFormData协议的。
@@ -328,20 +330,23 @@
                 
                 [formData appendPartWithFormData:imageData name:fileName];
                 
+                ////完操作完，让信号量计数+1，这样下次有线程要访问，就可以访问
+                dispatch_semaphore_signal(ls_semaphore_t);
+                
             } progress:^(NSProgress * _Nonnull uploadProgress) {
                 //打印 上传进度
-                NSLog(@"上传进度：%lf",1.0 * uploadProgress.completedUnitCount / uploadProgress.totalUnitCount);
+                NSLog(@"上传进度%d：%lf",i, 1.0 * uploadProgress.completedUnitCount / uploadProgress.totalUnitCount);
             } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 NSLog(@"第%d张图片上传成功:%@", i + 1, responseObject);
                 //手动关闭MBProgressHUD
-                [self hiddenHud:hud];
+//                [self hiddenHud:hud];
                 // 请求成功，解析数据
                 if (finish) {
                     finish([self tryToParseData:responseObject]);
                 }
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 //手动关闭MBProgressHUD
-                [self hiddenHud:hud];
+//                [self hiddenHud:hud];
                 //根据错误代码显示提示信息
                 [self showFailMarkedWordsWithError:error];
                 //请求失败
@@ -350,8 +355,6 @@
                     failure(error);
                 }
             }];
-        });;
-        dispatch_group_wait(ls_group_t, DISPATCH_TIME_FOREVER);
     }
 }
 
@@ -573,6 +576,19 @@
 
 ///根据错误代码显示提示信息
 + (void)showFailMarkedWordsWithError:(NSError *)error {
+    
+    //    NSLog(@"error = %@",error);
+    //    NSLog(@"error.code = %d", error.code);//错误代码
+    //    NSLog(@"error.description = %@", error.description);
+    //    NSLog(@"error.localizedDescription = %@", error.localizedDescription); //错误信息
+    //    NSLog(@"error.userInfo = %@", error.userInfo);
+    //    NSLog(@"error.domain = %@", error.domain);
+    //    NSLog(@"error.localizedFailureReason = %@", error.localizedFailureReason);
+    //    NSLog(@"error.localizedRecoverySuggestion = %@", error.localizedRecoverySuggestion);
+    //    NSLog(@"error.localizedRecoveryOptions = %@", error.localizedRecoveryOptions);
+    //    NSLog(@"error.recoveryAttempter = %@", error.recoveryAttempter);
+    //    NSLog(@"error.helpAnchor = %@", error.helpAnchor);
+    
     switch (error.code) {
         case -404:
             [MBProgressHUD qucickTip:@"服务器错误"];

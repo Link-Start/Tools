@@ -5,6 +5,8 @@
 //  Created by Xcode on 16/7/14.
 //  Copyright © 2016年 Link-Start. All rights reserved.
 //   支付宝 ：，移动支付接口文档您可以参考：https://doc.open.alipay.com/doc2/detail?treeId=59&articleId=103563&docType=1
+// 空白占位图 https://github.com/yangli-dev/LYEmptyView
+
 
 #import "AppDelegate.h"
 #import "RealReachability.h"

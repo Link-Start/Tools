@@ -25,7 +25,7 @@
 ////NSLog的使用效率比较低，所以在我们的项目中非调试状态下不应该出现大量的NSLog,让调试打印函数只在调试的时候有用，发布的时候就不能使用。
 // 让NSLog打印我们输出的内容,附加输出文件名和打印语句的行号
 #ifdef DEBUG
-#define NSLog(FORMAT, ...) fprintf(stderr,"%s:%d\t %s\n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
+#define NSLog(FORMAT, ...) fprintf(stderr,"[文件名：%s]:[函数名：%s]:[行号：%d]\t %s\n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __FUNCTION__, __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
 #else
 #define NSLog(...)
 #endif

@@ -28,7 +28,7 @@
 }
 
 // 网络请求频率很高，不必每次都创建\销毁一个hud，只需创建一个反复使用即可
-+ (MBProgressHUD *)hud{
++ (MBProgressHUD *)hud {
     
     //获取相关联的对象时使用Objective-C函数objc_getAssociatedObject
     MBProgressHUD *hud = objc_getAssociatedObject(self, _cmd);
@@ -64,8 +64,8 @@
     hud.animationType = MBProgressHUDAnimationZoom;
     //设置模式
     hud.mode = MBProgressHUDModeText;
-    ////设置需要显示的文字信息
-    hud.labelText=message;
+    ///设置需要显示的文字信息
+    hud.labelText = message;
     //关闭用户交互
     hud.userInteractionEnabled = NO;
     //1.4秒后消失
@@ -95,6 +95,76 @@
     hud.removeFromSuperViewOnHide = YES;
     //1.2秒后消失
     [hud hide:YES afterDelay:1.2];
+    return hud;
+}
+
+#pragma mark - 显示成功信息
+/**
+ *  显示成功信息
+ *
+ *  @param success 信息内容
+ *
+ *  不需要手动关闭
+ */
++ (MBProgressHUD *)showSuccess:(NSString *)success {
+    return [self showSuccess:success toView:nil];
+}
+
+/**
+ *  显示成功信息
+ *
+ *  @param success 信息内容
+ *  @param view    显示信息的视图
+ *  @return 直接返回一个MBProgressHUD，不需要手动关闭
+ */
++ (MBProgressHUD *)showSuccess:(NSString *)success toView:(UIView *)view {
+    return  [self show:success icon:@"success.png" view:view];
+}
+
+/**
+ *  显示错误信息
+ *
+ *  不需要手动关闭
+ */
++ (MBProgressHUD *)showError:(NSString *)error {
+    return [self showError:error toView:nil];
+}
+
+/**
+ *  显示错误信息
+ *
+ *  @param error 错误信息内容
+ *  @param view  需要显示信息的视图
+ *  @return 直接返回一个MBProgressHUD，不需要手动关闭
+ */
++ (MBProgressHUD *)showError:(NSString *)error toView:(UIView *)view {
+    return [self show:error icon:@"error.png" view:view];
+}
+/**
+ *  显示信息
+ *
+ *  @param text 信息内容
+ *  @param icon 图标
+ *  @param view 显示的视图
+ */
++ (MBProgressHUD *)show:(NSString *)text icon:(NSString *)icon view:(UIView *)view {
+    if (view == nil) {
+        view = [UIApplication sharedApplication].keyWindow;
+    }
+    // 快速显示一个提示信息
+    MBProgressHUD *hud = [self hud];
+    //设置需要显示的文字信息
+    hud.labelText = text;
+    // 设置图片
+    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"MBProgressHUD.bundle/%@", icon]]];
+    // 再设置模式
+    hud.mode = MBProgressHUDModeCustomView;
+    //设置动画
+    hud.animationType = MBProgressHUDAnimationZoom;
+    // 隐藏时候从父控件中移除
+    hud.removeFromSuperViewOnHide = YES;
+    // 1秒之后再消失
+    [hud hide:YES afterDelay:1.0];
     return hud;
 }
 

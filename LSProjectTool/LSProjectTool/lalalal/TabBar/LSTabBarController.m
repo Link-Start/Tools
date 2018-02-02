@@ -9,6 +9,10 @@
 #import "LSTabBarController.h"
 
 @interface LSTabBarController ()
+{
+#pragma mark - 屏幕旋转(TabBarController是根视图控制器) 1.
+    BOOL shouldAutorotate;  //1.设置一个全局的BOOL值
+}
 
 @property (nonatomic, assign) NSInteger indexFlag;
 
@@ -55,6 +59,10 @@
     
 /************ 去掉tabBar顶部黑色线条             方法2 *******************/
     [self configTabBar];
+    
+    
+#pragma mark - 屏幕旋转(TabBarController是根视图控制器) 3.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(AutorotateInterface:) name:@"InterfaceOrientation" object:nil];
 }
 
 ///去掉tabBar顶部黑色线条 (解决思路是用画布创建了一个透明色的图片)
@@ -212,6 +220,27 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+#pragma mark - 屏幕旋转(TabBarController是根视图控制器) 2.
+- (BOOL)shouldAutorotate {//是否支持旋转
+    NSLog(@"是否支持旋转======%d",shouldAutorotate);
+    if (!shouldAutorotate) {
+        return NO;
+    } else {
+        return YES;
+    }
+}
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {//适配旋转的类型
+    if (!shouldAutorotate) {
+        return UIInterfaceOrientationMaskPortrait;
+    }
+    return UIInterfaceOrientationMaskAllButUpsideDown;
+}
+#pragma mark - 屏幕旋转(TabBarController是根视图控制器) 4.
+- (void)AutorotateInterface:(NSNotification *)notifition {
+    shouldAutorotate = [notifition.object boolValue];
+}
+//在需要自动转屏的控制器里发送通知即可:
+//[[NSNotificationCenter defaultCenter] postNotificationName:@"InterfaceOrientation" object:@"YES"];
 
 /*
 #pragma mark - Navigation

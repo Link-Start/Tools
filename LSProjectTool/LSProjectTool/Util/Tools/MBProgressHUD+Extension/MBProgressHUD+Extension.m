@@ -6,7 +6,8 @@
 //  Copyright © 2016年 Link-Start. All rights reserved.
 //
 
-#define kLastWindow [UIApplication sharedApplication].keyWindow
+#define kLastWindow [[[UIApplication sharedApplication] delegate] window]
+//#define kLastWindow [UIApplication sharedApplication].keyWindow
 
 #import "MBProgressHUD+Extension.h"
 #import <objc/runtime.h>

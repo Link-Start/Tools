@@ -7,6 +7,25 @@
 //
 
 //系统尺寸
+/*
+设备               屏幕尺寸    分辨率（pt）    Reader     分辨率（px）    渲染后         PPI
+iPhone 3GS         3.5吋      320x480        @1x       320x480                    163
+iPhone 4/4s        3.5吋      320x480        @2x       640x960                    330
+iPhone 5/5s/5c     4.0吋      320x568        @2x       640x1136                   326
+iPhone 6           4.7吋      375x667        @2x       750x1334                   326
+iPhone 6Plus       5.5吋      414x736        @3x       1242x2208    1080x1920     401
+iPhone 6s          4.7吋      375x667        @2x       750x1334                   326
+iPhone 6sPlus      5.5吋      414x736        @3x       1242x2208    1080x1920     401
+iPhone 7           4.7吋      375x667        @2x       750x1334                   326
+iPhone 7Plus       5.5吋      414x736        @3x       1242x2208    1080x1920     401
+iPhone 8
+iPhone 8Plus
+iPhone SE
+iPhone X
+*/
+
+
+
 
 #ifndef DefineSystemSize_h
 #define DefineSystemSize_h
@@ -43,11 +62,20 @@
 #endif
 
 
-#define kLS_Iphone6ScaleWidth kLS_ScreenWidth/375.0
-#define kLS_Iphone6ScaleHeight kLS_ScreenHeight/667.0
-//根据ip6的屏幕来拉伸
-#define kLS_RealValue(with) ((with)*(kLS_ScreenWidth/375.0f))
+//#define kLS_Iphone6ScaleWidth        (kLS_ScreenWidth/375.0f)
+//#define kLS_Iphone6ScaleHeight       (kLS_ScreenHeight/667.0f)
+////相对宽度 以iphone6 4.7寸为依据
+//#define kLS_relative_width(width)    ((width)*(kLS_ScreenWidth/375.0f))
+////相对高度
+//#define kLS_relative_height(height)  ((height)*(kLS_ScreenHeight/667.0f))
 
+// 不同屏幕尺寸适配 以iphone6 4.7寸为依据
+#define kLS_relative_Width_Ratio   (kLS_ScreenWidth / 375.0)
+#define kLS_relative_Height_Ratio  (kLS_ScreenHeight / 667.0)
+#define kLS_relative_Width(x)      ceilf((x) * kLS_relative_Width_Ratio)
+#define kLS_relative_Height(y)     ceilf((y) * kLS_relative_Height_Ratio)
+// 字体适配
+#define ALS_relative_FontSize(fontsize) [UIFont systemFontOfSize:kLS_relative_Width_Ratio(fontsize)]
 
 
 /****************************** 适配ios11 *************************************/

@@ -1,5 +1,5 @@
 //
-//  LSTabBarController.h
+//  LSNavigationController.h
 //  copyText
 //
 //  Created by Xcode on 16/8/17.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LSTabBarController : UITabBarController
-
-
+@interface LSNavigationController : UINavigationController
 
 @end

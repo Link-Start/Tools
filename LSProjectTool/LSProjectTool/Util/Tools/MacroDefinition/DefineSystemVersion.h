@@ -32,29 +32,8 @@
 #define kLS_GetCurrentSystemVersion    ([[UIDevice currentDevice] systemVersion])
 
 
-
-
-//         ios7系统判断 判断设备的操做系统是不是ios7 如果是iOS7系统 返回YES
+// ios7系统判断 判断设备的操做系统是不是ios7 如果是iOS7系统 返回YES
 #define IsIOS7 ([[[UIDevice currentDevice] systemVersion] floatValue] >=7.0)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //当前语言
 #define kLS_GetCurrentLanguage (［NSLocale preferredLanguages] objectAtIndex:0])

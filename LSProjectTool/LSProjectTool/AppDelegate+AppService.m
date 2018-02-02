@@ -84,7 +84,7 @@
 }
 
 
--(UIViewController *)getCurrentVC{
+-(UIViewController *)getCurrentVC {
     
     UIViewController *result = nil;
     

@@ -36,4 +36,17 @@
  *  @return 直接返回一个MBProgressHUD，不需要手动关闭
  */
 + (MBProgressHUD *)fakeWaiting:(NSString *)message toView:(UIView *)view;
+
+/**
+ *  显示错误信息
+ *  不需要手动关闭
+ */
++ (MBProgressHUD *)showError:(NSString *)error;
+/**
+ *  显示成功信息
+ *  @param success 信息内容
+ *  不需要手动关闭
+ */
++ (MBProgressHUD *)showSuccess:(NSString *)success;
+
 @end

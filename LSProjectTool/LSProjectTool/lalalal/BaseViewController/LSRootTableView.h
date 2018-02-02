@@ -1,5 +1,5 @@
 //
-//  LSTableView.h
+//  LSRootTableView.h
 //  LSProjectTool
 //
 //  Created by Alex Yang on 2017/12/22.
@@ -7,9 +7,9 @@
 //
 
 #import "LSBaseViewController.h"
+#import "LSRootViewController.h"
 
-@interface LSTableView : LSBaseViewController
-
+@interface LSRootTableView : LSRootViewController
 
 
 @end
