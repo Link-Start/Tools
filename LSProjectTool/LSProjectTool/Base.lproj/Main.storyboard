@@ -17,10 +17,42 @@
                         <viewControllerLayoutGuide type="top" id="wsT-PC-pQM"/>
                         <viewControllerLayoutGuide type="bottom" id="rtr-h3-n0c"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="HXPhotoView" customModule="LSProjectTool">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KBd-pE-lyC" customClass="LSButton">
+                                <rect key="frame" x="103.5" y="313.5" width="169" height="40"/>
+                                <state key="normal" title="啦啦啦啦啦绿绿" image="5">
+                                    <color key="titleColor" red="1" green="0.12549019610000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="ls_borderWidth">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="ls_cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="ls_underlineColor">
+                                        <color key="value" red="1" green="0.12549019610000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="ls_padding">
+                                        <real key="value" value="23"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="ls_space">
+                                        <real key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="btnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lnj-H7-aBY"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="KBd-pE-lyC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Evr-pd-beX"/>
+                            <constraint firstItem="KBd-pE-lyC" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ZiP-eE-CmX"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -28,4 +60,7 @@
             <point key="canvasLocation" x="68" y="376.46176911544228"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="5" width="40" height="40"/>
+    </resources>
 </document>

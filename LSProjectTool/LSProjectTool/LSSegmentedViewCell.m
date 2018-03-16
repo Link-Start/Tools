@@ -11,7 +11,7 @@
 @interface LSSegmentedViewCell()
 
 ///名称
-@property (nonatomic, strong) UIButton *ls_titleBtn;
+@property (nonatomic, strong) UILabel *titleLabel;
 
 @end
 
@@ -27,41 +27,35 @@
 }
 
 - (void)addSubViews{
-
-    [self.contentView addSubview:self.ls_titleBtn];
+    self.contentView.backgroundColor = [UIColor whiteColor];
+    [self.contentView addSubview:self.titleLabel];
 }
 
 
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    self.ls_titleBtn.frame = self.bounds;
+    self.titleLabel.frame = self.bounds;
 }
 
 #pragma mark - setter方法
 - (void)setTitleStr:(NSString *)titleStr {
     _titleStr = titleStr;
-    [_ls_titleBtn setTitle:_titleStr forState:UIControlStateNormal];
+    self.titleLabel.text = titleStr;
 }
 
 - (void)setLs_titleLabelColor:(UIColor *)ls_titleLabelColor {
     ls_titleLabelColor = ls_titleLabelColor;
-    [_ls_titleBtn setTitleColor:_ls_titleLabelColor forState:UIControlStateNormal];
+    self.titleLabel.textColor = ls_titleLabelColor;
 }
 
 #pragma mark - 懒加载
-- (UIButton *)ls_titleBtn {
-    if (!_ls_titleBtn) {
-        _ls_titleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_ls_titleBtn addTarget:self action:@selector(ls_titleBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+- (UILabel *)titleLabel {
+    if (!_titleLabel) {
+        _titleLabel = [[UILabel alloc] init];
+        _titleLabel.textAlignment = NSTextAlignmentCenter;
     }
-    return _ls_titleBtn;
-}
-//点击事件
-- (void)ls_titleBtnAction:(UIButton *)sender {
-    if ([self.delegate respondsToSelector:@selector(cellDidClick:)]) {
-        [self.delegate cellDidClick:self];
-    }
+    return _titleLabel;
 }
 
 @end

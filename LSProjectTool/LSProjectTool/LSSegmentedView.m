@@ -32,7 +32,7 @@
     self = [super initWithFrame:frame];
     
     if (self) {
-        _titleArray = titleArray;
+        self.titleArray = titleArray;
         _ls_maxShowNum = 4;//默认是显示4个
         
         [self ls_addCollectionView];
@@ -41,9 +41,9 @@
 }
 
 - (void)ls_addCollectionView {
-    [self addSubview:_ls_segmented_collectionView];
+    [self addSubview:self.ls_segmented_collectionView];
     [_ls_segmented_collectionView registerClass:[LSSegmentedViewCell class] forCellWithReuseIdentifier:idefidenter];
-    
+    [self.ls_segmented_collectionView reloadData];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -51,11 +51,11 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return _titleArray.count;
+    return self.titleArray.count;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake([UIScreen mainScreen].bounds.size.width / _ls_maxShowNum, self.frame.size.height);
+    return CGSizeMake((self.frame.size.width-_ls_maxShowNum+1) / _ls_maxShowNum, self.frame.size.height);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -64,11 +64,44 @@
     
     cell.titleStr = self.titleArray[indexPath.item];
     
-    return nil;
+    return cell;
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     return UIEdgeInsetsMake(0, 0, 0, 0);
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"点击了__%ld", (long)indexPath.item);
+//    NSInteger centerNum = self.titleArray.count/2 + self.titleArray.count%2;
+//    if (indexPath.item >= centerNum - 1) {
+//        [self.ls_segmented_collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionLeft animated:YES];
+//    } else if (indexPath.item < centerNum - 1) {
+//        [self.ls_segmented_collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionRight animated:YES];
+//    }
+    
+}
+
+//这样scrollView就会逐渐减速，最终停止在itemCenterOffsetWithOriginalTargetContentOffset方法算出来的位置
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
+    CGPoint originalTargetContentOffset = CGPointMake(targetContentOffset->x, targetContentOffset->y);
+    CGPoint targetCenter = CGPointMake(originalTargetContentOffset.x + CGRectGetWidth(self.ls_segmented_collectionView.bounds)/2, CGRectGetHeight(self.ls_segmented_collectionView.bounds) / 2);
+    NSIndexPath *indexPath = nil;
+    NSInteger i = 0;
+    while (indexPath == nil) {
+        targetCenter = CGPointMake(originalTargetContentOffset.x + CGRectGetWidth(self.ls_segmented_collectionView.bounds)/2 + 10*i, CGRectGetHeight(self.ls_segmented_collectionView.bounds) / 2);
+        indexPath = [self.ls_segmented_collectionView indexPathForItemAtPoint:targetCenter];
+        i++;
+    }
+//    self.selectedIndex = indexPath;
+    //这里用attributes比用cell要好很多，因为cell可能因为不在屏幕范围内导致cellForItemAtIndexPath返回nil
+    UICollectionViewLayoutAttributes *attributes = [self.ls_segmented_collectionView.collectionViewLayout layoutAttributesForItemAtIndexPath:indexPath];
+    if (attributes) {
+        *targetContentOffset = CGPointMake(attributes.center.x - CGRectGetWidth(self.ls_segmented_collectionView.bounds)/2, originalTargetContentOffset.y);
+    } else {
+        NSLog(@"center is %@; indexPath is {%@, %@}; cell is %@",NSStringFromCGPoint(targetCenter), @(indexPath.section), @(indexPath.item), attributes);
+    }
+    
 }
 
 #pragma mark - 懒加载
@@ -77,6 +110,11 @@
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         _ls_segmented_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) collectionViewLayout:layout];
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal; //横
+        _ls_segmented_collectionView.backgroundColor = [UIColor redColor];
+        _ls_segmented_collectionView.delegate = self;
+        _ls_segmented_collectionView.dataSource = self;
+        _ls_segmented_collectionView.showsHorizontalScrollIndicator = NO;
+//        _ls_segmented_collectionView.pagingEnabled = YES;
     }
 
     return _ls_segmented_collectionView;
@@ -84,7 +122,7 @@
 
 - (NSMutableArray *)titleArray {
     if (!_titleArray) {
-        self.titleArray = [NSMutableArray array];
+        _titleArray = [NSMutableArray array];
     }
     return _titleArray;
 }

@@ -7,7 +7,7 @@
 //
 
 #import "LSRootTableView.h"
-
+#import "UIImage+Extension.h"
 @interface LSRootTableView ()
 
 @property (nonatomic, strong) UITableView *ls_tableView;
@@ -18,6 +18,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //设置导航栏下1px线的颜色 -- 测试可用
+//    [self.navigationController.navigationBar setShadowImage:[UIImage imageCreateImageWithColor:UIColorFromRGB(0xe8e8e8) size:CGSizeMake(kLS_ScreenWidth, 0.5)]];
     
     if (@available(iOS 11.0, *)) {
         self.ls_tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
@@ -63,8 +66,8 @@
 - (UITableView *)ls_tableView {
     if (!_ls_tableView) {
         _ls_tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kLS_ScreenWidth, kLS_ScreenHeight - kLS_TopHeight - kLS_TabBarHeight) style:UITableViewStylePlain];
-        _ls_tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
         
+        [self setupTableViewSeparatorsLine];
         //iOS8引入Self-Sizing 之后，我们可以通过实现estimatedRowHeight相关的属性来展示动态的内容
         //Self-Sizing在iOS11下是默认开启的
         //iOS11下不想使用Self-Sizing的话，可以通过以下方式关闭
@@ -103,6 +106,13 @@
         [self.view addSubview:_ls_tableView];
     }
     return _ls_tableView;
+}
+
+///设置tableView的分割线
+- (void)setupTableViewSeparatorsLine {
+    _ls_tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    self.ls_tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    self.ls_tableView.separatorColor = UIColorFromRGB(0xe8e8e8);
 }
 
 

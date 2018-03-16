@@ -17,7 +17,7 @@
  *
  *  @return 文件路径
  */
-- (NSString *)getDocumentFilePath:(NSString*)plistFileName{
+- (NSString *)getDocumentFilePath:(NSString *)plistFileName{
     /**
      *  @brief 获取应用程序沙盒中的Documents文件夹路径
      *  @param NSDocumentDirectory 指程序中对应的Documents文件夹路径
@@ -80,7 +80,7 @@
  *
  *  @return plist文件中的数据
  */
-+ (instancetype)readFromFile:(NSString*)plistFileName{
++ (instancetype)readFromFile:(NSString *)plistFileName{
     
     //如果 对象是UIImage 的子类
     if ([self isSubclassOfClass:[UIImage class]]) {
@@ -127,7 +127,7 @@
 }
 
 //存数据
--(void)SetPlistValue:(id)value andKeyName:(NSString*)keyName andFileName:(NSString*)fileName {
+-(void)SetPlistValue:(id)value andKeyName:(NSString *)keyName andFileName:(NSString *)fileName {
     //plist文件路径
     NSString *thePath = [self getDocumentFilePath:fileName];
     //创建文件管理器
@@ -152,8 +152,7 @@
 }
 
 //取出数据
-- (NSObject*)GetPlistValueOfKey:(NSString*)keyName andFileName:(NSString*)fileName
-{
+- (NSObject *)GetPlistValueOfKey:(NSString *)keyName andFileName:(NSString *)fileName {
     NSObject *returnObject;
     //plist文件路径
     NSString *thePath = [self getDocumentFilePath:fileName];

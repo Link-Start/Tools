@@ -42,7 +42,7 @@
  *
  *  @return 图片
  */
-+ (UIImage *)imageCreateImageWithColor:(UIColor *)color;
++ (UIImage *)imageCreateImageWithColor:(UIColor *)color size:(CGSize)size;
 /**
  *  压缩原图片尺寸
  *

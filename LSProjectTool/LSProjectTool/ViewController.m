@@ -10,11 +10,11 @@
 
 #import "ViewController.h"
 #import "LSTextView.h"
-#import "LSCollectionView.h"
-#import "HXPhotoView.h"
 #import "LSBaseViewController.h"
 #import "NetworkRequest.h"
 #import "LSNetworking.h"
+#import "CeshiVC.h"
+#import "LSSegmentedView.h"
 
 @interface ViewController ()<UITextFieldDelegate>
 
@@ -23,8 +23,9 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (nonatomic, strong) UIView *demoView;
-@property (nonatomic, strong) LSCollectionView *collection;
-@property (nonatomic, strong) HXPhotoView *photoView;
+
+
+@property (nonatomic, strong) UIButton *btn;
 
 @end
 
@@ -40,8 +41,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.photoView = [[HXPhotoView alloc] initWithFrame:self.view.bounds];
-    [self.view addSubview:self.photoView];
+    LSSegmentedView *view = [[LSSegmentedView alloc] initWithFrame:CGRectMake(0, 200, [UIScreen mainScreen].bounds.size.width, 60) andTitleArray:@[@"123456", @"456789", @"789132", @"147852", @"45678978789789787878787",@"123456", @"456789", @"789132", @"147852", @"45678978789789787878787",@"123456", @"456789", @"789132", @"147852", @"45678978789789787878787"].copy];
+    [self.view addSubview:view];
     
 //    self.inputView.ls_placeholder(@"123456789").ls_placeholderColor([UIColor redColor]).ls_maxNumberOfLines(3);
 //
@@ -64,14 +65,6 @@
 //
 //    NSLog(@"__________________________：%@", str);
 
-    NSMutableArray *imgs = [NSMutableArray array];
-    for (int i = 1; i < 7; i++) {
-        [imgs addObject:[UIImage imageNamed:[NSString stringWithFormat:@"%d", i]]];
-    }
-    
-    NSLog(@"%@", imgs);
-    
-    NSDictionary *param = @{@"urlType":@"0", @"token":@"3f7797f6a69c10dcd95caa63ecb22d5a"};
 }
 
 - (void)btnAction {
@@ -79,7 +72,8 @@
 }
 
 - (IBAction)btnAction:(id)sender {
-
+    CeshiVC *vc = [[CeshiVC alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

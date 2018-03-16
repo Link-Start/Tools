@@ -16,13 +16,19 @@
 [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 // rgb颜色转换（16进制->10进制）
-#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+#define UIColorFromRGBA(rgbValue, alpha)\
+[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:alpha]
 
 ///设置颜色 - RGBA  (R:红, G:绿, B:蓝, A:透明度) 利用这种方法设置颜色和透明值，可不影响子视图背景色
 #define kRGBA(R, G, B, A) [UIColor colorWithRed:(R)/255.0f green:(G)/255.0f blue:(B)/255.0f alpha:(A)]
 #define RGB(r,g,b) kRGBA(r,g,b,1.0f)
 //清除背景色
 #define kClearColor [UIColor clearColor]
+
+///UIView背景色 偏蓝
+#define UIViewDefaultBackgroundColor UIColorFromRGB(0xF0F1F5)
+///细线的颜色
+#define lineViewColor UIColorFromRGB(0xe8e8e8)
 
 
 /**

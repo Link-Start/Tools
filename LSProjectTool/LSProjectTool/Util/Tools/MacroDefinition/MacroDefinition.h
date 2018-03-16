@@ -63,8 +63,7 @@
 #define kLS_DeviceName [[UIDevice currentDevice] name]
 ///系统名称
 #define kLS_SystemName [[UIDevice currentDevice] systemName]
-///手机系统版本
-#define kLS_Version [[UIDevice currentDevice] systemVersion]
+
 ///地方型号（国际化区域名称）
 #define kLS_LocalPhoneModel [[UIDevice currentDevice] localizedModel]
 ///获取当前语言

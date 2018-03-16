@@ -30,9 +30,9 @@
     return [image resizableImageWithCapInsets:UIEdgeInsetsMake(h, w, h, w)];
 }
 
-+ (UIImage *)imageCreateImageWithColor:(UIColor *)color
++ (UIImage *)imageCreateImageWithColor:(UIColor *)color size:(CGSize)size
 {
-    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    CGRect rect = CGRectMake(0.0f, 0.0f, size.width, size.width);
     UIGraphicsBeginImageContext(rect.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetFillColorWithColor(context, [color CGColor]);

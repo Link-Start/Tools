@@ -26,6 +26,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    //设置导航栏下1px线的颜色 -- 测试可用
+    //    [self.navigationController.navigationBar setShadowImage:[UIImage imageCreateImageWithColor:UIColorFromRGB(0xe8e8e8) size:CGSizeMake(kLS_ScreenWidth, 0.5)]];
+    
     if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
@@ -36,9 +39,29 @@
         UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"返回"] style:UIBarButtonItemStyleDone target:self action:@selector(ls_backButtonAction)];
         
         self.navigationItem.leftBarButtonItem = leftButtonItem;
+        
     }
 }
 
+- (void)createBackBtn {
+    //1.初始化按钮UIButton
+    UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    //1.2设置位置
+    leftBtn.frame = CGRectMake(0, 0, 25,25);
+    //1.3添加背景颜色
+    [leftBtn setBackgroundImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateNormal];
+    //1.4监听
+    [leftBtn addTarget:self action:@selector(ls_backButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    leftBtn.adjustsImageWhenHighlighted = NO;
+    //2 初始化按钮UIBarButtonItem
+    UIBarButtonItem *leftBarBtn = [[UIBarButtonItem alloc]initWithCustomView:leftBtn];
+    //2.2创建UIBarButtonSystemItemFixedSpace
+    UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    //2.3将宽度设为负值
+    spaceItem.width = -8;
+    //2.4将两个BarButtonItem都返回给NavigationItem
+    self.navigationItem.leftBarButtonItems = @[spaceItem,leftBarBtn];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
