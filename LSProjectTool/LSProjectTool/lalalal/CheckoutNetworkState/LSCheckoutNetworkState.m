@@ -7,6 +7,7 @@
 //
 
 #import "LSCheckoutNetworkState.h"
+#import "RealReachability.h"
 
 @implementation LSCheckoutNetworkState
 #pragma mark - 监测当前网络状态（网络监听）
@@ -81,6 +82,15 @@
     ReachabilityStatus status = [GLobalRealReachability currentReachabilityStatus];
     
     if (status == RealStatusViaWiFi || status == RealStatusViaWWAN ||  status == RealStatusUnknown) {
+        return YES;
+    }
+    return NO;
+}
+///是WiFi 网络
++ (BOOL)isWiFiNetwork {
+    ReachabilityStatus status = [GLobalRealReachability currentReachabilityStatus];
+    
+    if (status == RealStatusViaWiFi) {
         return YES;
     }
     return NO;

@@ -7,7 +7,7 @@
 //
 
 #define kLastWindow [[[UIApplication sharedApplication] delegate] window]
-//#define kLastWindow [UIApplication sharedApplication].keyWindow
+
 
 #import "MBProgressHUD+Extension.h"
 #import <objc/runtime.h>
@@ -61,8 +61,8 @@
  *  @return 直接返回一个MBProgressHUD， 不需要手动关闭
  */
 + (MBProgressHUD *)qucickTip:(NSString *)message {
-    UIView *view = [UIApplication sharedApplication].keyWindow;
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+
+    MBProgressHUD *hud = [self hud];
     //动画
     hud.animationType = MBProgressHUDAnimationZoom;
     //设置模式
@@ -86,7 +86,7 @@
  */
 + (MBProgressHUD *)fakeWaiting:(NSString *)message toView:(UIView *)view {
     if (view == nil) {
-        view = [UIApplication sharedApplication].keyWindow;
+        view = [UIApplication sharedApplication].delegate.window;
     }
     // 快速显示一个提示信息
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
@@ -100,5 +100,22 @@
     [hud hide:YES afterDelay:1.2];
     return hud;
 }
+
+//隐藏hud  移除hud
++ (void)hiddenHud:(MBProgressHUD *)hud {
+    if (hud != nil) {
+        hud.taskInProgress = NO;
+        hud.removeFromSuperViewOnHide = YES;
+        [hud hide:YES];
+        [hud removeFromSuperview];
+    } else {
+        hud = [self hud];
+        hud.taskInProgress = NO;
+        hud.removeFromSuperViewOnHide = YES;
+        [hud hide:YES];
+        [hud removeFromSuperview];
+    }
+}
+
 
 @end

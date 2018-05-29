@@ -124,12 +124,36 @@
 //}
 
 #pragma mark - 右滑返回  2  判断(方法2)
+//iOS自定义全屏返回与tableView左划删除手势冲突解决
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
     
-    if (self.childViewControllers.count == 1) {
-        // 表示用户在根控制器界面，就不需要触发滑动手势，
-        return NO;
+    if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
+        if (self.childViewControllers.count == 1) {
+            // 表示用户在根控制器界面，就不需要触发滑动手势，
+            return NO;
+        }
+        
+        if (self.interactivePopGestureRecognizer &&
+            [[self.interactivePopGestureRecognizer.view gestureRecognizers] containsObject:gestureRecognizer]) {
+            
+            CGPoint tPoint = [(UIPanGestureRecognizer *)gestureRecognizer translationInView:gestureRecognizer.view];
+            
+            if (tPoint.x >= 0) {
+                CGFloat y = fabs(tPoint.y);
+                CGFloat x = fabs(tPoint.x);
+                CGFloat af = 30.0f/180.0f * M_PI;
+                CGFloat tf = tanf(af);
+                if ((y/x) <= tf) {
+                    return YES;
+                }
+                return NO;
+                
+            }else{
+                return NO;
+            }
+        }
     }
+    
     return YES;
 }
 

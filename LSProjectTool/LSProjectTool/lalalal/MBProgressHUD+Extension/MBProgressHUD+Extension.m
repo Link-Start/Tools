@@ -6,7 +6,7 @@
 //  Copyright © 2016年 Link-Start. All rights reserved.
 //
 
-#define kLastWindow [UIApplication sharedApplication].keyWindow
+#define kLastWindow [UIApplication sharedApplication].delegate.window
 
 #import "MBProgressHUD+Extension.h"
 #import <objc/runtime.h>
@@ -52,6 +52,21 @@
     return hud;
 }
 
+//隐藏hud  移除hud
++ (void)hiddenHud:(MBProgressHUD *)hud {
+    if (hud != nil) {
+        hud.taskInProgress = NO;
+        hud.removeFromSuperViewOnHide = YES;
+        [hud hide:YES];
+        [hud removeFromSuperview];
+    } else {
+        hud = [self hud];
+        hud.taskInProgress = NO;
+        hud.removeFromSuperViewOnHide = YES;
+        [hud hide:YES];
+        [hud removeFromSuperview];
+    }
+}
 
 /**
  *  快速显示某些信息
@@ -61,7 +76,7 @@
  *  @return 直接返回一个MBProgressHUD， 不需要手动关闭
  */
 + (MBProgressHUD *)qucickTip:(NSString *)message {
-    UIView *view = [UIApplication sharedApplication].keyWindow;
+    UIView *view = [UIApplication sharedApplication].delegate.window;
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
     //动画
     hud.animationType = MBProgressHUDAnimationZoom;
@@ -86,7 +101,7 @@
  */
 + (MBProgressHUD *)fakeWaiting:(NSString *)message toView:(UIView *)view {
     if (view == nil) {
-        view = [UIApplication sharedApplication].keyWindow;
+        view = [UIApplication sharedApplication].delegate.window;
     }
     // 快速显示一个提示信息
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
@@ -152,7 +167,7 @@
  */
 + (MBProgressHUD *)show:(NSString *)text icon:(NSString *)icon view:(UIView *)view {
     if (view == nil) {
-        view = [UIApplication sharedApplication].keyWindow;
+        view = [UIApplication sharedApplication].delegate.window;
     }
     // 快速显示一个提示信息
     MBProgressHUD *hud = [self hud];
@@ -169,6 +184,21 @@
     // 1秒之后再消失
     [hud hide:YES afterDelay:1.0];
     return hud;
+}
+
+///手动关闭所有的hud
++ (void)hideAllHuds {
+    [self hideAllHudsForView:nil];
+}
+
+///手动关闭所有的hud
++ (void)hideAllHudsForView:(UIView *)view {
+    
+    if (!view) {
+        view = [UIApplication sharedApplication].delegate.window;
+    }
+    
+    [self hideAllHUDsForView:view animated:YES];
 }
 
 @end

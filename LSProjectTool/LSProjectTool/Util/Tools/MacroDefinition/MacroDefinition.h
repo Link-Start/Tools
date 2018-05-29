@@ -25,6 +25,7 @@
 
 //以下代码是对__weak __typeof(self)weakSelf = self
 //和__strong __typeof(weakSelf)strongSelf = weakSelf的宏定义
+//使用 @ls_weakify(self)    @ls_strongify(self)
 #ifndef ls_weakify   //如果标识符未被定义过,执行程序段 1 否则执行程序段2
     #if DEBUG
         #if __has_feature(objc_arc)
@@ -67,7 +68,7 @@
 ///地方型号（国际化区域名称）
 #define kLS_LocalPhoneModel [[UIDevice currentDevice] localizedModel]
 ///获取当前语言
-#define kLS_CurrentLanguage ([[NSLocale preferredLanguages] objectAtIndex:0])
+#define kLS_GetCurrentLanguage ([[NSLocale preferredLanguages] objectAtIndex:0])
 //设备的 DeviceToken
 #define kLS_DeviceToken @"DeviceToken"
 
@@ -157,14 +158,8 @@
 #define kLS_IsArray(objArray) (objArray != nil && [objArray isKindOfClass:[NSArray class]])
 
 ///获取安全的字符串
-#define kLS_GetString(Str)\
-\
-+ (NSString *)getStr:(id)Str {\
-if (kLS_IsEmptyString(Str)) {\
-return @""\
-}\
-return [NSString stringWithFormat:@"%@", Str];;\
-}
+#define kLS_GetString(Str) (kLS_IsEmptyString(Str) ? @"" : [NSString stringWithFormat:@"%@", Str])
+
 
 
 //获取系统对象

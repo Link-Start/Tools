@@ -48,5 +48,6 @@
  *  不需要手动关闭
  */
 + (MBProgressHUD *)showSuccess:(NSString *)success;
-
+///手动关闭所有的hud
++ (void)hideAllHuds
 @end

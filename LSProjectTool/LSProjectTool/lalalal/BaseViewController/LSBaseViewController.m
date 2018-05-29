@@ -402,7 +402,7 @@
     }
 }
 
-- (void)backOut {
+- (void)backOut { //(当根试图是present出来的时候)这个方法会有问题
     //presentingViewController: present出来本视图控制器的视图控制器
     if (self.presentingViewController) {
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -412,10 +412,18 @@
 }
 
 //返回到指定控制器
-- (void)backToVC:(UIViewController *)VC {
+- (void)backOutToVC:(UIViewController *)VC {
     for (UIViewController *tempVc in self.navigationController.viewControllers) {
         if ([tempVc isKindOfClass:[VC class]]) {
             [self.navigationController popToViewController:tempVc animated:YES];
+        }
+    }
+}
+///返回指定控制器
+- (void)backOutToClassVC:(Class)tempClass {
+    for (UIViewController *tempVC in self.navigationController.viewControllers) {
+        if ([tempVC isKindOfClass:tempClass]) {
+            [self.navigationController popToViewController:[[tempClass alloc] init] animated:YES];
         }
     }
 }

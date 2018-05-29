@@ -4,17 +4,18 @@
 
 
 
-iOS获取当前的ViewController
+///iOS获取当前的ViewController
 ///从Windows中获取当前控制器
 - (UIViewController *)getCurrentVC {
-    
+
     UIViewController *result = nil;
-    UIWindow * window = [[UIApplication sharedApplication] keyWindow];
-    
+    ///获取keyWindow
+    UIWindow *window = [UIApplication sharedApplication].delegate.window;
+
     //app默认windowLevel是UIWindowLevelNormal，如果不是，找到UIWindowLevelNormal的
     if (window.windowLevel != UIWindowLevelNormal) {
         NSArray *windows = [[UIApplication sharedApplication] windows];
-        
+
         for(UIWindow *tmpWin in windows) {
             if (tmpWin.windowLevel == UIWindowLevelNormal) {
                 window = tmpWin;
@@ -24,41 +25,40 @@ iOS获取当前的ViewController
     }
     id  nextResponder = nil;
     UIViewController *appRootVC = window.rootViewController;
-    
+
     // 如果是present上来的appRootVC.presentedViewController 不为nil
     if (appRootVC.presentedViewController) {
         nextResponder = appRootVC.presentedViewController;
-        
+
     } else {
         NSLog(@"===%@",[window subviews]);
         UIView *frontView = [[window subviews] objectAtIndex:0];
         nextResponder = [frontView nextResponder];
     }
-    
-    //如果是Window 
+
+    //如果是Window
     if ([nextResponder isKindOfClass:[UIWindow class]]) {
         nextResponder = self.window.rootViewController;
+
     }
-    
-    if ([nextResponder isKindOfClass:[UITabBarController class]]) {
-        UITabBarController * tabbar = (UITabBarController *)nextResponder;
-        UINavigationController * nav = (UINavigationController *)tabbar.viewControllers[tabbar.selectedIndex];
-        
+
+    if ([nextResponder isKindOfClass:[UITabBarController class]]) {//如果是tabBarController
+        UITabBarController *tabbar = (UITabBarController *)nextResponder;
+        UINavigationController *nav = (UINavigationController *)tabbar.viewControllers[tabbar.selectedIndex];
+
         //UINavigationController * nav = tabbar.selectedViewController ; 上下两种写法都行
-        result=nav.childViewControllers.lastObject;
-        
-    } else if ([nextResponder isKindOfClass:[UINavigationController class]]) {
-        
-        UIViewController * nav = (UIViewController *)nextResponder;
         result = nav.childViewControllers.lastObject;
-        
+
+    } else if ([nextResponder isKindOfClass:[UINavigationController class]]) { //如果是navController
+
+        UIViewController *nav = (UIViewController *)nextResponder;
+        result = nav.childViewControllers.lastObject;
+
     } else {
-        
         result = nextResponder;
     }
-    return result;   
+    return result;
 }
-
 
 
 

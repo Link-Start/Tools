@@ -27,19 +27,10 @@
     } else {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
-    //如果你使用了Masonry，那么你需要适配safeArea
-//    [self.rightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.height.mas_equalTo(100);
-//        make.left.equalTo(self.leftLabel.mas_right);
-//        make.right.equalTo(self.view);
-//   make.bottom.equalTo(self.view.mas_bottom);
-// 1. 改为 make.bottom.equalTo(self.view.mas_bottomMargin); 或者
-// 2. 改为  if (@available(iOS 11.0, *)) {
-//    make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
-//} else {
-//    make.bottom.equalTo(self.view.mas_bottom);
-//}
-//    }];
+
+//    //判断当前控制器是否在显示 isViewLoaded 表示已经视图被加载过 view.window表示视图正在显示
+//    if (self.isViewLoaded && self.view.window) {
+//    }
 }
 
 #pragma mark - 刷新
@@ -65,7 +56,7 @@
 #pragma mark - 懒加载
 - (UITableView *)ls_tableView {
     if (!_ls_tableView) {
-        _ls_tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kLS_ScreenWidth, kLS_ScreenHeight - kLS_TopHeight - kLS_TabBarHeight) style:UITableViewStylePlain];
+        _ls_tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kLS_ScreenWidth, kLS_ScreenHeight - kLS_TopHeight - kLS_TabBarHeight-kLS_iPhoneX_Home_Indicator_Height) style:UITableViewStylePlain];
         
         [self setupTableViewSeparatorsLine];
         //iOS8引入Self-Sizing 之后，我们可以通过实现estimatedRowHeight相关的属性来展示动态的内容
@@ -74,11 +65,17 @@
         _ls_tableView.estimatedRowHeight = 0;
         _ls_tableView.estimatedSectionHeaderHeight = 0;
         _ls_tableView.estimatedSectionFooterHeight = 0;
+        _ls_tableView.rowHeight = UITableViewAutomaticDimension;//自动计算行高
         
-        _ls_tableView.backgroundColor = [UIColor whiteColor];
+        _ls_tableView.showsVerticalScrollIndicator = NO;
+        _ls_tableView.showsHorizontalScrollIndicator = NO;
+        _ls_tableView.backgroundColor = [UIColor colorFromHexString:@"#F0F1F5"];
         _ls_tableView.scrollsToTop = YES;
         _ls_tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kLS_ScreenWidth, CGFLOAT_MIN)];
         _ls_tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kLS_ScreenWidth, CGFLOAT_MIN)];
+        
+//        _ls_tableView.dataSource = self;
+//        _ls_tableView.delegate = self;
         
 #ifdef __IPHONE_11_0
         if (@available(iOS 11.0, *)) {

@@ -311,6 +311,7 @@
 		08FB5E21202DA8B0003F1132 /* LSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSLabel.h; sourceTree = "<group>"; };
 		08FB5E22202DA8B0003F1132 /* LSButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSButton.h; sourceTree = "<group>"; };
 		08FB5E23202DA8B1003F1132 /* LSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSLabel.m; sourceTree = "<group>"; };
+		48090A9B20B7AD490052D83C /* 递归获取子视图.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "递归获取子视图.h"; sourceTree = "<group>"; };
 		AE0C7D9B1E0BBE750051269F /* link.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = link.html; sourceTree = "<group>"; };
 		AE0C7D9D1E0BC2A50051269F /* link.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = link.js; sourceTree = "<group>"; };
 		AE1F72BB1DD40ACA00B8CCF7 /* 四舍五入.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "四舍五入.h"; sourceTree = "<group>"; };
@@ -867,6 +868,7 @@
 			isa = PBXGroup;
 			children = (
 				AE20DB7A1E27B08B0065EDCD /* 使用Xib创建的控制器添加到其他控制器上,视图大小错乱解决方法.pch */,
+				48090A9B20B7AD490052D83C /* 递归获取子视图.h */,
 				AEBD660D1D824E1400B1F64C /* 从Windows中获取当前控制器.h */,
 				AEBD660E1D824E1400B1F64C /* 定时器.pch */,
 				AEBD660F1D824E1400B1F64C /* 动画.pch */,

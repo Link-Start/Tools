@@ -38,4 +38,7 @@
  */
 + (MBProgressHUD *)fakeWaiting:(NSString *)message toView:(UIView *)view;
 
+//隐藏hud  移除hud
++ (void)hiddenHud:(MBProgressHUD *)hud;
+
 @end

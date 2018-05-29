@@ -69,21 +69,55 @@
 }
 
 #pragma mark - 返回
+- (void)judge {
+    NSArray *viewcontrollers = self.navigationController.viewControllers;
+    if (viewcontrollers.count > 1) {
+        if ([viewcontrollers objectAtIndex:viewcontrollers.count - 1] == self) {
+            //push方式
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    } else {
+        //present方式
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
 //返回方法
-- (void)ls_backButtonAction {
+- (void)ls_backButtonAction {//(当根试图是present出来的时候)这个方法会有问题
     if (self.presentingViewController) {
         [self dismissViewControllerAnimated:YES completion:nil];
     } else {
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
-
 ///返回指定控制器
 - (void)backOutToVC:(UIViewController *)VC {
     for (UIViewController *tempVC in self.navigationController.viewControllers) {
         if ([tempVC isKindOfClass:[VC class]]) {
             [self.navigationController popToViewController:VC animated:YES];
         }
+    }
+}
+///返回指定控制器
+- (void)backOutToClassVC:(Class)tempClass {
+    for (UIViewController *tempVC in self.navigationController.viewControllers) {
+        if ([tempVC isKindOfClass:tempClass]) {
+            [self.navigationController popToViewController:[[tempClass alloc] init] animated:YES];
+        }
+    }
+}
+
+
+///系统侧滑返回按钮
+- (void)willMoveToParentViewController:(UIViewController*)parent{
+    [super willMoveToParentViewController:parent];
+    NSLog(@"%s,%@",__FUNCTION__,parent);
+}
+- (void)didMoveToParentViewController:(UIViewController*)parent{
+    [super didMoveToParentViewController:parent];
+    NSLog(@"%s,%@",__FUNCTION__,parent);
+    if(!parent){
+        NSLog(@"页面pop成功了");
     }
 }
 
