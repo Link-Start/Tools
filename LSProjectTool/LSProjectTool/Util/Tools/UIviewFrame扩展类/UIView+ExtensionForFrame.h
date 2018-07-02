@@ -125,5 +125,7 @@
 - (UIViewController *)parentController;
 /// 第一响应者
 - (UIView *)firstResponder;
+///获取一个view所属的控制器
+- (UIViewController *)belongViewController;
 
 @end

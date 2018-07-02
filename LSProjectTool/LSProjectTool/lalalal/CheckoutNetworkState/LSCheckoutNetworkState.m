@@ -8,6 +8,7 @@
 
 #import "LSCheckoutNetworkState.h"
 #import "RealReachability.h"
+#import "AFNetworking.h"
 
 @implementation LSCheckoutNetworkState
 #pragma mark - 监测当前网络状态（网络监听）

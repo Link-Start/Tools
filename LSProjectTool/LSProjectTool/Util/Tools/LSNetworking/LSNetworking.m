@@ -632,8 +632,74 @@ static inline NSString *cachePath() {
     [self showFailMarkedWordsWithError:error];
 }
 
-///尝试解析数据
+/** 尝试解析数据
+ *  解析数据
+ *
+ *  @param responseData 服务器返回的数据
+ *
+ *  @return 解析后的数据
+ */
 + (id)tryToParseData:(id)responseData {
+    
+    //NSNull:数组中元素的占位符，数据中的元素不能为nil（可以为空，也就是NSNull），
+    //原因：nil 是数组的结束标志
+    //kCFNull: NSNull的单例
+    if (!responseData || responseData == (id)kCFNull) {
+        NSLog(@"原数据为nil， 返回nil");
+        return nil;
+    }
+    
+    NSData *jsonData = nil;
+    id jsonResults = nil;
+    
+    if ([responseData isKindOfClass:[NSDictionary class]]) {//如果是字典
+        NSLog(@"返回原字典");
+        return responseData;
+    } else if ([responseData isKindOfClass:[NSArray class]]) {//如果是数组
+        NSLog(@"返回原数组");
+        return responseData;
+    } else if ([responseData isKindOfClass:[NSString class]]) {//如果是NSString类型
+        NSLog(@"字符串类型");
+        jsonData = [(NSString *)responseData dataUsingEncoding:NSUTF8StringEncoding];
+    } else if ([responseData isKindOfClass:[NSData class]]) {//如果是NSData 类型
+        jsonData = responseData;
+    }
+    
+    if (jsonData) {
+        NSError *error = nil;
+        //使用缓冲区数据来解析 解析json数据
+        //NSJSONReadingMutableContainers：返回可变容器,NSMutableDictionary或NSMutableArray
+        jsonResults = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers | NSJSONReadingMutableLeaves | NSJSONReadingAllowFragments | kNilOptions error:&error];
+        if (error != nil) {
+            NSLog(@"有错误, 返回原数据");
+            return responseData;
+        } else {
+            if ([jsonResults isKindOfClass:[NSDictionary class]]) {
+                NSLog(@"JSON数据返回字典");
+            } else if ([jsonResults isKindOfClass:[NSArray class]]) {
+                NSLog(@"JSON数据返回数组");
+            } else if ([jsonResults isKindOfClass:[NSString class]]) {
+                NSLog(@"JSON数据返回字符串");
+            } else if (jsonResults == nil && [responseData isKindOfClass:[NSString class]]) {
+                NSLog(@"返回原字符串");
+                return responseData;
+            } else if (jsonResults == nil && [responseData isKindOfClass:[NSData class]]) {
+                // 不是数组，不是字典，还不是字符串吗？
+                NSString *string = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+                return string;
+            } else {
+                // 未识别
+                NSLog(@"未识别防止解析报错，原数据返回nil");
+                NSLog(@"未识别原数据：%@",responseData);
+                return nil;
+            }
+        }
+        return jsonResults;
+    }
+    //返回原数据
+    return responseData;
+    
+    
     //如果是NSData类型的数据
     if ([responseData isKindOfClass:[NSData class]]) {
         //尝试解析为JSON
@@ -652,12 +718,15 @@ static inline NSString *cachePath() {
             } else { //如果没有错误 返回解析后的数据
                 return response;
             }
+            
+//            return (error != nil) ? responseData : response;
         }
         
     } else { //如果不是NSData类型的数据,直接返回 原来的数据
         return responseData;
     }
 }
+
 
 #pragma mark + POST请求
 ///基础

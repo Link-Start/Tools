@@ -40,6 +40,10 @@
         // 参数kLastWindow仅仅是用到了其CGFrame，并没有将hud添加到上面
         hud = [[MBProgressHUD alloc] initWithWindow:kLastWindow];
         
+        //改变背景色
+//        hud.bezelView.style = MBProgressHUDBackgroundStyleSolidColor;
+//        hud.bezelView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
+        
         //objc_setAssociatedObject来把一个对象与另外一个对象进行关联。该函数需要四个参数：源对象(关联者)，关键字，关联的对象(被关联者)和一个关联策略。
         //关键字是一个void类型的指针。每一个关联的关键字必须是唯一的。通常都是会采用静态变量来作为关键字
         //
@@ -63,16 +67,30 @@
 + (MBProgressHUD *)qucickTip:(NSString *)message {
 
     MBProgressHUD *hud = [self hud];
+    [kLastWindow addSubview:hud];
     //动画
     hud.animationType = MBProgressHUDAnimationZoom;
     //设置模式
     hud.mode = MBProgressHUDModeText;
     ////设置需要显示的文字信息
-    hud.labelText=message;
+    hud.label.text = message;
+    hud.label.numberOfLines = 2;
+    hud.contentColor = [UIColor whiteColor];
+    hud.label.font = [UIFont systemFontOfSize:12];
+    
+    //最小size
+    hud.minSize = CGSizeMake(134, 40);
+    //切角
+    hud.bezelView.layer.cornerRadius = 20;
+    hud.bezelView.layer.masksToBounds = YES;
+    
     //关闭用户交互
     hud.userInteractionEnabled = NO;
+    //显示hud
+    [hud showAnimated:YES];
     //1.4秒后消失
-    [hud hide:YES afterDelay:1.4];
+    [hud hideAnimated:YES afterDelay:1.4];
+    return hud;
     return hud;
 }
 

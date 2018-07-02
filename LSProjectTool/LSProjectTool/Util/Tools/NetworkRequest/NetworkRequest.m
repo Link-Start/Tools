@@ -532,36 +532,113 @@
  */
 + (id)tryToParseData:(id)responseData {
     
-    //如果是NSData 类型
-    if ([responseData isKindOfClass:[NSData class]]) {
-        // 尝试解析成JSON
-        //如果数据是空
-        if (responseData == nil) {
+    //NSNull:数组中元素的占位符，数据中的元素不能为nil（可以为空，也就是NSNull），
+    //原因：nil 是数组的结束标志
+    //kCFNull: NSNull的单例
+    if (!responseData || responseData == (id)kCFNull) {
+        NSLog(@"原数据为nil， 返回nil");
+        return nil;
+    }
+    
+    NSData *jsonData = nil;
+    id jsonResults = nil;
+    
+    if ([responseData isKindOfClass:[NSDictionary class]]) {//如果是字典
+        NSLog(@"返回原字典");
+        return responseData;
+    } else if ([responseData isKindOfClass:[NSArray class]]) {//如果是数组
+        NSLog(@"返回原数组");
+        return responseData;
+    } else if ([responseData isKindOfClass:[NSString class]]) {//如果是NSString类型
+        NSLog(@"字符串类型");
+        jsonData = [(NSString *)responseData dataUsingEncoding:NSUTF8StringEncoding];
+    } else if ([responseData isKindOfClass:[NSData class]]) {//如果是NSData 类型
+        jsonData = responseData;
+    }
+    
+    if (jsonData) {
+        NSError *error = nil;
+        //使用缓冲区数据来解析 解析json数据
+        //NSJSONReadingMutableContainers：返回可变容器,NSMutableDictionary或NSMutableArray
+        jsonResults = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers | NSJSONReadingMutableLeaves | NSJSONReadingAllowFragments | kNilOptions error:&error];
+        if (error != nil) {
+            NSLog(@"有错误, 返回原数据");
             return responseData;
-            
         } else {
-            NSError *error = nil;
-            //使用缓冲区数据来解析 解析json数据
-            //NSJSONReadingMutableContainers：返回可变容器,NSMutableDictionary或NSMutableArray
-            NSDictionary *response = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers | NSJSONReadingMutableLeaves | NSJSONReadingAllowFragments error:&error];
-            
-            //如果有错误 直接返回原数据,如果没有错误 返回解析后的数据
-            //            return (error ? responseData : response);
-            
-            ////如果 有错误
-            if (error != nil) {
-                //直接返回 原数据
+            if ([jsonResults isKindOfClass:[NSDictionary class]]) {
+                NSLog(@"JSON数据返回字典");
+            } else if ([jsonResults isKindOfClass:[NSArray class]]) {
+                NSLog(@"JSON数据返回数组");
+            } else if ([jsonResults isKindOfClass:[NSString class]]) {
+                NSLog(@"JSON数据返回字符串");
+            } else if (jsonResults == nil && [responseData isKindOfClass:[NSString class]]) {
+                NSLog(@"返回原字符串");
                 return responseData;
+            } else if (jsonResults == nil && [responseData isKindOfClass:[NSData class]]) {
+                // 不是数组，不是字典，还不是字符串吗？
+                NSString *string = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+                return string;
             } else {
-                //如果没有错误 返回解析后的数据
-                return response;
+                // 未识别
+                NSLog(@"未识别防止解析报错，原数据返回nil");
+                NSLog(@"未识别原数据：%@",responseData);
+                return nil;
             }
         }
-        //如果不是NSData类型
-    } else {
-        //返回原数据
-        return responseData;
+        return jsonResults;
     }
+    //返回原数据
+    return responseData;
+}
+
+- (id )resultsWithResponseObject:(id)json {
+    
+    if (!json || json == (id)kCFNull) {
+        NSLog(@"原数据为nil，返回nil");
+        return nil;
+    }
+    
+    NSData *jsonData = nil;
+    id jsonResults = nil;
+    
+    if ([json isKindOfClass:[NSDictionary class]]) {
+        NSLog(@"返回原字典");
+    } else if ([json isKindOfClass:[NSArray class]]) {
+        NSLog(@"返回原数组");
+    } else if ([json isKindOfClass:[NSString class]]) {
+        jsonData = [(NSString *)json dataUsingEncoding : NSUTF8StringEncoding];
+    } else if ([json isKindOfClass:[NSData class]]) {
+        jsonData = json;
+    }
+    
+    if (jsonData) {
+        
+        jsonResults = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:NULL];
+        
+        if ([jsonResults isKindOfClass:[NSDictionary class]]) {
+            NSLog(@"JSON数据返回字典");
+        } else if ([jsonResults isKindOfClass:[NSArray class]]) {
+            NSLog(@"JSON数据返回数组");
+        } else if ([jsonResults isKindOfClass:[NSString class]]) {
+            NSLog(@"JSON数据返回字符串");
+        } else if (jsonResults == nil && [json isKindOfClass:[NSString class]]) {
+            NSLog(@"返回原字符串");
+            return json;
+        } else if (jsonResults == nil && [json isKindOfClass:[NSData class]]) {
+            // 不是数组，不是字典，还不是字符串吗？
+            NSString *string = [[NSString alloc] initWithData:json encoding:NSUTF8StringEncoding];
+            return string;
+        } else {
+            // 未识别
+            NSLog(@"未识别防止解析报错，原数据返回nil");
+            NSLog(@"未识别原数据：%@",json);
+            return nil;
+        }
+        
+        return jsonResults;
+    }
+    
+    return json;
 }
 
 //隐藏hud  移除hud

@@ -58,8 +58,21 @@
     #endif
 #endif
 
+///APP信息
+#define kLS_App_infoDictionary  [[NSBundle mainBundle] infoDictionary]
+///APP名称
+#define kLS_App_name      [kLS_AppInfoDictionary objectForKey:@"CFBundleDisplayName"]
+///APP版本
+#define kLS_App_version   [kLS_AppInfoDictionary objectForKey:@"CFBundleShortVersionString"]
+///app build版本
+#define kLA_App_bulidVersion  [infoDictionary objectForKey:@"CFBundleVersion"]
+
+
 ///手机序列号 UUID
 #define kLS_IdentifierNumber ([[UIDevice currentDevice] identifierForVendor])
+///每次获取都不一样
+#define kLS_UUID ([[NSUUID UUID] UUIDString])
+
 ///用户为设备设置的名称
 #define kLS_DeviceName [[UIDevice currentDevice] name]
 ///系统名称
@@ -134,6 +147,10 @@
 //拼接字符串
 #define kLS_NSStringFormat(format,...) [NSString stringWithFormat:format,##__VA_ARGS__]
 
+
+///修改textField的placeholder的字体颜色、大小
+#define kLS_changeTextFieldPlaceholderColor(textField, color) [textField setValue:color forKeyPath:@"_placeholderLabel.textColor"]
+#define kLS_changeTextFieldPlaceholderFont(textField, font) [textField setValue:font forKeyPath:@"_placeholderLabel.font"]
 
 //数据验证
 #define StrValid(f) (f!=nil && [f isKindOfClass:[NSString class]] && ![f isEqualToString:@""])

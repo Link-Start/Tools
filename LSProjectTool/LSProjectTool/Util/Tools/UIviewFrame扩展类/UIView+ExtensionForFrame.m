@@ -331,5 +331,17 @@
     return nil;
 }
 
+// view分类方法
+- (UIViewController *)belongViewController {
+    for (UIView *next = [self superview]; next; next = next.superview) {
+        UIResponder* nextResponder = [next nextResponder];
+        if ([nextResponder isKindOfClass:[UIViewController class]]) {
+            return (UIViewController *)nextResponder;
+        }
+    }
+    return nil;
+}
+
+
 
 @end

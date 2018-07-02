@@ -100,3 +100,24 @@
 
 
 
+
+
+#pragma mark - 2 拿到当前正在显示的控制器，不管是push进去的，还是present进去的都能拿到
+
+- (UIViewController *)getVisibleViewControllerFrom:(UIViewController*)vc {
+    if ([vc isKindOfClass:[UINavigationController class]]) {
+        return [self getVisibleViewControllerFrom:[((UINavigationController*) vc) visibleViewController]];
+    }else if ([vc isKindOfClass:[UITabBarController class]]){
+        return [self getVisibleViewControllerFrom:[((UITabBarController*) vc) selectedViewController]];
+    } else {
+        if (vc.presentedViewController) {
+            return [self getVisibleViewControllerFrom:vc.presentedViewController];
+        } else {
+            return vc;
+        }
+    }
+}
+
+
+
+
