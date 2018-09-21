@@ -81,9 +81,9 @@ iPhone X
 //如果不需要系统为你设置边缘距离
 //如果iOS的系统是11.0，会有这样一个宏定义“#define __IPHONE_11_0  110000”；如果系统版本低于11.0则没有这个宏定义
 #ifdef __IPHONE_11_0
-if ([tableView respondsToSelector:@selector(setContentInsetAdjustmentBehavior:)]) {
-    tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-}
+//if ([tableView respondsToSelector:@selector(setContentInsetAdjustmentBehavior:)]) {
+//    tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+//}
 #endif
 
 

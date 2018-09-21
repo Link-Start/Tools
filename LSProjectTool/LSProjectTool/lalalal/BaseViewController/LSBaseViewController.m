@@ -239,6 +239,8 @@
             failure(error);
         }
         
+        //task.state 任务状态、暂停、取消、完成、请求中
+        
     }];
         }
 }
@@ -348,7 +350,14 @@
 //    NSLog(@"error.helpAnchor = %@", error.helpAnchor);
     
     switch (error.code) {
+        case -200:
+        case -1016:
+            [MBProgressHUD qucickTip:@"不支持的解析格式,请添加数据解析类型"];
+            break;
         case -404:
+            [MBProgressHUD qucickTip:@"服务器错误"];
+            break;
+        case -500:
             [MBProgressHUD qucickTip:@"服务器错误"];
             break;
         case -999:
@@ -415,18 +424,15 @@
 //    [self backOut];
 }
 
+#pragma mark - 返回
 ///判断当前ViewController是push还是present的方式显示的
 - (void)judge {
-    
     NSArray *viewcontrollers = self.navigationController.viewControllers;
-    
     if (viewcontrollers.count > 1) {
-        
         if ([viewcontrollers objectAtIndex:viewcontrollers.count - 1] == self) {
             //push方式
             [self.navigationController popViewControllerAnimated:YES];
         }
-        
     } else {
         //present方式
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -457,6 +463,56 @@
             [self.navigationController popToViewController:[[tempClass alloc] init] animated:YES];
         }
     }
+}
+
+- (void)ls_backRootVC {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+///后退几步
+- (void)ls_backSeveralSteps:(NSInteger)steps {
+    
+    NSInteger subNum = self.navigationController.viewControllers.count;
+    if (steps >= subNum) {//如果后退太多，返回根试图控制器
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    } else {
+        UIViewController *VC = self.navigationController.viewControllers[subNum - steps - 1];
+        [self.navigationController popToViewController:VC animated:YES];
+    }
+}
+
+///dismiss 到指定的控制器
+- (void)ls_dismissToVC:(Class)temVC {
+    
+    UIViewController *vc = self.presentingViewController;
+    //temVC 要dimiss到的控制器
+    while (![vc isKindOfClass:[temVC class]]) {
+        vc = vc.presentingViewController;
+        if (vc == nil) {
+            break;
+        }
+    }
+    
+    if (vc) {
+        [vc dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        
+    }
+}
+
+///dismiss 到根试图控制器
+- (void)ls_dismissToRootVC {
+    UIViewController *parentVC = self.presentingViewController;
+    
+    UIViewController *bottomVC;
+    while (parentVC) {
+        bottomVC = parentVC;
+        parentVC = parentVC.presentingViewController;
+    }
+    
+    [bottomVC dismissViewControllerAnimated:NO completion:^{
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

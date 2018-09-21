@@ -103,7 +103,9 @@
 ///支持半颗星
 - (CGFloat)changeToCompleteStar:(CGFloat)percent {
     
-    if (percent <= 0.1001) {
+    if (percent <= 0.0001) {
+        percent = 0;
+    } else if (percent > 0.0001 && percent <= 0.1001) {
         percent = 0.1;
     } else if (percent > 0.1001 && percent <= 0.2001) {
         percent = 0.2;

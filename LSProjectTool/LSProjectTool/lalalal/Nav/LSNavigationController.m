@@ -111,6 +111,11 @@
     if (self.viewControllers.count > 0) {
         //隐藏tabBar
         viewController.hidesBottomBarWhenPushed = YES;
+        
+        //FIXME:这样做防止主界面卡顿时，导致一个ViewController被push多次、
+        if ([[self.childViewControllers lastObject] isKindOfClass:[viewController class]]) {
+            return;
+        }
     }
     [super pushViewController:viewController animated:animated];
 }
@@ -126,6 +131,10 @@
 #pragma mark - 右滑返回  2  判断(方法2)
 //iOS自定义全屏返回与tableView左划删除手势冲突解决
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    
+    if (self.cannotRightSlipBack) {
+        return NO;
+    }
     
     if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
         if (self.childViewControllers.count == 1) {
@@ -155,6 +164,21 @@
     }
     
     return YES;
+}
+
+///解决ios 11 下，系统imagePicker 取消按钮不灵敏问题
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if ([UIDevice currentDevice].systemVersion.floatValue < 11) {
+        return;
+    }
+    if ([viewController isKindOfClass:NSClassFromString(@"PUPhotoPickerHostViewController")]) {
+        [viewController.view.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (obj.frame.size.width < 42) {
+                [viewController.view sendSubviewToBack:obj];
+                *stop = YES;
+            }
+        }];
+    }
 }
 
 

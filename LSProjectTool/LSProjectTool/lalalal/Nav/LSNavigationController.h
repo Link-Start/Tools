@@ -10,4 +10,7 @@
 
 @interface LSNavigationController : UINavigationController
 
+///右滑返回 YES:不能
+@property (nonatomic, assign) BOOL cannotRightSlipBack;
+
 @end

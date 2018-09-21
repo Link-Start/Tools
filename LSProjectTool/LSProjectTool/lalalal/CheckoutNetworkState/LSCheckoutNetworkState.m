@@ -16,9 +16,13 @@
 /**
  *  检查当前网络连接 有网络:yes  无网络:no
  */
-- (BOOL)currentNetworkStatus {
++ (BOOL)currentNetworkStatus {
     
     //需要在didFinishLaunchingWithOptions中开启网络监听 [GLobalRealReachability startNotifier];
+    
+    //在需要用到的地方添加通知，可以实时监控网络变化
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkChanged:) name:kRealReachabilityChangedNotification object:nil];
+    
     
     //是否有网络
     __block BOOL canCheckNetwork  = NO;

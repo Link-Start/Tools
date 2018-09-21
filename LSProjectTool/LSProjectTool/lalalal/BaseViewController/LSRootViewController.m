@@ -26,7 +26,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    //设置导航栏下1px线的颜色 -- 测试可用
+    //设置导航栏下1px线的颜色 -- 测试可用(通过颜色创建图片)
     //    [self.navigationController.navigationBar setShadowImage:[UIImage imageCreateImageWithColor:UIColorFromRGB(0xe8e8e8) size:CGSizeMake(kLS_ScreenWidth, 0.5)]];
     
     if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
@@ -39,7 +39,6 @@
         UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"返回"] style:UIBarButtonItemStyleDone target:self action:@selector(ls_backButtonAction)];
         
         self.navigationItem.leftBarButtonItem = leftButtonItem;
-        
     }
 }
 
@@ -107,6 +106,47 @@
     }
 }
 
+- (void)ls_backRootVC {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+///后退几步
+- (void)ls_backSeveralSteps:(NSInteger)steps {
+    NSInteger subNum = self.navigationController.viewControllers.count;
+    if (steps >= subNum) {//如果后退太多，返回根试图控制器
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    } else {
+        UIViewController *VC = self.navigationController.viewControllers[subNum - steps - 1];
+        [self.navigationController popToViewController:VC animated:YES];
+    }
+}
+
+///dismiss 到指定的控制器
+- (void)ls_dismissToVC:(Class)temVC {
+    UIViewController *vc = self.presentingViewController;
+    //temVC 要dimiss到的控制器
+    while (![vc isKindOfClass:[temVC class]]) {
+        vc = vc.presentingViewController;
+        if (vc == nil) {
+            break;
+        }
+    }
+    if (vc) {
+        [vc dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+///dismiss 到根试图控制器
+- (void)ls_dismissToRootVC {
+    UIViewController *parentVC = self.presentingViewController;
+    UIViewController *bottomVC;
+    while (parentVC) {
+        bottomVC = parentVC;
+        parentVC = parentVC.presentingViewController;
+    }
+    [bottomVC dismissViewControllerAnimated:YES completion:^{
+    }];
+}
 
 ///系统侧滑返回按钮
 - (void)willMoveToParentViewController:(UIViewController*)parent{

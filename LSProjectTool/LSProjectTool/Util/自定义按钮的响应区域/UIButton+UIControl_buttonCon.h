@@ -5,6 +5,10 @@
 //  Created by Alex Yang on 2018/4/18.
 //  Copyright © 2018年 Link-Start. All rights reserved.
 //
+//  此方法慎用
+//  此方法与环信发送语音方法有冲突
+//  此方法，在需要监听按钮不同状态(按下、取消、长按等)时需注释掉，否则影响按钮转态监听
+//
 
 #import <UIKit/UIKit.h>
 

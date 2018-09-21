@@ -1214,6 +1214,10 @@ static inline NSString *cachePath() {
     //    NSLog(@"error.helpAnchor = %@", error.helpAnchor);
     
     switch (error.code) {
+        case -200:
+        case -1016:
+            [MBProgressHUD qucickTip:@"不支持的解析格式,请添加数据解析类型"];
+            break;
         case -404:
             [MBProgressHUD qucickTip:@"服务器错误"];
             break;

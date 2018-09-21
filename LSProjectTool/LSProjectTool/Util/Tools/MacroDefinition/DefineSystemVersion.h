@@ -12,7 +12,7 @@
 #define DefineSystemVersion_h
 
 
-///IOS 版本判断
+///IOS系统版本 版本判断
 #define IOSAVAILABLEVERSION(version) ([[UIDevice currentDevice] availableVersion:version] < 0)
 
 ///检查系统版本

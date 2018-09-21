@@ -33,6 +33,10 @@ static Function *ls_function = nil;
     }
     return ls_function;
 }
+///单利销毁
++ (void)attemptDealloc {
+    ls_function = nil;
+}
 
 //方式2、考虑线程安全 GCD
 ////dispatch_once这个函数， 它可以保证整个应用程序生命周期中某段代码只被执行一次！
@@ -43,6 +47,15 @@ static Function *ls_function = nil;
     });
     return ls_function;
 }
+///单利销毁
+//1. 必须把static dispatch_once_t onceToken; 这个拿到函数体外,成为全局的.
+////2.
+//+(void)attempDealloc{
+//    onceToken = 0;
+//    // 只有置成0,GCD才会认为它从未执行过.它默认为0.这样才能保证下次再次调用shareInstance的时候,再次创建对象.
+//    [ls_function release];
+//    ls_function = nil;
+//}
 
 //方式3 代码的优化
 //很多时候，项目的工程量很大，还有可能会很多开发者同时参与一个项目的开发，
@@ -65,9 +78,21 @@ static Function *ls_function = nil;
     NSAssert(0, @"这是一个单例对象，请使用+(Function *)shareFunction1方法");
     return nil;
 }
+
+////重写allocWithZone,里面实现跟方法一,方法二一致就行.
+//+(id)allocWithZone:(struct _NSZone *)zone{
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        if(_instance == nil)
+//            _instance = [MyClass alloc] init];
+//    });
+//    return _instance;
+//} 
 +(instancetype)allocWithZone:(struct _NSZone *)zone {
     return [self alloc];
 }
+
+
 -(id)copy {
     NSLog(@"这是一个单例对象，copy将不起任何作用");
     return self;

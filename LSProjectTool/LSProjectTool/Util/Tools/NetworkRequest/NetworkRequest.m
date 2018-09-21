@@ -294,13 +294,18 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     //设置请求超时的时间
     manager.requestSerializer.timeoutInterval = kTimeoutInterval;
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:
+                                                         @"application/json",
                                                          @"text/html",
-                                                         @"image/jpeg",
-                                                         @"image/png",
-                                                         @"application/octet-stream",
                                                          @"text/json",
+                                                         @"text/plain",
+                                                         @"text/javascript",
+                                                         @"text/xml",
+                                                         @"image/*",
+                                                         @"application/octet+stream",
+                                                         @"application/zip",
                                                          nil];
+    
 
     //创建信号量，参数：信号量的初值，如果小于0则会返回NULL
     dispatch_semaphore_t ls_semaphore_t = dispatch_semaphore_create(1);
@@ -667,6 +672,10 @@
     //    NSLog(@"error.helpAnchor = %@", error.helpAnchor);
     
     switch (error.code) {
+        case -200:
+        case -1016:
+            [MBProgressHUD qucickTip:@"不支持的解析格式,请添加数据解析类型"];
+            break;
         case -404:
             [MBProgressHUD qucickTip:@"服务器错误"];
             break;

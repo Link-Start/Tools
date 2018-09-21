@@ -242,7 +242,7 @@ static CGFloat const kNormalMargin = 10.0;
             [pin mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(_alertView).offset(kNormalMargin);
                 make.right.equalTo(_alertView).offset(-kNormalMargin);
-                make.height.equalTo(30);
+                make.height.mas_equalTo(30);
                 if (i == 0) {
                     make.top.equalTo(refView.mas_bottom).offset(kNormalMargin);
                 }else{
@@ -261,7 +261,7 @@ static CGFloat const kNormalMargin = 10.0;
             [txt mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(_alertView).offset(kNormalMargin);
                 make.right.equalTo(_alertView).offset(-kNormalMargin);
-                make.height.equalTo(30);
+                make.height.mas_equalTo(30);
                 if (i == 0) {
                     make.top.equalTo(refView.mas_bottom).offset(kNormalMargin);
                 }else{
@@ -287,7 +287,7 @@ static CGFloat const kNormalMargin = 10.0;
                 btn = _buttons[i];
                 [btn mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.top.equalTo(refView.mas_bottom).offset(kNormalMargin);
-                    make.height.equalTo(30);
+                    make.height.mas_equalTo(30);
                     if (i == 0) {
                         make.left.equalTo(_alertView).offset(kNormalMargin);
                     }else{
