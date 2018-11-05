@@ -94,6 +94,7 @@
 		486443932119CC7100C3B9BF /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 486443922119CC7100C3B9BF /* libresolv.tbd */; };
 		486551CC20C7C45200E4FE48 /* UIButton+ImageTitleSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = 486551CA20C7C45200E4FE48 /* UIButton+ImageTitleSpace.m */; };
 		487FC63D20BE937700FC19FA /* UIButton+UIControl_buttonCon.m in Sources */ = {isa = PBXBuildFile; fileRef = 487FC63B20BE937700FC19FA /* UIButton+UIControl_buttonCon.m */; };
+		48B715482184710900A32E5D /* UISearchBar+LSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B715472184710900A32E5D /* UISearchBar+LSExtension.m */; };
 		48C35B7F2137E71700B0AA2B /* LocationTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 48C35B7E2137E71700B0AA2B /* LocationTransform.m */; };
 		AE0C7D9C1E0BBE750051269F /* link.html in Resources */ = {isa = PBXBuildFile; fileRef = AE0C7D9B1E0BBE750051269F /* link.html */; };
 		AE0C7D9E1E0BC2A50051269F /* link.js in Resources */ = {isa = PBXBuildFile; fileRef = AE0C7D9D1E0BC2A50051269F /* link.js */; };
@@ -374,6 +375,8 @@
 		486551CB20C7C45200E4FE48 /* UIButton+ImageTitleSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+ImageTitleSpace.h"; sourceTree = "<group>"; };
 		487FC63920BE937600FC19FA /* UIButton+UIControl_buttonCon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+UIControl_buttonCon.h"; sourceTree = "<group>"; };
 		487FC63B20BE937700FC19FA /* UIButton+UIControl_buttonCon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+UIControl_buttonCon.m"; sourceTree = "<group>"; };
+		48B715462184710800A32E5D /* UISearchBar+LSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISearchBar+LSExtension.h"; sourceTree = "<group>"; };
+		48B715472184710900A32E5D /* UISearchBar+LSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISearchBar+LSExtension.m"; sourceTree = "<group>"; };
 		48C35B7D2137E71700B0AA2B /* LocationTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationTransform.h; sourceTree = "<group>"; };
 		48C35B7E2137E71700B0AA2B /* LocationTransform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationTransform.m; sourceTree = "<group>"; };
 		48F64E9220E205C1009BA3A1 /* UIScrollVIew代理方法.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollVIew代理方法.h"; sourceTree = "<group>"; };
@@ -1493,6 +1496,8 @@
 				AEB4D43A1DAA5E820078A52D /* NSString+LSExtension.m */,
 				AEB4D43C1DAA5FAD0078A52D /* UIColor+LSExtension.h */,
 				AEB4D43D1DAA5FAD0078A52D /* UIColor+LSExtension.m */,
+				48B715462184710800A32E5D /* UISearchBar+LSExtension.h */,
+				48B715472184710900A32E5D /* UISearchBar+LSExtension.m */,
 			);
 			path = LSExtension;
 			sourceTree = "<group>";
@@ -1903,6 +1908,7 @@
 				AEB4D4301DAA2E160078A52D /* JX_GCDTimerManager.m in Sources */,
 				08D35B54200A08BC00E122FF /* JKRFallsLayout.m in Sources */,
 				AEB4D3F51DAA0A600078A52D /* AFHTTPSessionManager.m in Sources */,
+				48B715482184710900A32E5D /* UISearchBar+LSExtension.m in Sources */,
 				AE83F6A51DBB7E5A002C9BDB /* NSData+SCAddition.m in Sources */,
 				08F658961FF3D2A5007880CC /* MJRefreshComponent.m in Sources */,
 				AE6529B81DBA3AAE00213D1F /* UIImage+Category.m in Sources */,

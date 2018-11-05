@@ -59,7 +59,7 @@
 #endif
 
 ///APP信息
-#define kLS_App_infoDictionary  [[NSBundle mainBundle] infoDictionary]
+#define kLS_AppInfoDictionary  [[NSBundle mainBundle] infoDictionary]
 ///APP名称
 #define kLS_App_name      [kLS_AppInfoDictionary objectForKey:@"CFBundleDisplayName"]
 ///APP版本

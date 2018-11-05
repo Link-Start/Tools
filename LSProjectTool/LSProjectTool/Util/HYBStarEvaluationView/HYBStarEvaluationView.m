@@ -103,28 +103,44 @@
 ///支持半颗星
 - (CGFloat)changeToCompleteStar:(CGFloat)percent {
     
-    if (percent <= 0.0001) {
-        percent = 0;
-    } else if (percent > 0.0001 && percent <= 0.1001) {
-        percent = 0.1;
-    } else if (percent > 0.1001 && percent <= 0.2001) {
-        percent = 0.2;
-    } else if (percent > 0.2001 && percent <= 0.3001) {
-        percent = 0.3;
-    } else if (percent > 0.3001 && percent <= 0.4001) {
-        percent = 0.4;
-    } else if (percent > 0.4001 && percent <= 0.5001) {
-        percent = 0.5;
-    } else if (percent > 0.5001 && percent <= 0.6001) {
-        percent = 0.6;
-    } else if (percent > 0.6001 && percent <= 0.7001) {
-        percent = 0.7;
-    } else if (percent > 0.7001 && percent <= 0.8001) {
-        percent = 0.8;
-    } else if (percent > 0.7001 && percent <= 0.9001) {
-        percent = 0.9;
-    }  else {
-        percent = 1.0;
+    if (self.isContrainsHalfStar) {
+        if (percent <= 0.0001) {
+            percent = 0;
+        } else if (percent > 0.0001 && percent <= 0.1001) {
+            percent = 0.1;
+        } else if (percent > 0.1001 && percent <= 0.2001) {
+            percent = 0.2;
+        } else if (percent > 0.2001 && percent <= 0.3001) {
+            percent = 0.3;
+        } else if (percent > 0.3001 && percent <= 0.4001) {
+            percent = 0.4;
+        } else if (percent > 0.4001 && percent <= 0.5001) {
+            percent = 0.5;
+        } else if (percent > 0.5001 && percent <= 0.6001) {
+            percent = 0.6;
+        } else if (percent > 0.6001 && percent <= 0.7001) {
+            percent = 0.7;
+        } else if (percent > 0.7001 && percent <= 0.8001) {
+            percent = 0.8;
+        } else if (percent > 0.8001 && percent <= 0.9001) {
+            percent = 0.9;
+        }  else {
+            percent = 1.0;
+        }
+    } else {
+        if (percent <= 0.0001) {
+            percent = 0;
+        } else if (percent > 0.0001 && percent <= 0.2001) {
+            percent = 0.2;
+        } else if (percent > 0.2001 && percent <= 0.4001) {
+            percent = 0.4;
+        } else if (percent > 0.4001 && percent <= 0.6001) {
+            percent = 0.6;
+        } else if (percent > 0.6001 && percent <= 0.8001) {
+            percent = 0.8;
+        } else {
+            percent = 1.0;
+        }
     }
     return percent;
 }

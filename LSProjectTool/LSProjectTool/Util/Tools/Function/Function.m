@@ -528,13 +528,10 @@ static Function *ls_function = nil;
 //遍历文件夹获得文件夹大小，返回多少M
 //设置folderPath为cache路径。
 - (float)folderSizeAtPath:(NSString *)folderPath {
-    
     NSFileManager *manager = [NSFileManager defaultManager];
-    
     if (![manager fileExistsAtPath:folderPath])  {
         return 0;
     }
-    
     NSEnumerator *childFilesEnumerator = [[manager subpathsAtPath:folderPath] objectEnumerator];
     NSString *fileName;
     long long folderSize = 0;
@@ -542,7 +539,6 @@ static Function *ls_function = nil;
         NSString *fileAbsolutePath = [folderPath stringByAppendingPathComponent:fileName];
         folderSize += [self fileSizeAtPath:fileAbsolutePath];
     }
-    
     return folderSize / (1024.0 * 1024.0);//得到缓存大小M
 }
 
@@ -554,19 +550,12 @@ static Function *ls_function = nil;
 + (void)clearCache {
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
-    
     NSString *path = [paths lastObject];
-    
     NSArray *files = [[NSFileManager defaultManager] subpathsAtPath:path];
-    
     for (NSString *p in files) {
-        
         NSError *error;
-        
         NSString *Path = [path stringByAppendingPathComponent:p];
-        
         if ([[NSFileManager defaultManager] fileExistsAtPath:Path]) {
-            
             [[NSFileManager defaultManager] removeItemAtPath:Path error:&error];
         }
     }
@@ -575,23 +564,14 @@ static Function *ls_function = nil;
 //3 NSCachesDirectory 存放缓存文件
 + (void)clearCaches {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
         NSString *cachPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        
         NSLog(@"%@", cachPath);
-        
         NSArray *files = [[NSFileManager defaultManager] subpathsAtPath:cachPath];
-        
         NSLog(@"files :%d",[files count]); //文件夹的数量
-        
         for (NSString *p in files) {
-            
             NSError *error;
-            
             NSString *path = [cachPath stringByAppendingPathComponent:p];
-            
             if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
-                
                 [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
             }
         }
@@ -600,7 +580,6 @@ static Function *ls_function = nil;
 }
 
 - (void)clearCacheSuccess {
-    
     NSLog(@"清理成功");
 }
 

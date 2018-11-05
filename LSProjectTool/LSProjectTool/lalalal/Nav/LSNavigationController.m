@@ -129,6 +129,7 @@
 //}
 
 #pragma mark - 右滑返回  2  判断(方法2)
+//防止scrollView手势覆盖侧滑手势[scrollView.panGestureRecognizerrequireGestureRecognizerToFail:self.navigationController.interactivePopGestureRecognizer];
 //iOS自定义全屏返回与tableView左划删除手势冲突解决
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
     

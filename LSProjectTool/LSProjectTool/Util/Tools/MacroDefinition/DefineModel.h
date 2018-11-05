@@ -37,6 +37,24 @@
 #define kDevice_IS__iPhoneX ([UIScreen mainScreen].bounds.size.width == 375 && [UIScreen mainScreen].bounds.size.height == 812)
 
 
+//判断iPHoneXr
+#define IS_IPHONE_Xr ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(828, 1792), [[UIScreen mainScreen] currentMode].size) && !IsPad : NO)
+//判断iPhoneXs
+#define IS_IPHONE_Xs ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) && !IsPad : NO)
+//判断iPhoneXs Max
+#define IS_IPHONE_Xs_Max ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2688), [[UIScreen mainScreen] currentMode].size) && !IsPad : NO)
+
+
+
+//由于iPhone X、iPhone XS、iPhone XS Max、iPhone XR这些机型的navigationBar高度以及tabBar高度都一致，所以可以用来判断当前设备是否有“齐刘海”。
+///iPhone X、iPhone XS、iPhone XS Max、iPhone XR
+#define kDevice_IS_iPhoneX_Series ([[UIApplication sharedApplication] statusBarFrame].size.height>20?YES:NO)
+
+
+
+
+
+
 
 //判断是否是Retina屏
 #define isRetina ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO)

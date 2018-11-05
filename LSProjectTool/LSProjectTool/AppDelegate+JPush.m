@@ -11,6 +11,7 @@
 
 @implementation AppDelegate (JPush)
 
+//极光推送__注册方法
 - (void)registerJPushWithOptions:(NSDictionary *)launchOptions {
     /************ 极光推送 ************/
     //1. 添加初始化APNs代码
@@ -108,7 +109,7 @@
     if (@available(iOS 10.0, *)) {
         if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
             [JPUSHService handleRemoteNotification:userInfo];
-            //            NSLog(@"iOS10 前台收到远程通知:%@", [self logDic:userInfo]);
+            NSLog(@"iOS10 前台收到远程通知:%@", [self logDic:userInfo]);
         } else {
             // 判断为本地通知
             
@@ -133,29 +134,7 @@
     NSString *subtitle = content.subtitle; // 推送消息的副标题
     NSString *title = content.title; // 推送消息的标题
     NSLog(@"推送消息的标题：%@ , 推送消息的副标题:%@, 推送消息体:%@", title, subtitle, body);
-    
-    // opt_type: 1:评论 2:点赞 3 举报  4:订单
-//    if ([[userInfo objectForKey:@"opt_type"] integerValue] == 1) { //评论
-//        
-//        //跳转到评论详情界面
-//        [self pushToCommentDetailsVCWithOpt_id:([userInfo objectForKey:@"opt_id"] ? [userInfo objectForKey:@"opt_id"] : @"") opt_type:[userInfo objectForKey:@"opt_type"] report_type:@""];
-//    } else if ([[userInfo objectForKey:@"opt_type"] integerValue] == 2) {//点赞
-//        //跳转到评论详情界面
-//        [self pushToCommentDetailsVCWithOpt_id:([userInfo objectForKey:@"opt_id"] ? [userInfo objectForKey:@"opt_id"] : @"") opt_type:[userInfo objectForKey:@"opt_type"] report_type:@""];
-//        
-//    } else if ([[userInfo objectForKey:@"opt_type"] integerValue] == 3) {//举报
-//        //跳转到举报详情页
-//        [self pushToCommentDetailsVCWithOpt_id:([userInfo objectForKey:@"opt_id"] ? [userInfo objectForKey:@"opt_id"] : @"") opt_type:[userInfo objectForKey:@"opt_type"] report_type:([userInfo objectForKey:@"report_type"] ? [userInfo objectForKey:@"report_type"] : @"")];
-//    } else if ([[userInfo objectForKey:@"opt_type"] integerValue] == 4) { //订单
-//        //跳转到订单详情页
-//        [self pushToOrderDetailsVCWithOpt_id:([userInfo objectForKey:@"opt_id"] ? [userInfo objectForKey:@"opt_id"] : @"") opt_type:[userInfo objectForKey:@"opt_type"]];
-//    }  else if ([[userInfo objectForKey:@"opt_type"] integerValue] == 5) { //会员中心
-//        //跳转到会员中心
-//        [self pushToMemberCenterVCWithOpt_type:[userInfo objectForKey:@"opt_type"]];
-//    }
-//    
-    
-    
+
     if (@available(iOS 10.0, *)) {
         if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
             [JPUSHService handleRemoteNotification:userInfo];
@@ -168,9 +147,7 @@
     } else {
         // Fallback on earlier versions
     }
-    
-    
-    
+
     completionHandler();  // 系统要求执行这个方法
 }
 ////当程序处于后台或者被杀死状态，收到远程通知后，当你进入程序时，就会调用

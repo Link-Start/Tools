@@ -21,8 +21,15 @@ iPhone 7Plus       5.5吋      414x736        @3x       1242x2208    1080x1920  
 iPhone 8
 iPhone 8Plus
 iPhone SE
-iPhone X
+iPhone X                      812*375                  1125*2436
+iPhoneXS           5.8英寸     812*375        @3x       1125*2436
+iPhoneXS Max       6.5英寸     896*414        @3x       1242x2688
+iPhoneXR           6.1英       896*414        @2x       828x1792
 */
+
+//iPhoneXR宽度828/2=414pt，iPhoneXS Max宽度1242/3=414pt；
+//iPhoneXR高度1792/2=896pt，iPhoneXS Max高度2688/3=896pt；
+
 
 
 
@@ -30,6 +37,7 @@ iPhone X
 #ifndef DefineSystemSize_h
 #define DefineSystemSize_h
 //iOS11之前导航栏默认高度为64pt(这里高度指statusBar + NavigationBar)，iOS11之后如果设置了prefersLargeTitles = YES则为96pt，默认情况下还是64pt，但在iPhoneX上由于刘海的出现statusBar由以前的20pt变成了44pt，所以iPhoneX上高度变为88pt
+////由于iPhone X、iPhone XS、iPhone XS Max、iPhone XR这些机型的navigationBar高度以及tabBar高度都一致，所以可以用来判断当前设备是否有“齐刘海”。
 
 //状态栏高度 20/44
 #define kLS_StatusBarHeight ([[UIApplication sharedApplication] statusBarFrame].size.height)
@@ -41,6 +49,9 @@ iPhone X
 #define kLS_TopHeight (kLS_StatusBarHeight + kLS_NavigationBarHeight)
 //底部安全距离(Home Indicator的高度宏定义)
 #define kLS_iPhoneX_Home_Indicator_Height ((kDevice_Is_iPhoneX) ? 34 : 0)
+
+//iPhoneX系列底部安全距离
+#define kLS_iPhoneX_Series_Home_Indicator_Height ([[UIApplication sharedApplication] statusBarFrame].size.height>20?34:0)
 
 //横屏有工具栏 20 没有 0
 //iPhone X竖屏时占满整个屏幕的控制器的view的safeAreaInsets是（44，0，34，0），横屏是（0，44，21，44），inset后的区域正好是safeAreaLayoutGuide区域

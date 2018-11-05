@@ -26,4 +26,9 @@
 
 @interface AppDelegate (JPush)<JPUSHRegisterDelegate>
 
+///初始化极光推送
+- (void)initializationJPush;
+//极光推送__注册方法
+- (void)registerJPushWithOptions:(NSDictionary *)launchOptions;
+
 @end
