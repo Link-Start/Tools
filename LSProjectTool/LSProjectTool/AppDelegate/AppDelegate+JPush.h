@@ -7,15 +7,6 @@
 //
 
 #import "AppDelegate.h"
-// 引入JPush功能所需头文件
-#import "JPUSHService.h"
-// iOS10注册APNs所需头文件
-#ifdef NSFoundationVersionNumber_iOS_9_x_Max
-#import <UserNotifications/UserNotifications.h>
-#endif
-// 如果需要使用idfa功能所需要引入的头文件（可选）
-#import <AdSupport/AdSupport.h>
-
 
 
 #ifdef DEBUG
@@ -24,10 +15,9 @@
 #define JPush_isProduction  YES //生产证书
 #endif
 
-@interface AppDelegate (JPush)<JPUSHRegisterDelegate>
+@interface AppDelegate (JPush)
 
 ///初始化极光推送
-- (void)initializationJPush;
 //极光推送__注册方法
 - (void)registerJPushWithOptions:(NSDictionary *)launchOptions;
 

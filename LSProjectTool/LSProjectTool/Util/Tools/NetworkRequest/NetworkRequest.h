@@ -96,7 +96,7 @@
 /**
  *  适合上传图片数量比较少的，比如上传头像，上传图片数量多的话，速度会慢些
  */
-
++ (void)uploadImagesBase64:(UIImage *)image toURL:(NSString *)urlString parameters:(NSDictionary*)parameters graceTime:(CGFloat)graceTime completed:(void(^)(id json))finish failure:(void(^)(NSError *error))failure;
 
 #pragma mark - 下载
 /**

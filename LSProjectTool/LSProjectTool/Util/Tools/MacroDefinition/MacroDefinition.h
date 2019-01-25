@@ -27,36 +27,44 @@
 //和__strong __typeof(weakSelf)strongSelf = weakSelf的宏定义
 //使用 @ls_weakify(self)    @ls_strongify(self)
 #ifndef ls_weakify   //如果标识符未被定义过,执行程序段 1 否则执行程序段2
-    #if DEBUG
-        #if __has_feature(objc_arc)
+#if DEBUG
+#if __has_feature(objc_arc)
 #define ls_weakify(object) autoreleasepool{} __weak __typeof__(object) weak##_##object = object;
-        #else
+#else
 #define ls_weakify(object) autoreleasepool{} __block __typeof__(object) block##_##object = object;
-        #endif
-    #else
-        #if __has_feature(objc_arc)
+#endif
+#else
+#if __has_feature(objc_arc)
 #define ls_weakify(object) try{} @finally{} {} __weak __typeof__(object) weak##_##object = object;
-        #else
+#else
 #define ls_weakify(object) try{} @finally{} {} __block __typeof__(object) block##_##object = object;
-        #endif
-    #endif
+#endif
+#endif
 #endif
 
 #ifndef ls_strongify
-    #if DEBUG
-        #if __has_feature(objc_arc)  //ARC
+#if DEBUG
+#if __has_feature(objc_arc)  //ARC
 #define ls_strongify(object) autoreleasepool{} __typeof__(object) object = weak##_##object;
-        #else                        //MRC
+#else                        //MRC
 #define ls_strongify(object) autoreleasepool{} __typeof__(object) object = block##_##object;
-        #endif
-    #else
-        #if __has_feature(objc_arc)
-#define ls_strongify(object) try{} @finally{} __typeof__(object) object = weak##_##object;
-        #else
-#define ls_strongify(object) try{} @finally{} __typeof__(object) object = block##_##object;
-        #endif
-    #endif
 #endif
+#else
+#if __has_feature(objc_arc)
+#define ls_strongify(object) try{} @finally{} __typeof__(object) object = weak##_##object;
+#else
+#define ls_strongify(object) try{} @finally{} __typeof__(object) object = block##_##object;
+#endif
+#endif
+#endif
+
+
+//WeakSelf 宏定义:
+#define LS_WeakSelf(type) __weak typeof(type) weak##type = type
+//StrongSelf 宏定义
+#define LS_StrongSelf(type) __strong typeof(type) strong##type = type
+
+
 
 ///APP信息
 #define kLS_AppInfoDictionary  [[NSBundle mainBundle] infoDictionary]

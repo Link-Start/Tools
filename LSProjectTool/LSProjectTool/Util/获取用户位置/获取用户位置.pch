@@ -27,7 +27,7 @@
 
 block:
 
-self.location.getCurrentLocation = ^(NSString *str) {
+self.location.getCurrentLocation = ^(NSString *str, CLPlacemark *placemarks) {
     weakSelf.textField.text = str;
 };
 

@@ -20,11 +20,28 @@ UIImageWriteToSavedPhotosAlbum(image, self, nil, nil); //保存的路径
 
 
 //获取当前屏幕内容
-- (UIImage *)getNormalImage:(UIView *)view {
+- (UIImage *)getCurrentScreenSnapshot:(UIView *)view {
+
+//   UIGraphicsBeginImageContext(CGSizeMake(view.bounds.size.width, view.bounds.size.height));//模糊图
+    
+//    UIGraphicsBeginImageContextWithOptions(CGSize size, BOOL opaque, CGFloat scale)
+//    opaque 透明度，不透明设为YES；
+//    scale  缩放因子，设0时系统自动设置缩放比例图片清晰；设1.0时模糊
+    UIGraphicsBeginImageContextWithOptions(view.bounds.size, NO, 0.0);//原图_高清图
+    
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
+
+//获取当前屏幕内容__模糊
+- (UIImage *)getNormalImage {
     CGFloat ls_width = [[UIScreen mainScreen] bounds].size.width;//获取屏幕宽度
     CGFloat ls_height = [UIScreen mainScreen].bounds.size.height;//获取屏幕高度
     
-    UIGraphicsBeginImageContext(CGSizeMake(ls_width, ls_height));
+    UIGraphicsBeginImageContext(CGSizeMake(ls_width, ls_height));//模糊
     CGContextRef ls_contentRef = UIGraphicsGetCurrentContext();
     [view.layer renderInContext:ls_contentRef];
     
@@ -32,7 +49,6 @@ UIImageWriteToSavedPhotosAlbum(image, self, nil, nil); //保存的路径
     UIGraphicsEndImageContext();
     return image;
 }
-
 
 
 

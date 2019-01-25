@@ -48,7 +48,7 @@ iPhoneXR           6.1英       896*414        @2x       828x1792
 //顶部高度 64/96/88
 #define kLS_TopHeight (kLS_StatusBarHeight + kLS_NavigationBarHeight)
 //底部安全距离(Home Indicator的高度宏定义)
-#define kLS_iPhoneX_Home_Indicator_Height ((kDevice_Is_iPhoneX) ? 34 : 0)
+#define kLS_iPhoneX_Home_Indicator_Height ([[UIApplication sharedApplication] statusBarFrame].size.height>20?34:0)
 
 //iPhoneX系列底部安全距离
 #define kLS_iPhoneX_Series_Home_Indicator_Height ([[UIApplication sharedApplication] statusBarFrame].size.height>20?34:0)

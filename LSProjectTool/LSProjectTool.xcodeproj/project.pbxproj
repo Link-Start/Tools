@@ -18,7 +18,6 @@
 		08197C8D1FE3564D00478FC4 /* ReachStateUnReachable.m in Sources */ = {isa = PBXBuildFile; fileRef = 08197C791FE3564D00478FC4 /* ReachStateUnReachable.m */; };
 		08197C8E1FE3564D00478FC4 /* ReachStateWIFI.m in Sources */ = {isa = PBXBuildFile; fileRef = 08197C7B1FE3564D00478FC4 /* ReachStateWIFI.m */; };
 		08197C8F1FE3564D00478FC4 /* ReachStateWWAN.m in Sources */ = {isa = PBXBuildFile; fileRef = 08197C7D1FE3564D00478FC4 /* ReachStateWWAN.m */; };
-		08197C901FE3564D00478FC4 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08197C7E1FE3564D00478FC4 /* Info.plist */; };
 		08197C911FE3564D00478FC4 /* PingFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 08197C811FE3564D00478FC4 /* PingFoundation.m */; };
 		08197C921FE3564D00478FC4 /* PingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 08197C831FE3564D00478FC4 /* PingHelper.m */; };
 		08197C931FE3564D00478FC4 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 08197C841FE3564D00478FC4 /* README.md */; };
@@ -32,8 +31,6 @@
 		085979EC2015E0C700E2CF2C /* orderPayPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 085979EB2015E0C700E2CF2C /* orderPayPopView.m */; };
 		087BCDBA201A10CA007B3706 /* LSBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 087BCDB9201A10CA007B3706 /* LSBaseViewController.m */; };
 		087BCDFB201A13DF007B3706 /* LSRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 087BCDFA201A13DF007B3706 /* LSRootViewController.m */; };
-		088753A9201F1CDD00920997 /* LSSegmentedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 088753A8201F1CDD00920997 /* LSSegmentedView.m */; };
-		088753AC201F20F200920997 /* LSSegmentedViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 088753AB201F20F200920997 /* LSSegmentedViewCell.m */; };
 		08BA1FE51FEFCBB900A19A46 /* AppDelegate+PushService.m in Sources */ = {isa = PBXBuildFile; fileRef = 08BA1FE21FEFCBB700A19A46 /* AppDelegate+PushService.m */; };
 		08BA1FE61FEFCBB900A19A46 /* AppDelegate+AppService.m in Sources */ = {isa = PBXBuildFile; fileRef = 08BA1FE41FEFCBB800A19A46 /* AppDelegate+AppService.m */; };
 		08BA1FE91FEFD0C300A19A46 /* WaterFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 08BA1FE71FEFD0C200A19A46 /* WaterFlowLayout.m */; };
@@ -69,6 +66,11 @@
 		08F658A81FF3D2A5007880CC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 08F658921FF3D2A5007880CC /* README.md */; };
 		08FB5E24202DA8B1003F1132 /* LSButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FB5E20202DA8B0003F1132 /* LSButton.m */; };
 		08FB5E25202DA8B1003F1132 /* LSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FB5E23202DA8B1003F1132 /* LSLabel.m */; };
+		3D2005C721F9C97E0010425C /* LSConstAppKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2005C621F9C97E0010425C /* LSConstAppKey.m */; };
+		3D2005CA21F9CA970010425C /* LSConstUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2005C921F9CA970010425C /* LSConstUrl.m */; };
+		3D2156DA21F09A54006EDACE /* JsonTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2156D921F09A54006EDACE /* JsonTools.m */; };
+		3D2156DF21F09DC3006EDACE /* json.json in Resources */ = {isa = PBXBuildFile; fileRef = 3D2156DE21F09DC3006EDACE /* json.json */; };
+		3D4E321021F9A4CA00A3F063 /* LSWKWebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4E320E21F9A4C900A3F063 /* LSWKWebViewVC.m */; };
 		4822181B212FDE7B005AE181 /* BaiDuMapTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 4822181A212FDE7A005AE181 /* BaiDuMapTools.m */; };
 		482267EC2154BDD700EE6599 /* PasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 482267E72154BDD600EE6599 /* PasswordView.m */; };
 		482267ED2154BDD700EE6599 /* VerificationCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 482267E82154BDD600EE6599 /* VerificationCodeView.m */; };
@@ -145,7 +147,6 @@
 		AEB4D3F81DAA0A600078A52D /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB4D3971DAA0A5F0078A52D /* AFURLRequestSerialization.m */; };
 		AEB4D3F91DAA0A600078A52D /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB4D3991DAA0A5F0078A52D /* AFURLResponseSerialization.m */; };
 		AEB4D3FA1DAA0A600078A52D /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB4D39B1DAA0A5F0078A52D /* AFURLSessionManager.m */; };
-		AEB4D3FB1DAA0A600078A52D /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = AEB4D39C1DAA0A5F0078A52D /* LICENSE */; };
 		AEB4D3FC1DAA0A600078A52D /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = AEB4D39D1DAA0A5F0078A52D /* README.md */; };
 		AEB4D3FD1DAA0A600078A52D /* AFAutoPurgingImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB4D3A01DAA0A5F0078A52D /* AFAutoPurgingImageCache.m */; };
 		AEB4D3FE1DAA0A600078A52D /* AFImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB4D3A21DAA0A5F0078A52D /* AFImageDownloader.m */; };
@@ -229,7 +230,6 @@
 		08197C7B1FE3564D00478FC4 /* ReachStateWIFI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachStateWIFI.m; sourceTree = "<group>"; };
 		08197C7C1FE3564D00478FC4 /* ReachStateWWAN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachStateWWAN.h; sourceTree = "<group>"; };
 		08197C7D1FE3564D00478FC4 /* ReachStateWWAN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachStateWWAN.m; sourceTree = "<group>"; };
-		08197C7E1FE3564D00478FC4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08197C801FE3564D00478FC4 /* PingFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PingFoundation.h; sourceTree = "<group>"; };
 		08197C811FE3564D00478FC4 /* PingFoundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PingFoundation.m; sourceTree = "<group>"; };
 		08197C821FE3564D00478FC4 /* PingHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PingHelper.h; sourceTree = "<group>"; };
@@ -262,10 +262,6 @@
 		087BCDB9201A10CA007B3706 /* LSBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSBaseViewController.m; sourceTree = "<group>"; };
 		087BCDF9201A13DF007B3706 /* LSRootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSRootViewController.h; sourceTree = "<group>"; };
 		087BCDFA201A13DF007B3706 /* LSRootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSRootViewController.m; sourceTree = "<group>"; };
-		088753A7201F1CDD00920997 /* LSSegmentedView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSSegmentedView.h; sourceTree = "<group>"; };
-		088753A8201F1CDD00920997 /* LSSegmentedView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSSegmentedView.m; sourceTree = "<group>"; };
-		088753AA201F20F200920997 /* LSSegmentedViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSSegmentedViewCell.h; sourceTree = "<group>"; };
-		088753AB201F20F200920997 /* LSSegmentedViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSSegmentedViewCell.m; sourceTree = "<group>"; };
 		08A6B29A20064B2700A70EC5 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		08BA1FE01FEFCA5D00A19A46 /* 如何实现并发执行多个网络请求，统一处理.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "如何实现并发执行多个网络请求，统一处理.h"; sourceTree = "<group>"; };
 		08BA1FE11FEFCBB700A19A46 /* AppDelegate+PushService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+PushService.h"; sourceTree = "<group>"; };
@@ -336,6 +332,16 @@
 		08FB5E21202DA8B0003F1132 /* LSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSLabel.h; sourceTree = "<group>"; };
 		08FB5E22202DA8B0003F1132 /* LSButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSButton.h; sourceTree = "<group>"; };
 		08FB5E23202DA8B1003F1132 /* LSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSLabel.m; sourceTree = "<group>"; };
+		3D2005C521F9C97E0010425C /* LSConstAppKey.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSConstAppKey.h; sourceTree = "<group>"; };
+		3D2005C621F9C97E0010425C /* LSConstAppKey.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSConstAppKey.m; sourceTree = "<group>"; };
+		3D2005C821F9CA970010425C /* LSConstUrl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSConstUrl.h; sourceTree = "<group>"; };
+		3D2005C921F9CA970010425C /* LSConstUrl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSConstUrl.m; sourceTree = "<group>"; };
+		3D2156D821F09A54006EDACE /* JsonTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JsonTools.h; sourceTree = "<group>"; };
+		3D2156D921F09A54006EDACE /* JsonTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JsonTools.m; sourceTree = "<group>"; };
+		3D2156DE21F09DC3006EDACE /* json.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = json.json; sourceTree = "<group>"; };
+		3D4E320E21F9A4C900A3F063 /* LSWKWebViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSWKWebViewVC.m; sourceTree = "<group>"; };
+		3D4E320F21F9A4CA00A3F063 /* LSWKWebViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSWKWebViewVC.h; sourceTree = "<group>"; };
+		3D8FAE1321F5E6C600B6F1A2 /* UITextField的代理相关方法.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextField的代理相关方法.h"; sourceTree = "<group>"; };
 		48090A9B20B7AD490052D83C /* 递归获取子视图.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "递归获取子视图.h"; sourceTree = "<group>"; };
 		48221819212FDE7A005AE181 /* BaiDuMapTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiDuMapTools.h; sourceTree = "<group>"; };
 		4822181A212FDE7A005AE181 /* BaiDuMapTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaiDuMapTools.m; sourceTree = "<group>"; };
@@ -487,7 +493,6 @@
 		AEB4D3991DAA0A5F0078A52D /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		AEB4D39A1DAA0A5F0078A52D /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		AEB4D39B1DAA0A5F0078A52D /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
-		AEB4D39C1DAA0A5F0078A52D /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		AEB4D39D1DAA0A5F0078A52D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AEB4D39F1DAA0A5F0078A52D /* AFAutoPurgingImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFAutoPurgingImageCache.h; sourceTree = "<group>"; };
 		AEB4D3A01DAA0A5F0078A52D /* AFAutoPurgingImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFAutoPurgingImageCache.m; sourceTree = "<group>"; };
@@ -551,8 +556,6 @@
 		AEBD660F1D824E1400B1F64C /* 动画.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "动画.pch"; sourceTree = "<group>"; };
 		AEBD66101D824E1400B1F64C /* 刮刮乐效果的实现.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "刮刮乐效果的实现.h"; sourceTree = "<group>"; };
 		AEBD66111D824E1400B1F64C /* 汉字转拼音.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "汉字转拼音.h"; sourceTree = "<group>"; };
-		AEBD66121D824E1400B1F64C /* 获取运营商信息.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "获取运营商信息.h"; sourceTree = "<group>"; };
-		AEBD66131D824E1400B1F64C /* 检查类是否包含这个方法.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "检查类是否包含这个方法.h"; sourceTree = "<group>"; };
 		AEBD66141D824E1400B1F64C /* 强制某个页面自己横屏.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "强制某个页面自己横屏.pch"; sourceTree = "<group>"; };
 		AEBD66151D824E1400B1F64C /* 让 iOS 应用直接退出.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "让 iOS 应用直接退出.h"; sourceTree = "<group>"; };
 		AEBD66161D824E1400B1F64C /* 跳转到系统设置.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "跳转到系统设置.h"; sourceTree = "<group>"; };
@@ -644,7 +647,6 @@
 			children = (
 				08197C691FE3564C00478FC4 /* Connection */,
 				08197C6C1FE3564D00478FC4 /* FSM */,
-				08197C7E1FE3564D00478FC4 /* Info.plist */,
 				08197C7F1FE3564D00478FC4 /* Ping */,
 				08197C851FE3564D00478FC4 /* RealReachability.h */,
 				08197C861FE3564D00478FC4 /* RealReachability.m */,
@@ -900,6 +902,30 @@
 			path = Header;
 			sourceTree = "<group>";
 		};
+		3D2005CB21F9CB040010425C /* LSConst */ = {
+			isa = PBXGroup;
+			children = (
+				3D2005C521F9C97E0010425C /* LSConstAppKey.h */,
+				3D2005C621F9C97E0010425C /* LSConstAppKey.m */,
+				3D2005C821F9CA970010425C /* LSConstUrl.h */,
+				3D2005C921F9CA970010425C /* LSConstUrl.m */,
+			);
+			path = LSConst;
+			sourceTree = "<group>";
+		};
+		3DD8BDB521EC6B3F00075823 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				08BA1FE31FEFCBB800A19A46 /* AppDelegate+AppService.h */,
+				08BA1FE41FEFCBB800A19A46 /* AppDelegate+AppService.m */,
+				08BA1FE11FEFCBB700A19A46 /* AppDelegate+PushService.h */,
+				08BA1FE21FEFCBB700A19A46 /* AppDelegate+PushService.m */,
+				486443752119CB6200C3B9BF /* AppDelegate+JPush.h */,
+				486443762119CB6200C3B9BF /* AppDelegate+JPush.m */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
 		482267E52154BDD600EE6599 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1010,8 +1036,6 @@
 				AEBD660F1D824E1400B1F64C /* 动画.pch */,
 				AEBD66101D824E1400B1F64C /* 刮刮乐效果的实现.h */,
 				AEBD66111D824E1400B1F64C /* 汉字转拼音.h */,
-				AEBD66121D824E1400B1F64C /* 获取运营商信息.h */,
-				AEBD66131D824E1400B1F64C /* 检查类是否包含这个方法.h */,
 				AEBD66141D824E1400B1F64C /* 强制某个页面自己横屏.pch */,
 				AEBD66151D824E1400B1F64C /* 让 iOS 应用直接退出.h */,
 				AEBD66161D824E1400B1F64C /* 跳转到系统设置.h */,
@@ -1035,6 +1059,7 @@
 				AE8A1A341E4C735A002186A0 /* 获取视频中的指定帧的图片.pch */,
 				085B44251FE3E8360070DCE9 /* 创建tableViewHeaderView需注意.h */,
 				08BA1FE01FEFCA5D00A19A46 /* 如何实现并发执行多个网络请求，统一处理.h */,
+				3D8FAE1321F5E6C600B6F1A2 /* UITextField的代理相关方法.h */,
 			);
 			path = File;
 			sourceTree = "<group>";
@@ -1165,6 +1190,7 @@
 		AEB4D3201DAA09EA0078A52D /* lalalal */ = {
 			isa = PBXGroup;
 			children = (
+				3D2005CB21F9CB040010425C /* LSConst */,
 				482267E52154BDD600EE6599 /* View */,
 				085978D82023220B00CA056F /* Nav */,
 				08CBAF8D1FED2AC600243B18 /* TabBar */,
@@ -1186,6 +1212,8 @@
 				08CBAF921FED346E00243B18 /* LSRootTableView.m */,
 				085978D52023186700CA056F /* LSRootCollectionView.h */,
 				085978D62023186700CA056F /* LSRootCollectionView.m */,
+				3D4E320F21F9A4CA00A3F063 /* LSWKWebViewVC.h */,
+				3D4E320E21F9A4C900A3F063 /* LSWKWebViewVC.m */,
 			);
 			path = BaseViewController;
 			sourceTree = "<group>";
@@ -1363,7 +1391,6 @@
 			isa = PBXGroup;
 			children = (
 				AEB4D38E1DAA0A5F0078A52D /* AFNetworking */,
-				AEB4D39C1DAA0A5F0078A52D /* LICENSE */,
 				AEB4D39D1DAA0A5F0078A52D /* README.md */,
 				AEB4D39E1DAA0A5F0078A52D /* UIKit+AFNetworking */,
 			);
@@ -1576,12 +1603,9 @@
 			children = (
 				AECFA2431D376C5F005F5DE6 /* AppDelegate.h */,
 				AECFA2441D376C5F005F5DE6 /* AppDelegate.m */,
-				08BA1FE31FEFCBB800A19A46 /* AppDelegate+AppService.h */,
-				08BA1FE41FEFCBB800A19A46 /* AppDelegate+AppService.m */,
-				08BA1FE11FEFCBB700A19A46 /* AppDelegate+PushService.h */,
-				08BA1FE21FEFCBB700A19A46 /* AppDelegate+PushService.m */,
-				486443752119CB6200C3B9BF /* AppDelegate+JPush.h */,
-				486443762119CB6200C3B9BF /* AppDelegate+JPush.m */,
+				3D2156D821F09A54006EDACE /* JsonTools.h */,
+				3D2156D921F09A54006EDACE /* JsonTools.m */,
+				3DD8BDB521EC6B3F00075823 /* AppDelegate */,
 				AED9083E1D3CB35700E00C02 /* Localizable.strings */,
 				AECFA2461D376C5F005F5DE6 /* ViewController.h */,
 				AECFA2471D376C5F005F5DE6 /* ViewController.m */,
@@ -1590,11 +1614,8 @@
 				0852D821204FDF9600B8686F /* CeshiVC.h */,
 				0852D822204FDF9600B8686F /* CeshiVC.m */,
 				AE0C7D9B1E0BBE750051269F /* link.html */,
+				3D2156DE21F09DC3006EDACE /* json.json */,
 				AE0C7D9D1E0BC2A50051269F /* link.js */,
-				088753A7201F1CDD00920997 /* LSSegmentedView.h */,
-				088753A8201F1CDD00920997 /* LSSegmentedView.m */,
-				088753AA201F20F200920997 /* LSSegmentedViewCell.h */,
-				088753AB201F20F200920997 /* LSSegmentedViewCell.m */,
 				48F64E9120E20592009BA3A1 /* UI控件 */,
 				08D71C5C200CE6BD00AB060F /* 添加照片 */,
 				AEB4D3201DAA09EA0078A52D /* lalalal */,
@@ -1749,15 +1770,14 @@
 				AED9083C1D3CB35700E00C02 /* Localizable.strings in Resources */,
 				AE0C7D9E1E0BC2A50051269F /* link.js in Resources */,
 				AE0C7D9C1E0BBE750051269F /* link.html in Resources */,
-				AEB4D3FB1DAA0A600078A52D /* LICENSE in Resources */,
 				4855232920E63EDB00CB32BF /* star_yellow.png in Resources */,
 				4855232820E63EDB00CB32BF /* star_gray.png in Resources */,
+				3D2156DF21F09DC3006EDACE /* json.json in Resources */,
 				08F658931FF3D2A5007880CC /* LICENSE in Resources */,
 				08F658A21FF3D2A5007880CC /* MJRefresh.bundle in Resources */,
 				AECFA24D1D376C5F005F5DE6 /* Assets.xcassets in Resources */,
 				AECFA24B1D376C5F005F5DE6 /* Main.storyboard in Resources */,
 				08F658A81FF3D2A5007880CC /* README.md in Resources */,
-				08197C901FE3564D00478FC4 /* Info.plist in Resources */,
 				AEB4D37F1DAA09EA0078A52D /* Information in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1828,10 +1848,10 @@
 				0814EE492015F86D009F5EE4 /* NTImageBrowser.m in Sources */,
 				08197C911FE3564D00478FC4 /* PingFoundation.m in Sources */,
 				487FC63D20BE937700FC19FA /* UIButton+UIControl_buttonCon.m in Sources */,
-				088753A9201F1CDD00920997 /* LSSegmentedView.m in Sources */,
 				AEB4D4101DAA0A600078A52D /* ViewController+MASAdditions.m in Sources */,
 				08F658A51FF3D2A5007880CC /* UIScrollView+MJExtension.m in Sources */,
 				08F658971FF3D2A5007880CC /* MJRefreshFooter.m in Sources */,
+				3D4E321021F9A4CA00A3F063 /* LSWKWebViewVC.m in Sources */,
 				08F6585F1FF3D270007880CC /* UICollectionView+IndexPath.m in Sources */,
 				AECFA2451D376C5F005F5DE6 /* AppDelegate.m in Sources */,
 				AEB4D3791DAA09EA0078A52D /* LSNetworking.m in Sources */,
@@ -1860,6 +1880,7 @@
 				AEB4D3661DAA09EA0078A52D /* UIButton+EnlargeTouchArea.m in Sources */,
 				08F6589D1FF3D2A5007880CC /* MJRefreshBackNormalFooter.m in Sources */,
 				AE24FCF91DABC51E00740806 /* NSString+LSCategory.m in Sources */,
+				3D2005CA21F9CA970010425C /* LSConstUrl.m in Sources */,
 				AEB4D3771DAA09EA0078A52D /* ClassExtension.m in Sources */,
 				AEB4D3821DAA09EA0078A52D /* NSDate+LSExtension.m in Sources */,
 				08FB5E24202DA8B1003F1132 /* LSButton.m in Sources */,
@@ -1882,6 +1903,7 @@
 				AEB4D3681DAA09EA0078A52D /* XBAlerButton.m in Sources */,
 				486551CC20C7C45200E4FE48 /* UIButton+ImageTitleSpace.m in Sources */,
 				AEB4D36B1DAA09EA0078A52D /* XBPinPasswordField.m in Sources */,
+				3D2005C721F9C97E0010425C /* LSConstAppKey.m in Sources */,
 				AECBBCC41DE55B3800F96D38 /* LSTextView.m in Sources */,
 				08F658601FF3D270007880CC /* UIViewController+AlertViewAndActionSheet.m in Sources */,
 				08F658981FF3D2A5007880CC /* MJRefreshHeader.m in Sources */,
@@ -1897,6 +1919,7 @@
 				08197C8E1FE3564D00478FC4 /* ReachStateWIFI.m in Sources */,
 				AEB4D40D1DAA0A600078A52D /* NSArray+MASAdditions.m in Sources */,
 				08D35B5E200A2A6500E122FF /* LMHWaterFallLayout.m in Sources */,
+				3D2156DA21F09A54006EDACE /* JsonTools.m in Sources */,
 				AEB4D3711DAA09EA0078A52D /* LSCheckoutNetworkState.m in Sources */,
 				AEB4D3621DAA09EA0078A52D /* LSDatePicker.m in Sources */,
 				AEB4D3671DAA09EA0078A52D /* LSAlertView.m in Sources */,
@@ -1922,7 +1945,6 @@
 				AEB4D43E1DAA5FAD0078A52D /* UIColor+LSExtension.m in Sources */,
 				085979E92015E09A00E2CF2C /* SYPasswordView.m in Sources */,
 				AEC14C5A1DC991480080D764 /* DataConversion.m in Sources */,
-				088753AC201F20F200920997 /* LSSegmentedViewCell.m in Sources */,
 				AEB4D3FE1DAA0A600078A52D /* AFImageDownloader.m in Sources */,
 				AEB4D3611DAA09EA0078A52D /* LSAlertRootView.m in Sources */,
 				AE5ED8E81DC8C6A900DA0300 /* AuthcodeView.m in Sources */,
@@ -2089,7 +2111,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LSProjectTool/PrefixHeader.pch";
 				INFOPLIST_FILE = LSProjectTool/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2118,7 +2140,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LSProjectTool/PrefixHeader.pch";
 				INFOPLIST_FILE = LSProjectTool/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

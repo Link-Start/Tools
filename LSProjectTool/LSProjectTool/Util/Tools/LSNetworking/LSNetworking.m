@@ -957,6 +957,56 @@ static inline NSString *cachePath() {
     return data;
 }
 
+#pragma mark - 使用Base64字符串上传图片
+/**
+ *  适合上传图片数量比较少的，比如上传头像，上传图片数量多的话，速度会慢些
+ */
++ (void)uploadImagesBase64:(UIImage *)image toURL:(NSString *)urlString parameters:(NSDictionary*)parameters graceTime:(CGFloat)graceTime completed:(void(^)(id json))finish failure:(void(^)(NSError *error))failure {
+    NSString *imageBase64Str = [self imageChangeBase64:image];
+    
+    NSDictionary *param = @{
+                            @"对应的参数":imageBase64Str
+                            };
+    [self postDataWithUrlStr:urlString refreshCache:NO parameters:param success:finish failure:failure];
+}
+
+#pragma mark -- image转化成Base64位
++ (NSString *)imageChangeBase64: (UIImage *)image{
+    
+    NSData   *imageData = nil;
+    //方法1
+    if (UIImagePNGRepresentation(image) == nil) {
+        imageData = UIImageJPEGRepresentation(image, 1.0);
+    } else {
+        imageData = UIImagePNGRepresentation(image);
+    }
+    
+    //方法2
+    //NSString *mimeType  = nil;
+    //    if ([self imageHasAlpha:image]) {
+    //
+    //        imageData = UIImagePNGRepresentation(image);
+    //        //mimeType = @"image/png";
+    //    }else{
+    //
+    //        imageData = UIImageJPEGRepresentation(image, 0.3f);
+    //        //mimeType = @"image/jpeg";
+    //    }
+    
+    return [NSString stringWithFormat:@"%@",[imageData base64EncodedStringWithOptions: 0]];
+}
+
+//+  (BOOL)imageHasAlpha:(UIImage *)image{
+//
+//    CGImageAlphaInfo alpha = CGImageGetAlphaInfo(image.CGImage);
+//    return (alpha == kCGImageAlphaFirst ||
+//            alpha == kCGImageAlphaLast ||
+//            alpha == kCGImageAlphaPremultipliedFirst ||
+//            alpha == kCGImageAlphaPremultipliedLast);
+//
+//}
+
+
 #pragma mark + 上传语音 通过URL来获取路径，进入沙盒或者系统相册等等
 #pragma mark + 上传 通过文件路径
 + (__kindof LSURLSessionTask *)uploadWithAudioPath:(NSString *)audioPath urlStr:(NSString *)urlStr parameters:(NSDictionary *)parameters audioKey:(NSString *)audioKey success:(void(^)(id responseData))success fail:(void(^)(NSError *error))fail {

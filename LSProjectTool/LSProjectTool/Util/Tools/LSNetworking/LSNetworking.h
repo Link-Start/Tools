@@ -438,6 +438,12 @@ typedef void(^LSLoadProgressBlock)(NSProgress *);
                           imageKey:(NSString *)imageKey
                            success:(void (^)(id response))success
                               fail:(void (^)(NSError *error))fail;
+
+#pragma mark - 使用Base64字符串上传图片
+/**
+ *  适合上传图片数量比较少的，比如上传头像，上传图片数量多的话，速度会慢些
+ */
++ (void)uploadImagesBase64:(UIImage *)image toURL:(NSString *)urlString parameters:(NSDictionary*)parameters graceTime:(CGFloat)graceTime completed:(void(^)(id json))finish failure:(void(^)(NSError *error))failure;
 #pragma mark - 上传语音 通过文件路径
 /**
  *  @author Link-Start

@@ -68,6 +68,9 @@
         
         if (error == nil) {
             //取得第一个地标，地标中存储了详细的地址信息，注意：一个地名可能搜索出多个地址
+            
+            CLPlacemark *placemark = [placemarks firstObject];
+            
             NSString *street = [[placemarks firstObject] thoroughfare];
             NSString *subStreet = [[placemarks firstObject] subThoroughfare];
             address = [NSString stringWithFormat:@"%@%@", street, subStreet];
@@ -89,7 +92,8 @@
             //        NSArray *areasOfInterest=placemark.areasOfInterest; //关联的或利益相关的地标
             
              if (self.getCurrentLocation) {
-                self.getCurrentLocation(street);
+                 
+//                 self.getCurrentLocation(street, [placemarks firstObject]);
             }
         } else {
             NSLog(@"定位解析出错");

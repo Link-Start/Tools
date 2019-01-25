@@ -7,10 +7,11 @@
 //  苹果系统自带的库
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CLPlacemark.h>
 
 @interface LSGetCurrentLocation : NSObject
 
-@property (nonatomic, copy) void(^getCurrentLocation)(NSString *);
+@property (nonatomic, copy) void(^getCurrentLocation)(NSString *str, CLPlacemark *placemarks);
 
 /******** 开始定位 ************/
 - (void)startUpdateLocation;

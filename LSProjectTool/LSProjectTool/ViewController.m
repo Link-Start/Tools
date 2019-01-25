@@ -14,7 +14,9 @@
 #import "NetworkRequest.h"
 #import "LSNetworking.h"
 #import "CeshiVC.h"
-#import "LSSegmentedView.h"
+#import "Function.h"
+#import "JsonTools.h"
+
 
 @interface ViewController ()<UITextFieldDelegate>
 
@@ -39,10 +41,18 @@
 
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
     
-    LSSegmentedView *view = [[LSSegmentedView alloc] initWithFrame:CGRectMake(0, 200, [UIScreen mainScreen].bounds.size.width, 60) andTitleArray:@[@"123456", @"456789", @"789132", @"147852", @"45678978789789787878787",@"123456", @"456789", @"789132", @"147852", @"45678978789789787878787",@"123456", @"456789", @"789132", @"147852", @"45678978789789787878787"].copy];
-    [self.view addSubview:view];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"json" ofType:@"txt"];
+    // 将文件数据化
+    NSData *data = [[NSData alloc] initWithContentsOfFile:path];
+    // 对数据进行JSON格式化并返回字典形式
+    NSDictionary *dict = [Function getDicFromResponseObject:data];
+//     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+
+    
+    
+    
+    [JsonTools propertyCodeWithDictionary:dict];
     
 //    self.inputView.ls_placeholder(@"123456789").ls_placeholderColor([UIColor redColor]).ls_maxNumberOfLines(3);
 //
