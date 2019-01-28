@@ -11,7 +11,7 @@
 
 @interface LSGetCurrentLocation : NSObject
 
-@property (nonatomic, copy) void(^getCurrentLocation)(NSString *str, CLPlacemark *placemarks);
+@property (nonatomic, copy) void(^getCurrentLocation)(NSString *str, CLPlacemark *placemark);
 
 /******** 开始定位 ************/
 - (void)startUpdateLocation;

@@ -70,6 +70,9 @@
 		3D2005CA21F9CA970010425C /* LSConstUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2005C921F9CA970010425C /* LSConstUrl.m */; };
 		3D2156DA21F09A54006EDACE /* JsonTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2156D921F09A54006EDACE /* JsonTools.m */; };
 		3D2156DF21F09DC3006EDACE /* json.json in Resources */ = {isa = PBXBuildFile; fileRef = 3D2156DE21F09DC3006EDACE /* json.json */; };
+		3D4579AC21FAEB9B007854E5 /* jcore-ios-1.2.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D4579A721FAEB9A007854E5 /* jcore-ios-1.2.6.a */; };
+		3D4579AD21FAEB9B007854E5 /* jpush-extension-ios-1.1.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D4579A821FAEB9A007854E5 /* jpush-extension-ios-1.1.1.a */; };
+		3D4579AE21FAEB9B007854E5 /* jpush-ios-3.1.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D4579A921FAEB9A007854E5 /* jpush-ios-3.1.2.a */; };
 		3D4E321021F9A4CA00A3F063 /* LSWKWebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4E320E21F9A4C900A3F063 /* LSWKWebViewVC.m */; };
 		4822181B212FDE7B005AE181 /* BaiDuMapTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 4822181A212FDE7A005AE181 /* BaiDuMapTools.m */; };
 		482267EC2154BDD700EE6599 /* PasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 482267E72154BDD600EE6599 /* PasswordView.m */; };
@@ -82,9 +85,6 @@
 		4855232820E63EDB00CB32BF /* star_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 4855232620E63EDB00CB32BF /* star_gray.png */; };
 		4855232920E63EDB00CB32BF /* star_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4855232720E63EDB00CB32BF /* star_yellow.png */; };
 		486443772119CB6200C3B9BF /* AppDelegate+JPush.m in Sources */ = {isa = PBXBuildFile; fileRef = 486443762119CB6200C3B9BF /* AppDelegate+JPush.m */; };
-		4864437E2119CBC400C3B9BF /* jpush-extension-ios-1.1.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 486443792119CBC400C3B9BF /* jpush-extension-ios-1.1.1.a */; };
-		4864437F2119CBC400C3B9BF /* jpush-ios-3.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4864437C2119CBC400C3B9BF /* jpush-ios-3.1.0.a */; };
-		486443802119CBC400C3B9BF /* jcore-ios-1.2.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4864437D2119CBC400C3B9BF /* jcore-ios-1.2.1.a */; };
 		486443832119CC0B00C3B9BF /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486443822119CC0B00C3B9BF /* CFNetwork.framework */; };
 		486443852119CC1300C3B9BF /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486443842119CC1300C3B9BF /* CoreFoundation.framework */; };
 		486443872119CC1C00C3B9BF /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486443862119CC1C00C3B9BF /* CoreTelephony.framework */; };
@@ -339,6 +339,11 @@
 		3D2156D821F09A54006EDACE /* JsonTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JsonTools.h; sourceTree = "<group>"; };
 		3D2156D921F09A54006EDACE /* JsonTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JsonTools.m; sourceTree = "<group>"; };
 		3D2156DE21F09DC3006EDACE /* json.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = json.json; sourceTree = "<group>"; };
+		3D4579A721FAEB9A007854E5 /* jcore-ios-1.2.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-1.2.6.a"; sourceTree = "<group>"; };
+		3D4579A821FAEB9A007854E5 /* jpush-extension-ios-1.1.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-extension-ios-1.1.1.a"; sourceTree = "<group>"; };
+		3D4579A921FAEB9A007854E5 /* jpush-ios-3.1.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-3.1.2.a"; sourceTree = "<group>"; };
+		3D4579AA21FAEB9A007854E5 /* JPushNotificationExtensionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPushNotificationExtensionService.h; sourceTree = "<group>"; };
+		3D4579AB21FAEB9A007854E5 /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
 		3D4E320E21F9A4C900A3F063 /* LSWKWebViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSWKWebViewVC.m; sourceTree = "<group>"; };
 		3D4E320F21F9A4CA00A3F063 /* LSWKWebViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSWKWebViewVC.h; sourceTree = "<group>"; };
 		3D8FAE1321F5E6C600B6F1A2 /* UITextField的代理相关方法.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextField的代理相关方法.h"; sourceTree = "<group>"; };
@@ -363,11 +368,6 @@
 		4855232720E63EDB00CB32BF /* star_yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_yellow.png; sourceTree = "<group>"; };
 		486443752119CB6200C3B9BF /* AppDelegate+JPush.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+JPush.h"; sourceTree = "<group>"; };
 		486443762119CB6200C3B9BF /* AppDelegate+JPush.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+JPush.m"; sourceTree = "<group>"; };
-		486443792119CBC400C3B9BF /* jpush-extension-ios-1.1.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-extension-ios-1.1.1.a"; sourceTree = "<group>"; };
-		4864437A2119CBC400C3B9BF /* JPushNotificationExtensionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPushNotificationExtensionService.h; sourceTree = "<group>"; };
-		4864437B2119CBC400C3B9BF /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
-		4864437C2119CBC400C3B9BF /* jpush-ios-3.1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-3.1.0.a"; sourceTree = "<group>"; };
-		4864437D2119CBC400C3B9BF /* jcore-ios-1.2.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-1.2.1.a"; sourceTree = "<group>"; };
 		486443822119CC0B00C3B9BF /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		486443842119CC1300C3B9BF /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		486443862119CC1C00C3B9BF /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -607,20 +607,20 @@
 			files = (
 				486443932119CC7100C3B9BF /* libresolv.tbd in Frameworks */,
 				486443912119CC6800C3B9BF /* UserNotifications.framework in Frameworks */,
+				3D4579AD21FAEB9B007854E5 /* jpush-extension-ios-1.1.1.a in Frameworks */,
 				4864438F2119CC5C00C3B9BF /* AdSupport.framework in Frameworks */,
 				AE24FCE21DAB41FB00740806 /* libz.tbd in Frameworks */,
 				4864438D2119CC4D00C3B9BF /* Security.framework in Frameworks */,
 				AE24FCE41DAB420500740806 /* UIKit.framework in Frameworks */,
 				4864438B2119CC4000C3B9BF /* Foundation.framework in Frameworks */,
 				AE24FCE01DAB41F300740806 /* CoreGraphics.framework in Frameworks */,
+				3D4579AE21FAEB9B007854E5 /* jpush-ios-3.1.2.a in Frameworks */,
 				486443892119CC2400C3B9BF /* SystemConfiguration.framework in Frameworks */,
 				486443872119CC1C00C3B9BF /* CoreTelephony.framework in Frameworks */,
 				486443852119CC1300C3B9BF /* CoreFoundation.framework in Frameworks */,
 				486443832119CC0B00C3B9BF /* CFNetwork.framework in Frameworks */,
-				486443802119CBC400C3B9BF /* jcore-ios-1.2.1.a in Frameworks */,
-				4864437E2119CBC400C3B9BF /* jpush-extension-ios-1.1.1.a in Frameworks */,
-				4864437F2119CBC400C3B9BF /* jpush-ios-3.1.0.a in Frameworks */,
 				AE24FCDE1DAB41E100740806 /* CoreMedia.framework in Frameworks */,
+				3D4579AC21FAEB9B007854E5 /* jcore-ios-1.2.6.a in Frameworks */,
 				AE24FCDC1DAB41D500740806 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -913,6 +913,18 @@
 			path = LSConst;
 			sourceTree = "<group>";
 		};
+		3D4579A621FAEB9A007854E5 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				3D4579A721FAEB9A007854E5 /* jcore-ios-1.2.6.a */,
+				3D4579A821FAEB9A007854E5 /* jpush-extension-ios-1.1.1.a */,
+				3D4579A921FAEB9A007854E5 /* jpush-ios-3.1.2.a */,
+				3D4579AA21FAEB9A007854E5 /* JPushNotificationExtensionService.h */,
+				3D4579AB21FAEB9A007854E5 /* JPUSHService.h */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
 		3DD8BDB521EC6B3F00075823 /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -948,18 +960,6 @@
 				4855232720E63EDB00CB32BF /* star_yellow.png */,
 			);
 			path = HYBStarEvaluationView;
-			sourceTree = "<group>";
-		};
-		486443782119CBC400C3B9BF /* Lib */ = {
-			isa = PBXGroup;
-			children = (
-				486443792119CBC400C3B9BF /* jpush-extension-ios-1.1.1.a */,
-				4864437A2119CBC400C3B9BF /* JPushNotificationExtensionService.h */,
-				4864437B2119CBC400C3B9BF /* JPUSHService.h */,
-				4864437C2119CBC400C3B9BF /* jpush-ios-3.1.0.a */,
-				4864437D2119CBC400C3B9BF /* jcore-ios-1.2.1.a */,
-			);
-			path = Lib;
 			sourceTree = "<group>";
 		};
 		486443812119CC0B00C3B9BF /* Frameworks */ = {
@@ -1374,7 +1374,7 @@
 		AEB4D38C1DAA0A300078A52D /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
-				486443782119CBC400C3B9BF /* Lib */,
+				3D4579A621FAEB9A007854E5 /* Lib */,
 				08F658611FF3D2A5007880CC /* MJRefresh */,
 				08F658571FF3D270007880CC /* Category */,
 				08197C681FE3564C00478FC4 /* RealReachability */,
@@ -1728,6 +1728,14 @@
 					AECFA23C1D376C5F005F5DE6 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 6P6LBHJEZF;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Maps.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 					AECFA2551D376C5F005F5DE6 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -2111,7 +2119,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LSProjectTool/PrefixHeader.pch";
 				INFOPLIST_FILE = LSProjectTool/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2140,7 +2148,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LSProjectTool/PrefixHeader.pch";
 				INFOPLIST_FILE = LSProjectTool/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

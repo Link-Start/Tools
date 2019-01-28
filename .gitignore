@@ -1,0 +1,41 @@
+
+# git 忽略文件
+
+# Xcode
+#
+# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+# Mac OS X Finder and whatnot
+.DS_Store
+
+## Build generated  Build生成
+build/
+DerivedData/
+
+## Various settings 各种设置
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+
+## Other
+*.moved-aside
+*.xcuserstate
+*.xccheckout
+
+## Obj-C/Swift specific
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+#CocoaPods
+Pods
+#Podfile 依赖库的配置信息
+!Podfile 
+#因为CocoaPods支持语义化版本号，所以需要Podfile.lock文件记住当前使用的版本
+!Podfile.lock 

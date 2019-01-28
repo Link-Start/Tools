@@ -426,6 +426,9 @@
         case -1011:
             [MBProgressHUD qucickTip:@"请求头格式错误"];
             break;
+        case -3840:
+            [MBProgressHUD qucickTip:@"JSON数据格式错误"];
+            break;
         default:
             [MBProgressHUD qucickTip:[NSString stringWithFormat:@"%ld数据请求错误", (long)error.code]];
             break;

@@ -93,7 +93,7 @@
             
              if (self.getCurrentLocation) {
                  
-//                 self.getCurrentLocation(street, [placemarks firstObject]);
+                 self.getCurrentLocation(street, placemark);
             }
         } else {
             NSLog(@"定位解析出错");

@@ -7,6 +7,7 @@
 //
 
 #import "JsonTools.h"
+#import "DefineNSLog.h"
 
 @implementation JsonTools
 
@@ -50,6 +51,7 @@
 
 +(void)propertyCodeWithDictionary:(NSDictionary *)dict
 {
+    NSMutableString *strMs = [NSMutableString string];
     NSMutableString *strM              = [NSMutableString string];
     NSMutableString *descriptionHeader = [NSMutableString stringWithFormat:@"[NSString stringWithFormat:%@\"",@"@"];
     NSMutableString *descriptionEnd    = [NSMutableString string];
@@ -59,6 +61,7 @@
                                               id  _Nonnull obj,
                                               BOOL * _Nonnull stop) {
         //        NSLog(@"类型%@\n",[obj class]);
+        
         NSString *str;
         NSString *Header;
         index ++;
@@ -67,16 +70,22 @@
             Header = [NSString stringWithFormat:@"%@:%@,\\n",key,@"%@"];
         }
         if ([NSStringFromClass([obj class]) containsString:@"Number"]) {
-            str = [NSString stringWithFormat:@"@property (nonatomic, assign) int %@;",key];
+            str = [NSString stringWithFormat:@"@property (nonatomic, assign) NSInteger %@;",key];
             Header = [NSString stringWithFormat:@"%@:%@,\\n",key,@"%@"];
         }
         if ([NSStringFromClass([obj class]) containsString:@"Array"]) {
             str = [NSString stringWithFormat:@"@property (nonatomic, copy) NSArray *%@;",key];
             Header = [NSString stringWithFormat:@"%@:%@,\\n",key,@"%@"];
+            
+            for (NSDictionary *dic in obj) {
+                [self propertyCodeWithDictionary:dic];
+            }
         }
         if ([NSStringFromClass([obj class]) containsString:@"Dictionary"]) {
             str = [NSString stringWithFormat:@"@property (nonatomic, copy) NSDictionary *%@;",key];
             Header = [NSString stringWithFormat:@"%@:%@,\\n",key,@"%@"];
+            
+            [self propertyCodeWithDictionary:obj];
         }
         if ([NSStringFromClass([obj class]) containsString:@"Boolean"]) {
             str = [NSString stringWithFormat:@"@property (nonatomic, assign) BOOL %@;",key];
@@ -89,13 +98,19 @@
         [descriptionEnd appendFormat:@"_%@,",key];
         [descriptionHeader appendFormat:@"%@",Header];
         [strM appendFormat:@"\n%@",str];
+        
+//        NSLog(@"\n%@\n", str);
+
+        [strMs appendFormat:@"\n%@\n",str];
     }];
-    if (count == index && count > 0) {
-        [descriptionHeader replaceCharactersInRange:NSMakeRange(descriptionHeader.length - 3, 3) withString:@"\","];
-        [descriptionEnd replaceCharactersInRange:NSMakeRange(descriptionEnd.length - 1, 1) withString:@"];"];
-    }
-    NSLog(@"\n\n*******模型所有属性，自己要改下(默认空的数据为字符串)*******%@",strM);
-    NSLog(@"\n\n***************重写模型的描述粘贴复制这句***************\nreture %@%@",descriptionHeader,descriptionEnd);
+    
+    NSLog(@"\n\n\n=======自动生成属性声明的代码=======\n\n\n%@",strM);
+//    if (count == index && count > 0) {
+//        [descriptionHeader replaceCharactersInRange:NSMakeRange(descriptionHeader.length - 3, 3) withString:@"\","];
+//        [descriptionEnd replaceCharactersInRange:NSMakeRange(descriptionEnd.length - 1, 1) withString:@"];"];
+//    }
+//    NSLog(@"\n\n*******模型所有属性，自己要改下(默认空的数据为字符串)*******%@",strM);
+//    NSLog(@"\n\n***************重写模型的描述粘贴复制这句***************\nreture %@%@",descriptionHeader,descriptionEnd);
     
 }
 
