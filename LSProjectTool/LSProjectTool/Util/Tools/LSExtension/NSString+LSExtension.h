@@ -26,6 +26,7 @@
  */
 - (NSString *)ls_firstCharLower;
 
+///纯数字
 - (BOOL)ls_isPureInt;
 
 - (NSURL *)ls_url;

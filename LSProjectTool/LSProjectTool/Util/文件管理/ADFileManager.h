@@ -54,13 +54,11 @@
 #pragma mark - 获取文件属性
 //根据key获取文件某个属性
 + (id)attributeOfItemAtPath:(NSString *)path forKey:(NSString *)key;
-
 //根据key获取文件某个属性(错误信息error)
 + (id)attributeOfItemAtPath:(NSString *)path forKey:(NSString *)key error:(NSError **)error;
 
 //获取文件属性集合
 + (NSDictionary *)attributesOfItemAtPath:(NSString *)path;
-
 //获取文件属性集合(错误信息error)
 + (NSDictionary *)attributesOfItemAtPath:(NSString *)path error:(NSError **)error;
 

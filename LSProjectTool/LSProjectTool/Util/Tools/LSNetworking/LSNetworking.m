@@ -9,15 +9,18 @@
 
 
 #import "LSNetworking.h"
-#import "AFNetworkActivityIndicatorManager.h"
+
 #import "Tools.h"
 
 //判断文件是否存在，再导入使用
 #if __has_include(<AFNetworking/AFNetworking.h>)
 #import <AFNetworking/AFNetworking.h>
+#import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 #else
 #import "AFNetworking.h"
+#import "AFNetworkActivityIndicatorManager.h"
 #endif
+
 
 ///装有任务的数组
 static NSMutableArray *ls_requestTasks;

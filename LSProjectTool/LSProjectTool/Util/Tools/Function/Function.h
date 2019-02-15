@@ -75,6 +75,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (NSString *)stringiPhoneDeviceVersion;
 
+#pragma mark 检验银行卡
++ (BOOL)checkCardNo:(NSString *)cardNo;
+#pragma mark - 根据银行卡号判断银行名称
++ (NSString *)getBankName:(NSString *)cardId;
+
 //*********************************************************
 #pragma mark - 解析网络上的数据
 /// 解析网络上的数据

@@ -70,9 +70,9 @@
 #define kLS_AppInfoDictionary  [[NSBundle mainBundle] infoDictionary]
 ///APP名称
 #define kLS_App_name      [kLS_AppInfoDictionary objectForKey:@"CFBundleDisplayName"]
-///APP版本
+///APP版本  Version版本
 #define kLS_App_version   [kLS_AppInfoDictionary objectForKey:@"CFBundleShortVersionString"]
-///app build版本
+///app      build版本
 #define kLA_App_bulidVersion  [infoDictionary objectForKey:@"CFBundleVersion"]
 
 

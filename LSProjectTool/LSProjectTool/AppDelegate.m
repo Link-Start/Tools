@@ -9,6 +9,15 @@
 
 #import "AppDelegate.h"
 #import "RealReachability.h"
+#import <AMapFoundationKit/AMapFoundationKit.h>
+#import <AMapLocationKit/AMapLocationKit.h>
+#import "AppDelegate+configuration.h"
+
+
+#import "ViewController.h"
+#import "LSNavigationController.h"
+#import "LSConstAppKey.h"
+
 @interface AppDelegate ()
 
 @end
@@ -20,9 +29,22 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+//    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+//    self.window.backgroundColor = [UIColor whiteColor];
+//    ViewController *vc = [[ViewController alloc] init];
+//    LSNavigationController *nav = [[LSNavigationController alloc] initWithRootViewController:vc];
+//    self.window.rootViewController = nav;
+//    [self.window makeKeyAndVisible];
+    
+    /****************** 基本设置 ******************/
+    [self initBasicConfiguration];//配置
+    
+    /****************** 网络检测 ******************/
     [GLobalRealReachability startNotifier];
     
-   
+    /****************** 高德地图 ******************/
+    [AMapServices sharedServices].apiKey = GaoDeMaps_appKey;
+    
     
     return YES;
 }

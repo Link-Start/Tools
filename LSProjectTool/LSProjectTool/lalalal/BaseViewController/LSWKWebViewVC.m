@@ -196,7 +196,13 @@
 }
 
 - (void)dealloc {
-    [self.wkWebView removeObserver:self forKeyPath:@"estimatedProgress"];
+    
+    //KVO没有添加监听的情况下移除观察者导致崩溃
+    @try {
+        [self.wkWebView removeObserver:self forKeyPath:@"estimatedProgress"];
+    }
+    @catch (NSException *exception) {
+    }
 }
 
 /*

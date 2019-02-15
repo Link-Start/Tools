@@ -72,6 +72,8 @@
     hud.mode = MBProgressHUDModeText;
     ////设置需要显示的文字信息
     hud.label.text = message;
+//    hud.detailsLabel.text = message;
+//    hud.detailsLabel.font = [UIFont systemFontOfSize:16];
     //关闭用户交互
     hud.userInteractionEnabled = NO;
     //1.4秒后消失

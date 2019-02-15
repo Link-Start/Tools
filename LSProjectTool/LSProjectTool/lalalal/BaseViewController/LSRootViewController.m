@@ -153,6 +153,12 @@
     }];
 }
 
+///判断当前UIViewController 是否正在显示。
+- (BOOL)isVisible {
+    return (self.isViewLoaded && self.view.window);
+}
+
+
 ///系统侧滑返回按钮
 - (void)willMoveToParentViewController:(UIViewController*)parent{
     [super willMoveToParentViewController:parent];
@@ -219,6 +225,15 @@
     //移除通知
     NSLog(@"控制器被dealloc: %@", [[self class] description]);
     NSLog(@"%s", __func__);
+    
+    
+    //KVO没有添加监听的情况下移除观察者导致崩溃
+//    @try {
+//        [self.wkWebView removeObserver:self forKeyPath:@"estimatedProgress"];
+//
+//    }
+//    @catch (NSException *exception) {
+//    }
 }
 
 

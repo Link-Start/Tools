@@ -123,9 +123,15 @@
 - (BOOL)isShowOnWindow;
 ///主控制器 - 响应者
 - (UIViewController *)parentController;
+// 判断View是否显示在屏幕上
+- (BOOL)isDisplayedInScreen;
 /// 第一响应者
 - (UIView *)firstResponder;
 ///获取一个view所属的控制器
 - (UIViewController *)belongViewController;
+
+
+///移除所有的子视图
+- (void)removeAllSubViews;
 
 @end

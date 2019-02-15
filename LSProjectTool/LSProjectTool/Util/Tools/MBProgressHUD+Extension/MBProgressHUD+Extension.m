@@ -77,7 +77,6 @@
     hud.label.numberOfLines = 2;
     hud.contentColor = [UIColor whiteColor];
     hud.label.font = [UIFont systemFontOfSize:12];
-    
     //最小size
     hud.minSize = CGSizeMake(134, 40);
     //切角
@@ -111,7 +110,8 @@
     //动画
     hud.animationType = MBProgressHUDAnimationZoomOut;
     //设置需要显示的细节文字信息
-    hud.detailsLabelText = message;
+    hud.detailsLabel.text = message;
+    hud.detailsLabel.font = [UIFont systemFontOfSize:16];
     // 隐藏时候从父控件中移除
     hud.removeFromSuperViewOnHide = YES;
     //1.2秒后消失

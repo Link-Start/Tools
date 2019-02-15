@@ -23,4 +23,7 @@
 ///返回指定控制器
 - (void)backOutToVC:(UIViewController *)VC;
 
+///判断当前UIViewController 是否正在显示。
+- (BOOL)isVisible;
+
 @end

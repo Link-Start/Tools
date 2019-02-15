@@ -58,6 +58,9 @@ UIKIT_EXTERN NSString *const Baidu_appKey;
 ///百度地图_appKey
 UIKIT_EXTERN NSString *const BaiduMaps_appKey;
 
+///高度地图_appKey
+UIKIT_EXTERN NSString *const GaoDeMaps_appKey;
+
 ///环信_appKey
 UIKIT_EXTERN NSString *const HuanXin_appKey;
 

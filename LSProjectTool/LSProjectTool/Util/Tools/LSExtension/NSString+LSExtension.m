@@ -64,6 +64,7 @@
     return string;
 }
 
+///纯数字
 - (BOOL)ls_isPureInt {
     NSScanner *scan = [NSScanner scannerWithString:self];
     int val;

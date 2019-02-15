@@ -40,7 +40,7 @@
     // 设置代理
     self.locationManager.delegate = self;
     // 设置定位精确
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
     //取得定位权限
     [self.locationManager requestWhenInUseAuthorization];
     // 开始定位

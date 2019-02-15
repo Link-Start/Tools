@@ -30,16 +30,22 @@
     第三个参数 ' ~ ' 路径是否展开
     ' ~ ' 路径是详细路径前半段直接隐藏用' ~ '显示
  
+ @ NSDocumentDirectory 指程序中对应的Documents文件夹路径
+ @ NSUserDomainMask    用户主目录中(说明是在当前应用沙盒中获取,所有应用沙盒目录组成一个数组结构的数据存放)
+ @ YES                 展开成完整路径
  */
-//沙盒的主目录路径
+
+///获取应用的根目录(获取沙盒路径),也就是Documents的上级目录,当然也是tmp目录的上级目录:NSHomeDirectory()
 + (NSString *)homeDir {
     return NSHomeDirectory();
 }
 
+///获取Documents文件夹目录
 + (NSString *)documentsDir {
     return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
 }
 
+///获取Library目录
 + (NSString *)libraryDir {
     return [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) lastObject];
 }
@@ -652,7 +658,7 @@
     return ((error == nil) || ((*error) == nil));
 }
 
-//转换大小格式
+//转换大小格式(传进来的值 bytes为单位 )
 + (NSString *)sizeFormatted:(NSNumber *)size {
     
     double convertedValue = [size doubleValue];

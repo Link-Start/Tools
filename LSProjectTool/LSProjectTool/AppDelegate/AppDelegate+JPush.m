@@ -76,8 +76,68 @@
             NSLog(@"极光推送 registrationID获取失败，code：%d",resCode);
         }
     }];
+ 
+#pragma mark - 获取自定义消息推送内容
+    /************** 极光推送自定义消息 *****************/
+    //https://docs.jiguang.cn/jpush/client/iOS/ios_api/#_67
+    //获取 iOS 的推送内容需要在 delegate 类中注册通知并实现回调方法。
+    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+    [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];
 }
 
+#pragma mark - 获取自定义消息推送内容
+///只有在前端运行的时候才能收到自定义消息的推送。
+//自定义的推送消息 设置为本地推送
+//实现回调方法 networkDidReceiveMessage
+- (void)networkDidReceiveMessage:(NSNotification *)notification {
+    
+    NSDictionary * userInfo = [notification userInfo];
+    NSLog(@"极光推送 自定义消息:%@", userInfo);
+    NSString *contents = [userInfo valueForKey:@"content"];//获取推送的内容
+    NSString *messageID = [userInfo valueForKey:@"_j_msgid"];//获取推送的 messageID（key 为 @"_j_msgid"）
+    NSDictionary *extras = [userInfo valueForKey:@"extras"];//获取用户自定义参数
+    NSString *customizeField1 = [extras valueForKey:@"customizeField1"]; //服务端传递的 Extras 附加字段，key 是自己定义的
+    
+    JPushNotificationContent *content = [[JPushNotificationContent alloc] init];
+    content.title = @"Test Notifications";// 推送标题
+    content.subtitle = @"2016";           // 推送副标题
+    content.body = @"This is a test code";// 推送内容
+    content.badge = @1;                   // 角标的数字。如果不需要改变角标传@(-1)
+    content.categoryIdentifier = @"Custom Category Name"; // 行为分类标识
+    content.userInfo = userInfo;//设置为本地推送后，点击消息根据内容做不同操作
+    
+    // 5s 后提醒 iOS 10 以上支持
+    JPushNotificationTrigger *trigger1 = [[JPushNotificationTrigger alloc] init];
+    trigger1.timeInterval = 5;
+    
+    
+    //[JPushNotificationRequest] 实体类型，可传入推送的属性
+    JPushNotificationRequest *request = [[JPushNotificationRequest alloc] init];
+    //request 中传入已有推送的 request.requestIdentifier 即更新已有的推送，否则为注册新推送。
+    request.requestIdentifier = @"sampleRequest";//这个 推送请求标识 要添加，否则自定义消息转本地通知时通知栏不显示
+    request.content = content;
+    request.trigger = trigger1;//trigger2;//trigger3;//trigger4;//trigger5;
+    request.completionHandler = ^(id result) {
+        NSLog(@"结果返回：%@", result);
+    };
+    [JPUSHService addNotification:request];//API 用于注册或更新推送
+}
+//用于移除待推送或已在通知中心显示的推送
+- (void)testRemoveNotification {
+    JPushNotificationIdentifier *identifier = [[JPushNotificationIdentifier alloc] init];
+    identifier.identifiers = @[@"sampleRequest"];
+    identifier.delivered = YES;  //iOS 10 以上有效，等于 YES 则在通知中心显示的里面移除，等于 NO 则为在待推送的里面移除；iOS 10 以下无效
+    [JPUSHService removeNotification:identifier];
+}
+//用于移除待推送或已在通知中心显示的推送
+- (void)testRemoveAllNotification {
+    [JPUSHService removeNotification:nil];  // iOS 10 以下移除所有推送；iOS 10 以上移除所有在通知中心显示推送和待推送请求
+    //  //iOS 10 以上支持
+    //  JPushNotificationIdentifier *identifier = [[JPushNotificationIdentifier alloc] init];
+    //  identifier.identifiers = nil;
+    //  identifier.delivered = YES;  //等于 YES 则移除所有在通知中心显示的，等于 NO 则为移除所有待推送的
+    //  [JPUSHService removeNotification:identifier];
+}
 
 /************************* 极光推送 *************************/
 //1. 注册APNs成功并上报DeviceToken 请在AppDelegate.m实现该回调方法并添加回调方法中的代码
@@ -200,11 +260,13 @@
     if (@available(iOS 10.0, *)) {
         if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
             [JPUSHService handleRemoteNotification:userInfo];
-            NSLog(@"iOS10 前台收到远程通知:%@", [self logDic:userInfo]);
+            NSLog(@"iOS10__应用在前台__收到远程通知:%@", [self logDic:userInfo]);
         } else {
-            // 判断为本地通知
+            // 判断为本地通知,(自定义消息 设置为本地消息推送在这里设置)
             
-            NSLog(@"iOS10 前台收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
+            NSLog(@"iOS10__应用在前台__收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
+            
+            
         }
     } else {
         // Fallback on earlier versions
@@ -212,7 +274,7 @@
      completionHandler(UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionSound|UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以设置
 }
 
-// iOS 10 Support
+// iOS 10 Support 在前台点击通知消息后也走didReceiveNotificationResponse方法（即后台收到通知后，点击通知的回调方法）。
 #pragma mark - iOS10 __应用在后台_极光推送信息
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
     // Required
@@ -230,11 +292,14 @@
     if (@available(iOS 10.0, *)) {
         if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
             [JPUSHService handleRemoteNotification:userInfo];
-       NSLog(@"iOS10__应用在后台_极光推送信息 收到远程通知:%@", [self logDic:userInfo]);
+       NSLog(@"iOS10__应用在后台__极光推送信息 收到远程通知:%@", [self logDic:userInfo]);
         } else {
             // 判断为本地通知
             
-            NSLog(@"iOS10 收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
+            NSLog(@"iOS10__应用在后台__收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
+            
+            
+            //自定义的推送消息 设置为本地推送之后 点击事件 可以在这里
         }
     } else {
         // Fallback on earlier versions

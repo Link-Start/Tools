@@ -45,7 +45,7 @@
     
     if (!hud) {
         // 参数kLastWindow仅仅是用到了其CGFrame，并没有将hud添加到上面
-        hud = [[MBProgressHUD alloc] initWithWindow:[UIApplication sharedApplication].keyWindow];
+        hud = [[MBProgressHUD alloc] initWithWindow:[UIApplication sharedApplication].delegate.window];
         hud.labelText = @"加载中...";
         //objc_setAssociatedObject来把一个对象与另外一个对象进行关联。该函数需要四个参数：源对象(关联者)，关键字，关联的对象(被关联者)和一个关联策略。
         //关键字是一个void类型的指针。每一个关联的关键字必须是唯一的。通常都是会采用静态变量来作为关键字
@@ -275,7 +275,8 @@
     //动画
     hud.animationType = MBProgressHUDAnimationZoomOut;
     //设置需要显示的细节文字信息
-    hud.detailsLabelText = message;
+    hud.detailsLabel.text = message;
+    hud.detailsLabel.font = [UIFont systemFontOfSize:16];
     // 隐藏时候从父控件中移除
     hud.removeFromSuperViewOnHide = YES;
     //1.2秒后消失
