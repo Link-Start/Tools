@@ -252,8 +252,13 @@
     hud.mode = MBProgressHUDModeText;
     //设置需要显示的文字信息
     hud.labelText = message;
-    //设置显示的文字大小
     hud.labelFont = [UIFont systemFontOfSize:15];
+    
+    
+    //    hud.detailsLabel.text = message;
+    //    hud.detailsLabel.font = [UIFont systemFontOfSize:16];
+    //设置显示的文字大小
+    
     //1.5秒后消失
     [hud hide:YES afterDelay:1.5];
 }

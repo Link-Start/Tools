@@ -23,8 +23,12 @@
     /****************** 基本设置 ******************/
     //状态栏的字体为白色
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    //在启动之后显示状态栏
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    
     //设置UIView、UIImageView、UILabel。button等 接收手势的互斥性为YES，防止多个响应区域被“同时”点击，“同时”响应
     [[UIButton appearance] setExclusiveTouch:YES];
+    
 
     /****************** 添加图片开屏广告 ******************/
     [self getLaunchImage];

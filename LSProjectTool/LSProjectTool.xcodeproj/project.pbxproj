@@ -24,7 +24,6 @@
 		08197C941FE3564D00478FC4 /* RealReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 08197C861FE3564D00478FC4 /* RealReachability.m */; };
 		082751C11FF1DB42004BB480 /* UIView+ExclusiveTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 082751C01FF1DB42004BB480 /* UIView+ExclusiveTouch.m */; };
 		0852D820204FDEC000B8686F /* SelfSizingCollectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0852D81F204FDEC000B8686F /* SelfSizingCollectCell.m */; };
-		0852D823204FDF9600B8686F /* CeshiVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0852D822204FDF9600B8686F /* CeshiVC.m */; };
 		085978D72023186700CA056F /* LSRootCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 085978D62023186700CA056F /* LSRootCollectionView.m */; };
 		085978DB2023220C00CA056F /* LSNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 085978DA2023220B00CA056F /* LSNavigationController.m */; };
 		085979E92015E09A00E2CF2C /* SYPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 085979E82015E09A00E2CF2C /* SYPasswordView.m */; };
@@ -47,7 +46,6 @@
 		3D2005C721F9C97E0010425C /* LSConstAppKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2005C621F9C97E0010425C /* LSConstAppKey.m */; };
 		3D2005CA21F9CA970010425C /* LSConstUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2005C921F9CA970010425C /* LSConstUrl.m */; };
 		3D2156DA21F09A54006EDACE /* JsonTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2156D921F09A54006EDACE /* JsonTools.m */; };
-		3D2156DF21F09DC3006EDACE /* json.json in Resources */ = {isa = PBXBuildFile; fileRef = 3D2156DE21F09DC3006EDACE /* json.json */; };
 		3D4E321021F9A4CA00A3F063 /* LSWKWebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4E320E21F9A4C900A3F063 /* LSWKWebViewVC.m */; };
 		3D6362E0220155A000E7F890 /* AppDelegate+configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D6362DF220155A000E7F890 /* AppDelegate+configuration.m */; };
 		3D6362E22201590C00E7F890 /* 启动图.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D6362E12201590C00E7F890 /* 启动图.png */; };
@@ -204,8 +202,6 @@
 		082752061FF2821E004BB480 /* DefineColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefineColor.h; sourceTree = "<group>"; };
 		0852D81E204FDEC000B8686F /* SelfSizingCollectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelfSizingCollectCell.h; sourceTree = "<group>"; };
 		0852D81F204FDEC000B8686F /* SelfSizingCollectCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelfSizingCollectCell.m; sourceTree = "<group>"; };
-		0852D821204FDF9600B8686F /* CeshiVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CeshiVC.h; sourceTree = "<group>"; };
-		0852D822204FDF9600B8686F /* CeshiVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CeshiVC.m; sourceTree = "<group>"; };
 		085978D52023186700CA056F /* LSRootCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSRootCollectionView.h; sourceTree = "<group>"; };
 		085978D62023186700CA056F /* LSRootCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSRootCollectionView.m; sourceTree = "<group>"; };
 		085978D92023220B00CA056F /* LSNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSNavigationController.h; sourceTree = "<group>"; };
@@ -253,7 +249,6 @@
 		3D2005C921F9CA970010425C /* LSConstUrl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSConstUrl.m; sourceTree = "<group>"; };
 		3D2156D821F09A54006EDACE /* JsonTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JsonTools.h; sourceTree = "<group>"; };
 		3D2156D921F09A54006EDACE /* JsonTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JsonTools.m; sourceTree = "<group>"; };
-		3D2156DE21F09DC3006EDACE /* json.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = json.json; sourceTree = "<group>"; };
 		3D4E320E21F9A4C900A3F063 /* LSWKWebViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSWKWebViewVC.m; sourceTree = "<group>"; };
 		3D4E320F21F9A4CA00A3F063 /* LSWKWebViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSWKWebViewVC.h; sourceTree = "<group>"; };
 		3D6362DE220155A000E7F890 /* AppDelegate+configuration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+configuration.h"; sourceTree = "<group>"; };
@@ -1279,10 +1274,7 @@
 				AECFA2471D376C5F005F5DE6 /* ViewController.m */,
 				0852D81E204FDEC000B8686F /* SelfSizingCollectCell.h */,
 				0852D81F204FDEC000B8686F /* SelfSizingCollectCell.m */,
-				0852D821204FDF9600B8686F /* CeshiVC.h */,
-				0852D822204FDF9600B8686F /* CeshiVC.m */,
 				AE0C7D9B1E0BBE750051269F /* link.html */,
-				3D2156DE21F09DC3006EDACE /* json.json */,
 				AE0C7D9D1E0BC2A50051269F /* link.js */,
 				48F64E9120E20592009BA3A1 /* UI控件 */,
 				08D71C5C200CE6BD00AB060F /* 添加照片 */,
@@ -1458,7 +1450,6 @@
 				3DB5DC062216E77500069E5F /* 银行卡有重复.text in Resources */,
 				3D6362E22201590C00E7F890 /* 启动图.png in Resources */,
 				3DB5DC072216E77500069E5F /* 银行卡号名称.xml in Resources */,
-				3D2156DF21F09DC3006EDACE /* json.json in Resources */,
 				AECFA24D1D376C5F005F5DE6 /* Assets.xcassets in Resources */,
 				AECFA24B1D376C5F005F5DE6 /* Main.storyboard in Resources */,
 				AEB4D37F1DAA09EA0078A52D /* Information in Resources */,
@@ -1671,7 +1662,6 @@
 				08F658601FF3D270007880CC /* UIViewController+AlertViewAndActionSheet.m in Sources */,
 				08197C881FE3564D00478FC4 /* FSMEngine.m in Sources */,
 				3D6362E0220155A000E7F890 /* AppDelegate+configuration.m in Sources */,
-				0852D823204FDF9600B8686F /* CeshiVC.m in Sources */,
 				085978DB2023220C00CA056F /* LSNavigationController.m in Sources */,
 				AEB4D3631DAA09EA0078A52D /* LSDatePickerTableView.m in Sources */,
 				AE42E16F1DB50D7E003E3B81 /* MyView.m in Sources */,

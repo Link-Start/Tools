@@ -77,6 +77,7 @@
         }
     }];
  
+    
 #pragma mark - 获取自定义消息推送内容
     /************** 极光推送自定义消息 *****************/
     //https://docs.jiguang.cn/jpush/client/iOS/ios_api/#_67

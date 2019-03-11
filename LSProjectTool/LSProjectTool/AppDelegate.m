@@ -39,6 +39,9 @@
     /****************** 基本设置 ******************/
     [self initBasicConfiguration];//配置
     
+    //    //点击背景收回键盘
+    //    [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
+    
     /****************** 网络检测 ******************/
     [GLobalRealReachability startNotifier];
     

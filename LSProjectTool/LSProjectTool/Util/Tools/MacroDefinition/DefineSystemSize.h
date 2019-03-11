@@ -85,8 +85,8 @@ iPhoneXR           6.1英       896*414        @2x       828x1792
 #define kLS_relative_Width(x)      (ceilf((x) * kLS_relative_Width_Ratio))
 #define kLS_relative_Height(y)     (ceilf((y) * kLS_relative_Height_Ratio))
 // 字体适配
-#define ALS_relative_FontSize(fontsize) [UIFont systemFontOfSize:kLS_relative_Width_Ratio(fontsize)]
-
+#define ALS_relative_systemFontSize(fontsize) [UIFont systemFontOfSize:kLS_relative_Width_Ratio(fontsize)]
+#define kLS_relative_FontSize(fontName,fontsize) [UIFont fontWithName:fontName size:kLS_relative_Width_Ratio(fontsize)]
 
 /****************************** 适配ios11 *************************************/
 //如果不需要系统为你设置边缘距离

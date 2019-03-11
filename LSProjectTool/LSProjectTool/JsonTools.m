@@ -12,42 +12,8 @@
 @implementation JsonTools
 
 /*
- https://github.com/MISSAJJ
  自动生成属性声明的代码
  */
-
-+ (void)MApropertyModelWithDictionary:(NSDictionary *)dict
-{
-    
-    NSMutableString *strM = [NSMutableString string];
-    
-    [dict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-        
-        NSString *str;
-        
-        NSLog(@"%@",[obj class]);
-        
-        if ([NSStringFromClass([obj class]) containsString:@"String"]) {
-            str = [NSString stringWithFormat:@"/** ====属性备注===== */\n@property (nonatomic, copy) NSString *%@;",key];
-        }
-        if ([NSStringFromClass([obj class]) containsString:@"Number"]) {
-            str = [NSString stringWithFormat:@"@/** ====属性备注===== */\nproperty (nonatomic, assign) int %@;",key];
-        }
-        if ([NSStringFromClass([obj class]) containsString:@"Array"]) {
-            str = [NSString stringWithFormat:@"/** ====属性备注===== */\n@property (nonatomic, strong) NSArray *%@;",key];
-        }
-        if ([NSStringFromClass([obj class]) containsString:@"Dictionary"]) {
-            str = [NSString stringWithFormat:@"/** ====属性备注===== */\n@property (nonatomic, strong) NSDictionary *%@;",key];
-        }
-        if ([NSStringFromClass([obj class]) containsString:@"Boolean"]) {
-            str = [NSString stringWithFormat:@"/** ====属性备注===== */\n@property (nonatomic, assign) BOOL %@;",key];
-        }
-        
-        [strM appendFormat:@"\n%@\n",str];
-    }];
-    
-    NSLog(@"\n\n\n=======自动生成属性声明的代码=======\n\n\n%@",strM);
-}
 
 +(void)propertyCodeWithDictionary:(NSDictionary *)dict
 {
