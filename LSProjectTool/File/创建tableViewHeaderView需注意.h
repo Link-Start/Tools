@@ -24,17 +24,17 @@ BBSTableHeaderView * cell = [BBSTableHeaderView tableHeaderView];
 cell = 291;
 self.tableView.tableHeaderView = header;
 按理来说这样设置肯定是没有问题的 但是这时候你设置的高度是不准确的 而且是没有办法适配机型的
-所以这样的设置发放不可行
+所以这样的设置方法不可行
 
 - 解决方案
 
-UIView * header = [[UIView alloc]init];
-header.backgroundColor = [UIColor whiteColor];
-BBSTableHeaderView * cell = [BBSTableHeaderView tableHeaderView];
-cell.backgroundColor = [UIColor clearColor];
-[header addSubview:cell];
-header.height = 291;
-self.tableView.tableHeaderView = header;
+UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kLS_ScreenWidth, kLS_relative_Height(195))];
+headerView.backgroundColor = [UIColor whiteColor];
+self.tabHeadView.backgroundColor = [UIColor clearColor];
+[headerView addSubview:self.tabHeadView];
+self.tableView.tableHeaderView = headerView;
+
+
 原理 就是在xib View下面在加一层View (代码创建的) 这样才能保证你设置的高度是准确的 因为Xib高度 准确 必须再加一层代码创建的view才能保证你的View的高度是准确的 而且是适配各种机型的
 
 

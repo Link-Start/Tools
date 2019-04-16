@@ -17,6 +17,18 @@
 
 @implementation AppDelegate (configuration)
 
+#pragma mark ————— 初始化window —————
+-(void)initWindow{
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+
+    if (@available(iOS 11.0, *)){
+        [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
+    }
+}
+
+
 ///初始化 配置
 - (void)initBasicConfiguration {
     

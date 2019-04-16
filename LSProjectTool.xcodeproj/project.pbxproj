@@ -1392,7 +1392,7 @@
 				TargetAttributes = {
 					AECFA23C1D376C5F005F5DE6 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 6P6LBHJEZF;
+						DevelopmentTeam = MFR4ADTS2Y;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1851,7 +1851,7 @@
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 6P6LBHJEZF;
+				DEVELOPMENT_TEAM = MFR4ADTS2Y;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LSProjectTool/PrefixHeader.pch";
 				INFOPLIST_FILE = LSProjectTool/Info.plist;
@@ -1863,7 +1863,7 @@
 					"$(PROJECT_DIR)/LSProjectTool/Vendors/Lib",
 					"$(SRCROOT)/Vendors/Lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mycard.LSProjectTool;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tianduo.test001;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "LSProjectTool/获取设备型号/LSProjectTool-Bridging-Header.h";
@@ -1881,7 +1881,7 @@
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 6P6LBHJEZF;
+				DEVELOPMENT_TEAM = MFR4ADTS2Y;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LSProjectTool/PrefixHeader.pch";
 				INFOPLIST_FILE = LSProjectTool/Info.plist;
@@ -1893,7 +1893,7 @@
 					"$(PROJECT_DIR)/LSProjectTool/Vendors/Lib",
 					"$(SRCROOT)/Vendors/Lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mycard.LSProjectTool;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tianduo.test001;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "LSProjectTool/获取设备型号/LSProjectTool-Bridging-Header.h";

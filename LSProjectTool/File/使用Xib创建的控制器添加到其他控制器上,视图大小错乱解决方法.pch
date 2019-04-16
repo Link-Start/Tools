@@ -30,6 +30,19 @@
 
 
 
+1、initWithFrame只适用纯代码创建时调用，不涉及xib或storyboard。
+
+
+
+2、initWithCoder、awakeFromNib是从xib、storyboard中创建时会调用。
+
+调用 ，顺序是：initWithCoder  -> awakeFromNib （
+- 可以这么来理解：
+一开始经过initWithCoder创建出来的控件是死的，然后通过awakeFromNib来唤醒，所以这会有一个先后的调用顺序。
+
+
+
+3、所以一般来说，为了安全起见，初始化控件的代码我们写在一个方法里面（类似我上面的initViews方法），然后我们分别在initWithFrame和initWithCoder中都调用一下，这样就保证了无论你是通过什么方式创建的控件，代码都能起到作用。
 
 
 
