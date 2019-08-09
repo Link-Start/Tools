@@ -45,6 +45,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="btnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lnj-H7-aBY"/>
+                                    <action selector="dismiss:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iWM-Ne-Ahj"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="456465465" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sYA-dj-nhU">

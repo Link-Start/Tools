@@ -47,6 +47,7 @@
 		3D2005CA21F9CA970010425C /* LSConstUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2005C921F9CA970010425C /* LSConstUrl.m */; };
 		3D2156DA21F09A54006EDACE /* JsonTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2156D921F09A54006EDACE /* JsonTools.m */; };
 		3D4E321021F9A4CA00A3F063 /* LSWKWebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4E320E21F9A4C900A3F063 /* LSWKWebViewVC.m */; };
+		3D5550D2228D730F00B8FAE7 /* UINavigationController+Smooth.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5550D1228D730F00B8FAE7 /* UINavigationController+Smooth.m */; };
 		3D6362E0220155A000E7F890 /* AppDelegate+configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D6362DF220155A000E7F890 /* AppDelegate+configuration.m */; };
 		3D6362E22201590C00E7F890 /* 启动图.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D6362E12201590C00E7F890 /* 启动图.png */; };
 		3DB5DC052216E77500069E5F /* 银行卡号和名称.json in Resources */ = {isa = PBXBuildFile; fileRef = 3DB5DC012216E77400069E5F /* 银行卡号和名称.json */; };
@@ -251,10 +252,13 @@
 		3D2156D921F09A54006EDACE /* JsonTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JsonTools.m; sourceTree = "<group>"; };
 		3D4E320E21F9A4C900A3F063 /* LSWKWebViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSWKWebViewVC.m; sourceTree = "<group>"; };
 		3D4E320F21F9A4CA00A3F063 /* LSWKWebViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSWKWebViewVC.h; sourceTree = "<group>"; };
+		3D5550D0228D730F00B8FAE7 /* UINavigationController+Smooth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Smooth.h"; sourceTree = "<group>"; };
+		3D5550D1228D730F00B8FAE7 /* UINavigationController+Smooth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Smooth.m"; sourceTree = "<group>"; };
 		3D6362DE220155A000E7F890 /* AppDelegate+configuration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+configuration.h"; sourceTree = "<group>"; };
 		3D6362DF220155A000E7F890 /* AppDelegate+configuration.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+configuration.m"; sourceTree = "<group>"; };
 		3D6362E12201590C00E7F890 /* 启动图.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动图.png"; sourceTree = "<group>"; };
 		3D8FAE1321F5E6C600B6F1A2 /* UITextField的代理相关方法.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextField的代理相关方法.h"; sourceTree = "<group>"; };
+		3D8FE1EF228E9AF200A9391C /* 仿支付宝金额数字滚动的动画效果.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "仿支付宝金额数字滚动的动画效果.h"; sourceTree = "<group>"; };
 		3DB5DC012216E77400069E5F /* 银行卡号和名称.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "银行卡号和名称.json"; sourceTree = "<group>"; };
 		3DB5DC022216E77400069E5F /* 银行卡有重复.text */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "银行卡有重复.text"; sourceTree = "<group>"; };
 		3DB5DC032216E77400069E5F /* 银行卡号名称.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "银行卡号名称.xml"; sourceTree = "<group>"; };
@@ -661,6 +665,15 @@
 			path = LSConst;
 			sourceTree = "<group>";
 		};
+		3D5550CF228D730200B8FAE7 /* 导航栏的平滑显示和隐藏 */ = {
+			isa = PBXGroup;
+			children = (
+				3D5550D0228D730F00B8FAE7 /* UINavigationController+Smooth.h */,
+				3D5550D1228D730F00B8FAE7 /* UINavigationController+Smooth.m */,
+			);
+			path = "导航栏的平滑显示和隐藏";
+			sourceTree = "<group>";
+		};
 		3D6362E32201591000E7F890 /* source */ = {
 			isa = PBXGroup;
 			children = (
@@ -809,6 +822,7 @@
 				085B44251FE3E8360070DCE9 /* 创建tableViewHeaderView需注意.h */,
 				08BA1FE01FEFCA5D00A19A46 /* 如何实现并发执行多个网络请求，统一处理.h */,
 				3D8FAE1321F5E6C600B6F1A2 /* UITextField的代理相关方法.h */,
+				3D8FE1EF228E9AF200A9391C /* 仿支付宝金额数字滚动的动画效果.h */,
 				3DB5DC012216E77400069E5F /* 银行卡号和名称.json */,
 				3DB5DC042216E77500069E5F /* 银行卡号和名称(字典).html */,
 				3DB5DC032216E77400069E5F /* 银行卡号名称.xml */,
@@ -842,6 +856,7 @@
 		AEB4D2F01DAA09770078A52D /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				3D5550CF228D730200B8FAE7 /* 导航栏的平滑显示和隐藏 */,
 				4855232220E63EBE00CB32BF /* HYBStarEvaluationView */,
 				085979ED2015E0E500E2CF2C /* 点击图片放大 */,
 				085979E62015E05500E2CF2C /* 仿支付宝支付密码 */,
@@ -1560,6 +1575,7 @@
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/SDCycleScrollView/SDCycleScrollView.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/TZImagePickerController/TZImagePickerController.framework",
 				"${BUILT_PRODUCTS_DIR}/XHLaunchAd/XHLaunchAd.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -1578,6 +1594,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDCycleScrollView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TZImagePickerController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XHLaunchAd.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1623,6 +1640,7 @@
 				487FC63D20BE937700FC19FA /* UIButton+UIControl_buttonCon.m in Sources */,
 				3D4E321021F9A4CA00A3F063 /* LSWKWebViewVC.m in Sources */,
 				08F6585F1FF3D270007880CC /* UICollectionView+IndexPath.m in Sources */,
+				3D5550D2228D730F00B8FAE7 /* UINavigationController+Smooth.m in Sources */,
 				AECFA2451D376C5F005F5DE6 /* AppDelegate.m in Sources */,
 				AEB4D3791DAA09EA0078A52D /* LSNetworking.m in Sources */,
 				085978D72023186700CA056F /* LSRootCollectionView.m in Sources */,
@@ -1779,6 +1797,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1795,7 +1814,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1824,6 +1843,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1834,7 +1854,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1851,11 +1871,13 @@
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
 				DEVELOPMENT_TEAM = MFR4ADTS2Y;
+				ENABLE_BITCODE = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LSProjectTool/PrefixHeader.pch";
 				INFOPLIST_FILE = LSProjectTool/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1868,6 +1890,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "LSProjectTool/获取设备型号/LSProjectTool-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Vendors/Lib $(PODS_ROOT)/**";
 			};
 			name = Debug;
@@ -1881,11 +1904,13 @@
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
 				DEVELOPMENT_TEAM = MFR4ADTS2Y;
+				ENABLE_BITCODE = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LSProjectTool/PrefixHeader.pch";
 				INFOPLIST_FILE = LSProjectTool/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1897,6 +1922,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "LSProjectTool/获取设备型号/LSProjectTool-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Vendors/Lib $(PODS_ROOT)/**";
 			};
 			name = Release;

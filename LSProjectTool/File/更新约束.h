@@ -36,4 +36,21 @@ updateConstraints：系统更新约束
 3.对于有层次关系的两个view之间的约束关系，添加到层次较高的父view上：
 
 
+
+
+
+
+//mas 动画
+-(void)beginAnimate{
+    //告知需要更改约束
+    [self.view setNeedsUpdateConstraints];
+    [UIView animateWithDuration:3 animations:^{
+        [btn mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(view.mas_right).offset(-100);
+        }];
+        //告知父类控件绘制，不添加注释的这两行的代码无法生效
+        [btn.superview layoutIfNeeded];
+    }];
+}
+
 #endif /* _____h */

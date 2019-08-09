@@ -1025,7 +1025,7 @@ static inline NSString *cachePath() {
     NSString *fileName = [NSString stringWithFormat:@"%@", [self returnsTheCurrentSystemTimeStamp]];
     //处理网址
     NSString *absoluteUrlStr = [self createPublicBasicSettingsWithurlString:urlStr];
-    //创建任务 开始上传图片
+    //创建任务 开始上传 
     LSURLSessionTask *sessionTask = [manager POST:absoluteUrlStr parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         
         /*  appendPartWithFileURL   //  指定上传的文件路径

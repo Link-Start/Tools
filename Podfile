@@ -22,6 +22,8 @@ def all_Pods
   pod 'JPush'           #极光推送
   pod 'XHLaunchAd'      #开屏广告
   pod 'AMapLocation-NO-IDFA'  #pod 'AMapLocation' #定位SDK 没有广告IDFA
+  pod 'TZImagePickerController'  #照片选择器
+
 end
 
 

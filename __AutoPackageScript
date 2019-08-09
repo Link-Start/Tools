@@ -100,6 +100,11 @@ else
     mkdir -pv $export_path
 fi
 
+#打印scheme
+xcodebuild \
+-list \
+-project ${script_dir}/${project_name}.xcodeproj 
+
 # 判断编译的项目类型是workspace还是project
 if $is_workspace ; then
 # 编译前清理工程
@@ -151,7 +156,8 @@ xcodebuild  -exportArchive \
             -archivePath ${export_archive_path} \
             -exportPath ${export_ipa_path} \
             -exportOptionsPlist ${export_options_plist_path} \
-            -allowProvisioningUpdates
+            -allowProvisioningUpdates 
+
 
 # 检查ipa文件是否存在
 if [ -f "$export_ipa_path/$scheme_name.ipa" ] ; then
