@@ -23,6 +23,10 @@ def all_Pods
   pod 'XHLaunchAd'      #开屏广告
   pod 'AMapLocation-NO-IDFA'  #pod 'AMapLocation' #定位SDK 没有广告IDFA
   pod 'TZImagePickerController'  #照片选择器
+ # pod 'TTGTextTagCollectionView' #流式标签(搜索历史、热门搜索)
+
+
+
 
 end
 

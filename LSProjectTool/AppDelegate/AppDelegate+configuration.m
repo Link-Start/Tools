@@ -41,6 +41,13 @@
     //设置UIView、UIImageView、UILabel。button等 接收手势的互斥性为YES，防止多个响应区域被“同时”点击，“同时”响应
     [[UIButton appearance] setExclusiveTouch:YES];
     
+    //关闭程序中的暗黑模式
+#if defined(__IPHONE_13_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0
+    if(@available(iOS 13.0,*)){
+        self.window.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+    }
+#endif
+    
 
     /****************** 添加图片开屏广告 ******************/
     [self getLaunchImage];

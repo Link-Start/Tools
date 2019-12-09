@@ -153,6 +153,19 @@
     }];
 }
 
+//iOS13后，Prensent方式弹出页面时，默认的模式变为了UIModalPresentationAutomatic
+//如果想用之前的样式
+- (void)ls_presentViewController:(UIViewController *)vc completion:(void (^ __nullable)(void))completion {
+    
+    if(@available(iOS 13.0,*)){
+        vc.modalPresentationStyle = UIModalPresentationFullScreen;
+        [self.navigationController presentViewController:vc animated:YES completion:completion];
+    } else {
+        [self.navigationController presentViewController:vc animated:YES completion:completion];
+    }
+}
+
+
 ///判断当前UIViewController 是否正在显示。
 - (BOOL)isVisible {
     return (self.isViewLoaded && self.view.window);
@@ -188,6 +201,30 @@
     _ls_statusBarStyle = ls_statusBarStyle;
     [self setNeedsStatusBarAppearanceUpdate];
 }
+
+//设置样式
+//// ios 13.0 之后，这个方法已经失效了
+// [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+//- (UIStatusBarStyle)preferredStatusBarStyle {
+//    //1
+//    if (@available(iOS 13.0, *)){
+//        return UIStatusBarStyleDarkContent;
+//    }
+//    return UIStatusBarStyleDefault;
+//    //2
+//    return (@available(iOS 13.0, *) ? UIStatusBarStyleDarkContent : UIStatusBarStyleDefault);
+//    //3
+////可以使用预编译命令
+//#if defined(__IPHONE_13_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0
+//if (@available(iOS 13.0, *)) {
+//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDarkContent];
+//}else{
+//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+//}
+//#else
+//[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+//#endif
+//}
 //设置样式
 - (UIStatusBarStyle)preferredStatusBarStyle{
     return _ls_statusBarStyle;

@@ -157,7 +157,13 @@
 
 
 ///修改textField的placeholder的字体颜色、大小
-#define kLS_changeTextFieldPlaceholderColor(textField, color) [textField setValue:color forKeyPath:@"_placeholderLabel.textColor"]
+//#define kLS_changeTextFieldPlaceholderColor(textField, color) [textField setValue:color forKeyPath:@"_placeholderLabel.textColor"]
+#define kLS_changeTextFieldPlaceholderColor(textField, color)\
+if (@available(iOS 13.0, *)) {\
+textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:textField.placeholder attributes:@{NSForegroundColorAttributeName:color}];\
+} else {\
+[textField setValue:color forKeyPath:@"_placeholderLabel.textColor"]\
+}\
 #define kLS_changeTextFieldPlaceholderFont(textField, font) [textField setValue:font forKeyPath:@"_placeholderLabel.font"]
 
 //数据验证
