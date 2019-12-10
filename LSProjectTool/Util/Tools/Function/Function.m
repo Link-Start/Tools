@@ -533,6 +533,30 @@ static Function *ls_function = nil;
     return inputDate;
 }
 
+/**
+//将UTC日期字符串转为本地时间字符串
+//输入的UTC日期格式2013-08-03T04:53:51.111  UTCFormat:yyyy-MM-dd'T'HH:mm:ss.SSS
+//日期：2013-08-03T04:53:51.111               utcDate
+//输入格式：yyyy-MM-dd'T'HH:mm:ss.SSS          UTCFormat
+//输出格式：yyyy-MM-dd HH:mm:ss                toFormat
+ */
++ (NSString *)getLocalDateFormateUTCDate:(NSString *)utcDate withUTCFormat:(NSString *)UTCFormat toFormat:(NSString *)toFormat {
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //输入格式
+    [dateFormatter setDateFormat:UTCFormat];
+    NSTimeZone *localTimeZone = [NSTimeZone localTimeZone];
+    [dateFormatter setTimeZone:localTimeZone];
+    
+    NSDate *dateFormatted = [dateFormatter dateFromString:utcDate];
+    //输出格式
+    [dateFormatter setDateFormat:toFormat];
+    NSString *dateString = [dateFormatter stringFromDate:dateFormatted];
+    
+    //    DSLog(@"%@", dateString);
+    return dateString;
+}
+
 //判断一个日期 是否在 两个日期之间
 + (BOOL)isBetweenFrom:(NSString *)fromString to:(NSString *)toString {
     
