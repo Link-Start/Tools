@@ -79,6 +79,8 @@
 		48C35B7F2137E71700B0AA2B /* LocationTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 48C35B7E2137E71700B0AA2B /* LocationTransform.m */; };
 		64A8FFE818E6D0A69F94F5E7 /* Pods_LSProjectTool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 465D92414C7A66C4533F2997 /* Pods_LSProjectTool.framework */; };
 		892F95F429105CBB90D606F8 /* Pods_LSProjectToolTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95DD7D8C761834B33DD36ECF /* Pods_LSProjectToolTests.framework */; };
+		A76A68BA239F819900E1273D /* PurchaseCarAnimationTool.m in Sources */ = {isa = PBXBuildFile; fileRef = A76A68B8239F819800E1273D /* PurchaseCarAnimationTool.m */; };
+		A76A68BB239F819900E1273D /* ShoppingCartTool.m in Sources */ = {isa = PBXBuildFile; fileRef = A76A68B9239F819800E1273D /* ShoppingCartTool.m */; };
 		AE0C7D9C1E0BBE750051269F /* link.html in Resources */ = {isa = PBXBuildFile; fileRef = AE0C7D9B1E0BBE750051269F /* link.html */; };
 		AE0C7D9E1E0BC2A50051269F /* link.js in Resources */ = {isa = PBXBuildFile; fileRef = AE0C7D9D1E0BC2A50051269F /* link.js */; };
 		AE24FCDA1DAB411C00740806 /* SCMath.m in Sources */ = {isa = PBXBuildFile; fileRef = AE24FCD91DAB411C00740806 /* SCMath.m */; };
@@ -305,6 +307,10 @@
 		841E88A53468F4CE44C7C738 /* Pods_LSProjectToolUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LSProjectToolUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		95DD7D8C761834B33DD36ECF /* Pods_LSProjectToolTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LSProjectToolTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9669D094AB10EBCD586505F1 /* Pods-LSProjectTool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LSProjectTool.release.xcconfig"; path = "Pods/Target Support Files/Pods-LSProjectTool/Pods-LSProjectTool.release.xcconfig"; sourceTree = "<group>"; };
+		A76A68B6239F819800E1273D /* ShoppingCartTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingCartTool.h; sourceTree = "<group>"; };
+		A76A68B7239F819800E1273D /* PurchaseCarAnimationTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseCarAnimationTool.h; sourceTree = "<group>"; };
+		A76A68B8239F819800E1273D /* PurchaseCarAnimationTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseCarAnimationTool.m; sourceTree = "<group>"; };
+		A76A68B9239F819800E1273D /* ShoppingCartTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingCartTool.m; sourceTree = "<group>"; };
 		AE0C7D9B1E0BBE750051269F /* link.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = link.html; sourceTree = "<group>"; };
 		AE0C7D9D1E0BC2A50051269F /* link.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = link.js; sourceTree = "<group>"; };
 		AE1F72BB1DD40ACA00B8CCF7 /* 四舍五入.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "四舍五入.h"; sourceTree = "<group>"; };
@@ -748,6 +754,17 @@
 			path = "UI控件";
 			sourceTree = "<group>";
 		};
+		A76A68B5239F817F00E1273D /* 购物车动画 */ = {
+			isa = PBXGroup;
+			children = (
+				A76A68B7239F819800E1273D /* PurchaseCarAnimationTool.h */,
+				A76A68B8239F819800E1273D /* PurchaseCarAnimationTool.m */,
+				A76A68B6239F819800E1273D /* ShoppingCartTool.h */,
+				A76A68B9239F819800E1273D /* ShoppingCartTool.m */,
+			);
+			path = "购物车动画";
+			sourceTree = "<group>";
+		};
 		AE24FCE51DAB423000740806 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -856,6 +873,7 @@
 		AEB4D2F01DAA09770078A52D /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				A76A68B5239F817F00E1273D /* 购物车动画 */,
 				3D5550CF228D730200B8FAE7 /* 导航栏的平滑显示和隐藏 */,
 				4855232220E63EBE00CB32BF /* HYBStarEvaluationView */,
 				085979ED2015E0E500E2CF2C /* 点击图片放大 */,
@@ -1493,15 +1511,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-LSProjectTool-checkManifestLockResult.txt",
 			);
@@ -1515,15 +1529,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-LSProjectToolTests-checkManifestLockResult.txt",
 			);
@@ -1537,15 +1547,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-LSProjectToolUITests-checkManifestLockResult.txt",
 			);
@@ -1558,8 +1564,6 @@
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-LSProjectTool/Pods-LSProjectTool-frameworks.sh",
@@ -1579,8 +1583,6 @@
 				"${BUILT_PRODUCTS_DIR}/XHLaunchAd/XHLaunchAd.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BRPickerView.framework",
@@ -1649,6 +1651,7 @@
 				AEB4D38B1DAA0A130078A52D /* NSObject+checkTool.m in Sources */,
 				AEB4D4381DAA5AE60078A52D /* LSExtensionConst.m in Sources */,
 				AEB4D42C1DAA19BF0078A52D /* FSTextView.m in Sources */,
+				A76A68BA239F819900E1273D /* PurchaseCarAnimationTool.m in Sources */,
 				08BA1FE61FEFCBB900A19A46 /* AppDelegate+AppService.m in Sources */,
 				AECB8DA41E01348000B42700 /* UIImage+Extension.m in Sources */,
 				482267ED2154BDD700EE6599 /* VerificationCodeView.m in Sources */,
@@ -1693,6 +1696,7 @@
 				AEB4D3621DAA09EA0078A52D /* LSDatePicker.m in Sources */,
 				AEB4D3671DAA09EA0078A52D /* LSAlertView.m in Sources */,
 				AEB4D37E1DAA09EA0078A52D /* UIView+ExtensionForFrame.m in Sources */,
+				A76A68BB239F819900E1273D /* ShoppingCartTool.m in Sources */,
 				AEB4D3781DAA09EA0078A52D /* Function.m in Sources */,
 				08197C8A1FE3564D00478FC4 /* ReachState.m in Sources */,
 				4855232520E63EBE00CB32BF /* HYBStarEvaluationView.m in Sources */,
