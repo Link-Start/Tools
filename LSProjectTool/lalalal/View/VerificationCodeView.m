@@ -58,13 +58,13 @@
     [self.desLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(self.mas_leading).mas_offset(30);
         make.top.mas_equalTo(self.mas_top);
-        make.height.mas_equalTo(kLS_relative_Height(20));
+//        make.height.mas_equalTo(kLS_relative_Height(20));
     }];
     
     [self.textField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(self.mas_leading).mas_offset(30);
         make.top.mas_equalTo(self.desLabel.mas_bottom).mas_offset(10);
-        make.height.mas_equalTo(kLS_relative_Height(30));
+//        make.height.mas_equalTo(kLS_relative_Height(30));
         make.trailing.mas_equalTo(self.mas_trailing).mas_offset(-30);
     }];
     

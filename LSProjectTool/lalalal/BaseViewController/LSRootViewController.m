@@ -7,6 +7,7 @@
 //
 
 #import "LSRootViewController.h"
+#import "LSTabBarController.h"
 
 @interface LSRootViewController ()
 
@@ -94,23 +95,88 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
-///返回指定控制器
-- (void)backOutToVC:(UIViewController *)VC {
+///返回指定控制器(同一个Nav之下)
+- (void)ls_backOutToVC:(UIViewController *)VC {
     for (UIViewController *tempVC in self.navigationController.viewControllers) {
         if ([tempVC isKindOfClass:[VC class]]) {
             [self.navigationController popToViewController:VC animated:YES];
         }
     }
 }
-///返回指定控制器
-- (void)backOutToClassVC:(Class)tempClass {
+///返回指定控制器(同一个Nav之下)
+- (void)ls_backOutToClassVC:(Class)tempClass {
     for (UIViewController *tempVC in self.navigationController.viewControllers) {
         if ([tempVC isKindOfClass:tempClass]) {
-            [self.navigationController popToViewController:[[tempClass alloc] init] animated:YES];
+            [self.navigationController popToViewController:tempVC animated:YES];
         }
     }
 }
 
+///返回指定控制器(可以是 不同Nav之下)
+/// 从tabBarController的某个item下的 多层栈中的一个VC 跳转到同一个tabBarController之下的其他item的第一个VC
+- (void)ls_backOutToClassVCs:(Class)tempClass {
+    for (UIViewController *tempVC in self.navigationController.viewControllers) {
+        if ([tempVC isKindOfClass:tempClass]) {
+            [self.navigationController popToViewController:tempVC animated:YES];
+            return;
+        } else {
+            for (int i = 0; i < self.tabBarController.viewControllers.count; i++) {
+                UINavigationController *tempNav = self.tabBarController.viewControllers[i];
+                if ([tempNav.topViewController isKindOfClass:tempClass]) {
+                    
+                    
+                    //借鉴:https://blog.csdn.net/zhao15127334470/article/details/98955374
+                    /******************下面的方法可以偷偷的把nav中的vc 移出栈*********************/
+                    NSMutableArray *VCSArray = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+                    if (VCSArray.count >= 2) {
+                        [VCSArray removeObjectsInRange:NSMakeRange(1, VCSArray.count-2)];
+                        self.navigationController.viewControllers = VCSArray;
+                    }
+                     /******************上面的方法可以偷偷的把nav中的vc 移出栈*********************/
+                    
+                    [self ls_selectTabBarControllerOtherItemVC:i];//选择tabBarController其他 item
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
+            }
+        }
+    }
+}
+
+
+///从tabBarController的某个itemVC 返回到同一个tabBarController 之下的其他 item 的VC
+//Note:感觉有点鸡肋,只能从 tabBarControll.的某个item第一个VC跳到其他item的第一个VC
+- (void)ls_backOutToTabBarControllerOtherItemVC:(null_unspecified Class)tempClass {
+    
+    for (int i = 0; i < self.tabBarController.viewControllers.count; i++) {
+        //nav
+        if ([self.tabBarController.viewControllers[i] isKindOfClass:[UINavigationController class]]) {
+            UINavigationController *tempNav = self.tabBarController.viewControllers[i];
+            if ([tempNav.topViewController isKindOfClass:tempClass]) {
+                [self ls_selectTabBarControllerOtherItemVC:i];//选择tabBarController其他 item
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }
+        } else { //VC
+            UIViewController *tempVC = self.tabBarController.viewControllers[i];
+            if ([tempVC isKindOfClass:tempClass]) {
+                [self ls_selectTabBarControllerOtherItemVC:i];//选择tabBarController其他 item
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }
+        }
+    }
+}
+
+///选择tabBarController其他 item
+- (void)ls_selectTabBarControllerOtherItemVC:(NSInteger)index {
+    if (self.tabBarController.viewControllers.count < index + 1) {
+        index = self.tabBarController.viewControllers.count - 1;
+        
+        NSLog(@"传入的 tabBarItem 下标越界!! (item总数量:%lu ,传入的下标:%ld)", (unsigned long)self.tabBarController.viewControllers.count, (long)index);
+    }
+    UITabBarController *tabBarCon = self.tabBarController;
+    tabBarCon.selectedIndex = index;
+}
+
+///返回根试图
 - (void)ls_backRootVC {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
@@ -165,9 +231,31 @@
     }
 }
 
+///设置tabBar角标
+- (void)setTabBarBadgeWithTabBarItemIndex:(NSInteger)tabBarItemIndex badgeNum:(NSInteger)badgeNum {
+    
+    LSTabBarController *tabBar = (LSTabBarController *)self.tabBarController;
+    UITabBarItem *tabBarItem = [[UITabBarItem alloc] init];
+    
+    if ([self.tabBarController.selectedViewController isMemberOfClass:[self class]]) {//如果当前VC就是要设置item角标的VC
+        tabBarItem = self.tabBarItem;
+    }
+    
+    if (tabBar.tabBar.items.count > 1) {
+        tabBarItem = tabBar.tabBar.items[tabBarItemIndex]; //需要设置角标的tabBarItem
+    }
+    
+    if (badgeNum > 0) {
+        tabBarItem.badgeValue = [NSString stringWithFormat:@"%ld", badgeNum];
+        
+    } else {
+        tabBarItem.badgeValue = nil;//清除
+    }
+}
+
 
 ///判断当前UIViewController 是否正在显示。
-- (BOOL)isVisible {
+- (BOOL)ls_isVisible {
     return (self.isViewLoaded && self.view.window);
 }
 

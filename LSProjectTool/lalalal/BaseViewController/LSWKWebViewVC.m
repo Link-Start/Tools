@@ -31,6 +31,8 @@
     [self addLayout];
     
     [self.wkWebView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
+    
+    [self.wkWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", self.urlString]]]];
 }
 
 #pragma mark - 数据
@@ -41,6 +43,11 @@
 // 页面开始加载时调用
 -(void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
     NSLog(@"开始加载网页");
+    
+    if (!self.title) {
+        self.title = webView.title;
+    }
+    
     //开始加载网页时展示出progressView
     self.progressView.hidden = NO;
     //开始加载网页的时候将progressView的Height恢复为1.5倍

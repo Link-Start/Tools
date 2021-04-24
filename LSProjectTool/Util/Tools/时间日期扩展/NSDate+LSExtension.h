@@ -193,4 +193,39 @@
 ///当前日期的年
 @property (readonly) NSInteger year;
 
+
+#pragma mark - 来自樊盛 https://www.jianshu.com/p/f3d83e031d63
+///当前日期对应的月份总天数
+///当前日期对应的月份 第一天所属星期
+///当前日期对应的农历日期
+/**
+ *  获得当前 NSDate 对象的上个月的某一天（此处定为15号）的 NSDate 对象
+ */
+- (NSDate *)previousMonthDate;
+
+/**
+ *  获得当前 NSDate 对象的下个月的某一天（此处定为15号）的 NSDate 对象
+ */
+- (NSDate *)nextMonthDate;
+
+/**
+ *  获得当前 NSDate 对象对应月份根据所传入的day所属日期
+ */
+- (NSDate *)otherDayInMonth:(NSInteger)number;
+
+/**
+ *  获得当前 NSDate 对象对应的月份的总天数
+ */
+- (NSInteger)totalDaysInMonth;
+
+/**
+ *  获得当前 NSDate 对象对应月份当月第一天的所属星期
+ */
+- (NSInteger)firstWeekDayInMonth;
+
+/**
+ *  获得当前 NSDate 对象对应农历日期
+ */
+- (NSString *)lunarText;
+
 @end

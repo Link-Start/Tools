@@ -130,8 +130,22 @@
 //    [super load];
 //    
 //    // 获取当前类的tabBarItem
-//    UITabBarItem *item = [UITabBarItem appearanceWhenContainedIn:self, nil];
-//    
+//    UITabBarItem *item = nil;
+//if (@available(iOS 9.0, *)) {
+//    item = [UITabBarItem appearanceWhenContainedInInstancesOfClasses:@[self]];;
+//} else {
+//    item = [UITabBarItem appearanceWhenContainedIn:self, nil];
+//}
+////
+//    // 通过normal状态设置字体大小
+//    // 字体大小 跟 normal
+//    NSMutableDictionary *attrnor = [NSMutableDictionary dictionary];
+// 文本颜色 -> 描述富文本属性的key -> NSAttributedString.h
+//attr[NSForegroundColorAttributeName] = [UIColor colorFromHexString:@"#333333"];
+//    // 设置字体
+//    attrnor[NSFontAttributeName] = [UIFont systemFontOfSize:13];
+//    [item setTitleTextAttributes:attrnor forState:UIControlStateNormal];
+
 //    // 设置所有item的选中时颜色
 //    // 设置选中文字颜色
 //    // 创建字典去描述文本
@@ -140,14 +154,7 @@
 //    attr[NSForegroundColorAttributeName] = [UIColor blueColor];
 //    [item setTitleTextAttributes:attr forState:UIControlStateSelected];
 //    
-//    // 通过normal状态设置字体大小
-//    // 字体大小 跟 normal
-//    NSMutableDictionary *attrnor = [NSMutableDictionary dictionary];
-//    
-//    // 设置字体
-//    attrnor[NSFontAttributeName] = [UIFont systemFontOfSize:13];
-//    
-//    [item setTitleTextAttributes:attrnor forState:UIControlStateNormal];
+
 //}
 
 /********** 设置自定义Tabbar的文字大小 方法 2**************/

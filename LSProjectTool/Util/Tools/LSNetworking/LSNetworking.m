@@ -511,6 +511,8 @@ static inline NSString *cachePath() {
     //处理网址
     NSString *absoluteUrlStr = [self createPublicBasicSettingsWithurlString:urlStr];
     
+    
+    
     //创建任务 开始请求数据
     LSURLSessionTask *sessionTask = [manager GET:absoluteUrlStr parameters:Parameters progress:^(NSProgress * _Nonnull downloadProgress) {
         if (progress) {
@@ -559,7 +561,7 @@ static inline NSString *cachePath() {
                 sessionTask.priority = NSURLSessionTaskPriorityLow;
                 break;
             case LSRequestPriorityDefault:
-                
+                sessionTask.priority = NSURLSessionTaskPriorityDefault;
             default:
                 sessionTask.priority = NSURLSessionTaskPriorityDefault;
                 break;
@@ -782,6 +784,15 @@ static inline NSString *cachePath() {
     AFHTTPSessionManager *manager = [self ls_manager];
     //处理网址
     NSString *absoluteUrlStr = [self createPublicBasicSettingsWithurlString:urlStr];
+    [manager POST:@"" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [formData appendPartWithHeaders:nil body:[NSData data]];//这个body里面换成你的data数据
+    } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+
+    }];
+//    [AFHTTPRequestSerializer serializer] requestBySerializingRequest:<#(nonnull NSURLRequest *)#> withParameters:<#(nullable id)#> error:<#(NSError * _Nullable __autoreleasing * _Nullable)#>
+//    [AFHTTPRequestSerializer serializer] requestWithMethod:@"" URLString:@"" parameters:nil error:<#(NSError * _Nullable __autoreleasing * _Nullable)#>
     
     //创建任务 开始请求数据
     LSURLSessionTask *sessionTask = [manager POST:absoluteUrlStr parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {

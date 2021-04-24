@@ -50,6 +50,13 @@
 //}
 ////设置返回每个item的属性必须实现）
 //- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+//[UIView animateWithDuration:0 animations:^{
+//    [UIView performWithoutAnimation:^{
+//        [self.collectionView reloadData];
+//    }];
+//} completion:^(BOOL finished) {
+//
+//}];
 //}
 ////对头视图或者尾视图进行设置
 //- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {

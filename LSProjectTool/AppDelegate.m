@@ -23,7 +23,8 @@
 @end
 
 @implementation AppDelegate
-
+//一款优雅好用的类似QQ和微信消息页面的右上角微型菜单弹窗, 最低支持iOS6
+//pod 'Popover.OC'
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {

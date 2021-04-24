@@ -14,3 +14,24 @@
 @property (nonatomic, assign) BOOL cannotRightSlipBack;
 
 @end
+
+
+
+
+
+//#pragma mark - 只在本界面禁用侧滑返回手势  1.
+//- (void)viewDidAppear:(BOOL)animated {
+//    [super viewDidAppear:animated];
+//    
+//    LSNavigationController *nav = self.navigationController;
+//    nav.cannotRightSlipBack = YES;
+//    
+//}
+//#pragma mark - 只在本界面禁用侧滑返回手势  2.
+//- (void)viewDidDisappear:(BOOL)animated {
+//    [super viewDidDisappear:animated];
+//    
+//    LSNavigationController *nav = self.navigationController;
+//    nav.cannotRightSlipBack = NO;
+//}
+

@@ -5,6 +5,10 @@
 //  Created by Xcode on 16/8/11.
 //  Copyright © 2016年 Link-Start. All rights reserved.
 //
+//
+//  适合 MBProgressHUD版本 1.1.0
+//
+//
 
 #import "MBProgressHUD.h"
 

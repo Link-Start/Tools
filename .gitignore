@@ -22,18 +22,55 @@ DerivedData/
 !default.perspectivev3
 xcuserdata/
 
-## Other
+## Other 其他
 *.moved-aside
 *.xcuserstate
 *.xccheckout
+*.xcscmblueprint
 
-## Obj-C/Swift specific
+## Obj-C/Swift specific    具体的
 *.hmap
 *.ipa
 *.dSYM.zip
 *.dSYM
 
-#CocoaPods
+# CocoaPods
+# CocoaPods
+# 我们建议不要将Pods目录添加到.gitinore。然而
+# We recommend against adding the Pods directory to your .gitignore. However
+# you should judge for yourself, the pros and cons are mentioned at:你应该自己判断，利弊如下：
+# https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
+#
+# Pods/
+# 如果要避免从Xcode工作区签入源代码，请添加此行
+# Add this line if you want to avoid checking in source code from the Xcode workspace
+# *.xcworkspace
+
+# Carthage
+# 如果希望避免签入来自Carthage依赖项的源代码，请添加此行。
+# Add this line if you want to avoid checking in source code from Carthage dependencies.
+# Carthage/Checkouts
+
+Carthage/Build
+
+# fastlane
+# 建议不要将截图存储在git repo中。相反，使用fastlane重新生成。
+# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
+# screenshots whenever they are needed.屏幕截图，只要他们需要 
+# For more information about the recommended setup visit:有关建议安装的更多信息，请访问：
+# https://docs.fastlane.tools/best-practices/source-control/#source-control
+
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# Code Injection 代码注入
+# 在新的代码注入工具之后，会生成一个文件夹 /iOSInjectionProject
+# After new code Injection tools there's a generated folder /iOSInjectionProject
+# https://github.com/johnno1962/injectionforxcode
+
+iOSInjectionProject/
 Pods
 #Podfile 依赖库的配置信息
 !Podfile 

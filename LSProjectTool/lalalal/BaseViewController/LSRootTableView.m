@@ -31,6 +31,20 @@
 //    //判断当前控制器是否在显示 isViewLoaded 表示已经视图被加载过 view.window表示视图正在显示
 //    if (self.isViewLoaded && self.view.window) {
 //    }
+    
+    
+    //判断某一个分区的cell是否已经显示
+//    CGRect cellRect = [self.tableView rectForSection:4];
+//    BOOL completelyVisible = CGRectContainsRect(self.tableView.bounds, cellRect);
+    
+    
+    
+//    ///获取某个cell中的字控件 在tableView中的位置
+//    CGRect rect = [tableView rectForRowAtIndexPath:indexPath];
+//    /// 获取当前cell 相对于self.view 当前的坐标
+//    rect.origin.y          = rect.origin.y - [tableView contentOffset].y;
+//    CGRect imageViewRect   = imageView.frame;
+//    imageViewRect.origin.y = rect.origin.y + imageViewRect.origin.y + imageView.frame.size.height/2;
 }
 
 #pragma mark - 刷新
@@ -42,6 +56,83 @@
     
 }
 
+
+#pragma mark - 数据
+#pragma mark - 上拉加载、下拉刷新
+//上拉加载 下拉刷新
+///开始刷新
+//- (void)setupRefresh {
+//
+//    __weak __typeof(self)weakSelf = self;
+//    //下拉刷新
+//    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//        __strong __typeof(weakSelf)strongSelf = weakSelf;
+//        strongSelf.currentPage = 1;
+//
+//    }];
+//    //开始刷新
+//    //    [self.c_tableView.mj_header  beginRefreshing];
+//
+//    //    //上拉加载
+//    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+//        __strong __typeof(weakSelf)strongSelf = weakSelf;
+//        strongSelf.currentPage++;
+//
+//    }];
+//    self.tableView.mj_footer.hidden = YES;
+//    self.tableView.mj_header.automaticallyChangeAlpha = YES;
+//    self.tableView.mj_footer.automaticallyChangeAlpha = YES;
+//    self.tableView.mj_footer.automaticallyHidden = YES;
+//}
+//
+//- (void)endRefreshing {
+//    if (self.tableView.mj_header.isRefreshing) {
+//        [self.tableView.mj_header endRefreshing];
+//    }
+//    if (self.tableView.mj_footer.isRefreshing) {
+//        [self.tableView.mj_footer endRefreshing];
+//    }
+//}
+
+#pragma mark - 代理方法
+//
+////1.首先设置cell可以编辑
+//- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return YES;
+//}
+////2.设置编辑的样式
+//- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return UITableViewCellEditingStyleDelete;
+//}
+////3.修改编辑按钮文字
+//- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return @"取消收藏";
+//}
+////4.设置进入编辑状态的时候，cell不会缩进
+//- (BOOL)tableView: (UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return NO;
+//}
+////5.点击删除的实现。特别提醒：必须要先删除了数据，才能再执行删除的动画或者其他操作，不然会引起崩溃。
+//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+//    
+//    __weak __typeof(self)weakSelf = self;
+//    UIAlertController *alerCon = [UIAlertController alertControllerWithTitle:@"确定取消此收藏？" message:nil preferredStyle:UIAlertControllerStyleAlert];
+//    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+//    }];
+//    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//        
+//    }];
+//    [alerCon addAction:cancelAction];
+//    [alerCon addAction:sureAction];
+//    [self presentViewController:alerCon animated:YES completion:nil];
+//}
+
+#pragma mark - 按钮
+
+
+#pragma mark - 添加子控件
+
+#pragma mark - 懒加载
 
 
 - (CGSize)intrinsicContentSize {

@@ -65,7 +65,6 @@
 #define LS_StrongSelf(type) __strong typeof(type) strong##type = type
 
 
-
 ///APP信息
 #define kLS_AppInfoDictionary  [[NSBundle mainBundle] infoDictionary]
 ///APP名称
@@ -75,17 +74,14 @@
 ///app      build版本
 #define kLA_App_bulidVersion  [infoDictionary objectForKey:@"CFBundleVersion"]
 
-
 ///手机序列号 UUID
 #define kLS_IdentifierNumber ([[UIDevice currentDevice] identifierForVendor])
 ///每次获取都不一样
 #define kLS_UUID ([[NSUUID UUID] UUIDString])
-
 ///用户为设备设置的名称
 #define kLS_DeviceName [[UIDevice currentDevice] name]
 ///系统名称
 #define kLS_SystemName [[UIDevice currentDevice] systemName]
-
 ///地方型号（国际化区域名称）
 #define kLS_LocalPhoneModel [[UIDevice currentDevice] localizedModel]
 ///获取当前语言
@@ -97,7 +93,6 @@
 #define kLS_Screen_resolution (kLS_ScreenWidth * kLS_ScreenHeight * ([UIScreen mainScreen].scale))
 ///获取系统时间戳
 #define kLS_GetCurentTime [NSString stringWithFormat:@"%ld", (long)[[NSDate date] timeIntervalSince1970]]
-
 
 //获取一段时间间隔
 #define kLS_StartTime CFAbsoluteTime start = CFAbsoluteTimeGetCurrent();
@@ -132,6 +127,15 @@
 #define kLS_PathCache [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject]
 
 
+//获取系统对象
+#define kLS_Application        [UIApplication sharedApplication]
+#define kLS_AppDelegate        kLS_Application.delegate
+#define kLS_AppDelegateWindow  (kLS_AppDelegate.window) ? (kLS_AppDelegate.window) : (kLS_Application.keyWindow)
+#define kLS_RootViewController [UIApplication sharedApplication].delegate.window.rootViewController
+#define kLS_UserDefaults       [NSUserDefaults standardUserDefaults]
+#define kLS_NotificationCenter [NSNotificationCenter defaultCenter]
+
+
 
 //View 圆角和加边框
 #define kLS_ViewBorderRadius(View, Radius, Width, Color)\
@@ -158,13 +162,51 @@
 
 ///修改textField的placeholder的字体颜色、大小
 //#define kLS_changeTextFieldPlaceholderColor(textField, color) [textField setValue:color forKeyPath:@"_placeholderLabel.textColor"]
-#define kLS_changeTextFieldPlaceholderColor(textField, color)\
+#define kLS_changeTextFieldPlaceholderColor(textField, color, font)\
 if (@available(iOS 13.0, *)) {\
-textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:textField.placeholder attributes:@{NSForegroundColorAttributeName:color}];\
+textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:(textField.placeholder.length > 0 ? textField.placeholder : @" ") attributes:@{NSForegroundColorAttributeName:color, NSFontAttributeName:font}];\
 } else {\
-[textField setValue:color forKeyPath:@"_placeholderLabel.textColor"]\
+[textField setValue:color forKeyPath:@"_placeholderLabel.textColor"];\
+[textField setValue:font forKeyPath:@"_placeholderLabel.font"];\
+}
+//#define kLS_changeTextFieldPlaceholderFont(textField, font) [textField setValue:font forKeyPath:@"_placeholderLabel.font"]
+
+
+//openUrl
+#define kLS_OpenUrl(urlString)\
+NSURL *str_URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@", urlString]];\
+if ([kLS_Application canOpenURL:str_URL]) {\
+if(@available(iOS 10.0, *)) {\
+    [kLS_Application openURL:str_URL options:@{} completionHandler:nil];\
+} else {\
+    [kLS_Application openURL:str_URL];\
 }\
-#define kLS_changeTextFieldPlaceholderFont(textField, font) [textField setValue:font forKeyPath:@"_placeholderLabel.font"]
+}
+
+//打开appStore中的应用 https://itunes.apple.com/cn/app/idxxxxx?mt=8
+
+//版本比较
+#define kLS_VersionCompare(v1, v2)\
+if ([v1 compare:v2 options:NSNumericSearch] == NSOrderedDescending) {\
+    NSLog(@"v1 > v2 (当前版本是最新)");\
+} else if ([v1 compare:v2 options:NSNumericSearch] == NSOrderedSame) {\
+    NSLog(@"相同");\
+} else {\
+    NSLog(@"v1 < v2 (有新版本)");\
+}
+
+
+
+//Xib 注册tableViewCell
+#define kLS_tableViewCell_RegisterNib(tableView, CellName, cellIdentifiter) [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([CellName class]) bundle:nil] forCellReuseIdentifier:cellIdentifiter]
+
+//Xib 注册collectionCell
+#define kLS_collectionCell_RegisterNib(collectionView, cellName, cellIdentifiter) [collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([cellName class]) bundle:nil] forCellWithReuseIdentifier:cellIdentifiter];
+
+///Xib加载View
+#define kLS_LoadViewFromNibName(ViewName) [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([ViewName class]) owner:self options:nil] firstObject];
+
+
 
 //数据验证
 #define StrValid(f) (f!=nil && [f isKindOfClass:[NSString class]] && ![f isEqualToString:@""])
@@ -182,7 +224,7 @@ textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:tex
 // 判断它是否是空字符串。
 #define kLS_IsEmptyString(str) ((str == nil) || [str isKindOfClass:[NSNull class]] || (str == NULL) || ([str isKindOfClass:[NSString class]] && str.length <= 0))
 // 判断它是否为nil或null对象。
-#define kLS_IsEmptyObject(obj) ((obj == nil) || (str == NULL) || [obj isKindOfClass:[NSNull class]])
+#define kLS_IsEmptyObject(obj) ((obj == nil) || (obj == NULL) || [obj isKindOfClass:[NSNull class]])
 // 判断它是否是一个有效的字典。
 #define kLS_IsDictionary(objDict) (objDict != nil && [objDict isKindOfClass:[NSDictionary class]])
 // 判断它是否是一个有效的数组。
@@ -191,15 +233,6 @@ textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:tex
 ///获取安全的字符串
 #define kLS_GetString(Str) (kLS_IsEmptyString(Str) ? @"" : [NSString stringWithFormat:@"%@", Str])
 
-
-
-//获取系统对象
-#define kLS_Application        [UIApplication sharedApplication]
-#define kLS_AppDelegate        [AppDelegate shareAppDelegate].delegate
-#define kLS_AppDelegateWindow  [UIApplication sharedApplication].delegate.window
-#define kLS_RootViewController [UIApplication sharedApplication].delegate.window.rootViewController
-#define kLS_UserDefaults       [NSUserDefaults standardUserDefaults]
-#define kLS_NotificationCenter [NSNotificationCenter defaultCenter]
 
 // 当我们使用kvo或者做动画的时候需要使用keyPath，但是keyPath是字符串类型，为了防止输入错误，我们可以使用下面的自动提示宏
 // 自动提示宏如下：

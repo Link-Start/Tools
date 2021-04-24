@@ -5,6 +5,11 @@
 //  Created by mj on 13-4-18.
 //  Copyright (c) 2013年 itcast. All rights reserved.
 //
+//
+//
+//  适合 MBProgressHUD版本 1.1.0
+//
+//
 
 #import "MBProgressHUD.h"
 

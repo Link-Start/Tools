@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIProgressView *progressView;
 @property (nonatomic, strong) WKWebView *wkWebView;
 
+@property (nonatomic, copy) NSString *urlString;
+
 ///添加子视图
 - (void)addSubViews;
 @end

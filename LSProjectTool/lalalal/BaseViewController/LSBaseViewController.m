@@ -507,7 +507,7 @@
         }
     }
 }
-///返回指定控制器
+///返回指定控制器---->出现过崩溃情况,原因不知道
 - (void)backOutToClassVC:(Class)tempClass {
     for (UIViewController *tempVC in self.navigationController.viewControllers) {
         if ([tempVC isKindOfClass:tempClass]) {

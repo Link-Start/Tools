@@ -40,4 +40,8 @@ IB_DESIGNABLE
  */
 - (void)layoutButtonWithEdgeInsetsStyle:(LSButtonEdgeInsetsStyle)style
                         imageTitleSpace:(CGFloat)space;
+
+///按钮响应区域
+@property (nonatomic, assign) CGSize enlargeSize;
+
 @end

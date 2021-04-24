@@ -1,5 +1,12 @@
+#知名依赖库的来源地址
+source 'https://github.com/CocoaPods/Specs.git'
+
 #取消对下一行的注释以定义项目的全局平台
+#平台ios,版本9.0
 platform :ios, '9.0'
+
+#忽略引入库的所有警告
+inhibit_all_warnings!
 
 #如果您不使用swift并且不想使用动态框架，请对下一行进行注释。
 use_frameworks!
@@ -8,6 +15,7 @@ use_frameworks!
 #使用多target 可以用下面这样定义,避免重复书写代码
 def all_Pods
   pod 'AFNetworking'                    #网络请求
+  pod 'YTKNetwork'                      #YTK
   pod 'SDWebImage'                      #请求图片
   pod 'MJRefresh'                       #刷新
   pod 'Masonry', '~> 1.1.0'  #布局
@@ -23,9 +31,12 @@ def all_Pods
   pod 'XHLaunchAd'      #开屏广告
   pod 'AMapLocation-NO-IDFA'  #pod 'AMapLocation' #定位SDK 没有广告IDFA
   pod 'TZImagePickerController'  #照片选择器
- # pod 'TTGTextTagCollectionView' #流式标签(搜索历史、热门搜索)
-
-
+  #pod 'TTGTextTagCollectionView' #流式标签(搜索历史、热门搜索)
+  pod 'WZLBadge' #角标
+  pod 'CYLTabBarController' #一行代码实现 Lottie 动画TabBar，支持中间带+号的TabBar样式，自带红点角标，支持动态刷新
+  pod 'Popover.OC' #一款优雅好用的类似QQ和微信消息页面的右上角微型菜单弹窗, 最低支持iOS6 
+  pod 'ThinkVerb' #iOS动画(链式语法)
+  pod 'JXCategoryView' #segment
 
 
 end

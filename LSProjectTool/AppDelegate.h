@@ -29,4 +29,5 @@
 //pod 'WechatOpenSDK'   #微信SDK
 //pod 'JPush'           #极光推送
 //pod 'XHLaunchAd'      #开屏广告
-
+//CYLTabBarController #一行代码实现 Lottie 动画TabBar，支持中间带+号的TabBar样式，自带红点角标，支持动态刷新
+//pod 'WZLBadge' 角标

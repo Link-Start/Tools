@@ -17,17 +17,16 @@
 #import "JsonTools.h"
 #import "LSGetCurrentLocation.h"
 #import <AMapLocationKit/AMapLocationKit.h>
-
 #import <Photos/Photos.h>
 #import "TZImagePickerController.h"
-
+//#import "Util/Tools/Function/Function.h"
 
 @interface ViewController ()<UITextFieldDelegate, AMapLocationManagerDelegate>
 
-@property (weak, nonatomic) IBOutlet LSTextView *inputView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *H;
+@property (weak, nonatomic)  LSTextView *inputView;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *H;
 
-@property (weak, nonatomic) IBOutlet UITextField *textField;
+@property (weak, nonatomic)  UITextField *textField;
 @property (nonatomic, strong) UIView *demoView;
 
 ///位置
@@ -47,6 +46,9 @@
 
 
 - (void)viewDidLoad {
+    
+    
+   
     
 //    // 带逆地理信息的一次定位（返回坐标和地址信息）
 //    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyHundredMeters];
@@ -91,11 +93,43 @@
     
 //    [self configLocationManager];
     
-    
+    NSString *usrename = @"ouv11";
+    NSString *pwd = @"";
+    NSString *resultStr = [self obfuscate:[NSString stringWithFormat:@"%@@@%@", usrename, pwd] withKey:@"s488v"];
     
 }
 
-
+- (NSString *)obfuscate:(NSString *)string withKey:(NSString *)key
+{
+  // Create data object from the string
+  NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
+ 
+  // Get pointer to data to obfuscate
+  char *dataPtr = (char *) [data bytes];
+ 
+  // Get pointer to key data
+  char *keyData = (char *) [[key dataUsingEncoding:NSUTF8StringEncoding] bytes];
+ 
+  // Points to each char in sequence in the key
+  char *keyPtr = keyData;
+  int keyIndex = 0;
+ 
+  // For each character in data, xor with current value in key
+  for (int x = 0; x < [data length]; x++)
+  {
+    // Replace current character in data with
+    // current character xor'd with current key value.
+    // Bump each pointer to the next character
+    *dataPtr = *dataPtr++ ^ *keyPtr++;
+ 
+    // If at end of key data, reset count and
+    // set key pointer back to start of key value
+    if (++keyIndex == [key length])
+      keyIndex = 0, keyPtr = keyData;
+  }
+ 
+  return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+}
 
 -(NSString *)getNeedSignStrFrom:(id)obj {
 //    NSDictionary *dict = obj;
