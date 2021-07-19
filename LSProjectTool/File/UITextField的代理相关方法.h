@@ -104,4 +104,19 @@
 }
 
 
+
+
+
+/// 监测 textField 编辑情况
+- (void)addTextFieldEventEdit {
+    [self.liveNickNameView.centerTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+}
+
+- (void)textFieldDidChange:(UITextField *)textField {
+    if (textField == self.liveNickNameView.centerTextField) { //昵称
+        NSLog(@"主播昵称：%@", textField);
+    }
+}
 #endif /* UITextField________h */
+
+

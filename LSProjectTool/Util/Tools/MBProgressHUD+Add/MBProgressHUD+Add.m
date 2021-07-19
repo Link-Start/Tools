@@ -45,8 +45,10 @@
     
     if (!hud) {
         // 参数kLastWindow仅仅是用到了其CGFrame，并没有将hud添加到上面
-        hud = [[MBProgressHUD alloc] initWithWindow:[UIApplication sharedApplication].delegate.window];
-        hud.labelText = @"加载中...";
+//        hud = [[MBProgressHUD alloc] initWithWindow:[UIApplication sharedApplication].delegate.window];
+        hud = [[MBProgressHUD alloc] initWithView:[UIApplication sharedApplication].delegate.window];
+//        hud.labelText = @"加载中...";
+        hud.label.text = @"";
         //objc_setAssociatedObject来把一个对象与另外一个对象进行关联。该函数需要四个参数：源对象(关联者)，关键字，关联的对象(被关联者)和一个关联策略。
         //关键字是一个void类型的指针。每一个关联的关键字必须是唯一的。通常都是会采用静态变量来作为关键字
         //
@@ -63,8 +65,9 @@
     [[UIApplication sharedApplication].keyWindow addSubview:hud];
     hud.graceTime = 0.2;
     // 设置该属性，graceTime才能生效
-    hud.taskInProgress = YES;
-    [hud show:YES];
+//    hud.taskInProgress = YES;
+//    [hud show:YES];
+    [hud showAnimated:YES];
 }
 
 
@@ -82,7 +85,8 @@
     // 快速显示一个提示信息
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
     //设置需要显示的文字信息
-    hud.labelText = text;
+//    hud.labelText = text;
+    hud.label.text = text;
     // 设置图片
     hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"MBProgressHUD.bundle/%@", icon]]];
     // 再设置模式
@@ -92,7 +96,8 @@
     // 隐藏时候从父控件中移除
     hud.removeFromSuperViewOnHide = YES;
     // 1秒之后再消失
-    [hud hide:YES afterDelay:1.0];
+//    [hud hide:YES afterDelay:1.0];
+    [hud hideAnimated:YES afterDelay:1.0];
     return hud;
 }
 
@@ -166,11 +171,13 @@
     // 快速显示一个提示信息
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
     //设置需要显示的文字信息
-    hud.labelText = message;
+//    hud.labelText = message;
+    hud.label.text = message;
     // 隐藏时候从父控件中移除
     hud.removeFromSuperViewOnHide = YES;
     // YES代表需要蒙版效果
-    hud.dimBackground = YES;
+//    hud.dimBackground = YES;
+    
     return hud;
 }
 
@@ -184,14 +191,16 @@
 + (MBProgressHUD *)showLoadingToView:(UIView *)view {
     if (view == nil) view = [UIApplication sharedApplication].keyWindow;
     MBProgressHUD *hud = [MBProgressHUD  showHUDAddedTo:view animated:YES];
-    hud.opacity = 0.6;
+//    hud.opacity = 0.6;
+
     hud.mode = MBProgressHUDModeCustomView;
     UIImageView *animationImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 35, 35)];
     animationImageView.contentMode = UIViewContentModeScaleToFill;
     animationImageView.image = [UIImage imageNamed:@"加载中 圆圈-6"];
     hud.customView = animationImageView;
     [self rotateImageView:animationImageView];
-    hud.labelText=@"加载中...";
+//    hud.labelText=@"加载中...";
+    hud.label.text = @"";
     return hud;
 }
 
@@ -225,11 +234,13 @@
     //设置模式
     hud.mode = MBProgressHUDModeText;
     ////设置需要显示的文字信息
-    hud.labelText=message;
+//    hud.labelText=message;
+    hud.label.text = message;
     //关闭用户交互
     hud.userInteractionEnabled = NO;
     //1.4秒后消失
-    [hud hide:YES afterDelay:1.4];
+//    [hud hide:YES afterDelay:1.4];
+    [hud hideAnimated:YES afterDelay:1.4];
     return hud;
 }
 
@@ -251,8 +262,9 @@
     //设置模式
     hud.mode = MBProgressHUDModeText;
     //设置需要显示的文字信息
-    hud.labelText = message;
-    hud.labelFont = [UIFont systemFontOfSize:15];
+//    hud.labelText = message;
+//    hud.labelFont = [UIFont systemFontOfSize:15];
+    hud.label.text = message;
     
     
     //    hud.detailsLabel.text = message;
@@ -260,7 +272,8 @@
     //设置显示的文字大小
     
     //1.5秒后消失
-    [hud hide:YES afterDelay:1.5];
+//    [hud hide:YES afterDelay:1.5];
+    [hud hideAnimated:YES afterDelay:1.5];
 }
 
 /**
@@ -285,7 +298,8 @@
     // 隐藏时候从父控件中移除
     hud.removeFromSuperViewOnHide = YES;
     //1.2秒后消失
-    [hud hide:YES afterDelay:1.2];
+//    [hud hide:YES afterDelay:1.2];
+    [hud hideAnimated:YES afterDelay:1.2];
     return hud;
 }
 
@@ -320,7 +334,8 @@
         view = [UIApplication sharedApplication].keyWindow;
     }
     
-    [self hideAllHUDsForView:view animated:YES];
+//    [self hideAllHUDsForView:view animated:YES];
+    [self hideHUDForView:view animated:YES];
 }
 
 @end

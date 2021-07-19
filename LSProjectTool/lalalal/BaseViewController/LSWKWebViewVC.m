@@ -60,18 +60,26 @@
     
 }
 // 页面加载完成之后调用
-- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{//这里修改导航栏的标题，动态改变
-                                                                                    //    self.title = webView.title;
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
+    //这里修改导航栏的标题，动态改变
+    //self.title = webView.title;
+    
+    //关闭手势缩放
+    NSString *injectionJSString = @"var script = document.createElement('meta');"
+    "script.name = 'viewport';"
+    "script.content=\"width=device-width, user-scalable=no\";" "document.getElementsByTagName('head')[0].appendChild(script);";
+    [webView evaluateJavaScript:injectionJSString completionHandler:nil];
+    
     NSLog(@"加载完成");
     //加载完成后隐藏progressView
     //self.progressView.hidden = YES;
 }
-// 页面加载失败时调用
-- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation{
-    NSLog(@"加载失败");
-    //加载失败同样需要隐藏progressView
-    //self.progressView.hidden = YES;
-}
+
+/////页面加载失败时调用         在提交的主帧期间发生错误时调用
+//- (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error {
+//
+//}
+
 // 接收到服务器跳转请求之后再执行
 - (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(WKNavigation *)navigation{
     
@@ -111,7 +119,7 @@
     
 }
 
-
+///页面加载失败时调用         在提交的主帧期间发生错误时调用
 - (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
     NSLog(@"加载失败,失败原因:%@",[error description]);
 }
@@ -194,10 +202,15 @@
     if (!_progressView) {
         //进度条初始化
         _progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, kLS_TopHeight, kLS_ScreenWidth, 2)];
-        _progressView.backgroundColor = [UIColor blueColor];
+        _progressView.progressTintColor = [UIColor blueColor];
         //设置进度条的高度，下面这句代码表示进度条的宽度变为原来的1倍，高度变为原来的1.5倍.
         _progressView.transform = CGAffineTransformMakeScale(1.0f, 1.5f);
         
+        //iOS14，UIProgressView默认高度变为4，之前是2，如果产品要求保持之前的高度，需要进行适配
+        // 适配iOS14，UIProgressView高度变为2
+        if (CGRectGetHeight(_progressView.frame) == 4) {
+            _progressView.transform = CGAffineTransformMakeScale(1.0, 0.5);
+        }
     }
     return _progressView;
 }

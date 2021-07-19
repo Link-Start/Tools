@@ -481,12 +481,17 @@ static Function *ls_function = nil;
 //kNilOptions     什么也不做
 
 #/////////////////////////////////////////////////////////////////////////////////////////////
+//NSDate:表示一个具体的绝对的时间点。
+//NSTimeZone:表示时区信息。
+//NSLocale:本地化信息。
 #pragma mark - 系统时间戳
 ///获取系统时间戳 精确到秒
 + (long long)getSystemTimeStampAccurateToSeconds {
-    NSDate *localDate = [NSDate date]; //获取当前时间
-    long ls_time = (long)[localDate timeIntervalSince1970];
-    NSString *timeSp = [NSString stringWithFormat:@"%ld", ls_time]; //转化为UNIX时间戳
+//[NSDate date]返回的就是当前时间，注意此时间是世界标准时间，准确时间应加上当前时区与世界标准时间的偏移量
+    NSDate *localDate = [NSDate date]; //获取当前时间 返回当前时间
+    // NSTimeInterval:double类型的 获取的数据有小数点  longlong 获取的是整数
+    long long ls_time = (long)[localDate timeIntervalSince1970];//
+    NSString *timeSp = [NSString stringWithFormat:@"%lld", ls_time]; //转化为UNIX时间戳
     NSLog(@"精确到秒timeSp:%@",timeSp); //时间戳的值
     return  ls_time;
 }
@@ -497,12 +502,57 @@ static Function *ls_function = nil;
     //创建并返回一个NSDate对象设置为给定的当前日期和时间的秒数。
     //seconds 如果该值为整数,则表示以后的日期,如果为负数则表示以前的日期
     //返回一个NSDate的日期对象
-    NSDate *date = [NSDate dateWithTimeIntervalSinceNow:0];
-    NSTimeInterval ls_time = [date timeIntervalSince1970] * 1000; // *1000 是精确到毫秒，不乘就是精确到秒
-    NSString *timeString = [NSString stringWithFormat:@"%f", ls_time]; //转为字符型
+    //dateWithTimeIntervalSinceNow 以当前时间的偏移秒数来初始化
+    NSDate *date = [NSDate dateWithTimeIntervalSinceNow:0];//获取当前时间
+    // NSTimeInterval:double类型的 获取的数据有小数点  longlong 获取的是整数
+    long long ls_time = [date timeIntervalSince1970] * 1000; // *1000 是精确到毫秒，不乘就是精确到秒
+    NSString *timeString = [NSString stringWithFormat:@"%lld", ls_time]; //转为字符型
     // 注：不想有小数点用%.0f​就OK啦
     NSLog(@"精确到毫秒timeString:%@",timeString); //时间戳的值
     return ls_time;
+}
+
+/// 将UTC格式的时间转成特定格式的时间字符串
+static inline NSString *UTCDateStr(NSString *utcDate, NSString *toFormat) {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSzzz"];
+    NSTimeZone *localTimeZone = [NSTimeZone localTimeZone];
+    [dateFormatter setTimeZone:localTimeZone];
+    NSDate *dateFormatted = [dateFormatter dateFromString:utcDate];
+    [dateFormatter setDateFormat:toFormat];
+    NSString *dateString = [dateFormatter stringFromDate:dateFormatted];
+    return dateString;
+}
+///将UTC格式的时间转成时间戳  秒
+static inline long long UTCDateTimeStamp(NSString *utcDate) {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSzzz"];
+    NSTimeZone *localTimeZone = [NSTimeZone localTimeZone];
+    [dateFormatter setTimeZone:localTimeZone];
+    NSDate *dateFormatted = [dateFormatter dateFromString:utcDate];
+    ///时间戳
+    long long timeStamp = (long)[dateFormatted timeIntervalSince1970];
+    return timeStamp;
+}
+/// 将UTC格式的时间转成NSDate   2021-05-13T09:35:01.160+0800
+static inline NSDate *UTCDateToNSDate(NSString *utcDate) {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSzzz"];
+    NSTimeZone *localTimeZone = [NSTimeZone localTimeZone];
+    [dateFormatter setTimeZone:localTimeZone];
+    NSDate *dateFormatted = [dateFormatter dateFromString:utcDate];
+    return dateFormatted;
+}
+///将时间转成时间戳  毫秒
+static inline long long HYHDateTimeStamp(NSString *DateStr) {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    NSTimeZone *localTimeZone = [NSTimeZone localTimeZone];
+    [dateFormatter setTimeZone:localTimeZone];
+    NSDate *dateFormatted = [dateFormatter dateFromString:DateStr];
+    ///时间戳
+    long long timeStamp = (long)[dateFormatted timeIntervalSince1970] * 1000;
+    return timeStamp;
 }
 
 ///将系统时间戳转换成时间数据
@@ -534,11 +584,14 @@ static Function *ls_function = nil;
 }
 
 /**
-//将UTC日期字符串转为本地时间字符串
+//将UTC日期字符串转为本地时间字符串   2021-05-11T18:26:00.000+0800
 //输入的UTC日期格式2013-08-03T04:53:51.111  UTCFormat:yyyy-MM-dd'T'HH:mm:ss.SSS
+//                      2021-05-11T18:26:00.000+0800  UTCFormat:yyyy-MM-dd'T'HH:mm:ss.SSSzzz
 //日期：2013-08-03T04:53:51.111               utcDate
+//
 //输入格式：yyyy-MM-dd'T'HH:mm:ss.SSS          UTCFormat
 //输出格式：yyyy-MM-dd HH:mm:ss                toFormat
+ //2013-11-17T11:59:22+08:00==UTC(世界协调时间格式)
  */
 + (NSString *)getLocalDateFormateUTCDate:(NSString *)utcDate withUTCFormat:(NSString *)UTCFormat toFormat:(NSString *)toFormat {
     

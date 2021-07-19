@@ -183,6 +183,8 @@
 	<string>为了给你提供更好的服务,播放需要获取您的Siri权限</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>为了给你提供更好的服务,播放需要获取您的语音识别权限</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>我们需要获取您的设备信息用以精准推送您喜欢的内容,比如推送商品,或旅游信息等,需要获取您的设备信息,您是否同意?</string>
 	<key>NSVideoSubscriberAccountUsageDescription</key>
 	<string>为了给你提供更好的服务,播放需要获取您的AppleTV权限</string>
 	<key>UIBackgroundModes</key>

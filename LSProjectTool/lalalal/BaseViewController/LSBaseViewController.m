@@ -30,13 +30,14 @@
     //显示加载中
     MBProgressHUD *hud = [MBProgressHUD hud:graceTime];
     //显示提示语
-    hud.labelText = markedWords;
+//    hud.labelText = markedWords;
+    hud.label.text = markedWords;
     ////1.创建管理者对象
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     //设置请求超时的时间
     manager.requestSerializer.timeoutInterval = kTimeoutInterval;
     //开始请求
-    [manager GET:url parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
+    [manager GET:url parameters:parameters headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
         // 这里可以获取到目前的数据请求的进度
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         //手动关闭MBProgressHUD
@@ -77,7 +78,7 @@
     //设置请求超时的时间
     manager.requestSerializer.timeoutInterval = kTimeoutInterval;
     //开始请求
-    [manager POST:url parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+    [manager POST:url parameters:parameters headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
         // 这里可以获取到目前的数据请求的进度
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         //手动关闭MBProgressHUD(必须写在这个位置，不然不会关闭)
@@ -130,7 +131,7 @@
     //设置请求超时的时间
     manager.requestSerializer.timeoutInterval = kTimeoutInterval;
     //2.上传文件
-    [manager POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    [manager POST:urlString parameters:parameters headers:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         // 拼接data到请求体，这个block的参数是遵守AFMultipartFormData协议的。
         //上传文件参数
         NSData *imageData = UIImageJPEGRepresentation(image, 0.1);
@@ -198,7 +199,7 @@
     manager.requestSerializer.timeoutInterval = 30.f;
     for (UIImage *image in images) {
     //2.上传文件
-    [manager POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    [manager POST:urlString parameters:parameters headers:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         // 拼接data到请求体，这个block的参数是遵守AFMultipartFormData协议的。
         //上传文件参数
         
@@ -376,9 +377,10 @@
 //隐藏hud  移除hud
 - (void)hiddenHud:(MBProgressHUD *)hud {
     if (hud != nil) {
-        hud.taskInProgress = NO;
+//        hud.taskInProgress = NO;
         hud.removeFromSuperViewOnHide = YES;
-        [hud hide:YES];
+//        [hud hide:YES];
+        [hud hideAnimated:YES];
         [hud removeFromSuperview];
     }
 }
@@ -390,6 +392,7 @@
 //    NSLog(@"error.description = %@", error.description);
 //    NSLog(@"error.localizedDescription = %@", error.localizedDescription); //错误信息
 //    NSLog(@"error.userInfo = %@", error.userInfo);
+//    NSLog(@"error.userInfo[NSLocalizedFailureReasonErrorKey] = %@", error.userInfo[NSLocalizedFailureReasonErrorKey]);
 //    NSLog(@"error.domain = %@", error.domain);
 //    NSLog(@"error.localizedFailureReason = %@", error.localizedFailureReason);
 //    NSLog(@"error.localizedRecoverySuggestion = %@", error.localizedRecoverySuggestion);
@@ -564,6 +567,29 @@
     [bottomVC dismissViewControllerAnimated:NO completion:^{
         
     }];
+}
+
+// 通过递归拿到当前控制器
+- (UIViewController*)currentViewControllerFrom:(UIViewController*)viewController {
+     // 如果传入的控制器是导航控制器,则返回最后一个
+  if ([viewController isKindOfClass:[UINavigationController class]]) {
+        UINavigationController* navigationController = (UINavigationController *)viewController;
+        return [self currentViewControllerFrom:navigationController.viewControllers.lastObject];
+    }
+    // 如果传入的控制器是tabBar控制器,则返回选中的那个
+  if([viewController isKindOfClass:[UITabBarController class]]) {
+        UITabBarController* tabBarController = (UITabBarController *)viewController;
+        return [self currentViewControllerFrom:tabBarController.selectedViewController];
+    }
+     // 如果传入的控制器发生了modal,则就可以拿到modal的那个控制器
+  if(viewController.presentedViewController != nil) {
+      if ([viewController.presentedViewController isKindOfClass:NSClassFromString(@"TXIMSDK_TUIKit_iOS.TUIAudioCallViewController")]||[viewController.presentedViewController isKindOfClass:NSClassFromString(@"TXIMSDK_TUIKit_iOS.TUIVideoCallViewController")]) {
+          return viewController;
+      }
+        return [self currentViewControllerFrom:viewController.presentedViewController];
+    }
+    //否则返回本身
+    return viewController;
 }
 
 - (void)didReceiveMemoryWarning {

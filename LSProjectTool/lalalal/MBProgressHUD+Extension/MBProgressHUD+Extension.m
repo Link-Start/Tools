@@ -20,7 +20,7 @@
     [kLastWindow addSubview:hud];
     hud.graceTime = graceTime;
     // 设置该属性，graceTime才能生效
-    hud.taskInProgress = YES;
+//    hud.taskInProgress = YES;
     [hud showAnimated:YES];
     hud.userInteractionEnabled = NO;//打开hud用户交互,使hud所在的父视图不能用户交互
     return hud;
@@ -87,15 +87,17 @@
         hud = [self hud];
     }
     if (hud != nil) {
-        hud.taskInProgress = NO;
+//        hud.taskInProgress = NO;
         hud.removeFromSuperViewOnHide = YES;
-        [hud hide:YES];
+//        [hud hide:YES];
+        [hud hideAnimated:YES];
         [hud removeFromSuperview];
     } else {
         hud = [self hud];
-        hud.taskInProgress = NO;
+//        hud.taskInProgress = NO;
         hud.removeFromSuperViewOnHide = YES;
-        [hud hide:YES];
+//        [hud hide:YES];
+        [hud hideAnimated:YES];
         [hud removeFromSuperview];
     }
 }

@@ -6,6 +6,23 @@
 //  Copyright (c) 2015 com.tencent. All rights reserved.
 //
 
+/**
+ CADisplayLink是一个能让我们以和屏幕刷新率同步的频率将特定的内容画到屏幕上的定时器类。 CADisplayLink以特定模式注册到runloop后， 每当屏幕显示内容刷新结束的时候，runloop就会向 CADisplayLink指定的target发送一次指定的selector消息， CADisplayLink类对应的selector就会被调用一次。
+ NSTimer以指定的模式注册到runloop后，每当设定的周期时间到达后，runloop会向指定的target发送一次指定的selector消息。
+ dispatch_source直接和底层内核交互，准确性更高。
+ 2、精确度
+ dispatch_source > CADisplayLink > NSTimer
+
+ 3、常见应用
+
+ CADisplayLink使用场合相对专一，适合做UI的不停重绘，比如自定义动画引擎或者视频播放的渲染。
+ NSTimer的使用范围要广泛的多，各种需要单次或者循环定时处理的任务都可以使用。
+ dispatch_source对计时精确性要求比较高应用。
+ ————————————————
+ 版权声明：本文为CSDN博主「rattanchen」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+ 原文链接：https://blog.csdn.net/weixin_38633659/article/details/113870567
+ */
+
 #import "JX_GCDTimerManager.h"
 
 @interface JX_GCDTimerManager()

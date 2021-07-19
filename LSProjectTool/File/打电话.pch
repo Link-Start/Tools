@@ -36,3 +36,18 @@ NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",@
 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
 
 NSLog(@"打电话");
+
+if ([[UIApplication sharedApplication] canOpenURL:str]) {
+    [[UIApplication sharedApplication] openURL:str options:@{UIApplicationOpenURLOptionsSourceApplicationKey : @YES} completionHandler:nil];
+}
+
+UIPasteboard *appPasteBoard =  [UIPasteboard generalPasteboard];
+[appPasteBoard setString:@"成功复制到剪切板"];
+
+
+
+if (@available(iOS 10.0, *)) {
+    [[UIApplication sharedApplication] openURL:url options:@{UIApplicationOpenURLOptionsSourceApplicationKey:@YES} completionHandler:nil];
+}else {
+    [[UIApplication sharedApplication] openURL:url];
+}

@@ -25,7 +25,7 @@
 //pod 'MBProgressHUD'
 //pod 'FSTextView'           #placeholder和最大字数
 //pod 'SDCycleScrollView', '~> 1.75'   #轮播图
-//pod 'BRPickerView', '~> 2.2.1'       #选择器
+//pod 'BRPickerView', '~> 2.2.1'       #日期时间地址选择器
 //pod 'WechatOpenSDK'   #微信SDK
 //pod 'JPush'           #极光推送
 //pod 'XHLaunchAd'      #开屏广告

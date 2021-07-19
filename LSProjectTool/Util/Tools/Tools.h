@@ -65,7 +65,10 @@
 /// 宏定义
 #import "MacroDefinition.h"
 /// UIView扩展类
-#import "UIView+ExtensionForFrame.h"
+//#import "UIView+ExtensionForFrame.h"
+#import "UIView+LSCategoryForFrame.h"
+#import "UIView+LSCategory.h"
+#import "UIView+LSExtension.h"
 /// 类别 -- 类方法的扩展
 #import "ClassExtension.h"
 

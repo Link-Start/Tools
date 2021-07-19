@@ -76,3 +76,7 @@ Pods
 !Podfile 
 #因为CocoaPods支持语义化版本号，所以需要Podfile.lock文件记住当前使用的版本
 !Podfile.lock 
+
+
+#SVN
+.svn

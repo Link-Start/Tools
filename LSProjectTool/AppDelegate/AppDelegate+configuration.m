@@ -9,6 +9,11 @@
 #import "AppDelegate+configuration.h"
 #import "XHLaunchAd.h"
 #import "MacroDefinition.h"
+// 如果需要使用idfa功能所需要引入的头文件（可选）
+#import <AdSupport/AdSupport.h>
+#import <AppTrackingTransparency/AppTrackingTransparency.h>
+
+#import <IQKeyboardManager/IQKeyboardManager.h>
 
 
 @interface AppDelegate ()<XHLaunchAdDelegate>
@@ -18,7 +23,7 @@
 @implementation AppDelegate (configuration)
 
 #pragma mark ————— 初始化window —————
--(void)initWindow{
+- (void)initWindow {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
@@ -33,7 +38,8 @@
 - (void)initBasicConfiguration {
     
     /****************** 基本设置 ******************/
-    //状态栏的字体为白色
+    //状态栏的字体   黑色：UIStatusBarStyleDefault  白色：UIStatusBarStyleLightContent
+    //状态栏的字体
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     //在启动之后显示状态栏
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
@@ -48,15 +54,44 @@
     }
 #endif
     
-
+    
+    /****************** IQKeyboardManager设置 ******************/
+    // 1.
+    [self configIQKeyboardManager];
+    
+    
+    
+    
     /****************** 添加图片开屏广告 ******************/
     [self getLaunchImage];
+    
+    [self obtainIDFA];//获取IDFA权限
 }
 
+#pragma mark - IQKeyboardManager设置
+- (void)configIQKeyboardManager {
+    // 1.修改 IQKeyBoardManager 的右边的 Done 按钮
+//    [IQKeyboardManager sharedManager].toolbarDoneBarButtonItemText = @"完成";
+//    // 或者
+//    [IQKeyboardManager sharedManager].toolbarDoneBarButtonItemImage = [UIImage imageNamed:@"IQKeyboardManagerScreenshot"];
+
+    // 2.修改 IQKeyBoardManager 的 Toolbar颜色等
+    [IQKeyboardManager sharedManager].shouldToolbarUsesTextFieldTintColor = NO;
+    [IQKeyboardManager sharedManager].toolbarTintColor = [UIColor redColor];
+//
+//    // 3.是否显示响应者的水印和字号
+//    [IQKeyboardManager sharedManager].shouldShowToolbarPlaceholder = YES;
+//    [IQKeyboardManager sharedManager].placeholderFont = [UIFont systemFontOfSize:14.0];
+//    // 4. 设置键盘textField的距离。不能小于零。默认是10.0。<触发条件是textField需要改变y时 >
+//    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 10.0f;
+
+//    // 6.  IQKeyBoardManager 的右边的 Done 按钮的响应事件doneAction 事件未公开API,不过可以通过代理
+//    - (void)textFieldDidEndEditing:(UITextField *)textField
+}
+
+#pragma mark - 开屏广告
 //获取启动页
 - (void)getLaunchImage {
-    
-    
     
 //    LS_WeakSelf(self);
 //    LS_StrongSelf(self);
@@ -87,7 +122,90 @@
     }
 }
 
+#pragma mark - 获取IDFA 权限
+//获取IDFA 权限
+- (void)obtainIDFA {
+     // iOS14方式访问 IDFA
+     if (@available(iOS 14, *)) {
+          
+          //进行权限判断，根据不同权限进行判断
+          ATTrackingManagerAuthorizationStatus status = ATTrackingManager.trackingAuthorizationStatus;
+          switch (status) {
+               case ATTrackingManagerAuthorizationStatusDenied:
+                    NSLog(@"用户拒绝");
+//                    [self applyIDFAAuthority];//申请权限
+//                  finishBlock();
+                    break;
+               case ATTrackingManagerAuthorizationStatusAuthorized:
+                    NSLog(@"用户允许");
+//                  finishBlock();
+                    break;
+               case ATTrackingManagerAuthorizationStatusNotDetermined:
+                    NSLog(@"用户为做选择或未弹窗");
+                    [self applyIDFAAuthority];//申请权限
+                    break;
+               default:
+//                    [self applyIDFAAuthority];//申请IDFA权限
+                    break;
+          }
+          
+     } else {
+          // 使用原方式访问 IDFA
+          if ([[ASIdentifierManager sharedManager] isAdvertisingTrackingEnabled]) {
+               NSString *idfaStr = [[ASIdentifierManager sharedManager] advertisingIdentifier].UUIDString;
+               NSLog(@"idfaStr - %@", idfaStr);
+          } else {
+               NSLog(@"iOS13  用户开启了限制广告追踪");
+          }
+     }
+}
 
+- (void)applyIDFAAuthority { //申请IDFA权限
+     if (@available(iOS 14, *)) {
+          //申请权限
+         //请求弹出用户授权框，只会在程序运行是弹框1次，除非卸载app重装，通地图、相机等权限弹框一样
+          [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
+               if (status == ATTrackingManagerAuthorizationStatusAuthorized) { //用户同意授权
+                    NSString *idfaStr = [[ASIdentifierManager sharedManager] advertisingIdentifier].UUIDString;
+                    NSLog(@"iOS14 idfaStr - %@", idfaStr);
+               } else {
+                    NSLog(@"iOS14 用户开启了限制广告追踪");
+               }
+//              dispatch_async(dispatch_get_main_queue(), ^{
+//                  finishBlock();
+//              });
+          }];
+     }
+}
 
+#pragma mark - 指定页面禁止使用第三方键盘
+//指定页面禁止使用第三方键盘
+- (BOOL)application:(UIApplication *)application shouldAllowExtensionPointIdentifier:(UIApplicationExtensionPointIdentifier)extensionPointIdentifier{
+    NSArray *vcClass = @[
+                         ];
+    for (Class a in vcClass) {
+        if ([self.window.rootViewController isKindOfClass:a]) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
+#pragma mark - 微信初始化相关     微信需要注册
+- (void)initWeiXin {
+//    //在register之前打开log, 后续可以根据log排查问题
+////    [WXApi startLogByLevel:WXLogLevelDetail logBlock:^(NSString *log) {
+////        NSLog(@"WeChatSDK: %@", log);
+////    }];
+//
+//    if([WXApi registerApp:WX_APP_ID universalLink:WX_Universal_Links]){
+//        NSLog(@"初始化成功");
+////        //自检函数
+////        [WXApi checkUniversalLinkReady:^(WXULCheckStep step, WXCheckULStepResult* result) {
+////            NSLog(@"微信自检：%@, %u, %@, %@", @(step), result.success, result.errorInfo, result.suggestion);
+////        }];
+//    }
+}
+#pragma mark - 支付宝初始化相关      支付宝不需要注册
 
 @end

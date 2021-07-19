@@ -15,8 +15,19 @@
 #endif
 // 如果需要使用idfa功能所需要引入的头文件（可选）
 #import <AdSupport/AdSupport.h>
+#import <AppTrackingTransparency/AppTrackingTransparency.h>
 
 
+
+/**
+ 从2021年4月26日开始，AppStore上的应用程序必须在收集用于跟踪他们或他们的设备的数据之前，使用AppTrackingTransform获得用户的许可。
+ 使用IDFA功能必须导入AppTrakingTransparency.framework库,并且在Info.plist中添加NSUserTrackingUsageDescription和询问用户时候的描述语。
+ 
+ Xcode 12中添加后在iOS14的设备和测试机上都没问题，但是运行在iOS14以下设备时候会崩溃。
+ 解决方案：
+ Xcode 导入库时候AppTrackingTransparency.framework时在 Build Phases -> Link Binary With Libraries 中找到 AppTrackingTransparency.framework 状态设置为 Optional
+ Optional 意思为如果 IOS系统支持就会加载
+ */
 
 
 @interface AppDelegate ()<JPUSHRegisterDelegate, JPUSHGeofenceDelegate>
@@ -56,7 +67,7 @@
     // Optional
     // 获取IDFA
     // 如需使用IDFA功能请添加此代码并在初始化方法的advertisingIdentifier参数中填写对应值
-    NSString *advertisingId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+    NSString *advertisingId = [self obtainIDFA];
     
     // Required
     // init Push
@@ -84,6 +95,30 @@
     //获取 iOS 的推送内容需要在 delegate 类中注册通知并实现回调方法。
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
     [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];
+}
+
+/// 获取IDFA 广告标志符
+- (NSString *)obtainIDFA {
+    
+    __block NSString *idfaStr = @"";
+    
+    // iOS14方式访问 IDFA
+    if (@available(iOS 14, *)) { //
+        [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
+            if (status == ATTrackingManagerAuthorizationStatusAuthorized) {//用户同意授权
+                idfaStr = [[ASIdentifierManager sharedManager] advertisingIdentifier].UUIDString;
+                NSLog(@"获取IDFA 广告标志符 - %@", idfaStr);
+            }
+        }];
+    } else {
+        // 使用原方式访问 IDFA
+        if ([[ASIdentifierManager sharedManager] isAdvertisingTrackingEnabled]) {
+            idfaStr = [[ASIdentifierManager sharedManager] advertisingIdentifier].UUIDString;
+            NSLog(@"获取IDFA 广告标志符 - %@", idfaStr);
+        }
+    }
+    
+    return idfaStr;
 }
 
 #pragma mark - 获取自定义消息推送内容

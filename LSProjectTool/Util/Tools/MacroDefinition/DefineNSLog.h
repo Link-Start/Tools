@@ -59,4 +59,13 @@
 //#endif
 
 
+//
+////修复打印不完整，打印中文显示Unicode码问题
+//#ifndef __OPTIMIZE__
+//#define NSLog(FORMAT, ...) fprintf(stderr, "[%s %s %s-%d] %s\n", __DATE__ , __TIME__, [[[NSString stringWithUTF8String: __FILE__] lastPathComponent] UTF8String], __LINE__, [[[NSString alloc] initWithData:[[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] dataUsingEncoding:NSUTF8StringEncoding] encoding:NSNonLossyASCIIStringEncoding] UTF8String]?[[[NSString alloc] initWithData:[[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] dataUsingEncoding:NSUTF8StringEncoding] encoding:NSNonLossyASCIIStringEncoding] UTF8String]:[[NSString stringWithFormat: FORMAT, ## __VA_ARGS__] UTF8String]);
+//#else
+//#define NSLog(FORMAT, ...) nil
+//#endif
+
+
 #endif /* DefineNSLog_h */

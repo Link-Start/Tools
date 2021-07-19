@@ -64,6 +64,17 @@
 //StrongSelf 宏定义
 #define LS_StrongSelf(type) __strong typeof(type) strong##type = type
 
+#if DEBUG
+//0开发环境 测试环境 1正式环境
+#define currentEnvironment 0
+#define isProduction      NO
+#define isDEBUG           YES
+#else
+#define currentEnvironment 1
+#define isProduction      YES
+#define isDEBUG           NO
+#endif
+
 
 ///APP信息
 #define kLS_AppInfoDictionary  [[NSBundle mainBundle] infoDictionary]
@@ -78,19 +89,45 @@
 #define kLS_IdentifierNumber ([[UIDevice currentDevice] identifierForVendor])
 ///每次获取都不一样
 #define kLS_UUID ([[NSUUID UUID] UUIDString])
-///用户为设备设置的名称
+/********************************** 识别设备和操作系统 *************************************/
+/// 用户为设备设置的名称 ar name: String                             设备的名称。
 #define kLS_DeviceName [[UIDevice currentDevice] name]
+/// 操作系统的当前版本。var systemVersion: String               操作系统的当前版本。
+#define kLS_SystemVersion [[UIDevice currentDevice] systemVersion]
+/// //var model: String                                                               设备的型号。
+#define kLS_Model [[UIDevice currentDevice] model]
+/// 地方型号（国际化区域名称) var localizedModel: String      设备作为本地化字符串的模型。。
+#define kLS_LocalizePhoneModel [[UIDevice currentDevice] localizedModel]
+/// var userInterfaceIdiom: UIUserInterfaceIdiom                      当前设备上要使用的接口样式。
+#define kLS_UserInterfaceIdiom [[UIDevice currentDevice] userInterfaceIdiom]
+/// var identifierForVendor: UUID?                                             一个字母数字字符串，唯一地标识应用程序供应商的设备。
+#define kLS_IdentifierForVendor [[UIDevice currentDevice] identifierForVendor]
+
 ///系统名称
 #define kLS_SystemName [[UIDevice currentDevice] systemName]
-///地方型号（国际化区域名称）
-#define kLS_LocalPhoneModel [[UIDevice currentDevice] localizedModel]
 ///获取当前语言
 #define kLS_GetCurrentLanguage ([[NSLocale preferredLanguages] objectAtIndex:0])
 //设备的 DeviceToken
 #define kLS_DeviceToken @"DeviceToken"
 
+
+/// 禁止手机睡眠
+#define kLS_PhoneDisabledSleep [UIApplication sharedApplication].idleTimerDisabled = YES;
+
+/**
+ [[UIScreen mainScreen] scale]是计算屏幕分辨率的
+ [[UIScreen main] scale] == 1; //代表320 x 480 的分辨率（就是iphone4之前的设备，非Retain屏幕）
+ [[UIScreen main] scale] == 2; //代表640 x 960 的分辨率（Retain屏幕）
+ [[UIScreen main] scale] == 3; //代表1242 x 2208 的分辨率
+ 
+ 用 [[UIScreen mainScreen] scale]  可以知道使用@2x 图片还是@3x图片
+ */
+
 ///屏幕分辨率
 #define kLS_Screen_resolution (kLS_ScreenWidth * kLS_ScreenHeight * ([UIScreen mainScreen].scale))
+/// 设备分辨率
+#define kLS_Device_resolution CGSizeMake(kLS_ScreenWidth*([UIScreen mainScreen].scale), (kLS_ScreenHeight * ([UIScreen mainScreen].scale)))
+
 ///获取系统时间戳
 #define kLS_GetCurentTime [NSString stringWithFormat:@"%ld", (long)[[NSDate date] timeIntervalSince1970]]
 
@@ -131,7 +168,7 @@
 #define kLS_Application        [UIApplication sharedApplication]
 #define kLS_AppDelegate        kLS_Application.delegate
 #define kLS_AppDelegateWindow  (kLS_AppDelegate.window) ? (kLS_AppDelegate.window) : (kLS_Application.keyWindow)
-#define kLS_RootViewController [UIApplication sharedApplication].delegate.window.rootViewController
+#define kLS_RootViewController kLS_Application.delegate.window.rootViewController
 #define kLS_UserDefaults       [NSUserDefaults standardUserDefaults]
 #define kLS_NotificationCenter [NSNotificationCenter defaultCenter]
 
@@ -183,6 +220,7 @@ if(@available(iOS 10.0, *)) {\
 }\
 }
 
+
 //打开appStore中的应用 https://itunes.apple.com/cn/app/idxxxxx?mt=8
 
 //版本比较
@@ -195,17 +233,78 @@ if ([v1 compare:v2 options:NSNumericSearch] == NSOrderedDescending) {\
     NSLog(@"v1 < v2 (有新版本)");\
 }
 
+/// Xib 注册tableViewCellSectionHeaderView、 tableViewCellSectionFooterView
+#define kLS_tableViewCellSectionHeaderFooterView_registerNib(tableView, headerFooterViewName, headerFooterViewNameId) \
+                        [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([headerFooterViewName class]) bundle:nil] forHeaderFooterViewReuseIdentifier:headerFooterViewNameId];
+/// 纯代码 注册tableViewCellSectionHeaderView、tableViewCellSectionFooterView
+#define kLS_tableViewCellSectionHeaderFooterView_registerClass(tableView, headerFooterViewName) \
+                        [tableView registerClass:[headerFooterViewName class] forHeaderFooterViewReuseIdentifier:k##headerFooterViewName##Id];
+/// Xib 注册tableViewCellSectionFooterView
+//#define kLS_tableViewCellSectionFooterView_registerNib(tableView, footerViewName, footerViewId) \
+                        [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([footerViewName class]) bundle:nil] forHeaderFooterViewReuseIdentifier:footerViewId];
+/// Xib 注册tableViewCell
+#define kLS_tableViewCell_registerNib(tableView, cellName, cellIdentifiter) \
+                        [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([cellName class]) bundle:nil] forCellReuseIdentifier:cellIdentifiter]
+///纯代码注册 tableViewCell
+#define kLS_tableViewCell_registerClass(tableView, cellName, cellID) \
+                         [tableView registerClass:[cellName class] forCellReuseIdentifier:cellID];
+///从缓存池获取 tableViewCell
+#define kLS_tableViewCell_getFromCachePool(cellIdentifiter) \
+                         [tableView dequeueReusableCellWithIdentifier:cellIdentifiter forIndexPath:indexPath];
+///从缓存池获取 tableViewCellSectionHeaderView、 tableViewCellSectionFooterView
+#define kkLS_tableViewCellSectionHeaderFooterView_getFromCachePool(kHeaderFooterViewNameId) [tableView dequeueReusableHeaderFooterViewWithIdentifier:kHeaderFooterViewNameId];
 
 
-//Xib 注册tableViewCell
-#define kLS_tableViewCell_RegisterNib(tableView, CellName, cellIdentifiter) [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([CellName class]) bundle:nil] forCellReuseIdentifier:cellIdentifiter]
+/// Xib 注册collectionViewCell
+#define kLS_collectionViewCell_registerNib(collectionView, cellName, cellIdentifiter) \
+                         [collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([cellName class]) bundle:nil] forCellWithReuseIdentifier:cellIdentifiter];
+///纯代码注册 collectionViewCell
+#define kLS_collectionViewCell_registerClass(collectionView, cellName, cellIdentifiter) \
+                         [collectionView registerClass:[cellName class] forCellWithReuseIdentifier:cellIdentifiter];
+///从缓存池获取 collectionViewCell
+#define kLS_collectionViewCell_getFromCachePool(cellIdentifiter) \
+                         [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifiter forIndexPath:indexPath];
 
-//Xib 注册collectionCell
-#define kLS_collectionCell_RegisterNib(collectionView, cellName, cellIdentifiter) [collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([cellName class]) bundle:nil] forCellWithReuseIdentifier:cellIdentifiter];
 
-///Xib加载View
-#define kLS_LoadViewFromNibName(ViewName) [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([ViewName class]) owner:self options:nil] firstObject];
+/// Xib 加载View
+#define kLS_loadViewFromNibName(ViewName) \
+                         [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([ViewName class]) owner:self options:nil] firstObject];
 
+
+/// Xib 注册tableViewCellSectionHeaderView、 tableViewCellSectionFooterView
+#define kLS_tableViewCellSectionHeaderFooterView_registerNib_(tableView, headerViewName) \
+                        [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([headerViewName class]) bundle:nil] forHeaderFooterViewReuseIdentifier:k##headerViewName##Id];
+/// 纯代码 注册tableViewCellSectionHeaderView、tableViewCellSectionFooterView
+#define kLS_tableViewCellSectionHeaderFooterView_registerClass_(tableView, headerViewName) \
+                        [tableView registerClass:[headerViewName class] forHeaderFooterViewReuseIdentifier:k##headerViewName##Id];
+///  Xib 注册tableViewCell
+#define kLS_tableViewCell_registerNib_(tableView, cellName) \
+                        [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([cellName class]) bundle:nil] forCellReuseIdentifier:k##cellName##Id]
+///纯代码注册 tableViewCell cellID     kCellNameId 形式
+#define kLS_tableViewCell_registerClass_(tableView, cellName) \
+                         [tableView registerClass:[cellName class] forCellReuseIdentifier:k##cellName##Id];
+/// Xib 注册collectionViewCell
+#define kLS_collectionViewCell_registerNib_(collectionView, cellName) \
+                        [collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([cellName class]) bundle:nil] forCellWithReuseIdentifier:k##cellName##Id];
+///纯代码注册 collectionViewCell
+#define kLS_collectionViewCell_registerClass_(collectionView, cellName) \
+                        [collectionView registerClass:[cellName class] forCellWithReuseIdentifier:k##cellName##Id];
+
+///从缓存池获取 tableViewCell
+#define kLS_tableViewCell_getFromCachePool_(cellName) \
+                        [tableView dequeueReusableCellWithIdentifier:k##cellName##Id forIndexPath:indexPath];
+///从缓存池获取 tableViewCellSectionHeaderView、 tableViewCellSectionFooterView
+#define kkLS_tableViewCellSectionHeaderFooterView_getFromCachePool_(headerFooterViewName) \
+                        [tableView dequeueReusableHeaderFooterViewWithIdentifier:k##headerFooterViewName##Id];
+
+///从缓存池获取 collectionViewCell
+#define kLS_collectionViewCell_getFromCachePool_(cellName) \
+                        [collectionView dequeueReusableCellWithReuseIdentifier:k##cellName##Id forIndexPath:indexPath];
+
+
+
+///去除数组中重复的对象
+#define kLS_RemoveDuplicateObjectsFromArray(oldArray) [oldArray valueForKeyPath:@"@distinctUnionOfObjects.self"];
 
 
 //数据验证
@@ -222,7 +321,8 @@ if ([v1 compare:v2 options:NSNumericSearch] == NSOrderedDescending) {\
 
 #pragma mark - Judge 判断
 // 判断它是否是空字符串。
-#define kLS_IsEmptyString(str) ((str == nil) || [str isKindOfClass:[NSNull class]] || (str == NULL) || ([str isKindOfClass:[NSString class]] && str.length <= 0))
+// 判断它是否是空字符串。undefined
+#define kLS_IsEmptyString(str) ((str == nil) || [str isKindOfClass:[NSNull class]] || (str == NULL) || ([str isEqualToString:@"null"])  || ([str isEqualToString:@"<null>"]) || ([str isEqualToString:@"<NULL>"]) || ([str isEqualToString:@"(null)"]) || ([str isEqualToString:@"(NULL)"]) || ([str isEqualToString:@"undefined"]) || ([str isKindOfClass:[NSString class]] && str.length <= 0))
 // 判断它是否为nil或null对象。
 #define kLS_IsEmptyObject(obj) ((obj == nil) || (obj == NULL) || [obj isKindOfClass:[NSNull class]])
 // 判断它是否是一个有效的字典。
@@ -232,6 +332,13 @@ if ([v1 compare:v2 options:NSNumericSearch] == NSOrderedDescending) {\
 
 ///获取安全的字符串
 #define kLS_GetString(Str) (kLS_IsEmptyString(Str) ? @"" : [NSString stringWithFormat:@"%@", Str])
+#define kLS_IntegerToStr(num) ([NSString stringWithFormat:@"%ld", (long)num])
+#define CHECK_VALUE(str) (kLS_IsEmptyString(str) ? @"" : [NSString stringWithFormat:@"%@", str])
+
+#define ChangeNSIntegerToStr(num) [NSString stringWithFormat:@"%d", num]
+#define GET_SD_IMAGE_URL(str) [NSURL URLWithString:[NSString stringWithFormat:@"%@", str]]
+
+#define GetImgWithUrl(url) [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:url]]]
 
 
 // 当我们使用kvo或者做动画的时候需要使用keyPath，但是keyPath是字符串类型，为了防止输入错误，我们可以使用下面的自动提示宏

@@ -80,8 +80,11 @@ iPhoneXR           6.1英       896*414        @2x       828x1792
 //#define kLS_relative_height(height)  ((height)*(kLS_ScreenHeight/667.0f))
 
 // 不同屏幕尺寸适配 以iphone6 4.7寸为依据  ceilf:向上取整  floorf:向下取整
-#define kLS_relative_Width_Ratio   (kLS_ScreenWidth / 375.0)
-#define kLS_relative_Height_Ratio  (kLS_ScreenHeight / 667.0)
+#define kLS_relative_Width_Ratio   (kLS_ScreenWidth / 375.0f)
+#define kLS_relative_Height_Ratio  (kLS_ScreenHeight / 667.0f)
+#define kLS_relative_Width(x)      (ceilf((x) * kLS_relative_Width_Ratio))
+#define kLS_relative_Height(y)     (ceilf((y) * kLS_relative_Height_Ratio))
+
 //向上取整
 #define kLS_relative_Width_ceilf(x)      (ceilf((x) * kLS_relative_Width_Ratio))
 #define kLS_relative_Height_ceilf(y)     (ceilf((y) * kLS_relative_Height_Ratio))
@@ -91,6 +94,10 @@ iPhoneXR           6.1英       896*414        @2x       828x1792
 // 字体适配
 #define ALS_relative_systemFontSize(fontsize) [UIFont systemFontOfSize:kLS_relative_Width_Ratio(fontsize)]
 #define kLS_relative_FontSize(fontName,fontsize) [UIFont fontWithName:fontName size:kLS_relative_Width_Ratio(fontsize)]
+
+#define ADAPTERSIZE(X)     (X)*[UIScreen mainScreen].bounds.size.height/667.0f          //高度适配
+#define ADAPTERSIZE_6S(X)  (X)*[UIScreen mainScreen].bounds.size.width/375.0f           //6s宽度适配
+
 
 /****************************** 适配ios11 *************************************/
 //如果不需要系统为你设置边缘距离

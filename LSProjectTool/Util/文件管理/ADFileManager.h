@@ -5,7 +5,8 @@
 //  Created by Xcode on 16/12/7.
 //  Copyright © 2016年 Link-Start. All rights reserved.
 //
-
+//NSFileManager是用来管理文件系统的
+//它可以用来进行常见的文件\文件夹操作
 
 #import <Foundation/Foundation.h>
 
@@ -13,18 +14,18 @@
 
 #pragma mark - 沙盒目录相关
 
-//沙盒的主目录路径
-+ (NSString *)homeDir;
-//沙盒中Documents的目录路径
-+ (NSString *)documentsDir;
-//沙盒中Library的目录路径
-+ (NSString *)libraryDir;
-//沙盒中Library / Preferences的目录路径
-+ (NSString *)preferencesDir;
-//沙盒中Library / Caches的目录路径
-+ (NSString *)cachesDir;
-//沙盒中tmp的目录路径
-+ (NSString *)tmpDir;
+//沙盒 的主目录路径/ 应用程序路径
++ (NSString *)homeDirPath;
+//沙盒中 Documents 的目录路径
++ (NSString *)documentsDirPath;
+//沙盒中 Library 的目录路径
++ (NSString *)libraryDirPath;
+//沙盒中 Library/Preferences 的目录路径
++ (NSString *)preferencesDirPath;
+//沙盒中 Library/Caches 的 目录路径
++ (NSString *)cachesDirPath;
+//沙盒中 tmp 的目录路径
++ (NSString *)tmpDirPath;
 
 
 #pragma mark - 遍历文件夹
@@ -136,7 +137,7 @@
 + (NSString *)suffixAtPath:(NSString *)path;
 
 #pragma mark - 判断文件(夹)是否存在
-//判断文件路径是否存在
+//判断文件/文件夹 路径是否存在
 + (BOOL)isExistsAtPath:(NSString *)path;
 //判断路径是否为空(判断条件是文件大小为0, 或者是文件夹下没有子文件)
 + (BOOL)isEmptyItemAtPath:(NSString *)path;
@@ -191,5 +192,13 @@
 //写入文件内容(错误信息error)
 + (BOOL)writeFileAtPath:(NSString *)path content:(NSObject *)content error:(NSError **)error;
 
+
+
+
+
+/** 将文件大小转化成M单位或者B单位 */
++ (NSString *)getFileSizeString:(NSString *)size;
+/** 将文件大小转化成不带单位的数字 */
++ (float)getFileSizeNumber:(NSString *)size;
 
 @end

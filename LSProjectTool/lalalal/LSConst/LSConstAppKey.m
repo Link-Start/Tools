@@ -14,6 +14,8 @@
 NSString *const JPush_appKey = @"";
 ///友盟_appKey
 NSString *const UM_appKey = @"";
+/// 友盟_channel 渠道标识     可设置nil/@"" 表示"App Store".
+NSString *const UM_channel = @"";
 
 ///微信_appId
 NSString *const WeChat_appId = @"";
@@ -21,11 +23,15 @@ NSString *const WeChat_appId = @"";
 NSString *const WeChat_appKey = @"";
 ///微信_appSecret
 NSString *const WeChat_appSecret = @"";
+/// 微信分享的 Universal Links
+NSString *const WeChat_Universal_Links = @"";
 
 ///QQ_appId
 NSString *const QQ_appId = @"";
 ///QQ_appKey
 NSString *const QQ_appKey = @"";
+///QQ_appSecret
+NSString *const QQ_appSecret = @"";
 ///客服_QQ
 NSString *const QQ_KeFu = @"";
 

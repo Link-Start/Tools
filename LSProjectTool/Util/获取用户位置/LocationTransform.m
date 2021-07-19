@@ -6,6 +6,8 @@
 //  Copyright © 2018年 Naive. All rights reserved.
 //
 
+
+
 #import "LocationTransform.h"
 #import <CoreLocation/CoreLocation.h>
 
@@ -24,27 +26,31 @@ static const double xPi = M_PI  * 3000.0 / 180.0;
     }
     return self;
 }
-
+#pragma mark - GPS坐标<------>高德坐标
+//从GPS坐标转化到高德坐标      WGS-84 -----> GCJ-02
 - (id)transformFromGPSToGD {
     CLLocationCoordinate2D coor = [LocationTransform transformFromWGSToGCJ:CLLocationCoordinate2DMake(self.latitude, self.longitude)];
     return [[LocationTransform alloc] initWithLatitude:coor.latitude andLongitude:coor.longitude];
 }
-
+//从高德坐标到GPS坐标              GCJ-02 -----> WGS-84
+- (id)transformFromGDToGPS {
+    CLLocationCoordinate2D coor = [LocationTransform transformFromGCJToWGS:CLLocationCoordinate2DMake(self.latitude, self.longitude)];
+    return [[LocationTransform alloc] initWithLatitude:coor.latitude andLongitude:coor.longitude];
+}
+#pragma mark - 高德坐标<------>百度坐标
+//从高德坐标转化到百度坐标       GCJ-02 -----> BD-09
 - (id)transformFromGDToBD {
     CLLocationCoordinate2D coor = [LocationTransform transformFromGCJToBaidu:CLLocationCoordinate2DMake(self.latitude, self.longitude)];
     return [[LocationTransform alloc] initWithLatitude:coor.latitude andLongitude:coor.longitude];
 }
-
+//从百度坐标到高德坐标                BD-09 -----> GCJ-02
 - (id)transformFromBDToGD {
     CLLocationCoordinate2D coor = [LocationTransform transformFromBaiduToGCJ:CLLocationCoordinate2DMake(self.latitude, self.longitude)];
     return [[LocationTransform alloc] initWithLatitude:coor.latitude andLongitude:coor.longitude];
 }
 
-- (id)transformFromGDToGPS {
-    CLLocationCoordinate2D coor = [LocationTransform transformFromGCJToWGS:CLLocationCoordinate2DMake(self.latitude, self.longitude)];
-    return [[LocationTransform alloc] initWithLatitude:coor.latitude andLongitude:coor.longitude];
-}
-
+#pragma mark - 百度坐标<------>GPS坐标
+//从百度坐标到GPS坐标             BD-09 -----> WGS-84
 - (id)transformFromBDToGPS {
     //先把百度转化为高德
     CLLocationCoordinate2D start_coor = [LocationTransform transformFromBaiduToGCJ:CLLocationCoordinate2DMake(self.latitude, self.longitude)];
@@ -89,7 +95,7 @@ static const double xPi = M_PI  * 3000.0 / 180.0;
     return lon;
 }
 
-/// 高德坐标转百度坐标
+/// 高德坐标转百度坐标                    GCJ--------------->BD09
 + (CLLocationCoordinate2D)transformFromGCJToBaidu:(CLLocationCoordinate2D)p {
     long double z = sqrt(p.longitude * p.longitude + p.latitude * p.latitude) + 0.00002 * sqrt(p.latitude * pi);
     long double theta = atan2(p.latitude, p.longitude) + 0.000003 * cos(p.longitude * pi);
@@ -98,7 +104,7 @@ static const double xPi = M_PI  * 3000.0 / 180.0;
     geoPoint.longitude = (z * cos(theta) + 0.0065);
     return geoPoint;
 }
-/// 百度坐标转高德坐标
+/// 百度坐标转高德坐标                       BD09-------------->GCJ
 + (CLLocationCoordinate2D)transformFromBaiduToGCJ:(CLLocationCoordinate2D)p {
     double x = p.longitude - 0.0065, y = p.latitude - 0.006;
     double z = sqrt(x * x + y * y) - 0.00002 * sin(y * xPi);
@@ -108,7 +114,7 @@ static const double xPi = M_PI  * 3000.0 / 180.0;
     geoPoint.longitude = z * cos(theta);
     return geoPoint;
 }
-
+//高德 --> GPS                   GCG----->GPS
 + (CLLocationCoordinate2D)transformFromGCJToWGS:(CLLocationCoordinate2D)p {
     double threshold = 0.00001;
     
@@ -161,6 +167,45 @@ static bool isContains(CLLocationCoordinate2D point, CLLocationCoordinate2D p1, 
     return NO;
 }
 
+///********************************************************************************************************************************************/
+////https://blog.csdn.net/wei_zhenwei/article/details/80284287
+///// 只在中国大陆的范围的坐标有效，以外直接返回世界标准坐标
+///// @param location 世界标准地理坐标(WGS-84)
+///// @return 中国国测局地理坐标（GCJ-02）<火星坐标>
+//+ (CLLocationCoordinate2D)WGS84ToGCJ02:(CLLocationCoordinate2D)location;
+//
+//
+///// 中国国测局地理坐标（GCJ-02） 转换成 世界标准地理坐标（WGS-84）
+///// 此接口有1－2米左右的误差，需要精确定位情景慎用
+///// @param location 中国国测局地理坐标（GCJ-02）
+///// @return 世界标准地理坐标（WGS-84）
+//+ (CLLocationCoordinate2D)GCJ02ToWGS84:(CLLocationCoordinate2D)location;
+//
+//
+///// 世界标准地理坐标(WGS-84) 转换成 百度地理坐标（BD-09)
+///// @param location 世界标准地理坐标(WGS-84)
+///// @return 百度地理坐标（BD-09)
+//+ (CLLocationCoordinate2D)WGS84ToBD09:(CLLocationCoordinate2D)location;
+//
+//
+///// 中国国测局地理坐标（GCJ-02）<火星坐标> 转换成 百度地理坐标（BD-09)
+///// @param location 中国国测局地理坐标（GCJ-02）<火星坐标>
+///// @return 百度地理坐标（BD-09)
+//+ (CLLocationCoordinate2D)GCJ02ToBD09:(CLLocationCoordinate2D)location;
+//
+//
+///// 百度地理坐标（BD-09) 转换成 中国国测局地理坐标（GCJ-02）<火星坐标>
+///// @param location 百度地理坐标（BD-09)
+///// @return 中国国测局地理坐标（GCJ-02）<火星坐标>
+//+ (CLLocationCoordinate2D)BD09ToGCJ02:(CLLocationCoordinate2D)location;
+//
+//
+///// 百度地理坐标（BD-09) 转换成 世界标准地理坐标（WGS-84）
+///// 此接口有1－2米左右的误差，需要精确定位情景慎用
+///// @param location 百度地理坐标（BD-09)
+///// @return 世界标准地理坐标（WGS-84）
+//+ (CLLocationCoordinate2D)BD09ToWGS84:(CLLocationCoordinate2D)location;
 
 
 @end
+

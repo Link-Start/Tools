@@ -57,6 +57,7 @@
 
 
 #pragma mark ————— 友盟 初始化 —————
+//友盟分享 配置第三方平台URL Scheme :https://developer.umeng.com/docs/128606/detail/193653
 
 #pragma mark ————— 配置第三方 —————
 -(void)configUSharePlatforms{

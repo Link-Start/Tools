@@ -29,13 +29,13 @@
 //这个方法不是特别靠谱
 #define kLS_GetCurrentSystemVersion_D          ([[[UIDevice currentDevice] systemVersion] doubleValue])
 //建议使用这个方法
-#define kLS_GetCurrentSystemVersion    ([[UIDevice currentDevice] systemVersion])
+#define kLS_GetCurrentSystemVersion            ([[UIDevice currentDevice] systemVersion])
 
 //获取当前 APP的 版本  
-#define kLS_GetCurrentAPPVersion [[[NSBundle mainBundle] infoDictionary]objectForKey:@"CFBundleShortVersionString"]
+#define kLS_GetCurrentAPPVersion [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
 
 // ios7系统判断 判断设备的操做系统是不是ios7 如果是iOS7系统 返回YES
-#define IsIOS7 ([[[UIDevice currentDevice] systemVersion] floatValue] >=7.0)
+#define IsIOS7 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
 
 
 #endif /* DefineSystemVersion_h */

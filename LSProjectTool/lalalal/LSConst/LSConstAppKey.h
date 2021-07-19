@@ -23,11 +23,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LSConstAppKey : NSObject
 
+//FOUNDATION_EXPORT;
+//Foundation_export;
+
 ///极光推送appKey
 UIKIT_EXTERN NSString *const JPush_appKey;
 
 ///友盟_appKey
 UIKIT_EXTERN NSString *const UM_appKey;
+/// 友盟_channel 渠道标识
+UIKIT_EXTERN NSString *const UM_channel;
+
 
 ///微信_appId
 UIKIT_EXTERN NSString *const WeChat_appId;
@@ -35,11 +41,15 @@ UIKIT_EXTERN NSString *const WeChat_appId;
 UIKIT_EXTERN NSString *const WeChat_appKey;
 ///微信_appSecret
 UIKIT_EXTERN NSString *const WeChat_appSecret;
+/// 微信分享的 Universal Links
+UIKIT_EXTERN NSString *const WeChat_Universal_Links;
 
 ///QQ_appId
 UIKIT_EXTERN NSString *const QQ_appId;
 ///QQ_appKey
 UIKIT_EXTERN NSString *const QQ_appKey;
+///QQ_appSecret
+UIKIT_EXTERN NSString *const QQ_appSecret;
 ///客服_QQ
 UIKIT_EXTERN NSString *const QQ_KeFu;
 

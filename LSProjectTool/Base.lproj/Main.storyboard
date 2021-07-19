@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="DIN-Bold-2.ttf">
+            <string>DIN-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -49,19 +52,31 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="456465465" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sYA-dj-nhU">
-                                <rect key="frame" x="139" y="193" width="97" height="30"/>
+                                <rect key="frame" x="139" y="173" width="97" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="97" id="hyG-XO-Ew0"/>
                                 </constraints>
-                                <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2tf-0T-ePP">
+                                <rect key="frame" x="172.5" y="423.5" width="30" height="30"/>
+                                <color key="backgroundColor" red="0.98823529409999999" green="0.54901960780000003" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="CER-XG-vwq"/>
+                                    <constraint firstAttribute="width" constant="30" id="O7d-B7-urV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="DIN-Bold" family="DIN" pointSize="25"/>
+                                <color key="textColor" red="0.92156862750000001" green="0.26274509800000001" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="sYA-dj-nhU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9iA-Oz-T06"/>
+                            <constraint firstItem="2tf-0T-ePP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="EM6-SZ-HJA"/>
                             <constraint firstItem="KBd-pE-lyC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Evr-pd-beX"/>
+                            <constraint firstItem="2tf-0T-ePP" firstAttribute="top" secondItem="KBd-pE-lyC" secondAttribute="bottom" constant="70" id="S4L-xA-hiy"/>
                             <constraint firstItem="KBd-pE-lyC" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ZiP-eE-CmX"/>
                             <constraint firstItem="sYA-dj-nhU" firstAttribute="top" secondItem="wsT-PC-pQM" secondAttribute="bottom" constant="173" id="lhI-8d-E6p"/>
                         </constraints>
@@ -72,6 +87,11 @@
             <point key="canvasLocation" x="68" y="376.46176911544228"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="KBd-pE-lyC">
+            <size key="intrinsicContentSize" width="169" height="40"/>
+        </designable>
+    </designables>
     <resources>
         <image name="5" width="40" height="40"/>
     </resources>

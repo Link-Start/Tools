@@ -13,6 +13,12 @@
 #import "LSDatePicker.h"
 
 @interface LSDatePicker ()
+
+@property (nonatomic, strong) UIView *bgView;
+
+@end
+
+@interface LSDatePicker ()
 ///datePicker背景
 @property (nonatomic, strong) UIView *datePickerView;
 
@@ -39,6 +45,8 @@
 - (instancetype)initWithSelectTitle:(NSString *)title viewOfDelegate:(UIView *)view delegate:(id<LSDatePickerDelegate>)delegate {
     if (self = [super init]) {
         _view = view;
+        [_view addSubview:self.bgView];
+        _bgView.frame = view.frame;
         _delegate=  delegate;
         _isBeforeTime = YES;
         _theTypeOfLSDatePicker = 3;
@@ -59,6 +67,7 @@
 - (instancetype)initWithpickerViewWithCenterTitle:(NSString *)titleStr viewOfDelegate:(UIView *)view andCancelStr:(NSString *)cancelStr andSureStr:(NSString *)sureStr {
     if (self = [super init]) {
         _view = view;
+        _view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
         _isBeforeTime = YES;
         _theTypeOfLSDatePicker = 3;
         
@@ -92,7 +101,8 @@
 ///
 - (void)addSubView {
     
-    [self createDatePickerBgView];
+//    [self createDatePickerBgView];
+    [self.datePickerView addSubview:self.datePicker];
     //创建日期选择器
     [self createDatePicker];
     //创建左侧按钮
@@ -101,13 +111,13 @@
     [self createRightButton];
 }
 
-///创建日期选择器 背景
-- (void)createDatePickerBgView {
-    //创建日期选择器 背景
-    _datePickerView=[[UIView alloc] initWithFrame:CGRectMake(0,_view.bounds.size.height,_view.bounds.size.width,_view.bounds.size.height*0.42243)];
-    _datePickerView.backgroundColor=[UIColor whiteColor];
-    [_view addSubview:_datePickerView];
-}
+/////创建日期选择器 背景
+//- (void)createDatePickerBgView {
+//    //创建日期选择器 背景
+//    _datePickerView=[[UIView alloc] initWithFrame:CGRectMake(0,_view.bounds.size.height,_view.bounds.size.width,_view.bounds.size.height*0.42243)];
+//    _datePickerView.backgroundColor = [UIColor whiteColor];
+//    [_view addSubview:_datePickerView];
+//}
 
 ///创建日期选择器
 - (void)createDatePicker {
@@ -151,29 +161,30 @@
     if (isBeforeTime == NO) {
         [_datePicker setMinimumDate:[NSDate date]];
     } else {
+        //dateWithTimeIntervalSince1970: *1000 是精确到毫秒，不乘就是精确到秒
         [_datePicker setMinimumDate:[NSDate dateWithTimeIntervalSince1970:0]];
     }
 }
 
-/// datePicker显示类别
-- (void)setTheTypeOfLSDatePicker:(NSInteger)theTypeOfLSDatePicker{
+- (void)setMinDate:(NSDate *)minDate {
+    _minDate = minDate;
     
+    _datePicker.minimumDate = minDate;
+}
+
+/// datePicker显示类别
+- (void)setTheTypeOfLSDatePicker:(LSDatePickType)theTypeOfLSDatePicker{
     if (theTypeOfLSDatePicker == 1) {
         //只显示时间
         _datePicker.datePickerMode = UIDatePickerModeTime;
-        
-    }  else if(theTypeOfLSDatePicker == 2) {
+    } else if(theTypeOfLSDatePicker == 2) {
         //只显示日期
         _datePicker.datePickerMode = UIDatePickerModeDate;
-        
-    }  else if(theTypeOfLSDatePicker == 3) {
+    } else if(theTypeOfLSDatePicker == 3) {
         //时间与日期都显示
         _datePicker.datePickerMode = UIDatePickerModeDateAndTime;
-        
-    }else if (theTypeOfLSDatePicker == 4) {
-        
+    } else if (theTypeOfLSDatePicker == 4) {
         _datePicker.datePickerMode = UIDatePickerModeCountDownTimer;
-        
     } else {
         NSLog(@"时间类别选择错误");
     }
@@ -208,13 +219,17 @@
 }
 
 - (NSNumber *)getNumber {
+    // 获取当前所处的时区
     NSTimeZone *timeZone = [NSTimeZone systemTimeZone];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setTimeZone:timeZone];
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSDate *date = [formatter dateFromString:[[self getsTheSelectedTimeString] substringToIndex:16]];
+    // 获取当前时区和指定时区的时间差
     NSInteger interval = [timeZone secondsFromGMTForDate:date];
+    // 得到准确时间
     NSDate *localeDate = [date  dateByAddingTimeInterval: interval];
+    //dateWithTimeIntervalSince1970: *1000 是精确到毫秒，不乘就是精确到秒
     long long currentTime = (long long)(([localeDate timeIntervalSince1970] - 28800) * 1000);
     NSNumber *timeNumber = [NSNumber numberWithDouble:currentTime];
     return timeNumber;
@@ -224,17 +239,45 @@
 //出现
 - (void)showDatePicker {
     [UIView animateWithDuration:0.3 animations:^ {
+        _bgView.alpha = 1.0f;
          _datePickerView.frame=CGRectMake(0,_view.bounds.size.height-_view.bounds.size.height*0.42243,_view.bounds.size.width,_view.bounds.size.height*0.42243);
      }];
 }
 //隐藏日期选择器
 - (void)dismissDatePicker{
     [UIView animateWithDuration:0.3 animations:^{
+        _bgView.alpha = 0.0f;
         _datePickerView.frame=CGRectMake(0,_view.bounds.size.height,_view.bounds.size.width,_view.bounds.size.height*0.42243);
     }];
 }
 
+- (UIView *)bgView {
+    if (!_bgView) {
+        _bgView = [[UIView alloc] init];
+        _bgView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+
+    }
+    return _bgView;
+}
+
+- (UIDatePicker *)datePicker {
+    if (!_datePicker) {
+        //生成日期选择器
+        _datePicker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0,_view.bounds.size.height*0.07042,_view.bounds.size.width,_view.bounds.size.height*0.42243)];
+        _datePicker.date = [NSDate date];
+        _datePicker.datePickerMode = UIDatePickerModeDateAndTime;
+        //_datePicker.backgroundColor = [UIColor whiteColor]; 背景色是透明的。
+        if (@available(iOS 13.4, *)) {
+            _datePicker.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];//新发现这里不会根据系统的语言变了
+            _datePicker.preferredDatePickerStyle = UIDatePickerStyleWheels;
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+    return _datePicker;
+}
+
 - (void)dealloc {
-    self.delegate=nil;
+    self.delegate = nil;
 }
 @end

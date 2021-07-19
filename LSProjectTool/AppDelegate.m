@@ -8,15 +8,17 @@
 // JZNavigationExtension 导航条
 
 #import "AppDelegate.h"
+#import "AppDelegate+configuration.h"
+#import "AppDelegate+UMConfiguration.h"
 #import "RealReachability.h"
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import <AMapLocationKit/AMapLocationKit.h>
-#import "AppDelegate+configuration.h"
 
 
 #import "ViewController.h"
 #import "LSNavigationController.h"
 #import "LSConstAppKey.h"
+
 
 @interface AppDelegate ()
 
@@ -49,6 +51,8 @@
     /****************** 高德地图 ******************/
     [AMapServices sharedServices].apiKey = GaoDeMaps_appKey;
     
+    /****************** 初始化友盟 ******************/
+    [self initUMengConfiguration];
     
     return YES;
 }
@@ -78,7 +82,7 @@
 }
 
 
-///当程序将要退出是被调用，通常是用来保存数据和一些退出前的清理工作。这个需要要设置UIApplicationExitsOnSuspend的键值。
+///当程序将要退出时被调用，通常是用来保存数据和一些退出前的清理工作。这个需要要设置UIApplicationExitsOnSuspend的键值。
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     //用户关闭APP时调用

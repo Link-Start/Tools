@@ -39,9 +39,9 @@
     //如果是Window
     if ([nextResponder isKindOfClass:[UIWindow class]]) {
         nextResponder = self.window.rootViewController;
-
     }
 
+    //如果 是tabBar控制器,则返回选中的那个
     if ([nextResponder isKindOfClass:[UITabBarController class]]) {//如果是tabBarController
         UITabBarController *tabbar = (UITabBarController *)nextResponder;
         UINavigationController *nav = (UINavigationController *)tabbar.viewControllers[tabbar.selectedIndex];
@@ -50,7 +50,7 @@
         result = nav.childViewControllers.lastObject;
 
     } else if ([nextResponder isKindOfClass:[UINavigationController class]]) { //如果是navController
-
+        // 如果 导航控制器,则返回最后一个
         UIViewController *nav = (UIViewController *)nextResponder;
         result = nav.childViewControllers.lastObject;
 
@@ -60,6 +60,34 @@
     return result;
 }
 
+
+- (UIViewController*)currentViewController {
+    UIViewController* rootViewController = self.applicationDelegate.window.rootViewController;
+    return [self currentViewControllerFrom:rootViewController];
+}
+
+// 通过递归拿到当前控制器
+- (UIViewController*)currentViewControllerFrom:(UIViewController*)viewController {
+     // 如果传入的控制器是导航控制器,则返回最后一个
+  if ([viewController isKindOfClass:[UINavigationController class]]) {
+        UINavigationController* navigationController = (UINavigationController *)viewController;
+        return [self currentViewControllerFrom:navigationController.viewControllers.lastObject];
+    }
+    // 如果传入的控制器是tabBar控制器,则返回选中的那个
+  if([viewController isKindOfClass:[UITabBarController class]]) {
+        UITabBarController* tabBarController = (UITabBarController *)viewController;
+        return [self currentViewControllerFrom:tabBarController.selectedViewController];
+    }
+     // 如果传入的控制器发生了modal,则就可以拿到modal的那个控制器
+  if(viewController.presentedViewController != nil) {
+      if ([viewController.presentedViewController isKindOfClass:NSClassFromString(@"TXIMSDK_TUIKit_iOS.TUIAudioCallViewController")]||[viewController.presentedViewController isKindOfClass:NSClassFromString(@"TXIMSDK_TUIKit_iOS.TUIVideoCallViewController")]) {
+          return viewController;
+      }
+        return [self currentViewControllerFrom:viewController.presentedViewController];
+    }
+    //否则返回本身
+    return viewController;
+}
 
 
 

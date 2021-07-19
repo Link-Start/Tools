@@ -55,15 +55,16 @@
     //显示加载中
     MBProgressHUD *hud = [MBProgressHUD hud:graceTime];
     //显示提示语
-    hud.labelText = markedWords;
+//    hud.labelText = markedWords;
+    hud.label.text = markedWords;
     
     ////1.创建管理者对象
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     //设置请求超时的时间
     manager.requestSerializer.timeoutInterval = kTimeoutInterval;
-    
+
     //开始请求
-    [manager GET:url parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
+    [manager GET:url parameters:parameters headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
         // 这里可以获取到目前的数据请求的进度
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         //手动关闭MBProgressHUD
@@ -123,7 +124,7 @@
      第四个参数：上传失败的block回调
      error：错误信息，如果上传文件失败，那么error里面包含了错误的描述信息
      */
-    [manager POST:url parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+    [manager POST:url parameters:parameters headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
         // 这里可以获取到目前的数据请求的进度
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         //手动关闭MBProgressHUD(必须写在这个位置，不然不会关闭)
@@ -175,7 +176,7 @@
     //设置请求超时的时间
     manager.requestSerializer.timeoutInterval = kTimeoutInterval;
     //2.上传文件
-    [manager POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    [manager POST:urlString parameters:parameters headers:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         // 拼接data到请求体，这个block的参数是遵守AFMultipartFormData协议的。
         //上传文件参数
         NSData *imageData = UIImageJPEGRepresentation(image, 0.1);
@@ -236,7 +237,7 @@
     
     for (UIImage *image in images) {
         //2.上传文件
-        [manager POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [manager POST:urlString parameters:parameters headers:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
             // 拼接data到请求体，这个block的参数是遵守AFMultipartFormData协议的。
             //上传文件参数
             //在实际使用过程中,比较发现: UIImagePNGRepresentation(UIImage* image) 要比UIImageJPEGRepresentation(UIImage* image, 1.0) 返回的图片数据量大很多.
@@ -315,7 +316,7 @@
         //只要信号量值不大于等于1，就会一直等待，知道>=1，再进行操作
         dispatch_semaphore_wait(ls_semaphore_t, DISPATCH_TIME_FOREVER);
             //2.上传文件
-            [manager POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+            [manager POST:urlString parameters:parameters headers:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
                 // 拼接data到请求体，这个block的参数是遵守AFMultipartFormData协议的。
                 //上传文件参数
                 //在实际使用过程中,比较发现: UIImagePNGRepresentation(UIImage* image) 要比UIImageJPEGRepresentation(UIImage* image, 1.0) 返回的图片数据量大很多.
@@ -390,7 +391,7 @@
         dispatch_group_enter(group);
         
         //2.上传文件
-        [manager POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [manager POST:urlString parameters:parameters headers:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
             // 拼接data到请求体，这个block的参数是遵守AFMultipartFormData协议的。
             //上传文件参数
             //UIImageJPEGRepresentation(image, 1.0) 返回的图片数据较小.
@@ -526,7 +527,7 @@
     //2.上传文件
     for (NSString *filePath in audioArray) {
         
-        [manager POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [manager POST:urlString parameters:parameters headers:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
             
             ///上传文件参数
             // 拼接data到请求体，这个block的参数是遵守AFMultipartFormData协议的。
@@ -700,9 +701,10 @@
 //隐藏hud  移除hud
 + (void)hiddenHud:(MBProgressHUD *)hud {
     if (hud != nil) {
-        hud.taskInProgress = NO;
+//        hud.taskInProgress = NO;
         hud.removeFromSuperViewOnHide = YES;
-        [hud hide:YES];
+//        [hud hide:YES];
+        [hud hideAnimated:YES];
         [hud removeFromSuperview];
     }
 }
@@ -715,6 +717,7 @@
     //    NSLog(@"error.description = %@", error.description);
     //    NSLog(@"error.localizedDescription = %@", error.localizedDescription); //错误信息
     //    NSLog(@"error.userInfo = %@", error.userInfo);
+//    NSLog(@"error.userInfo[NSLocalizedFailureReasonErrorKey] = %@", error.userInfo[NSLocalizedFailureReasonErrorKey]);
     //    NSLog(@"error.domain = %@", error.domain);
     //    NSLog(@"error.localizedFailureReason = %@", error.localizedFailureReason);
     //    NSLog(@"error.localizedRecoverySuggestion = %@", error.localizedRecoverySuggestion);

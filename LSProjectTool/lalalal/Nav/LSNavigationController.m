@@ -108,6 +108,22 @@
     //    [self.navigationController.navigationBar setShadowImage:nil];
 }
 
+#pragma mark - iOS隐藏导航条1px的底部横线 方法3
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+//    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+- (UIImage *)barSpeLineWithColor:(UIColor *)color{
+    
+    CGRect rect = CGRectMake(0, 0, kLS_ScreenWidth, 0.5);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, color.CGColor);
+    CGContextFillRect(context, rect);
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return img;
+}
+
 ///重写push方法 push的控制器隐藏tabbar
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
     if (self.viewControllers.count > 0) {

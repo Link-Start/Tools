@@ -7,6 +7,26 @@
 //
 /***********************************************************************************/
 /********************** 使用时 必须把 LSDatePicker的实例对象 作为属性 **********************/
+/**
+ @property (nonatomic, strong) LSDatePicker *datePicker;
+
+ - (void)viewWillDisappear:(BOOL)animated {
+     [super viewWillDisappear:animated];
+     if (_datePicker) {
+         [_datePicker popDatePicker];
+     }
+ }
+ 
+ {
+ if (!_datePicker) {
+     UIWindow * keyWindow = [UIApplication sharedApplication].keyWindow;
+     _datePicker =[[CDPDatePicker alloc] initWithSelectTitle:nil viewOfDelegate:keyWindow delegate:self];
+ }
+ _datePicker.theTypeOfDatePicker = 2;//只有年月日
+ 
+ [self.datePicker pushDatePicker];
+ }
+ */
 /***********************************************************************************/
 
 #import <Foundation/Foundation.h>
@@ -27,7 +47,7 @@ typedef NS_ENUM(NSUInteger, LSDatePickType) {
 
 /*********************** @beif 代理 ***********************/
 @protocol LSDatePickerDelegate <NSObject>
-///代理方法
+///代理方法  年月日加时间:(0,16)
 -(void)LSDatePickerDidConfirm:(NSString *)dateString Num:(NSNumber *)timeNumber;
 @end
 
@@ -43,8 +63,11 @@ typedef NS_ENUM(NSUInteger, LSDatePickType) {
 
 /// 是否可选择今天以前的时间,默认为YES
 @property (nonatomic, assign) BOOL isBeforeTime;
+/// 最小时间
+@property (nonatomic, strong) NSDate *minDate;
+
 /// datePicker显示类别,分别为1=只显示时间,2=只显示日期，3=显示日期和时间(默认为3)
-@property (nonatomic, assign) NSInteger theTypeOfLSDatePicker;
+@property (nonatomic, assign) LSDatePickType theTypeOfLSDatePicker;
 
 
 ///初始化方法

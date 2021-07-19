@@ -12,16 +12,52 @@
 #define DefineColor_h
 
 ///rgb颜色转换（16进制->10进制） UIColorFromRGB(0xeef0f2)
-#define UIColorFromRGB(rgbValue) \
-[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+#define UIColorFromRGB(rgbValue)         [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+                                                         green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
+                                                          blue:((float)(rgbValue & 0xFF))/255.0 \
+                                                         alpha:1.0]
 
 // rgb颜色转换（16进制->10进制）
-#define UIColorFromRGBA(rgbValue, alpha)\
-[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:alpha]
+#define UIColorFromRGBA(rgbValue, alpha)      [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+                                                              green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
+                                                               blue:((float)(rgbValue & 0xFF))/255.0 \
+                                                              alpha:alpha]
 
 ///设置颜色 - RGBA  (R:红, G:绿, B:蓝, A:透明度) 利用这种方法设置颜色和透明值，可不影响子视图背景色
-#define kRGBA(R, G, B, A) [UIColor colorWithRed:(R)/255.0f green:(G)/255.0f blue:(B)/255.0f alpha:(A)]
+#define kRGBA(R, G, B, A)                     [UIColor colorWithRed:(R)/255.0f \
+                                                              green:(G)/255.0f \
+                                                               blue:(B)/255.0f \
+                                                              alpha:(A)]
 #define RGB(r,g,b) kRGBA(r,g,b,1.0f)
+
+// 取色值相关的方法
+#define RGBs(r,g,b)          [UIColor colorWithRed:(r)/255.f \
+                                            green:(g)/255.f \
+                                             blue:(b)/255.f \
+                                            alpha:1.f]
+
+#define RGBA(r,g,b,a)       [UIColor colorWithRed:(r)/255.f \
+                                            green:(g)/255.f \
+                                             blue:(b)/255.f \
+                                            alpha:(a)]
+
+#define RGBOF(rgbValue)     [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+                                            green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
+                                             blue:((float)(rgbValue & 0xFF))/255.0 \
+                                            alpha:1.0]
+
+#define RGBA_OF(rgbValue)   [UIColor colorWithRed:((float)(((rgbValue) & 0xFF000000) >> 24))/255.0 \
+                                             green:((float)(((rgbValue) & 0x00FF0000) >> 16))/255.0 \
+                                              blue:((float)(rgbValue & 0x0000FF00) >> 8)/255.0 \
+                                             alpha:((float)(rgbValue & 0x000000FF))/255.0]
+
+#define RGBAOF(v, a)        [UIColor colorWithRed:((float)(((v) & 0xFF0000) >> 16))/255.0 \
+                                            green:((float)(((v) & 0x00FF00) >> 8))/255.0 \
+                                             blue:((float)(v & 0x0000FF))/255.0 \
+                                            alpha:a]
+
+//#define UIColorHex(_hex_)   [UIColor colorWithHexString:((__bridge NSString *)CFSTR(#_hex_))]
+
 //清除背景色
 #define kClearColor [UIColor clearColor]
 

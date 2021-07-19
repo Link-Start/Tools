@@ -29,7 +29,8 @@
 #import "Masonry.h"
 #define MAS_SHORTHAND
 #define MAS_SHORTHAND_GLOBALS
-
+//#define MAS_SHORTHAND_GLOBALS使用全局宏定义，可以使equalTo等效于mas_equalTo
+//#define MAS_SHORTHAND使用全局宏定义, 可以在调用masonry方法的时候不使用mas_前缀
 
 
 

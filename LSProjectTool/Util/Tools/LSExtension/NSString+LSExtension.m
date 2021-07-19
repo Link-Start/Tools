@@ -13,7 +13,9 @@
 ///驼峰转下划线（loveYou -> love_you）
 - (NSString *)ls_underlineFromCamel {
     
-    if (self.length == 0) return self;
+    if (self.length == 0) {
+        return self;
+    }
     NSMutableString *string = [NSMutableString string];
     for (NSUInteger i = 0; i<self.length; i++) {
         unichar c = [self characterAtIndex:i];

@@ -124,7 +124,6 @@
                 UINavigationController *tempNav = self.tabBarController.viewControllers[i];
                 if ([tempNav.topViewController isKindOfClass:tempClass]) {
                     
-                    
                     //借鉴:https://blog.csdn.net/zhao15127334470/article/details/98955374
                     /******************下面的方法可以偷偷的把nav中的vc 移出栈*********************/
                     NSMutableArray *VCSArray = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
@@ -142,6 +141,28 @@
     }
 }
 
+///返回指定控制器(可以是 不同Nav之下)
+/// 从tabBarController的某个item下的 多层栈中的一个VC 跳转到同一个tabBarController之下的其他item的 某个VC
+- (void)ls_backOutTabBarControlItemToOtherItem:(Class)tempClass tabBarlItem:(NSInteger)tabBarItem {
+    for (UIViewController *tempVC in self.navigationController.viewControllers) {
+        if ([tempVC isKindOfClass:tempClass]) {
+            [self.navigationController popToViewController:tempVC animated:YES];
+            return;
+        } else {
+
+            
+            [self ls_selectTabBarControllerOtherItemVC:tabBarItem];//选择tabBarController其他 item
+            
+            UINavigationController *tempNav = self.tabBarController.viewControllers[tabBarItem];
+            NSMutableArray *VCS = [NSMutableArray arrayWithArray:tempNav.viewControllers];
+            [VCS addObject:tempVC];
+            tempNav.viewControllers = VCS;
+            self.navigationController.viewControllers = VCS;
+            
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }
+}
 
 ///从tabBarController的某个itemVC 返回到同一个tabBarController 之下的其他 item 的VC
 //Note:感觉有点鸡肋,只能从 tabBarControll.的某个item第一个VC跳到其他item的第一个VC
@@ -253,6 +274,28 @@
     }
 }
 
+// 通过递归拿到当前控制器
+- (UIViewController*)currentViewControllerFrom:(UIViewController*)viewController {
+     // 如果传入的控制器是导航控制器,则返回最后一个
+  if ([viewController isKindOfClass:[UINavigationController class]]) {
+        UINavigationController* navigationController = (UINavigationController *)viewController;
+        return [self currentViewControllerFrom:navigationController.viewControllers.lastObject];
+    }
+    // 如果传入的控制器是tabBar控制器,则返回选中的那个
+  if([viewController isKindOfClass:[UITabBarController class]]) {
+        UITabBarController* tabBarController = (UITabBarController *)viewController;
+        return [self currentViewControllerFrom:tabBarController.selectedViewController];
+    }
+     // 如果传入的控制器发生了modal,则就可以拿到modal的那个控制器
+  if(viewController.presentedViewController != nil) {
+      if ([viewController.presentedViewController isKindOfClass:NSClassFromString(@"TXIMSDK_TUIKit_iOS.TUIAudioCallViewController")]||[viewController.presentedViewController isKindOfClass:NSClassFromString(@"TXIMSDK_TUIKit_iOS.TUIVideoCallViewController")]) {
+          return viewController;
+      }
+        return [self currentViewControllerFrom:viewController.presentedViewController];
+    }
+    //否则返回本身
+    return viewController;
+}
 
 ///判断当前UIViewController 是否正在显示。
 - (BOOL)ls_isVisible {
@@ -312,6 +355,36 @@
 //#else
 //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 //#endif
+//}
+//- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+//    [super traitCollectionDidChange:previousTraitCollection];
+//#ifdef __IPHONE_13_0
+//    if (@available(iOS 13.0, *)) {
+//        [self preferredStatusBarUpdateAnimation];
+////        [self changeStatus];
+//    }
+//#endif
+//}
+//- (UIStatusBarStyle)preferredStatusBarStyle {
+//#ifdef __IPHONE_13_0
+//    if (@available(iOS 13.0, *)) {
+//        if (UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+//            return UIStatusBarStyleLightContent;
+//        }
+//    }
+//#endif
+//    return UIStatusBarStyleDefault;
+//}
+//- (void)changeStatus {
+//#ifdef __IPHONE_13_0
+//    if (@available(iOS 13.0, *)) {
+//        if (UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+//            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+//            return;
+//        }
+//    }
+//#endif
+//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
 //}
 //设置样式
 - (UIStatusBarStyle)preferredStatusBarStyle{

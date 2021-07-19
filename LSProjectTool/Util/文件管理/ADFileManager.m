@@ -36,31 +36,31 @@
  */
 
 ///获取应用的根目录(获取沙盒路径),也就是Documents的上级目录,当然也是tmp目录的上级目录:NSHomeDirectory()
-+ (NSString *)homeDir {
++ (NSString *)homeDirPath {
     return NSHomeDirectory();
 }
 
-///获取Documents文件夹目录
-+ (NSString *)documentsDir {
+///获取Documents文件夹目录/路径
++ (NSString *)documentsDirPath {
     return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
 }
 
-///获取Library目录
-+ (NSString *)libraryDir {
+///获取Library目录/路径
++ (NSString *)libraryDirPath {
     return [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) lastObject];
 }
-//沙盒中Library / Preferences的目录路径
-+ (NSString *)preferencesDir {
-    NSString *libraryDir = [self libraryDir];
+//沙盒中Library/Preferences的目录路径
++ (NSString *)preferencesDirPath {
+    NSString *libraryDir = [self libraryDirPath];
     return [libraryDir stringByAppendingPathComponent:@"Preferences"];
 }
 
-//沙盒中Library / Caches的目录路径
-+ (NSString *)cachesDir {
+//沙盒中Library/Caches 的 目录路径
++ (NSString *)cachesDirPath {
     return [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
 }
 // 沙盒中tmp的目录路径
-+ (NSString *)tmpDir {
++ (NSString *)tmpDirPath {
     return NSTemporaryDirectory();
 }
 
@@ -97,27 +97,27 @@
 
 //遍历沙盒主目录
 + (NSArray *)listFilesInHomeDirectoryByDeep:(BOOL)deep {
-    return [self listFilesInDirectoryAtPath:[self homeDir] deep:deep];
+    return [self listFilesInDirectoryAtPath:[self homeDirPath] deep:deep];
 }
 
 //遍历Library目录
 + (NSArray *)listFilesInLibraryDirectoryByDeep:(BOOL)deep {
-    return [self listFilesInDirectoryAtPath:[self libraryDir] deep:deep];
+    return [self listFilesInDirectoryAtPath:[self libraryDirPath] deep:deep];
 }
 
 //遍历Documents目录
 + (NSArray *)listFilesInDocumentDirectoryByDeep:(BOOL)deep {
-    return [self listFilesInDirectoryAtPath:[self documentsDir] deep:deep];
+    return [self listFilesInDirectoryAtPath:[self documentsDirPath] deep:deep];
 }
 
 //遍历tmp目录
 + (NSArray *)listFilesInTmpDirectoryByDeep:(BOOL)deep {
-    return [self listFilesInDirectoryAtPath:[self tmpDir] deep:deep];
+    return [self listFilesInDirectoryAtPath:[self tmpDirPath] deep:deep];
 }
 
 //遍历Caches目录
 + (NSArray *)listFilesInCachesDirectoryByDeep:(BOOL)deep {
-    return [self listFilesInDirectoryAtPath:[self cachesDir] deep:deep];
+    return [self listFilesInDirectoryAtPath:[self cachesDirPath] deep:deep];
 }
 
 #pragma mark - 获取文件属性
@@ -275,7 +275,7 @@
     BOOL isSuccess = YES;
     
     for (NSString *file in subFiles) {
-        NSString *absolutePath = [[self cachesDir] stringByAppendingPathComponent:file];
+        NSString *absolutePath = [[self cachesDirPath] stringByAppendingPathComponent:file];
         isSuccess &= [self removeItemAtPath:absolutePath];
     }
     return isSuccess;
@@ -288,7 +288,7 @@
     BOOL isSuccess = YES;
     
     for (NSString *file in subFiles) {
-        NSString *absolutePath = [[self tmpDir] stringByAppendingPathComponent:file];
+        NSString *absolutePath = [[self tmpDirPath] stringByAppendingPathComponent:file];
         isSuccess &= [self removeItemAtPath:absolutePath];
     }
     return isSuccess;
@@ -445,7 +445,7 @@
  */
 
 
-//判断文件路径是否存在
+//判断 文件/文件夹 是否存在
 + (BOOL)isExistsAtPath:(NSString *)path {
     return [[NSFileManager defaultManager] fileExistsAtPath:path];
 }
@@ -614,7 +614,7 @@
     }
    
     
-    if ([self isExistsAtPath:path]) {
+    if ([self isExistsAtPath:path]) {//判断 文件/文件夹 是否存在
         if ([content isKindOfClass:[NSMutableArray class]]) {
             [(NSMutableArray *)content writeToFile:path atomically:YES];
         }else if([content isKindOfClass:[NSArray class]]){
@@ -680,4 +680,57 @@
 }
 
 //
+
+/** 将文件大小转化成M单位或者B单位 */
++ (NSString *)getFileSizeString:(NSString *)size {
+    if([size floatValue]>=1024*1024)//大于1M，则转化成M单位的字符串
+    {
+        return [NSString stringWithFormat:@"%1.2fM",[size floatValue]/1024/1024];
+    }
+    else if([size floatValue]>=1024&&[size floatValue]<1024*1024) //不到1M,但是超过了1KB，则转化成KB单位
+    {
+        return [NSString stringWithFormat:@"%1.2fK",[size floatValue]/1024];
+    }
+    else//剩下的都是小于1K的，则转化成B单位
+    {
+        return [NSString stringWithFormat:@"%1.2fB",[size floatValue]];
+    }
+}
+/** 经文件大小转化成不带单位的数字 */
++ (float)getFileSizeNumber:(NSString *)size {
+    NSInteger indexM=[size rangeOfString:@"M"].location;
+    NSInteger indexK=[size rangeOfString:@"K"].location;
+    NSInteger indexB=[size rangeOfString:@"B"].location;
+    if(indexM<1000)//是M单位的字符串
+    {
+        return [[size substringToIndex:indexM] floatValue]*1024*1024;
+    }
+    else if(indexK<1000)//是K单位的字符串
+    {
+        return [[size substringToIndex:indexK] floatValue]*1024;
+    }
+    else if(indexB<1000)//是B单位的字符串
+    {
+        return [[size substringToIndex:indexB] floatValue];
+    }
+    else//没有任何单位的数字字符串
+    {
+        return [size floatValue];
+    }
+}
+
++ (CGFloat)calculateFileSizeInUnit:(unsigned long long)contentLength {
+    if (contentLength >= pow(1024, 3)) { return (CGFloat) (contentLength / (CGFloat)pow(1024, 3)); }
+    else if (contentLength >= pow(1024, 2)) { return (CGFloat) (contentLength / (CGFloat)pow(1024, 2)); }
+    else if (contentLength >= 1024) { return (CGFloat) (contentLength / (CGFloat)1024); }
+    else { return (CGFloat) (contentLength); }
+}
+
++ (NSString *)calculateUnit:(unsigned long long)contentLength {
+    if(contentLength >= pow(1024, 3)) { return @"GB";}
+    else if(contentLength >= pow(1024, 2)) { return @"MB"; }
+    else if(contentLength >= 1024) { return @"KB"; }
+    else { return @"B"; }
+}
+
 @end

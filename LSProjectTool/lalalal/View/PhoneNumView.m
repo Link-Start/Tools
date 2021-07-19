@@ -20,7 +20,7 @@
 ///验证码计时器
 @property (nonatomic, weak) NSTimer *verTimer;
 //验证码计数
-@property (nonatomic, assign)NSUInteger verTimeLimit;
+@property (nonatomic, assign) NSUInteger verTimeLimit;
 
 @end
 
@@ -83,10 +83,22 @@
 //        }
 //    }];
 }
+
+///NSTimer 自带的方法中是没有暂停和继续的方法的，但是NSTimer有个方法是 setFireDate .可以利用这个方法实现暂停和继续
+/// 暂停定时器
+- (void)pauseTimer {//暂停： 原理是把触发时间设置在未来，既很久之后，这样定时器自动进入等待触发的状态，估计要等很久。。。
+    [self.verTimer setFireDate:[NSDate distantFuture]];
+}
+///恢复定时器
+- (void)resumeTimer {//开始： 原理是把触发时间设置为现在，设置后定时器马上进入工作状态。
+    [self.verTimer setFireDate:[NSDate date]];
+}
 ///销毁定时器
-- (void)invalidateTimer {
-    [self.verTimer invalidate];
-    self.verTimer = nil;
+- (void)invalidateTimer {//停止： 系统自带方法，停止定时器
+    if (self.verTimer) {
+        [self.verTimer invalidate];
+        self.verTimer = nil;
+    }
 }
 
 #pragma mark - 定时器方法

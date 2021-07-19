@@ -27,14 +27,14 @@
 // 减速直到 targetContentOffset。
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset NS_AVAILABLE_IOS(5_0);
 
-// 在用户结束拖动后被调用，decelerate 为 YES 时，
+// 在用户结束拖动后被调用，decelerate(减速) 为 YES 时，
 // 结束拖动后会有减速过程。注，在 didEndDragging 之后，如果有减速过程，
 // scroll view 的 dragging 并不会立即置为 NO，而是要等到减速结束之后，
 // 所以这个 dragging 属性的实际语义更接近 scrolling。
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate;
 
 
-// 减速动画开始前被调用。
+// 减速动画开始前被调用。 decelerate:减速
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView;
 
 // 减速动画结束时被调用，这里有一种特殊情况：当一次减速动画尚未结束的时候再次 drag scroll view，

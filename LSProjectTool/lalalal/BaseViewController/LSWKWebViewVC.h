@@ -21,7 +21,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIProgressView *progressView;
 @property (nonatomic, strong) WKWebView *wkWebView;
 
+/// web URL地址
 @property (nonatomic, copy) NSString *urlString;
+
+///HTML 富文本
+@property (nonatomic, strong) NSString *HTMLString;
 
 ///添加子视图
 - (void)addSubViews;

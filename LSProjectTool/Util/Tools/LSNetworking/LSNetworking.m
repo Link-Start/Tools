@@ -20,6 +20,8 @@
 #import "AFNetworking.h"
 #import "AFNetworkActivityIndicatorManager.h"
 #endif
+#import "AFHTTPSessionManager+RetryPolicy.h"
+
 
 
 ///装有任务的数组
@@ -301,7 +303,21 @@ static inline NSString *cachePath() {
 ///使用UTF8 编码字符串
 + (NSString *)encodeUrl:(NSString *)urlStr {
     //使用系统方法对 字符串进行UTF+8编码
-    NSString *newString = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *newString = @"";
+//    if (@available(iOS 9.0, *)) {
+//        //对url中的中文进行转码
+//        newString = [urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+//    } else {
+//        [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    }
+    
+    if ([self respondsToSelector:@selector(stringByAddingPercentEncodingWithAllowedCharacters:)]) {
+        //对url中的中文进行转码
+        newString = [urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    } else {
+        [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    }
+    
     
     //如果编码成功 字符串不为空 返回编码后的字符串
     if (newString) {
@@ -504,17 +520,16 @@ static inline NSString *cachePath() {
     //显示加载中
     MBProgressHUD *hud = [MBProgressHUD hud:graceTime];
     //提示语
-    hud.labelText = markedWords;
+//    hud.labelText = markedWords;
+    hud.label.text = markedWords;
     //1.创建管理者对象
     AFHTTPSessionManager *manager = [self ls_manager];
     
     //处理网址
     NSString *absoluteUrlStr = [self createPublicBasicSettingsWithurlString:urlStr];
-    
-    
-    
+        
     //创建任务 开始请求数据
-    LSURLSessionTask *sessionTask = [manager GET:absoluteUrlStr parameters:Parameters progress:^(NSProgress * _Nonnull downloadProgress) {
+    LSURLSessionTask *sessionTask = [manager GET:absoluteUrlStr parameters:Parameters headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
         if (progress) {
             progress(downloadProgress.completedUnitCount, downloadProgress.totalUnitCount);
         }
@@ -523,9 +538,7 @@ static inline NSString *cachePath() {
         [self successResponse:responseObject callback:success hideHud:hud];
         //从数组中移除任务
         [[self allTasks] removeObject:sessionTask];
-        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-
         //从数组中移除任务
         [[self allTasks] removeObject:task];
         // 数据请求失败 返回错误
@@ -645,6 +658,9 @@ static inline NSString *cachePath() {
  *  @return 解析后的数据
  */
 + (id)tryToParseData:(id)responseData {
+    
+    ////这种可以打印中文
+    //NSString *string = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
     
     //NSNull:数组中元素的占位符，数据中的元素不能为nil（可以为空，也就是NSNull），
     //原因：nil 是数组的结束标志
@@ -779,23 +795,18 @@ static inline NSString *cachePath() {
     //显示加载中
     MBProgressHUD *hud = [MBProgressHUD hud:graceTime];
     //提示语
-    hud.labelText = markedWords;
+//    hud.labelText = markedWords;
+    hud.label.text = markedWords;
     //1.创建管理者对象
     AFHTTPSessionManager *manager = [self ls_manager];
     //处理网址
     NSString *absoluteUrlStr = [self createPublicBasicSettingsWithurlString:urlStr];
-    [manager POST:@"" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        [formData appendPartWithHeaders:nil body:[NSData data]];//这个body里面换成你的data数据
-    } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-
-    }];
-//    [AFHTTPRequestSerializer serializer] requestBySerializingRequest:<#(nonnull NSURLRequest *)#> withParameters:<#(nullable id)#> error:<#(NSError * _Nullable __autoreleasing * _Nullable)#>
-//    [AFHTTPRequestSerializer serializer] requestWithMethod:@"" URLString:@"" parameters:nil error:<#(NSError * _Nullable __autoreleasing * _Nullable)#>
+//    [manager POST:@"" parameters:nil headers:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+//        [formData appendPartWithHeaders:nil body:[NSData data]];//这个body里面换成你的data数据
+//    } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) { } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) { }];
     
     //创建任务 开始请求数据
-    LSURLSessionTask *sessionTask = [manager POST:absoluteUrlStr parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+    LSURLSessionTask *sessionTask = [manager POST:absoluteUrlStr parameters:parameters headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
         if (progress) {
             progress(uploadProgress.completedUnitCount, uploadProgress.totalUnitCount);
         }
@@ -810,7 +821,7 @@ static inline NSString *cachePath() {
         [[self allTasks] removeObject:task];
         // 数据请求失败 返回错误
         [self handleCallbackWithError:error fail:fail hideHud:hud];
-    }];
+    } retryCount:3 retryInterval:3 progressive:NO fatalStatusCodes:@[@(401)]];
     
     // 设置请求的优先级
     [weakSelf ls_configRequestPriority:sessionTask];
@@ -840,7 +851,7 @@ static inline NSString *cachePath() {
     //处理网址
     NSString *absoluteUrlStr = [self createPublicBasicSettingsWithurlString:urlStr];
     //创建任务 开始上传图片
-    LSURLSessionTask *sessionTask = [manager POST:absoluteUrlStr parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    LSURLSessionTask *sessionTask = [manager POST:absoluteUrlStr parameters:parameters headers:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         
         //可以在上传时使用当前系统时间作为文件名
         NSString *fileName = [NSString stringWithFormat:@"%@.jpg", [self returnsTheCurrentSystemTimeStamp]];
@@ -905,7 +916,7 @@ static inline NSString *cachePath() {
     LSURLSessionTask *sessionTask = nil;
     
     for (UIImage *image in images) {
-    sessionTask = [manager POST:absoluteUrlStr parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    sessionTask = [manager POST:absoluteUrlStr parameters:parameters headers:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
             //可以在上传时使用当前系统时间作为文件名
             NSString *fileName = [NSString stringWithFormat:@"%@.jpg", [self returnsTheCurrentSystemTimeStamp]];
             
@@ -1037,7 +1048,7 @@ static inline NSString *cachePath() {
     //处理网址
     NSString *absoluteUrlStr = [self createPublicBasicSettingsWithurlString:urlStr];
     //创建任务 开始上传 
-    LSURLSessionTask *sessionTask = [manager POST:absoluteUrlStr parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    LSURLSessionTask *sessionTask = [manager POST:absoluteUrlStr parameters:parameters headers:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         
         /*  appendPartWithFileURL   //  指定上传的文件路径
          *  name                    //  指定在服务器中获取对应文件或文本时的key
@@ -1124,6 +1135,8 @@ static inline NSString *cachePath() {
             [self handleCallbackWithError:error fail:fail hideHud:hud];
         }
     }];
+//    [manager uploadTaskWithRequest:<#(nonnull NSURLRequest *)#> fromData:<#(nullable NSData *)#> progress:<#^(NSProgress * _Nonnull uploadProgress)uploadProgressBlock#> completionHandler:<#^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error)completionHandler#>]
+//    [manager uploadTaskWithStreamedRequest:<#(nonnull NSURLRequest *)#> progress:<#^(NSProgress * _Nonnull uploadProgress)uploadProgressBlock#> completionHandler:<#^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error)completionHandler#>]
     
     // 设置请求的优先级
     [weakSelf ls_configRequestPriority:sessionTask];
@@ -1239,9 +1252,10 @@ static inline NSString *cachePath() {
 //隐藏hud  移除hud
 + (void)hiddenHud:(MBProgressHUD *)hud {
     if (hud != nil) {
-        hud.taskInProgress = NO;
+//        hud.taskInProgress = NO;
         hud.removeFromSuperViewOnHide = YES;
-        [hud hide:YES];
+//        [hud hide:YES];
+        [hud hideAnimated:YES];
         [hud removeFromSuperview];
     }
 }
@@ -1270,6 +1284,7 @@ static inline NSString *cachePath() {
     //    NSLog(@"error.description = %@", error.description);
     //    NSLog(@"error.localizedDescription = %@", error.localizedDescription); //错误信息
     //    NSLog(@"error.userInfo = %@", error.userInfo);
+//    NSLog(@"error.userInfo[NSLocalizedFailureReasonErrorKey] = %@", error.userInfo[NSLocalizedFailureReasonErrorKey]);
     //    NSLog(@"error.domain = %@", error.domain);
     //    NSLog(@"error.localizedFailureReason = %@", error.localizedFailureReason);
     //    NSLog(@"error.localizedRecoverySuggestion = %@", error.localizedRecoverySuggestion);
@@ -1282,6 +1297,9 @@ static inline NSString *cachePath() {
         case -1016:
             [MBProgressHUD qucickTip:@"不支持的解析格式,请添加数据解析类型"];
             break;
+        case -400:
+            [MBProgressHUD qucickTip:@"参数传递错误"];
+            break;
         case -404:
             [MBProgressHUD qucickTip:@"服务器错误"];
             break;
@@ -1290,6 +1308,7 @@ static inline NSString *cachePath() {
             break;
         case -1001:
             [MBProgressHUD qucickTip:@"请求超时"];
+//            您当前网络状态不好,请检查您的网络连接
             break;
         case -1002:
             [MBProgressHUD qucickTip:@"URL地址需要utf-8编码"];

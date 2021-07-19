@@ -60,3 +60,113 @@ image = [image resizableImageWithCapInsets:insets resizingMode:UIImageResizingMo
 CGRect rc = [btn.superview convertRect:btn.frame toView:self.view];
 或
 CGRect rc = [self.view convertRect:btn.frame fromView:btn.superview];
+
+
+
+
+iOS裁剪图片方式
+//返回裁剪区域图片
+
+-(UIImage*)clicpViewWithRect:(CGRect)aRect { //arect 想要截图的区域
+    CGFloat scale = [UIScreen mainScreen].scale;
+    aRect.origin.x*= scale;
+    aRect.origin.y*= scale;
+    aRect.size.width*= scale;
+    aRect.size.height*= scale;
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(self.view.width, self.view.height), YES, scale);
+    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    CGImageRefimageRef = viewImage.CGImage;
+    CGImageRef imageRefRect =CGImageCreateWithImageInRect(imageRef, aRect);
+    UIImage*sendImage = [[UIImagealloc]initWithCGImage:imageRefRect];
+    returnsendImage;
+}
+
+第一种方法
+
+// CIImage实现
+
+    CIImage*ciimage = [CIImageimageWithCGImage:newImage.CGImage];
+    ciimage = [ciimageimageByCroppingToRect:cropRect];
+    CIContext*context = [CIContextcontext];
+    CGImageRefimageRef = [contextcreateCGImage:ciimagefromRect:cropRect];
+    newImage = [UIImageimageWithCGImage:imageRef];
+第二种方法
+
+// quartz 2d 实现
+    UIGraphicsBeginImageContext(cropRect.size);
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    CGImageRefimageRef = newImage.CGImage;
+    CGImageRefsubImageRef =CGImageCreateWithImageInRect(imageRef, cropRect);
+    CGContextDrawImage(ctx, cropRect, subImageRef);
+    newImage = [UIImageimageWithCGImage:subImageRef];
+    UIGraphicsEndImageContext();
+第三种方法
+
+// CGImage
+    newImage = [UIImage imageWithCGImage:CGImageCreateWithImageInRect([newImage CGImage], cropRect)];
+
+
+
+按大小裁剪为指定的尺寸并解决图片裁剪之后显示不正确的问题
++ (UIImage *)cutCenterImageSize:(CGSize)size iMg:(UIImage *)img {
+    CGFloat scale = [UIScreen mainScreen].scale;
+    size.width = size.width*scale;
+    size.height = size.height *scale;
+    CGSize imageSize = img.size;
+    CGRect rect;
+    //根据图片的大小计算出图片中间矩形区域的位置与大小
+    if (imageSize.width > imageSize.height) {
+        float leftMargin = (imageSize.width - imageSize.height) *0.5;
+        rect = CGRectMake(leftMargin,0, imageSize.height, imageSize.height);
+    }else{
+        float topMargin = (imageSize.height - imageSize.width) *0.5;
+        rect = CGRectMake(0, topMargin, imageSize.width, imageSize.width);
+    }
+//记录旋转方向
+    CGAffineTransform transform = CGAffineTransformIdentity;
+    switch (img.imageOrientation) {
+        case UIImageOrientationDown:
+        case UIImageOrientationDownMirrored:
+            transform = CGAffineTransformTranslate(transform, img.size.width, img.size.height);
+            transform = CGAffineTransformRotate(transform,M_PI);
+            break;
+        case UIImageOrientationLeft:
+        case UIImageOrientationLeftMirrored:
+            transform = CGAffineTransformTranslate(transform, img.size.width,0);
+            transform = CGAffineTransformRotate(transform,M_PI_2);
+            break;
+        case UIImageOrientationRight:
+        case UIImageOrientationRightMirrored:
+            transform = CGAffineTransformTranslate(transform,0, img.size.height);
+            transform = CGAffineTransformRotate(transform, -M_PI_2);
+            break;
+        default:
+            break;
+    }
+    CGImageRef imageRef = img.CGImage;
+    //截取中间区域矩形图片
+    CGImageRef imageRefRect =CGImageCreateWithImageInRect(imageRef, rect);
+    UIImage *tmp = [[UIImage alloc] initWithCGImage:imageRefRect];
+    CGImageRelease(imageRefRect);
+    UIGraphicsBeginImageContext(size);
+    CGRect rectDraw =CGRectMake(0,0, size.width, size.height);
+    [tmp drawInRect:rectDraw];
+    // 从当前context中创建一个改变大小后的图片
+    tmp = UIGraphicsGetImageFromCurrentImageContext();
+    // 使当前的context出堆栈
+    UIGraphicsEndImageContext();
+    // 旋转为正确的方向
+    CGContextRef ctx = CGBitmapContextCreate(NULL, tmp.size.width, tmp.size.height,
+                                                 CGImageGetBitsPerComponent(tmp.CGImage),0,
+                                                 CGImageGetColorSpace(tmp.CGImage),
+                                                 CGImageGetBitmapInfo(tmp.CGImage));
+    CGContextConcatCTM(ctx, transform);
+    return tmp;
+}
+
+
+
+
+
