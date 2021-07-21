@@ -25,6 +25,8 @@ def all_Pods
 	pod 'TZImagePickerController'						#照片选择器
 	pod 'ZLPhotoBrowser'										#照片选择器(该库OC版本不再维护)
 	pod 'HXPhotoPicker'											#照片选择器
+	pod 'GKPhotoBrowser'										#iOS仿微信、今日头条等图片浏览器
+	# pod 'XLPhotoBrowser+CoderXL'						#一个简单实用的图片浏览器,效果类似微信图片浏览器,支持弹出动画和回缩动画,支持多图浏览,支持本地和网络图片浏览,支持多种属性自定义(支持横竖屏)
 	pod 'YTKNetwork'												#YTK 网络请求
 	pod 'XHLaunchAd'												#开屏广告
 

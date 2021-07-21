@@ -683,54 +683,61 @@
 
 /** 将文件大小转化成M单位或者B单位 */
 + (NSString *)getFileSizeString:(NSString *)size {
-    if([size floatValue]>=1024*1024)//大于1M，则转化成M单位的字符串
-    {
+//    if ([size floatValue] >= 1024*1024*1024) { // 大于1G，则转化成G单位的字符串
+//        return [NSString stringWithFormat:@"%1.2fG",[size floatValue]/1024/1024/1024];
+//    } else //&& [size floatValue] < 1024*1024*1024
+    if ([size floatValue] >= 1024*1024) {//大于1M，则转化成M单位的字符串
         return [NSString stringWithFormat:@"%1.2fM",[size floatValue]/1024/1024];
-    }
-    else if([size floatValue]>=1024&&[size floatValue]<1024*1024) //不到1M,但是超过了1KB，则转化成KB单位
-    {
+    } else if ([size floatValue] >= 1024 && [size floatValue] < 1024*1024) { //不到1M,但是超过了1KB，则转化成KB单位
         return [NSString stringWithFormat:@"%1.2fK",[size floatValue]/1024];
-    }
-    else//剩下的都是小于1K的，则转化成B单位
-    {
+    } else { //剩下的都是小于1K的，则转化成B单位
         return [NSString stringWithFormat:@"%1.2fB",[size floatValue]];
     }
 }
-/** 经文件大小转化成不带单位的数字 */
+/** 将文件大小转化成不带单位的数字 */
 + (float)getFileSizeNumber:(NSString *)size {
-    NSInteger indexM=[size rangeOfString:@"M"].location;
-    NSInteger indexK=[size rangeOfString:@"K"].location;
-    NSInteger indexB=[size rangeOfString:@"B"].location;
-    if(indexM<1000)//是M单位的字符串
-    {
-        return [[size substringToIndex:indexM] floatValue]*1024*1024;
-    }
-    else if(indexK<1000)//是K单位的字符串
-    {
-        return [[size substringToIndex:indexK] floatValue]*1024;
-    }
-    else if(indexB<1000)//是B单位的字符串
-    {
+    
+//    NSInteger indexG = [size rangeOfString:@"G"].location;
+    NSInteger indexM = [size rangeOfString:@"M"].location;
+    NSInteger indexK = [size rangeOfString:@"K"].location;
+    NSInteger indexB = [size rangeOfString:@"B"].location;
+    
+    
+    if (indexM < 1000) { //是M单位的字符串
+        return [[size substringToIndex:indexM] floatValue] * 1024 * 1024;
+    } else if (indexK < 1000) { //是K单位的字符串
+        return [[size substringToIndex:indexK] floatValue] * 1024;
+    } else if (indexB < 1000) {// 是B单位的字符串
         return [[size substringToIndex:indexB] floatValue];
-    }
-    else//没有任何单位的数字字符串
-    {
+    } else { //没有任何单位的数字字符串
         return [size floatValue];
     }
 }
 
 + (CGFloat)calculateFileSizeInUnit:(unsigned long long)contentLength {
-    if (contentLength >= pow(1024, 3)) { return (CGFloat) (contentLength / (CGFloat)pow(1024, 3)); }
-    else if (contentLength >= pow(1024, 2)) { return (CGFloat) (contentLength / (CGFloat)pow(1024, 2)); }
-    else if (contentLength >= 1024) { return (CGFloat) (contentLength / (CGFloat)1024); }
-    else { return (CGFloat) (contentLength); }
+    
+    if (contentLength >= pow(1024, 3)) {//
+        return (CGFloat)(contentLength / (CGFloat)pow(1024, 3));
+    } else if (contentLength >= pow(1024, 2)) {//
+        return (CGFloat)(contentLength / (CGFloat)pow(1024, 2));
+    } else if (contentLength >= 1024) {//
+        return (CGFloat)(contentLength / (CGFloat)1024);
+    } else {//
+        return (CGFloat)(contentLength);
+    }
 }
 
 + (NSString *)calculateUnit:(unsigned long long)contentLength {
-    if(contentLength >= pow(1024, 3)) { return @"GB";}
-    else if(contentLength >= pow(1024, 2)) { return @"MB"; }
-    else if(contentLength >= 1024) { return @"KB"; }
-    else { return @"B"; }
+    
+    if (contentLength >= pow(1024, 3)) {
+        return @"GB";
+    } else if (contentLength >= pow(1024, 2)) {
+        return @"MB";
+    } else if (contentLength >= 1024) {
+        return @"KB";
+    } else {
+        return @"B";
+    }
 }
 
 @end

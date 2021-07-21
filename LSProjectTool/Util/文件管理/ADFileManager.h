@@ -196,7 +196,7 @@
 
 
 
-/** 将文件大小转化成M单位或者B单位 */
+/** 将文件大小转化成M单位或者B单位   TB、GB、MB、KB、Byte、bit */
 + (NSString *)getFileSizeString:(NSString *)size;
 /** 将文件大小转化成不带单位的数字 */
 + (float)getFileSizeNumber:(NSString *)size;
