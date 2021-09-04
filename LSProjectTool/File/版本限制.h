@@ -64,10 +64,9 @@ func methodName4() {
 
 iOS @available 和 #available 的用法
 
-卡尔特斯 2020-10-14 09:50:14   1815   收藏 1
-分类专栏： iOS 文章标签： ios
-版权
-Swift 2.0 中,引入了可用性的概念。对于函数,类,协议等,可以使用**@available** 声明这些类型的生命周期依赖于特定的平台和操作系统版本。而**#available** 用在判断语句中(if, guard, while等),在不同的平台上做不同的逻辑。
+
+Swift 2.0 中,引入了可用性的概念。对于函数,类,协议等,可以使用**@available** 声明这些类型的生命周期依赖于特定的平台和操作系统版本。
+而**#available** 用在判断语句中(if, guard, while等),在不同的平台上做不同的逻辑。
 
 @available
 @available放在函数(方法),类或者协议前面。表明这些类型适用的平台和操作系统。看下面一个例子:
@@ -76,10 +75,7 @@ Swift 2.0 中,引入了可用性的概念。对于函数,类,协议等,可以使
     
   // do something
 }
-1
-2
-3
-4
+
 @available(iOS 9, *)必须包含至少2个特性参数,其中iOS 9表示必须在 iOS 9 版本以上才可用。
 另外一个特性参数: 星号( * ),表示包含了所有平台
 
@@ -87,10 +83,7 @@ Swift 2.0 中,引入了可用性的概念。对于函数,类,协议等,可以使
 // 是一种简写形式。全写形式是@available(iOS, introduced=9.0)
 // introduced=9.0参数表示指定平台(iOS)从 9.0 开始引入该声明。
 // 为什么可以采用简写形式呢?当只有introduced这样一种参数时,就可以简写成以上简写形式。
-1
-2
-3
-4
+
 @available还有其他一些参数可以使用,分别是:
 
 // deprecated = 版本号:从指定平台某个版本开始过期该声明
@@ -98,21 +91,13 @@ Swift 2.0 中,引入了可用性的概念。对于函数,类,协议等,可以使
 // message = 信息内容:给出一些附加信息
 // unavailable : 指定平台上是无效的
 // renamed = 新名字:重命名声明
-1
-2
-3
-4
-5
+
 @available(iOS, introduced: 6.0, deprecated: 9.0, message:"")
 func myMethod() { }
 
 @available(iOS, introduced: 8.0, obsoleted: 10.0, message:"")
 func myMethod() { }
-1
-2
-3
-4
-5
+
 #available
 #available 用在条件语句代码块中,判断不同的平台下,做不同的逻辑处理
 
@@ -125,7 +110,3 @@ guard #available(iOS 8, *) else {
 
   return //iOS 8 以下系统就直接返回
 }
-————————————————
-版权声明：本文为CSDN博主「卡尔特斯」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
-原文链接：https://blog.csdn.net/zz00008888/article/details/109058454
-#endif /* _____h */

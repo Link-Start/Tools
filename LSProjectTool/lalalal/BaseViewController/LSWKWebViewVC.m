@@ -108,8 +108,21 @@
     if (navigationAction.navigationType==WKNavigationTypeBackForward) {//判断是返回类型
         
     }
+    
+//    if ([navigationAction.request.URL.path rangeOfString:@"type=09&id="].location != NSNotFound){//选中服务
+//
+//        NSString *string = navigationAction.request.URL.path;
+//        NSRange startRange = [string rangeOfString:@"type=09&id="];
+//        NSString *result = [string substringFromIndex:(startRange.location+startRange.length)];
+//        self.spid = result;
+//
+//
+//        decisionHandler(WKNavigationActionPolicyCancel);
+//    } else {
+    
     //这句是必须加上的，不然会异常
-    decisionHandler(actionPolicy);
+      decisionHandler(WKNavigationActionPolicyAllow);
+//    }
 }
 
 
@@ -125,6 +138,7 @@
 }
 - (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView {
     NSLog(@"网页加载内容进程终止");
+//    [webView reload];
 }
 
 

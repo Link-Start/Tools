@@ -97,11 +97,11 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  水平居中
  */
-- (void)alignHorizontal;
+- (void)ls_alignHorizontal;
 /**
  *  垂直居中
  */
-- (void)alignVertical;
+- (void)ls_alignVertical;
 /** **/
 - (instancetype)ls_with;
 
@@ -113,7 +113,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @description Loads an instance from the Nib named like the class.
  *               Returns the first root object of the Nib.
  */
-+ (id)loadFromNib;
++ (id)ls_loadFromNib;
 
 ////////////////////////////////////////////////////////
 
@@ -122,19 +122,22 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return 是:在      否：不在
  */
-- (BOOL)isShowOnWindow;
+- (BOOL)ls_isShowOnWindow;
 ///主控制器 - 响应者
-- (UIViewController *)parentController;
+- (UIViewController *)ls_parentController;
 // 判断View是否显示在屏幕上
-- (BOOL)isDisplayedInScreen;
+- (BOOL)ls_isDisplayedInScreen;
 /// 第一响应者
-- (UIView *)firstResponder;
+- (UIView *)ls_firstResponder;
 ///获取一个view所属的控制器
-- (UIViewController *)belongViewController;
+- (UIViewController *)ls_belongViewController;
 
 
 ///移除所有的子视图
-- (void)removeAllSubViews;
+- (void)ls_removeAllSubViews;
+
+/// 更新尺寸，使用autolayout布局时需要刷新约束才能获取到真实的frame
+- (void)ls_updateFrame;
 
 @end
 

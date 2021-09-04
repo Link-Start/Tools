@@ -123,6 +123,14 @@
 }
 
 #pragma mark - 获取IDFA 权限
+//IDFA & IDFV
+//IDFA - Identifier For Advertising（广告标识符）
+//      同一手机获取该值都相同
+//      重装应用, 不会改变
+//      用户可手动重置这个值. 重置广告 id: 设置 -> 隐私 -> 广告 -> 重置广告 id (中国区的可能看不到这个, 模拟器可以看到)
+//IDFV - Identifier For Vendor（应用开发商标识符）
+///// https://blog.csdn.net/yangxuan0261/article/details/113801704
+
 //获取IDFA 权限
 - (void)obtainIDFA {
      // iOS14方式访问 IDFA

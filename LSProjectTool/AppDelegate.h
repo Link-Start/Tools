@@ -12,6 +12,8 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+///允许屏幕旋转/横屏
+@property (nonatomic, assign) BOOL allowRotation;
 
 @end
 
@@ -31,3 +33,4 @@
 //pod 'XHLaunchAd'      #开屏广告
 //CYLTabBarController #一行代码实现 Lottie 动画TabBar，支持中间带+号的TabBar样式，自带红点角标，支持动态刷新
 //pod 'WZLBadge' 角标
+//UICKeyChainStore   https://blog.csdn.net/yangxuan0261/article/details/113801704

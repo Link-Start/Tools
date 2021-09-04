@@ -38,4 +38,15 @@
 #define IsIOS7 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
 
 
+
+////使用 @available 导致旧版本 Xcode 编译出错。
+////在 Xcode 11 的 SDK 工程的代码里面使用了 @available 判断当前系统版本，打出来的包放在 Xcode 10 中编译，会出现错误
+//#ifndef __IPHONE_13_0
+//#define __IPHONE_13_0 130000
+//#endif
+//
+//#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0
+//
+//#endif
+
 #endif /* DefineSystemVersion_h */

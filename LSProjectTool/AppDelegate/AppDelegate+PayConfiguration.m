@@ -8,6 +8,7 @@
 
 #import "AppDelegate+PayConfiguration.h"
 
+
 @implementation AppDelegate (PayConfiguration)
 
 @end

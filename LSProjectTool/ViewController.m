@@ -20,6 +20,10 @@
 #import <Photos/Photos.h>
 #import "TZImagePickerController.h"
 //#import "Util/Tools/Function/Function.h"
+#import "AppDelegate.h"
+
+//#import "LSProjectTool-Swift.h"
+
 
 @interface ViewController ()<UITextFieldDelegate, AMapLocationManagerDelegate>
 
@@ -43,6 +47,15 @@
 
 
 #define kuu @"uu"
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self begainFullScreen];
+}
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self endFullScreen];
+}
 
 
 - (void)viewDidLoad {
@@ -291,6 +304,47 @@
 //        [self pushImagePickerController];
     }
 }
+
+
+#pragma mark - ----------------- 屏幕旋转
+
+// 是否支持自动转屏
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
+// 支持哪些屏幕方向
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskAllButUpsideDown;
+}
+
+// 默认的屏幕方向（当前ViewController必须是通过模态出来的UIViewController（模态带导航的无效）方式展现出来的，才会调用这个方法）
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return [self.navigationController.topViewController preferredInterfaceOrientationForPresentation];
+}
+
+/// 开始 支持屏幕旋转
+- (void)begainFullScreen {
+    AppDelegate * appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    appDelegate.allowRotation = YES;
+}
+
+// 关闭 屏幕旋转
+- (void)endFullScreen {
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.allowRotation = NO;
+     //强制归正：
+    if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
+        SEL selector = NSSelectorFromString(@"setOrientation:");
+        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[UIDevice instanceMethodSignatureForSelector:selector]];
+        [invocation setSelector:selector];
+        [invocation setTarget:[UIDevice currentDevice]];
+        int val = UIInterfaceOrientationPortrait;
+        [invocation setArgument:&val atIndex:2];
+        [invocation invoke];
+    }
+}
+#pragma mark - ----------------- 屏幕旋转
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -125,7 +125,12 @@
 }
 
 
-
+-(UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+    if (self.allowRotation) {//如果设置了allowRotation属性，支持横屏
+        return UIInterfaceOrientationMaskAllButUpsideDown;
+    }
+    return UIInterfaceOrientationMaskPortrait;//默认全局不支持横屏
+}
 
 
 

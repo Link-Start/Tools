@@ -400,19 +400,22 @@
 }
 
 #pragma mark -  屏幕旋转(如果当前VC是根视图控制器直接设置下面的方法)
+//需要在支持除竖屏以外方向的页面重新下边三个方法
+// 最好在需要支持旋转的VC 中重写这个方法，以防止有其他nav,vc,tabBarCon的分类中有重写这三个方法导致 横屏支持不可用
 //是否自动旋转,返回YES可以自动旋转
 - (BOOL)shouldAutorotate {
     // 是否支持旋转
-    return NO;
+    return YES;         //需要支持横屏的VC中这里设置为YES/NO 好像没什么影响
 }
-//返回支持的方向
+//支持哪些屏幕方向
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskPortrait;
+    return UIInterfaceOrientationMaskAllButUpsideDown;
 }
-//这个是返回优先方向\默认进去类型
+// 默认的屏幕方向（当前ViewController必须是通过模态出来的UIViewController（模态带导航的无效）方式展现出来的，才会调用这个方法）
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
-    return UIInterfaceOrientationPortrait;
+    return [self.navigationController.topViewController preferredInterfaceOrientationForPresentation];
 }
+/************************ 屏幕旋转 ********************************/
 
 //只要日志没有打印出来，说明内存得不到释放，就需要学会分析内存引用问题了
 - (void)viewDidAppear:(BOOL)animated {

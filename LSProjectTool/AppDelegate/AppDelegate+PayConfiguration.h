@@ -10,6 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+
+/// 支付
 @interface AppDelegate (PayConfiguration)
 
 @end

@@ -58,21 +58,21 @@ static char leftEdgeKey;
         return self.bounds;
     }
 }
-
-///系统方法重载
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *) event {
-    
-    if (self.alpha <= 0.01 || !self.userInteractionEnabled || self.hidden) {
-        return nil;
-    }
-    
-    CGRect rect = [self enlargedRect];
-    
-    if (CGRectEqualToRect(rect, self.bounds)) {
-        return [super hitTest:point withEvent:event];
-    }
-    return CGRectContainsPoint(rect, point) ? self : nil;
-}
+//
+/////系统方法重载
+//- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *) event {
+//
+//    if (self.alpha <= 0.01 || !self.userInteractionEnabled || self.hidden) {
+//        return nil;
+//    }
+//
+//    CGRect rect = [self enlargedRect];
+//
+//    if (CGRectEqualToRect(rect, self.bounds)) {
+//        return [super hitTest:point withEvent:event];
+//    }
+//    return CGRectContainsPoint(rect, point) ? self : nil;
+//}
 
 //######################## button不设置高度此处 会有问题
 /////自定义按钮点击的有效区域
@@ -95,5 +95,30 @@ static char leftEdgeKey;
 //    
 //    return YES;
 //}
+
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent*)event {
+    
+    //    CGRect bounds = self.bounds;
+    //    //若原热区小于44x44，则放大热区，否则保持原大小不变
+    //    CGFloat widthDelta = MAX(44.0 - bounds.size.width, 0);
+    //    CGFloat heightDelta = MAX(44.0 - bounds.size.height, 0);
+    //    bounds = CGRectInset(bounds, -0.5 * widthDelta, -0.5 * heightDelta);
+    //    return CGRectContainsPoint(bounds, point);
+    
+    CGRect rect = [self enlargedRect];
+    
+    if (self.tag == 413) {
+        //若原热区小于44x44，则放大热区，否则保持原大小不变
+        CGFloat widthDelta = MAX(self.enlargedEdge, self.bounds.size.width);
+        CGFloat heightDelta = MAX(self.enlargedEdge, self.bounds.size.height);
+        rect = CGRectInset(rect, -0.5 * widthDelta, -0.5 * heightDelta);
+    } else {
+        //若原热区小于44x44，则放大热区，否则保持原大小不变
+        CGFloat widthDelta = MAX(44.0 - rect.size.width, 0);
+        CGFloat heightDelta = MAX(44.0 - rect.size.height, 0);
+        rect = CGRectInset(rect, -0.5 * widthDelta, -0.5 * heightDelta);
+    }
+    return CGRectContainsPoint(rect, point);
+}
 
 @end

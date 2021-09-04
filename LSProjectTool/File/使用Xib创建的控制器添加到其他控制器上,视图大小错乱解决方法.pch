@@ -25,6 +25,7 @@
     
     CGRect frame = self.view.frame;
     frame.size.width = KScreenWidth;
+    frame.size.height = KScreenHeight;
     [self.view setFrame:frame];
 }
 

@@ -405,6 +405,12 @@
         case -1016:
             [MBProgressHUD qucickTip:@"不支持的解析格式,请添加数据解析类型"];
             break;
+        case -400:
+            [MBProgressHUD qucickTip:@"参数传递错误"];
+            break;
+        case -401:
+            [MBProgressHUD qucickTip:@"访问的页面没有授权"];
+            break;
         case -404:
             [MBProgressHUD qucickTip:@"服务器错误"];
             break;

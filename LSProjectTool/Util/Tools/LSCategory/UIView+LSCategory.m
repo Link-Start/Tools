@@ -239,11 +239,11 @@
 }
 
 ///水平居中
-- (void)alignHorizontal {
+- (void)ls_alignHorizontal {
     self.ls_x = (self.superview.ls_width - self.ls_width) * 0.5;
 }
 ///垂直居中
-- (void)alignVertical {
+- (void)ls_alignVertical {
     self.ls_y = (self.superview.ls_height - self.ls_height) *0.5;
 }
 
@@ -260,7 +260,7 @@
 /**
  *  @brief 从Xib加载视图
  */
-+ (id)loadFromNib
++ (id)ls_loadFromNib
 {
     NSString *nibName = NSStringFromClass([self class]);
     NSArray *elements = [[NSBundle mainBundle] loadNibNamed:nibName
@@ -276,7 +276,7 @@
 
 /**************************************************************************/
 ///判断是否显示在主窗口window上面
-- (BOOL)isShowOnWindow {
+- (BOOL)ls_isShowOnWindow {
     //主窗口
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     
@@ -294,7 +294,7 @@
 }
 
 ///主控制器
-- (UIViewController *)parentController {
+- (UIViewController *)ls_parentController {
     UIResponder *responder = [self nextResponder];
     while (responder) {
         if ([responder isKindOfClass:[UIViewController class]]) {
@@ -306,7 +306,7 @@
 }
 
 // 判断View是否显示在屏幕上
-- (BOOL)isDisplayedInScreen {
+- (BOOL)ls_isDisplayedInScreen {
     if (self == nil) {
         return FALSE;
     }
@@ -344,7 +344,7 @@
 }
 
 /**************************************************************************/
-- (UIView *)firstResponder {
+- (UIView *)ls_firstResponder {
     if ([self isFirstResponder]) {
         return self;
     }
@@ -360,7 +360,7 @@
 }
 
 // view分类方法
-- (UIViewController *)belongViewController {
+- (UIViewController *)ls_belongViewController {
     for (UIView *next = [self superview]; next; next = next.superview) {
         UIResponder* nextResponder = [next nextResponder];
         if ([nextResponder isKindOfClass:[UIViewController class]]) {
@@ -372,10 +372,17 @@
 
 
 ///移除所有的子视图
-- (void)removeAllSubViews {
+- (void)ls_removeAllSubViews {
     for(UIView * view in [self subviews]) {
         [view removeFromSuperview];
     }
+}
+
+/// 更新尺寸，使用autolayout布局时需要刷新约束才能获取到真实的frame
+- (void)ls_updateFrame{
+    [self updateConstraints];
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
 }
 
 

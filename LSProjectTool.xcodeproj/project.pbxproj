@@ -20,7 +20,6 @@
 		08197C8F1FE3564D00478FC4 /* ReachStateWWAN.m in Sources */ = {isa = PBXBuildFile; fileRef = 08197C7D1FE3564D00478FC4 /* ReachStateWWAN.m */; };
 		08197C911FE3564D00478FC4 /* PingFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 08197C811FE3564D00478FC4 /* PingFoundation.m */; };
 		08197C921FE3564D00478FC4 /* PingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 08197C831FE3564D00478FC4 /* PingHelper.m */; };
-		08197C931FE3564D00478FC4 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 08197C841FE3564D00478FC4 /* README.md */; };
 		08197C941FE3564D00478FC4 /* RealReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 08197C861FE3564D00478FC4 /* RealReachability.m */; };
 		082751C11FF1DB42004BB480 /* UIView+ExclusiveTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 082751C01FF1DB42004BB480 /* UIView+ExclusiveTouch.m */; };
 		0852D820204FDEC000B8686F /* SelfSizingCollectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0852D81F204FDEC000B8686F /* SelfSizingCollectCell.m */; };
@@ -42,7 +41,6 @@
 		08F658601FF3D270007880CC /* UIViewController+AlertViewAndActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6585D1FF3D270007880CC /* UIViewController+AlertViewAndActionSheet.m */; };
 		08FB5E24202DA8B1003F1132 /* LSButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FB5E20202DA8B0003F1132 /* LSButton.m */; };
 		08FB5E25202DA8B1003F1132 /* LSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FB5E23202DA8B1003F1132 /* LSLabel.m */; };
-		14FC952B2A68AF605C169F5A /* libPods-LSProjectToolUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EB33AA47C09150389C7A779 /* libPods-LSProjectToolUITests.a */; };
 		3D2005C721F9C97E0010425C /* LSConstAppKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2005C621F9C97E0010425C /* LSConstAppKey.m */; };
 		3D2005CA21F9CA970010425C /* LSConstUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2005C921F9CA970010425C /* LSConstUrl.m */; };
 		3D2156DA21F09A54006EDACE /* JsonTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2156D921F09A54006EDACE /* JsonTools.m */; };
@@ -77,10 +75,15 @@
 		487FC63D20BE937700FC19FA /* UIButton+UIControl_buttonCon.m in Sources */ = {isa = PBXBuildFile; fileRef = 487FC63B20BE937700FC19FA /* UIButton+UIControl_buttonCon.m */; };
 		48B715482184710900A32E5D /* UISearchBar+LSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B715472184710900A32E5D /* UISearchBar+LSExtension.m */; };
 		48C35B7F2137E71700B0AA2B /* LocationTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 48C35B7E2137E71700B0AA2B /* LocationTransform.m */; };
-		8EB8DB2C53C80F4142324F38 /* libPods-LSProjectToolTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE0A00A2A5479E7F8B9FE57A /* libPods-LSProjectToolTests.a */; };
-		A29D9686F6B9AFBA2B8EEE37 /* libPods-LSProjectTool.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD2F215F9D94630775437E5E /* libPods-LSProjectTool.a */; };
+		83124E4D88DC06B1792327A8 /* Pods_LSProjectTool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C53BE9EC7EC41315362254 /* Pods_LSProjectTool.framework */; };
 		A7029FB9266F200600D42B84 /* ZYNetworkAccessibility.m in Sources */ = {isa = PBXBuildFile; fileRef = A7029FB8266F200600D42B84 /* ZYNetworkAccessibility.m */; };
 		A704E1352672261900EC55EE /* JYEqualCellSpaceFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A704E1342672261900EC55EE /* JYEqualCellSpaceFlowLayout.m */; };
+		A70CFF3E26A6AA8E008F47AA /* AppDelegate+PayConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = A70CFF3D26A6AA8E008F47AA /* AppDelegate+PayConfiguration.m */; };
+		A70CFF4126A6AAFC008F47AA /* LSPayTools.m in Sources */ = {isa = PBXBuildFile; fileRef = A70CFF4026A6AAFC008F47AA /* LSPayTools.m */; };
+		A70CFF5326A6B5DC008F47AA /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A70CFF5226A6B5DC008F47AA /* libc++.tbd */; };
+		A70CFF5526A6B5FA008F47AA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A70CFF5426A6B5FA008F47AA /* QuartzCore.framework */; };
+		A70CFF5726A6B60D008F47AA /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A70CFF5626A6B60D008F47AA /* CoreText.framework */; };
+		A70CFF5926A6B642008F47AA /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A70CFF5826A6B642008F47AA /* CoreMotion.framework */; };
 		A73C39DB23A76262005F50D6 /* CFGradientLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A73C39DA23A76262005F50D6 /* CFGradientLabel.m */; };
 		A748A0BF263D243300C7FFE7 /* YLWaterFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A748A0BD263D243200C7FFE7 /* YLWaterFlowLayout.m */; };
 		A74FA417268D6C0200A251DA /* NSObject+LSSelectorDefenderInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = A74FA416268D6C0200A251DA /* NSObject+LSSelectorDefenderInstance.m */; };
@@ -109,6 +112,10 @@
 		A7AA34FC2679F6D90043716A /* DIN-Black-2.otf in Resources */ = {isa = PBXBuildFile; fileRef = A7AA34F82679F6D90043716A /* DIN-Black-2.otf */; };
 		A7AA35022679FA900043716A /* DIN-Bold-2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A7AA35012679FA900043716A /* DIN-Bold-2.ttf */; };
 		A7AC000326549FCD006CD6B8 /* LSWKWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AC000226549FCD006CD6B8 /* LSWKWebView.m */; };
+		A7BA62E226BD1E4B00D49930 /* ScanSuccessJumpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BA62DC26BD1E4B00D49930 /* ScanSuccessJumpVC.m */; };
+		A7BA62E326BD1E4B00D49930 /* WCQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BA62DE26BD1E4B00D49930 /* WCQRCodeVC.m */; };
+		A7BA62E426BD1E4B00D49930 /* WBQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BA62E026BD1E4B00D49930 /* WBQRCodeVC.m */; };
+		A7BA62E726BD1E5600D49930 /* SGWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BA62E526BD1E5600D49930 /* SGWebView.m */; };
 		A7BC079A268AB2BE004D08F6 /* UIView+AdaptScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BC0799268AB2BE004D08F6 /* UIView+AdaptScreen.m */; };
 		A7D14FFD265CA54E00C6D713 /* NSTimer+LSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D14FFC265CA54E00C6D713 /* NSTimer+LSExtension.m */; };
 		A7DE94F32653E1E300110026 /* NSTimer+BlockTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DE94F22653E1E300110026 /* NSTimer+BlockTimer.m */; };
@@ -116,6 +123,7 @@
 		A7DE94FF2653E32F00110026 /* NormalTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DE94FE2653E32F00110026 /* NormalTimer.m */; };
 		A7F5064123A386D800666F3B /* LSYTKGetRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F5063F23A386D800666F3B /* LSYTKGetRequest.m */; };
 		A7F5064223A386D800666F3B /* LSYTKRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F5064023A386D800666F3B /* LSYTKRequest.m */; };
+		AAFFC729DCEA40F0A2B0D88D /* Pods_LSProjectToolTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCC4DBE5D19BF7E0AAFF332D /* Pods_LSProjectToolTests.framework */; };
 		AE0C7D9C1E0BBE750051269F /* link.html in Resources */ = {isa = PBXBuildFile; fileRef = AE0C7D9B1E0BBE750051269F /* link.html */; };
 		AE0C7D9E1E0BC2A50051269F /* link.js in Resources */ = {isa = PBXBuildFile; fileRef = AE0C7D9D1E0BC2A50051269F /* link.js */; };
 		AE24FCDA1DAB411C00740806 /* SCMath.m in Sources */ = {isa = PBXBuildFile; fileRef = AE24FCD91DAB411C00740806 /* SCMath.m */; };
@@ -177,6 +185,7 @@
 		AECFA25B1D376C5F005F5DE6 /* LSProjectToolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AECFA25A1D376C5F005F5DE6 /* LSProjectToolTests.m */; };
 		AECFA2661D376C5F005F5DE6 /* LSProjectToolUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = AECFA2651D376C5F005F5DE6 /* LSProjectToolUITests.m */; };
 		AED9083C1D3CB35700E00C02 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AED9083E1D3CB35700E00C02 /* Localizable.strings */; };
+		E46E18DF084539324454B871 /* Pods_LSProjectToolUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 821E60571B22AEE397AB4EE2 /* Pods_LSProjectToolUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -224,7 +233,6 @@
 		08197C811FE3564D00478FC4 /* PingFoundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PingFoundation.m; sourceTree = "<group>"; };
 		08197C821FE3564D00478FC4 /* PingHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PingHelper.h; sourceTree = "<group>"; };
 		08197C831FE3564D00478FC4 /* PingHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PingHelper.m; sourceTree = "<group>"; };
-		08197C841FE3564D00478FC4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		08197C851FE3564D00478FC4 /* RealReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealReachability.h; sourceTree = "<group>"; };
 		08197C861FE3564D00478FC4 /* RealReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealReachability.m; sourceTree = "<group>"; };
 		082751BF1FF1DB42004BB480 /* UIView+ExclusiveTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ExclusiveTouch.h"; sourceTree = "<group>"; };
@@ -295,7 +303,6 @@
 		3DB5DC022216E77400069E5F /* 银行卡有重复.text */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "银行卡有重复.text"; sourceTree = "<group>"; };
 		3DB5DC032216E77400069E5F /* 银行卡号名称.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "银行卡号名称.xml"; sourceTree = "<group>"; };
 		3DB5DC042216E77500069E5F /* 银行卡号和名称(字典).html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "银行卡号和名称(字典).html"; sourceTree = "<group>"; };
-		3EB33AA47C09150389C7A779 /* libPods-LSProjectToolUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LSProjectToolUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		48090A9B20B7AD490052D83C /* 递归获取子视图.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "递归获取子视图.h"; sourceTree = "<group>"; };
 		48221819212FDE7A005AE181 /* BaiDuMapTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiDuMapTools.h; sourceTree = "<group>"; };
 		4822181A212FDE7A005AE181 /* BaiDuMapTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaiDuMapTools.m; sourceTree = "<group>"; };
@@ -334,12 +341,25 @@
 		48C35B7E2137E71700B0AA2B /* LocationTransform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationTransform.m; sourceTree = "<group>"; };
 		48F64E9220E205C1009BA3A1 /* UIScrollVIew代理方法.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollVIew代理方法.h"; sourceTree = "<group>"; };
 		77D6B28DC7A1EE10042FC61F /* Pods-LSProjectToolTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LSProjectToolTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LSProjectToolTests/Pods-LSProjectToolTests.debug.xcconfig"; sourceTree = "<group>"; };
+		821E60571B22AEE397AB4EE2 /* Pods_LSProjectToolUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LSProjectToolUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9669D094AB10EBCD586505F1 /* Pods-LSProjectTool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LSProjectTool.release.xcconfig"; path = "Pods/Target Support Files/Pods-LSProjectTool/Pods-LSProjectTool.release.xcconfig"; sourceTree = "<group>"; };
 		A7029FB7266F200600D42B84 /* ZYNetworkAccessibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYNetworkAccessibility.h; sourceTree = "<group>"; };
 		A7029FB8266F200600D42B84 /* ZYNetworkAccessibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYNetworkAccessibility.m; sourceTree = "<group>"; };
 		A704E1332672261800EC55EE /* JYEqualCellSpaceFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYEqualCellSpaceFlowLayout.h; sourceTree = "<group>"; };
 		A704E1342672261900EC55EE /* JYEqualCellSpaceFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYEqualCellSpaceFlowLayout.m; sourceTree = "<group>"; };
+		A709888726C15542000BA7F8 /* iOS 指定页面横屏的实现.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iOS 指定页面横屏的实现.h"; sourceTree = "<group>"; };
+		A70CFF3C26A6AA8D008F47AA /* AppDelegate+PayConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+PayConfiguration.h"; sourceTree = "<group>"; };
+		A70CFF3D26A6AA8E008F47AA /* AppDelegate+PayConfiguration.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+PayConfiguration.m"; sourceTree = "<group>"; };
+		A70CFF3F26A6AAFC008F47AA /* LSPayTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSPayTools.h; sourceTree = "<group>"; };
+		A70CFF4026A6AAFC008F47AA /* LSPayTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSPayTools.m; sourceTree = "<group>"; };
+		A70CFF5226A6B5DC008F47AA /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		A70CFF5426A6B5FA008F47AA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A70CFF5626A6B60D008F47AA /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		A70CFF5826A6B642008F47AA /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		A70CFF5A26A6B687008F47AA /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlipaySDK.framework; path = "Pods/AlipaySDK-iOS/AlipaySDK.framework"; sourceTree = "<group>"; };
+		A70EFF2A26C605D200BE686D /* 自定义弹窗VC和View.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "自定义弹窗VC和View.h"; sourceTree = "<group>"; };
 		A71A28352647EABC00E49854 /* pod第三方库版本.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "pod第三方库版本.h"; sourceTree = "<group>"; };
+		A72B2CC626D72F7A008B18E2 /* LSProjectTool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LSProjectTool.entitlements; sourceTree = "<group>"; };
 		A73BD0E0264F5A9400DD98C6 /* WKWebView的一些设置.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WKWebView的一些设置.h"; sourceTree = "<group>"; };
 		A73C39D923A76262005F50D6 /* CFGradientLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFGradientLabel.h; sourceTree = "<group>"; };
 		A73C39DA23A76262005F50D6 /* CFGradientLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFGradientLabel.m; sourceTree = "<group>"; };
@@ -362,6 +382,7 @@
 		A76A68B7239F819800E1273D /* PurchaseCarAnimationTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseCarAnimationTool.h; sourceTree = "<group>"; };
 		A76A68B8239F819800E1273D /* PurchaseCarAnimationTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseCarAnimationTool.m; sourceTree = "<group>"; };
 		A76A68B9239F819800E1273D /* ShoppingCartTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingCartTool.m; sourceTree = "<group>"; };
+		A77B458826C3D32400B76F70 /* LSProjectTool-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LSProjectTool-Bridging-Header.h"; sourceTree = "<group>"; };
 		A77BA17523A870BE00316085 /* TTGTagCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTGTagCollectionView.h; sourceTree = "<group>"; };
 		A77BA17723A870BE00316085 /* TTGTextTagCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTGTextTagCollectionView.h; sourceTree = "<group>"; };
 		A77BA17823A870BE00316085 /* TTGTagCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTGTagCollectionView.m; sourceTree = "<group>"; };
@@ -398,6 +419,15 @@
 		A7AA35012679FA900043716A /* DIN-Bold-2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DIN-Bold-2.ttf"; sourceTree = "<group>"; };
 		A7AC000126549FCD006CD6B8 /* LSWKWebView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSWKWebView.h; sourceTree = "<group>"; };
 		A7AC000226549FCD006CD6B8 /* LSWKWebView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSWKWebView.m; sourceTree = "<group>"; };
+		A7BA62CF26BCE70C00D49930 /* Xcode创建文件自定义头部注释.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Xcode创建文件自定义头部注释.h"; sourceTree = "<group>"; };
+		A7BA62DC26BD1E4B00D49930 /* ScanSuccessJumpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanSuccessJumpVC.m; sourceTree = "<group>"; };
+		A7BA62DD26BD1E4B00D49930 /* WBQRCodeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBQRCodeVC.h; sourceTree = "<group>"; };
+		A7BA62DE26BD1E4B00D49930 /* WCQRCodeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCQRCodeVC.m; sourceTree = "<group>"; };
+		A7BA62DF26BD1E4B00D49930 /* ScanSuccessJumpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanSuccessJumpVC.h; sourceTree = "<group>"; };
+		A7BA62E026BD1E4B00D49930 /* WBQRCodeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBQRCodeVC.m; sourceTree = "<group>"; };
+		A7BA62E126BD1E4B00D49930 /* WCQRCodeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCQRCodeVC.h; sourceTree = "<group>"; };
+		A7BA62E526BD1E5600D49930 /* SGWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGWebView.m; sourceTree = "<group>"; };
+		A7BA62E626BD1E5600D49930 /* SGWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGWebView.h; sourceTree = "<group>"; };
 		A7BC0798268AB2BD004D08F6 /* UIView+AdaptScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AdaptScreen.h"; sourceTree = "<group>"; };
 		A7BC0799268AB2BE004D08F6 /* UIView+AdaptScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AdaptScreen.m"; sourceTree = "<group>"; };
 		A7CA5A082637AC5E00420D6A /* DefineFont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefineFont.h; sourceTree = "<group>"; };
@@ -414,7 +444,6 @@
 		A7F5063E23A386D800666F3B /* LSYTKRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSYTKRequest.h; sourceTree = "<group>"; };
 		A7F5063F23A386D800666F3B /* LSYTKGetRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSYTKGetRequest.m; sourceTree = "<group>"; };
 		A7F5064023A386D800666F3B /* LSYTKRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSYTKRequest.m; sourceTree = "<group>"; };
-		AD2F215F9D94630775437E5E /* libPods-LSProjectTool.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LSProjectTool.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE0C7D9B1E0BBE750051269F /* link.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = link.html; sourceTree = "<group>"; };
 		AE0C7D9D1E0BC2A50051269F /* link.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = link.js; sourceTree = "<group>"; };
 		AE1F72BB1DD40ACA00B8CCF7 /* 四舍五入.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "四舍五入.h"; sourceTree = "<group>"; };
@@ -564,10 +593,11 @@
 		AED908401D3CB48900E00C02 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		AED908411D3CB48900E00C02 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		AEE9A6971DD07F9E000990C5 /* 获取iOS设备键盘高度.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "获取iOS设备键盘高度.h"; sourceTree = "<group>"; };
+		B2C53BE9EC7EC41315362254 /* Pods_LSProjectTool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LSProjectTool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C69ABA5E6EE0EAF0C5A71735 /* Pods-LSProjectTool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LSProjectTool.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LSProjectTool/Pods-LSProjectTool.debug.xcconfig"; sourceTree = "<group>"; };
 		DB0A56D400258C26CC378921 /* Pods-LSProjectToolUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LSProjectToolUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LSProjectToolUITests/Pods-LSProjectToolUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		DCC4DBE5D19BF7E0AAFF332D /* Pods_LSProjectToolTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LSProjectToolTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDEAC8A311A145A80907489D /* Pods-LSProjectToolUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LSProjectToolUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LSProjectToolUITests/Pods-LSProjectToolUITests.release.xcconfig"; sourceTree = "<group>"; };
-		FE0A00A2A5479E7F8B9FE57A /* libPods-LSProjectToolTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LSProjectToolTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE31EAEFFFA43EE6B03170CD /* Pods-LSProjectToolTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LSProjectToolTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LSProjectToolTests/Pods-LSProjectToolTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -576,6 +606,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A70CFF5926A6B642008F47AA /* CoreMotion.framework in Frameworks */,
+				A70CFF5726A6B60D008F47AA /* CoreText.framework in Frameworks */,
+				A70CFF5526A6B5FA008F47AA /* QuartzCore.framework in Frameworks */,
+				A70CFF5326A6B5DC008F47AA /* libc++.tbd in Frameworks */,
 				A79650BC2638F33F0031932F /* AppTrackingTransparency.framework in Frameworks */,
 				486443932119CC7100C3B9BF /* libresolv.tbd in Frameworks */,
 				486443912119CC6800C3B9BF /* UserNotifications.framework in Frameworks */,
@@ -591,7 +625,7 @@
 				486443832119CC0B00C3B9BF /* CFNetwork.framework in Frameworks */,
 				AE24FCDE1DAB41E100740806 /* CoreMedia.framework in Frameworks */,
 				AE24FCDC1DAB41D500740806 /* CoreData.framework in Frameworks */,
-				A29D9686F6B9AFBA2B8EEE37 /* libPods-LSProjectTool.a in Frameworks */,
+				83124E4D88DC06B1792327A8 /* Pods_LSProjectTool.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -599,7 +633,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8EB8DB2C53C80F4142324F38 /* libPods-LSProjectToolTests.a in Frameworks */,
+				AAFFC729DCEA40F0A2B0D88D /* Pods_LSProjectToolTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -607,7 +641,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14FC952B2A68AF605C169F5A /* libPods-LSProjectToolUITests.a in Frameworks */,
+				E46E18DF084539324454B871 /* Pods_LSProjectToolUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -638,6 +672,7 @@
 		08197C6C1FE3564D00478FC4 /* FSM */ = {
 			isa = PBXGroup;
 			children = (
+				A7547B4623CDA8DE00AF3535 /* UIImage+GenerateBarCode.h */,
 				08197C6D1FE3564D00478FC4 /* FSMDefines.h */,
 				08197C6E1FE3564D00478FC4 /* FSMEngine.h */,
 				08197C6F1FE3564D00478FC4 /* FSMEngine.m */,
@@ -666,7 +701,6 @@
 				08197C811FE3564D00478FC4 /* PingFoundation.m */,
 				08197C821FE3564D00478FC4 /* PingHelper.h */,
 				08197C831FE3564D00478FC4 /* PingHelper.m */,
-				08197C841FE3564D00478FC4 /* README.md */,
 			);
 			path = Ping;
 			sourceTree = "<group>";
@@ -807,6 +841,10 @@
 				486443762119CB6200C3B9BF /* AppDelegate+JPush.m */,
 				A77F5E92265795CD0002AD16 /* AppDelegate+UMConfiguration.h */,
 				A77F5E93265795CD0002AD16 /* AppDelegate+UMConfiguration.m */,
+				A70CFF3C26A6AA8D008F47AA /* AppDelegate+PayConfiguration.h */,
+				A70CFF3D26A6AA8E008F47AA /* AppDelegate+PayConfiguration.m */,
+				A70CFF3F26A6AAFC008F47AA /* LSPayTools.h */,
+				A70CFF4026A6AAFC008F47AA /* LSPayTools.m */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -838,6 +876,11 @@
 		486443812119CC0B00C3B9BF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A70CFF5A26A6B687008F47AA /* AlipaySDK.framework */,
+				A70CFF5826A6B642008F47AA /* CoreMotion.framework */,
+				A70CFF5626A6B60D008F47AA /* CoreText.framework */,
+				A70CFF5426A6B5FA008F47AA /* QuartzCore.framework */,
+				A70CFF5226A6B5DC008F47AA /* libc++.tbd */,
 				A79650BB2638F33F0031932F /* AppTrackingTransparency.framework */,
 				486443922119CC7100C3B9BF /* libresolv.tbd */,
 				486443902119CC6800C3B9BF /* UserNotifications.framework */,
@@ -848,9 +891,9 @@
 				486443862119CC1C00C3B9BF /* CoreTelephony.framework */,
 				486443842119CC1300C3B9BF /* CoreFoundation.framework */,
 				486443822119CC0B00C3B9BF /* CFNetwork.framework */,
-				AD2F215F9D94630775437E5E /* libPods-LSProjectTool.a */,
-				FE0A00A2A5479E7F8B9FE57A /* libPods-LSProjectToolTests.a */,
-				3EB33AA47C09150389C7A779 /* libPods-LSProjectToolUITests.a */,
+				B2C53BE9EC7EC41315362254 /* Pods_LSProjectTool.framework */,
+				DCC4DBE5D19BF7E0AAFF332D /* Pods_LSProjectToolTests.framework */,
+				821E60571B22AEE397AB4EE2 /* Pods_LSProjectToolUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -884,7 +927,6 @@
 		A7547B4523CDA88500AF3535 /* 生成条形码 */ = {
 			isa = PBXGroup;
 			children = (
-				A7547B4623CDA8DE00AF3535 /* UIImage+GenerateBarCode.h */,
 				A7547B4723CDA8DE00AF3535 /* UIImage+GenerateBarCode.m */,
 			);
 			path = "生成条形码";
@@ -940,6 +982,29 @@
 				A7AA34F82679F6D90043716A /* DIN-Black-2.otf */,
 			);
 			path = DIN;
+			sourceTree = "<group>";
+		};
+		A7BA62DA26BD1E1E00D49930 /* 二维码扫描 */ = {
+			isa = PBXGroup;
+			children = (
+				A7BA62DB26BD1E2C00D49930 /* SGScanCode */,
+			);
+			path = "二维码扫描";
+			sourceTree = "<group>";
+		};
+		A7BA62DB26BD1E2C00D49930 /* SGScanCode */ = {
+			isa = PBXGroup;
+			children = (
+				A7BA62DF26BD1E4B00D49930 /* ScanSuccessJumpVC.h */,
+				A7BA62DC26BD1E4B00D49930 /* ScanSuccessJumpVC.m */,
+				A7BA62DD26BD1E4B00D49930 /* WBQRCodeVC.h */,
+				A7BA62E026BD1E4B00D49930 /* WBQRCodeVC.m */,
+				A7BA62E126BD1E4B00D49930 /* WCQRCodeVC.h */,
+				A7BA62DE26BD1E4B00D49930 /* WCQRCodeVC.m */,
+				A7BA62E626BD1E5600D49930 /* SGWebView.h */,
+				A7BA62E526BD1E5600D49930 /* SGWebView.m */,
+			);
+			path = SGScanCode;
 			sourceTree = "<group>";
 		};
 		A7BC079B268AB2DE004D08F6 /* xib文件根据屏幕等比例缩放的适配 */ = {
@@ -1039,6 +1104,7 @@
 				AEBD66101D824E1400B1F64C /* 刮刮乐效果的实现.h */,
 				AEBD66111D824E1400B1F64C /* 汉字转拼音.h */,
 				AEBD66141D824E1400B1F64C /* 强制某个页面自己横屏.pch */,
+				A709888726C15542000BA7F8 /* iOS 指定页面横屏的实现.h */,
 				AEBD66151D824E1400B1F64C /* 让 iOS 应用直接退出.h */,
 				AEBD66161D824E1400B1F64C /* 跳转到系统设置.h */,
 				AEBD66171D824E1400B1F64C /* 推送.pch */,
@@ -1071,6 +1137,8 @@
 				A758825126843304003AB7DF /* iOS 跳转网页的四种方法.h */,
 				A79650E5263902F80031932F /* infoplist权限.h */,
 				A71A28352647EABC00E49854 /* pod第三方库版本.h */,
+				A7BA62CF26BCE70C00D49930 /* Xcode创建文件自定义头部注释.h */,
+				A70EFF2A26C605D200BE686D /* 自定义弹窗VC和View.h */,
 			);
 			path = File;
 			sourceTree = "<group>";
@@ -1202,8 +1270,8 @@
 			children = (
 				AEB4D30A1DAA09EA0078A52D /* LSAlertView.h */,
 				AEB4D30B1DAA09EA0078A52D /* LSAlertView.m */,
-				AEB4D30C1DAA09EA0078A52D /* XBAlerButton.m */,
 				AEB4D30D1DAA09EA0078A52D /* XBAlertButton.h */,
+				AEB4D30C1DAA09EA0078A52D /* XBAlerButton.m */,
 				AEB4D30E1DAA09EA0078A52D /* XBAlertTextField.h */,
 				AEB4D30F1DAA09EA0078A52D /* XBAlertTextField.m */,
 				AEB4D3101DAA09EA0078A52D /* XBAlertView.h */,
@@ -1404,6 +1472,7 @@
 		AEB4D38C1DAA0A300078A52D /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				A7BA62DA26BD1E1E00D49930 /* 二维码扫描 */,
 				A7BC079B268AB2DE004D08F6 /* xib文件根据屏幕等比例缩放的适配 */,
 				A7029FB6266F200600D42B84 /* ZYNetworkAccessibility */,
 				A7547B4523CDA88500AF3535 /* 生成条形码 */,
@@ -1539,6 +1608,7 @@
 		AECFA23F1D376C5F005F5DE6 /* LSProjectTool */ = {
 			isa = PBXGroup;
 			children = (
+				A72B2CC626D72F7A008B18E2 /* LSProjectTool.entitlements */,
 				AECFA2431D376C5F005F5DE6 /* AppDelegate.h */,
 				AECFA2441D376C5F005F5DE6 /* AppDelegate.m */,
 				3D2156D821F09A54006EDACE /* JsonTools.h */,
@@ -1561,6 +1631,7 @@
 				AE64AF791D5B2E70009959DE /* File */,
 				AECFA2491D376C5F005F5DE6 /* Main.storyboard */,
 				08A6B29A20064B2700A70EC5 /* PrefixHeader.pch */,
+				A77B458826C3D32400B76F70 /* LSProjectTool-Bridging-Header.h */,
 				AECFA24C1D376C5F005F5DE6 /* Assets.xcassets */,
 				AECFA24E1D376C5F005F5DE6 /* LaunchScreen.storyboard */,
 				AECFA2511D376C5F005F5DE6 /* Info.plist */,
@@ -1609,6 +1680,7 @@
 				AECFA23A1D376C5F005F5DE6 /* Frameworks */,
 				AECFA23B1D376C5F005F5DE6 /* Resources */,
 				445FED9E83BC539325DD3A73 /* [CP] Copy Pods Resources */,
+				007B9141E505E74056475F9D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1663,7 +1735,7 @@
 		AECFA2351D376C5F005F5DE6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = "Link-Start";
 				TargetAttributes = {
 					AECFA23C1D376C5F005F5DE6 = {
@@ -1690,10 +1762,9 @@
 			};
 			buildConfigurationList = AECFA2381D376C5F005F5DE6 /* Build configuration list for PBXProject "LSProjectTool" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 				"zh-Hans",
@@ -1754,6 +1825,126 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		007B9141E505E74056475F9D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LSProjectTool/Pods-LSProjectTool-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ACActionSheet/ACActionSheet.framework",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking+RetryPolicy/AFNetworking_RetryPolicy.framework",
+				"${BUILT_PRODUCTS_DIR}/BRPickerView/BRPickerView.framework",
+				"${BUILT_PRODUCTS_DIR}/CYLTabBarController/CYLTabBarController.framework",
+				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
+				"${BUILT_PRODUCTS_DIR}/FMListPlaceholder/FMListPlaceholder.framework",
+				"${BUILT_PRODUCTS_DIR}/FSTextView/FSTextView.framework",
+				"${BUILT_PRODUCTS_DIR}/FTPopOverMenu/FTPopOverMenu.framework",
+				"${BUILT_PRODUCTS_DIR}/GKPageScrollView/GKPageScrollView.framework",
+				"${BUILT_PRODUCTS_DIR}/GKPageSmoothView/GKPageSmoothView.framework",
+				"${BUILT_PRODUCTS_DIR}/GKPhotoBrowser/GKPhotoBrowser.framework",
+				"${BUILT_PRODUCTS_DIR}/HXPhotoPicker/HXPhotoPicker.framework",
+				"${BUILT_PRODUCTS_DIR}/IAPHelper/IAPHelper.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
+				"${BUILT_PRODUCTS_DIR}/JXCategoryView/JXCategoryView.framework",
+				"${BUILT_PRODUCTS_DIR}/KNPhotoBrowser/KNPhotoBrowser.framework",
+				"${BUILT_PRODUCTS_DIR}/LBXPermission/LBXPermission.framework",
+				"${BUILT_PRODUCTS_DIR}/LSTPopView/LSTPopView.framework",
+				"${BUILT_PRODUCTS_DIR}/LSTTimer/LSTTimer.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/MGSwipeTableCell/MGSwipeTableCell.framework",
+				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
+				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjcAssociatedObjectHelpers/ObjcAssociatedObjectHelpers.framework",
+				"${BUILT_PRODUCTS_DIR}/OttoKeyboardView/OttoKeyboardView.framework",
+				"${BUILT_PRODUCTS_DIR}/PKRevealController/PKRevealController.framework",
+				"${BUILT_PRODUCTS_DIR}/PPGetAddressBook/PPGetAddressBook.framework",
+				"${BUILT_PRODUCTS_DIR}/Popover.OC/Popover_OC.framework",
+				"${BUILT_PRODUCTS_DIR}/RKNotificationHub/RKNotificationHub.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactiveObjC/ReactiveObjC.framework",
+				"${BUILT_PRODUCTS_DIR}/SDAutoLayout/SDAutoLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/SDCycleScrollView/SDCycleScrollView.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SGQRCode/SGQRCode.framework",
+				"${BUILT_PRODUCTS_DIR}/SlackTextViewController/SlackTextViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/TZImagePickerController/TZImagePickerController.framework",
+				"${BUILT_PRODUCTS_DIR}/ThinkVerb/ThinkVerb.framework",
+				"${BUILT_PRODUCTS_DIR}/UICKeyChainStore/UICKeyChainStore.framework",
+				"${BUILT_PRODUCTS_DIR}/WMZDialog/WMZDialog.framework",
+				"${BUILT_PRODUCTS_DIR}/WMZDropDownMenu/WMZDropDownMenu.framework",
+				"${BUILT_PRODUCTS_DIR}/WZLBadge/WZLBadge.framework",
+				"${BUILT_PRODUCTS_DIR}/XHLaunchAd/XHLaunchAd.framework",
+				"${BUILT_PRODUCTS_DIR}/YTKNetwork/YTKNetwork.framework",
+				"${BUILT_PRODUCTS_DIR}/YYKit/YYKit.framework",
+				"${BUILT_PRODUCTS_DIR}/ZLPhotoBrowser/ZLPhotoBrowser.framework",
+				"${BUILT_PRODUCTS_DIR}/dsBridge/dsBridge.framework",
+				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ACActionSheet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking_RetryPolicy.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BRPickerView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CYLTabBarController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMListPlaceholder.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSTextView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FTPopOverMenu.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GKPageScrollView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GKPageSmoothView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GKPhotoBrowser.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HXPhotoPicker.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IAPHelper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JXCategoryView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KNPhotoBrowser.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LBXPermission.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LSTPopView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LSTTimer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MGSwipeTableCell.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcAssociatedObjectHelpers.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OttoKeyboardView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKRevealController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PPGetAddressBook.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Popover_OC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RKNotificationHub.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveObjC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDAutoLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDCycleScrollView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SGQRCode.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SlackTextViewController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyStoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TZImagePickerController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ThinkVerb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICKeyChainStore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WMZDialog.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WMZDropDownMenu.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WZLBadge.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XHLaunchAd.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YTKNetwork.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZLPhotoBrowser.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/dsBridge.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LSProjectTool/Pods-LSProjectTool-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		445FED9E83BC539325DD3A73 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1761,35 +1952,13 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-LSProjectTool/Pods-LSProjectTool-resources.sh",
-				"${PODS_ROOT}/ACActionSheet/ACActionSheet/ACActionSheet.bundle",
-				"${PODS_ROOT}/BRPickerView/BRPickerView/Base/BRPickerView.bundle",
-				"${PODS_ROOT}/HXPhotoPicker/HXPhotoPicker/Resources/HXPhotoPicker.bundle",
-				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
-				"${PODS_ROOT}/SGQRCode/SGQRCode/SGQRCode.bundle",
-				"${PODS_ROOT}/TZImagePickerController/TZImagePickerController/TZImagePickerController/TZImagePickerController.bundle",
 				"${PODS_ROOT}/UMCCommonLog/UMCommonLog/UMCommonLog.bundle",
 				"${PODS_ROOT}/UMShare/UMShare/UMSocialUI/UMSocialSDKResources.bundle",
-				"${PODS_ROOT}/WMZDialog/WMZDialog/WMZDialog/WMZDialog.bundle",
-				"${PODS_ROOT}/WMZDropDownMenu/WMZDropDownMenu/WMZDropDownMenu/WMZDropMenu.bundle",
-				"${PODS_ROOT}/ZLPhotoBrowser/ZLPhotoBrowser/PhotoBrowser/resource/ZLPhotoActionSheet.xib",
-				"${PODS_ROOT}/ZLPhotoBrowser/ZLPhotoBrowser/PhotoBrowser/resource/ZLPhotoBrowserCell.xib",
-				"${PODS_ROOT}/ZLPhotoBrowser/ZLPhotoBrowser/PhotoBrowser/resource/ZLPhotoBrowser.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ACActionSheet.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/BRPickerView.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/HXPhotoPicker.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SGQRCode.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TZImagePickerController.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UMCommonLog.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UMSocialSDKResources.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/WMZDialog.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/WMZDropMenu.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ZLPhotoActionSheet.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ZLPhotoBrowserCell.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ZLPhotoBrowser.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1879,23 +2048,25 @@
 				48519DB620EC58C8009F048C /* MBProgressHUD+Extension.m in Sources */,
 				A73C39DB23A76262005F50D6 /* CFGradientLabel.m in Sources */,
 				08197C8D1FE3564D00478FC4 /* ReachStateUnReachable.m in Sources */,
-				08197C931FE3564D00478FC4 /* README.md in Sources */,
 				08D35B5B200A281100E122FF /* JWCCustomLayout.m in Sources */,
 				087BCDBA201A10CA007B3706 /* LSBaseViewController.m in Sources */,
 				AEB4D35E1DAA09EA0078A52D /* LSGetCurrentLocation.m in Sources */,
 				AECFA2481D376C5F005F5DE6 /* ViewController.m in Sources */,
 				A748A0BF263D243300C7FFE7 /* YLWaterFlowLayout.m in Sources */,
+				A70CFF4126A6AAFC008F47AA /* LSPayTools.m in Sources */,
 				0852D820204FDEC000B8686F /* SelfSizingCollectCell.m in Sources */,
 				AE24FCDA1DAB411C00740806 /* SCMath.m in Sources */,
 				08197C8C1FE3564D00478FC4 /* ReachStateUnloaded.m in Sources */,
 				A7F5064223A386D800666F3B /* LSYTKRequest.m in Sources */,
 				AEB4D43B1DAA5E820078A52D /* NSString+LSExtension.m in Sources */,
 				0814EE492015F86D009F5EE4 /* NTImageBrowser.m in Sources */,
+				A7BA62E726BD1E5600D49930 /* SGWebView.m in Sources */,
 				A77BFA6126671A1700FF08FF /* NSObject+LSRuntimeCategory.m in Sources */,
 				08197C911FE3564D00478FC4 /* PingFoundation.m in Sources */,
 				487FC63D20BE937700FC19FA /* UIButton+UIControl_buttonCon.m in Sources */,
 				3D4E321021F9A4CA00A3F063 /* LSWKWebViewVC.m in Sources */,
 				A77F5E7E265745D70002AD16 /* LSStringEnum.m in Sources */,
+				A7BA62E326BD1E4B00D49930 /* WCQRCodeVC.m in Sources */,
 				08F6585F1FF3D270007880CC /* UICollectionView+IndexPath.m in Sources */,
 				3D5550D2228D730F00B8FAE7 /* UINavigationController+Smooth.m in Sources */,
 				AECFA2451D376C5F005F5DE6 /* AppDelegate.m in Sources */,
@@ -1960,6 +2131,7 @@
 				08197C8E1FE3564D00478FC4 /* ReachStateWIFI.m in Sources */,
 				08D35B5E200A2A6500E122FF /* LMHWaterFallLayout.m in Sources */,
 				3D2156DA21F09A54006EDACE /* JsonTools.m in Sources */,
+				A7BA62E426BD1E4B00D49930 /* WBQRCodeVC.m in Sources */,
 				AEB4D3711DAA09EA0078A52D /* LSCheckoutNetworkState.m in Sources */,
 				AEB4D3621DAA09EA0078A52D /* LSDatePicker.m in Sources */,
 				A76132CF2655EE4B0098B07C /* LSLocationConverter.m in Sources */,
@@ -1967,6 +2139,7 @@
 				A77BA17E23A870BE00316085 /* TTGTextTagCollectionView.m in Sources */,
 				A76A68BB239F819900E1273D /* ShoppingCartTool.m in Sources */,
 				AEB4D3781DAA09EA0078A52D /* Function.m in Sources */,
+				A70CFF3E26A6AA8E008F47AA /* AppDelegate+PayConfiguration.m in Sources */,
 				08197C8A1FE3564D00478FC4 /* ReachState.m in Sources */,
 				4855232520E63EBE00CB32BF /* HYBStarEvaluationView.m in Sources */,
 				AEB4D4301DAA2E160078A52D /* JX_GCDTimerManager.m in Sources */,
@@ -1985,6 +2158,7 @@
 				A79B7F1B23C56CF2005F62DA /* LSWebImageMustRevalidateDownloader.m in Sources */,
 				AEC14C5A1DC991480080D764 /* DataConversion.m in Sources */,
 				AEB4D3611DAA09EA0078A52D /* LSAlertRootView.m in Sources */,
+				A7BA62E226BD1E4B00D49930 /* ScanSuccessJumpVC.m in Sources */,
 				AE5ED8E81DC8C6A900DA0300 /* AuthcodeView.m in Sources */,
 				482267EE2154BDD700EE6599 /* PhoneNumView.m in Sources */,
 				AE4D9C391DCB38FE008DA28C /* UIImage+LSCategory.m in Sources */,
@@ -2057,18 +2231,30 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -2103,18 +2289,30 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -2143,30 +2341,36 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C69ABA5E6EE0EAF0C5A71735 /* Pods-LSProjectTool.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = LSProjectTool/LSProjectTool.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
 				DEVELOPMENT_TEAM = 6P6LBHJEZF;
 				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LSProjectTool/PrefixHeader.pch";
 				INFOPLIST_FILE = LSProjectTool/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/LSProjectTool",
 					"$(PROJECT_DIR)/LSProjectTool/Vendors/Lib",
 					"$(SRCROOT)/Vendors/Lib",
+					"$(PROJECT_DIR)/LSProjectTool/Wechat",
+					"$(PROJECT_DIR)/LSProjectTool/Wechat/WechatSDK",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.linkstart.test001;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "LSProjectTool/获取设备型号/LSProjectTool-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "LSProjectTool/LSProjectTool-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Vendors/Lib $(PODS_ROOT)/**";
 			};
@@ -2176,29 +2380,35 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9669D094AB10EBCD586505F1 /* Pods-LSProjectTool.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = LSProjectTool/LSProjectTool.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
 				DEVELOPMENT_TEAM = 6P6LBHJEZF;
 				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LSProjectTool/PrefixHeader.pch";
 				INFOPLIST_FILE = LSProjectTool/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/LSProjectTool",
 					"$(PROJECT_DIR)/LSProjectTool/Vendors/Lib",
 					"$(SRCROOT)/Vendors/Lib",
+					"$(PROJECT_DIR)/LSProjectTool/Wechat",
+					"$(PROJECT_DIR)/LSProjectTool/Wechat/WechatSDK",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.linkstart.test001;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "LSProjectTool/获取设备型号/LSProjectTool-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "LSProjectTool/LSProjectTool-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Vendors/Lib $(PODS_ROOT)/**";
 			};

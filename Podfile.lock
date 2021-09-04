@@ -1,128 +1,371 @@
 PODS:
-  - AFNetworking (3.2.1):
-    - AFNetworking/NSURLSession (= 3.2.1)
-    - AFNetworking/Reachability (= 3.2.1)
-    - AFNetworking/Security (= 3.2.1)
-    - AFNetworking/Serialization (= 3.2.1)
-    - AFNetworking/UIKit (= 3.2.1)
-  - AFNetworking/NSURLSession (3.2.1):
+  - ACActionSheet (1.0.5)
+  - AFNetworking (4.0.1):
+    - AFNetworking/NSURLSession (= 4.0.1)
+    - AFNetworking/Reachability (= 4.0.1)
+    - AFNetworking/Security (= 4.0.1)
+    - AFNetworking/Serialization (= 4.0.1)
+    - AFNetworking/UIKit (= 4.0.1)
+  - "AFNetworking+RetryPolicy (2.0.0)":
+    - AFNetworking (~> 4.0)
+    - ObjcAssociatedObjectHelpers (= 2.0.1)
+  - AFNetworking/NSURLSession (4.0.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (3.2.1)
-  - AFNetworking/Security (3.2.1)
-  - AFNetworking/Serialization (3.2.1)
-  - AFNetworking/UIKit (3.2.1):
+  - AFNetworking/Reachability (4.0.1)
+  - AFNetworking/Security (4.0.1)
+  - AFNetworking/Serialization (4.0.1)
+  - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
-  - AMapFoundation-NO-IDFA (1.5.6)
-  - AMapLocation-NO-IDFA (2.6.1):
-    - AMapFoundation-NO-IDFA (~> 1.4)
-  - BRPickerView (2.2.1)
-  - CYLTabBarController (1.26.0):
-    - CYLTabBarController/Core (= 1.26.0)
-  - CYLTabBarController/Core (1.26.0)
+  - AMapFoundation-NO-IDFA (1.6.8)
+  - AMapLocation-NO-IDFA (2.7.0):
+    - AMapFoundation-NO-IDFA (~> 1.6.8)
+  - BMKLocationKit (2.0.0)
+  - BRPickerView (2.7.3):
+    - BRPickerView/AddressPickerView (= 2.7.3)
+    - BRPickerView/Base (= 2.7.3)
+    - BRPickerView/DatePickerView (= 2.7.3)
+    - BRPickerView/StringPickerView (= 2.7.3)
+  - BRPickerView/AddressPickerView (2.7.3):
+    - BRPickerView/Base
+  - BRPickerView/Base (2.7.3)
+  - BRPickerView/DatePickerView (2.7.3):
+    - BRPickerView/Base
+  - BRPickerView/StringPickerView (2.7.3):
+    - BRPickerView/Base
+  - ChameleonFramework (2.1.0):
+    - ChameleonFramework/Default (= 2.1.0)
+  - ChameleonFramework/Default (2.1.0)
+  - CYLTabBarController (1.29.1):
+    - CYLTabBarController/Core (= 1.29.1)
+  - CYLTabBarController/Core (1.29.1)
+  - dsBridge (3.0.6)
   - DZNEmptyDataSet (1.8.1)
-  - FLAnimatedImage (1.0.12)
+  - FLAnimatedImage (1.0.16)
+  - FMListPlaceholder (1.1.5)
   - FSTextView (1.8)
-  - IQKeyboardManager (6.2.0)
-  - JCore (1.2.6)
-  - JPush (3.1.2):
-    - JCore (~> 1.2.6)
+  - FTPopOverMenu (2.1.1)
+  - GKPageScrollView (1.6.2):
+    - GKPageScrollView/Objc (= 1.6.2)
+  - GKPageScrollView/Objc (1.6.2)
+  - GKPageSmoothView (1.6.2):
+    - GKPageSmoothView/Objc (= 1.6.2)
+  - GKPageSmoothView/Objc (1.6.2)
+  - GKPhotoBrowser (2.3.2):
+    - GKPhotoBrowser/SD (= 2.3.2)
+  - GKPhotoBrowser/Core (2.3.2)
+  - GKPhotoBrowser/SD (2.3.2):
+    - GKPhotoBrowser/Core
+    - SDWebImage (~> 5.0)
+  - HXPhotoPicker (3.2.2):
+    - HXPhotoPicker/Default (= 3.2.2)
+  - HXPhotoPicker/Default (3.2.2)
+  - IAPHelper (1.1)
+  - IQKeyboardManager (6.5.6)
+  - JCore (2.7.1)
+  - JPush (4.3.0):
+    - JCore (< 3.0.0, >= 2.0.0)
+  - JXCategoryView (1.5.9)
+  - KNPhotoBrowser (2.5.4):
+    - SDWebImage
+  - LBXPermission/Base (1.1.1)
+  - LBXPermission/Calendar (1.1.1)
+  - LBXPermission/Camera (1.1.1)
+  - LBXPermission/Contact (1.1.1)
+  - LBXPermission/Location (1.1.1)
+  - LBXPermission/Photo (1.1.1)
+  - LBXPermission/Reminder (1.1.1)
+  - lottie-ios (3.2.3)
+  - LSTPopView (0.3.10):
+    - LSTPopView/Code (= 0.3.10)
+    - LSTTimer
+  - LSTPopView/Code (0.3.10):
+    - LSTTimer
+  - LSTTimer (0.2.10)
   - Masonry (1.1.0)
-  - MBProgressHUD (1.1.0)
-  - MJExtension (3.0.15.1)
-  - MJRefresh (3.1.15.7)
+  - MBProgressHUD (1.2.0)
+  - MGSwipeTableCell (1.6.11)
+  - MJExtension (3.3.0)
+  - MJRefresh (3.7.2)
+  - ObjcAssociatedObjectHelpers (2.0.1):
+    - ObjcAssociatedObjectHelpers/Core (= 2.0.1)
+    - "ObjcAssociatedObjectHelpers/NSObject+Dictionary (= 2.0.1)"
+  - ObjcAssociatedObjectHelpers/Core (2.0.1)
+  - "ObjcAssociatedObjectHelpers/NSObject+Dictionary (2.0.1)":
+    - ObjcAssociatedObjectHelpers/Core
+  - OttoKeyboardView (0.0.5)
+  - PKRevealController (2.0.6)
   - Popover.OC (2.2)
-  - SDCycleScrollView (1.75):
-    - SDWebImage (>= 4.0.0)
-  - SDWebImage (4.4.3):
-    - SDWebImage/Core (= 4.4.3)
-  - SDWebImage/Core (4.4.3)
-  - ThinkVerb (1.0.8)
-  - TZImagePickerController (3.1.7)
-  - WechatOpenSDK (1.8.3)
+  - PPGetAddressBook (0.2.8)
+  - ReactiveObjC (3.1.1)
+  - RKNotificationHub (2.0.5)
+  - SDAutoLayout (2.2.1)
+  - SDCycleScrollView (1.82):
+    - SDWebImage (>= 5.0.0)
+  - SDWebImage (5.11.1):
+    - SDWebImage/Core (= 5.11.1)
+  - SDWebImage/Core (5.11.1)
+  - SGQRCode (3.5.1)
+  - SlackTextViewController (1.9.6)
+  - SwiftyStoreKit (0.16.1)
+  - ThinkVerb (1.1.0)
+  - TZImagePickerController (3.6.4)
+  - UICKeyChainStore (2.2.1)
+  - UMABTest (1.0.1):
+    - UMCommon
+  - UMAPM (1.4.2)
+  - UMCCommonLog (2.0.2)
+  - UMCommon (7.3.5):
+    - UMDevice
+  - UMCSecurityPlugins (1.0.6)
+  - UMDevice (2.0.4)
+  - UMLink (1.1.0):
+    - UMCommon
+  - UMPush (3.3.1):
+    - UMCommon
+  - UMShare/Core (6.10.3):
+    - UMCommon
+  - UMShare/Social/ReducedQQ (6.10.3):
+    - UMCommon
+    - UMShare/Core
+  - UMShare/Social/ReducedWeChat (6.10.3):
+    - UMCommon
+    - UMShare/Core
+  - UMShare/Social/WeChat (6.10.3):
+    - UMCommon
+    - UMShare/Core
+    - UMShare/Social/ReducedWeChat
+  - UMShare/UI (6.10.3):
+    - UMCommon
+    - UMShare/Core
+  - WMZDialog (1.3.3)
+  - WMZDropDownMenu (1.1.6)
   - WZLBadge (1.2.6)
-  - XHLaunchAd (3.9.8):
+  - XHLaunchAd (3.9.12):
     - FLAnimatedImage (~> 1.0.12)
-  - YTKNetwork (2.0.4):
-    - AFNetworking (~> 3.0)
+  - YTKNetwork (3.0.6):
+    - AFNetworking/NSURLSession (~> 4.0)
+  - YYKit (1.0.9):
+    - YYKit/no-arc (= 1.0.9)
+  - YYKit/no-arc (1.0.9)
+  - ZFPlayer (4.0.1):
+    - ZFPlayer/Core (= 4.0.1)
+  - ZFPlayer/Core (4.0.1)
+  - ZLPhotoBrowser (3.2.0):
+    - SDWebImage
 
 DEPENDENCIES:
+  - ACActionSheet
   - AFNetworking
+  - "AFNetworking+RetryPolicy"
   - AMapLocation-NO-IDFA
-  - BRPickerView (~> 2.2.1)
+  - BMKLocationKit
+  - BRPickerView
+  - ChameleonFramework
   - CYLTabBarController
+  - dsBridge
   - DZNEmptyDataSet
+  - FMListPlaceholder
   - FSTextView
+  - FTPopOverMenu
+  - GKPageScrollView
+  - GKPageSmoothView
+  - GKPhotoBrowser
+  - HXPhotoPicker
+  - IAPHelper
   - IQKeyboardManager
   - JPush
-  - Masonry (~> 1.1.0)
+  - JXCategoryView
+  - KNPhotoBrowser
+  - LBXPermission/Base
+  - LBXPermission/Calendar
+  - LBXPermission/Camera
+  - LBXPermission/Contact
+  - LBXPermission/Location
+  - LBXPermission/Photo
+  - LBXPermission/Reminder
+  - lottie-ios
+  - LSTPopView
+  - Masonry
   - MBProgressHUD
+  - MGSwipeTableCell
   - MJExtension
   - MJRefresh
+  - OttoKeyboardView
+  - PKRevealController
   - Popover.OC
-  - SDCycleScrollView (~> 1.75)
+  - PPGetAddressBook
+  - ReactiveObjC
+  - RKNotificationHub
+  - SDAutoLayout
+  - SDCycleScrollView
   - SDWebImage
+  - SGQRCode
+  - SlackTextViewController
+  - SwiftyStoreKit
   - ThinkVerb
   - TZImagePickerController
-  - WechatOpenSDK
+  - UICKeyChainStore
+  - UMABTest
+  - UMAPM
+  - UMCCommonLog
+  - UMCommon
+  - UMCSecurityPlugins
+  - UMDevice
+  - UMLink
+  - UMPush
+  - UMShare/Social/ReducedQQ
+  - UMShare/Social/WeChat
+  - UMShare/UI
+  - WMZDialog
+  - WMZDropDownMenu
   - WZLBadge
   - XHLaunchAd
   - YTKNetwork
+  - YYKit
+  - ZFPlayer
+  - ZLPhotoBrowser
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
+    - ACActionSheet
     - AFNetworking
+    - "AFNetworking+RetryPolicy"
     - AMapFoundation-NO-IDFA
     - AMapLocation-NO-IDFA
+    - BMKLocationKit
     - BRPickerView
+    - ChameleonFramework
     - CYLTabBarController
+    - dsBridge
     - DZNEmptyDataSet
     - FLAnimatedImage
+    - FMListPlaceholder
     - FSTextView
+    - FTPopOverMenu
+    - GKPageScrollView
+    - GKPageSmoothView
+    - GKPhotoBrowser
+    - HXPhotoPicker
+    - IAPHelper
     - IQKeyboardManager
     - JCore
     - JPush
+    - JXCategoryView
+    - KNPhotoBrowser
+    - LBXPermission
+    - lottie-ios
+    - LSTPopView
+    - LSTTimer
     - Masonry
     - MBProgressHUD
+    - MGSwipeTableCell
     - MJExtension
     - MJRefresh
+    - ObjcAssociatedObjectHelpers
+    - OttoKeyboardView
+    - PKRevealController
     - Popover.OC
+    - PPGetAddressBook
+    - ReactiveObjC
+    - RKNotificationHub
+    - SDAutoLayout
     - SDCycleScrollView
     - SDWebImage
+    - SGQRCode
+    - SlackTextViewController
+    - SwiftyStoreKit
     - ThinkVerb
     - TZImagePickerController
-    - WechatOpenSDK
+    - UICKeyChainStore
+    - UMABTest
+    - UMAPM
+    - UMCCommonLog
+    - UMCommon
+    - UMCSecurityPlugins
+    - UMDevice
+    - UMLink
+    - UMPush
+    - UMShare
+    - WMZDialog
+    - WMZDropDownMenu
     - WZLBadge
     - XHLaunchAd
     - YTKNetwork
+    - YYKit
+    - ZFPlayer
+    - ZLPhotoBrowser
 
 SPEC CHECKSUMS:
-  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  AMapFoundation-NO-IDFA: 40d723b352992d0f95abe2976f0c0ecda3c3ffc3
-  AMapLocation-NO-IDFA: ffd69b8b88f553d0b252d4967bf301ad2afff9c0
-  BRPickerView: 0590a8c5de9bd98c6b4e4f117a3dff6de287d5b2
-  CYLTabBarController: 266188f29eb76fbbb476b7af33a2ab6c45246a63
+  ACActionSheet: 41a448af27671f7819d03662a204cebdfa9b5a1c
+  AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  "AFNetworking+RetryPolicy": d823c39e54178c311931615507a54e401eda5055
+  AMapFoundation-NO-IDFA: 444163c19aa10720c3ecd57b1f071ecdfe0edead
+  AMapLocation-NO-IDFA: cf78db86c5be566c5470d53495a976bb416468f9
+  BMKLocationKit: 097814ef672b1e57e86e6c1968d7892fb78002bf
+  BRPickerView: 9cc11880ac79c4872d081ccb88f306224c1501d7
+  ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
+  CYLTabBarController: 2fdd8b286367629a1acd3087a3879a3eee304004
+  dsBridge: 48b62ee8a411ad601a88d6f6c8cf6cb634b206b7
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
-  FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
+  FLAnimatedImage: 8f3e854ebf9680b71f0b6e700939687fc4d82b4b
+  FMListPlaceholder: 17b3cb63922850e18ca97dd092a233ea3a80bc5a
   FSTextView: 9e2ca07bb6bb0fb7e77b49b2717adf81f3c620b5
-  IQKeyboardManager: 6194101620b73af5e67900b8f89707a99de0b804
-  JCore: cae516dd2bf1a73b578ce6e1065abd49e709e0f7
-  JPush: d0cead70ba223a6a3b52749899ebda830dfbc49a
+  FTPopOverMenu: 202d46aea0656307fd463fac0340c9c8837158d2
+  GKPageScrollView: 55fbcaf83707081f1ee8fb8c6c5f7614874295c5
+  GKPageSmoothView: 17c42ba8e5c74528ef2687e56fc1cc0008af8e4f
+  GKPhotoBrowser: b9f6e438bffe77d111e467385d5bbdf6a50d6a4e
+  HXPhotoPicker: fe0a84764c6fc93cdaccb5f8dabe0af08470075e
+  IAPHelper: fd74f53b0ac142eed085777b88b86a11746a2dd4
+  IQKeyboardManager: 2a6e97afdafc7becf0cb17a9a8d795e3a980717f
+  JCore: 9d5bda3a172c65bbe14f2806ab0f6246f8a06065
+  JPush: 88d6361fbec4be7c8b55b20b7fe1c292228f6bc2
+  JXCategoryView: 2ef9ecfd3735158d009ce02d1f29811aa822da65
+  KNPhotoBrowser: a6da54e9bdca3cc1f4ab36b0ff2be706ae5be868
+  LBXPermission: e7f860ce1280599fc196a8c5dee713cbb81354d4
+  lottie-ios: c058aeafa76daa4cf64d773554bccc8385d0150e
+  LSTPopView: 9379f00f6ce7d1fc620b50ab00ed3ef97b2d4d52
+  LSTTimer: caf8f02ff366ca175cf4c1778d26c166183c1b6f
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
-  MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
-  MJExtension: 19bc33ce2eee2d319760f5622562cf581a6ff756
-  MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  MGSwipeTableCell: b804e4e450dee439c42250be90bd50458bf67fce
+  MJExtension: 01704cca2b60a214c10761b6491eab74069d68a9
+  MJRefresh: 30997d30b347c8e9508a4db11e3a690da0c9b85a
+  ObjcAssociatedObjectHelpers: 686c291f292c26a49b9b1fa7d58130a8d35d59d2
+  OttoKeyboardView: 70f3b3528e681e1e87d099639f1ac4f2296266e7
+  PKRevealController: ffb45a16f5a5032ad90a3d16e5cbb0d8e035bd58
   Popover.OC: bfcce8307f77593e1e1d7cf58604077f74e114bc
-  SDCycleScrollView: 884b88f0266dd4708a0e1934975c69cb971707b1
-  SDWebImage: c5594f1a19c48d526d321e548902b56b479cd508
-  ThinkVerb: eabad1a16606839cc3c521da79870f411aace360
-  TZImagePickerController: 3027e1e2029c830186c6a167c88c933b8556fdc7
-  WechatOpenSDK: 3117412f8aafde4758cac1e8d20b93c67cafcfef
+  PPGetAddressBook: e4b6b0a87e852df5d5b90c44ecd9ded7f6f1ccf6
+  ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
+  RKNotificationHub: e926748820d719f21ff374657a47fceefa1796b4
+  SDAutoLayout: 8bf6b3bbc8b01f775d4defbb4fda2ace805461be
+  SDCycleScrollView: a0d74c3384caa72bdfc81470bdbc8c14b3e1fbcf
+  SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
+  SGQRCode: 65d6170ddcf3feecc6e2f3601aac78ad93e56589
+  SlackTextViewController: b854e62c1c156336bc4fd409c6ca79b5773e8f9d
+  SwiftyStoreKit: 6b9c08810269f030586dac1fae8e75871a82e84a
+  ThinkVerb: 942c70b3a7862c88ee858cc32de46ac87129ec32
+  TZImagePickerController: 1cc39ec0454d6e94d0397418953164d7aa631719
+  UICKeyChainStore: ba3bff2c762b12db1e516f395c837dd25298b05e
+  UMABTest: e35a7be1f4401640f780d95b403d98794d65c6aa
+  UMAPM: 9766611aba84e0755afc785d4399f1e9fbb0a475
+  UMCCommonLog: bea707e50c85cef4b0eb47cc5c7226bb843245ca
+  UMCommon: ab4d875ddefe1b06c60b577e4a58bc4d433ee067
+  UMCSecurityPlugins: 0831a08f3988f3cea9f1d3a7626cd9bee4fef150
+  UMDevice: 590115ebb238250e574988c7a3e9511f5d5cd4d3
+  UMLink: 8c2b9b9b19f57468dc3d65ae6d6a772d50768744
+  UMPush: 7ef2ff2fcca16e4d5c7897183a78a0d26f920bfe
+  UMShare: a3f9cb2d3ece67edd2c58331bd89bfffb289782b
+  WMZDialog: a4412a71ef1ca84fefb24dd5caea0be8de67e2f8
+  WMZDropDownMenu: 6d8ec030a4467fb95e285709e525587abceb4960
   WZLBadge: 9ec779dcfd94c825518b395e8315fccaabff1bfa
-  XHLaunchAd: 45048592af01aa501c9d2d0c45e95ca74c4d0596
-  YTKNetwork: df8a7a5597bda1664a4efaa7ef871a818a887fe0
+  XHLaunchAd: 6320f9c68732667323072fc3a5f104e40fbe9cfe
+  YTKNetwork: c16be90b06be003de9e9cd0d3b187cc8eaf35c04
+  YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
+  ZFPlayer: f88787c815f7b0801279c42f131a89e2823e669e
+  ZLPhotoBrowser: 3748fdbeb2b28961c2495d15131dbf413082e1b9
 
-PODFILE CHECKSUM: f25ae9bd07c895988a19a6a1581413a7b0f350b8
+PODFILE CHECKSUM: 11d3273d5e0e8e58a47ccd5007afc2045cfa5845
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.10.1

@@ -1300,6 +1300,9 @@ static inline NSString *cachePath() {
         case -400:
             [MBProgressHUD qucickTip:@"参数传递错误"];
             break;
+        case -401:
+            [MBProgressHUD qucickTip:@"访问的页面没有授权"];
+            break;
         case -404:
             [MBProgressHUD qucickTip:@"服务器错误"];
             break;

@@ -11,28 +11,100 @@
 
 iOS常用权限请求判断  https://github.com/MxABC/LBXPermission
 
-#pragma mark -
-#pragma mark -
-#pragma mark -
-#pragma mark -
-#pragma mark -
-#pragma mark -
-#pragma mark -
-#pragma mark -
-#pragma mark -
-#pragma mark -
-#pragma mark -
-#pragma mark -
-#pragma mark -
-#pragma mark -
-#pragma mark -
-#pragma mark -
-#pragma mark -
-#pragma mark -
-#pragma mark -
-#pragma mark -
-#pragma mark -
+#pragma mark - 麦克风权限：Privacy - Microphone Usage Description 是否允许此App使用你的麦克风？
+#pragma mark - 相机权限： Privacy - Camera Usage Description 是否允许此App使用你的相机？
+#pragma mark - 相册权限： Privacy - Photo Library Usage Description 是否允许此App访问你的媒体资料库？
+#pragma mark - 通讯录权限： Privacy - Contacts Usage Description 是否允许此App访问你的通讯录？
+#pragma mark - 蓝牙权限：Privacy - Bluetooth Peripheral Usage Description 是否许允此App使用蓝牙？
+#pragma mark - 语音转文字权限：Privacy - Speech Recognition Usage Description 是否允许此App使用语音识别？
+#pragma mark - 日历权限：Privacy - Calendars Usage Description
 #pragma mark - 定位。位置
+#pragma mark - 定位权限：Privacy - Location When In Use Usage Description
+#pragma mark - 定位权限: Privacy - Location Always Usage Description
+#pragma mark - 位置权限：Privacy - Location Usage Description
+#pragma mark - 使用期间定位：info.plist 配置 NSLocationWhenInUseUsageDescription
+#pragma mark - 始终定位：info.plist 同时配置以下项目 NSLocationAlwaysAndWhenInUseUsageDescription、NSLocationWhenInUseUsageDescription，需要支持 iOS10 的话需要配置 NSLocationAlawaysUsageDescription
+#pragma mark - 位置权限：模糊定位状态 NSLocationDefaultAccuracyReduced(Privacy - Location Default Accuracy Reduced 为 true 默认请求大概位置。)
+// https://www.jianshu.com/p/7616285c251d
+1.系统级开关状态，及跳转设置
+[CLLocationManager locationServicesEnabled] //系统的全局定位开关
+此方法是获取到用户是否打开了系统的位置服务，但是因为现在苹果的安全机制，我们无法执行代码跳转到系统的位置开关界面，所以，如果位置服务不可用的情况下，我们不需要做任何操作，只需要操作位置权限问题即可。
+注意：一定要区分位置服务和位置权限，位置服务是系统设置中位置的总开关，位置权限，只是代表是否可以获取到某一个应用的位置
+
+//CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+typedef NS_ENUM(int, CLAuthorizationStatus) {
+      kCLAuthorizationStatusNotDetermined = 0,  // 用户未授权，即还未弹出OS的授权弹窗
+      kCLAuthorizationStatusDenied, // 用户拒绝定位权限，包括拒绝App或者全局开关关闭
+      kCLAuthorizationStatusRestricted, // 定位服务受限，该状态位用户无法通过设置页面进行改变
+      kCLAuthorizationStatusAuthorizedAlways, // 始终定位，即后台定位
+      kCLAuthorizationStatusAuthorizedWhenInUse, // App使用的时候，允许定位
+      kCLAuthorizationStatusAuthorized, // iOS8.0之后已经被废弃
+};
+
+// 三、始终定位Always 和 App使用期间定位WhenInUse 两种定位模式配置
+// 两种模式的都需要初始化CLLocationManagerd的实例self.locationManager = [[CLLocationManager alloc] init];，然后调用实例方法。
+
+//3.1、“使用期间定位”模式 info.plist 配置 NSLocationWhenInUseUsageDescription
+//b、调用方法requestWhenInUseAuthorization申请使用期间定位模式,有且只有status == kCLAuthorizationStatusNotDetermined的时候，调用才会出现系统弹窗。
+//注意：如果用户选择“允许一次”，则状态更改为kCLAuthorizationStatusAuthorizedWhenInUse，但是设置还是为"询问"状态，下次App启动的时候，还是status == kCLAuthorizationStatusNotDetermined需要进行授权弹窗。
+//c、之后如果还需要定位，则需要自己弹窗提醒用户
+
+// 3.2、“始终定位”模式 只有当你的App确实需要始终定位的时候，才配置。该模式下，AppStore的审核也会更加的严格。
+// info.plist 同时配置以下项目
+//NSLocationAlwaysAndWhenInUseUsageDescription
+//NSLocationWhenInUseUsageDescription
+//需要支持 iOS10 的话需要配置 NSLocationAlawaysUsageDescription
+// 调用方法requestAlwaysAuthorization, 该方法的调用时机非常重要，否则可能永远都出不来弹窗。
+
+
+// 四、模糊定位，iOS14适配
+// 4.1、模糊定位状态
+self.locationManager = [[CLLocationManager alloc] init];
+CLAccuracyAuthorization status = self.locationManager.accuracyAuthorization;
+typedef NS_ENUM(NSInteger, CLAccuracyAuthorization) {
+    CLAccuracyAuthorizationFullAccuracy, //精准定位
+    CLAccuracyAuthorizationReducedAccuracy, // 模糊定位
+};
+// 4.2、可以通过直接在 info.plist 中添加 NSLocationDefaultAccuracyReduced(Privacy - Location Default Accuracy Reduced) 为 true 默认请求大概位置。 这样设置之后，即使用户想要为该 App 开启精确定位权限，也无法开启。
+// 4.3、可以直接通过API来根据不同的需求设置不同的定位精确度。
+self.locationManager = [[CLLocationManager alloc] init];
+self.locationManager.desiredAccuracy = kCLLocationAccuracyReduced;
+// 4.4、临时一次精准定位弹窗 —— 每次调用否会弹窗，iOS无限制
+// 在 Info.plist 中配置NSLocationTemporaryUsageDescriptionDictionary字典中需要配置 key 和 value 表明使用位置的原因，以及具体的描述。 key为自定义的字段，在接口中传入PurposeKey。
+// 然后调用方法[self.mgr requestTemporaryFullAccuracyAuthorizationWithPurposeKey:@"purposeKey"];
+
+
+#pragma mark - 媒体库权限：Privacy - Media Library Usage Description
+#pragma mark - 健康分享权限：Privacy - Health Share Usage Description
+#pragma mark - 健康更新权限：Privacy - Health Update Usage Description
+#pragma mark - 运动使用权限：Privacy - Motion Usage Description
+#pragma mark - 音乐权限：Privacy - Music Usage Description
+#pragma mark - 提醒使用权限：Privacy - Reminders Usage Description
+#pragma mark - Siri使用权限：Privacy - Siri Usage Description
+#pragma mark - 电视供应商使用权限：Privacy - TV Provider Usage Description
+#pragma mark - 视频用户账号使用权限：Privacy - Video Subscriber Account Usage Description
+#pragma mark - 网络权限：App Transport Security Settings — Allow Arbitrary Loads
+#pragma mark -
+#pragma mark -
+#pragma mark -
+#pragma mark -
+#pragma mark -
+#pragma mark -
+#pragma mark -
+#pragma mark -
+#pragma mark -
+#pragma mark -
+#pragma mark -
+#pragma mark -
+#pragma mark -
+#pragma mark -
+#pragma mark -
+#pragma mark -
+#pragma mark -
+#pragma mark -
+#pragma mark -
+#pragma mark -
+#pragma mark -
 #pragma mark - 相册
 #pragma mark - 相机
 #pragma mark - IDFA
@@ -208,5 +280,9 @@ Pricacy - Tracking Usage Description 我们需要获取您的设备信息用以�
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
 
+#pragma mark -
+#pragma mark -
+#pragma mark -
+#pragma mark -
 
 #endif /* infoplist___h */

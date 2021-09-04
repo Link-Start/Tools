@@ -313,54 +313,55 @@
     
     for (int i = 0; i < images.count; i++) {
         //等待降低信号量
-        //只要信号量值不大于等于1，就会一直等待，知道>=1，再进行操作
+// 调用dispatch_semaphore_wait：如果当前信号量大于0则使信号量-1后执行子线程任务；当前信号量为0则等待信号量
         dispatch_semaphore_wait(ls_semaphore_t, DISPATCH_TIME_FOREVER);
-            //2.上传文件
-            [manager POST:urlString parameters:parameters headers:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-                // 拼接data到请求体，这个block的参数是遵守AFMultipartFormData协议的。
-                //上传文件参数
-                //在实际使用过程中,比较发现: UIImagePNGRepresentation(UIImage* image) 要比UIImageJPEGRepresentation(UIImage* image, 1.0) 返回的图片数据量大很多.
-                //UIImageJPEGRepresentation函数需要两个参数:图片的引用和压缩系数
-                //如果对图片的清晰度要求不高,还可以通过设置 UIImageJPEGRepresentation函数的第二个参数,大幅度降低图片数据量.
-                //因此,在读取图片数据内容时,建议优先使用UIImageJPEGRepresentation,并可根据自己的实际使用场景,设置压缩系数,进一步降低图片数据量大小.
-                NSData *imageData = UIImageJPEGRepresentation(images[i], 0.1);
-                /*
-                 此方法参数
-                 1. FileData:  要上传的[二进制数据] +++ image转换成的data数据
-                 2. name:      对应网站上[upload.php中]处理文件的[字段"file"] +++ 参数image 对应的key值
-                 3. fileName:  要保存在服务器上的[文件名] ++++ 可以随便写
-                 4. mimeType:  上传文件的类型[mimeType] +++
-                 */
-                //服务器上传文件的字段和类型 上传图片，以文件流的格式
-                //            [formData appendPartWithFileData:imageData name:imageKey fileName:fileName mimeType:@"image/png/file/jpg"];
-                
-                [formData appendPartWithFormData:imageData name:fileName];
-                
-                ////完操作完，让信号量计数+1，这样下次有线程要访问，就可以访问
-                dispatch_semaphore_signal(ls_semaphore_t);
-                
-            } progress:^(NSProgress * _Nonnull uploadProgress) {
-                //打印 上传进度
-                NSLog(@"上传进度%d：%lf",i, 1.0 * uploadProgress.completedUnitCount / uploadProgress.totalUnitCount);
-            } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                NSLog(@"第%d张图片上传成功:%@", i + 1, responseObject);
-                //手动关闭MBProgressHUD
-//                [self hiddenHud:hud];
-                // 请求成功，解析数据
-                if (finish) {
-                    finish([self tryToParseData:responseObject]);
-                }
-            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                //手动关闭MBProgressHUD
-//                [self hiddenHud:hud];
-                //根据错误代码显示提示信息
-                [self showFailMarkedWordsWithError:error];
-                //请求失败
-                NSLog(@"失败：%@",error);
-                if (failure) {
-                    failure(error);
-                }
-            }];
+        //2.上传文件
+        [manager POST:urlString parameters:parameters headers:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+            // 拼接data到请求体，这个block的参数是遵守AFMultipartFormData协议的。
+            //上传文件参数
+            //在实际使用过程中,比较发现: UIImagePNGRepresentation(UIImage* image) 要比UIImageJPEGRepresentation(UIImage* image, 1.0) 返回的图片数据量大很多.
+            //UIImageJPEGRepresentation函数需要两个参数:图片的引用和压缩系数
+            //如果对图片的清晰度要求不高,还可以通过设置 UIImageJPEGRepresentation函数的第二个参数,大幅度降低图片数据量.
+            //因此,在读取图片数据内容时,建议优先使用UIImageJPEGRepresentation,并可根据自己的实际使用场景,设置压缩系数,进一步降低图片数据量大小.
+            NSData *imageData = UIImageJPEGRepresentation(images[i], 0.1);
+            /*
+             此方法参数
+             1. FileData:  要上传的[二进制数据] +++ image转换成的data数据
+             2. name:      对应网站上[upload.php中]处理文件的[字段"file"] +++ 参数image 对应的key值
+             3. fileName:  要保存在服务器上的[文件名] ++++ 可以随便写
+             4. mimeType:  上传文件的类型[mimeType] +++
+             */
+            //服务器上传文件的字段和类型 上传图片，以文件流的格式
+            //            [formData appendPartWithFileData:imageData name:imageKey fileName:fileName mimeType:@"image/png/file/jpg"];
+            
+            [formData appendPartWithFormData:imageData name:fileName];
+            
+            ////完操作完，让信号量计数+1，这样下次有线程要访问，就可以访问
+            //增加计数信号量。如果前一个值小于零，此函数将唤醒当前在wait中线程
+            dispatch_semaphore_signal(ls_semaphore_t);
+            
+        } progress:^(NSProgress * _Nonnull uploadProgress) {
+            //打印 上传进度
+            NSLog(@"上传进度%d：%lf",i, 1.0 * uploadProgress.completedUnitCount / uploadProgress.totalUnitCount);
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSLog(@"第%d张图片上传成功:%@", i + 1, responseObject);
+            //手动关闭MBProgressHUD
+            //                [self hiddenHud:hud];
+            // 请求成功，解析数据
+            if (finish) {
+                finish([self tryToParseData:responseObject]);
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            //手动关闭MBProgressHUD
+            //                [self hiddenHud:hud];
+            //根据错误代码显示提示信息
+            [self showFailMarkedWordsWithError:error];
+            //请求失败
+            NSLog(@"失败：%@",error);
+            if (failure) {
+                failure(error);
+            }
+        }];
     }
 }
 
@@ -729,6 +730,12 @@
         case -200:
         case -1016:
             [MBProgressHUD qucickTip:@"不支持的解析格式,请添加数据解析类型"];
+            break;
+        case -400:
+            [MBProgressHUD qucickTip:@"参数传递错误"];
+            break;
+        case -401:
+            [MBProgressHUD qucickTip:@"访问的页面没有授权"];
             break;
         case -404:
             [MBProgressHUD qucickTip:@"服务器错误"];

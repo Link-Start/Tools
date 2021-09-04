@@ -233,6 +233,9 @@ if ([v1 compare:v2 options:NSNumericSearch] == NSOrderedDescending) {\
     NSLog(@"v1 < v2 (有新版本)");\
 }
 
+
+/******************************************************************************************************************************************************************************************************/
+
 /// Xib 注册tableViewCellSectionHeaderView、 tableViewCellSectionFooterView
 #define kLS_tableViewCellSectionHeaderFooterView_registerNib(tableView, headerFooterViewName, headerFooterViewNameId) \
                         [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([headerFooterViewName class]) bundle:nil] forHeaderFooterViewReuseIdentifier:headerFooterViewNameId];
@@ -301,6 +304,29 @@ if ([v1 compare:v2 options:NSNumericSearch] == NSOrderedDescending) {\
 #define kLS_collectionViewCell_getFromCachePool_(cellName) \
                         [collectionView dequeueReusableCellWithReuseIdentifier:k##cellName##Id forIndexPath:indexPath];
 
+
+
+#define dismissCurrentVc(targetVc) \
+{NSMutableArray *childsVcs = targetVc.navigationController.viewControllers.mutableCopy;\
+[childsVcs removeObject:targetVc];\
+targetVc.navigationController.viewControllers = childsVcs;\
+}
+
+#define dismissCurrentVcAnimation(targetVc) \
+{NSMutableArray *childsVcs = targetVc.navigationController.viewControllers.mutableCopy;\
+[childsVcs removeObject:targetVc];\
+[targetVc.navigationController setViewControllers:childsVcs animated:YES];\
+}
+
+#define bringVctoFront(targetVc) \
+{NSMutableArray *childsVcs = targetVc.navigationController.viewControllers.mutableCopy;\
+    NSMutableArray *remainChildVcs = [NSMutableArray array];\
+    [remainChildVcs addObject:[childsVcs firstObject]];\
+    [remainChildVcs addObject:[childsVcs lastObject]];\
+    targetVc.navigationController.viewControllers = remainChildVcs;\
+}
+
+/******************************************************************************************************************************************************************************************************/
 
 
 ///去除数组中重复的对象
