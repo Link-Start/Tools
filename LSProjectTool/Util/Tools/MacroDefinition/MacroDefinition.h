@@ -222,6 +222,8 @@ if(@available(iOS 10.0, *)) {\
 
 
 //打开appStore中的应用 https://itunes.apple.com/cn/app/idxxxxx?mt=8
+// 当前app 在 appStore中的下载地址 1515655040
+#define kLS_currentApplicationInAppStoreDownloadAddress(appleID) [NSString stringWithFormat:@"https://itunes.apple.com/cn/app/id%@?mt=8", appleID]
 
 //版本比较
 #define kLS_VersionCompare(v1, v2)\

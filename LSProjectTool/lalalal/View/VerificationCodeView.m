@@ -94,6 +94,12 @@
         _textField.font = [UIFont fontWithName:@"PingFang-SC-Medium" size:16];
         _textField.textColor = [UIColor colorFromHexString:@"#212121"];
         _textField.keyboardType = UIKeyboardTypeNumberPad;
+        if (@available(iOS 12.0, *)) {//iOS 获取手机短信验证码
+            //Xcode 10 适配
+            _textField.textContentType = UITextContentTypeOneTimeCode;
+            //非Xcode 10 适配
+            _textField.textContentType = @"one-time-code";
+        } 
     }
     
     return _textField;

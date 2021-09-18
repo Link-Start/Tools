@@ -69,6 +69,18 @@
 //    [hud show:YES];
     [hud showAnimated:YES];
 }
+//隐藏hud  移除hud
++ (void)hiddenHud:(MBProgressHUD *)hud {
+    if (!hud) {
+        hud = [self hud];
+    }
+    if (hud != nil) {
+        hud.removeFromSuperViewOnHide = YES;
+        [hud hideAnimated:YES];
+        [hud removeFromSuperview];
+    }
+}
+/******************************************************************************************************************************************************************************************************************/
 
 
 /**

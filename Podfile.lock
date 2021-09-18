@@ -22,6 +22,7 @@ PODS:
   - AMapLocation-NO-IDFA (2.7.0):
     - AMapFoundation-NO-IDFA (~> 1.6.8)
   - BMKLocationKit (2.0.0)
+  - BMLongPressDragCellCollectionView (3.1.4)
   - BRPickerView (2.7.3):
     - BRPickerView/AddressPickerView (= 2.7.3)
     - BRPickerView/Base (= 2.7.3)
@@ -37,36 +38,44 @@ PODS:
   - ChameleonFramework (2.1.0):
     - ChameleonFramework/Default (= 2.1.0)
   - ChameleonFramework/Default (2.1.0)
-  - CYLTabBarController (1.29.1):
-    - CYLTabBarController/Core (= 1.29.1)
-  - CYLTabBarController/Core (1.29.1)
+  - CYLTabBarController (1.29.2):
+    - CYLTabBarController/Core (= 1.29.2)
+  - CYLTabBarController/Core (1.29.2)
   - dsBridge (3.0.6)
   - DZNEmptyDataSet (1.8.1)
+  - FDFullscreenPopGesture (1.1)
   - FLAnimatedImage (1.0.16)
   - FMListPlaceholder (1.1.5)
   - FSTextView (1.8)
   - FTPopOverMenu (2.1.1)
-  - GKPageScrollView (1.6.2):
-    - GKPageScrollView/Objc (= 1.6.2)
-  - GKPageScrollView/Objc (1.6.2)
-  - GKPageSmoothView (1.6.2):
-    - GKPageSmoothView/Objc (= 1.6.2)
-  - GKPageSmoothView/Objc (1.6.2)
+  - FWPopupView (4.2.1):
+    - SnapKit
+  - FWPopupViewOC (3.1.0):
+    - Masonry
+  - GKPageScrollView (1.6.4):
+    - GKPageScrollView/Objc (= 1.6.4)
+  - GKPageScrollView/Objc (1.6.4)
+  - GKPageSmoothView (1.6.4):
+    - GKPageSmoothView/Objc (= 1.6.4)
+  - GKPageSmoothView/Objc (1.6.4)
   - GKPhotoBrowser (2.3.2):
     - GKPhotoBrowser/SD (= 2.3.2)
   - GKPhotoBrowser/Core (2.3.2)
   - GKPhotoBrowser/SD (2.3.2):
     - GKPhotoBrowser/Core
     - SDWebImage (~> 5.0)
-  - HXPhotoPicker (3.2.2):
-    - HXPhotoPicker/Default (= 3.2.2)
-  - HXPhotoPicker/Default (3.2.2)
+  - HXPhotoPicker (3.2.3):
+    - HXPhotoPicker/Default (= 3.2.3)
+  - HXPhotoPicker/Default (3.2.3)
   - IAPHelper (1.1)
   - IQKeyboardManager (6.5.6)
   - JCore (2.7.1)
   - JPush (4.3.0):
     - JCore (< 3.0.0, >= 2.0.0)
   - JXCategoryView (1.5.9)
+  - KJEmitterView (7.1.0):
+    - KJEmitterView/Kit (= 7.1.0)
+  - KJEmitterView/Kit (7.1.0)
   - KNPhotoBrowser (2.5.4):
     - SDWebImage
   - LBXPermission/Base (1.1.1)
@@ -76,6 +85,7 @@ PODS:
   - LBXPermission/Location (1.1.1)
   - LBXPermission/Photo (1.1.1)
   - LBXPermission/Reminder (1.1.1)
+  - LMJDropdownMenu (3.0.4)
   - lottie-ios (3.2.3)
   - LSTPopView (0.3.10):
     - LSTPopView/Code (= 0.3.10)
@@ -108,10 +118,15 @@ PODS:
   - SDWebImage/Core (5.11.1)
   - SGQRCode (3.5.1)
   - SlackTextViewController (1.9.6)
+  - SnapKit (4.2.0)
   - SwiftyStoreKit (0.16.1)
   - ThinkVerb (1.1.0)
+  - TTGTagCollectionView (2.1.0)
   - TZImagePickerController (3.6.4)
   - UICKeyChainStore (2.2.1)
+  - UITableViewDynamicLayoutCacheHeight (5.1.8):
+    - UITableViewDynamicLayoutCacheHeight/Category (= 5.1.8)
+  - UITableViewDynamicLayoutCacheHeight/Category (5.1.8)
   - UMABTest (1.0.1):
     - UMCommon
   - UMAPM (1.4.2)
@@ -119,7 +134,7 @@ PODS:
   - UMCommon (7.3.5):
     - UMDevice
   - UMCSecurityPlugins (1.0.6)
-  - UMDevice (2.0.4)
+  - UMDevice (2.0.5)
   - UMLink (1.1.0):
     - UMCommon
   - UMPush (3.3.1):
@@ -152,6 +167,8 @@ PODS:
   - ZFPlayer (4.0.1):
     - ZFPlayer/Core (= 4.0.1)
   - ZFPlayer/Core (4.0.1)
+  - ZLCellDataSource (0.4.1)
+  - ZLCollectionViewFlowLayout (1.4.5)
   - ZLPhotoBrowser (3.2.0):
     - SDWebImage
 
@@ -161,14 +178,18 @@ DEPENDENCIES:
   - "AFNetworking+RetryPolicy"
   - AMapLocation-NO-IDFA
   - BMKLocationKit
+  - BMLongPressDragCellCollectionView
   - BRPickerView
   - ChameleonFramework
   - CYLTabBarController
   - dsBridge
   - DZNEmptyDataSet
+  - FDFullscreenPopGesture
   - FMListPlaceholder
   - FSTextView
   - FTPopOverMenu
+  - FWPopupView
+  - FWPopupViewOC
   - GKPageScrollView
   - GKPageSmoothView
   - GKPhotoBrowser
@@ -177,6 +198,7 @@ DEPENDENCIES:
   - IQKeyboardManager
   - JPush
   - JXCategoryView
+  - KJEmitterView
   - KNPhotoBrowser
   - LBXPermission/Base
   - LBXPermission/Calendar
@@ -185,6 +207,7 @@ DEPENDENCIES:
   - LBXPermission/Location
   - LBXPermission/Photo
   - LBXPermission/Reminder
+  - LMJDropdownMenu
   - lottie-ios
   - LSTPopView
   - Masonry
@@ -205,8 +228,10 @@ DEPENDENCIES:
   - SlackTextViewController
   - SwiftyStoreKit
   - ThinkVerb
+  - TTGTagCollectionView
   - TZImagePickerController
   - UICKeyChainStore
+  - UITableViewDynamicLayoutCacheHeight
   - UMABTest
   - UMAPM
   - UMCCommonLog
@@ -225,6 +250,8 @@ DEPENDENCIES:
   - YTKNetwork
   - YYKit
   - ZFPlayer
+  - ZLCellDataSource
+  - ZLCollectionViewFlowLayout
   - ZLPhotoBrowser
 
 SPEC REPOS:
@@ -235,15 +262,19 @@ SPEC REPOS:
     - AMapFoundation-NO-IDFA
     - AMapLocation-NO-IDFA
     - BMKLocationKit
+    - BMLongPressDragCellCollectionView
     - BRPickerView
     - ChameleonFramework
     - CYLTabBarController
     - dsBridge
     - DZNEmptyDataSet
+    - FDFullscreenPopGesture
     - FLAnimatedImage
     - FMListPlaceholder
     - FSTextView
     - FTPopOverMenu
+    - FWPopupView
+    - FWPopupViewOC
     - GKPageScrollView
     - GKPageSmoothView
     - GKPhotoBrowser
@@ -253,8 +284,10 @@ SPEC REPOS:
     - JCore
     - JPush
     - JXCategoryView
+    - KJEmitterView
     - KNPhotoBrowser
     - LBXPermission
+    - LMJDropdownMenu
     - lottie-ios
     - LSTPopView
     - LSTTimer
@@ -275,10 +308,13 @@ SPEC REPOS:
     - SDWebImage
     - SGQRCode
     - SlackTextViewController
+    - SnapKit
     - SwiftyStoreKit
     - ThinkVerb
+    - TTGTagCollectionView
     - TZImagePickerController
     - UICKeyChainStore
+    - UITableViewDynamicLayoutCacheHeight
     - UMABTest
     - UMAPM
     - UMCCommonLog
@@ -295,6 +331,8 @@ SPEC REPOS:
     - YTKNetwork
     - YYKit
     - ZFPlayer
+    - ZLCellDataSource
+    - ZLCollectionViewFlowLayout
     - ZLPhotoBrowser
 
 SPEC CHECKSUMS:
@@ -304,26 +342,32 @@ SPEC CHECKSUMS:
   AMapFoundation-NO-IDFA: 444163c19aa10720c3ecd57b1f071ecdfe0edead
   AMapLocation-NO-IDFA: cf78db86c5be566c5470d53495a976bb416468f9
   BMKLocationKit: 097814ef672b1e57e86e6c1968d7892fb78002bf
+  BMLongPressDragCellCollectionView: 99f224009d4137999b35b8a810a54edc8b34eb85
   BRPickerView: 9cc11880ac79c4872d081ccb88f306224c1501d7
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
-  CYLTabBarController: 2fdd8b286367629a1acd3087a3879a3eee304004
+  CYLTabBarController: db44b5901a28693a8a4279e4721b3aafdd36c178
   dsBridge: 48b62ee8a411ad601a88d6f6c8cf6cb634b206b7
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
+  FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
   FLAnimatedImage: 8f3e854ebf9680b71f0b6e700939687fc4d82b4b
   FMListPlaceholder: 17b3cb63922850e18ca97dd092a233ea3a80bc5a
   FSTextView: 9e2ca07bb6bb0fb7e77b49b2717adf81f3c620b5
   FTPopOverMenu: 202d46aea0656307fd463fac0340c9c8837158d2
-  GKPageScrollView: 55fbcaf83707081f1ee8fb8c6c5f7614874295c5
-  GKPageSmoothView: 17c42ba8e5c74528ef2687e56fc1cc0008af8e4f
+  FWPopupView: eea10388d25444fbe69b9222a5b5f317bb049395
+  FWPopupViewOC: 116094e33ba1f492e60c262a095a9ae6bfd0c715
+  GKPageScrollView: 5056cfa970e51955af3d36bd6e3872d968ceff87
+  GKPageSmoothView: 3384813a3f5cd4226525a8682e8cbce0355cd56a
   GKPhotoBrowser: b9f6e438bffe77d111e467385d5bbdf6a50d6a4e
-  HXPhotoPicker: fe0a84764c6fc93cdaccb5f8dabe0af08470075e
+  HXPhotoPicker: f05aa6d293a13ba1b3f3523779c97e390ed44a42
   IAPHelper: fd74f53b0ac142eed085777b88b86a11746a2dd4
   IQKeyboardManager: 2a6e97afdafc7becf0cb17a9a8d795e3a980717f
   JCore: 9d5bda3a172c65bbe14f2806ab0f6246f8a06065
   JPush: 88d6361fbec4be7c8b55b20b7fe1c292228f6bc2
   JXCategoryView: 2ef9ecfd3735158d009ce02d1f29811aa822da65
+  KJEmitterView: 41fe5f85959049b282cd17f7373fbcbaf8f6219b
   KNPhotoBrowser: a6da54e9bdca3cc1f4ab36b0ff2be706ae5be868
   LBXPermission: e7f860ce1280599fc196a8c5dee713cbb81354d4
+  LMJDropdownMenu: 50c74e9d50a480c290fec47eb575826861d0823b
   lottie-ios: c058aeafa76daa4cf64d773554bccc8385d0150e
   LSTPopView: 9379f00f6ce7d1fc620b50ab00ed3ef97b2d4d52
   LSTTimer: caf8f02ff366ca175cf4c1778d26c166183c1b6f
@@ -344,16 +388,19 @@ SPEC CHECKSUMS:
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SGQRCode: 65d6170ddcf3feecc6e2f3601aac78ad93e56589
   SlackTextViewController: b854e62c1c156336bc4fd409c6ca79b5773e8f9d
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SwiftyStoreKit: 6b9c08810269f030586dac1fae8e75871a82e84a
   ThinkVerb: 942c70b3a7862c88ee858cc32de46ac87129ec32
+  TTGTagCollectionView: a2a8668c659b39e7a6ffd6590475ea53a7ae95f7
   TZImagePickerController: 1cc39ec0454d6e94d0397418953164d7aa631719
   UICKeyChainStore: ba3bff2c762b12db1e516f395c837dd25298b05e
+  UITableViewDynamicLayoutCacheHeight: 4fabd95e944317cc7cd7ead3c56915d9527432dd
   UMABTest: e35a7be1f4401640f780d95b403d98794d65c6aa
   UMAPM: 9766611aba84e0755afc785d4399f1e9fbb0a475
   UMCCommonLog: bea707e50c85cef4b0eb47cc5c7226bb843245ca
   UMCommon: ab4d875ddefe1b06c60b577e4a58bc4d433ee067
   UMCSecurityPlugins: 0831a08f3988f3cea9f1d3a7626cd9bee4fef150
-  UMDevice: 590115ebb238250e574988c7a3e9511f5d5cd4d3
+  UMDevice: c13bbb2e8ca6c67d1e23e03162553e3ec5a8b5b0
   UMLink: 8c2b9b9b19f57468dc3d65ae6d6a772d50768744
   UMPush: 7ef2ff2fcca16e4d5c7897183a78a0d26f920bfe
   UMShare: a3f9cb2d3ece67edd2c58331bd89bfffb289782b
@@ -364,8 +411,10 @@ SPEC CHECKSUMS:
   YTKNetwork: c16be90b06be003de9e9cd0d3b187cc8eaf35c04
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
   ZFPlayer: f88787c815f7b0801279c42f131a89e2823e669e
+  ZLCellDataSource: 7b78bded737174201489a8de478b55a9f2155bf8
+  ZLCollectionViewFlowLayout: 134dbc8ccd32e298e742ee8ab0bc949f1fd2396f
   ZLPhotoBrowser: 3748fdbeb2b28961c2495d15131dbf413082e1b9
 
-PODFILE CHECKSUM: 11d3273d5e0e8e58a47ccd5007afc2045cfa5845
+PODFILE CHECKSUM: 742fd4b5359355d7cefccad537811b41fe2ed36b
 
 COCOAPODS: 1.10.1

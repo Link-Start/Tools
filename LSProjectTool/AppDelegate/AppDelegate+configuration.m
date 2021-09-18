@@ -84,6 +84,13 @@
 //    [IQKeyboardManager sharedManager].placeholderFont = [UIFont systemFontOfSize:14.0];
 //    // 4. 设置键盘textField的距离。不能小于零。默认是10.0。<触发条件是textField需要改变y时 >
 //    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 10.0f;
+    
+    // 5.全局禁用 键盘toolBar左侧的 跳转其他输入框的箭头(上一个/下一个输入框)
+//    [IQKeyboardManager sharedManager].previousNextDisplayMode = IQPreviousNextDisplayModeAlwaysHide;
+
+    // 6.为textField/textView设置与键盘的自定义距离。不能小于零
+//    self.verifyCodeTF.keyboardDistanceFromTextField = 50;
+
 
 //    // 6.  IQKeyBoardManager 的右边的 Done 按钮的响应事件doneAction 事件未公开API,不过可以通过代理
 //    - (void)textFieldDidEndEditing:(UITextField *)textField

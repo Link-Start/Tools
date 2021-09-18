@@ -44,8 +44,8 @@
 -(void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
     NSLog(@"开始加载网页");
     
-    if (!self.title) {
-        self.title = webView.title;
+    if (!self.navigationItem.title && webView.title) {
+        self.navigationItem.title = webView.title;
     }
     
     //开始加载网页时展示出progressView
@@ -62,7 +62,9 @@
 // 页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
     //这里修改导航栏的标题，动态改变
-    //self.title = webView.title;
+//    if (!self.navigationItem.title && webView.title) {
+//        self.navigationItem.title = webView.title;
+//    }
     
     //关闭手势缩放
     NSString *injectionJSString = @"var script = document.createElement('meta');"

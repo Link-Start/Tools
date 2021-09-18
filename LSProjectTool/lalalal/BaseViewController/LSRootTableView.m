@@ -409,6 +409,9 @@
             self.ls_tableView.scrollIndicatorInsets = self.ls_tableView.contentInset;
         }
 #endif
+//        if (@available(iOS 15.0, *)) {
+//            self.ls_tableView.sectionHeaderTopPadding = 0
+//        }
         
         //头部刷新
         //        MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRereshing)];

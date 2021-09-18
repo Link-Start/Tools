@@ -54,6 +54,17 @@
     
 }
 
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    // iOS 13 之后横竖屏切换的时候 self.contentView 会变化
+    if (self.contentView.frame.origin.x > 0 ) {
+        CGRect frame = self.contentView.frame;
+        frame.origin.x = 0;
+        self.contentView.frame = frame;
+    }
+}
+
 #pragma mark - 懒加载
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

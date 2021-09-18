@@ -12,77 +12,49 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIView (LSCategory)
 ////////////////////////////////////////////////////////frame
+///
 /// view的x 坐标
 @property (nonatomic, assign) CGFloat ls_x;
 /// y 坐标
 @property (nonatomic, assign) CGFloat ls_y;
-///最大横坐标(代表控件右边界)
+/// 最大横坐标(代表控件右边界)
 @property (nonatomic, assign) CGFloat ls_maxX;
-///最大纵坐标(代表控件下边界)
+/// 最大纵坐标(代表控件下边界)
 @property (nonatomic, assign) CGFloat ls_maxY;
-/*!
- @brief 中心点X坐标
- */
+/// 中心点X坐标
 @property (nonatomic, assign) CGFloat ls_centerX;
-/*!
- @brief 中心点Y坐标
- */
+/// 中心点Y坐标
 @property (nonatomic, assign) CGFloat ls_centerY;
-/*!
- @brief 宽度值
- */
+/// 宽度值
 @property (nonatomic, assign) CGFloat ls_width;
-/*!
- @brief 高度值
- */
+/// 高度值
 @property (nonatomic, assign) CGFloat ls_height;
-/*!
- @brief View大小
- */
+/// View大小
 @property (nonatomic, assign) CGSize ls_size;
-/*!
- @brief 初始坐标
- */
+/// 初始坐标
 @property (nonatomic, assign) CGPoint ls_origin;
-/*!
- @brief 顶部坐标值
- */
+/// 顶部坐标值
 @property (nonatomic, assign) CGFloat ls_top;
-/*!
- @brief 左部坐标值
- */
+/// 左部坐标值
 @property (nonatomic, assign) CGFloat ls_left;
-/*!
- @brief 底部坐标值
- */
+/// 底部坐标值
 @property (nonatomic, assign) CGFloat ls_bottom;
-/*!
- @brief 右部坐标值
- */
+/// 右部坐标值
 @property (nonatomic, assign) CGFloat ls_right;
 
 ////////////////////////////////////////////////////////bounds
-/*!
- @brief 边界大小
- */
+///
+/// 边界大小
 @property (nonatomic, assign) CGSize ls_boundsSize;
-/*!
- @brief 边界宽度
- */
+/// 边界宽度
 @property (nonatomic, assign) CGFloat ls_boundsWidth;
-/*!
- @brief 边界高度
- */
+/// 边界高度
 @property (nonatomic, assign) CGFloat ls_boundsHeight;
 
 //content getters
-/*!
- @brief 边界区域
- */
+/// 边界区域
 @property (nonatomic, readonly) CGRect ls_contentBounds;
-/*!
- @brief 边界中心点
- */
+/// 边界中心点
 @property (nonatomic, readonly) CGPoint ls_contentCenter;
 
 ////////////////////////////////////////////////////////
@@ -93,51 +65,50 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 
-////////////////////////////////////////////////////////
-/**
- *  水平居中
- */
+///////////////////////////////////////////////////////
+
+/// 水平居中
 - (void)ls_alignHorizontal;
-/**
- *  垂直居中
- */
+/// 垂直居中
 - (void)ls_alignVertical;
 /** **/
 - (instancetype)ls_with;
-
+///
 - (instancetype)ls_and;
 ////////////////////////////////////////////////////////
-/**
- *  @brief 从Xib加载视图
- *
- *  @description Loads an instance from the Nib named like the class.
- *               Returns the first root object of the Nib.
- */
+/// 从Xib加载视图
 + (id)ls_loadFromNib;
 
 ////////////////////////////////////////////////////////
 
-/**
- *  判断是否显示在主窗口window上面
- *
- *  @return 是:在      否：不在
- */
+/// 判断是否显示在主窗口window上面      YES:在      NO：不在
 - (BOOL)ls_isShowOnWindow;
-///主控制器 - 响应者
+/// 主控制器 - 响应者
 - (UIViewController *)ls_parentController;
-// 判断View是否显示在屏幕上
+/// 判断View是否显示在屏幕上
 - (BOOL)ls_isDisplayedInScreen;
+
+/// 判断某个点是否在视图区域内，针对 transform 做了转换计算，并提供 UIEdgeInsets 缩放区域的参数
+/// @param point  要判断的点坐标
+/// @param view   传入的视图，一定要与本视图处于同一视图树中
+/// @param insets UIEdgeInsets参数可以调整判断的边界
+/// @return BOOL类型，返回点坐标是否位于视图内
+- (BOOL)checkPoint:(CGPoint) point inView:(UIView *)view withInsets:(UIEdgeInsets)insets;
+
 /// 第一响应者
 - (UIView *)ls_firstResponder;
 ///获取一个view所属的控制器
 - (UIViewController *)ls_belongViewController;
 
 
-///移除所有的子视图
+/// 移除所有的子视图
 - (void)ls_removeAllSubViews;
 
 /// 更新尺寸，使用autolayout布局时需要刷新约束才能获取到真实的frame
 - (void)ls_updateFrame;
+
+/// 切圆角
+- (void)ls_setRoundedCorners:(UIRectCorner)corners radius:(CGFloat)radius;
 
 @end
 

@@ -28,6 +28,7 @@ def all_Pods
 
 	
 	pod 'WMZDropDownMenu'										#筛选菜单,可悬浮,目前已实现闲鱼/美团/Boss直聘/京东/饿了么/淘宝/拼多多/赶集网/美图外卖等等的筛选菜单
+	# pod 'XYXFilterMenu'											#一个超级流畅的菜单筛选项，支持tableView和collectionView以及自定义输入范围模式，可以根据你的需要设定显示方式。
 	pod 'JXCategoryView'                  	#强大且易于使用的类别视图（分段控制、分段视图、分页视图、页面控制）（APP分类切换滚动视图）
 	pod 'GKPageScrollView'									#(主要参考了JXPagingView，在他的基础上做了修改)iOS类似微博、抖音、网易云等个人详情页滑动嵌套效果
 	pod 'GKPageSmoothView'									#(主要参考了JXPagingView，在他的基础上做了修改)iOS类似微博、抖音、网易云等个人详情页滑动嵌套效果
@@ -36,8 +37,8 @@ def all_Pods
 	pod 'FSTextView'                      	#placeholder和最大字数
 	
 	pod 'ThinkVerb'                       	#iOS动画(链式语法)
-	#pod 'TTGTextTagCollectionView'       	#流式标签(搜索历史、热门搜索)
-	# pod "TTGTagCollectionView"						#标签流显示控件，同时支持文字或自定义View
+	#pod 'TTGTextTagCollectionView'       	#流式标签
+	pod "TTGTagCollectionView"							#标签流显示控件，同时支持文字或自定义View(搜索历史、热门搜索)
 	pod 'WZLBadge'                        	#角标
 	pod 'RKNotificationHub'									#添加未读消息数显示提醒
 	pod 'SGQRCode'													#【iOS 原生二维码生成与扫描 -> 高仿微信】
@@ -57,8 +58,14 @@ def all_Pods
 	pod 'MGSwipeTableCell'									#一个易于使用的UITableViewCell子类，允许显示具有各种过渡的可滑动按钮。
 	pod 'IAPHelper'													#此回购协议不再维护!!!苹果内购助手,Apple 在购买应用时为 IAP 提供帮助
 	pod 'SwiftyStoreKit'										#swift版本 苹果内购助手
+	# pod 'ZXNavigationBar'										#pod 'ZXNavigationBar'
+	pod 'FDFullscreenPopGesture'						#UINavigationController的类别，用于启用iOS7+系统风格的全屏弹出手势
+	pod 'ZLCollectionViewFlowLayout' 				#基于UICollectionView实现，目前支持标签布局，列布局，百分比布局，定位布局，填充式布局，瀑布流布局等
+	pod 'BMLongPressDragCellCollectionView'	#让你轻松实现类似支付宝的拖拽重排功能, 支持各种自定义操作。
+	pod 'UITableViewDynamicLayoutCacheHeight'	#高性能的自动计算采用 Autolayout 布局的 UITableViewCell 和 UITableViewHeaderFooterView 的高度，内部自动管理高度缓存。
+	pod 'ZLCellDataSource'									#mvvm，mvp的应用。为viewcontroller瘦身，把tableview和collectionview的datasource提取出来，可节省1/3的代码量。
 
-	
+
 
 	#定位
 	pod 'AMapLocation-NO-IDFA'            	#高德地图定位SDK 没有广告IDFA
@@ -76,7 +83,7 @@ end
 
 
 def jiqimao_tools_ios	#机器猫工具库
-	# pod 'KJEmitterView'											#UIKit模块安装
+	pod 'KJEmitterView'											#UIKit模块安装
 	# pod 'KJEmitterView/Kit'									#UIKit 相关扩展
 	# pod 'KJEmitterView/Foundation'					#Foundation模块安装
 	# pod 'KJEmitterView/Language' 						# 多语言模块
@@ -100,7 +107,8 @@ def alertView_ios #弹窗
 	pod 'BRPickerView'											#选择器(日期,地址...)
 	pod 'ACActionSheet'											#仿微信ActionSheet
 	pod 'Popover.OC'                      	#一款优雅好用的类似QQ和微信消息页面的右上角微型菜单弹窗, 最低支持iOS6
-	pod 'FTPopOverMenu'											#FTPopOverMenu是iOS的弹出菜单，可能是最容易使用的菜单。支持人像和风景。它可以从任何UIView、任何UIBarButtonItem和任何CGRect显示。
+	pod 'FTPopOverMenu'											#类似QQ和微信消息页面的右上角微型菜单弹窗
+	pod 'LMJDropdownMenu'										#一个简单好用的下拉菜单控件,类似QQ和微信消息页面的右上角微型菜单弹窗
 	pod 'WMZDialog'													#弹窗，支持普通/微信底部/提示/加载框/日期/地区/日历/选择/编辑/分享/菜单/吐司/自定义弹窗等,支持多种动画,链式编程调用
 	pod 'LSTPopView'												#iOS万能弹窗
 

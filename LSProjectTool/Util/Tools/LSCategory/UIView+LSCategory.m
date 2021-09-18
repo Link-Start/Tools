@@ -343,6 +343,29 @@
     return TRUE;
 }
 
+
+/// 判断某个点是否在视图区域内，针对 transform 做了转换计算，并提供 UIEdgeInsets 缩放区域的参数
+/// @param point  要判断的点坐标
+/// @param view   传入的视图，一定要与本视图处于同一视图树中
+/// @param insets UIEdgeInsets参数可以调整判断的边界
+/// @return BOOL类型，返回点坐标是否位于视图内
+- (BOOL)checkPoint:(CGPoint)point inView:(UIView *)view withInsets:(UIEdgeInsets)insets {
+     // 将点坐标转化为视图内坐标系的点，消除 transform 带来的影响
+    CGPoint convertedPoint = [self convertPoint:point toView:view];
+    CGAffineTransform viewTransform = view.transform;
+    // 计算视图缩放比例
+    CGFloat scale = sqrt(viewTransform.a * viewTransform.a + viewTransform.c * viewTransform.c);
+    // 将 UIEdgeInsets 除以缩放比例，以便得到真实的『周围区域』
+    UIEdgeInsets scaledInsets = (UIEdgeInsets){insets.top/scale,insets.left/scale,insets.bottom/scale,insets.right/scale};
+    CGRect resultRect = UIEdgeInsetsInsetRect(view.bounds, scaledInsets);
+    // 判断给定坐标点是否在区域内
+    if (CGRectContainsPoint(resultRect, convertedPoint)) {
+        return YES;
+    }
+    return NO;
+}
+
+
 /**************************************************************************/
 - (UIView *)ls_firstResponder {
     if ([self isFirstResponder]) {
@@ -351,7 +374,7 @@
     UIView *firstResponder = nil;
     NSArray *subviews = self.subviews;
     for (UIView *subview in subviews) {
-        firstResponder = [subview firstResponder];
+        firstResponder = [subview ls_firstResponder];
         if (firstResponder) {
             return firstResponder;
         }
@@ -371,10 +394,18 @@
 }
 
 
-///移除所有的子视图
+///移除所有的子视图         如果是弹窗视图AlertView,不能调用此方法,回导致弹窗子控件全部被移除而不能显示弹窗
 - (void)ls_removeAllSubViews {
-    for(UIView * view in [self subviews]) {
+    for(UIView *view in [self subviews]) {
         [view removeFromSuperview];
+    }
+}
+
+///移除所有的子视图 如果是弹窗视图AlertView,不能调用此方法,回导致弹窗子控件全部被移除而不能显示弹窗
+- (void)ls_removeAllSubviews {
+    while (self.subviews.count) {
+        UIView* child = self.subviews.lastObject;
+        [child removeFromSuperview];
     }
 }
 
@@ -383,6 +414,20 @@
     [self updateConstraints];
     [self setNeedsLayout];
     [self layoutIfNeeded];
+}
+
+- (void)ls_setRoundedCorners:(UIRectCorner)corners radius:(CGFloat)radius {
+    CGRect rect = self.bounds;
+    // Create the path
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:rect
+                                                   byRoundingCorners:corners
+                                                         cornerRadii:CGSizeMake(radius, radius)];
+    // Create the shape layer and set its path
+    CAShapeLayer *maskLayer = [CAShapeLayer layer];
+    maskLayer.frame = rect;
+    maskLayer.path = maskPath.CGPath;
+    // Set the newly created shape layer as the mask for the view's layer
+    self.layer.mask = maskLayer;
 }
 
 

@@ -6,6 +6,7 @@
 //  Copyright © 2017年 CHC. All rights reserved.
 //
 // collectionView 自适应宽度
+// 标签流布局
 
 #import <UIKit/UIKit.h>
 
