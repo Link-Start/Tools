@@ -240,6 +240,28 @@
     }];
 }
 
+/// 从targetVc 所在的导航控制器Nav中 移除某个vc
+- (void)removeCurrentVC:(UIViewController *)targetVc {
+    NSMutableArray *childsVcs = targetVc.navigationController.viewControllers.mutableCopy;
+    [childsVcs removeObject:targetVc];
+    targetVc.navigationController.viewControllers = childsVcs;
+}
+/// 从targetVc 所在的导航控制器Nav中 移除某个vc
+- (void)removeCurrentVcAnimation:(UIViewController *)targetVc {
+    NSMutableArray *childsVcs = targetVc.navigationController.viewControllers.mutableCopy;
+    [childsVcs removeObject:targetVc];
+    [targetVc.navigationController setViewControllers:childsVcs animated:YES];
+}
+/// 保留 targetVc 所在导航条Nav 中的第一个和最后一个VC,其余的全部移除
+- (void)retainTargetVcWhereNavFirstAndLastVC:(UIViewController *)targetVc {
+    NSMutableArray *childsVcs = targetVc.navigationController.viewControllers.mutableCopy;
+    NSMutableArray *remainChildVcs = [NSMutableArray array];
+    [remainChildVcs addObject:[childsVcs firstObject]];
+    [remainChildVcs addObject:[childsVcs lastObject]];
+    targetVc.navigationController.viewControllers = remainChildVcs;
+}
+
+
 //iOS13后，Prensent方式弹出页面时，默认的模式变为了UIModalPresentationAutomatic
 //如果想用之前的样式
 - (void)ls_presentViewController:(UIViewController *)vc completion:(void (^ __nullable)(void))completion {
@@ -276,21 +298,23 @@
 
 // 通过递归拿到当前控制器
 - (UIViewController*)currentViewControllerFrom:(UIViewController*)viewController {
-     // 如果传入的控制器是导航控制器,则返回最后一个
-  if ([viewController isKindOfClass:[UINavigationController class]]) {
-        UINavigationController* navigationController = (UINavigationController *)viewController;
-        return [self currentViewControllerFrom:navigationController.viewControllers.lastObject];
+    // 如果传入的控制器是UIWindow,则返回 rootVC
+  if ([viewController isKindOfClass:[UIWindow class]]) {
+        UIWindow *window = (UIWindow *)viewController;
+        return [self currentViewControllerFrom:window.rootViewController];
     }
     // 如果传入的控制器是tabBar控制器,则返回选中的那个
-  if([viewController isKindOfClass:[UITabBarController class]]) {
-        UITabBarController* tabBarController = (UITabBarController *)viewController;
+  if ([viewController isKindOfClass:[UITabBarController class]]) {
+        UITabBarController *tabBarController = (UITabBarController *)viewController;
         return [self currentViewControllerFrom:tabBarController.selectedViewController];
     }
-     // 如果传入的控制器发生了modal,则就可以拿到modal的那个控制器
-  if(viewController.presentedViewController != nil) {
-      if ([viewController.presentedViewController isKindOfClass:NSClassFromString(@"TXIMSDK_TUIKit_iOS.TUIAudioCallViewController")]||[viewController.presentedViewController isKindOfClass:NSClassFromString(@"TXIMSDK_TUIKit_iOS.TUIVideoCallViewController")]) {
-          return viewController;
-      }
+     // 如果传入的控制器是导航控制器,则返回最后一个
+  if ([viewController isKindOfClass:[UINavigationController class]]) {
+        UINavigationController *navigationController = (UINavigationController *)viewController;
+        return [self currentViewControllerFrom:navigationController.viewControllers.lastObject];
+    }
+//     // 如果传入的控制器发生了modal,则就可以拿到modal的那个控制器
+  if ([viewController isKindOfClass:[UIViewController class]] && viewController.presentedViewController) {
         return [self currentViewControllerFrom:viewController.presentedViewController];
     }
     //否则返回本身
@@ -298,10 +322,13 @@
 }
 
 ///判断当前UIViewController 是否正在显示。
-- (BOOL)ls_isVisible {
+- (BOOL)ls_currentVCIsVisible {
     return (self.isViewLoaded && self.view.window);
 }
-
+/// 判断某个VC是否正在显示
+- (BOOL)ls_judgeVCWhetherIsVisible:(UIViewController *)VC {
+    return (VC.isViewLoaded && VC.view.window);
+}
 
 ///系统侧滑返回按钮
 - (void)willMoveToParentViewController:(UIViewController*)parent{

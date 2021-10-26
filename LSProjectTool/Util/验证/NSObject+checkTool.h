@@ -87,7 +87,7 @@
 + (BOOL) checkForUpperCase:(NSString *)data;
 
 /**
- *  校验只能输入由26个小写英文字母组成的字符串
+ *  校验只能输入由26个英文字母组成的字符串
  *
  *  @param data 字符串
  *

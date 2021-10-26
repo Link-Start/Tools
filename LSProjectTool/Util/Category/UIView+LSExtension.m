@@ -35,10 +35,16 @@
 
 /**
  使用masonry设置view后发现，设置任意角的圆角不起作用。
- 解决方法：
+ 解决方法：1.<tableview的cell里面切角有时不行>
  当设置完控件的约束，需要调用layoutIfNeeded 函数进行布局，然后所约束的控件才会按照约束条件，生成当前布局相应的frame和bounds。这样就可以利用这两个属性来进行图片圆角剪裁
  [self layoutIfNeeded];//这句代码很重要，不能忘了
  [self setRoundedCorners:UIRectCornerTopLeft radius:6];
+ 
+ 解决方法：2.<tableView的cell里面切角也可以>
+  先给要切圆角的view 设置frame(x,y和高度可以随便设置,宽度最好设置准确一点,设置为view的最终宽度),
+    view.frame = CGRectMake(0, 0, view的真实/准确的最终宽度, 100);
+ 然后:
+    [self setRoundedCorners:UIRectCornerTopLeft radius:6];
  */
 - (void)setRoundedCorners:(UIRectCorner)corners radius:(CGFloat)radius {
     CGRect rect = self.bounds;
@@ -46,15 +52,14 @@
     UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:rect
                                                    byRoundingCorners:corners
                                                          cornerRadii:CGSizeMake(radius, radius)];
-    
     // Create the shape layer and set its path
     CAShapeLayer *maskLayer = [CAShapeLayer layer];
     maskLayer.frame = rect;
     maskLayer.path = maskPath.CGPath;
-    
     // Set the newly created shape layer as the mask for the view's layer
     self.layer.mask = maskLayer;
 }
+
 
 
 

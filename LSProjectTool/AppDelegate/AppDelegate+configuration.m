@@ -41,11 +41,31 @@
     //状态栏的字体   黑色：UIStatusBarStyleDefault  白色：UIStatusBarStyleLightContent
     //状态栏的字体
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
-    //在启动之后显示状态栏
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     
     //设置UIView、UIImageView、UILabel。button等 接收手势的互斥性为YES，防止多个响应区域被“同时”点击，“同时”响应
     [[UIButton appearance] setExclusiveTouch:YES];
+    
+    /******************  ******************/
+    [self adaptationOfEachVersion];//各个版本的一些适配
+    /******************  ******************/
+    [self configIQKeyboardManager];//IQKeyboardManager设置
+    /******************  ******************/
+    [self getLaunchImage];//添加图片开屏广告
+    /******************  ******************/
+    [self obtainIDFA];//获取IDFA权限
+}
+
+/// 各个版本的一些适配
+- (void)adaptationOfEachVersion {
+    
+    //在启动之后显示状态栏   9.0之前
+    if ([[UIApplication sharedApplication] respondsToSelector:@selector(setStatusBarHidden:animated:)]) {
+        [[UIApplication sharedApplication] setStatusBarHidden:NO animated:NO];
+    }
+    //
+    if (@available(iOS 11.0, *)){
+        [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
+    }
     
     //关闭程序中的暗黑模式
 #if defined(__IPHONE_13_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0
@@ -54,18 +74,13 @@
     }
 #endif
     
-    
-    /****************** IQKeyboardManager设置 ******************/
-    // 1.
-    [self configIQKeyboardManager];
-    
-    
-    
-    
-    /****************** 添加图片开屏广告 ******************/
-    [self getLaunchImage];
-    
-    [self obtainIDFA];//获取IDFA权限
+    //从iOS15开始,TableView增加sectionHeaderTopPadding属性,
+    //默认情况sectionHeaderTopPadding会有22个像素的高度,及默认情况,TableView section header增加22像素的高度
+    if (@available(iOS 15.0, *)) {
+        UITableView.appearance.sectionHeaderTopPadding = 0;
+    } else {
+        // Fallback on earlier versions
+    }
 }
 
 #pragma mark - IQKeyboardManager设置
@@ -190,6 +205,14 @@
 //                  finishBlock();
 //              });
           }];
+     } else {
+         // 使用原方式访问 IDFA
+         if ([[ASIdentifierManager sharedManager] isAdvertisingTrackingEnabled]) {
+             NSString *advertisingId = [[ASIdentifierManager sharedManager] advertisingIdentifier].UUIDString;
+             NSLog(@"获取IDFA 广告标志符 - %@", advertisingId);
+         } else {
+             NSLog(@"用户开启了限制广告追踪");
+        }
      }
 }
 

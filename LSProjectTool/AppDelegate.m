@@ -13,7 +13,7 @@
 #import "RealReachability.h"
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import <AMapLocationKit/AMapLocationKit.h>
-
+//#import <UserNotifications/UNUserNotificationCenter.h>
 
 #import "ViewController.h"
 #import "LSNavigationController.h"
@@ -78,7 +78,11 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     [application setApplicationIconBadgeNumber:0];
-    [application cancelAllLocalNotifications];
+//    if (@available(iOS 10.0, *)) {
+//        [[UNUserNotificationCenter currentNotificationCenter] removeAllPendingNotificationRequests];
+//    } else {
+        [application cancelAllLocalNotifications];
+//    }
 }
 
 
@@ -86,6 +90,9 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     //用户关闭APP时调用
+    //  - 监听到 app 被杀死时候的回调....
+    
+//    sleep(1);//延迟关闭
 }
 
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {

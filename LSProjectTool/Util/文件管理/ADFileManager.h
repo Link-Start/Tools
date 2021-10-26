@@ -186,6 +186,8 @@
 //获取文件夹大小, 返回格式化后的数值(错误信息error)
 + (NSString *)sizeFormattedOfDirectoryAtPath:(NSString *)path error:(NSError **)error;
 
+
+
 #pragma mark - 写入文件内容
 //写入文件内容
 + (BOOL)writeFileAtPath:(NSString *)path content:(NSObject *)content;

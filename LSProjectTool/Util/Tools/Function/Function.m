@@ -671,6 +671,26 @@ static inline long long HYHDateTimeStamp(NSString *DateStr) {
     CFRelease(uuidObj);
     
     return uuidString;
+    
+// uuid保存到钥匙串中
+//#import "UICKeyChainStore.h"
+//#define  KEY_DEVICE_ID @"com.pension.uuid"
+//    UICKeyChainStore *store = [UICKeyChainStore keyChainStoreWithService:KEY_DEVICE_ID];
+//    NSString * strUUID = (NSString *)[store stringForKey:KEY_DEVICE_ID];
+//
+//    //首次执行该方法时，uuid为空
+//    if ([strUUID isEqualToString:@""] || !strUUID)
+//    {
+//        //生成一个uuid的方法
+//        CFUUIDRef uuidRef = CFUUIDCreate(kCFAllocatorDefault);
+//
+//        strUUID = (NSString *)CFBridgingRelease(CFUUIDCreateString (kCFAllocatorDefault,uuidRef));
+//
+//        //将该uuid保存到keychain
+//      [store setString:strUUID forKey:KEY_DEVICE_ID];
+//
+//    }
+//    return strUUID;
 }
 
 //*********************************************************

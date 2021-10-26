@@ -24,6 +24,8 @@
 - (void)ls_backOutToVC:(UIViewController *)VC;
 
 ///判断当前UIViewController 是否正在显示。
-- (BOOL)ls_isVisible;
+- (BOOL)ls_currentVCIsVisible;
+/// 判断某个VC是否正在显示
+- (BOOL)ls_judgeVCWhetherIsVisible:(UIViewController *)VC;
 
 @end

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+/// 导航控制器
 @interface LSNavigationController : UINavigationController
 
 ///右滑返回 YES:不能

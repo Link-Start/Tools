@@ -52,39 +52,79 @@
     self.tabBar.translucent = YES;
     
 /************** 这里是去掉 系统tabbar上黑线的  方法 1 ***********************/
-//    self.tabBar.backgroundImage = [[UIImage alloc]init];
-//    self.tabBar.shadowImage = [[UIImage alloc]init];
+//    self.tabBar.backgroundImage = [[UIImage alloc] init];//背景图片
+//    self.tabBar.shadowImage = [[UIImage alloc] init];//0xEEEEEE.image
     //设置tabBar的背景色
 //    self.tabBar.barTintColor = [UIColor colorFromHexString:@"f5f5f5"];
     
 /************ 去掉tabBar顶部黑色线条             方法2 *******************/
-    [self configTabBar];
+    [self configTabBarTopLine];
     
     
 #pragma mark - 屏幕旋转(TabBarController是根视图控制器) 3.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(AutorotateInterface:) name:@"InterfaceOrientation" object:nil];
+    
+    
+    [self adaptationiOS15];//iOS15 系统tabbar下会出现透明，解决方法如下
+}
+
+///iOS15 系统tabbar下会出现透明，解决方法如下
+- (void)adaptationiOS15 {
+ 
+    if (@available(iOS 15.0, *)) { //UITabBar新增新的属性名为scrollEdgeAppearance
+        UITabBarAppearance *tabBarAppearance = [UITabBarAppearance new];
+        tabBarAppearance.backgroundColor = [UIColor whiteColor];
+        tabBarAppearance.shadowImage = [[UIImage alloc] init];//0xEEEEEE.image
+        tabBarAppearance.shadowColor = [UIColor clearColor];
+        //设置选中的tabBar 字体 attributes
+        tabBarAppearance.stackedLayoutAppearance.selected.titleTextAttributes = @{
+            NSFontAttributeName:[UIFont systemFontOfSize:18],
+            NSForegroundColorAttributeName:[UIColor blackColor]
+        };
+
+        self.tabBar.scrollEdgeAppearance = tabBarAppearance;
+        self.tabBar.standardAppearance = tabBarAppearance;
+    }
 }
 
 ///去掉tabBar顶部黑色线条 (解决思路是用画布创建了一个透明色的图片)
-- (void)configTabBar {
+- (void)configTabBarTopLine {
     
     CGRect rect = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
-    
     UIGraphicsBeginImageContext(rect.size);
-    
     CGContextRef context = UIGraphicsGetCurrentContext();
-    
     CGContextSetFillColorWithColor(context, [[UIColor clearColor] CGColor]);
-    
     CGContextFillRect(context, rect);
-    
     UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-    
     UIGraphicsEndImageContext();
     
-//    [self.tabBar setBackgroundImage:img];
+    [self.tabBar setUnselectedItemTintColor:[UIColor colorWithHexString:@"#999999"]];
+    [self.tabBar setTintColor:[UIColor colorWithHexString:@"#FF9800"]];
     
-    [self.tabBar setShadowImage:img];
+    if (@available(iOS 13, *)) {
+#ifdef __IPHONE_13_0
+        NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
+        textAttrs[NSForegroundColorAttributeName] = [UIColor colorWithHexString:@"#999999"];
+        NSMutableDictionary *selectTextAttrs = [NSMutableDictionary dictionary];
+        selectTextAttrs[NSForegroundColorAttributeName] = [UIColor colorWithHexString:@"#FF9800"];
+        
+        UITabBarAppearance *appearance = [self.tabBar.standardAppearance copy];
+        [appearance.stackedLayoutAppearance.normal setTitleTextAttributes:textAttrs];
+        [appearance.stackedLayoutAppearance.selected setTitleTextAttributes:selectTextAttrs];
+        
+        [appearance setBackgroundColor:[UIColor whiteColor]];
+        appearance.backgroundImage = [UIImage new];
+        appearance.shadowImage = img;
+        appearance.shadowColor = [UIColor clearColor];
+        self.tabBar.standardAppearance = appearance;
+#endif
+    } else {
+
+        [self.tabBar setBackgroundColor:[UIColor whiteColor]];
+        [self.tabBar setBackgroundImage:img];
+        [self.tabBar setShadowImage:img];
+
+    }
 }
 
 ///添加子导航控制器

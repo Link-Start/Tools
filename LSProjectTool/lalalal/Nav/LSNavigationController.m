@@ -53,23 +53,111 @@
     self.interactivePopGestureRecognizer.enabled = NO;
 }
 
+/// https://www.jianshu.com/p/3e1f0ce35bd5
+/// UINavigationBar
+/// iOS15 从 iOS 15 开始，UINavigationBar、UIToolbar 和 UITabBar 在控制器中关联滚动视图顶部或底部时使用
+/// 在iOS15中，UINavigationBar默认是透明的，有滑动时会逐渐变为模糊效果，
+/// 可以通过改变UINavigationBar.scrollEdgeAppearance属性直接变为模糊效果、配置相关属性-背景、字体等
+- (void)adaptationiOS15 {
+    if (@available(iOS 15.0, *)) {
+//        /**********************/
+//        UINavigationBarAppearance *navBarAppearance = [[UINavigationBarAppearance alloc] init];
+//        //背景色
+//        navBarAppearance.backgroundColor = [UIColor whiteColor];
+//        //去掉半透明效果
+//        navBarAppearance.backgroundEffect = nil;
+//        //  去除导航栏阴影（如果不设置clear，导航栏底下会有一条阴影线）
+//        navBarAppearance.shadowColor = [UIColor clearColor];
+//        //字体颜色
+//        navBarAppearance.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
+//        self.navigationController.navigationBar.scrollEdgeAppearance = navBarAppearance;
+//        /**********************/
+        
+        /**********************/
+        UINavigationBarAppearance *appearance = [[UINavigationBarAppearance alloc] init];
+        [appearance configureWithOpaqueBackground];//重置背景和阴影颜色
+        appearance.titleTextAttributes = @{
+            NSFontAttributeName:[UIFont systemFontOfSize:18],
+            NSForegroundColorAttributeName:[UIColor whiteColor]
+        };
+        appearance.backgroundColor = [UIColor whiteColor];//设置导航栏背景色
+        appearance.shadowImage = [self barSpeLineWithColor:[UIColor clearColor]]; //设置导航栏下边界分割线透明
+        self.navigationBar.scrollEdgeAppearance = appearance;//带scroll滑动的页面
+        self.navigationBar.standardAppearance = appearance;//常规页面
+        
+        /**********************/
+    }
+}
+
+/***
+ //https://www.jianshu.com/p/acb0d1d3efe9
+ 不透明导纯色航栏：
+     //navigation标题文字颜色
+     NSDictionary *dic = @{NSForegroundColorAttributeName : [UIColor blackColor],
+                           NSFontAttributeName : [UIFont systemFontOfSize:18 weight:UIFontWeightMedium]};
+     if (@available(iOS 15.0, *)) {
+         UINavigationBarAppearance *barApp = [UINavigationBarAppearance new];
+         barApp.backgroundColor = [UIColor whiteColor];
+         barApp.shadowColor = [UIColor whiteColor];
+         barApp.titleTextAttributes = dic;
+         self.navigationController.navigationBar.scrollEdgeAppearance = barApp;
+         self.navigationController.navigationBar.standardAppearance = barApp;
+     }else{
+         //背景色
+         self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+         self.navigationController.navigationBar.titleTextAttributes = dic;
+         [self.navigationBar setShadowImage:[UIImage new]];
+         [self.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+     }
+     //不透明
+     self.navigationController.navigationBar.translucent = NO;
+     //navigation控件颜色
+     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+ 
+ 
+ 
+ 透明导航栏:
+     //navigation标题文字颜色
+     NSDictionary *dic = @{NSForegroundColorAttributeName : [UIColor whiteColor],
+                           NSFontAttributeName : [UIFont systemFontOfSize:18]};
+     if (@available(iOS 15.0, *)) {
+         UINavigationBarAppearance *barApp = [UINavigationBarAppearance new];
+         barApp.backgroundColor = [UIColor clearColor];
+         barApp.titleTextAttributes = dic;
+         self.navigationController.navigationBar.scrollEdgeAppearance = nil;
+         self.navigationController.navigationBar.standardAppearance = barApp;
+     }else{
+         self.navigationController.navigationBar.titleTextAttributes = dic;
+         [self.navigationBar setShadowImage:[UIImage new]];
+         [self.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+     }
+     //透明
+     self.navigationController.navigationBar.translucent = YES;
+     //navigation控件颜色
+     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+ **/
+
+
 ///设置导航条
 - (void)confitNav {
     //设置板的背景图片
     [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"顶部"] forBarMetrics:UIBarMetricsDefault];
     // 设置navigationBar的背景颜色，根据需要自己设置
-    //    self.navigationBar.barTintColor = [UIColor clearColor];
+    //    self.navigationBar.barTintColor = [UIColor clearColor];//导航栏背景
     //设置左右字体的颜色
-    self.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationBar.tintColor = [UIColor whiteColor];//着色，让返回男图片渲染为白色
     //中间标题 字体设置为白色
     NSDictionary *dic = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
     self.navigationBar.titleTextAttributes = dic;
     
     //打开毛玻璃效果
-    self.navigationBar.translucent = YES;
+    self.navigationBar.translucent = YES;//透明
     
 #pragma mark - iOS隐藏导航条1px的底部横线 方法1 第二步
     //    navBarHairlineImageView = [self findHairlineImageViewUnder:self.navigationBar];
+    
+        
+    [self adaptationiOS15]; //适配iOS15
 }
 #pragma mark - iOS隐藏导航条1px的底部横线 方法1 第三步
 ///实现找出底部横线的函数

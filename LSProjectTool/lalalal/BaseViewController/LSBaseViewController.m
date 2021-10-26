@@ -43,12 +43,28 @@
         //手动关闭MBProgressHUD
         [self hiddenHud:hud];
         
-        // 请求成功，解析数据
-        if (finish) {
-            finish([self tryToParseData:responseObject]);
+        /*********1.直接返回原始数据**********/
+//        // 请求成功，解析数据
+//        if (finish) {
+//            finish([self tryToParseData:responseObject]);
+//        }
+
+        
+        /*********2.服务器返回统一类型数据,根据接口进行数据处理 再返回**********/
+        NSDictionary *dict = [self tryToParseData:responseObject];
+        if ([dict[@"success"] boolValue]) {
+            if (finish) {
+                finish(dict[@"data"]);
+            }
+            return;
         }
-        //显示成功
-        //        [MBProgressHUD showSuccess:@"成功"];
+        [MBProgressHUD qucickTip:[NSString stringWithFormat:@"%@", dict[@"message"]]];
+        if (failure) {
+            NSDictionary *errorUserInfo = @{NSLocalizedFailureReasonErrorKey:dict[@"message"]?:@""};
+            NSInteger ls_code = [[[dict[@"code"] stringByReplacingOccurrencesOfString:@"_" withString:@"0"] stringByReplacingOccurrencesOfString:@"-" withString:@"0"] integerValue];
+            failure([NSError errorWithDomain:@"lsError" code:ls_code userInfo:errorUserInfo]);
+        }
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull   error) {
         //手动关闭MBProgressHUD
         [self hiddenHud:hud];

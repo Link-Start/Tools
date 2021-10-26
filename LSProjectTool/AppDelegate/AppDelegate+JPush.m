@@ -17,7 +17,9 @@
 #import <AdSupport/AdSupport.h>
 #import <AppTrackingTransparency/AppTrackingTransparency.h>
 
-
+//地理围栏
+//#import <CoreLocation/CoreLocation.h>
+//#import <PushKit/PushKit.h>//Voip
 
 /**
  从2021年4月26日开始，AppStore上的应用程序必须在收集用于跟踪他们或他们的设备的数据之前，使用AppTrackingTransform获得用户的许可。
@@ -30,7 +32,12 @@
  */
 
 
-@interface AppDelegate ()<JPUSHRegisterDelegate, JPUSHGeofenceDelegate>
+@interface AppDelegate ()<JPUSHRegisterDelegate, JPUSHGeofenceDelegate
+//, PKPushRegistryDelegate
+>
+//{
+////    CLLocationManager * _locationManager;
+//}
 
 @end
 
@@ -61,13 +68,30 @@
         //      entity.categories = categories;
         //    }
     }
+    //新版本的注册方法（兼容iOS10）
     [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
-    [JPUSHService registerLbsGeofenceDelegate:self withLaunchOptions:launchOptions];
+//    如果使用地理围栏，请先获取地理位置权限。
+//    [self getLocationAuthority];
+//    如果使用地理围栏功能，需要注册地理围栏代理
+//    [JPUSHService registerLbsGeofenceDelegate:self withLaunchOptions:launchOptions];
+//
     //2 . 添加初始化JPush代码
     // Optional
     // 获取IDFA
     // 如需使用IDFA功能请添加此代码并在初始化方法的advertisingIdentifier参数中填写对应值
-    NSString *advertisingId = [self obtainIDFA];
+    __block NSString *advertisingId = @"";
+    if (@available(iOS 14, *)) {
+        //设置Info.plist中 NSUserTrackingUsageDescription 需要广告追踪权限，用来定位唯一用户标识
+        [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
+            if (status == ATTrackingManagerAuthorizationStatusAuthorized) {
+                advertisingId = [[ASIdentifierManager sharedManager] advertisingIdentifier].UUIDString;
+            }
+        }];
+    } else {
+        // 使用原方式访问 IDFA
+        advertisingId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+    }
+    
     
     // Required
     // init Push
@@ -77,7 +101,7 @@
                            appKey:@"kJPUSHAppKey"
                           channel:@"AppStore"
                  apsForProduction:JPush_isProduction
-            advertisingIdentifier:nil];
+            advertisingIdentifier:advertisingId];
     //2.1.9版本新增获取registration id block接口。
     [JPUSHService registrationIDCompletionHandler:^(int resCode, NSString *registrationID) {
         if(resCode == 0){
@@ -87,6 +111,9 @@
             NSLog(@"极光推送 registrationID获取失败，code：%d",resCode);
         }
     }];
+    
+//    //注册 voip
+//    [self voipRegistration];
  
     
 #pragma mark - 获取自定义消息推送内容
@@ -108,14 +135,18 @@
             if (status == ATTrackingManagerAuthorizationStatusAuthorized) {//用户同意授权
                 idfaStr = [[ASIdentifierManager sharedManager] advertisingIdentifier].UUIDString;
                 NSLog(@"获取IDFA 广告标志符 - %@", idfaStr);
-            }
+            } else {
+                NSLog(@"iOS14 用户开启了限制广告追踪");
+           }
         }];
     } else {
         // 使用原方式访问 IDFA
         if ([[ASIdentifierManager sharedManager] isAdvertisingTrackingEnabled]) {
             idfaStr = [[ASIdentifierManager sharedManager] advertisingIdentifier].UUIDString;
             NSLog(@"获取IDFA 广告标志符 - %@", idfaStr);
-        }
+        } else {
+            NSLog(@"用户开启了限制广告追踪");
+       }
     }
     
     return idfaStr;
@@ -178,6 +209,14 @@
 /************************* 极光推送 *************************/
 //1. 注册APNs成功并上报DeviceToken 请在AppDelegate.m实现该回调方法并添加回调方法中的代码
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    
+    const unsigned int *tokenBytes = [deviceToken bytes];
+    NSString *tokenString = [NSString stringWithFormat:@"%08x%08x%08x%08x%08x%08x%08x%08x",
+                          ntohl(tokenBytes[0]), ntohl(tokenBytes[1]), ntohl(tokenBytes[2]),
+                          ntohl(tokenBytes[3]), ntohl(tokenBytes[4]), ntohl(tokenBytes[5]),
+                          ntohl(tokenBytes[6]), ntohl(tokenBytes[7])];
+    NSLog(@"Device Token: %@", tokenString);
+    
     /// Required - 注册 DeviceToken
     [JPUSHService registerDeviceToken:deviceToken];
 }
@@ -198,7 +237,7 @@
 //当程序正在运行时，收到远程推送，就会调用,如果两个方法都实现了，就只会调用上面的那个方法
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     // Required,For systems with less than or equal to iOS6
-    NSLog(@"iOS6之前 极光推送信息：%@", userInfo);
+    NSLog(@"iOS6及以下系统，收到通知 极光推送信息：%@", userInfo);
     // 取得 APNs 标准信息内容，如果没需要可以不取
     
     NSDictionary *aps = [userInfo valueForKey:@"aps"];
@@ -214,9 +253,9 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     
     [JPUSHService handleRemoteNotification:userInfo];
-    completionHandler(UIBackgroundFetchResultNewData);
+    
     // Required, iOS 7 Support
-    NSLog(@"iOS7 极光推送信息：%@", userInfo);
+    NSLog(@"iOS7及以上系统，收到通知 极光推送信息：%@", userInfo);
     NSDictionary *aps = [userInfo valueForKey:@"aps"];
     
     //    NSString *content = [aps valueForKey:@"alert"]; //推送显示的内容
@@ -239,6 +278,8 @@
     } else { //未启动
         
     }
+    
+    completionHandler(UIBackgroundFetchResultNewData);
 }
 
 ///本地通知
@@ -328,13 +369,10 @@
     if (@available(iOS 10.0, *)) {
         if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
             [JPUSHService handleRemoteNotification:userInfo];
-       NSLog(@"iOS10__应用在后台__极光推送信息 收到远程通知:%@", [self logDic:userInfo]);
+            NSLog(@"iOS10__应用在后台__极光推送信息 收到远程通知:%@", [self logDic:userInfo]);
         } else {
             // 判断为本地通知
-            
             NSLog(@"iOS10__应用在后台__收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
-            
-            
             //自定义的推送消息 设置为本地推送之后 点击事件 可以在这里
         }
     } else {
@@ -343,7 +381,13 @@
 
     completionHandler();  // 系统要求执行这个方法
 }
+//监测通知授权状态返回的结果
+- (void)jpushNotificationAuthorization:(JPAuthorizationStatus)status withInfo:(NSDictionary *)info {
+  NSLog(@"receive notification authorization status:%lu, info:%@", status, info);
+  [self alertNotificationAuthorization:status];
+}
 #endif
+
 
 #ifdef __IPHONE_12_0
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center openSettingsForNotification:(UNNotification *)notification{
@@ -388,12 +432,42 @@
 
 
 
+#pragma mark - 通知权限引导
+// 检测通知权限授权情况
+- (void)checkNotificationAuthorization {
+  [JPUSHService requestNotificationAuthorization:^(JPAuthorizationStatus status) {
+    // run in main thread, you can custom ui
+    NSLog(@"notification authorization status:%lu", status);
+    [self alertNotificationAuthorization:status];
+  }];
+}
+
+// 通知未授权时提示，是否进入系统设置允许通知，仅供参考
+- (void)alertNotificationAuthorization:(JPAuthorizationStatus)status {
+  if (status < JPAuthorizationStatusAuthorized) {
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"允许通知" message:@"是否进入设置允许通知？" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    [alertView show];
+  }
+}
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+  if (buttonIndex == 1) {
+    if(@available(iOS 8.0, *)) {
+      [JPUSHService openSettingsForNotification:^(BOOL success) {
+        NSLog(@"open settings %@", success?@"success":@"failed");
+      }];
+    }
+  }
+}
+
+
+
 #pragma mark -JPUSHGeofenceDelegate
 //进入地理围栏区域
 - (void)jpushGeofenceIdentifer:(NSString * _Nonnull)geofenceId didEnterRegion:(NSDictionary * _Nullable)userInfo error:(NSError * _Nullable)error{
     NSLog(@"进入地理围栏区域");
     if (error) {
-        NSLog(@"error = %@",error);
+        NSLog(@"错误信息 = %@",error);
         return;
     }
     if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
@@ -407,7 +481,7 @@
 - (void)jpushGeofenceIdentifer:(NSString * _Nonnull)geofenceId didExitRegion:(NSDictionary * _Nullable)userInfo error:(NSError * _Nullable)error{
     NSLog(@"离开地理围栏区域");
     if (error) {
-        NSLog(@"error = %@",error);
+        NSLog(@"错误信息 = %@",error);
         return;
     }
     if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
@@ -417,6 +491,13 @@
         [self geofenceBackgroudTest:userInfo];
     }
 }
+- (void)jpushGeofenceRegion:(NSDictionary *)geofence error:(NSError *)error {
+  NSLog(@"region:%@", geofence);
+}
+- (void)jpushCallbackGeofenceReceived:(NSArray<NSDictionary *> *)geofenceList {
+  NSLog(@"region list:%@", geofenceList);
+}
+
 //
 - (void)geofenceBackgroudTest:(NSDictionary * _Nullable)userInfo{
     //静默推送：
@@ -440,6 +521,83 @@
         [alertView show];
     }
 }
+
+
+#pragma mark location  地理围栏
+//- (void)getLocationAuthority{
+//  _locationManager= [[CLLocationManager alloc] init];
+//  if(@available(iOS 8.0, *)) {
+//    [_locationManager requestAlwaysAuthorization];
+//  } else {
+//    if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined){
+//      NSLog(@"kCLAuthorizationStatusNotDetermined");
+//    }
+//  }
+//  _locationManager.delegate = (id<CLLocationManagerDelegate>)self;
+//}
+//#pragma mark -CLLocationManagerDelegate
+//- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status{
+//  if (status != kCLAuthorizationStatusNotDetermined) {
+//    NSLog(@"获取地理位置权限成功");
+//  }
+//}
+
+
+
+#pragma mark - Voip
+///**
+// 注册Voip服务（以下示例代码，开发者可根据需要修改）JPush 3.3.2 JCore 2.2.4 及以上支持Voip功能
+// */
+//- (void)voipRegistration{
+//  dispatch_queue_t mainQueue = dispatch_get_main_queue();
+//  PKPushRegistry *voipRegistry = [[PKPushRegistry alloc] initWithQueue:mainQueue];
+//  voipRegistry.delegate = self;
+//  // Set the push type to VoIP
+//  voipRegistry.desiredPushTypes = [NSSet setWithObject:PKPushTypeVoIP];
+//}
+//#pragma mark- PKPushRegistryDelegate
+//
+///// 系统返回VoipToken,上报给极光服务器
+//- (void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)pushCredentials forType:(PKPushType)type{
+//    [JPUSHService registerVoipToken:pushCredentials.token];
+//    NSLog(@"Voip Token: %@", pushCredentials.token);
+//}
+//
+///**
+// * 接收到Voip推送信息，并向极光服务器上报（iOS 8.0 - 11.0）
+// */
+//- (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(PKPushType)type{
+//  // 提交回执给极光服务器
+//  [JPUSHService handleVoipNotification:payload.dictionaryPayload];
+//  NSLog(@"Voip Payload: %@, %@",payload,payload.dictionaryPayload);
+//  // [ 示例代码 ] 发起一个本地通知
+//  JPushNotificationContent *content = [[JPushNotificationContent alloc] init];;
+//  content.title = @"测试标题";
+//  content.body = @"测试内容";
+//  JPushNotificationTrigger *triggger = [[JPushNotificationTrigger alloc] init];
+//  triggger.timeInterval = 3;
+//  JPushNotificationRequest *request = [[JPushNotificationRequest alloc] init];
+//  request.content = content;
+//  request.trigger = triggger;
+//  request.requestIdentifier = @"test";
+//  request.completionHandler = ^(id result) {
+//    if (result) {
+//      NSLog(@"添加 timeInterval 通知成功 --- %@", result);
+//    }else {
+//      NSLog(@"添加 timeInterval 通知失败 --- %@", result);
+//    }
+//  };
+//  [JPUSHService addNotification:request];
+//}
+//
+///**
+// * 接收到Voip推送信息，并向极光服务器上报（iOS 11.0 以后）
+// */
+//- (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(PKPushType)type withCompletionHandler:(void(^)(void))completion{
+//  // 提交回执给极光服务器
+//  [JPUSHService handleVoipNotification:payload.dictionaryPayload];
+//  NSLog(@"Voip Payload: %@, %@",payload,payload.dictionaryPayload);
+//}
 
 
 @end

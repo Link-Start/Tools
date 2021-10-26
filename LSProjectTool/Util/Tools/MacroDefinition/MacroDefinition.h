@@ -67,12 +67,12 @@
 #if DEBUG
 //0开发环境 测试环境 1正式环境
 #define currentEnvironment 0
-#define isProduction      NO
-#define isDEBUG           YES
+#define isProduction        NO
+#define isDebug             YES
 #else
 #define currentEnvironment 1
-#define isProduction      YES
-#define isDEBUG           NO
+#define isProduction        YES
+#define isDebug             NO
 #endif
 
 
@@ -327,6 +327,31 @@ targetVc.navigationController.viewControllers = childsVcs;\
     [remainChildVcs addObject:[childsVcs lastObject]];\
     targetVc.navigationController.viewControllers = remainChildVcs;\
 }
+
+/// 从targetVc 所在的导航控制器Nav中 移除某个vc
+#define removeCurrentVC(targetVc) { \
+    NSMutableArray *childsVcs = targetVc.navigationController.viewControllers.mutableCopy; \
+    [childsVcs removeObject:targetVc]; \
+    targetVc.navigationController.viewControllers = childsVcs; \
+}
+/// 从targetVc 所在的导航控制器Nav中 移除某个vc
+#define removeCurrentVcAnimation(targetVc) { \
+    NSMutableArray *childsVcs = targetVc.navigationController.viewControllers.mutableCopy; \
+    [childsVcs removeObject:targetVc]; \
+    [targetVc.navigationController setViewControllers:childsVcs animated:YES]; \
+}
+/// 保留 targetVc 所在导航条Nav 中的第一个和最后一个VC,其余的全部移除
+#define retainTargetVcWhereNavFirstAndLastVC(targetVc) { \
+    NSMutableArray *childsVcs = targetVc.navigationController.viewControllers.mutableCopy; \
+    NSMutableArray *remainChildVcs = [NSMutableArray array]; \
+    [remainChildVcs addObject:[childsVcs firstObject]]; \
+    [remainChildVcs addObject:[childsVcs lastObject]]; \
+    targetVc.navigationController.viewControllers = remainChildVcs; \
+}
+
+/// 更改tabBar 选中的下标
+#define changeTabBarControllerSelectIndex(index) [(UITabBarController *)BEEAppDelegate.window.rootViewController setSelectedIndex:index]
+
 
 /******************************************************************************************************************************************************************************************************/
 

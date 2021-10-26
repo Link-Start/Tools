@@ -7,6 +7,7 @@
 //
 
 #import "CodeView.h"
+#import <UIView+YYAdd.h>
 
 #define margin 12.0 //两个验证码之间的间距 随需求可以更改
 

@@ -59,7 +59,7 @@
             return NO;
         }
         
-        // 如果第一位是.不能输入0
+        // 第一位不能输入0
         if ((textField.text.length == 0) && (single == '0')) {
             NSLog(@"第一位不能输入0");
             return NO;

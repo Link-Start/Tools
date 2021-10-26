@@ -534,10 +534,31 @@ static inline NSString *cachePath() {
             progress(downloadProgress.completedUnitCount, downloadProgress.totalUnitCount);
         }
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        /*********1.直接返回原始数据**********/
         //数据请求解析成功, 解析数据
-        [self successResponse:responseObject callback:success hideHud:hud];
+//        [self successResponse:responseObject callback:success hideHud:hud];
         //从数组中移除任务
         [[self allTasks] removeObject:sessionTask];
+        
+        
+        /*********2.服务器返回统一类型数据,根据接口进行数据处理 再返回**********/
+        //手动关闭MBProgressHUD
+        [self hiddenHud:hud];
+        NSDictionary *dict = [self tryToParseData:responseObject];
+        if ([dict[@"success"] boolValue]) {
+            if (success) {
+                success(dict[@"data"]);
+            }
+            return;
+        }
+        
+        [MBProgressHUD qucickTip:[NSString stringWithFormat:@"%@", dict[@"message"]]];
+        if (fail) {
+            NSDictionary *errorUserInfo = @{NSLocalizedFailureReasonErrorKey:dict[@"message"]?:@""};
+            NSInteger ls_code = [[[dict[@"code"] stringByReplacingOccurrencesOfString:@"_" withString:@"0"] stringByReplacingOccurrencesOfString:@"-" withString:@"0"] integerValue];
+            fail([NSError errorWithDomain:@"lsError" code:ls_code userInfo:errorUserInfo]);
+        }
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         //从数组中移除任务
         [[self allTasks] removeObject:task];

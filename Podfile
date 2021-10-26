@@ -11,10 +11,13 @@ def all_Pods
 	pod 'AFNetworking'											#网络请求
 	pod 'AFNetworking+RetryPolicy'					#增加了为使用AFNetworking提出的请求设置重试逻辑的能力
 	pod 'DZNEmptyDataSet'										#空白占位图
+	pod 'LYEmptyView'												#iOS一行代码集成空白页面占位图(无数据、无网络占位图)
 	pod 'FMListPlaceholder'									#一个优雅的占位图解决方案。适用于 UITableView 和 UICollectionView。
 	pod 'Masonry'														#布局
 	pod 'SDAutoLayout'											#布局
 	pod 'SDCycleScrollView'									#轮播图
+	pod 'WMZBanner'													#最好用的轻量级轮播图+卡片样式+自定义样式,链式编程语法(可实现各种样式的轮播图,大多需要的功能都有)
+
 	pod 'SDWebImage'												#请求图片
 	pod 'MBProgressHUD'
 	pod 'IQKeyboardManager'									#输入框键盘管理iOS8 and later
@@ -22,18 +25,20 @@ def all_Pods
 	pod 'MJRefresh'													#刷新
 	pod 'ReactiveObjC'											#RAC
 	pod 'YYKit'															#富文本,图片请求,模型转换
+	# pod 'YYImage', :git => 'https://github.com/QiuYeHong90/YYImage.git'
 	pod 'YTKNetwork'												#YTK 网络请求
 	pod 'XHLaunchAd'												#开屏广告
 	# pod 'AutoRotation'											#iOS 横竖屏切换解决方案https://www.jianshu.com/p/da1a03cc1f72
+	# pod 'DCURLRouter'												#通过自定义URL实现控制器之间的跳转
 
-	
+	pod 'HMSegmentedControl'								#UISegmentedControl的高度可定制的下拉式更换件。
 	pod 'WMZDropDownMenu'										#筛选菜单,可悬浮,目前已实现闲鱼/美团/Boss直聘/京东/饿了么/淘宝/拼多多/赶集网/美图外卖等等的筛选菜单
-	# pod 'XYXFilterMenu'											#一个超级流畅的菜单筛选项，支持tableView和collectionView以及自定义输入范围模式，可以根据你的需要设定显示方式。
+	pod 'WMZPageController'									#分页控制器,替换UIPageController方案,具备完整的生命周期,多种指示器样式,多种标题样式,可悬浮,支持ios13暗黑模式(仿优酷,爱奇艺,今日头条,简书,京东等多种标题菜单) 
 	pod 'JXCategoryView'                  	#强大且易于使用的类别视图（分段控制、分段视图、分页视图、页面控制）（APP分类切换滚动视图）
 	pod 'GKPageScrollView'									#(主要参考了JXPagingView，在他的基础上做了修改)iOS类似微博、抖音、网易云等个人详情页滑动嵌套效果
 	pod 'GKPageSmoothView'									#(主要参考了JXPagingView，在他的基础上做了修改)iOS类似微博、抖音、网易云等个人详情页滑动嵌套效果
 	pod 'CYLTabBarController'								#一行代码实现 Lottie 动画TabBar，支持中间带+号的TabBar样式，自带红点角标，支持动态刷新
-	pod 'lottie-ios'												#用于原生渲染After Effects矢量动画的iOS库(OC:2.5.3之前版本  swift:3.0之后)
+	pod 'lottie-ios'												#用于原生渲染After Effects矢量动画的iOS库(OC:2.5.3之前版本(, '~> 2.5.3')  swift:3.0之后)
 	pod 'FSTextView'                      	#placeholder和最大字数
 	
 	pod 'ThinkVerb'                       	#iOS动画(链式语法)
@@ -51,21 +56,24 @@ def all_Pods
 	# pod 'SKCalendarView'										#一个高可控性的日历基础组件
 	pod 'OttoKeyboardView'									#自定义键盘，支持数字、小数点、身份证、十六进制键盘、随机布局的安全数字键盘
 
-	pod 'ChameleonFramework'								#不再维护!!!一个 iOS 的颜色框架
 	# pod 'TextFieldEffects'									#Swift版本，自定义UITextFields效果灵感来自Codrops，
-	pod 'PKRevealController'								#不再维护!!!PKRevealController是一个令人愉快的iOS视图控制器容器，使您能够将多个控制器叠加在一起。
-	pod 'SlackTextViewController'						#不再维护!!!一个下拉式 UIViewController 子类，具有不断增长的文本输入视图和其他有用的消息功能
 	pod 'MGSwipeTableCell'									#一个易于使用的UITableViewCell子类，允许显示具有各种过渡的可滑动按钮。
-	pod 'IAPHelper'													#此回购协议不再维护!!!苹果内购助手,Apple 在购买应用时为 IAP 提供帮助
 	pod 'SwiftyStoreKit'										#swift版本 苹果内购助手
 	# pod 'ZXNavigationBar'										#pod 'ZXNavigationBar'
 	pod 'FDFullscreenPopGesture'						#UINavigationController的类别，用于启用iOS7+系统风格的全屏弹出手势
+	pod 'HDCollectionView'									#数据驱动(data driven)的高效灵活列表。基于Flexbox，支持 悬浮、瀑布流、装饰view、横向滑动、分段布局、各种对齐方式。支持链式语法初始化。支持diff刷新，渐进式加载，动画更新UI
+	pod 'FMLayoutKit'												#自定义CollectionView的布局，可以快速实现瀑布流，标签布局，商品详情，各种电商首页等，悬停，拖拽排序等等功能丰富，可以穿插布局（垂直水平）
 	pod 'ZLCollectionViewFlowLayout' 				#基于UICollectionView实现，目前支持标签布局，列布局，百分比布局，定位布局，填充式布局，瀑布流布局等
 	pod 'BMLongPressDragCellCollectionView'	#让你轻松实现类似支付宝的拖拽重排功能, 支持各种自定义操作。
 	pod 'UITableViewDynamicLayoutCacheHeight'	#高性能的自动计算采用 Autolayout 布局的 UITableViewCell 和 UITableViewHeaderFooterView 的高度，内部自动管理高度缓存。
 	pod 'ZLCellDataSource'									#mvvm，mvp的应用。为viewcontroller瘦身，把tableview和collectionview的datasource提取出来，可节省1/3的代码量。
-
-
+	pod 'ZQSearch'													#Search，SearchBar, 仿《饿了么》搜索栏。自定义搜索结果界面。搜索主页、模糊匹配、结果界面之间的状态切换。支持搜索历史和热门设置
+	pod 'TOSearchBar'												#搜索框
+	
+	# pod 'ZZFLEX', :git => 'https://github.com/tbl00c/ZZFLEX.git'#一个完善的iOS敏捷开发框架，基于UIKit实现，包含常用控件的链式API拓展、一个数据驱动的列表框架、一个事件处理队列。
+	# pod 'ZJKitTool'													#ZJKitTool 可以更加便捷高效的添加UIKit控件,使用链式编程的思想，结合使用Masonry，以及其他工具类的简单使用,底层的封装.
+	pod 'MyLayout'													#MyLayout是一套iOS界面视图布局框架。
+	pod 'WMZTreeView'												#类似前端elementUI的树形控件,可自定义节点内容,支持无限极节点,可拖拽增删节点等等,非递归实现
 
 	#定位
 	pod 'AMapLocation-NO-IDFA'            	#高德地图定位SDK 没有广告IDFA
@@ -79,8 +87,13 @@ def all_Pods
   
 end
 
-
-
+def noLonger_maintainLib # 不再维护的库
+	# pod 'ChameleonFramework'								#不再维护!!!一个 iOS 的颜色框架
+	# pod 'PKRevealController'								#不再维护!!!PKRevealController是一个令人愉快的iOS视图控制器容器，使您能够将多个控制器叠加在一起。
+	# pod 'SlackTextViewController'						#不再维护!!!一个下拉式 UIViewController 子类，具有不断增长的文本输入视图和其他有用的消息功能
+	# pod 'IAPHelper'													#此回购协议不再维护!!!苹果内购助手,Apple 在购买应用时为 IAP 提供帮助
+	# pod 'XYXFilterMenu'											#一个超级流畅的菜单筛选项，支持tableView和collectionView以及自定义输入范围模式，可以根据你的需要设定显示方式。
+end
 
 def jiqimao_tools_ios	#机器猫工具库
 	pod 'KJEmitterView'											#UIKit模块安装
@@ -104,16 +117,17 @@ def image_photo_ios	# 照片选择、图片浏览
 end
 
 def alertView_ios #弹窗
+	pod 'LEEAlert'													#优雅的可自定义 Alert ActionSheet,只能同时显示一个弹窗(当前所有弹窗的controller是同一个,也就是说只能同时显示一个弹窗,不能同时显示多个)
+	pod 'ACActionSheet'											#仿微信ActionSheet,系统actionSheet
 	pod 'BRPickerView'											#选择器(日期,地址...)
-	pod 'ACActionSheet'											#仿微信ActionSheet
+	pod 'WMZDialog'													#弹窗，支持普通/微信底部/提示/加载框/日期/地区/日历/选择/编辑/分享/菜单/吐司/自定义弹窗等,支持多种动画,链式编程调用
+	pod 'LSTPopView'												#iOS万能弹窗,可同时显示多个弹窗
+	pod 'FWPopupViewOC'											#信手拈来的OC弹窗库：1、继承 FWPopupBaseView 即可轻松实现各种位置、动画类型的弹窗；2、新功能引导弹窗
+	pod 'FWPopupView'												#swift版
 	pod 'Popover.OC'                      	#一款优雅好用的类似QQ和微信消息页面的右上角微型菜单弹窗, 最低支持iOS6
 	pod 'FTPopOverMenu'											#类似QQ和微信消息页面的右上角微型菜单弹窗
 	pod 'LMJDropdownMenu'										#一个简单好用的下拉菜单控件,类似QQ和微信消息页面的右上角微型菜单弹窗
-	pod 'WMZDialog'													#弹窗，支持普通/微信底部/提示/加载框/日期/地区/日历/选择/编辑/分享/菜单/吐司/自定义弹窗等,支持多种动画,链式编程调用
-	pod 'LSTPopView'												#iOS万能弹窗
-
-	pod 'FWPopupViewOC'											#信手拈来的OC弹窗库：1、继承 FWPopupBaseView 即可轻松实现各种位置、动画类型的弹窗；2、新功能引导弹窗
-	pod 'FWPopupView'												#swift版
+	pod 'GKCover'														#一行代码显示遮罩视图，让你的弹窗更easy!
 end
 
 
@@ -181,6 +195,9 @@ end
 
 
 
+
+
+
 # Pods for LSProjectTool
 target 'LSProjectTool' do 								# 项目工程名
 	  # tx_IMSDK_UI														# 腾讯IM(含UI库)
@@ -192,6 +209,7 @@ target 'LSProjectTool' do 								# 项目工程名
     alertView_ios													# 弹窗
     zf_player_ios													# 支持自定义任何播放器SDK和控制层
     # zhibo_anmiation_mp4_ios								# 直播间送礼物动画 .mp4格式
+    noLonger_maintainLib									# 不再维护的库
 
 
   target 'LSProjectToolTests' do

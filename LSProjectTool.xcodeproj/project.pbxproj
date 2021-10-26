@@ -84,6 +84,10 @@
 		A70CFF5526A6B5FA008F47AA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A70CFF5426A6B5FA008F47AA /* QuartzCore.framework */; };
 		A70CFF5726A6B60D008F47AA /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A70CFF5626A6B60D008F47AA /* CoreText.framework */; };
 		A70CFF5926A6B642008F47AA /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A70CFF5826A6B642008F47AA /* CoreMotion.framework */; };
+		A71D6EF527225799002746E4 /* DCURLRouter.plist in Resources */ = {isa = PBXBuildFile; fileRef = A71D6EED27225799002746E4 /* DCURLRouter.plist */; };
+		A71D6EF627225799002746E4 /* UIViewController+DCURLRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = A71D6EEE27225799002746E4 /* UIViewController+DCURLRouter.m */; };
+		A71D6EF727225799002746E4 /* DCURLRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = A71D6EF027225799002746E4 /* DCURLRouter.m */; };
+		A71D6EF827225799002746E4 /* DCURLNavgation.m in Sources */ = {isa = PBXBuildFile; fileRef = A71D6EF427225799002746E4 /* DCURLNavgation.m */; };
 		A728E43926EF4B060086CF46 /* JQCollectionViewAlignLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A728E43726EF4B050086CF46 /* JQCollectionViewAlignLayout.m */; };
 		A728E43C26EF4B6F0086CF46 /* JHCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A728E43B26EF4B6F0086CF46 /* JHCollectionViewFlowLayout.m */; };
 		A73C39DB23A76262005F50D6 /* CFGradientLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A73C39DA23A76262005F50D6 /* CFGradientLabel.m */; };
@@ -124,6 +128,7 @@
 		A7DE94F32653E1E300110026 /* NSTimer+BlockTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DE94F22653E1E300110026 /* NSTimer+BlockTimer.m */; };
 		A7DE94F92653E27500110026 /* ProxyObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DE94F82653E27500110026 /* ProxyObject.m */; };
 		A7DE94FF2653E32F00110026 /* NormalTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DE94FE2653E32F00110026 /* NormalTimer.m */; };
+		A7E581D5270022100024CE2E /* ZWMGuideView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7E581D3270022100024CE2E /* ZWMGuideView.m */; };
 		A7F5064123A386D800666F3B /* LSYTKGetRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F5063F23A386D800666F3B /* LSYTKGetRequest.m */; };
 		A7F5064223A386D800666F3B /* LSYTKRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F5064023A386D800666F3B /* LSYTKRequest.m */; };
 		AAFFC729DCEA40F0A2B0D88D /* Pods_LSProjectToolTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCC4DBE5D19BF7E0AAFF332D /* Pods_LSProjectToolTests.framework */; };
@@ -362,6 +367,14 @@
 		A70CFF5A26A6B687008F47AA /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlipaySDK.framework; path = "Pods/AlipaySDK-iOS/AlipaySDK.framework"; sourceTree = "<group>"; };
 		A70EFF2A26C605D200BE686D /* 自定义弹窗VC和View.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "自定义弹窗VC和View.h"; sourceTree = "<group>"; };
 		A71A28352647EABC00E49854 /* pod第三方库版本.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "pod第三方库版本.h"; sourceTree = "<group>"; };
+		A71D6EED27225799002746E4 /* DCURLRouter.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DCURLRouter.plist; sourceTree = "<group>"; };
+		A71D6EEE27225799002746E4 /* UIViewController+DCURLRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+DCURLRouter.m"; sourceTree = "<group>"; };
+		A71D6EEF27225799002746E4 /* DCURLNavgation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCURLNavgation.h; sourceTree = "<group>"; };
+		A71D6EF027225799002746E4 /* DCURLRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCURLRouter.m; sourceTree = "<group>"; };
+		A71D6EF127225799002746E4 /* DCSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCSingleton.h; sourceTree = "<group>"; };
+		A71D6EF227225799002746E4 /* UIViewController+DCURLRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+DCURLRouter.h"; sourceTree = "<group>"; };
+		A71D6EF327225799002746E4 /* DCURLRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCURLRouter.h; sourceTree = "<group>"; };
+		A71D6EF427225799002746E4 /* DCURLNavgation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCURLNavgation.m; sourceTree = "<group>"; };
 		A728E43726EF4B050086CF46 /* JQCollectionViewAlignLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQCollectionViewAlignLayout.m; sourceTree = "<group>"; };
 		A728E43826EF4B050086CF46 /* JQCollectionViewAlignLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQCollectionViewAlignLayout.h; sourceTree = "<group>"; };
 		A728E43A26EF4B6F0086CF46 /* JHCollectionViewFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JHCollectionViewFlowLayout.h; sourceTree = "<group>"; };
@@ -448,6 +461,8 @@
 		A7DE94F82653E27500110026 /* ProxyObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProxyObject.m; sourceTree = "<group>"; };
 		A7DE94FD2653E32F00110026 /* NormalTimer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NormalTimer.h; sourceTree = "<group>"; };
 		A7DE94FE2653E32F00110026 /* NormalTimer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NormalTimer.m; sourceTree = "<group>"; };
+		A7E581D3270022100024CE2E /* ZWMGuideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWMGuideView.m; sourceTree = "<group>"; };
+		A7E581D4270022100024CE2E /* ZWMGuideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWMGuideView.h; sourceTree = "<group>"; };
 		A7F3D6B626469D1800198CD0 /* RAC使用.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RAC使用.h"; sourceTree = "<group>"; };
 		A7F5063D23A386D800666F3B /* LSYTKGetRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSYTKGetRequest.h; sourceTree = "<group>"; };
 		A7F5063E23A386D800666F3B /* LSYTKRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSYTKRequest.h; sourceTree = "<group>"; };
@@ -615,13 +630,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				486443912119CC6800C3B9BF /* UserNotifications.framework in Frameworks */,
 				A70CFF5926A6B642008F47AA /* CoreMotion.framework in Frameworks */,
 				A70CFF5726A6B60D008F47AA /* CoreText.framework in Frameworks */,
 				A70CFF5526A6B5FA008F47AA /* QuartzCore.framework in Frameworks */,
 				A70CFF5326A6B5DC008F47AA /* libc++.tbd in Frameworks */,
 				A79650BC2638F33F0031932F /* AppTrackingTransparency.framework in Frameworks */,
 				486443932119CC7100C3B9BF /* libresolv.tbd in Frameworks */,
-				486443912119CC6800C3B9BF /* UserNotifications.framework in Frameworks */,
 				4864438F2119CC5C00C3B9BF /* AdSupport.framework in Frameworks */,
 				AE24FCE21DAB41FB00740806 /* libz.tbd in Frameworks */,
 				4864438D2119CC4D00C3B9BF /* Security.framework in Frameworks */,
@@ -930,6 +945,21 @@
 			path = ZYNetworkAccessibility;
 			sourceTree = "<group>";
 		};
+		A71D6EEC27225799002746E4 /* DCURLRouter */ = {
+			isa = PBXGroup;
+			children = (
+				A71D6EED27225799002746E4 /* DCURLRouter.plist */,
+				A71D6EF127225799002746E4 /* DCSingleton.h */,
+				A71D6EF327225799002746E4 /* DCURLRouter.h */,
+				A71D6EF027225799002746E4 /* DCURLRouter.m */,
+				A71D6EEF27225799002746E4 /* DCURLNavgation.h */,
+				A71D6EF427225799002746E4 /* DCURLNavgation.m */,
+				A71D6EF227225799002746E4 /* UIViewController+DCURLRouter.h */,
+				A71D6EEE27225799002746E4 /* UIViewController+DCURLRouter.m */,
+			);
+			path = DCURLRouter;
+			sourceTree = "<group>";
+		};
 		A73C39D823A76250005F50D6 /* label文字渐变色 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1029,6 +1059,15 @@
 				A7BC0799268AB2BE004D08F6 /* UIView+AdaptScreen.m */,
 			);
 			path = "xib文件根据屏幕等比例缩放的适配";
+			sourceTree = "<group>";
+		};
+		A7E581D2270022100024CE2E /* ZWMGuideView */ = {
+			isa = PBXGroup;
+			children = (
+				A7E581D4270022100024CE2E /* ZWMGuideView.h */,
+				A7E581D3270022100024CE2E /* ZWMGuideView.m */,
+			);
+			path = ZWMGuideView;
 			sourceTree = "<group>";
 		};
 		A7F5063C23A386D800666F3B /* YTK */ = {
@@ -1302,6 +1341,7 @@
 		AEB4D3201DAA09EA0078A52D /* lalalal */ = {
 			isa = PBXGroup;
 			children = (
+				A7E581D2270022100024CE2E /* ZWMGuideView */,
 				A7F5063C23A386D800666F3B /* YTK */,
 				3D2005CB21F9CB040010425C /* LSConst */,
 				482267E52154BDD600EE6599 /* View */,
@@ -1487,6 +1527,7 @@
 		AEB4D38C1DAA0A300078A52D /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				A71D6EEC27225799002746E4 /* DCURLRouter */,
 				A7BA62DA26BD1E1E00D49930 /* 二维码扫描 */,
 				A7BC079B268AB2DE004D08F6 /* xib文件根据屏幕等比例缩放的适配 */,
 				A7029FB6266F200600D42B84 /* ZYNetworkAccessibility */,
@@ -1807,6 +1848,7 @@
 				AE0C7D9E1E0BC2A50051269F /* link.js in Resources */,
 				AE0C7D9C1E0BBE750051269F /* link.html in Resources */,
 				4855232920E63EDB00CB32BF /* star_yellow.png in Resources */,
+				A71D6EF527225799002746E4 /* DCURLRouter.plist in Resources */,
 				A7AA34FA2679F6D90043716A /* DIN-Regular-2.otf in Resources */,
 				3DB5DC082216E77500069E5F /* 银行卡号和名称(字典).html in Resources */,
 				4855232820E63EDB00CB32BF /* star_gray.png in Resources */,
@@ -1853,24 +1895,28 @@
 				"${BUILT_PRODUCTS_DIR}/BMLongPressDragCellCollectionView/BMLongPressDragCellCollectionView.framework",
 				"${BUILT_PRODUCTS_DIR}/BRPickerView/BRPickerView.framework",
 				"${BUILT_PRODUCTS_DIR}/CYLTabBarController/CYLTabBarController.framework",
-				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/FDFullscreenPopGesture/FDFullscreenPopGesture.framework",
 				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
+				"${BUILT_PRODUCTS_DIR}/FMLayoutKit/FMLayoutKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FMListPlaceholder/FMListPlaceholder.framework",
 				"${BUILT_PRODUCTS_DIR}/FSTextView/FSTextView.framework",
 				"${BUILT_PRODUCTS_DIR}/FTPopOverMenu/FTPopOverMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/FWPopupView/FWPopupView.framework",
 				"${BUILT_PRODUCTS_DIR}/FWPopupViewOC/FWPopupViewOC.framework",
+				"${BUILT_PRODUCTS_DIR}/GKCover/GKCover.framework",
 				"${BUILT_PRODUCTS_DIR}/GKPageScrollView/GKPageScrollView.framework",
 				"${BUILT_PRODUCTS_DIR}/GKPageSmoothView/GKPageSmoothView.framework",
 				"${BUILT_PRODUCTS_DIR}/GKPhotoBrowser/GKPhotoBrowser.framework",
+				"${BUILT_PRODUCTS_DIR}/HDCollectionView/HDCollectionView.framework",
+				"${BUILT_PRODUCTS_DIR}/HDListViewDiffer/HDListViewDiffer.framework",
+				"${BUILT_PRODUCTS_DIR}/HMSegmentedControl/HMSegmentedControl.framework",
 				"${BUILT_PRODUCTS_DIR}/HXPhotoPicker/HXPhotoPicker.framework",
-				"${BUILT_PRODUCTS_DIR}/IAPHelper/IAPHelper.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/JXCategoryView/JXCategoryView.framework",
 				"${BUILT_PRODUCTS_DIR}/KNPhotoBrowser/KNPhotoBrowser.framework",
 				"${BUILT_PRODUCTS_DIR}/LBXPermission/LBXPermission.framework",
+				"${BUILT_PRODUCTS_DIR}/LEEAlert/LEEAlert.framework",
 				"${BUILT_PRODUCTS_DIR}/LMJDropdownMenu/LMJDropdownMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/LSTPopView/LSTPopView.framework",
 				"${BUILT_PRODUCTS_DIR}/LSTTimer/LSTTimer.framework",
@@ -1879,9 +1925,9 @@
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/MyLayout/MyLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjcAssociatedObjectHelpers/ObjcAssociatedObjectHelpers.framework",
 				"${BUILT_PRODUCTS_DIR}/OttoKeyboardView/OttoKeyboardView.framework",
-				"${BUILT_PRODUCTS_DIR}/PKRevealController/PKRevealController.framework",
 				"${BUILT_PRODUCTS_DIR}/PPGetAddressBook/PPGetAddressBook.framework",
 				"${BUILT_PRODUCTS_DIR}/Popover.OC/Popover_OC.framework",
 				"${BUILT_PRODUCTS_DIR}/RKNotificationHub/RKNotificationHub.framework",
@@ -1890,23 +1936,28 @@
 				"${BUILT_PRODUCTS_DIR}/SDCycleScrollView/SDCycleScrollView.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SGQRCode/SGQRCode.framework",
-				"${BUILT_PRODUCTS_DIR}/SlackTextViewController/SlackTextViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/TOSearchBar/TOSearchBar.framework",
 				"${BUILT_PRODUCTS_DIR}/TTGTagCollectionView/TTGTags.framework",
 				"${BUILT_PRODUCTS_DIR}/TZImagePickerController/TZImagePickerController.framework",
 				"${BUILT_PRODUCTS_DIR}/ThinkVerb/ThinkVerb.framework",
 				"${BUILT_PRODUCTS_DIR}/UICKeyChainStore/UICKeyChainStore.framework",
 				"${BUILT_PRODUCTS_DIR}/UITableViewDynamicLayoutCacheHeight/UITableViewDynamicLayoutCacheHeight.framework",
+				"${BUILT_PRODUCTS_DIR}/WMZBanner/WMZBanner.framework",
 				"${BUILT_PRODUCTS_DIR}/WMZDialog/WMZDialog.framework",
 				"${BUILT_PRODUCTS_DIR}/WMZDropDownMenu/WMZDropDownMenu.framework",
+				"${BUILT_PRODUCTS_DIR}/WMZPageController/WMZPageController.framework",
+				"${BUILT_PRODUCTS_DIR}/WMZTreeView/WMZTreeView.framework",
 				"${BUILT_PRODUCTS_DIR}/WZLBadge/WZLBadge.framework",
 				"${BUILT_PRODUCTS_DIR}/XHLaunchAd/XHLaunchAd.framework",
 				"${BUILT_PRODUCTS_DIR}/YTKNetwork/YTKNetwork.framework",
 				"${BUILT_PRODUCTS_DIR}/YYKit/YYKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Yoga/yoga.framework",
 				"${BUILT_PRODUCTS_DIR}/ZLCellDataSource/ZLCellDataSource.framework",
 				"${BUILT_PRODUCTS_DIR}/ZLCollectionViewFlowLayout/ZLCollectionViewFlowLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/ZLPhotoBrowser/ZLPhotoBrowser.framework",
+				"${BUILT_PRODUCTS_DIR}/ZQSearch/ZQSearch.framework",
 				"${BUILT_PRODUCTS_DIR}/dsBridge/dsBridge.framework",
 				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
 			);
@@ -1918,24 +1969,28 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BMLongPressDragCellCollectionView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BRPickerView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CYLTabBarController.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FDFullscreenPopGesture.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMLayoutKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMListPlaceholder.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSTextView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FTPopOverMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FWPopupView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FWPopupViewOC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GKCover.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GKPageScrollView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GKPageSmoothView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GKPhotoBrowser.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HDCollectionView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HDListViewDiffer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HMSegmentedControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HXPhotoPicker.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IAPHelper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JXCategoryView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KNPhotoBrowser.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LBXPermission.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LEEAlert.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LMJDropdownMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LSTPopView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LSTTimer.framework",
@@ -1944,9 +1999,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MyLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcAssociatedObjectHelpers.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OttoKeyboardView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKRevealController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PPGetAddressBook.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Popover_OC.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RKNotificationHub.framework",
@@ -1955,23 +2010,28 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDCycleScrollView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SGQRCode.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SlackTextViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyStoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TOSearchBar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTGTags.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TZImagePickerController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ThinkVerb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICKeyChainStore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UITableViewDynamicLayoutCacheHeight.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WMZBanner.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WMZDialog.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WMZDropDownMenu.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WMZPageController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WMZTreeView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WZLBadge.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XHLaunchAd.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YTKNetwork.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/yoga.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZLCellDataSource.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZLCollectionViewFlowLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZLPhotoBrowser.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZQSearch.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/dsBridge.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
 			);
@@ -2078,6 +2138,7 @@
 				482E9FF9212C3FB1005B91DF /* JumpThirdPartyMapTools.m in Sources */,
 				08BA1FE91FEFD0C300A19A46 /* WaterFlowLayout.m in Sources */,
 				08197C891FE3564D00478FC4 /* FSMStateUtil.m in Sources */,
+				A71D6EF727225799002746E4 /* DCURLRouter.m in Sources */,
 				AEB4D37D1DAA09EA0078A52D /* NetworkRequest.m in Sources */,
 				48C35B7F2137E71700B0AA2B /* LocationTransform.m in Sources */,
 				08CBAF931FED346E00243B18 /* LSRootTableView.m in Sources */,
@@ -2111,6 +2172,7 @@
 				085978D72023186700CA056F /* LSRootCollectionView.m in Sources */,
 				AEC14C561DC978310080D764 /* GetMacAddress.m in Sources */,
 				A74FA417268D6C0200A251DA /* NSObject+LSSelectorDefenderInstance.m in Sources */,
+				A7E581D5270022100024CE2E /* ZWMGuideView.m in Sources */,
 				486443772119CB6200C3B9BF /* AppDelegate+JPush.m in Sources */,
 				AEB4D38B1DAA0A130078A52D /* NSObject+checkTool.m in Sources */,
 				AEB4D4381DAA5AE60078A52D /* LSExtensionConst.m in Sources */,
@@ -2130,6 +2192,7 @@
 				AEB4D3771DAA09EA0078A52D /* ClassExtension.m in Sources */,
 				A76134F42656946B0098B07C /* UIView+LSExtension.m in Sources */,
 				AEB4D3821DAA09EA0078A52D /* NSDate+LSExtension.m in Sources */,
+				A71D6EF827225799002746E4 /* DCURLNavgation.m in Sources */,
 				08FB5E24202DA8B1003F1132 /* LSButton.m in Sources */,
 				A74BDA3326EB905C00D8E083 /* CodeView.m in Sources */,
 				A7DE94F32653E1E300110026 /* NSTimer+BlockTimer.m in Sources */,
@@ -2190,6 +2253,7 @@
 				A728E43926EF4B060086CF46 /* JQCollectionViewAlignLayout.m in Sources */,
 				AE6529B81DBA3AAE00213D1F /* UIImage+Category.m in Sources */,
 				A74FA41D268D6C9600A251DA /* NSObject+LSSelectorDefenderClass.m in Sources */,
+				A71D6EF627225799002746E4 /* UIViewController+DCURLRouter.m in Sources */,
 				AE42E1721DB50E12003E3B81 /* UIView+IB.m in Sources */,
 				08197C8F1FE3564D00478FC4 /* ReachStateWWAN.m in Sources */,
 				08D35B57200A195000E122FF /* LSCountDown.m in Sources */,

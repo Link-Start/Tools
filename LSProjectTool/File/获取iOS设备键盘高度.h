@@ -36,7 +36,7 @@
 
 
 在这2个函数中可以得到键盘的一些属性，具体代码如下：
-- (void)keyboardWillShow:(NSNotification *)aNotification {
+- (void)keyboardWillShow:(NSNotification *)notif {
     //获取键盘的高度
     /*
      iphone 6:
@@ -67,18 +67,40 @@
      2014-12-31 11:33:57.258 Demo[1014:53043] 键盘高度是  264
      2014-12-31 11:33:57.258 Demo[1014:53043] 键盘宽度是  768
      */
-    NSDictionary *userInfo = [aNotification userInfo];
+    NSDictionary *userInfo = [notif userInfo];
     NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
     CGRect keyboardRect = [aValue CGRectValue];
     int height = keyboardRect.size.height;
     int width = keyboardRect.size.width;
     NSLog(@"键盘高度是  %d",height);
     NSLog(@"键盘宽度是  %d",width);
+    
+    //键盘弹出的时长
+    CGFloat duration = [notif.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    // 弹出的键盘的 frame
+    CGRect endFrame = [notif.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+
+
+    [UIView animateWithDuration:duration animations:^{
+        CGFloat h = (kScreenHeight/2-endFrame.size.height-125);
+        [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(self.view.mas_centerY).mas_offset(h);
+        }];
+        
+    }];
+    [self.view layoutIfNeeded];
 }
 
 //当键退出时调用
-- (void)keyboardWillHide:(NSNotification *)aNotification {
-    
+- (void)keyboardWillHide:(NSNotification *)notif {
+  
+    CGFloat duration = [notif.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    [UIView animateWithDuration:duration animations:^{
+        [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(self.view.mas_centerY).mas_offset(0);
+        }];
+    }];
+    [self.view layoutIfNeeded];
 }
 
 

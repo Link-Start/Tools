@@ -409,6 +409,8 @@
             self.ls_tableView.scrollIndicatorInsets = self.ls_tableView.contentInset;
         }
 #endif
+//从 iOS 15 开始，TableView 增加sectionHeaderTopPadding属性，
+//默认情况sectionHeaderTopPadding会有22个像素的高度，及默认情况，TableView section header增加22像素的高度
 //        if (@available(iOS 15.0, *)) {
 //            self.ls_tableView.sectionHeaderTopPadding = 0
 //        }

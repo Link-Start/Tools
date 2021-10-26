@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+/// 标签栏控制器
 @interface LSTabBarController : UITabBarController
 
 
