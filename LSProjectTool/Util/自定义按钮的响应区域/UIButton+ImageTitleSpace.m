@@ -156,7 +156,7 @@ static char *ls_spaceKey = "ls_edgeInsetsSpace";
            //若原热区小于44x44，则放大热区，否则保持原大小不变
            CGFloat widthDelta = MAX(self.enlargeSize.width, 0);
            CGFloat heightDelta = MAX(self.enlargeSize.height, 0);
-           bounds = CGRectInset(bounds, -0.5 * widthDelta, -0.5 * heightDelta);
+           bounds = CGRectInset(bounds, widthDelta, heightDelta);
        } else {
            //若原热区小于44x44，则放大热区，否则保持原大小不变
            CGFloat widthDelta = MAX(44.0 - bounds.size.width, 0);

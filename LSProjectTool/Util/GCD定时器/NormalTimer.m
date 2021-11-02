@@ -24,7 +24,7 @@
 
 
 @implementation NSTimer(NormalTimer)
-+ (NSTimer *)scheduledNormalTimerWithTimeInterval:(NSTimeInterval)ti target:(id)aTarget selector:(SEL)aSelector userInfo:(nullable id)userInfo repeats:(BOOL)yesOrNo{
++ (NSTimer *)scheduledNormalTimerWithTimeInterval:(NSTimeInterval)ti target:(id)aTarget selector:(SEL)aSelector userInfo:(nullable id)userInfo repeats:(BOOL)yesOrNo {
     NormalTimer* normalTimer = [[NormalTimer alloc] init];
     normalTimer.target = aTarget;
     normalTimer.selector = aSelector;

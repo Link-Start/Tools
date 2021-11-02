@@ -85,26 +85,27 @@
 ///app      build版本
 #define kLA_App_bulidVersion  [infoDictionary objectForKey:@"CFBundleVersion"]
 
-///手机序列号 UUID
-#define kLS_IdentifierNumber ([[UIDevice currentDevice] identifierForVendor])
-///每次获取都不一样
-#define kLS_UUID ([[NSUUID UUID] UUIDString])
+
 /********************************** 识别设备和操作系统 *************************************/
-/// 用户为设备设置的名称 ar name: String                             设备的名称。
+/// 用户为设备设置的名称 ar name: String                             设备的名称。                     e.g. "My iPhone"
 #define kLS_DeviceName [[UIDevice currentDevice] name]
-/// 操作系统的当前版本。var systemVersion: String               操作系统的当前版本。
+/// 当前操作系统名称                                                                                                        e.g. @"iOS"
+#define kLS_SystemName [[UIDevice currentDevice] systemName]
+/// 操作系统的当前版本。var systemVersion: String               操作系统的当前版本。    e.g. @"4.0"
 #define kLS_SystemVersion [[UIDevice currentDevice] systemVersion]
-/// //var model: String                                                               设备的型号。
+/// //var model: String                                                             设备的型号。                  e.g. @"iPhone", @"iPod touch"
 #define kLS_Model [[UIDevice currentDevice] model]
 /// 地方型号（国际化区域名称) var localizedModel: String      设备作为本地化字符串的模型。。
 #define kLS_LocalizePhoneModel [[UIDevice currentDevice] localizedModel]
 /// var userInterfaceIdiom: UIUserInterfaceIdiom                      当前设备上要使用的接口样式。
 #define kLS_UserInterfaceIdiom [[UIDevice currentDevice] userInterfaceIdiom]
-/// var identifierForVendor: UUID?                                             一个字母数字字符串，唯一地标识应用程序供应商的设备。
+/// 手机序列号 UUID var identifierForVendor: UUID?                           一个字母数字字符串，唯一地标识应用程序供应商的设备。
 #define kLS_IdentifierForVendor [[UIDevice currentDevice] identifierForVendor]
+/// UUID 每次获取都不一样
+#define kLS_UUID ([[NSUUID UUID] UUIDString])
 
-///系统名称
-#define kLS_SystemName [[UIDevice currentDevice] systemName]
+
+
 ///获取当前语言
 #define kLS_GetCurrentLanguage ([[NSLocale preferredLanguages] objectAtIndex:0])
 //设备的 DeviceToken
@@ -125,8 +126,11 @@
 
 ///屏幕分辨率
 #define kLS_Screen_resolution (kLS_ScreenWidth * kLS_ScreenHeight * ([UIScreen mainScreen].scale))
-/// 设备分辨率
-#define kLS_Device_resolution CGSizeMake(kLS_ScreenWidth*([UIScreen mainScreen].scale), (kLS_ScreenHeight * ([UIScreen mainScreen].scale)))
+/// 设备分辨率、系统分辨率
+#define kLS_Device_resolution CGSizeMake(kLS_ScreenWidth * ([UIScreen mainScreen].scale), (kLS_ScreenHeight * ([UIScreen mainScreen].scale)))
+/// 设备分辨率、系统分辨率
+#define kLS_Device_resolution_str [NSString stringWithFormat:@"%.0f*%.0f", (kLS_ScreenWidth * [UIScreen mainScreen].scale), (kLS_ScreenHeight * [UIScreen mainScreen].scale)];
+
 
 ///获取系统时间戳
 #define kLS_GetCurentTime [NSString stringWithFormat:@"%ld", (long)[[NSDate date] timeIntervalSince1970]]

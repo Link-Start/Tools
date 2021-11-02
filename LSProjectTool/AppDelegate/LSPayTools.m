@@ -423,6 +423,8 @@ static LSPayTools *_ls_payTools = nil;
 #pragma mark - 苹果支付 内购
 
 /// 开启内购监听 在程序入口 didFinsihLaunchingWithOptions 实现
+/// 在didFinsihLaunchingWithOptions调用此方法,会先检测一遍有没有未校验的订单, >>>
+///     >>>如果有未校验的订单会走这个方法:<- (void)paymentQueue:updatedTransactions:>,走到交易完成(Purchased)的回调,
 - (void)IAP_startManagerObserver {
     dispatch_sync(iap_queue(), ^{
         if ([SKPaymentQueue defaultQueue]) {
@@ -581,12 +583,14 @@ static LSPayTools *_ls_payTools = nil;
 }
 
 /*解决掉单的问题:
- 1.将需要传给后台服务器的参数（比如订单id，用户id）放到SKMutablePayment的applicationUsername字段里面；
+ 1.将需要传给后台服务器的参数（比如订单id，用户id,等参数）放到SKMutablePayment的applicationUsername字段里面；
+  在监听到交易完成的回调的时候可以从transaction.payment.applicationUsername里面获取之前存入的参数
  */
 -(void)buyProduct:(SKProduct *)product{
     // 1.创建票据
     NSString *userId = self.user_id;
     NSString *orderId = self.orderNo;
+    
     NSString *userName = [NSString stringWithFormat:@"%@-%@",userId,orderId];
     SKMutablePayment *skpayment = [SKMutablePayment paymentWithProduct:product];
     skpayment.applicationUsername = userName;
@@ -640,7 +644,7 @@ static LSPayTools *_ls_payTools = nil;
                 NSLog(@"-----商品添加进列表 --------");
                 NSLog(@"正在购买中...");
                 //解决applicationUsername支付一半kill进程后为nil的问题
-                [self saveCurrentTransationBindedOrderNo];
+//                [self saveCurrentTransationBindedOrderNo];
             }
                 break;
             case SKPaymentTransactionStatePurchased: { //交易完成
@@ -739,16 +743,7 @@ static LSPayTools *_ls_payTools = nil;
         NSLog(@"没有交易收据");
 //        return;
     }
-
-    //获取编码格式的收据
-    NSString *receiptBase64String = [receiptData base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
-    // 注意：字符串：@"{\"receipt-data\" : \"%@\"}"，服务器解码时，带上“receipt-data”字段，不然base64解码失败
-    // NSString *sendString = [NSString stringWithFormat:@"{\"receipt-data\" : \"%@\"}", encodedReceipt];
-    //获取product_id
-    NSString *product_id = transaction.payment.productIdentifier;
-    //获取transaction_id
-    NSString *transaction_id = transaction.transactionIdentifier;
-
+    
     
 //1. 在这里保存数据
   /*在appDelegate里面开启监听,如果有没有验证票据的订单存在,会直接走<updatedTransactions:>方法,到这里
@@ -760,96 +755,105 @@ static LSPayTools *_ls_payTools = nil;
   */
 //2.调用后台服务器接口 验证票据
 //3. 成功方法里:移除对应的数据，返回成功
+
+    //获取编码格式的收据
+    NSString *receiptBase64String = [receiptData base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+    // 注意：字符串：@"{\"receipt-data\" : \"%@\"}"，服务器解码时，带上“receipt-data”字段，不然base64解码失败
+
     
-
-    if (self.PaySuccessBlock) {
-//product_id：这个也不用解释 内购产品编号 你不传的话 服务器不知道你买的哪个订单
-// transaction_id：这个是交易编号，是必须要传的。因为你要是防止越狱下内购被破解就必须要校验in_app这个参数。
-        //而这个参数的数组元素有可能为多个，你必须得找到一个唯一标示，才可以区分订单到底是那一笔。
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        dict[@"product_id"] = transaction.payment.productIdentifier;// 内购产品编号
-        dict[@"transaction_id"] = transaction.transactionIdentifier;//交易编号
-        dict[@"receipt_data"] = receiptBase64String;
-        self.PaySuccessBlock(AppStorePaySuccess, @"内购支付成功", dict);
-        
-        [self finishAndRemoveTransaction:transaction];
-    }
-
-
-//    // server解析json字符串和端上一样，不带转义字符“\”根本解析不出来
-//    // 先将凭据转成字典，在将字典转成json字符串（添加了receipt-data）
-//    NSDictionary *sendDic = @{@"receipt-data" : receiptBase64String};
-//    NSData *data = [NSJSONSerialization dataWithJSONObject:sendDic options:NSJSONWritingPrettyPrinted error:nil];
-//    NSString *sendString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//    [self serverVerify_getApplePayDataToServerRequestString:sendString withTransaction:transaction];
-}
-//所以服务器那边逻辑就很清晰了。 http://www.cocoachina.com/cms/wap.php?action=article&id=25323
-//1.首先判断订单状态是不是成功。
-//2.如果订单状态成功在判断in_app这个字段有没有，没有直接就返回失败了。如果存在的话，遍历整个数组，通过客户端给的transaction_id 来比较，取到相同的订单时，对比一下bundle_id ，product_id 是不是正确的。
-//3.如果以上校验都正确再去查询一下数据库里这笔订单是不是存在，如果存在也是返回失败，避免重复分发内购商品。如果都成功了，再把这笔订单充值进去，给用户分发内购商品。
-//（15.）:发送到服务器，由服务器判断交易收据（生成预订单，成功后在发送到服务器校验App Store凭据）
-// https://www.jianshu.com/p/8715bc255278
-- (void)serverVerify_getApplePayDataToServerRequestString:(NSString *)receiptString withTransaction:(SKPaymentTransaction *)transaction {
-    if (self.user_id == nil) {
-        //登录
-        return;
-    }
-
-    NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
-    NSString *app_version = [infoDict objectForKey:@"CFBundleShortVersionString"];
-    NSString *pay_product_id = @"";
-    if ([self.product_Id isEqualToString:@""]) {
-        pay_product_id = @"";
-    } else if ([self.product_Id isEqualToString:@""]) {
-        pay_product_id = @"";
-    }
-    // ...
-
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    dict[@"user_id"] = self.user_id?:@"";
-    dict[@"app_version"]    = app_version;
-    dict[@"pay_method"]     = @"3";// 支付方式 1：阿里 2：微信 3：苹果
-    dict[@"pay_source"]     = @"6";// 1.二维码支付 2.H5支付 3.支付宝手机网站支付 4.支付宝电脑网站支付 5.微信JSAPI 6.APP
-    dict[@"pay_for"]       = @"2";// 1: 会员 2：金币 3:礼品卡 4:商城 10其它（自定义生成的订单）11阅读会员
-    dict[@"client_type"]    = @"2";// 1.安卓 2ios 3.pc
-    NSArray *keyArray = [dict allKeys]; //将dict 总的全部key取出，并放到数组中
+    if (!self.orderNo) { //没有订单号，(代表是之前验签失败的订单,是程序启动时苹果api自动检测到未完成订单过来的)
+        //苹果检测到的未完成订单
+        //1.从applicationUsername拿到参数信息
+        //2.读取自己保存的订单数据，根据订单号进行比对
+        //3.1如果在自己保存的记录中找到对应的订单号,去服务器校验
+        //3.2如果没有在自己保存的记录中找到对应的订单号,保存这条订单记录,然后去服务器校验
+        //4.1 校验成功,从自己保存的数据中删除对应的数据,
+        //4.2 校验失败,返回失败信息
+        
+//        NSDictionary *iap_dict = [self getIAPDictData];
+//        NSLog(@"%@", iap_dict);
+        NSArray *iap_array = [self getIAPArrayData];//保存的iap_订单数据
+        NSLog(@"%@", iap_array);
+        
+//        NSString *userName = [NSString stringWithFormat:@"%@-%@-%@-%@-%@",userId,product_id, self.traderOrderNo, self.orderSendTime, self.tranAmt];
 
-    //根据ASCII码,将参数key值从小到大排序(升序)
-    NSStringCompareOptions comparisonOptions = NSCaseInsensitiveSearch|NSNumericSearch|NSWidthInsensitiveSearch|NSForcedOrderingSearch;
-    NSComparator sort = ^(NSString *obj1, NSString *obj2) {
-        NSRange range = NSMakeRange(0, obj1.length);
-        return [obj1 compare:obj2 options:comparisonOptions range:range];
-    };
-    NSArray *resultArr = [keyArray sortedArrayUsingComparator:sort];
-    NSLog(@"字符串数组排序结果%@", resultArr);
-    NSMutableArray *paramValueArr = [NSMutableArray arrayWithCapacity:resultArr.count];
-    for (NSString *str in resultArr) {
-        //将key对应的value,存到数组 用 "7500KM" 组成字符串
-        NSString *tokenStr = [dict objectForKey:[NSString stringWithFormat:@"%@", str]];
-        if (tokenStr.length > 0) {
-            [paramValueArr addObject:tokenStr];
+        //获取到前面放到applicationUsername里面的参数(订单号,userid,...等)
+        NSArray *arr = [transaction.payment.applicationUsername componentsSeparatedByString:@"-"];
+        self.orderNo = @"";//self.traderOrderNo
+        if (arr.count >= 4) {
+            self.product_Id = arr[1];
+//            self.traderOrderNo = arr[2];
+//            self.orderSendTime = arr[3];
+//            self.tranAmt = arr[4];
         }
+        for (int i = 0; i < iap_array.count; i++) {
+            NSDictionary *temDic = iap_array[i];
+            if ([temDic[@"traderOrderNo"] isEqualToString:self.orderNo]) {
+                dict = [NSMutableDictionary dictionaryWithDictionary:temDic];
+                break;
+            }
+        }
+        
+        if (!dict[@"traderOrderNo"]) {//如果之前没有保存过这条数据
+//            // 提交服务器验证之前，保存数据
+//            dict[@"product_id"] = transaction.payment.productIdentifier;// 内购产品编号
+//            dict[@"transaction_id"] = transaction.transactionIdentifier;//交易编号
+//            dict[@"receipt_data"] = receiptBase64String;
+//            dict[@"traderOrderNo"] = self.orderNo;//订单号
+//            dict[@"orderSendTime"] = self.orderSendTime;
+//            dict[@"tranAmt"] = self.tranAmt;//交易金额
+//            [self saveIAPArrayWithDict:dict];//保存到数组
+        }
+        
+    } else {//有订单号，代表是正常流程下单过来的
+        // 提交服务器验证之前，保存数据
+//        dict[@"product_id"] = transaction.payment.productIdentifier;// 内购产品编号
+//        dict[@"transaction_id"] = transaction.transactionIdentifier;//交易编号
+//        dict[@"receipt_data"] = receiptBase64String;
+//        dict[@"traderOrderNo"] = self.orderNo;//订单号
+//        dict[@"orderSendTime"] = self.orderSendTime;
+//        dict[@"tranAmt"] = self.tranAmt;//交易金额
+//        [self saveIAPArrayWithDict:dict];//保存到数组
+////        [self saveIAPDictWithTraderOrderNo:self.traderOrderNo dict:dict]//保存到字典
     }
-    NSLog(@"字符串数组value排序结果%@", paramValueArr);
-    NSString *token = [paramValueArr componentsJoinedByString:@"7500KM"];
-    token = @""; //md5加密
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"user_id"] = self.user_id?:@"";
-    params[@"app_version"]    = app_version;
-    params[@"pay_method"]     = @"3";// 支付方式 1：阿里 2：微信 3：苹果
-    params[@"pay_source"]     = @"6";// 1.二维码支付 2.H5支付 3.支付宝手机网站支付 4.支付宝电脑网站支付 5.微信JSAPI 6.APP
-    params[@"pay_for"]       = @"2";// 1: 会员 2：金币 3:礼品卡 4:商城 10其它（自定义生成的订单）11阅读会员
-    params[@"client_type"]    = @"2";// 1.安卓 2ios 3.pc
-    params[@"token"]         = token;
 
-    //请求后台接口，判断交易收据 https://www.jianshu.com/p/8715bc255278
-    // 后台判断交易收据返回成功后,在发送到后台服务器,校验 APP Store 凭据 https://www.jianshu.com/p/8715bc255278
+    // 提交服务器验证
+//    [OPNetClient paymentConfirm_AppleIPAPayWithTraderOrderNo:self.traderOrderNo orderSendTime:self.orderSendTime tranAmt:self.tranAmt productId:self.product_Id receiptData:dict[@"receipt_data"] transactionId:dict[@"transaction_id"] complete:^(id  _Nonnull response) {
+//
+//        NSLog(@"苹果支付确认成功：%@", response);
+//        if (self.PaySuccessBlock) {
+//            self.PaySuccessBlock(AppStorePaySuccess, @"内购交易成功", dict);
+//        }
+//
+//        [self finishAndRemoveTransaction:transaction];
+//
+//        [self removeIAPArrayObjectWithTraderOrderNo:self.traderOrderNo];
+////        [self removeIAPDictObjectWithTraderOrderNo:self.traderOrderNo];//
+//
+//    } failure:^(NSError * _Nonnull error) {
+//        NSLog(@"苹果支付确认失败：：%@", error);
+//        BEEFailToast(error.userInfo[NSLocalizedFailureReasonErrorKey]?:@"");
+//    }];
 
 }
-// (16.)发送到后台服务器，校验App Store凭据
-- (void)serverVerify_getApplePayDataToServerRequestString:(NSString *)receiptString withBookingOrderDictionary:(NSDictionary *)bookingOrderDic withTransaction:(SKPaymentTransaction *)transaction {
 
-}
+
+//// 提交服务器验证之前，保存数据
+//- (void)commitServerVerifyBeforSaveIAPArrayOrderDataWitTransaction:(SKPaymentTransaction *)transaction receiptBase64String:(NSString *)receiptBase64String {
+//    //product_id：这个也不用解释 内购产品编号 你不传的话 服务器不知道你买的哪个订单
+//    // transaction_id：这个是交易编号，是必须要传的。因为你要是防止越狱下内购被破解就必须要校验in_app这个参数。
+//    //而这个参数的数组元素有可能为多个，你必须得找到一个唯一标示，才可以区分订单到底是那一笔。
+//    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+//    dict[@"product_id"] = transaction.payment.productIdentifier;// 内购产品编号
+//    dict[@"transaction_id"] = transaction.transactionIdentifier;//交易编号
+//    dict[@"receipt_data"] = receiptBase64String;
+//    dict[@"traderOrderNo"] = self.traderOrderNo;//订单号
+//    dict[@"orderSendTime"] = self.orderSendTime;
+//    dict[@"tranAmt"] = self.tranAmt;//交易金额
+//
+//    [self saveIAPArrayWithDict:dict];//保存
+//}
 
 
 #pragma mark - 保存票据、订单信息
@@ -1263,11 +1267,11 @@ static LSPayTools *_ls_payTools = nil;
     if(transaction.error.code != SKErrorPaymentCancelled) {
         NSLog(@"购买失败");
         self.PayFailBlock?self.PayFailBlock(AppStorePayError, transaction.error.localizedDescription?:@"购买失败", nil):Nil;
-        [MBProgressHUD showError:@"购买失败"];
+        [MBProgressHUD showError:@"购买失败"];//交易失败
     } else {
         NSLog(@"用户取消交易(取消购买)");
         self.PayFailBlock?self.PayFailBlock(AppStorePayCancel, transaction.error.localizedDescription?:@"用户取消交易", nil):Nil;
-        [MBProgressHUD showError:@"用户取消交易(取消购买)"];
+        [MBProgressHUD showError:@"用户取消交易(取消购买)"];//取消充值
     }
 
     if ([SKPaymentQueue defaultQueue]) {
@@ -1311,15 +1315,15 @@ static LSPayTools *_ls_payTools = nil;
 }
 
 #pragma mark - 异常订单处理
-//https://www.jianshu.com/p/60645201a29c
-//array是异常数组，包含订单号、交易凭据
--(void)anomalyOrderVerify:(NSMutableArray * )array{
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(1);
-    for (int i = array.count; i > 0 ; i-- ) {
-       //循环判断，通过信号量控制
-        dispatch_semaphore_signal(semaphore);
-    }
-}
+////https://www.jianshu.com/p/60645201a29c
+////array是异常数组，包含订单号、交易凭据
+//-(void)anomalyOrderVerify:(NSMutableArray * )array{
+//    dispatch_semaphore_t semaphore = dispatch_semaphore_create(1);
+//    for (int i = array.count; i > 0 ; i-- ) {
+//       //循环判断，通过信号量控制
+//        dispatch_semaphore_signal(semaphore);
+//    }
+//}
 
 
 

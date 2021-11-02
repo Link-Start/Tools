@@ -111,7 +111,7 @@ static char leftEdgeKey;
         //若原热区小于44x44，则放大热区，否则保持原大小不变
         CGFloat widthDelta = MAX(self.enlargedEdge, self.bounds.size.width);
         CGFloat heightDelta = MAX(self.enlargedEdge, self.bounds.size.height);
-        rect = CGRectInset(rect, -0.5 * widthDelta, -0.5 * heightDelta);
+        rect = CGRectInset(rect, widthDelta, heightDelta);
     } else {
         //若原热区小于44x44，则放大热区，否则保持原大小不变
         CGFloat widthDelta = MAX(44.0 - rect.size.width, 0);

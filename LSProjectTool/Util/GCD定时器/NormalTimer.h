@@ -40,10 +40,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-
+NS_ASSUME_NONNULL_BEGIN
 
 @interface NSTimer(NormalTimer)
 
 + (NSTimer *)scheduledNormalTimerWithTimeInterval:(NSTimeInterval)ti target:(id)aTarget selector:(SEL)aSelector userInfo:(nullable id)userInfo repeats:(BOOL)yesOrNo;
 
 @end
+
+NS_ASSUME_NONNULL_END
