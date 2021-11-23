@@ -184,7 +184,7 @@
 //                  finishBlock();
                     break;
                case ATTrackingManagerAuthorizationStatusNotDetermined:
-                    NSLog(@"用户为做选择或未弹窗");
+                    NSLog(@"用户未做选择或未弹窗");
                     [self applyIDFAAuthority];//申请权限
                     break;
                default:

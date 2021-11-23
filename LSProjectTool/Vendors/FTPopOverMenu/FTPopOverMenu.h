@@ -5,8 +5,11 @@
 //  Created by liufengting on 16/4/5.
 //  Copyright © 2016年 liufengting ( https://github.com/liufengting ). All rights reserved.
 //
+//
+//  类似QQ和微信消息页面的右上角微型菜单弹窗
 
 #import <UIKit/UIKit.h>
+@class FTPopOverMenuConfiguration;
 
 /**
  *  FTPopOverMenuDoneBlock
@@ -18,6 +21,9 @@ typedef void (^FTPopOverMenuDoneBlock)(NSInteger selectedIndex);
  *  FTPopOverMenuDismissBlock
  */
 typedef void (^FTPopOverMenuDismissBlock)(void);
+
+/// 设置
+typedef FTPopOverMenuConfiguration *(^FTPopOverMenuConfigurationBlock)(void);
 
 /**
  *  -----------------------FTPopOverMenuModel-----------------------
@@ -125,6 +131,20 @@ typedef void (^FTPopOverMenuDismissBlock)(void);
  */
 + (FTPopOverMenu *)showForSender:(UIView *)sender
                    withMenuArray:(NSArray *)menuArray
+                       doneBlock:(FTPopOverMenuDoneBlock)doneBlock
+                    dismissBlock:(FTPopOverMenuDismissBlock)dismissBlock;
+/**
+ show method with sender without images
+ 
+ @param sender 箭头要显示的位置所在的控件
+ @param menuArray 菜单数据
+ @param configurationBlock 设置
+ @param doneBlock doneBlock
+ @param dismissBlock dismissBlock
+ */
++ (FTPopOverMenu *)showForSender:(UIView *)sender
+                   withMenuArray:(NSArray *)menuArray
+                   configurationBlock:(FTPopOverMenuConfiguration *(^)(void))configurationBlock
                        doneBlock:(FTPopOverMenuDoneBlock)doneBlock
                     dismissBlock:(FTPopOverMenuDismissBlock)dismissBlock;
 
@@ -257,6 +277,12 @@ typedef void (^FTPopOverMenuDismissBlock)(void);
 - (FTPopOverMenu *)showForSender:(UIView *)sender
                         withMenu:(NSArray *)menuArray
                           config:(FTPopOverMenuConfiguration *)config
+                       doneBlock:(FTPopOverMenuDoneBlock)doneBlock
+                    dismissBlock:(FTPopOverMenuDismissBlock)dismissBlock;
+
+- (FTPopOverMenu *)showForSender:(UIView *)sender
+                        withMenu:(NSArray *)menuArray
+                          configBlock:(FTPopOverMenuConfiguration * (^)(void))configBlock
                        doneBlock:(FTPopOverMenuDoneBlock)doneBlock
                     dismissBlock:(FTPopOverMenuDismissBlock)dismissBlock;
 

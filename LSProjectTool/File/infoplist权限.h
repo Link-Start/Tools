@@ -169,7 +169,7 @@ Pricacy - Tracking Usage Description 我们需要获取您的设备信息用以�
 //                  finishBlock();
                     break;
                case ATTrackingManagerAuthorizationStatusNotDetermined:
-                    NSLog(@"用户为做选择或未弹窗");
+                    NSLog(@"用户未做选择或未弹窗");
                     [self applyIDFAAuthority];//申请权限
                     break;
                default:

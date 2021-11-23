@@ -477,11 +477,11 @@ typedef NS_ENUM(NSUInteger, FTPopOverMenuArrowDirection) {
         title = ((FTPopOverMenuModel *)object).title;
         menuImage = ((FTPopOverMenuModel *)object).image;
         selected = ((FTPopOverMenuModel *)object).selected;
-    }else{
+    } else {
         title = [NSString stringWithFormat:@"%@", object];
     }
     
-    FTPopOverMenuCell *menuCell = [[FTPopOverMenuCell alloc]initWithStyle:UITableViewCellStyleDefault
+    FTPopOverMenuCell *menuCell = [[FTPopOverMenuCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                           reuseIdentifier:FTPopOverMenuTableViewCellIndentifier
                                                                  menuName:title
                                                                 menuImage:menuImage
@@ -489,7 +489,7 @@ typedef NS_ENUM(NSUInteger, FTPopOverMenuArrowDirection) {
                                                             configuration:self.config];
     if (indexPath.row == _menuStringArray.count-1) {
         menuCell.separatorInset = UIEdgeInsetsMake(0, self.bounds.size.width, 0, 0);
-    }else{
+    } else {
         menuCell.separatorInset = self.config.separatorInset;
     }
     return menuCell;
@@ -549,6 +549,18 @@ typedef NS_ENUM(NSUInteger, FTPopOverMenuArrowDirection) {
                        doneBlock:(FTPopOverMenuDoneBlock)doneBlock
                     dismissBlock:(FTPopOverMenuDismissBlock)dismissBlock {
     return [[self sharedInstance] showForSender:sender window:nil senderFrame:CGRectNull withMenu:menuArray imageNameArray:nil config:nil doneBlock:doneBlock dismissBlock:dismissBlock];
+}
+
++ (FTPopOverMenu *)showForSender:(UIView *)sender
+                   withMenuArray:(NSArray *)menuArray
+              configurationBlock:(FTPopOverMenuConfiguration *(^)(void))configurationBlock
+                       doneBlock:(FTPopOverMenuDoneBlock)doneBlock
+                    dismissBlock:(FTPopOverMenuDismissBlock)dismissBlock {
+    
+    FTPopOverMenuConfiguration *config = [FTPopOverMenuConfiguration defaultConfiguration];
+    config = configurationBlock();
+    
+    return [[self sharedInstance] showForSender:sender window:nil senderFrame:CGRectNull withMenu:menuArray imageNameArray:nil config:config doneBlock:doneBlock dismissBlock:dismissBlock];
 }
 
 + (FTPopOverMenu *)showForSender:(UIView *)sender
@@ -692,6 +704,20 @@ typedef NS_ENUM(NSUInteger, FTPopOverMenuArrowDirection) {
                           config:(FTPopOverMenuConfiguration *)config
                        doneBlock:(FTPopOverMenuDoneBlock)doneBlock
                     dismissBlock:(FTPopOverMenuDismissBlock)dismissBlock {
+    [self showForSender:sender window:nil senderFrame:CGRectNull withMenu:menuArray imageNameArray:nil config:config doneBlock:doneBlock dismissBlock:dismissBlock];
+    return self;
+}
+
+- (FTPopOverMenu *)showForSender:(UIView *)sender
+                        withMenu:(NSArray *)menuArray
+                          configBlock:(FTPopOverMenuConfiguration * (^)(void))configBlock
+                       doneBlock:(FTPopOverMenuDoneBlock)doneBlock
+                    dismissBlock:(FTPopOverMenuDismissBlock)dismissBlock {
+    
+//    FTPopOverMenuConfiguration *config = configBlock();
+    FTPopOverMenuConfiguration *config = [FTPopOverMenuConfiguration defaultConfiguration];
+    config = configBlock();
+    
     [self showForSender:sender window:nil senderFrame:CGRectNull withMenu:menuArray imageNameArray:nil config:config doneBlock:doneBlock dismissBlock:dismissBlock];
     return self;
 }

@@ -290,21 +290,25 @@
 //    [self.navigationController pushViewController:vc animated:YES];
     NSArray *temArr = @[@"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3",@"1", @"2", @"3",@"1", @"2", @"3"];
     FTPopOverMenu *menu = [[FTPopOverMenu alloc] init];
-    FTPopOverMenuConfiguration *config = [[FTPopOverMenuConfiguration alloc] init];
-    config.optionsListLimitHeight = 800;
-//    config.
-    
-    [menu showForSender:sender window:nil senderFrame:CGRectNull withMenu:temArr imageNameArray:nil config:config doneBlock:^(NSInteger selectedIndex) {
-        
-    } dismissBlock:^{
-        
-    }];
-
-//    FTPopOverMenu *menu = [FTPopOverMenu showForSender:sender withMenuArray:@[@"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3",@"1", @"2", @"3",@"1", @"2", @"3"] doneBlock:^(NSInteger selectedIndex) {
+//    FTPopOverMenuConfiguration *config = [[FTPopOverMenuConfiguration alloc] init];
+//    config.optionsListLimitHeight = 800;
+////    config.
+//
+//    [menu showForSender:sender window:nil senderFrame:CGRectNull withMenu:temArr imageNameArray:nil config:config doneBlock:^(NSInteger selectedIndex) {
 //
 //    } dismissBlock:^{
 //
 //    }];
+
+    [menu showForSender:sender withMenu:temArr configBlock:^FTPopOverMenuConfiguration *{
+        FTPopOverMenuConfiguration *config = [[FTPopOverMenuConfiguration alloc] init];
+        config.optionsListLimitHeight = 200;
+        return config;
+    } doneBlock:^(NSInteger selectedIndex) {
+        
+    } dismissBlock:^{
+        
+    }];
 }
 
 

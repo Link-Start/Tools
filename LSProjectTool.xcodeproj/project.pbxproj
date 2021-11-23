@@ -112,7 +112,7 @@
 		A77F5E7E265745D70002AD16 /* LSStringEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = A77F5E7D265745D70002AD16 /* LSStringEnum.m */; };
 		A77F5E94265795CD0002AD16 /* AppDelegate+UMConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = A77F5E93265795CD0002AD16 /* AppDelegate+UMConfiguration.m */; };
 		A77FEB23265257F50058CAB6 /* LSCommonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A77FEB22265257F50058CAB6 /* LSCommonTableViewCell.m */; };
-		A79650BC2638F33F0031932F /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A79650BB2638F33F0031932F /* AppTrackingTransparency.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		A79650BC2638F33F0031932F /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A79650BB2638F33F0031932F /* AppTrackingTransparency.framework */; };
 		A79B7F1A23C56CF2005F62DA /* LSWebImageMustRevalidateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A79B7F1823C56CF2005F62DA /* LSWebImageMustRevalidateManager.m */; };
 		A79B7F1B23C56CF2005F62DA /* LSWebImageMustRevalidateDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = A79B7F1923C56CF2005F62DA /* LSWebImageMustRevalidateDownloader.m */; };
 		A79D02472744D7860026D585 /* SettingTableViewBindActionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A79D02462744D7860026D585 /* SettingTableViewBindActionModel.m */; };
@@ -129,7 +129,6 @@
 		A7BA62E726BD1E5600D49930 /* SGWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BA62E526BD1E5600D49930 /* SGWebView.m */; };
 		A7BC079A268AB2BE004D08F6 /* UIView+AdaptScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BC0799268AB2BE004D08F6 /* UIView+AdaptScreen.m */; };
 		A7D14FFD265CA54E00C6D713 /* NSTimer+LSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D14FFC265CA54E00C6D713 /* NSTimer+LSExtension.m */; };
-		A7DB323D274C8FF3003EC5A2 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7DB323C274C8FF3003EC5A2 /* StoreKit.framework */; };
 		A7DB323F274C901A003EC5A2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7DB323E274C901A003EC5A2 /* WebKit.framework */; };
 		A7DE94F32653E1E300110026 /* NSTimer+BlockTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DE94F22653E1E300110026 /* NSTimer+BlockTimer.m */; };
 		A7DE94F92653E27500110026 /* ProxyObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DE94F82653E27500110026 /* ProxyObject.m */; };
@@ -646,27 +645,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7DB323F274C901A003EC5A2 /* WebKit.framework in Frameworks */,
-				A7DB323D274C8FF3003EC5A2 /* StoreKit.framework in Frameworks */,
-				486443912119CC6800C3B9BF /* UserNotifications.framework in Frameworks */,
-				A70CFF5926A6B642008F47AA /* CoreMotion.framework in Frameworks */,
-				A70CFF5726A6B60D008F47AA /* CoreText.framework in Frameworks */,
-				A70CFF5526A6B5FA008F47AA /* QuartzCore.framework in Frameworks */,
-				A70CFF5326A6B5DC008F47AA /* libc++.tbd in Frameworks */,
-				A79650BC2638F33F0031932F /* AppTrackingTransparency.framework in Frameworks */,
-				486443932119CC7100C3B9BF /* libresolv.tbd in Frameworks */,
 				4864438F2119CC5C00C3B9BF /* AdSupport.framework in Frameworks */,
-				AE24FCE21DAB41FB00740806 /* libz.tbd in Frameworks */,
-				4864438D2119CC4D00C3B9BF /* Security.framework in Frameworks */,
-				AE24FCE41DAB420500740806 /* UIKit.framework in Frameworks */,
-				4864438B2119CC4000C3B9BF /* Foundation.framework in Frameworks */,
-				AE24FCE01DAB41F300740806 /* CoreGraphics.framework in Frameworks */,
-				486443892119CC2400C3B9BF /* SystemConfiguration.framework in Frameworks */,
-				486443872119CC1C00C3B9BF /* CoreTelephony.framework in Frameworks */,
-				486443852119CC1300C3B9BF /* CoreFoundation.framework in Frameworks */,
+				A79650BC2638F33F0031932F /* AppTrackingTransparency.framework in Frameworks */,
 				486443832119CC0B00C3B9BF /* CFNetwork.framework in Frameworks */,
-				AE24FCDE1DAB41E100740806 /* CoreMedia.framework in Frameworks */,
 				AE24FCDC1DAB41D500740806 /* CoreData.framework in Frameworks */,
+				486443852119CC1300C3B9BF /* CoreFoundation.framework in Frameworks */,
+				AE24FCE01DAB41F300740806 /* CoreGraphics.framework in Frameworks */,
+				AE24FCDE1DAB41E100740806 /* CoreMedia.framework in Frameworks */,
+				A70CFF5926A6B642008F47AA /* CoreMotion.framework in Frameworks */,
+				486443872119CC1C00C3B9BF /* CoreTelephony.framework in Frameworks */,
+				A70CFF5726A6B60D008F47AA /* CoreText.framework in Frameworks */,
+				4864438B2119CC4000C3B9BF /* Foundation.framework in Frameworks */,
+				A70CFF5526A6B5FA008F47AA /* QuartzCore.framework in Frameworks */,
+				4864438D2119CC4D00C3B9BF /* Security.framework in Frameworks */,
+				486443892119CC2400C3B9BF /* SystemConfiguration.framework in Frameworks */,
+				AE24FCE41DAB420500740806 /* UIKit.framework in Frameworks */,
+				486443912119CC6800C3B9BF /* UserNotifications.framework in Frameworks */,
+				A7DB323F274C901A003EC5A2 /* WebKit.framework in Frameworks */,
+				A70CFF5326A6B5DC008F47AA /* libc++.tbd in Frameworks */,
+				486443932119CC7100C3B9BF /* libresolv.tbd in Frameworks */,
+				AE24FCE21DAB41FB00740806 /* libz.tbd in Frameworks */,
 				83124E4D88DC06B1792327A8 /* Pods_LSProjectTool.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
