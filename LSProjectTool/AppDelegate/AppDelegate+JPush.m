@@ -420,11 +420,19 @@
     NSString *tempStr3 =
     [[@"\"" stringByAppendingString:tempStr2] stringByAppendingString:@"\""];
     NSData *tempData = [tempStr3 dataUsingEncoding:NSUTF8StringEncoding];
-    NSString *str =
-    [NSPropertyListSerialization propertyListFromData:tempData
-                                     mutabilityOption:NSPropertyListImmutable
-                                               format:NULL
-                                     errorDescription:NULL];
+    NSString *str = @"";
+    
+//    if ([NSPropertyListSerialization respondsToSelector:@selector(propertyListFromData:mutabilityOption:format:errorDescription:)]) {
+//        str = [NSPropertyListSerialization propertyListFromData:tempData
+//                                               mutabilityOption:NSPropertyListImmutable
+//                                                         format:NULL
+//                                               errorDescription:NULL];
+//    } else {
+        str = [NSPropertyListSerialization propertyListWithData:tempData
+                                                        options:NSPropertyListImmutable
+                                                         format:NULL error:NULL];
+//    }
+        
     NSLog(@"%@", str);
     return str;
 }
@@ -463,7 +471,7 @@
 
 
 #pragma mark -JPUSHGeofenceDelegate
-//进入地理围栏区域
+// 进入地理围栏区域
 - (void)jpushGeofenceIdentifer:(NSString * _Nonnull)geofenceId didEnterRegion:(NSDictionary * _Nullable)userInfo error:(NSError * _Nullable)error{
     NSLog(@"进入地理围栏区域");
     if (error) {
@@ -477,7 +485,7 @@
         [self geofenceBackgroudTest:userInfo];
     }
 }
-//离开地理围栏区域
+// 离开地理围栏区域
 - (void)jpushGeofenceIdentifer:(NSString * _Nonnull)geofenceId didExitRegion:(NSDictionary * _Nullable)userInfo error:(NSError * _Nullable)error{
     NSLog(@"离开地理围栏区域");
     if (error) {
@@ -491,9 +499,11 @@
         [self geofenceBackgroudTest:userInfo];
     }
 }
+// 触发地理围栏
 - (void)jpushGeofenceRegion:(NSDictionary *)geofence error:(NSError *)error {
   NSLog(@"region:%@", geofence);
 }
+// 拉取地理围栏列表的回调
 - (void)jpushCallbackGeofenceReceived:(NSArray<NSDictionary *> *)geofenceList {
   NSLog(@"region list:%@", geofenceList);
 }

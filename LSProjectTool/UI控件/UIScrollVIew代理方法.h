@@ -116,7 +116,7 @@
 
 
 
-Tip:判断uiscrollview是向上滚动还是向下滚动
+//Tip:判断uiscrollview是向上滚动还是向下滚动
 
 // 25 可以是任意数字，可根据自己的需要来设定。
 int _lastPosition;    //A variable define in headfile
@@ -134,9 +134,9 @@ int _lastPosition;    //A variable define in headfile
     }
 }
 
-作者：Simple_Code
-链接：https://www.jianshu.com/p/7d4d5e7517d4
-来源：简书
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+//作者：Simple_Code
+//链接：https://www.jianshu.com/p/7d4d5e7517d4
+//来源：简书
+//著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
 #endif /* UIScrollVIew_____h */

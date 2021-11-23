@@ -64,8 +64,20 @@
     }
     //
     if (@available(iOS 11.0, *)){
+        //UIScrollViewContentInsetAdjustmentNever:contentInset 不会被调整
+        //UIScrollViewContentInsetAdjustmentAlways:contentInset 始终会被scrollView的safeAreaInsets来调整
         [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
+        
+        //iOS8引入Self-Sizing 之后，我们可以通过实现estimatedRowHeight相关的属性来展示动态的内容
+        //Self-Sizing在iOS11下是默认开启的
+        //iOS11下不想使用Self-Sizing的话，可以通过以下方式关闭
+        //关闭自调整尺寸
+        UITableView.appearance.estimatedRowHeight = 0;
+        UITableView.appearance.estimatedSectionFooterHeight = 0;
+        UITableView.appearance.estimatedSectionHeaderHeight = 0;
     }
+    
+    
     
     //关闭程序中的暗黑模式
 #if defined(__IPHONE_13_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0
@@ -74,9 +86,10 @@
     }
 #endif
     
-    //从iOS15开始,TableView增加sectionHeaderTopPadding属性,
-    //默认情况sectionHeaderTopPadding会有22个像素的高度,及默认情况,TableView section header增加22像素的高度
+
     if (@available(iOS 15.0, *)) {
+        //从iOS15开始,TableView增加sectionHeaderTopPadding属性,
+        //默认情况sectionHeaderTopPadding会有22个像素的高度,及默认情况,TableView section header增加22像素的高度
         UITableView.appearance.sectionHeaderTopPadding = 0;
     } else {
         // Fallback on earlier versions

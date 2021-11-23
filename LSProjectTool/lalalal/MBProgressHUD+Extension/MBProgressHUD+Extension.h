@@ -10,7 +10,13 @@
 //
 //
 
+#if __has_include(<MBProgressHUD/MBProgressHUD.h>)
+#import <MBProgressHUD/MBProgressHUD.h>
+#else
 #import "MBProgressHUD.h"
+#endif
+
+//#import "MBProgressHUD.h"
 
 @interface MBProgressHUD (Extension)
 

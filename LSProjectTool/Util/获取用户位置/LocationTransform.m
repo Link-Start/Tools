@@ -209,3 +209,23 @@ static bool isContains(CLLocationCoordinate2D point, CLLocationCoordinate2D p1, 
 
 @end
 
+
+/**
+ 国内涉及到的地图坐标系的转换: https://blog.csdn.net/wei_zhenwei/article/details/80284287
+ 一.相关的坐标系
+ 1）GPS以及iOS系统定位获得的坐标是地理坐标系WGS1984；
+ 2）Web地图一般用的坐标细是投影坐标系WGS 1984 Web Mercator；
+ 3）国内出于相关法律法规要求，对国内所有GPS设备及地图数据都进行了加密偏移处理，代号GCJ-02，这样GPS定位获得的坐标与地图上的位置刚好对应上；
+ 4）特殊的是百度地图在这基础上又进行一次偏移，通称Bd-09;
+ 所以以在处理系统定位坐标及相关地图SDK坐标时需要转换处理下，根据网络资源，目前有一些公开的转换算法。
+
+ 二.iOS地图开发
+ 1.坐标的转换逻辑
+ 1）<CoreLocation/CoreLocation.h>中提供的CLLocationManager类获取的坐标是WGS1984坐标，这种坐标显示在原生地图(国内iOS原生地图也是用的高德)、谷歌地图或高德地图需要进行WGS1984转GCJ-02计算，苹果地图及谷歌地图用的都是高德地图的数据，所以这三种情况坐标处理方法一样，即将WGS1984坐标转换成偏移后的GCJ-02才可以在地图上正确显示位置。
+
+ 2）在高德地图中获取的坐标是已经转换成GCJ-02的坐标，这时候的坐标无需转换可以直接显示到地图上的正确位置。
+
+ 注意点：若此时要对获取的坐标使用CLGeocoder类提供的方法- (void)reverseGeocodeLocation:(CLLocation *)location completionHandler:(CLGeocodeCompletionHandler)completionHandler转码成中文地理位置，就得先将GCJ-02的坐标转换成WGS1984坐标，然后再进行中文地址转码，因为CLGeocoder也是CoreLocation中的类，同样使用的是WGS1984坐标。
+
+ 3）同理，百度地图显示需要先将坐标转换为Bd-09坐标。
+ */

@@ -21,6 +21,7 @@
 #import "TZImagePickerController.h"
 //#import "Util/Tools/Function/Function.h"
 #import "AppDelegate.h"
+#import "FTPopOverMenu.h"
 
 //#import "LSProjectTool-Swift.h"
 
@@ -37,6 +38,8 @@
 @property (nonatomic, strong) LSGetCurrentLocation *getLocation;
 @property (nonatomic, strong) UIButton *btn;
 @property (nonatomic, strong) AMapLocationManager *locationManager;
+
+@property (nonatomic, assign) BOOL isFullScreen;
 
 @end
 
@@ -109,6 +112,32 @@
     NSString *usrename = @"ouv11";
     NSString *pwd = @"";
     NSString *resultStr = [self obfuscate:[NSString stringWithFormat:@"%@@@%@", usrename, pwd] withKey:@"s488v"];
+    
+
+#pragma mark - ----------------- 屏幕旋转
+    // 监测设备方向
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onDeviceOrientationChange)
+                                                 name:UIDeviceOrientationDidChangeNotification
+                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onStatusBarOrientationChange)
+                                                 name:UIApplicationDidChangeStatusBarOrientationNotification
+                                               object:nil];
+#pragma mark - ----------------- 屏幕旋转
+    
+    
+    
+    
+//    self.btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [self.btn setTitle:@"哈哈哈" forState:UIControlStateNormal];
+//    [self.btn setBackgroundColor:[UIColor yellowColor]];
+//    self.btn.frame = CGRectMake(100, 200, 100, 30);
+//    [self.btn addTarget:self action:@selector(btnAction) forControlEvents:UIControlEventTouchUpInside];
+    
+
     
 }
 
@@ -256,11 +285,26 @@
    
 }
 
-- (IBAction)btnAction:(id)sender {
+- (IBAction)btnAction:(UIButton *)sender {
 //    CeshiVC *vc = [[CeshiVC alloc] init];
 //    [self.navigationController pushViewController:vc animated:YES];
+    NSArray *temArr = @[@"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3",@"1", @"2", @"3",@"1", @"2", @"3"];
+    FTPopOverMenu *menu = [[FTPopOverMenu alloc] init];
+    FTPopOverMenuConfiguration *config = [[FTPopOverMenuConfiguration alloc] init];
+    config.optionsListLimitHeight = 800;
+//    config.
     
+    [menu showForSender:sender window:nil senderFrame:CGRectNull withMenu:temArr imageNameArray:nil config:config doneBlock:^(NSInteger selectedIndex) {
+        
+    } dismissBlock:^{
+        
+    }];
 
+//    FTPopOverMenu *menu = [FTPopOverMenu showForSender:sender withMenuArray:@[@"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3",@"1", @"2", @"3",@"1", @"2", @"3"] doneBlock:^(NSInteger selectedIndex) {
+//
+//    } dismissBlock:^{
+//
+//    }];
 }
 
 
@@ -343,6 +387,36 @@
         [invocation setArgument:&val atIndex:2];
         [invocation invoke];
     }
+}
+// 状态条变化通知（在前台播放才去处理）
+- (void)onStatusBarOrientationChange {
+    [self onDeviceOrientationChange];
+}
+
+/**
+ *  屏幕方向发生变化会调用这里
+ */
+- (void)onDeviceOrientationChange {
+    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
+    if (orientation == UIDeviceOrientationFaceUp) {
+        return;
+    }
+    BOOL shouldFullScreen = UIDeviceOrientationIsLandscape(orientation);
+    
+    if (self.isFullScreen == shouldFullScreen) {
+        return;
+    }
+    self.isFullScreen = shouldFullScreen;
+    
+    if (shouldFullScreen) { //横屏
+        NSLog(@"横屏");
+    } else { //竖屏
+        NSLog(@"竖屏");
+    }
+}
+- (void)dealloc {
+
+    [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
 }
 #pragma mark - ----------------- 屏幕旋转
 

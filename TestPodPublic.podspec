@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "TestPodPublic" #名称使用的时候pod search [name]
-  s.version      = "1.0.0"         #代码库的版本
+  s.version      = "0.1.0"         #代码库的版本
   s.summary      = "测试项目添加pod支持" #简介
 
   # This description is used to generate tags and improve search results.
@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
   测试项目添加pod支持__1
                    DESC
 
-  s.homepage     = "https://github.com/Link-Start/TestPodPublic" #主页
+  s.homepage     = "https://github.com/Link-Start/TestPodPublic" #github仓库主页
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -64,11 +64,11 @@ Pod::Spec.new do |s|
   #  the deployment target. You can optionally include the target after the platform.
   #
 
-  s.platform     = :ios
+  # s.platform     = :ios
   # s.platform     = :ios, "9.0" #代码最低支持版本
 
   #  When using multiple platforms
-  # s.ios.deployment_target = "5.0"
+  s.ios.deployment_target = "9.0"
   # s.osx.deployment_target = "10.7"
   # s.watchos.deployment_target = "2.0"
   # s.tvos.deployment_target = "9.0"
@@ -92,12 +92,15 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  #如果使用pod 将会导入哪些资源   想要pod导入的文件所在的地址
-  s.source_files  = "lalalal/MBProgressHUD+Extension", "LSProjectTool/lalalal/MBProgressHUD+Extension/**/*.{h,m}"
+  #如果使用pod 将会导入哪些资源   想要pod导入的文件所在的地址    类库文件代码路径
+  s.source_files  = "LSProjectTool/lalalal/MBProgressHUD+Extension/**/*", "LSProjectTool/lalalal/MBProgressHUD+Extension/**/*.{h,m}"
   s.exclude_files = "lalalal/MBProgressHUD+Extension/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
 
+  # s.resource_bundles = {
+  #   'TestHelloWorld' => ['TestHelloWorld/Assets/*.png']
+  # }
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -121,6 +124,7 @@ Pod::Spec.new do |s|
 
   # s.framework  = "SomeFramework"
   # s.frameworks = "SomeFramework", "AnotherFramework"
+  # s.frameworks = 'UIKit', 'MapKit'
 
   # s.library   = "iconv"
   # s.libraries = "iconv", "xml2"

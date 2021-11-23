@@ -740,6 +740,13 @@
         case -404:
             [MBProgressHUD qucickTip:@"服务器错误"];
             break;
+        case -405:
+            //接口调用的方式或者参数不对
+            [MBProgressHUD qucickTip:@"方法不被允许"];
+            break;
+        case -500:
+            [MBProgressHUD qucickTip:@"服务器错误,服务暂不可用"];
+            break;
         case -999:
             [MBProgressHUD qucickTip:@"取消请求"];
             break;

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+   IDETemplateMacros.plist
+   LSProjectTool
+
+   Created by 刘晓龙 on 2021/8/6.
+   Copyright (c) 2021 Link-Start. All rights reserved.
+-->
+<plist version="1.0">
+<dict>
+<key>FILEHEADER</key>
+<string>
+// ___FILENAME___
+// ___PACKAGENAME___
+//
+// reated by ___FULLUSERNAME___ on ___DATE___.
+// ___COPYRIGHT___
+//
+/**
+*　　┏┓　　　┏┓+ +
+*　┏┛┻━━━┛┻┓ + +
+*　┃　　　　　　　┃
+*　┃　　　━　　　┃ ++ + + +
+* ████━████ ┃+
+*　┃　　　　　　　┃ +
+*　┃　　　┻　　　┃
+*　┃　　　　　　　┃ + +
+*　┗━┓　　　┏━┛
+*　　　┃　　　┃
+*　　　┃　　　┃ + + + +
+*　　　┃　　　┃
+*　　　┃　　　┃ +  神兽保佑
+*　　　┃　　　┃    代码无bug
+*　　　┃　　　┃　　+
+*　　　┃　 　　┗━━━┓ + +
+*　　　┃ 　　　　　　　┣┓
+*　　　┃ 　　　　　　　┏┛
+*　　　┗┓┓┏━┳┓┏┛ + + + +
+*　　　　┃┫┫　┃┫┫
+*　　　　┗┻┛　┗┻┛+ + + +
+*/
+</string>
+</dict>
+</plist>

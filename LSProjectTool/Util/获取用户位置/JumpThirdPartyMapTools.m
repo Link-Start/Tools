@@ -29,11 +29,14 @@
 //    coor.longitude = [weakSelf.longitude doubleValue];
     
     NSMutableArray *maps = [NSMutableArray array];
-    //苹果地图
-    NSMutableDictionary *iosMapDic = [NSMutableDictionary dictionary];
-    iosMapDic[@"title"] = @"苹果地图";
-    iosMapDic[@"url"]   = [NSString stringWithFormat:@"%f-%f",endLocation.latitude,endLocation.longitude];
-    [maps addObject:iosMapDic];
+    //这个判断其实是不需要的(苹果地图系统有自带)
+    if ( [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"http://maps.apple.com/"]]) {
+        //苹果地图
+        NSMutableDictionary *iosMapDic = [NSMutableDictionary dictionary];
+        iosMapDic[@"title"] = @"苹果地图";
+        iosMapDic[@"url"]   = [NSString stringWithFormat:@"%f-%f",endLocation.latitude,endLocation.longitude];
+        [maps addObject:iosMapDic];
+    }
     
     /**
      1. origin={{我的位置}}  这个是不能被修改的 不然无法把出发位置设置为当前位置
@@ -135,6 +138,7 @@
         }
         
     } else {
+        NSLog(@"未检测到地图应用");
         //        [SVProgressHUD showErrorWithStatus:@"未检测到地图应用"];
     }
 }

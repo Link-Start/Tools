@@ -438,6 +438,28 @@ static inline NSString *cachePath() {
     }
 }
 
+/**
+ AFNetworking的请求AFHTTPSessionManager 有一个专门的属性来处理加密策略，AFSecurityPolicy
+ 创建一个AFSecurityPolicy
+ AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
+ 传入参数表示https验证模式，一共三种选项
+ typedef NS_ENUM(NSUInteger, AFSSLPinningMode) {
+     //不验证
+     AFSSLPinningModeNone,
+     //只验证公钥
+     AFSSLPinningModePublicKey,
+     //验证证书
+     AFSSLPinningModeCertificate,
+ };
+ // AFSecurityPolicy还有三个重要属性
+ //可以去匹配服务端证书验证的证书
+ @property (nonatomic, strong, nullable) NSSet <NSData *> *pinnedCertificates;
+ //是否支持非法的证书（例如自签名证书）
+ @property (nonatomic, assign) BOOL allowInvalidCertificates;
+ //是否去验证证书域名是否匹配
+ @property (nonatomic, assign) BOOL validatesDomainName;
+ */
+
 ///支持https
 + (AFSecurityPolicy *)customSecurityPolicy {
     
@@ -459,6 +481,14 @@ static inline NSString *cachePath() {
     securityPolicy.validatesDomainName = NO;
     NSSet *set = [[NSSet alloc] initWithObjects:certData, nil];
     securityPolicy.pinnedCertificates = set;
+    
+    
+    
+//    //设置非校验证书模式
+//    manager.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];//设置证书模式
+//    manager.securityPolicy.allowInvalidCertificates = YES;//客户端是否信任非法证书
+//    [manager.securityPolicy setValidatesDomainName:NO];//是否在证书域字段中验证域名
+    
     
     return securityPolicy;
 }
@@ -1326,6 +1356,13 @@ static inline NSString *cachePath() {
             break;
         case -404:
             [MBProgressHUD qucickTip:@"服务器错误"];
+            break;
+        case -405:
+            //接口调用的方式或者参数不对
+            [MBProgressHUD qucickTip:@"方法不被允许"];
+            break;
+        case -500:
+            [MBProgressHUD qucickTip:@"服务器错误,服务暂不可用"];
             break;
         case -999:
             [MBProgressHUD qucickTip:@"取消请求"];

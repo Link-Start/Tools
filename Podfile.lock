@@ -18,9 +18,9 @@ PODS:
   - AFNetworking/Serialization (4.0.1)
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
-  - AMapFoundation-NO-IDFA (1.6.8)
-  - AMapLocation-NO-IDFA (2.7.0):
-    - AMapFoundation-NO-IDFA (~> 1.6.8)
+  - AMapFoundation-NO-IDFA (1.6.9)
+  - AMapLocation-NO-IDFA (2.8.0):
+    - AMapFoundation-NO-IDFA (~> 1.6.9)
   - BMKLocationKit (2.0.0)
   - BMLongPressDragCellCollectionView (3.1.4)
   - BRPickerView (2.7.6):
@@ -35,6 +35,12 @@ PODS:
     - BRPickerView/Base
   - BRPickerView/StringPickerView (2.7.6):
     - BRPickerView/Base
+  - CalendarLib (2.0):
+    - OrderedDictionary (~> 1.2)
+    - OSCache (~> 1.2)
+  - CHTCollectionViewWaterfallLayout (0.9.8):
+    - CHTCollectionViewWaterfallLayout/ObjC (= 0.9.8)
+  - CHTCollectionViewWaterfallLayout/ObjC (0.9.8)
   - CYLTabBarController (1.29.2):
     - CYLTabBarController/Core (= 1.29.2)
   - CYLTabBarController/Core (1.29.2)
@@ -44,19 +50,19 @@ PODS:
   - FLAnimatedImage (1.0.16)
   - FMLayoutKit (1.2.0)
   - FMListPlaceholder (1.1.5)
+  - FSCalendar (2.8.2)
   - FSTextView (1.8)
-  - FTPopOverMenu (2.1.1)
   - FWPopupView (4.2.1):
     - SnapKit
   - FWPopupViewOC (3.1.0):
     - Masonry
   - GKCover (3.0.0)
-  - GKPageScrollView (1.6.8):
-    - GKPageScrollView/Objc (= 1.6.8)
-  - GKPageScrollView/Objc (1.6.8)
-  - GKPageSmoothView (1.6.8):
-    - GKPageSmoothView/Objc (= 1.6.8)
-  - GKPageSmoothView/Objc (1.6.8)
+  - GKPageScrollView (1.6.9):
+    - GKPageScrollView/Objc (= 1.6.9)
+  - GKPageScrollView/Objc (1.6.9)
+  - GKPageSmoothView (1.6.9):
+    - GKPageSmoothView/Objc (= 1.6.9)
+  - GKPageSmoothView/Objc (1.6.9)
   - GKPhotoBrowser (2.3.3):
     - GKPhotoBrowser/SD (= 2.3.3)
   - GKPhotoBrowser/Core (2.3.3)
@@ -68,21 +74,28 @@ PODS:
     - Yoga (~> 1.14.0)
   - HDListViewDiffer (0.2.0)
   - HMSegmentedControl (1.5.6)
+  - HSSetTableViewController (1.3.1):
+    - SDWebImage
   - HXPhotoPicker (3.2.8):
     - HXPhotoPicker/Default (= 3.2.8)
   - HXPhotoPicker/Default (3.2.8)
-  - IQKeyboardManager (6.5.6)
-  - JCore (3.0.0)
-  - JPush (4.4.0):
-    - JCore (>= 2.0.0)
+  - IMYAOPTableView (2.1.1)
+  - IQKeyboardManager (6.5.9)
+  - JCore (2.1.8)
+  - JPush (3.2.8):
+    - JCore (< 3.0.0, >= 2.0.0)
+  - JQCollectionViewWaterfallLayout (0.1.2)
   - JXCategoryView (1.5.9)
-  - KJEmitterView (7.1.4):
-    - KJEmitterView/Categories (= 7.1.4)
   - KJEmitterView/Categories (7.1.4):
     - KJEmitterView/Categories/Foundation (= 7.1.4)
     - KJEmitterView/Categories/UIKit (= 7.1.4)
   - KJEmitterView/Categories/Foundation (7.1.4)
   - KJEmitterView/Categories/UIKit (7.1.4)
+  - KJEmitterView/Control (7.1.4)
+  - KJEmitterView/Foundation (7.1.4)
+  - KJEmitterView/Kit (7.1.4):
+    - KJEmitterView/Categories
+  - KJEmitterView/Language (7.1.4)
   - KNPhotoBrowser (2.5.4):
     - SDWebImage
   - LBXPermission/Base (1.1.1)
@@ -105,7 +118,7 @@ PODS:
   - Masonry (1.1.0)
   - MBProgressHUD (1.2.0)
   - MGSwipeTableCell (1.6.11)
-  - MJExtension (3.3.0)
+  - MJExtension (3.4.0)
   - MJRefresh (3.7.2)
   - MyLayout (1.9.8)
   - ObjcAssociatedObjectHelpers (2.0.1):
@@ -114,9 +127,13 @@ PODS:
   - ObjcAssociatedObjectHelpers/Core (2.0.1)
   - "ObjcAssociatedObjectHelpers/NSObject+Dictionary (2.0.1)":
     - ObjcAssociatedObjectHelpers/Core
+  - OrderedDictionary (1.4)
+  - OSCache (1.2.1)
   - OttoKeyboardView (0.0.5)
   - Popover.OC (2.2)
   - PPGetAddressBook (0.2.8)
+  - PPTextField (0.0.2)
+  - PYSearch (0.9.1)
   - ReactiveObjC (3.1.1)
   - RKNotificationHub (2.0.5)
   - SDAutoLayout (2.2.1)
@@ -126,19 +143,22 @@ PODS:
     - SDWebImage/Core (= 5.12.1)
   - SDWebImage/Core (5.12.1)
   - SGQRCode (3.5.1)
+  - SJStaticTableView (1.2.0)
   - SnapKit (4.2.0)
+  - SSAlert (0.0.3)
+  - STPopup (1.8.7)
   - SwiftyStoreKit (0.16.1)
   - ThinkVerb (1.1.0)
   - TOSearchBar (1.0.3)
   - TTGTagCollectionView (2.1.0)
-  - TZImagePickerController (3.6.6)
+  - TZImagePickerController (3.6.7)
   - UICKeyChainStore (2.2.1)
   - UITableViewDynamicLayoutCacheHeight (5.1.8):
     - UITableViewDynamicLayoutCacheHeight/Category (= 5.1.8)
   - UITableViewDynamicLayoutCacheHeight/Category (5.1.8)
   - UMABTest (1.0.1):
     - UMCommon
-  - UMAPM (1.5.2)
+  - UMAPM (1.5.3)
   - UMCCommonLog (2.0.2)
   - UMCommon (7.3.5):
     - UMDevice
@@ -148,19 +168,19 @@ PODS:
     - UMCommon
   - UMPush (3.3.1):
     - UMCommon
-  - UMShare/Core (6.10.3):
+  - UMShare/Core (6.10.4):
     - UMCommon
-  - UMShare/Social/ReducedQQ (6.10.3):
-    - UMCommon
-    - UMShare/Core
-  - UMShare/Social/ReducedWeChat (6.10.3):
+  - UMShare/Social/ReducedQQ (6.10.4):
     - UMCommon
     - UMShare/Core
-  - UMShare/Social/WeChat (6.10.3):
+  - UMShare/Social/ReducedWeChat (6.10.4):
+    - UMCommon
+    - UMShare/Core
+  - UMShare/Social/WeChat (6.10.4):
     - UMCommon
     - UMShare/Core
     - UMShare/Social/ReducedWeChat
-  - UMShare/UI (6.10.3):
+  - UMShare/UI (6.10.4):
     - UMCommon
     - UMShare/Core
   - WMZBanner (1.2.0):
@@ -178,9 +198,9 @@ PODS:
   - YYKit (1.0.9):
     - YYKit/no-arc (= 1.0.9)
   - YYKit/no-arc (1.0.9)
-  - ZFPlayer (4.0.2):
-    - ZFPlayer/Core (= 4.0.2)
-  - ZFPlayer/Core (4.0.2)
+  - ZFPlayer (4.0.3):
+    - ZFPlayer/Core (= 4.0.3)
+  - ZFPlayer/Core (4.0.3)
   - ZLCellDataSource (0.4.1)
   - ZLCollectionViewFlowLayout (1.4.5)
   - ZLPhotoBrowser (3.2.0):
@@ -196,14 +216,16 @@ DEPENDENCIES:
   - BMKLocationKit
   - BMLongPressDragCellCollectionView
   - BRPickerView
+  - CalendarLib
+  - CHTCollectionViewWaterfallLayout
   - CYLTabBarController
   - dsBridge
   - DZNEmptyDataSet
   - FDFullscreenPopGesture
   - FMLayoutKit
   - FMListPlaceholder
+  - FSCalendar
   - FSTextView
-  - FTPopOverMenu
   - FWPopupView
   - FWPopupViewOC
   - GKCover
@@ -212,11 +234,18 @@ DEPENDENCIES:
   - GKPhotoBrowser
   - HDCollectionView
   - HMSegmentedControl
+  - HSSetTableViewController
   - HXPhotoPicker
+  - IMYAOPTableView
   - IQKeyboardManager
-  - JPush
+  - JCore (~> 2.1.4-noidfa)
+  - JPush (~> 3.2.6)
+  - JQCollectionViewWaterfallLayout
   - JXCategoryView
-  - KJEmitterView
+  - KJEmitterView/Control
+  - KJEmitterView/Foundation
+  - KJEmitterView/Kit
+  - KJEmitterView/Language
   - KNPhotoBrowser
   - LBXPermission/Base
   - LBXPermission/Calendar
@@ -239,12 +268,17 @@ DEPENDENCIES:
   - OttoKeyboardView
   - Popover.OC
   - PPGetAddressBook
+  - PPTextField
+  - PYSearch
   - ReactiveObjC
   - RKNotificationHub
   - SDAutoLayout
   - SDCycleScrollView
   - SDWebImage
   - SGQRCode
+  - SJStaticTableView
+  - SSAlert
+  - STPopup
   - SwiftyStoreKit
   - ThinkVerb
   - TOSearchBar
@@ -288,6 +322,8 @@ SPEC REPOS:
     - BMKLocationKit
     - BMLongPressDragCellCollectionView
     - BRPickerView
+    - CalendarLib
+    - CHTCollectionViewWaterfallLayout
     - CYLTabBarController
     - dsBridge
     - DZNEmptyDataSet
@@ -295,8 +331,8 @@ SPEC REPOS:
     - FLAnimatedImage
     - FMLayoutKit
     - FMListPlaceholder
+    - FSCalendar
     - FSTextView
-    - FTPopOverMenu
     - FWPopupView
     - FWPopupViewOC
     - GKCover
@@ -306,10 +342,13 @@ SPEC REPOS:
     - HDCollectionView
     - HDListViewDiffer
     - HMSegmentedControl
+    - HSSetTableViewController
     - HXPhotoPicker
+    - IMYAOPTableView
     - IQKeyboardManager
     - JCore
     - JPush
+    - JQCollectionViewWaterfallLayout
     - JXCategoryView
     - KJEmitterView
     - KNPhotoBrowser
@@ -327,16 +366,23 @@ SPEC REPOS:
     - MJRefresh
     - MyLayout
     - ObjcAssociatedObjectHelpers
+    - OrderedDictionary
+    - OSCache
     - OttoKeyboardView
     - Popover.OC
     - PPGetAddressBook
+    - PPTextField
+    - PYSearch
     - ReactiveObjC
     - RKNotificationHub
     - SDAutoLayout
     - SDCycleScrollView
     - SDWebImage
     - SGQRCode
+    - SJStaticTableView
     - SnapKit
+    - SSAlert
+    - STPopup
     - SwiftyStoreKit
     - ThinkVerb
     - TOSearchBar
@@ -373,11 +419,13 @@ SPEC CHECKSUMS:
   ACActionSheet: 41a448af27671f7819d03662a204cebdfa9b5a1c
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   "AFNetworking+RetryPolicy": d823c39e54178c311931615507a54e401eda5055
-  AMapFoundation-NO-IDFA: 444163c19aa10720c3ecd57b1f071ecdfe0edead
-  AMapLocation-NO-IDFA: cf78db86c5be566c5470d53495a976bb416468f9
+  AMapFoundation-NO-IDFA: cc2ec7a2828ef292358ad594b7ee0ae21a7f097b
+  AMapLocation-NO-IDFA: 9d7ec9b052405356600b59fe0a9a65261bacc54e
   BMKLocationKit: 097814ef672b1e57e86e6c1968d7892fb78002bf
   BMLongPressDragCellCollectionView: 99f224009d4137999b35b8a810a54edc8b34eb85
   BRPickerView: 2a1620caf218e37a3aca9626732719a419928b15
+  CalendarLib: 040a8a655376581d8dc7c3c63196ddcf5223f471
+  CHTCollectionViewWaterfallLayout: 5f241d2480ab4939aa0d1ad4981de9eef1fbe60d
   CYLTabBarController: db44b5901a28693a8a4279e4721b3aafdd36c178
   dsBridge: 48b62ee8a411ad601a88d6f6c8cf6cb634b206b7
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
@@ -385,21 +433,24 @@ SPEC CHECKSUMS:
   FLAnimatedImage: 8f3e854ebf9680b71f0b6e700939687fc4d82b4b
   FMLayoutKit: 5ae34e3f6d7cbc79c112651ca390b79ac2a73c5b
   FMListPlaceholder: 17b3cb63922850e18ca97dd092a233ea3a80bc5a
+  FSCalendar: e6a2eb9c571bf0719ed797ef807e08426753c241
   FSTextView: 9e2ca07bb6bb0fb7e77b49b2717adf81f3c620b5
-  FTPopOverMenu: 202d46aea0656307fd463fac0340c9c8837158d2
   FWPopupView: eea10388d25444fbe69b9222a5b5f317bb049395
   FWPopupViewOC: 116094e33ba1f492e60c262a095a9ae6bfd0c715
   GKCover: babf404248716c2760c5b4b24cd2a2792935a0ce
-  GKPageScrollView: 1eb85a664fb1c68a137b549e745fdca81537b955
-  GKPageSmoothView: cd97bcad5746a6b7f38aec9cc53459f18b405a9b
+  GKPageScrollView: 8c3e8e9c35f1f4117bf94e5556b351917cb3df14
+  GKPageSmoothView: 8eae3929aa6e6a80b1dc93f4b539f890e63b5df1
   GKPhotoBrowser: 2a79b890aada4c8e443d458f564f412bf7058dc3
   HDCollectionView: aa813a050565a1b7da04d2dffd9a303304690ecc
   HDListViewDiffer: f1ab8168cfbaddcb93fd57aebeb03a98e7612c46
   HMSegmentedControl: 34c1f54d822d8308e7b24f5d901ec674dfa31352
+  HSSetTableViewController: e1845101c7b16c70d9f72dee63bab6f74bca8660
   HXPhotoPicker: 8cd7a80a79ee2176aa8a76c31f084e0689b9a90f
-  IQKeyboardManager: 2a6e97afdafc7becf0cb17a9a8d795e3a980717f
-  JCore: bcd22f442118a5a98f9f50dd3bfee52aa38ad483
-  JPush: b7d00f2cc78766e76c8abb30a5741fe94d21e5bc
+  IMYAOPTableView: 9e5779267080be32e963c42d392ac36719569764
+  IQKeyboardManager: 241cc94ccabc9deb8f8bd7d12f00d73288d13ecc
+  JCore: a7f1dead960d77a97717c73ea8b0aa5b33706491
+  JPush: 8ce888d6dedfa417e90c8b6bc87405a16ce2e699
+  JQCollectionViewWaterfallLayout: e66b3027ad8a38b914c9bc35241eb4e4009f49bf
   JXCategoryView: 2ef9ecfd3735158d009ce02d1f29811aa822da65
   KJEmitterView: 3e8f41ebaffbced4f72332d31420e8677b0ef020
   KNPhotoBrowser: a6da54e9bdca3cc1f4ab36b0ff2be706ae5be868
@@ -413,36 +464,43 @@ SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   MGSwipeTableCell: b804e4e450dee439c42250be90bd50458bf67fce
-  MJExtension: 01704cca2b60a214c10761b6491eab74069d68a9
+  MJExtension: 6c15c7b93398447252c0defdb8d69d02d218a41e
   MJRefresh: 30997d30b347c8e9508a4db11e3a690da0c9b85a
   MyLayout: 6ca47dbf27648aa011496094cfe1162217e3c912
   ObjcAssociatedObjectHelpers: 686c291f292c26a49b9b1fa7d58130a8d35d59d2
+  OrderedDictionary: 138c8d2e358d3a0c9adda15c6c7db24e8e3b09e6
+  OSCache: 826996b68e8542a8a3d8af1ab0a0fc3070d8f357
   OttoKeyboardView: 70f3b3528e681e1e87d099639f1ac4f2296266e7
   Popover.OC: bfcce8307f77593e1e1d7cf58604077f74e114bc
   PPGetAddressBook: e4b6b0a87e852df5d5b90c44ecd9ded7f6f1ccf6
+  PPTextField: 34b5e67ba9892575134f6c351f11010503ea465c
+  PYSearch: 76dee18eea3309b60921a5d6a69390a63a5dda15
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
   RKNotificationHub: e926748820d719f21ff374657a47fceefa1796b4
   SDAutoLayout: 8bf6b3bbc8b01f775d4defbb4fda2ace805461be
   SDCycleScrollView: a0d74c3384caa72bdfc81470bdbc8c14b3e1fbcf
   SDWebImage: 4dc3e42d9ec0c1028b960a33ac6b637bb432207b
   SGQRCode: 65d6170ddcf3feecc6e2f3601aac78ad93e56589
+  SJStaticTableView: b04329ab8bf5823463468a06650bf00090008fed
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+  SSAlert: 91db5db62fa8bb26504c3c2368cf33f3798d2796
+  STPopup: a9045557bc48a0df51fbb7bf0544447c5fe84d34
   SwiftyStoreKit: 6b9c08810269f030586dac1fae8e75871a82e84a
   ThinkVerb: 942c70b3a7862c88ee858cc32de46ac87129ec32
   TOSearchBar: ee22b7ade729521b6ace523cea0ce97d23ab3cd9
   TTGTagCollectionView: a2a8668c659b39e7a6ffd6590475ea53a7ae95f7
-  TZImagePickerController: edf61b8e87f26e3e445aa50eb66254bd7f4859db
+  TZImagePickerController: 679ae9fa11e189a9a81291ae96f0a4463be8edc1
   UICKeyChainStore: ba3bff2c762b12db1e516f395c837dd25298b05e
   UITableViewDynamicLayoutCacheHeight: 4fabd95e944317cc7cd7ead3c56915d9527432dd
   UMABTest: e35a7be1f4401640f780d95b403d98794d65c6aa
-  UMAPM: 163962b8a6ec1a10a3034468da070b28ca510d5b
+  UMAPM: 16a3b4140855b5f61a6ac6b403b180311bd83275
   UMCCommonLog: bea707e50c85cef4b0eb47cc5c7226bb843245ca
   UMCommon: ab4d875ddefe1b06c60b577e4a58bc4d433ee067
   UMCSecurityPlugins: 0831a08f3988f3cea9f1d3a7626cd9bee4fef150
   UMDevice: c13bbb2e8ca6c67d1e23e03162553e3ec5a8b5b0
   UMLink: d5047e2716c2571d120d890af0f7a41d1b5e5224
   UMPush: 7ef2ff2fcca16e4d5c7897183a78a0d26f920bfe
-  UMShare: a3f9cb2d3ece67edd2c58331bd89bfffb289782b
+  UMShare: 84edf6d080f524d109271164ba2b07650f69d691
   WMZBanner: 42d02896dc7a67a4d7a2ebe1ef5b7a79f8d2c540
   WMZDialog: 836f79cc20e25f4d3b1209b726960c13a02ecc09
   WMZDropDownMenu: dd2c5bb18684f84d30405c9051bf7552dfec1f0a
@@ -453,12 +511,12 @@ SPEC CHECKSUMS:
   Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
   YTKNetwork: c16be90b06be003de9e9cd0d3b187cc8eaf35c04
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
-  ZFPlayer: ffa31fb470d0634eb9e65efeca0296b1d742a524
+  ZFPlayer: 624c92de06eb34df322c3b53b4c9ce760f528f7a
   ZLCellDataSource: 7b78bded737174201489a8de478b55a9f2155bf8
   ZLCollectionViewFlowLayout: 134dbc8ccd32e298e742ee8ab0bc949f1fd2396f
   ZLPhotoBrowser: 3748fdbeb2b28961c2495d15131dbf413082e1b9
   ZQSearch: de5e8f91ee215d891bb8345ecae9094d04fef73a
 
-PODFILE CHECKSUM: 83ec549524e7c6e10a202f0abfadb6b97ebd92f6
+PODFILE CHECKSUM: 6bdcf97f0af326b71e206b30f8bbd387de2b6433
 
 COCOAPODS: 1.11.2
