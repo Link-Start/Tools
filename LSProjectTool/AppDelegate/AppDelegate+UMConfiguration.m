@@ -54,3 +54,17 @@
 }
 
 @end
+
+/** iOS开发 友盟推送环境和打包类型 https://www.jianshu.com/p/138e551d6361
+
+ 打包时可以选择 appstore、adhoc、development三种模式
+ 上面三种模式决定了安装包的推送环境
+ 一般导出类型为adhoc、appstore包对应着生产环境的推送；
+          而development对应着开发环境的推送。
+ 
+这里切记 :
+    测试友盟推送：测试(开发)环境打包选择development
+              正式(生产)环境打包选择adhoc
+ 否则可能导致 deviceToken 错误( bad deviceToken) ,导致推送不成功
+
+*/

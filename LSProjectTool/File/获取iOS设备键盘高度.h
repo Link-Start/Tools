@@ -105,4 +105,73 @@
 
 
 
+
+
+
+
+
+/**********************************************************************************************************************************************************/
+
+
+
+//[IQKeyboardManager sharedManager].shouldResignOnTouchOutside = NO;
+
+//增加监听，当键盘出现或改变时收出消息
+[[NSNotificationCenter defaultCenter] addObserver:self
+                                         selector:@selector(keyboardWillShow:)
+                                             name:UIKeyboardWillShowNotification
+                                           object:nil];
+
+//增加监听，当键退出时收出消息
+[[NSNotificationCenter defaultCenter] addObserver:self
+                                         selector:@selector(keyboardWillHide:)
+                                             name:UIKeyboardWillHideNotification
+                                           object:nil];
+
+//self.originalFrame = self.containBgView.frame;
+}
+
+
+- (void)keyboardWillShow:(NSNotification *)notif {
+//获取键盘的高度
+
+// 弹出的键盘的 frame
+CGRect endFrame = [notif.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+//键盘弹起时的动画效果
+UIViewAnimationOptions option = [notif.userInfo[UIKeyboardAnimationCurveUserInfoKey] intValue];
+//键盘弹出的时长
+CGFloat duration = [notif.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+
+[UIView animateWithDuration:duration delay:0 options:option animations:^{
+    CGRect frame = self.containBgView.frame;
+//    frame.origin.y = (endFrame.origin.y-frame.size.height);//
+    if (endFrame.origin.y-self.containerBgView.height > 0) {
+        frame.origin.y = endFrame.origin.y-frame.size.height;
+    } else {
+        frame.origin.y = 0;
+    }
+    self.containBgView.frame = frame;
+} completion:^(BOOL finished) {
+    [self layoutIfNeeded];
+}];
+}
+
+//当键退出时调用
+- (void)keyboardWillHide:(NSNotification *)notif {
+
+UIViewAnimationOptions option = [notif.userInfo[UIKeyboardAnimationCurveUserInfoKey] intValue];
+NSTimeInterval duration = [notif.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+[UIView animateWithDuration:duration delay:0 options:option animations:^{
+    CGRect frame = self.containBgView.frame;
+//    frame.origin.y = self.originalFrame.origin.y;
+    frame.origin.y = (self.view.height-self.containBgView.height)/2
+    self.containBgView.frame = frame;
+    
+} completion:^(BOOL finished) {
+    [self layoutIfNeeded];
+}];
+}
+
+
+
 #endif /* __iOS_______h */

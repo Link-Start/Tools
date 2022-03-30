@@ -50,13 +50,24 @@
 //}
 ////设置返回每个item的属性必须实现）
 //- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-//[UIView animateWithDuration:0 animations:^{
-//    [UIView performWithoutAnimation:^{
-//        [self.collectionView reloadData];
-//    }];
-//} completion:^(BOOL finished) {
 //
-//}];
+////    // 去掉 刷新collection的时候的隐式动画
+////    [UIView animateWithDuration:0 animations:^{
+////        [UIView performWithoutAnimation:^{
+////            [self.collectionView reloadData];
+////        }];
+////    } completion:^(BOOL finished) {
+////
+////    }];
+////    // 去掉 刷新collection的 row 的时候的隐式动画
+////    [UIView animateWithDuration:0 animations:^{
+////        [collectionView performBatchUpdates:^{
+////            [self.cardCollectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:indexPath.item inSection:0]]];
+////        } completion:^(BOOL finished) {
+////        }];
+////    }];
+//
+//
 //}
 ////对头视图或者尾视图进行设置
 //- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {

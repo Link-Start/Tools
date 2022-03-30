@@ -23,8 +23,56 @@ typedef NS_ENUM(NSInteger,AlignType){
 //cell对齐方式
 @property (nonatomic,assign) IBInspectable AlignType cellType;
 
--(instancetype)initWthType : (AlignType)cellType;
+- (instancetype)initWthType:(AlignType)cellType;
 //全能初始化方法 其他方式初始化最终都会走到这里
--(instancetype)initWithType:(AlignType) cellType betweenOfCell:(CGFloat)betweenOfCell;
-
+- (instancetype)initWithType:(AlignType) cellType betweenOfCell:(CGFloat)betweenOfCell;
+- (instancetype)initWithType:(AlignType)cellType betweenOfCell:(CGFloat)betweenOfCell edgeInset:(UIEdgeInsets)edgeInset;
 @end
+
+
+/**
+ 
+ 
+ // 获取collectionView的真实高度 -->>
+ // 1.[self.collectionView reloadData];
+ // 2.[self getCollectionViewHeiht:YES];
+ /// 获取collectionView的高度    是否返回高度
+ - (void)getCollectionViewHeiht:(BOOL)returnUpdateHeight {
+     dispatch_async(dispatch_get_main_queue(), ^{
+         if (self.getCollectionViewHeightBlcok && returnUpdateHeight) {
+             CGFloat height = self.collectionView.collectionViewLayout.collectionViewContentSize.height;
+             self.getCollectionViewHeightBlcok(height);
+         }
+     });
+ }
+
+ 
+ - (CGSize)sizeThatFits:(CGSize)size{
+     //获取总共有多少行
+     int row = 0;
+     CGFloat collectionWidth = size.width;
+     CGFloat width = 0;
+     if (self.datas.count > 0) {
+         row = 1;
+     }
+     for (KKOfficialLabelsModel *cellModel in self.datas) {
+         CGFloat space = self.flowLayout.maximumInteritemSpacing;
+         KKOfficialLabelsCollecitonViewCell *cell = [KKOfficialLabelsCollecitonViewCell sharedInstance];
+         cell.bounds = self.collectionView.bounds;
+         cell.titleLabel.text = cellModel.label;
+         CGSize size = [cell.titleLabel sizeThatFits:CGSizeZero];
+         size.width += AdaptedWidth(30.f);
+         size.height = AdaptedWidth(30.f);
+         width += size.width + space;
+         if ((width - space) >= collectionWidth) {
+             row += 1;
+             width = size.width + space;
+         }
+     }
+     CGFloat space = self.flowLayout.minimumLineSpacing;
+     CGFloat height = row * AdaptedWidth(30.f) + (row - 1) * space;
+     size.height = height;
+     return size;
+ }
+ 
+*/

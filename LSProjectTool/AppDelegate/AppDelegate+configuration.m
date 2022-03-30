@@ -12,8 +12,24 @@
 // 如果需要使用idfa功能所需要引入的头文件（可选）
 #import <AdSupport/AdSupport.h>
 #import <AppTrackingTransparency/AppTrackingTransparency.h>
-
 #import <IQKeyboardManager/IQKeyboardManager.h>
+
+/**
+ 打包测试时：
+        Debug: 选择导出 development 包
+        Release:选择导出 ad-hoc 包
+ 
+ 打包时可以选择appstore、adhoc、development三种模式
+ 上面三种模式决定了安装包的推送环境
+ 一般导出类型为adhoc、appstore包对应着生产环境的推送；而development对应着开发环境的推送。
+
+ development:       针对内部测试使用，主要给开发者的设备(具体也为在开发者账户下添加可用设备的udid)。该app包是开发证书编译的
+ ad-hoc:                在账号添加的可使用设备上使用（具体为在开发者账户下添加可用设备的udid,最多100个），该app包是发布证书编译的
+            [Ad Hoc模式的包，和将来发布到App Store的包在各种功能测试上是一样的，
+            只要Ad Hoc模式下测试（推送，内购等）没有问题，发布到App  Store也是没有问题的。]
+ 
+ 
+ */
 
 
 @interface AppDelegate ()<XHLaunchAdDelegate>
@@ -52,7 +68,9 @@
     /******************  ******************/
     [self getLaunchImage];//添加图片开屏广告
     /******************  ******************/
-    [self obtainIDFA];//获取IDFA权限
+//    [self obtainIDFA];//获取IDFA权限
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(obtainIDFA) name:UIApplicationDidBecomeActiveNotification object:nil];
+
 }
 
 /// 各个版本的一些适配
@@ -106,6 +124,22 @@
     // 2.修改 IQKeyBoardManager 的 Toolbar颜色等
     [IQKeyboardManager sharedManager].shouldToolbarUsesTextFieldTintColor = NO;
     [IQKeyboardManager sharedManager].toolbarTintColor = [UIColor redColor];
+    
+    //3. 设置 IQKeyBoardManager 触摸UITextField/View外部时退出键盘，默认为否
+    [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = NO;
+//    [IQKeyboardManager sharedManager].resignFirstResponderGesture;
+    //初始化时 resignFirstResponderGesture.enabled = shouldResignOnTouchOutside;
+    //点击手势，在视图触摸时退出键盘。它是一个只读属性，仅当添加的手势与此手势发生冲突时，才用于添加/删除依赖项
+    //如果这个手势被打开,IQ会在View上添加一个手势,会使View上某一个设置[textField resignFirstResponder]方法的textField被强制设置为第一响应者,
+    //例:当[IQKeyboardManager sharedManager].shouldResignOnTouchOutside=YES时
+    // tableView的cell上有一个textField,并且使用了.rac_textSignal监听,当设置[textField resignFirstResponder]后,会在点击某一处非编辑区域时触发IQKeyboard的tapRecognized:方法,使View上的某一个textField成为第一响应者
+    
+    
+    
+    // 4. 自动添加工具栏功能。默认值是YES
+    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
+    
+    
 //
 //    // 3.是否显示响应者的水印和字号
 //    [IQKeyboardManager sharedManager].shouldShowToolbarPlaceholder = YES;
@@ -158,6 +192,7 @@
 }
 
 #pragma mark - 获取IDFA 权限
+/// 用户追踪授权弹窗
 //IDFA & IDFV
 //IDFA - Identifier For Advertising（广告标识符）
 //      同一手机获取该值都相同
@@ -165,6 +200,11 @@
 //      用户可手动重置这个值. 重置广告 id: 设置 -> 隐私 -> 广告 -> 重置广告 id (中国区的可能看不到这个, 模拟器可以看到)
 //IDFV - Identifier For Vendor（应用开发商标识符）
 ///// https://blog.csdn.net/yangxuan0261/article/details/113801704
+/// 没弹框是因为系统设置里面的[设置-隐私-跟踪-允许App请求跟踪]的状态开关状态没开?(https://www.jianshu.com/p/7a244e92278f)
+/// iOS 15.0 以上没弹窗  [着重推荐方法1通知监听，推荐2，不推荐3延迟调用]
+/// 1.监听UIApplicationDidBecomeActiveNotification通知，在对应回调内调用获取授权方法     ------>强烈推荐
+/// 2.写到 applicationDidBecomeActive 里面才会提示授权弹窗                                                  ------>推荐
+/// 3.延迟几秒后调用                                                                                                                     ------>不推荐
 
 //获取IDFA 权限
 - (void)obtainIDFA {

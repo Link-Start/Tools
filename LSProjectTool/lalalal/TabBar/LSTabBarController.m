@@ -7,6 +7,8 @@
 //
 
 #import "LSTabBarController.h"
+#import "ViewController.h"
+#import "LSNavigationController.h"
 
 @interface LSTabBarController ()
 {
@@ -73,14 +75,18 @@
  
     if (@available(iOS 15.0, *)) { //UITabBar新增新的属性名为scrollEdgeAppearance
         UITabBarAppearance *tabBarAppearance = [UITabBarAppearance new];
-        tabBarAppearance.backgroundColor = [UIColor whiteColor];
+        tabBarAppearance.backgroundColor = [UIColor whiteColor];// 背景色
         tabBarAppearance.shadowImage = [[UIImage alloc] init];//0xEEEEEE.image
         tabBarAppearance.shadowColor = [UIColor clearColor];
         //设置选中的tabBar 字体 attributes
         tabBarAppearance.stackedLayoutAppearance.selected.titleTextAttributes = @{
-            NSFontAttributeName:[UIFont systemFontOfSize:18],
-            NSForegroundColorAttributeName:[UIColor blackColor]
+//            NSFontAttributeName:[UIFont systemFontOfSize:14],//字体大小，不设置默认系统大小
+            NSForegroundColorAttributeName:[UIColor blackColor]//字体颜色
         };
+//        tabBarAppearance.stackedLayoutAppearance.normal.titleTextAttributes= @{
+//            NSFontAttributeName:[UIFont systemFontOfSize:18],
+//            NSForegroundColorAttributeName:[UIColor blackColor]
+//        };
 
         self.tabBar.scrollEdgeAppearance = tabBarAppearance;
         self.tabBar.standardAppearance = tabBarAppearance;
@@ -129,29 +135,31 @@
 
 ///添加子导航控制器
 - (void)addChildNav {
-    //vc
-//    HomepageViewController *homepageVC = [[HomepageViewController alloc] init];
-//    BookingLaundryViewController *bookingLaundryVC = [[BookingLaundryViewController alloc] init];
-//    PersonalCenterViewController *personalCenterVC = [[PersonalCenterViewController alloc] init];
-//    //将VC 加入导航控制器nav
-//    LSNavigationController *homepageNav = [[LSNavigationController alloc] initWithRootViewController:homepageVC];
-//    LSNavigationController *bookingLaundryNav = [[LSNavigationController alloc] initWithRootViewController:bookingLaundryVC];
-//    LSNavigationController *personalCenterNav = [[LSNavigationController alloc] initWithRootViewController:personalCenterVC];
+    
+    ViewController *homepageVC = [[ViewController alloc] init];
+    UIViewController *bookingLaundryVC = [[UIViewController alloc] init];
+    UIViewController *personalCenterVC = [[UIViewController alloc] init];
+    //将VC 加入导航控制器nav
+    LSNavigationController *homepageNav = [[LSNavigationController alloc] initWithRootViewController:homepageVC];
+    LSNavigationController *bookingLaundryNav = [[LSNavigationController alloc] initWithRootViewController:bookingLaundryVC];
+    LSNavigationController *personalCenterNav = [[LSNavigationController alloc] initWithRootViewController:personalCenterVC];
+
 //
-//    self.viewControllers = @[homepageNav, bookingLaundryNav, personalCenterNav];
-//
-//    //设置item
-//    homepageVC.title = @"首页";
-//    bookingLaundryVC.title = @"";
-//    personalCenterVC.title = @"我的";
-//
-//    //设置tabBarItem的图片 显示图片原本的颜色
-//    homepageNav.tabBarItem.image = [UIImage imageNamed:@"底部-首页默认"];
-//    homepageVC.tabBarItem.selectedImage = [[UIImage imageNamed:@"底部-首页点击"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-//    bookingLaundryNav.tabBarItem.image = [[UIImage imageNamed:@"预约取件"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-//    bookingLaundryNav.tabBarItem.selectedImage = [[UIImage imageNamed:@"预约取件"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-//    personalCenterNav.tabBarItem.image = [UIImage imageNamed:@"底部-我的默认"];
-//    personalCenterNav.tabBarItem.selectedImage = [[UIImage imageNamed:@"底部-我的点击"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    //设置item
+    homepageVC.title = @"首页";
+    bookingLaundryVC.title = @"预约";
+    personalCenterVC.title = @"我的";
+
+    //设置tabBarItem的图片 显示图片原本的颜色
+    homepageNav.tabBarItem.image = [UIImage imageNamed:@"2"];
+    homepageVC.tabBarItem.selectedImage = [[UIImage imageNamed:@"1"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    bookingLaundryNav.tabBarItem.image = [[UIImage imageNamed:@"2"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    bookingLaundryNav.tabBarItem.selectedImage = [[UIImage imageNamed:@"1"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    personalCenterNav.tabBarItem.image = [UIImage imageNamed:@"底部-我的默认"];
+    personalCenterNav.tabBarItem.selectedImage = [[UIImage imageNamed:@"底部-我的点击"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    self.viewControllers = @[homepageNav, bookingLaundryNav, personalCenterNav];
+
     
 //    [self setTabBarItem:homepageNav.tabBarItem
 //                  Title:@"首页"

@@ -157,30 +157,30 @@
 - (void)setNeedsNavigationBackgroundAlpha:(CGFloat)alpha
 {
     //导航栏透明层
-    UIView *barBackgroundView = [[self.navigationBar subviews] objectAtIndex:0];
-    UIView *shadowView = [barBackgroundView valueForKey:@"_shadowView"];
-    if (shadowView) {
-        shadowView.alpha = alpha;
-    }
-    
-    if (!self.navigationBar.isTranslucent) {
-        barBackgroundView.alpha = alpha;
-        return;
-    }
-    
-    if (IOS10) {
-        UIView *backgroundEffectView = [barBackgroundView valueForKey:@"_backgroundEffectView"];
-        if (backgroundEffectView != nil && [self.navigationBar backgroundImageForBarMetrics:UIBarMetricsDefault] == nil) {
-            backgroundEffectView.alpha = alpha;
-        }
-    }
-    else{
-        UIView *daptiveBackdrop = [barBackgroundView valueForKey:@"_adaptiveBackdrop"];
-        UIView *backdropEffectView = [daptiveBackdrop valueForKey:@"_backdropEffectView"];
-        if (daptiveBackdrop != nil && backdropEffectView != nil ) {
-            backdropEffectView.alpha = alpha;
-        }
-    }
+//    UIView *barBackgroundView = [[self.navigationBar subviews] objectAtIndex:0];
+//    UIView *shadowView = [barBackgroundView valueForKey:@"_shadowView"];
+//    if (shadowView) {
+//        shadowView.alpha = alpha;
+//    }
+//    
+//    if (!self.navigationBar.isTranslucent) {
+//        barBackgroundView.alpha = alpha;
+//        return;
+//    }
+//    
+//    if (IOS10) {
+//        UIView *backgroundEffectView = [barBackgroundView valueForKey:@"_backgroundEffectView"];
+//        if (backgroundEffectView != nil && [self.navigationBar backgroundImageForBarMetrics:UIBarMetricsDefault] == nil) {
+//            backgroundEffectView.alpha = alpha;
+//        }
+//    }
+//    else{
+//        UIView *daptiveBackdrop = [barBackgroundView valueForKey:@"_adaptiveBackdrop"];
+//        UIView *backdropEffectView = [daptiveBackdrop valueForKey:@"_backdropEffectView"];
+//        if (daptiveBackdrop != nil && backdropEffectView != nil ) {
+//            backdropEffectView.alpha = alpha;
+//        }
+//    }
 }
 
 

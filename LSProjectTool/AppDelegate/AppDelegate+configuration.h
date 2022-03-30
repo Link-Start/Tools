@@ -16,6 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 ///初始化 配置
 - (void)initBasicConfiguration;
 
+//获取IDFA 权限
+- (void)obtainIDFA;
+
 @end
 
 NS_ASSUME_NONNULL_END

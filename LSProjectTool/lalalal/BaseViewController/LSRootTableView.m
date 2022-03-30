@@ -372,6 +372,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+/**
+ 
+ UITableViewStylePlain            ：sectionHeadView和sectionFootView会默认悬浮
+ UITableViewStyleGrouped      :  
+ 
+ 这两个在 Self-Sizing 是不是有啥不同？ 要验证一下
+ 
+ 
+ */
+
 #pragma mark - 懒加载
 - (UITableView *)ls_tableView {
     if (!_ls_tableView) {

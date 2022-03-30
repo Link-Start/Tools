@@ -14,17 +14,18 @@
 @end
 
 @implementation JYEqualCellSpaceFlowLayout
--(instancetype)init{
+
+- (instancetype)init{
     return [self initWithType:AlignWithCenter betweenOfCell:5.0];
 }
--(void)setBetweenOfCell:(CGFloat)betweenOfCell{
+- (void)setBetweenOfCell:(CGFloat)betweenOfCell{
     _betweenOfCell = betweenOfCell;
     self.minimumInteritemSpacing = betweenOfCell;
 }
--(instancetype)initWthType:(AlignType)cellType{
+- (instancetype)initWthType:(AlignType)cellType{
     return [self initWithType:cellType betweenOfCell:5.0];
 }
--(instancetype)initWithType:(AlignType)cellType betweenOfCell:(CGFloat)betweenOfCell{
+- (instancetype)initWithType:(AlignType)cellType betweenOfCell:(CGFloat)betweenOfCell{
     self = [super init];
     if (self){
         self.scrollDirection = UICollectionViewScrollDirectionVertical;
@@ -36,17 +37,34 @@
     }
     return self;
 }
-- (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
+- (instancetype)initWithType:(AlignType)cellType betweenOfCell:(CGFloat)betweenOfCell edgeInset:(UIEdgeInsets)edgeInset {
+    self = [super init];
+    if (self){
+        self.scrollDirection = UICollectionViewScrollDirectionVertical;
+        self.minimumLineSpacing = 5;
+        self.minimumInteritemSpacing = betweenOfCell;
+        self.sectionInset = edgeInset;
+        _betweenOfCell = betweenOfCell;
+        _cellType = cellType;
+    }
+    return self;
+}
+- (nullable NSArray<__kindof UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {
+
+    //使用系统帮我们计算好的结果。
     NSArray * layoutAttributes_t = [super layoutAttributesForElementsInRect:rect];
     NSArray * layoutAttributes = [[NSArray alloc]initWithArray:layoutAttributes_t copyItems:YES];
     //用来临时存放一行的Cell数组
     NSMutableArray * layoutAttributesTemp = [[NSMutableArray alloc]init];
     for (NSUInteger index = 0; index < layoutAttributes.count ; index++) {
         
-        UICollectionViewLayoutAttributes *currentAttr = layoutAttributes[index]; // 当前cell的位置信息
-        UICollectionViewLayoutAttributes *previousAttr = index == 0 ? nil : layoutAttributes[index-1]; // 上一个cell 的位置信
+        // 当前cell的位置信息
+        UICollectionViewLayoutAttributes *currentAttr = layoutAttributes[index];
+        // 上一个cell的位置信
+        UICollectionViewLayoutAttributes *previousAttr = index == 0 ? nil : layoutAttributes[index-1];
+        // 下一个cell的位置信息
         UICollectionViewLayoutAttributes *nextAttr = index + 1 == layoutAttributes.count ?
-        nil : layoutAttributes[index+1];//下一个cell 位置信息
+        nil : layoutAttributes[index+1];
         
         //加入临时数组
         [layoutAttributesTemp addObject:currentAttr];
@@ -60,10 +78,10 @@
             if ([currentAttr.representedElementKind isEqualToString:UICollectionElementKindSectionHeader]) {
                 [layoutAttributesTemp removeAllObjects];
                 _sumCellWidth = 0.0;
-            }else if ([currentAttr.representedElementKind isEqualToString:UICollectionElementKindSectionFooter]){
+            } else if ([currentAttr.representedElementKind isEqualToString:UICollectionElementKindSectionFooter]){
                 [layoutAttributesTemp removeAllObjects];
                 _sumCellWidth = 0.0;
-            }else{
+            } else {
                 [self setCellFrameWith:layoutAttributesTemp];
             }
         }
@@ -74,6 +92,7 @@
     }
     return layoutAttributes;
 }
+
 //调整属于同一行的cell的位置frame
 -(void)setCellFrameWith:(NSMutableArray*)layoutAttributes{
     CGFloat nowWidth = 0.0;

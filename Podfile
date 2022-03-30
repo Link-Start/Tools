@@ -18,6 +18,7 @@ def all_Pods
 	pod 'MyLayout'													#MyLayout是一套iOS界面视图布局框架。
 	pod 'SDCycleScrollView'									#轮播图
 	pod 'WMZBanner'													#最好用的轻量级轮播图+卡片样式+自定义样式,链式编程语法(可实现各种样式的轮播图,大多需要的功能都有)
+	pod 'KJBannerView'											#轮播图(看demo)
 
 	pod 'SDWebImage'												#请求图片
 	pod 'MBProgressHUD'
@@ -30,8 +31,8 @@ def all_Pods
 	pod 'YTKNetwork'												#YTK 网络请求
 	pod 'XHLaunchAd'												#开屏广告
 	# pod 'AutoRotation'											#iOS 横竖屏切换解决方案https://www.jianshu.com/p/da1a03cc1f72
-	# pod 'DCURLRouter'												#通过自定义URL实现控制器之间的跳转
-	# pod 'FLAnimatedImage'									# gif播放
+	pod 'DCURLRouter'												#通过自定义URL实现控制器之间的跳转
+	pod 'FLAnimatedImage'									# gif播放
 
 	pod 'HMSegmentedControl'								#UISegmentedControl的高度可定制的下拉式更换件。
 	pod 'WMZDropDownMenu'										#筛选菜单,可悬浮,目前已实现闲鱼/美团/Boss直聘/京东/饿了么/淘宝/拼多多/赶集网/美图外卖等等的筛选菜单
@@ -48,6 +49,7 @@ def all_Pods
 	pod "TTGTagCollectionView"							#标签流显示控件，同时支持文字或自定义View(搜索历史、热门搜索)
 	pod 'WZLBadge'                        	#角标
 	pod 'RKNotificationHub'									#添加未读消息数显示提醒
+	# pod 'PPBadgeView'												#iOS自定义Badge组件, 支持UIView, UITabBarItem, UIBarButtonItem
 	pod 'SGQRCode'													#【iOS 原生二维码生成与扫描 -> 高仿微信】
 	pod 'UICKeyChainStore'									# UICKeyChainStore是iOS、watchOS、tvOS和macOS上钥匙串的简单包装。使使用钥匙串API像NSUserDefaults一样简单。
 	 
@@ -55,9 +57,10 @@ def all_Pods
 	# pod "XXShield"													#防止Crash
 	# pod 'LSSafeProtector'										#防止crash
 	pod 'PPGetAddressBook'									#一句代码极速获取按A~Z分组精准排序的通讯录联系人 OC版( 已处理姓名所有字符的排序问题 )
+	pod 'PPNumberButton'										#iOS中一款高度可定制性商品计数按钮(京东/淘宝/饿了么/美团外卖/百度外卖样式)
 	# pod 'SKCalendarView'										#一个高可控性的日历基础组件
 	pod 'FSCalendar'												#一个完全可定制的iOS日历库，与Objective-C和Swift兼容
-	pod "CalendarLib"
+	pod 'CalendarLib'
 	pod 'OttoKeyboardView'									#自定义键盘，支持数字、小数点、身份证、十六进制键盘、随机布局的安全数字键盘
 	pod 'PPTextField'												#UITextField各种限制，从此一个属性就能解决！比如：手机号（11位）、密码（只能数字和字母）、最大字符串（是否区分中英文）等等这样的限制,以及实时监测输入文字、结束编辑时回调等
 
@@ -69,7 +72,7 @@ def all_Pods
 
 	pod 'ZQSearch'													#Search，SearchBar, 仿《饿了么》搜索栏。自定义搜索结果界面。搜索主页、模糊匹配、结果界面之间的状态切换。支持搜索历史和热门设置
 	pod 'TOSearchBar'												#搜索框
-	pod "PYSearch"													#一个优雅的搜索控制器，取代了iOS（iPhone和iPad）版UISearchController
+	pod 'PYSearch'													#一个优雅的搜索控制器，取代了iOS（iPhone和iPad）版UISearchController
 	
 	# pod 'ZZFLEX', :git => 'https://github.com/tbl00c/ZZFLEX.git'#一个完善的iOS敏捷开发框架，基于UIKit实现，包含常用控件的链式API拓展、一个数据驱动的列表框架、一个事件处理队列。
 	# pod 'ZJKitTool'													#ZJKitTool 可以更加便捷高效的添加UIKit控件,使用链式编程的思想，结合使用Masonry，以及其他工具类的简单使用,底层的封装.
@@ -80,6 +83,7 @@ def all_Pods
 	# pod 'MangoFix'													#https://github.com/yanshuimu/MangoFixUtil
 	# pod 'MangoFixUtil'											#依赖MangoFix,封装补丁拉取、执行、设备激活、补丁激活完整流程,另外提供本地加密或未加密补丁执行、生成加密补丁等方法。
 
+	# pod 'AAChartKit', :git => 'https://github.com/AAChartModel/AAChartKit.git' #极其精美而又强大的跨平台数据可视化图表框架,支持柱状图、条形图、
 
 	#定位
 	pod 'AMapLocation-NO-IDFA'            		#高德地图定位SDK 没有广告IDFA
@@ -106,15 +110,37 @@ def noLonger_maintainLib # 不再维护的库
 end
 
 def jiqimao_tools_ios	#机器猫工具库
-	# pod 'KJEmitterView'											#UIKit模块安装
-	pod 'KJEmitterView/Kit'									#UIKit 相关扩展
-	pod 'KJEmitterView/Foundation'					#Foundation模块安装
-	pod 'KJEmitterView/Language' 						# 多语言模块
+	# ---------------------------------------------------------------------------------------
+	# https://github.com/yangKJ/KJEmitterView
+	# pod 'KJEmitterView'												#UIKit模块安装
+	# pod 'KJEmitterView/Kit'										#UIKit 相关扩展
+	# pod 'KJEmitterView/Foundation'						#Foundation模块安装
+	pod 'KJEmitterView/Language' 							# 多语言模块
 	# pod 'OpenCV'							
 	# pod 'KJEmitterView/Opencv'   						# 图片处理   Opencv图片模块该模块需要引入OpenCV库
-	# pod 'KJEmitterView/LeetCode'  					# LeetCode算法模块
-	# pod 'KJEmitterView/Classes'  						# 粒子效果模块
-	pod 'KJEmitterView/Control'							# 自定义控件模块
+	pod 'KJEmitterView/LeetCode'  					# LeetCode算法模块
+	pod 'KJEmitterView/Classes'  						# 粒子效果模块
+	pod 'ChainThen'														#UIKit快捷链式创建
+	# pod 'KJExceptionDemo'										#Crash防护
+	# 说是不再维护 分离为新的库 KJCategories
+	# ---------------------------------------------------------------------------------------
+
+
+	pod 'KJCategories'												#该模块主要涵盖常用核心分类(1.0.0 中文) , '1.0.0'	
+	# pod 'KJCategories/CustomControl'							# 自定义控件模块
+
+
+	pod 'KJNetworkPlugin'											#一款纯OC版 批量 和 链式 插件版网络请求库
+
+	#KJPlayerDemo[视频支持格式：mp4、m3u8、wav、avi; 音频支持格式：midi、mp3]
+	pod 'KJPlayer/TryTime' # vip尝试观看功能
+	pod 'KJPlayer/SkipTime' # vip跳过片头片尾功能
+	pod 'KJPlayer/RecordTime' # vip自动记忆播放功能[该功能大于跳过片头功能,简单讲就是该功能实现之后下次会直接从上次播放位置开始继续观看]
+end
+
+def tencent_QMUI_iOS_tool #QMUIKit工具(使用:https://qmuiteam.com/ios/get-started)
+	#https://qmuiteam.com/ios/documents				功能列表
+	pod 'QMUIKit'															#QMUI iOS——致力于提高项目 UI 开发效率的解决方案
 end
 
 def table_iOS_OC #tableView 的封装
@@ -127,8 +153,9 @@ def table_iOS_OC #tableView 的封装
 	#RWTableView 														#参考mvvm tableView封装
 	#IGListKitDemoOC
 	pod 'IMYAOPTableView'										#无业务入侵,无逻辑入侵,外部察觉不到的UITableView/UICollectionView AOP框架,(具体可查看demo)
-	pod 'MGSwipeTableCell'									#一个易于使用的UITableViewCell子类，允许显示具有各种过渡的可滑动按钮。
+	pod 'MGSwipeTableCell'									#一个易于使用的UITableViewCell子类,允许显示具有各种过渡的可滑动按钮。
 
+	pod 'YBHandyList'												#让 UITableView/UICollectionView 更加简单优雅,轻易实现列表动态化、模块化、MVVM 架构
 
 	#LXB-HorizontalScroll										#横向滚动table列表
 
@@ -164,11 +191,11 @@ def alertView_ios #弹窗
 	pod 'SSAlert'														#自带常用自定义弹窗，类型系统的UIAlertView,UIActionSheet。支持自定义动画。
 	pod 'FWPopupViewOC'											#信手拈来的OC弹窗库：1、继承 FWPopupBaseView 即可轻松实现各种位置、动画类型的弹窗；2、新功能引导弹窗
 	pod 'FWPopupView'												#swift版
-	pod 'STPopup'
+	pod 'STPopup'														#STPopup为iPhone和iPad提供STPopupController，它的工作原理与弹出式UINavigationController相同。它用Objective-C编写，并与Swift兼容。
 
 	pod 'Popover.OC'                      	#一款优雅好用的类似QQ和微信消息页面的右上角微型菜单弹窗, 最低支持iOS6
 	# pod 'FTPopOverMenu'											#类似QQ和微信消息页面的右上角微型菜单弹窗
-	pod 'LMJDropdownMenu'										#一个简单好用的下拉菜单控件,类似QQ和微信消息页面的右上角微型菜单弹窗
+	pod 'LMJDropdownMenu'										#一个简单好用的下拉菜单控件,类似QQ和微信消息页面的右上角微型菜单弹窗,<<<顶部会多一个按钮(btn)，莫名其妙，奇奇怪怪的感觉>>>
 	pod 'GKCover'														#一行代码显示遮罩视图，让你的弹窗更easy!
 end
 
@@ -196,6 +223,17 @@ def zf_player_ios #视频播放器 https://github.com/renzifeng/ZFPlayer
 	# pod 'ZFPlayer/ControlView', '~> 4.0'		# 使用默认控件View
 	# pod 'ZFPlayer/AVPlayer', '~> 4.0'				# 使用AVPlayer只需将以下行添加到您的Podfile中：
 	# pod 'ZFPlayer/ijkplayer', '~> 4.0'			# 使用ijkplayer只需将以下行添加到您的Podfile中
+end
+def sj_videoPlayer #短视频播放器 可接入 ijkplayer aliplayer alivodplayer plplayer
+	# Player with default control layer.
+	pod 'SJVideoPlayer'
+	# The base player, without the control layer, can be used if you need a custom control layer.
+	pod 'SJBaseVideoPlayer'
+
+	# # 如果网络不行安装不了, 可改成以下方式进行安装
+	# pod 'SJBaseVideoPlayer', :git => 'https://gitee.com/changsanjiang/SJBaseVideoPlayer.git'
+	# pod 'SJVideoPlayer', :git => 'https://gitee.com/changsanjiang/SJVideoPlayer.git'
+	# $ pod update --no-repo-update   (不要用 pod install 了, 用这个命令安装)
 end
 
 def um_Pods    #### def 方法名第一个字母不能是大写字母
@@ -294,12 +332,16 @@ target 'LSProjectTool' do 								# 项目工程名
     all_Pods
     um_Pods 															# 友盟
     jiqimao_tools_ios											# 工具库
+    tencent_QMUI_iOS_tool									# 工具
     image_photo_ios												# 照片选择、图片浏览
     permission_ios												# iOS权限判断
     alertView_ios													# 弹窗
     zf_player_ios													# 支持自定义任何播放器SDK和控制层
     table_iOS_OC													# tableView封装
     collection_iOS_OC											# collectionView布局
+
+
+
     # zhibo_anmiation_mp4_ios								# 直播间送礼物动画 .mp4格式
     noLonger_maintainLib									# 不再维护的库
 

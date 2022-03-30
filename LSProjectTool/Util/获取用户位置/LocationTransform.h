@@ -4,7 +4,7 @@
 //
 //  Created by macbook v5 on 2018/8/30.
 //  Copyright © 2018年 Naive. All rights reserved.
-//
+//  坐标 转换
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
@@ -20,7 +20,7 @@
  坐标系： WGS-84世界标准坐标、GCJ-02中国国测局(火星坐标)、BD-09百度坐标系
  WGS-84：是国际标准，GPS坐标（Google Earth使用、或者GPS模块）
  GCJ-02：中国坐标偏移标准，Google Map、高德、腾讯使用
- BD-09 ：百度坐标偏移标准，Baidu Map使用
+ BD-09 ：百度坐标偏移标准，Baidu Map使用 (BMK09LL、BMK09MC)
  */
 
 #pragma mark - 从GPS坐标转化到高德坐标

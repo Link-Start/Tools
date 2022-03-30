@@ -206,6 +206,7 @@
 - (void)ls_backSeveralSteps:(NSInteger)steps {
     NSInteger subNum = self.navigationController.viewControllers.count;
     if (steps >= subNum) {//如果后退太多，返回根试图控制器
+        NSLog(@"确定可以pop掉那么多控制器?");
         [self.navigationController popToRootViewControllerAnimated:YES];
     } else {
         UIViewController *VC = self.navigationController.viewControllers[subNum - steps - 1];
@@ -238,6 +239,22 @@
     }
     [bottomVC dismissViewControllerAnimated:YES completion:^{
     }];
+}
+/// dismiss 指定 层数 控制器
+- (void)dismissViewControllerWithTimes:(NSUInteger)times animated: (BOOL)flag completion: (void (^ __nullable)(void))completion {
+    UIViewController *rootVC = [UIApplication sharedApplication].delegate.window.rootViewController;
+    
+    if (rootVC) {
+        while (times > 0) {
+            rootVC = rootVC.presentingViewController;
+            times -= 1;
+        }
+        [rootVC dismissViewControllerAnimated:YES completion:completion];
+    }
+    
+    if (!rootVC.presentedViewController) {
+        NSLog(@"确定能dismiss掉这么多控制器?");
+    }
 }
 
 /// 从targetVc 所在的导航控制器Nav中 移除某个vc

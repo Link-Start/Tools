@@ -59,26 +59,29 @@
 /// 在iOS15中，UINavigationBar默认是透明的，有滑动时会逐渐变为模糊效果，
 /// 可以通过改变UINavigationBar.scrollEdgeAppearance属性直接变为模糊效果、配置相关属性-背景、字体等
 - (void)adaptationiOS15 {
-    if (@available(iOS 15.0, *)) {
+    if (@available(iOS 13.0, *)) {
 //        /**********************/
 //        UINavigationBarAppearance *navBarAppearance = [[UINavigationBarAppearance alloc] init];
 //        //背景色
 //        navBarAppearance.backgroundColor = [UIColor whiteColor];
-//        //去掉半透明效果
+//        //去掉半透明效果,
 //        navBarAppearance.backgroundEffect = nil;
 //        //  去除导航栏阴影（如果不设置clear，导航栏底下会有一条阴影线）
 //        navBarAppearance.shadowColor = [UIColor clearColor];
-//        //字体颜色
+//        //字体颜色、尺寸等
 //        navBarAppearance.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
-//        self.navigationController.navigationBar.scrollEdgeAppearance = navBarAppearance;
+//        // 带scroll滑动的页面
+//        self.navigationController.navigationBar.scrollEdgeAppearance = appearance;
+//        // 常规页面
+//        self.navigationController.navigationBar.standardAppearance = appearance;
 //        /**********************/
         
         /**********************/
         UINavigationBarAppearance *appearance = [[UINavigationBarAppearance alloc] init];
         [appearance configureWithOpaqueBackground];//重置背景和阴影颜色
         appearance.titleTextAttributes = @{
-            NSFontAttributeName:[UIFont systemFontOfSize:18],
-            NSForegroundColorAttributeName:[UIColor whiteColor]
+            NSFontAttributeName:[UIFont systemFontOfSize:18],//字体大小
+            NSForegroundColorAttributeName:[UIColor whiteColor]//字体颜色
         };
         appearance.backgroundColor = [UIColor whiteColor];//设置导航栏背景色
         appearance.shadowImage = [self barSpeLineWithColor:[UIColor clearColor]]; //设置导航栏下边界分割线透明
@@ -86,6 +89,14 @@
         self.navigationBar.standardAppearance = appearance;//常规页面
         
         /**********************/
+    }
+    else {
+        //中间标题 字体设置为黑色 (查看图层: nav 默认的中间标题 字号17，黑色,粗体)
+        NSDictionary *dic = @{
+            NSFontAttributeName:[UIFont boldSystemFontOfSize:17],
+            NSForegroundColorAttributeName:[UIColor blackColor]
+        };
+        self.navigationBar.titleTextAttributes = dic;
     }
 }
 
@@ -135,6 +146,20 @@
      self.navigationController.navigationBar.translucent = YES;
      //navigation控件颜色
      self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+ 
+ /////////////////////////////////--------------------->/////////////////////////////////
+ 之前有人遇到导航栏隐藏的返回按钮失效问题，备注里面也已经解决，并做出说明
+ [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(-200, 0) forBarMetrics:UIBarMetricsDefault];
+     // iOS 15适配
+     if (@available(iOS 13.0, *)) {
+         UINavigationBarAppearance *appearance = [[UINavigationBarAppearance alloc] init];
+         [appearance setBackgroundColor:[UIColor whiteColor]];
+         // UINavigationBarAppearance 会覆盖原有的导航栏设置，这里需要重新设置返回按钮隐藏，不隐藏可注释或删掉
+         appearance.backButtonAppearance.normal.titlePositionAdjustment = UIOffsetMake(-200, 0);
+
+         [[UINavigationBar appearance] setScrollEdgeAppearance: appearance];
+         [[UINavigationBar appearance] setStandardAppearance:appearance];
+     }
  **/
 
 
@@ -145,9 +170,17 @@
     // 设置navigationBar的背景颜色，根据需要自己设置
     //    self.navigationBar.barTintColor = [UIColor clearColor];//导航栏背景
     //设置左右字体的颜色
-    self.navigationBar.tintColor = [UIColor whiteColor];//着色，让返回男图片渲染为白色
+    self.navigationBar.tintColor = [UIColor whiteColor];//着色，让返回栏图片渲染为白色
     //中间标题 字体设置为白色
-    NSDictionary *dic = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
+    NSDictionary *dic = @{
+        NSForegroundColorAttributeName:[UIColor whiteColor]
+    };
+    //中间标题 字体设置
+    // 查看图层: nav 默认的中间标题 字号17，黑色,粗体
+//    NSDictionary *dic = @{
+//        NSFontAttributeName:[UIFont boldSystemFontOfSize:17],
+//        NSForegroundColorAttributeName:[UIColor blackColor]
+//    };
     self.navigationBar.titleTextAttributes = dic;
     
     //打开毛玻璃效果
@@ -244,8 +277,8 @@
     }
     
     if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
-        if (self.childViewControllers.count == 1) {
-            // 表示用户在根控制器界面，就不需要触发滑动手势，
+        if (self.childViewControllers.count <= 1) {
+            // ==1表示用户在根控制器界面，就不需要触发滑动手势，
             return NO;
         }
         

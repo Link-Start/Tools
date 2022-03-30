@@ -31,7 +31,7 @@
  */
 @interface NSObject (AssociatedDictionary)
 /**
- *  Lazily instantiated mutable dictionary
+ *  Lazily instantiated mutable dictionary 延迟实例化可变字典
  */
 @property (readonly) NSMutableDictionary *ascObj_dictionary;
 @end

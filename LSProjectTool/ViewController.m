@@ -28,7 +28,7 @@
 
 @interface ViewController ()<UITextFieldDelegate, AMapLocationManagerDelegate>
 
-@property (weak, nonatomic)  LSTextView *inputView;
+@property (nonatomic, strong)  LSTextView *inputView;
 //@property (weak, nonatomic) IBOutlet NSLayoutConstraint *H;
 
 @property (weak, nonatomic)  UITextField *textField;
@@ -80,8 +80,10 @@
 //        NSLog(@"%@",[NSString stringWithFormat:@"%@%@%@%@", placemark.administrativeArea, placemark.locality, placemark.subLocality,placemark.name]);
 //    };
 //
-    
-//    self.inputView.ls_placeholder(@"123456789").ls_placeholderColor([UIColor redColor]).ls_maxNumberOfLines(3);//
+    self.inputView = [LSTextView textView];
+    self.inputView.frame = CGRectMake(100, 200, 200, 30);
+    self.inputView.ls_placeholder(@"123456789").ls_placeholderColor([UIColor redColor]).ls_maxNumberOfLines(3);//
+    [self.view addSubview:self.inputView];
 //     self.f = [[FengChe alloc] initWithFrame:CGRectMake(20, 100, 200, 200)];
 //    UILabel *l = [[UILabel alloc] init];
 //    l = ({
@@ -113,6 +115,7 @@
     NSString *pwd = @"";
     NSString *resultStr = [self obfuscate:[NSString stringWithFormat:@"%@@@%@", usrename, pwd] withKey:@"s488v"];
     
+    
 
 #pragma mark - ----------------- 屏幕旋转
     // 监测设备方向
@@ -131,12 +134,12 @@
     
     
     
-//    self.btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [self.btn setTitle:@"哈哈哈" forState:UIControlStateNormal];
-//    [self.btn setBackgroundColor:[UIColor yellowColor]];
-//    self.btn.frame = CGRectMake(100, 200, 100, 30);
+    self.btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.btn setTitle:@"哈哈哈" forState:UIControlStateNormal];
+    [self.btn setBackgroundColor:[UIColor yellowColor]];
+    self.btn.frame = CGRectMake(100, 400, 100, 30);
 //    [self.btn addTarget:self action:@selector(btnAction) forControlEvents:UIControlEventTouchUpInside];
-    
+    [self.view addSubview:self.btn];
 
     
 }

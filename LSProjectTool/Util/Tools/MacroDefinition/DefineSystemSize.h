@@ -80,10 +80,19 @@ iPhoneXR           6.1英       896*414        @2x       828x1792
 //#define kLS_relative_height(height)  ((height)*(kLS_ScreenHeight/667.0f))
 
 // 不同屏幕尺寸适配 以iphone6 4.7寸为依据  ceilf:向上取整  floorf:向下取整
+// 保留两位小数:
+// ceilf(99.7983) = 100.00   ceilf(99.2983) = 100.00
+// floorf(99.7983) = 99.00   floorf(99.2983) = 99.00
 #define kLS_relative_Width_Ratio   (kLS_ScreenWidth / 375.0f)
 #define kLS_relative_Height_Ratio  (kLS_ScreenHeight / 667.0f)
 #define kLS_relative_Width(x)      (ceilf((x) * kLS_relative_Width_Ratio))
 #define kLS_relative_Height(y)     (ceilf((y) * kLS_relative_Height_Ratio))
+// float a=0.0;
+// 7.63的小数部分:modff(7.63,&a) = 0.63
+//       整数部分: a = 7.00
+
+
+//iPad不同屏幕尺寸适配 : 以分辨率比例为768*1024的iPad 为依据
 
 //向上取整
 #define kLS_relative_Width_ceilf(x)      (ceilf((x) * kLS_relative_Width_Ratio))

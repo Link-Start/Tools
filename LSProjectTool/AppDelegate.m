@@ -18,7 +18,7 @@
 #import "ViewController.h"
 #import "LSNavigationController.h"
 #import "LSConstAppKey.h"
-
+#import "LSTabBarController.h"
 
 @interface AppDelegate ()
 
@@ -32,12 +32,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-//    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-//    self.window.backgroundColor = [UIColor whiteColor];
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.backgroundColor = [UIColor whiteColor];
 //    ViewController *vc = [[ViewController alloc] init];
 //    LSNavigationController *nav = [[LSNavigationController alloc] initWithRootViewController:vc];
-//    self.window.rootViewController = nav;
-//    [self.window makeKeyAndVisible];
+    LSTabBarController *tabBarController = [[LSTabBarController alloc] init];
+    self.window.rootViewController = tabBarController;
+    [self.window makeKeyAndVisible];
     
     /****************** 基本设置 ******************/
     [self initBasicConfiguration];//配置
@@ -66,6 +67,9 @@
 ///当应用程序入活动状态执行
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    /******************  ******************/
+//    [self obtainIDFA];//获取IDFA权限
 }
 
 ///当程序被推送到后台的时候调用。所以要设置后台继续运行，则在这个函数里面设置即可
@@ -79,7 +83,7 @@
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     [application setApplicationIconBadgeNumber:0];
 //    if (@available(iOS 10.0, *)) {
-//        [[UNUserNotificationCenter currentNotificationCenter] removeAllPendingNotificationRequests];
+//        [UNUserNotificationCenter removeAllPendingNotificationRequests];
 //    } else {
         [application cancelAllLocalNotifications];
 //    }

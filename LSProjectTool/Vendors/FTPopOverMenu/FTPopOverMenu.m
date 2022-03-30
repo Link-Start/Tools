@@ -46,13 +46,11 @@ static NSString  *const FTPopOverMenuImageCacheDirectory = @"com.FTPopOverMenuIm
  *  FTPopOverMenuArrowDirection
  */
 typedef NS_ENUM(NSUInteger, FTPopOverMenuArrowDirection) {
-    /**
-     *  Up 箭头方向向上
-     */
+//    /// 没有箭头
+//    FTPopOverMenuArrowDirectionNone,
+    /// Up 箭头方向向上
     FTPopOverMenuArrowDirectionUp,
-    /**
-     *  Down 箭头方向向下
-     */
+    /// Down 箭头方向向下
     FTPopOverMenuArrowDirectionDown,
 };
 

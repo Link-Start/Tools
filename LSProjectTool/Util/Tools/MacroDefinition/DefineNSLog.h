@@ -12,6 +12,13 @@
 #define DefineNSLog_h
 
 #pragma mark - NSLog 打印
+/**
+ * 打印
+ * __PRETTY_FUNCTION__ 方法名 c字符串
+ * __LINE__ 打印行数
+ * ## "##"放在","和参数之间，那么如果参数留空的话，那么"##"前面的","就会删掉，从而防止编译错误。
+ * ((void)0) 在C、C++中表示无任何操作（详见http://stackoverflow.com/questions/2198950/why-is-void-0-a-no-operation-in-c-and-c）
+ */
 // 项目打包上线都不会打印日志，因此可放心。
 //__VA_ARGS__ 是一个可变参数的宏，这个可变参数的宏是新的C99规范中新增的，目前似乎只有gcc支持（VC6.0的编译器不支持）。实现思想就是宏定义中参数列表的最后一个参数为省略号（也就是三个点）。这样预定义宏_ _VA_ARGS_ _就可以被用在替换部分中，替换省略号所代表的字符串。
 //重新定义系统的NSLog，__OPTIMIZE__ 是release 默认会加的宏
@@ -25,10 +32,14 @@
 ////NSLog的使用效率比较低，所以在我们的项目中非调试状态下不应该出现大量的NSLog,让调试打印函数只在调试的时候有用，发布的时候就不能使用。
 // 让NSLog打印我们输出的内容,附加输出文件名和打印语句的行号
 #ifdef DEBUG
-#define NSLog(FORMAT, ...) fprintf(stderr,"[文件名：%s]:[函数名：%s]:[行号：%d]\t %s\n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __FUNCTION__, __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
+//#define NSLog(FORMAT, ...) fprintf(stderr,"[文件名：%s]:[函数名：%s]:[行号：%d]\t %s\n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __FUNCTION__, __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
+#define NSLog(FORMAT, ...) fprintf(stderr,"[文件名：%s]:[行号：%d]:[函数名：%s]\n %s\n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, __FUNCTION__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
 #else
 #define NSLog(...)
 #endif
+
+//#define NSLog(FORMAT, ...) fprintf(stderr,"<%s : %d>\n%s\n%s\n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, __func__ ,[[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String])
+
 // ---------------------------3
 //替换NSLog来使用，debug模式下可以打印很多方法名，行信息。
 //#ifdef DEBUG
