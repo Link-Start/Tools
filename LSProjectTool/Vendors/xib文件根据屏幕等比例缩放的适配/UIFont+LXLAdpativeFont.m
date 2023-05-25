@@ -44,9 +44,9 @@
 //    }
 //    return size;
     
-    if (MemberInfoModel.overallSituationFontSizeEnlargeMultiple) {//如果设置了放大倍数
-        return [NSNumber numberWithString:MemberInfoModel.overallSituationFontSizeEnlargeMultiple].floatValue*size;
-    }
+//    if (MemberInfoModel.overallSituationFontSizeEnlargeMultiple) {//如果设置了放大倍数
+//        return [NSNumber numberWithString:MemberInfoModel.overallSituationFontSizeEnlargeMultiple].floatValue*size;
+//    }
     return size;
 }
 

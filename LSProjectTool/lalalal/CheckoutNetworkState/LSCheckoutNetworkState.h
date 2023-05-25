@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 //#import "Tools.h"
 @interface LSCheckoutNetworkState : NSObject
+
+
+/// 检查当前网络连接 有网络:yes  无网络:no
++ (BOOL)currentNetworkStatus;
 /**
  *  当前网络是否活跃
  *

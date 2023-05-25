@@ -39,15 +39,21 @@ NSLog(@"打电话");
 
 if ([[UIApplication sharedApplication] canOpenURL:str]) {
     [[UIApplication sharedApplication] openURL:str options:@{UIApplicationOpenURLOptionsSourceApplicationKey : @YES} completionHandler:nil];
+} else {
+    NSLog(@"不能打开的地址url：");
 }
+
 
 UIPasteboard *appPasteBoard =  [UIPasteboard generalPasteboard];
 [appPasteBoard setString:@"成功复制到剪切板"];
 
 
-
-if (@available(iOS 10.0, *)) {
-    [[UIApplication sharedApplication] openURL:url options:@{UIApplicationOpenURLOptionsSourceApplicationKey:@YES} completionHandler:nil];
-}else {
-    [[UIApplication sharedApplication] openURL:url];
+if ([[UIApplication sharedApplication] canOpenURL:str_URL]) {
+    if (@available(iOS 10.0, *)) {
+        [[UIApplication sharedApplication] openURL:url options:@{UIApplicationOpenURLOptionsSourceApplicationKey:@YES} completionHandler:nil];
+    }else {
+        [[UIApplication sharedApplication] openURL:url];
+    }
+} else {
+    NSLog(@"不能打开的地址url：");
 }

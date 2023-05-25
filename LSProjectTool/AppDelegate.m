@@ -40,14 +40,16 @@
     self.window.rootViewController = tabBarController;
     [self.window makeKeyAndVisible];
     
+    /****************** 网络检测 ******************/
+    [GLobalRealReachability startNotifier];
+    
     /****************** 基本设置 ******************/
     [self initBasicConfiguration];//配置
     
     //    //点击背景收回键盘
     //    [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
     
-    /****************** 网络检测 ******************/
-    [GLobalRealReachability startNotifier];
+    
     
     /****************** 高德地图 ******************/
     [AMapServices sharedServices].apiKey = GaoDeMaps_appKey;

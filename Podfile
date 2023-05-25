@@ -13,12 +13,17 @@ def all_Pods
 	pod 'DZNEmptyDataSet'										#空白占位图
 	pod 'LYEmptyView'												#iOS一行代码集成空白页面占位图(无数据、无网络占位图)
 	pod 'FMListPlaceholder'									#一个优雅的占位图解决方案。适用于 UITableView 和 UICollectionView。
+	pod 'TABAnimated'												#一个由iOS原生组件映射出骨架屏的框架，包含快速植入，低耦合，兼容复杂视图等特点，提供国内主流骨架屏动画的加载方案，同时支持上拉加载更多、自定制动画。
+																					# https://github.com/tigerAndBull/TABAnimated
+
 	pod 'Masonry'														#布局
 	pod 'SDAutoLayout'											#布局
 	pod 'MyLayout'													#MyLayout是一套iOS界面视图布局框架。
 	pod 'SDCycleScrollView'									#轮播图
 	pod 'WMZBanner'													#最好用的轻量级轮播图+卡片样式+自定义样式,链式编程语法(可实现各种样式的轮播图,大多需要的功能都有)
 	pod 'KJBannerView'											#轮播图(看demo)
+	pod 'TYCyclePagerView'									# 轮播图，TYPageControl可修改大小
+	pod 'EllipsePageControl'								#椭圆形 长方形 PageControl 轮播图点
 
 	pod 'SDWebImage'												#请求图片
 	pod 'MBProgressHUD'
@@ -26,7 +31,7 @@ def all_Pods
 	pod 'MJExtension'												#数据模型转换
 	pod 'MJRefresh'													#刷新
 	pod 'ReactiveObjC'											#RAC
-	pod 'YYKit'															#富文本,图片请求,模型转换
+	# pod 'YYKit'															#富文本,图片请求,模型转换
 	# pod 'YYImage', :git => 'https://github.com/QiuYeHong90/YYImage.git'
 	pod 'YTKNetwork'												#YTK 网络请求
 	pod 'XHLaunchAd'												#开屏广告
@@ -38,6 +43,7 @@ def all_Pods
 	pod 'WMZDropDownMenu'										#筛选菜单,可悬浮,目前已实现闲鱼/美团/Boss直聘/京东/饿了么/淘宝/拼多多/赶集网/美图外卖等等的筛选菜单
 	pod 'WMZPageController'									#分页控制器,替换UIPageController方案,具备完整的生命周期,多种指示器样式,多种标题样式,可悬浮,支持ios13暗黑模式(仿优酷,爱奇艺,今日头条,简书,京东等多种标题菜单) 
 	pod 'JXCategoryView'                  	#强大且易于使用的类别视图（分段控制、分段视图、分页视图、页面控制）（APP分类切换滚动视图）
+	pod 'JXPagingView/Pager'								#类似微博主页、简书主页、QQ联系人页面等效果。多页面嵌套，既可以上下滑动，也可以左右滑动切换页面。支持HeaderView悬浮、支持下拉刷新、上拉加载更多
 	pod 'GKPageScrollView'									#(主要参考了JXPagingView，在他的基础上做了修改)iOS类似微博、抖音、网易云等个人详情页滑动嵌套效果
 	pod 'GKPageSmoothView'									#(主要参考了JXPagingView，在他的基础上做了修改)iOS类似微博、抖音、网易云等个人详情页滑动嵌套效果
 	pod 'CYLTabBarController'								#一行代码实现 Lottie 动画TabBar，支持中间带+号的TabBar样式，自带红点角标，支持动态刷新
@@ -83,7 +89,6 @@ def all_Pods
 	# pod 'MangoFix'													#https://github.com/yanshuimu/MangoFixUtil
 	# pod 'MangoFixUtil'											#依赖MangoFix,封装补丁拉取、执行、设备激活、补丁激活完整流程,另外提供本地加密或未加密补丁执行、生成加密补丁等方法。
 
-	# pod 'AAChartKit', :git => 'https://github.com/AAChartModel/AAChartKit.git' #极其精美而又强大的跨平台数据可视化图表框架,支持柱状图、条形图、
 
 	#定位
 	pod 'AMapLocation-NO-IDFA'            		#高德地图定位SDK 没有广告IDFA
@@ -99,6 +104,16 @@ def all_Pods
 	# pod 'WechatOpenSDK'                 		#微信SDK(如果导入了友盟分享,直接使用友盟分享中的微信SDK即可)
 	# pod  'AlipaySDK-iOS'										#支付宝支付(如果和友盟UMCSecurityPlugins冲突,请下载支付宝无UTDID.framework库的兼容版本)
   
+  pod 'BabyBluetooth','~> 0.7.0'						#一个非常容易使用的蓝牙库,
+  pod 'AAChartKit'													# 图表库 极其精美而又强大的跨平台数据可视化图表框架,支持柱状图、条形图、OC
+  																					# pod 'AAChartKit', :git => 'https://github.com/AAChartModel/AAChartKit.git'
+  pod 'Charts'															# 图表：折线图、柱状图、饼图	swift，不支持模拟器(i386)																			
+  pod 'PNChart'															#
+
+  pod 'LFPhoneInfo'													#iOS快速获取硬件信息(获取网络运营商、网络状态、设备局域网 IP、是否越狱https://github.com/muzipiao/LFPhoneInfo)
+
+  pod 'EBBannerView'												#只需一行代码：展示跟 iOS 系统一样的推送通知横幅，或展示一个自定义的 view。支持横屏、自动适应各种机型、自动声音/震动。
+  																	#https://github.com/pikacode/EBBannerView
 end
 
 def noLonger_maintainLib # 不再维护的库
@@ -115,21 +130,24 @@ def jiqimao_tools_ios	#机器猫工具库
 	# pod 'KJEmitterView'												#UIKit模块安装
 	# pod 'KJEmitterView/Kit'										#UIKit 相关扩展
 	# pod 'KJEmitterView/Foundation'						#Foundation模块安装
-	pod 'KJEmitterView/Language' 							# 多语言模块
+	# pod 'KJEmitterView/Language' 							# 多语言模块
 	# pod 'OpenCV'							
 	# pod 'KJEmitterView/Opencv'   						# 图片处理   Opencv图片模块该模块需要引入OpenCV库
-	pod 'KJEmitterView/LeetCode'  					# LeetCode算法模块
-	pod 'KJEmitterView/Classes'  						# 粒子效果模块
+	# pod 'KJEmitterView/LeetCode'  					# LeetCode算法模块
+	# pod 'KJEmitterView/Classes'  						# 粒子效果模块
 	pod 'ChainThen'														#UIKit快捷链式创建
 	# pod 'KJExceptionDemo'										#Crash防护
+	# pod 'Foggy'															# 自动防护异常崩溃(未捕获的Objective-C异常(NSException),通过向自己发送SIGABRT信号导致程序崩溃)
 	# 说是不再维护 分离为新的库 KJCategories
 	# ---------------------------------------------------------------------------------------
 
 
 	pod 'KJCategories'												#该模块主要涵盖常用核心分类(1.0.0 中文) , '1.0.0'	
-	# pod 'KJCategories/CustomControl'							# 自定义控件模块
+	pod 'KJCategories/KitExtension'						# UIKit
+	pod 'KJCategories/Foundation'							# Foundation
+	pod 'KJCategories/Customized'							# 自定义控件模块
 
-
+	# pod 'OpencvQueen'													# OpenCV模块
 	pod 'KJNetworkPlugin'											#一款纯OC版 批量 和 链式 插件版网络请求库
 
 	#KJPlayerDemo[视频支持格式：mp4、m3u8、wav、avi; 音频支持格式：midi、mp3]
@@ -175,10 +193,11 @@ end
 
 def image_photo_ios	# 照片选择、图片浏览
 	pod 'TZImagePickerController'						#照片选择器
-	pod 'ZLPhotoBrowser'										#照片选择器(该库OC版本不再维护)
-	pod 'HXPhotoPicker'											#照片选择器
-	pod 'GKPhotoBrowser'										#iOS仿微信、今日头条等图片浏览器
-	pod 'KNPhotoBrowser'										#图片浏览器(本地和网络) ,视频浏览器 (本地和网络), 无耦合性,自定义控件,资源路径保存和获取, 完美适配 iPhone 以及 iPad ,屏幕旋转功能.
+	pod 'ZLPhotoBrowser'								#照片选择器(4.0.0版本以后由Swift重新编写，该库OC版本不再维护)
+	# pod 'ZLPhotoBrowser-objc'							#照片选择器 (OC)
+	pod 'HXPhotoPicker'									#照片选择器 
+	pod 'GKPhotoBrowser'								#iOS仿微信、今日头条等图片浏览器
+	pod 'KNPhotoBrowser'								#图片浏览器(本地和网络) ,视频浏览器 (本地和网络), 无耦合性,自定义控件,资源路径保存和获取, 完美适配 iPhone 以及 iPad ,屏幕旋转功能.
 	# pod 'XLPhotoBrowser+CoderXL'					#(不再维护)一个简单实用的图片浏览器,效果类似微信图片浏览器,支持弹出动画和回缩动画,支持多图浏览,支持本地和网络图片浏览,支持多种属性自定义(支持横竖屏)
 end
 
@@ -289,21 +308,31 @@ def tx_IMSDK_UI #腾讯IM 含UI(https://cloud.tencent.com/document/product/269/3
 	install! 'cocoapods', :disable_input_output_paths => true #这句话要放在platform同级位置
 	# use_frameworks! ## TUI 组件依赖了静态库，需要屏蔽此设置，如果报错，请参考常见问题说明。
 	# use_frameworks! :linkage => :static #如果在某种情况下,需要使用use_frameworks!,则请使用cocoapods1.9.0及以上版本进行pod install
-	# 集成聊天功能 主要用于收发和展示消息。
-	pod 'TUIChat'
-	# 集成会话功能 主要用于拉取和展示会话列表。
-	pod 'TUIConversation'
-	# 集成关系链功能 主要用于拉取和展示好友列表。
-	pod 'TUIContact'
-	# 集成群组功能 主要用于拉取和展示群信息。
-	pod 'TUIGroup'
-	# 集成搜索功能 主要用于搜索和展示会话或消息。（需要购买旗舰版套餐）
-	pod 'TUISearch' 
-	# 集成音视频通话功能 主要用于音视频通话。
-	pod 'TUICalling'
-				#腾讯云的音视频库不能同时集成,会有符号冲突,
-				#如果您使用了非TRTC版本的音视频库,建议pod集成 TUICalling/Professional版本,
-				#该版本依赖的 LiteAV_Professional 音视频库包含了音视频的所有基础能力。
+	# 请按需开启 modular headers，开启后 Pod 模块才能使用 @import 导入，简化 Swift 引用 OC 的方式。
+  	# use_modular_headers!
+
+	# # 集成聊天功能 主要用于收发和展示消息。
+	# pod 'TUIChat'
+	# # 集成会话功能 主要用于拉取和展示会话列表。
+	# pod 'TUIConversation'
+	# # 集成关系链功能 主要用于拉取和展示好友列表。
+	# pod 'TUIContact'
+	# # 集成群组功能 主要用于拉取和展示群信息。
+	# pod 'TUIGroup'
+	# # 集成搜索功能 主要用于搜索和展示会话或消息。（需要购买旗舰版套餐）
+	# pod 'TUISearch' 
+	# # 集成音视频通话功能 主要用于音视频通话。
+	# pod 'TUICalling'
+	# 			#腾讯云的音视频库不能同时集成,会有符号冲突,
+	# 			#如果您使用了非TRTC版本的音视频库,建议pod集成 TUICalling/Professional版本,
+	# 			#该版本依赖的 LiteAV_Professional 音视频库包含了音视频的所有基础能力。
+	#    		腾讯实时音视频（Tencent Real-Time Communication，TRTC）
+
+# 1.如果您直接 pod 'TUIChat'，不指定经典版或简约版，默认会集成两套版本 UI 组件。 
+# 2. 经典版和简约版 UI 不能混用，集成多个组件时，您必须同时全部选择经典版 UI 或简约版 UI。
+# 	例如，经典版 TUIChat 组件必须与经典版 TUIConversation、TUIContact、TUIGroup组件搭配使用。
+# 	同理，简约版 TUIChat 组件必须与简约版 TUIConversation、TUIContact、TUIGroup 组件搭配使用。
+# 3.如果您使用的是 Swift，请开启 use_modular_headers!，并将头文件引用改成 @import 模块名形式引用。
 
 end
 def tx_IMSDK_NoUI #腾讯IM 不含UI(https://cloud.tencent.com/document/product/269/32675)
@@ -344,6 +373,28 @@ target 'LSProjectTool' do 								# 项目工程名
 
     # zhibo_anmiation_mp4_ios								# 直播间送礼物动画 .mp4格式
     noLonger_maintainLib									# 不再维护的库
+
+
+
+
+    # post_install do |installer|
+  	# 	installer.generated_projects.each do |project|
+    # 		project.targets.each do |target|
+    #     		target.build_configurations.each do |config|
+    #         		config.build_settings['CODE_SIGN_IDENTITY'] = ''
+    #      		end
+    # 		end
+  	# 	end
+	# end
+	post_install do |installer|
+  		installer.pods_project.targets.each do |target|
+    		target.build_configurations.each do |config|
+      			config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
+    		end
+  		end
+	end
+
+
 
 
   target 'LSProjectToolTests' do

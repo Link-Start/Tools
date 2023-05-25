@@ -248,6 +248,7 @@ static inline NSString *cachePath() {
     
     //如果传入的网址path为空 或者 path长度为0  返回 空字符串(零长度字符串往往指的是空串)
     if (path == nil || path.length == 0) {
+        NSLog(@"🔥🔥🔥 传入的网址path为空 或者 path长度为0 🔥🔥🔥");
         return @"";
     }
     
@@ -308,14 +309,14 @@ static inline NSString *cachePath() {
 //        //对url中的中文进行转码
 //        newString = [urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
 //    } else {
-//        [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//        newString = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 //    }
     
-    if ([self respondsToSelector:@selector(stringByAddingPercentEncodingWithAllowedCharacters:)]) {
+    if ([[NSString alloc] respondsToSelector:@selector(stringByAddingPercentEncodingWithAllowedCharacters:)]) {
         //对url中的中文进行转码
         newString = [urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     } else {
-        [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        newString = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     }
     
     

@@ -24,4 +24,7 @@
 - (UIImage *)changeColorForQRImage:(UIImage *)image backColor:(UIColor *)backColor frontColor:(UIColor *)frontColor;
 ///
 
+
+//创建高斯模糊效果图片(不会卡)
+- (UIImage *)gsImage:(UIImage *)image withGsNumber:(CGFloat)blur;
 @end

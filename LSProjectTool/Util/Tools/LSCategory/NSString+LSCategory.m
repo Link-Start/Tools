@@ -113,6 +113,42 @@
     return result;
 }
 
+#pragma - 将saveBase64编码中的"-"，"_"字符串转换成"+"，"/"，字符串长度余4倍的位补"="
+/// "url safe"的base64编码
++(NSData*)safeUrlBase64Decode:(NSString*)safeUrlbase64Str
+{
+    // '-' -> '+'
+    // '_' -> '/'
+    // 不足4倍长度，补'='
+    NSMutableString * base64Str = [[NSMutableString alloc]initWithString:safeUrlbase64Str];
+    base64Str = (NSMutableString * )[base64Str stringByReplacingOccurrencesOfString:@"-" withString:@"+"];
+    base64Str = (NSMutableString * )[base64Str stringByReplacingOccurrencesOfString:@"_" withString:@"/"];
+    NSInteger mod4 = base64Str.length % 4;
+    if (mod4 > 0) {
+        [base64Str appendString:[@"====" substringToIndex:(4-mod4)]];
+    }
+    NSLog(@"Base64原文：%@", base64Str);
+//    return [GTMBase64 decodeData:[base64Str dataUsingEncoding:NSUTF8StringEncoding]];
+
+    return [[NSData data] initWithBase64EncodedString:base64Str options:(NSDataBase64DecodingIgnoreUnknownCharacters)] ; //返回 base64解码
+}
+
+#pragma - 因为Base64编码中包含有+,/,=这些不安全的URL字符串，所以要进行换字符
+/// "url safe"的base64编码
++(NSString*)safeUrlBase64Encode:(NSString *)base64Str {
+    // '+' -> '-'
+    // '/' -> '_'
+    // '=' -> ''
+//    NSString * base64Str = [GTMBase64 stringByEncodingData:data];
+    NSMutableString * safeBase64Str = [[NSMutableString alloc]initWithString:base64Str];
+    safeBase64Str = (NSMutableString * )[safeBase64Str stringByReplacingOccurrencesOfString:@"+" withString:@"-"];
+    safeBase64Str = (NSMutableString * )[safeBase64Str stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
+    safeBase64Str = (NSMutableString * )[safeBase64Str stringByReplacingOccurrencesOfString:@"=" withString:@""];
+    NSLog(@"safeBase64编码：%@", safeBase64Str);
+    return safeBase64Str;
+}
+
+
 /// URL
 - (NSURL *)URL {
     return [NSURL URLWithString:self];

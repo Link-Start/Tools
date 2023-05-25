@@ -136,7 +136,53 @@
 
 
 
+/******************************************************************************************************************************************************************/
+// iOS-浮动球体上下浮动动画
+// https://www.jianshu.com/p/0d2bbc60d269
+/******************************************************************************************************************************************************************/
 
+方法1:
+- (void)createAnimaition{
+self.animationView = [[UIView alloc] initWithFrame:CGRectMake(SIZE.width/2.0 - 30, 200, 60, 60)];
+    self.animationView.layer.cornerRadius =30;
+    self.animationView.layer.borderWidth = 2;
+    self.animationView.layer.borderColor = [UIColor redColor].CGColor;
+    self.animationView.backgroundColor = [UIColor yellowColor];
+    [self.view addSubview:self.animationView];
+   [self up];
+}
+- (void)up{
+
+    [UIView animateWithDuration:2 animations:^{
+         self.animationView.frame = CGRectMake(SIZE.width/2.0 - 30, self.animationView.frame.origin.y + 10, 60, 60);
+    }];
+    [UIView animateWithDuration:2 delay:2 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.animationView.frame = CGRectMake(SIZE.width/2.0 - 30, self.animationView.frame.origin.y - 10, 60, 60);
+    } completion:^(BOOL finished) {
+        [self up];
+    }];
+}
+
+方法2:
+- (void)createAnimaition{
+    self.animationView = [[UIView alloc] initWithFrame:CGRectMake(SIZE.width/2.0 - 30, 200, 60, 60)];
+    self.animationView.layer.cornerRadius =30;
+    self.animationView.layer.borderWidth = 2;
+    self.animationView.layer.borderColor = [UIColor redColor].CGColor;
+    self.animationView.backgroundColor = [UIColor yellowColor];
+    [self.view addSubview:self.animationView];
+
+    CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"transform.translation.y"];
+    CGFloat duration = 1.f;
+    CGFloat height = 7.f;
+    CGFloat currentY = self.animationView.transform.ty;
+    animation.duration = duration;
+    animation.values = @[@(currentY),@(currentY - height/4),@(currentY - height/4*2),@(currentY - height/4*3),@(currentY - height),@(currentY - height/ 4*3),@(currentY - height/4*2),@(currentY - height/4),@(currentY)];
+    animation.keyTimes = @[ @(0), @(0.025), @(0.085), @(0.2), @(0.5), @(0.8), @(0.915), @(0.975), @(1) ];
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    animation.repeatCount = HUGE_VALF;
+    [self.animationView.layer addAnimation:animation forKey:@"kViewShakerAnimationKey"];
+}
 
 
 

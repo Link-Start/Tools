@@ -18,8 +18,16 @@
 //使用SDWebImage清理缓存
 - (void)clear {
     
-    [[SDImageCache sharedImageCache] clearDisk];
+    [[SDImageCache sharedImageCache] clearDiskOnCompletion:^{
+            
+    }];
     [[SDImageCache sharedImageCache] clearMemory];
+    
+//    // 清理yyImage缓存
+//    YYImageCache *cache = [YYWebImageManager sharedManager].cache;
+//    [cache.diskCache removeAllObjectsWithProgressBlock:^(int removedCount, int totalCount) {
+//    } endBlock:^(BOOL error) {
+//    }];
 }
 
 

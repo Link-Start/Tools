@@ -22,11 +22,16 @@
 //#import "Util/Tools/Function/Function.h"
 #import "AppDelegate.h"
 #import "FTPopOverMenu.h"
+#import "LBXPermission.h"
+#import "LSCheckoutNetworkState.h"
+
+#import "TZImagePickerController.h"
+
 
 //#import "LSProjectTool-Swift.h"
 
 
-@interface ViewController ()<UITextFieldDelegate, AMapLocationManagerDelegate>
+@interface ViewController ()<UITextFieldDelegate, AMapLocationManagerDelegate, TZImagePickerControllerDelegate>
 
 @property (nonatomic, strong)  LSTextView *inputView;
 //@property (weak, nonatomic) IBOutlet NSLayoutConstraint *H;
@@ -63,6 +68,15 @@
 
 - (void)viewDidLoad {
     
+ CGFloat statusBarHeight = ({
+        CGFloat statusBarHeight = 0;
+        if (@available(iOS 13.0, *)) {
+            statusBarHeight = [UIApplication sharedApplication].windows.firstObject.windowScene.statusBarManager.statusBarFrame.size.height;
+        } else {
+            statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+        }
+        statusBarHeight;
+    });
     
    
     
@@ -138,10 +152,51 @@
     [self.btn setTitle:@"哈哈哈" forState:UIControlStateNormal];
     [self.btn setBackgroundColor:[UIColor yellowColor]];
     self.btn.frame = CGRectMake(100, 400, 100, 30);
-//    [self.btn addTarget:self action:@selector(btnAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.btn addTarget:self action:@selector(btnAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.btn];
 
     
+    UIButton *changeIconBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [changeIconBtn setTitle:@"改变Icon" forState:UIControlStateNormal];
+    [changeIconBtn setBackgroundColor:[UIColor redColor]];
+    changeIconBtn.frame = CGRectMake(100, 500, 100, 30);
+    [changeIconBtn addTarget:self action:@selector(changeIconBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:changeIconBtn];
+    
+    UIButton *resetIconBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [resetIconBtn setTitle:@"重置Icon" forState:UIControlStateNormal];
+    [resetIconBtn setBackgroundColor:[UIColor cyanColor]];
+    resetIconBtn.frame = CGRectMake(100, 600, 100, 30);
+    [resetIconBtn addTarget:self action:@selector(resetIconBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:resetIconBtn];
+    
+    [self presentViewController:self animated:YES completion:nil];
+    
+    
+    
+
+    
+    
+#pragma mark - ------
+    
+   
+//    [LSCheckoutNetworkState currentNetworkStatus];
+    
+    
+    [LSNetworking startMonitoring];
+   
+//    [LBXPermission authorizeWithType:LBXPermissionType_DataNetwork completion:^(BOOL granted, BOOL firstTime) {
+//        if (granted) {
+//            //TODO
+//            //dosth
+//            NSLog(@"跳转 网络权限 之后");
+//        } else if (!firstTime) {
+//            //不是第一次请求权限，那么可以弹出权限提示，用户选择设置，即跳转到设置界面，设置权限
+//            [LBXPermissionSetting showAlertToDislayPrivacySettingWithTitle:@"提示" msg:@"没有定位权限，是否前往设置" cancel:@"取消" setting:@"设置"];
+//        } else {
+//            NSLog(@"跳转 网络权限 之后");
+//        }
+//    }];
 }
 
 - (NSString *)obfuscate:(NSString *)string withKey:(NSString *)key
@@ -286,6 +341,18 @@
 
 - (void)btnAction {
    
+   
+//    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:9 delegate:self];
+//
+//    // You can get the photos by block, the same as by delegate.
+//    // 你可以通过block或者代理，来得到用户选择的照片.
+//    [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
+//
+//    }];
+    UIViewController *vc = [[UIViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+//    [vc presentViewController:imagePickerVc animated:YES completion:nil];
+  
 }
 
 - (IBAction)btnAction:(UIButton *)sender {
@@ -313,6 +380,35 @@
         
     }];
 }
+
+- (void)changeIconBtnAction:(UIButton *)sender {
+    NSLog(@"更改 Icon");
+    if ([UIApplication sharedApplication].supportsAlternateIcons) {
+        [[UIApplication sharedApplication] setAlternateIconName:@"oubasaller" completionHandler:^(NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"更换Icon错误：%@", error);
+            } else {
+                NSLog(@"更换Icon成功");
+            }
+            
+        }];
+    }
+}
+
+
+- (void)resetIconBtnAction:(UIButton *)sender {
+    NSLog(@"恢复 Icon");
+    if ([UIApplication sharedApplication].supportsAlternateIcons) {
+        [[UIApplication sharedApplication] setAlternateIconName:nil completionHandler:^(NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"更换Icon错误%@", error);
+            } else {
+                NSLog(@"更换Icon成功");
+            }
+        }];
+    }
+}
+
 
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -360,7 +456,7 @@
 #pragma mark - ----------------- 屏幕旋转
 
 // 是否支持自动转屏
-- (BOOL)shouldAutorotate {
+- (BOOL)shouldAutorotate {// iOS16中此方法不再起作用，需要控制，- (UIInterfaceOrientationMask)supportedInterfaceOrientations
     return NO;
 }
 
@@ -394,6 +490,20 @@
         [invocation setArgument:&val atIndex:2];
         [invocation invoke];
     }
+    
+    if (@available(iOS 16.0, *)) {
+        // setNeedsUpdateOfSupportedInterfaceOrientations 方法是 UIViewController 的方法
+        [self setNeedsUpdateOfSupportedInterfaceOrientations];
+        NSArray *array = [[[UIApplication sharedApplication] connectedScenes] allObjects];
+        UIWindowScene *scene = [array firstObject];
+        // 屏幕方向
+        UIInterfaceOrientationMask orientation = self.isFullScreen ? UIInterfaceOrientationMaskLandscape:UIInterfaceOrientationMaskPortrait;
+        UIWindowSceneGeometryPreferencesIOS *geometryPreferencesIOS = [[UIWindowSceneGeometryPreferencesIOS alloc] initWithInterfaceOrientations:orientation];
+        // 开始切换
+        [scene requestGeometryUpdateWithPreferences:geometryPreferencesIOS errorHandler:^(NSError * _Nonnull error) {
+            NSLog(@"错误:%@", error);
+        }];
+    }
 }
 // 状态条变化通知（在前台播放才去处理）
 - (void)onStatusBarOrientationChange {
@@ -413,10 +523,16 @@
     if (self.isFullScreen == shouldFullScreen) {
         return;
     }
+    if (@available(iOS 16.0, *)) {
+        if (orientation == UIDeviceOrientationPortraitUpsideDown) {//禁止上下颠倒
+            return;
+        }
+    }
     self.isFullScreen = shouldFullScreen;
     
     if (shouldFullScreen) { //横屏
         NSLog(@"横屏");
+        // iOS16, view需要重新更新frame， 旋转之后的屏幕宽高没有变化，需要自己重新赋值更改
     } else { //竖屏
         NSLog(@"竖屏");
     }
@@ -440,6 +556,13 @@
     }
     return _getLocation;
 }
+
+////设置水平方向
+//[<#self.unreadCommentFloatLabel#> setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal]; //抗拉伸
+//[<#self.unreadCommentFloatLabel#> setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];//抗压缩
+////设置竖直方向
+//[<#self.unreadCommentFloatLabel#> setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical]; //抗拉伸
+//[<#self.unreadCommentFloatLabel#> setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];//抗压缩
 
 
 @end

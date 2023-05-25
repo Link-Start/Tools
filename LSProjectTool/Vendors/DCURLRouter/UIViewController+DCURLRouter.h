@@ -15,13 +15,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) NSURL *originUrl;
 
 /** url路径 */
-@property(nonatomic,copy) NSString *path;
+@property(nonatomic, copy) NSString *path;
 
 /** 跳转后控制器能拿到的参数 */
-@property(nonatomic,strong) NSDictionary *params;
+@property(nonatomic, strong) NSDictionary *params;
 
 /** 回调block */
-@property (nonatomic, strong) void(^valueBlock)(id value);
+@property (nonatomic, copy) void(^valueBlock)(id value);
 
 // 根据参数创建控制器
 + (UIViewController *)initFromString:(NSString *)urlString fromConfig:(NSDictionary *)configDict;

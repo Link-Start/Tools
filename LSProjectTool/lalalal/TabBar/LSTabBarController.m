@@ -10,7 +10,7 @@
 #import "ViewController.h"
 #import "LSNavigationController.h"
 
-@interface LSTabBarController ()
+@interface LSTabBarController ()<UITabBarControllerDelegate>
 {
 #pragma mark - 屏幕旋转(TabBarController是根视图控制器) 1.
     BOOL shouldAutorotate;  //1.设置一个全局的BOOL值
@@ -127,7 +127,7 @@
     } else {
 
         [self.tabBar setBackgroundColor:[UIColor whiteColor]];
-        [self.tabBar setBackgroundImage:img];
+        [self.tabBar setBackgroundImage:[[UIImage alloc] init]];
         [self.tabBar setShadowImage:img];
 
     }
@@ -270,6 +270,64 @@
 //
 //    self.indexFlag = index;
 //}
+
+
+//
+//- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
+//    if (tabBar.selectedItem == tabBar.items.firstObject) {
+//
+////    }
+////    if ([item.title isEqualToString:@"首页"]) {
+//        item.title = @"";
+//        item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
+//    } else {
+//        for (UITabBarItem * iiitem in tabBar.items) {
+//            if ([iiitem.title isEqualToString:@""]) {
+//                iiitem.title = @"首页";
+//                iiitem.imageInsets = UIEdgeInsetsZero;
+//            }
+//        }
+//    }
+//
+//}
+
+//用于决定当前选中的viewController是否响应,返回NO，则当前的viewcontroller一直保持active状态，别的viewcontroller无法点击响应。
+// 可用于拦截要跳转的viewController，转而跳到别的VC,或者执行某些方法
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+//    if ([nav.topViewController isKindOfClass:[FriendDynamicVC class]]) {//动态
+//        if (!MemberInfoModel.isLogin) {
+//            [MemberInfoModel logout];
+//            return NO;
+//        }
+//        if (!MemberInfoModel.getCurrentLoginBlindDateInfoExistenceStatus) {//当前登录人相亲信息不存在
+//            [DCURLRouter pushURLString:[OPH5Config h5_friendPerfectMyTag] animated:YES];
+//            return NO;
+//        }
+//
+//        [DCURLRouter pushURLString:[OPH5Config h5_friendDynamicPage] animated:YES];
+//        return NO;
+//    } else if ([nav.topViewController isKindOfClass:[FriendMyVC class]]) {// 我的
+//
+//        if (!MemberInfoModel.isLogin) {
+//            [MemberInfoModel logout];
+//            return NO;
+//        }
+//        if (!MemberInfoModel.getCurrentLoginBlindDateInfoExistenceStatus) {//当前登录人相亲信息不存在
+//            [DCURLRouter pushURLString:[OPH5Config h5_friendPerfectMyTag] animated:YES];
+//            return NO;
+//        }
+//
+//        [DCURLRouter pushURLString:[OPH5Config h5_friendMyPage] animated:YES];
+//        return NO;
+//    }
+
+    return YES;
+}
+//确定用户当前点击的是哪个tab对应的viewcontroller
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

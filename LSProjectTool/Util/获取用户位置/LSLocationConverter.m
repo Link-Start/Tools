@@ -28,6 +28,7 @@
 #define jzA 6378245.0
 #define jzEE 0.00669342162296594323
 
+static const double x_pi = M_PI  * 3000.0 / 180.0;
 
 
 @implementation LSLocationConverter
@@ -48,6 +49,7 @@
     return ret;
 }
 
+//判断是不是在中国
 + (BOOL)outOfChina:(double)lat bdLon:(double)lon {
     if (lon < RANGE_LON_MIN || lon > RANGE_LON_MAX)
         return true;
@@ -56,6 +58,7 @@
     return false;
 }
 
+// WGS-84 -----> GCJ-02
 + (CLLocationCoordinate2D)gcj02Encrypt:(double)ggLat bdLon:(double)ggLon {
     CLLocationCoordinate2D resPoint;
     double mgLat;
@@ -81,6 +84,7 @@
     return resPoint;
 }
 
+//GCJ-02 -----> WGS-84
 + (CLLocationCoordinate2D)gcj02Decrypt:(double)gjLat gjLon:(double)gjLon {
     CLLocationCoordinate2D  gPt = [self gcj02Encrypt:gjLat bdLon:gjLon];
     double dLon = gPt.longitude - gjLon;
@@ -91,19 +95,10 @@
     return pt;
 }
 
-+ (CLLocationCoordinate2D)bd09Decrypt:(double)bdLat bdLon:(double)bdLon
-{
-    CLLocationCoordinate2D gcjPt;
-    double x = bdLon - 0.0065, y = bdLat - 0.006;
-    double z = sqrt(x * x + y * y) - 0.00002 * sin(y * M_PI);
-    double theta = atan2(y, x) - 0.000003 * cos(x * M_PI);
-    gcjPt.longitude = z * cos(theta);
-    gcjPt.latitude = z * sin(theta);
-    return gcjPt;
-}
-
-+(CLLocationCoordinate2D)bd09Encrypt:(double)ggLat bdLon:(double)ggLon
-{
+///--------------------------------------------------------------------------------------------------------------------------------------------
+// github 上的方法
+// GCJ02--------------->BD09
++(CLLocationCoordinate2D)bd09Encrypt:(double)ggLat bdLon:(double)ggLon {
     CLLocationCoordinate2D bdPt;
     double x = ggLon, y = ggLat;
     double z = sqrt(x * x + y * y) + 0.00002 * sin(y * M_PI);
@@ -112,6 +107,42 @@
     bdPt.latitude = z * sin(theta) + 0.006;
     return bdPt;
 }
+// BD-09 -----> GCJ-02
++ (CLLocationCoordinate2D)bd09Decrypt:(double)bdLat bdLon:(double)bdLon {
+    CLLocationCoordinate2D gcjPt;
+    double x = bdLon - 0.0065;
+    double y = bdLat - 0.006;
+    double z = sqrt(x * x + y * y) - 0.00002 * sin(y * M_PI);
+    double theta = atan2(y, x) - 0.000003 * cos(x * M_PI);
+    gcjPt.longitude = z * cos(theta);
+    gcjPt.latitude = z * sin(theta);
+    return gcjPt;
+}
+///--------------------------------------------------------------------------------------------------------------------------------------------
+// 网上搜索的方法，两个方法有区别，不知道哪个更精确
+// GCJ02--------------->BD09
++(CLLocationCoordinate2D)bd09Encrypt_02:(double)ggLat bdLon:(double)ggLon {
+    CLLocationCoordinate2D bdPt;
+    double x = ggLon, y = ggLat;
+    double z = sqrt(x * x + y * y) + 0.00002 * sin(y * x_pi);
+    double theta = atan2(y, x) + 0.000003 * cos(x * x_pi);
+    bdPt.longitude = z * cos(theta) + 0.0065;
+    bdPt.latitude = z * sin(theta) + 0.006;
+    return bdPt;
+}
+// BD-09 -----> GCJ-02
++ (CLLocationCoordinate2D)bd09Decrypt_02:(double)bdLat bdLon:(double)bdLon {
+    CLLocationCoordinate2D gcjPt;
+    double x = bdLon - 0.0065;
+    double y = bdLat - 0.006;
+    double z = sqrt(x * x + y * y) - 0.00002 * sin(y * x_pi);
+    double theta = atan2(y, x) - 0.000003 * cos(x * x_pi);
+    gcjPt.longitude = z * cos(theta);
+    gcjPt.latitude = z * sin(theta);
+    return gcjPt;
+}
+///--------------------------------------------------------------------------------------------------------------------------------------------
+
 
 + (CLLocationCoordinate2D)WGS84ToGCJ02:(CLLocationCoordinate2D)location {
     return [self gcj02Encrypt:location.latitude bdLon:location.longitude];
@@ -122,8 +153,7 @@
 }
 
 + (CLLocationCoordinate2D)WGS84ToBD09:(CLLocationCoordinate2D)location {
-    CLLocationCoordinate2D gcj02Pt = [self gcj02Encrypt:location.latitude
-                                                  bdLon:location.longitude];
+    CLLocationCoordinate2D gcj02Pt = [self gcj02Encrypt:location.latitude bdLon:location.longitude];
     return [self bd09Encrypt:gcj02Pt.latitude bdLon:gcj02Pt.longitude] ;
 }
 
@@ -150,11 +180,12 @@
  2）Web地图一般用的坐标细是投影坐标系WGS 1984 Web Mercator；
  3）国内出于相关法律法规要求，对国内所有GPS设备及地图数据都进行了加密偏移处理，代号GCJ-02，这样GPS定位获得的坐标与地图上的位置刚好对应上；
  4）特殊的是百度地图在这基础上又进行一次偏移，通称Bd-09;
- 所以以在处理系统定位坐标及相关地图SDK坐标时需要转换处理下，根据网络资源，目前有一些公开的转换算法。
+ 所以在处理系统定位坐标及相关地图SDK坐标时需要转换处理下，根据网络资源，目前有一些公开的转换算法。
 
  二.iOS地图开发
  1.坐标的转换逻辑
- 1）<CoreLocation/CoreLocation.h>中提供的CLLocationManager类获取的坐标是WGS1984坐标，这种坐标显示在原生地图(国内iOS原生地图也是用的高德)、谷歌地图或高德地图需要进行WGS1984转GCJ-02计算，苹果地图及谷歌地图用的都是高德地图的数据，所以这三种情况坐标处理方法一样，即将WGS1984坐标转换成偏移后的GCJ-02才可以在地图上正确显示位置。
+ 1）<CoreLocation/CoreLocation.h>中提供的CLLocationManager类获取的坐标是WGS1984坐标，这种坐标显示在原生地图
+ (国内iOS原生地图也是用的高德)、谷歌地图或高德地图需要进行WGS1984转GCJ-02计算，苹果地图及谷歌地图用的都是高德地图的数据，所以这三种情况坐标处理方法一样，即将WGS1984坐标转换成偏移后的GCJ-02才可以在地图上正确显示位置。
 
  2）在高德地图中获取的坐标是已经转换成GCJ-02的坐标，这时候的坐标无需转换可以直接显示到地图上的正确位置。
 

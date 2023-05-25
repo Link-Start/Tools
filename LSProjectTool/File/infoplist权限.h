@@ -5,6 +5,8 @@
 //  Created by 刘晓龙 on 2021/4/28.
 //  Copyright © 2021 Link-Start. All rights reserved.
 //
+//
+// iOS各种权限状态的获取及注意事项 https://www.dandelioncloud.cn/article/details/1515907437629644801
 
 #ifndef infoplist___h
 #define infoplist___h
@@ -18,6 +20,13 @@ iOS常用权限请求判断  https://github.com/MxABC/LBXPermission
 #pragma mark - 蓝牙权限：Privacy - Bluetooth Peripheral Usage Description 是否许允此App使用蓝牙？
 #pragma mark - 语音转文字权限：Privacy - Speech Recognition Usage Description 是否允许此App使用语音识别？
 #pragma mark - 日历权限：Privacy - Calendars Usage Description
+//EKAuthorizationStatusNotDetermined = 0,//未确定
+//EKAuthorizationStatusRestricted, //受限制的
+//EKAuthorizationStatusDenied, //否认，拒绝
+//EKAuthorizationStatusAuthorized,//经授权的
+
+
+
 #pragma mark - 定位。位置
 #pragma mark - 定位权限：Privacy - Location When In Use Usage Description
 #pragma mark - 定位权限: Privacy - Location Always Usage Description
@@ -130,6 +139,21 @@ Pricacy - Tracking Usage Description 我们需要获取您的设备信息用以�
 //    ATTrackingManagerAuthorizationStatusDenied,
 //如果用户授权访问可用于跟踪用户或设备的应用程序相关数据，则返回的值
 //    ATTrackingManagerAuthorizationStatusAuthorized
+
+
+/// 用户追踪授权弹窗
+//IDFA & IDFV
+//IDFA - Identifier For Advertising（广告标识符）
+//      同一手机获取该值都相同
+//      重装应用, 不会改变
+//      用户可手动重置这个值. 重置广告 id: 设置 -> 隐私 -> 广告 -> 重置广告 id (中国区的可能看不到这个, 模拟器可以看到)
+//IDFV - Identifier For Vendor（应用开发商标识符）
+///// https://blog.csdn.net/yangxuan0261/article/details/113801704
+/// 没弹框是因为系统设置里面的[设置-隐私-跟踪-允许App请求跟踪]的状态开关状态没开?(https://www.jianshu.com/p/7a244e92278f)
+/// iOS 15.0 以上没弹窗  [着重推荐方法1通知监听，推荐2，不推荐3延迟调用]
+/// 1.监听UIApplicationDidBecomeActiveNotification通知，在对应回调内调用获取授权方法     ------>强烈推荐
+/// 2.写到 applicationDidBecomeActive 里面才会提示授权弹窗                                                  ------>推荐
+/// 3.延迟几秒后调用                                                                                                                     ------>不推荐
 
 
 ///获取IDFA

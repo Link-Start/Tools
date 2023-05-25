@@ -52,6 +52,10 @@
 -(UIImage *)imageCompressForWidth:(UIImage *)sourceImage targetWidth:(CGFloat)defineWidth;
 //压缩图片 先对图片进行裁剪，然后再压缩
 + (NSData *)compressWithOrgImg:(UIImage *)img;
+
+//创建高斯模糊效果图片(不会卡)
+- (UIImage *)gsImage:(UIImage *)image withGsNumber:(CGFloat)blur;
+
 @end
 
 

@@ -39,13 +39,13 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSDate *_Nonnull)dateWithDaysFromNow:(NSInteger)days;
 /** 从现在起向前推几天的日期 @param days 向前推的天数 @return 前推得到的日期 */
 + (NSDate *_Nonnull)dateWithDaysBeforeNow:(NSInteger)days;
-/** 从现在起向后推几小时的日期 @param days 向后推的小时数 @return 后推得到的日期 */
+/** 从现在起向后推几小时的日期 @param dHours 向后推的小时数 @return 后推得到的日期 */
 + (NSDate *_Nonnull)dateWithHoursFromNow:(NSInteger)dHours;
-/** 从现在起向前推几小时的日期 @param days 向前推的小时数 @return 前推得到的日期 */
+/** 从现在起向前推几小时的日期 @param dHours 向前推的小时数 @return 前推得到的日期 */
 + (NSDate *_Nonnull)dateWithHoursBeforeNow:(NSInteger)dHours;
-/** 从现在起向后推几分钟的日期 @param days 向后推的分钟数 @return 后推得到的日期 */
+/** 从现在起向后推几分钟的日期 @param dMinutes 向后推的分钟数 @return 后推得到的日期 */
 + (NSDate *_Nonnull)dateWithMinutesFromNow:(NSInteger)dMinutes;
-/** 从现在起向前推几分钟的日期 @param days 向前推的分钟数 @return 前推得到的日期 */
+/** 从现在起向前推几分钟的日期 @param dMinutes 向前推的分钟数 @return 前推得到的日期 */
 + (NSDate *_Nonnull)dateWithMinutesBeforeNow:(NSInteger)dMinutes;
 
 #pragma mark - 日期转字符串
@@ -197,8 +197,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly) NSInteger weekOfMonth;
 ///当前年的第几周
 @property (readonly) NSInteger weekOfYear;
-///当前日期所在周的第几天
-@property (readonly) NSInteger weekday;
+///当前日期所在周的第几天，是周几
+@property (readonly) NSInteger ls_weekday;
 ///当前日期所在年的第几季度
 @property (readonly) NSInteger nthWeekday; // e.g. 2nd Tuesday of the month == 2
 ///当前日期的年
@@ -221,13 +221,24 @@ NS_ASSUME_NONNULL_BEGIN
 
 ///获得当前 NSDate 对象对应的月份的总天数
 - (NSInteger)totalDaysInMonth;
+/// 获取指定月份的总 天数
+- (NSInteger)totaldaysInThisMonth:(NSDate *)date;
 
 ///获得当前 NSDate 对象对应月份当月第一天的所属星期
 - (NSInteger)firstWeekDayInMonth;
+/// 获取指定月份的第一天是周几
+- (NSInteger)firstWeekdayInThisMonth:(NSDate *)date;
 
 ///获得当前 NSDate 对象对应农历日期
 - (NSString *)lunarText;
 
+
+#pragma mark -
+//https://www.jianshu.com/p/c89564c25e81
+/// 获取当前日期月份的第一天日期
+- (NSString *)getCurrentMonthFirstDayWithFormat:(NSString *)format;
+/// 获取当前日期月份的最后一天日期
+- (NSString *)getCurrentMonthLastDayWithFormat:(NSString *)format;
 
 
 #pragma mark - 时间/时间戳，转换/格式化

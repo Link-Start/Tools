@@ -19,7 +19,7 @@ typedef NS_ENUM(NSInteger, XBAlertButtonStyle)
     XBAlertButtonStyleRed,          //亮红色-白字
 };
 /**
- *  退出动画
+ *  进入动画
  */
 typedef NS_ENUM(NSInteger, XBAlertShowAnimate)
 {

@@ -211,8 +211,47 @@
 /******************************************************************************************************************************************************************************************/
 
 
++ (UIViewController*)zf_currentViewController {
+    __block UIWindow *window;
+    if (@available(iOS 13, *)) {
+        [[UIApplication sharedApplication].connectedScenes enumerateObjectsUsingBlock:^(UIScene * _Nonnull scene, BOOL * _Nonnull scenesStop) {
+            if ([scene isKindOfClass: [UIWindowScene class]]) {
+                UIWindowScene * windowScene = (UIWindowScene *)scene;
+                [windowScene.windows enumerateObjectsUsingBlock:^(UIWindow * _Nonnull windowTemp, NSUInteger idx, BOOL * _Nonnull windowStop) {
+                    if (windowTemp.isKeyWindow) {
+                        window = windowTemp;
+                        *windowStop = YES;
+                        *scenesStop = YES;
+                    }
+                }];
+            }
+        }];
+    } else {
+        window = [[UIApplication sharedApplication].delegate window];
+    }
+    UIViewController *topViewController = [window rootViewController];
+    while (true) {
+        if (topViewController.presentedViewController) {
+            topViewController = topViewController.presentedViewController;
+        } else if ([topViewController isKindOfClass:[UINavigationController class]] && [(UINavigationController *)topViewController topViewController]) {
+            topViewController = [(UINavigationController *)topViewController topViewController];
+        } else if ([topViewController isKindOfClass:[UITabBarController class]]) {
+            UITabBarController *tab = (UITabBarController *)topViewController;
+            topViewController = tab.selectedViewController;
+        } else {
+            break;
+        }
+    }
+    return topViewController;
+}
 
 
+
+
+
+
+
+/******************************************************************************************************************************************************************************************/
 
 //自定义弹出框显示动画
 ///视图展示

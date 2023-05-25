@@ -5,6 +5,9 @@
 //  Created by Alex Yang on 2018/2/1.
 //  Copyright © 2018年 Link-Start. All rights reserved.
 //
+//
+// zIndex这个属性调整collectionview中的层级关系，cell是0，要想装饰视图在cell底部，就要把装饰视图的zindex调整到小于0
+// zIndex 这个属性可以在自定义卡片的时候 让中间的cell处于视图的最前面
 
 #import "LSRootCollectionView.h"
 
@@ -71,6 +74,7 @@
 //}
 ////对头视图或者尾视图进行设置
 //- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+//MemberInfoDetailsBottomConsumerDetailsHeadView *headView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kMemberInfoDetailsBottomConsumerDetailsHeadViewId forIndexPath:indexPath];
 //}
 //是否允许移动Item
 - (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(9_0){

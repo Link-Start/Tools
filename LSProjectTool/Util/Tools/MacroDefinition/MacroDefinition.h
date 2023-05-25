@@ -65,7 +65,7 @@
 #define LS_StrongSelf(type) __strong typeof(type) strong##type = type
 
 #if DEBUG
-//0开发环境 测试环境 1正式环境
+//0开发环境/测试环境 1正式环境
 #define currentEnvironment 0
 #define isProduction        NO
 #define isDebug             YES
@@ -170,9 +170,9 @@
 
 //获取系统对象
 #define kLS_Application        [UIApplication sharedApplication]
-#define kLS_AppDelegate        kLS_Application.delegate
+#define kLS_AppDelegate        [UIApplication sharedApplication].delegate
 #define kLS_AppDelegateWindow  (kLS_AppDelegate.window) ? (kLS_AppDelegate.window) : (kLS_Application.keyWindow)
-#define kLS_RootViewController kLS_Application.delegate.window.rootViewController
+#define kLS_RootViewController kLS_AppDelegateWindow.rootViewController
 #define kLS_UserDefaults       [NSUserDefaults standardUserDefaults]
 #define kLS_NotificationCenter [NSNotificationCenter defaultCenter]
 
@@ -213,16 +213,46 @@ textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:(te
 //#define kLS_changeTextFieldPlaceholderFont(textField, font) [textField setValue:font forKeyPath:@"_placeholderLabel.font"]
 
 
-//openUrl
-#define kLS_OpenUrl(urlString)\
-NSURL *str_URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@", urlString]];\
-if ([kLS_Application canOpenURL:str_URL]) {\
-if(@available(iOS 10.0, *)) {\
-    [kLS_Application openURL:str_URL options:@{} completionHandler:nil];\
-} else {\
-    [kLS_Application openURL:str_URL];\
-}\
-}
+//openUrlString 打开网址
+#define kLS_OpenUrlString(urlString)\
+    NSURL *str_URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@", urlString]];\
+    if ([[UIApplication sharedApplication] canOpenURL:str_URL]) {\
+        if(@available(iOS 10.0, *)) {\
+            [[UIApplication sharedApplication] openURL:str_URL options:@{UIApplicationOpenURLOptionsSourceApplicationKey:@YES} completionHandler:nil];\
+        } else {\
+            [[UIApplication sharedApplication] openURL:str_URL];\
+        }\
+    } else {\
+        NSLog(@"不能打开的地址urlString：%@", urlString);\
+    }
+//openUrl 打开网址
+#define kLS_OpenUrl(Url)\
+    if ([[UIApplication sharedApplication] canOpenURL:Url]) {\
+        if(@available(iOS 10.0, *)) {\
+            [[UIApplication sharedApplication] openURL:Url options:@{UIApplicationOpenURLOptionsSourceApplicationKey:@YES} completionHandler:nil];\
+        } else {\
+            [[UIApplication sharedApplication] openURL:Url];\
+        }\
+    } else {\
+        NSLog(@"不能打开的地址url：%@", Url);\
+    }
+
+// 打电话
+#define kLS_CallPhone(phoneNumber)\
+    if (!phoneNumber) {\
+        NSLog(@"手机号码是空的");\
+        return;\
+    }\
+    NSString * phoneStr = [NSString stringWithFormat:@"tel:%@",phoneNumber];\
+    NSURL *takePhoneUrl = [NSURL URLWithString:phoneStr];\
+    if ([[UIApplication sharedApplication] canOpenURL:takePhoneUrl]) {\
+        if(@available(iOS 10.0, *)) {\
+            [[UIApplication sharedApplication] openURL:takePhoneUrl options:@{UIApplicationOpenURLOptionsSourceApplicationKey:@YES} completionHandler:nil];\
+        } else {\
+            [[UIApplication sharedApplication] openURL:str_URL];\
+        }\
+    }
+
 
 
 //打开appStore中的应用 https://itunes.apple.com/cn/app/idxxxxx?mt=8
@@ -312,21 +342,25 @@ if ([v1 compare:v2 options:NSNumericSearch] == NSOrderedDescending) {\
 
 /******************************************************************************************************************************************************************************************************/
 
-
+/// 从当前导航栏 nav 中移除当前VC
 #define dismissCurrentVc(targetVc) \
-{NSMutableArray *childsVcs = targetVc.navigationController.viewControllers.mutableCopy;\
-[childsVcs removeObject:targetVc];\
-targetVc.navigationController.viewControllers = childsVcs;\
+{\
+    NSMutableArray *childsVcs = targetVc.navigationController.viewControllers.mutableCopy;\
+    [childsVcs removeObject:targetVc];\
+    targetVc.navigationController.viewControllers = childsVcs;\
 }
-
+/// 从当前导航栏 nav 中移除当前VC
 #define dismissCurrentVcAnimation(targetVc) \
-{NSMutableArray *childsVcs = targetVc.navigationController.viewControllers.mutableCopy;\
-[childsVcs removeObject:targetVc];\
-[targetVc.navigationController setViewControllers:childsVcs animated:YES];\
+{ \
+    NSMutableArray *childsVcs = targetVc.navigationController.viewControllers.mutableCopy;\
+    [childsVcs removeObject:targetVc];\
+    [targetVc.navigationController setViewControllers:childsVcs animated:YES];\
 }
 
+///  移除导航栏 nav 中间的所有VC， 只保留第一个和最后一个Vc
 #define bringVctoFront(targetVc) \
-{NSMutableArray *childsVcs = targetVc.navigationController.viewControllers.mutableCopy;\
+{\
+    NSMutableArray *childsVcs = targetVc.navigationController.viewControllers.mutableCopy;\
     NSMutableArray *remainChildVcs = [NSMutableArray array];\
     [remainChildVcs addObject:[childsVcs firstObject]];\
     [remainChildVcs addObject:[childsVcs lastObject]];\
@@ -355,7 +389,7 @@ targetVc.navigationController.viewControllers = childsVcs;\
 }
 
 /// 更改tabBar 选中的下标
-#define changeTabBarControllerSelectIndex(index) [(UITabBarController *)BEEAppDelegate.window.rootViewController setSelectedIndex:index]
+#define changeTabBarControllerSelectIndex(index) [(UITabBarController *)kLS_AppDelegateWindow.rootViewController setSelectedIndex:index]
 
 
 /******************************************************************************************************************************************************************************************************/

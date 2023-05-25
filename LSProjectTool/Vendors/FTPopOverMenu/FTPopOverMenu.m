@@ -807,7 +807,7 @@ typedef NS_ENUM(NSUInteger, FTPopOverMenuArrowDirection) {
             menuRect = CGRectMake(menuX, (senderRect.origin.y + senderRect.size.height), self.config.menuWidth, KSCREEN_HEIGHT - menuRect.origin.y - self.config.horizontalMargin - safeAreaInset.bottom);
             shouldAutoScroll = YES;
         }
-    }else{//箭头方向向下
+    } else {//箭头方向向下
         menuRect = CGRectMake(menuX, (senderRect.origin.y - menuHeight), self.config.menuWidth, menuHeight);
         // if too long and is out of screen 如果太长并且在屏幕外
         if (menuRect.origin.y < safeAreaInset.top) {

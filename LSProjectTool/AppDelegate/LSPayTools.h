@@ -23,7 +23,7 @@ typedef NS_ENUM(NSUInteger, PayResultCode) {
     AlipayPaySuccess        = 1101,   /**< 支付宝支付成功 */
     AlipayPayError          = 1102,   /**< 支付宝支付错误 */
     AlipayPayCancel         = 1103,   /**< 支付宝支付取消 */
-    AlipayError_Param         = 1006,   /**< 支付宝支付参数解析错误   */
+    AlipayError_Param       = 1006,   /**< 支付宝支付参数解析错误   */
     
     
     AppStorePaySuccess      = 1201,   /**内购支付成功*/
@@ -81,8 +81,12 @@ NS_ASSUME_NONNULL_BEGIN
 /******************* 参数 ********************/
 ///用户ID
 @property (nonatomic, copy) NSString *user_id;
-/// 订单号
-@property (nonatomic, copy) NSString *orderNo;
+///订单发送时间（yyyyMMddHHmmss）
+@property (nonatomic , copy) NSString *orderSendTime;
+///订单号
+@property (nonatomic , copy) NSString *traderOrderNo;
+///交易金额（分）
+@property (nonatomic , copy) NSString *tranAmt;
 
 
 

@@ -8,7 +8,7 @@
 
 #import "LSRootTableView.h"
 #import "UIImage+Extension.h"
-@interface LSRootTableView ()
+@interface LSRootTableView ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *ls_tableView;
 
@@ -57,10 +57,11 @@
 }
 
 
+
 #pragma mark - 数据
 #pragma mark - 上拉加载、下拉刷新
-//上拉加载 下拉刷新
-///开始刷新
+////上拉加载 下拉刷新
+/////开始刷新
 //- (void)setupRefresh {
 //
 //    __weak __typeof(self)weakSelf = self;
@@ -84,7 +85,7 @@
 //    self.tableView.mj_footer.automaticallyChangeAlpha = YES;
 //    self.tableView.mj_footer.automaticallyHidden = YES;
 //}
-//
+
 //- (void)endRefreshing {
 //    if (self.tableView.mj_header.isRefreshing) {
 //        [self.tableView.mj_header endRefreshing];
@@ -92,6 +93,14 @@
 //    if (self.tableView.mj_footer.isRefreshing) {
 //        [self.tableView.mj_footer endRefreshing];
 //    }
+//}
+
+//// 设置尾部刷新控件，更新为无感知加载更多
+//- (void)addTableViewFooterAutoAddData {
+//    MJRefreshAutoFooter *footer = [[MJRefreshAutoFooter alloc] init];
+//    // tiggerAutomaticallyRefreshPercent:默认值为1，改为0滑倒底部就会自动刷新，-1:在快滑倒底部44px的时候就会自动刷新
+//    footer.triggerAutomaticallyRefreshPercent = -1;
+//    tableView.mj_footer = footer;
 //}
 
 #pragma mark - 代理方法
@@ -109,9 +118,9 @@
 //    return [[UIView alloc] init];
 //}
 
+/// cell左滑删除 使用和这个第三方库 :MGSwipeTableCell      -------->持续更新中
 
-#pragma mark - cell左滑删除
-//
+#pragma mark - cell左滑删除 1
 ////1.首先设置cell可以编辑
 //- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
 //    return YES;
@@ -130,18 +139,175 @@
 //}
 ////5.点击删除的实现。特别提醒：必须要先删除了数据，才能再执行删除的动画或者其他操作，不然会引起崩溃。
 //- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-//    
+//
 //    __weak __typeof(self)weakSelf = self;
 //    UIAlertController *alerCon = [UIAlertController alertControllerWithTitle:@"确定取消此收藏？" message:nil preferredStyle:UIAlertControllerStyleAlert];
 //    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
 //    }];
 //    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//        
+//
 //    }];
 //    [alerCon addAction:cancelAction];
 //    [alerCon addAction:sureAction];
 //    [self presentViewController:alerCon animated:YES completion:nil];
 //}
+
+#pragma mark - cell左滑删除 2
+////iOS11之前的editActionsForRowAtIndexPath方法
+//- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    UITableViewRowAction *rowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault
+//                                                                         title:@"跟进" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+//        NSLog(@"跟进");
+//
+//    }];
+//
+//    UITableViewRowAction *rowActionSec = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault
+//                                                                            title:@"快速备忘"    handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+//        NSLog(@"快速备忘");
+//
+//    }];
+//    rowActionSec.backgroundColor = [UIColor colorWithHexString:@"f38202"];
+//    rowAction.backgroundColor = [UIColor colorWithHexString:@"d9d9d9"];
+//
+//    NSArray *arr = @[rowAction,rowActionSec];
+//    return arr;
+//}
+//
+////iOS11新增的系统侧滑方法
+////ios11新增的方法支持图片和文字侧滑样式, 默认的样式是图片在上，文字在下。滑动操作这里还有一个需要注意的是，当cell高度较小时，会只显示image，不显示title，当cell高度够大时，会同时显示image和title。
+//- (nullable UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(11.0)) {
+//    UIContextualAction *action = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive title:@"删除" handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+////        if (self.dataArray.count > indexPath.row) {
+////            [self.dataArray removeObjectAtIndex:indexPath.row];
+////            [UIView performWithoutAnimation:^{
+////                [self.detailTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+////            }];
+////        }
+//        completionHandler(YES);
+//    }];
+////    action.image = [UIImage imageNamed:@"tab_home"];
+//    action.backgroundColor = UIColorFromRGB(0xC9C6CC);
+//    UISwipeActionsConfiguration *config = [UISwipeActionsConfiguration configurationWithActions:@[action]];
+//    /// 控制是否可以左滑到头删除当前cell，默认为YES
+////    config.performsFirstActionWithFullSwipe = NO;
+////    self.editingIndexPath = indexPath;
+//    [self.view setNeedsLayout];
+//    return config;
+//}
+
+///// 不同系统版本对左滑样式的处理
+///// 设置左滑菜单按钮的样式
+//- (void)setupSlideBtn {
+////ios 13: _UITableViewCellSwipeContainerView 是tableview 的子视图，UISwipeActionPullView是_UITableViewCellSwipeContainerView的子视图
+//    if (@available(iOS 13.0, *)) {
+//        for (UIView *subView in self.ls_tableView.subviews) {
+//            if ([subView isKindOfClass:NSClassFromString(@"_UITableViewCellSwipeContainerView")] && [subView.subviews count] >= 1) {
+//                UIView *remarkContentView = subView.subviews.firstObject;
+//               // [self setupRowActionViewInit: remarkContentView];
+//for (UIView *v in remarkContentView.subviews) {
+//    if ([v isKindOfClass:NSClassFromString(@"UISwipeActionStandardButton")]) {
+//        UIButton *btn = (UIButton *)v;
+//        [btn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+//    }
+//}
+//            }
+//        }
+//        return;
+//    }
+//// iOS 11层级 : UITableView -> UISwipeActionPullView(当左滑出现“删除”按钮时，按钮的俯视图是UISwipeActionPullView)
+//    if (@available(iOS 11.0, *)) {
+//        for (UIView *subView in self.ls_tableView.subviews) {
+//            if ([subView isKindOfClass:NSClassFromString(@"UISwipeActionPullView")] && [subView.subviews count] >= 1) {
+//                UIView *remarkContentView = subView;
+//                remarkContentView.backgroundColor = [UIColor clearColor];
+//                [self setupRowActionViewInit: remarkContentView];
+//
+//                //subView.subviews[0]; //按钮
+//            }
+//        }
+//        return;
+//    }
+//    // iOS11 以下的版本
+//    UITableViewCell *cell = [self.ls_tableView cellForRowAtIndexPath:self.editingIndexPath];
+//    for (UIView *subView in cell.subviews) {
+//        if ([subView isKindOfClass:NSClassFromString(@"UITableViewCellDeleteConfirmationView")] && [subView.subviews count] >= 1) {
+//            UIView *remarkContentView = subView;
+//            [self setupRowActionViewInit:remarkContentView];
+//        }
+//    }
+//}
+
+////自定义cell高度时左滑样式处理
+////左滑删除的系统样式默认是cell的高度，当在cell显示的View和cell本身高度不等高时候需要处理
+///// 系统默认的侧滑删除高度是和cell等高的,修改样式
+//- (void)setupRowActionViewInit:(UIView *)rowActionView {
+//    CGRect frame = rowActionView.frame;
+//    if (self.editingIndexPath == nil) {
+//        if (frame.origin.y > 0) {
+//            frame.origin.y = 0;
+//            frame.size.height += 15*KYY;
+//        }
+//    } else {
+//        if (frame.origin.y == 0) {
+//            frame.origin.y += 15*KYY;
+//            frame.size.height -= 15*KYY;
+//        }
+//    }
+//    rowActionView.frame = frame;
+//    UIButton *button = rowActionView.subviews.firstObject;
+//    [button setTitle:@"删除" forState:UIControlStateNormal];
+////    [button setImage:[UIImage imageNamed:@"tab_home"] forState:UIControlStateNormal];
+//    button.titleLabel.font = UIDEFAULTFONTSIZE(16);
+//}
+
+//#pragma mark -- -- 自定义修改左滑 删除按钮 样式
+//- (void)changeConfigSwipeButtons {
+//
+//    // iOS 11层级 : UITableView -> UISwipeActionPullView(当左滑出现“删除”按钮时，按钮的俯视图是UISwipeActionPullView)
+//    for (UIView *subview in self.tableView.subviews) {
+//         // ios 11以下
+//         if ([subview isKindOfClass:NSClassFromString(@"UISwipeActionPullView")] && [subview.subviews count] >= 1)
+//         {
+//              UIButton*readButton = subview.subviews[0];
+//              [readButton setImage:[UIImage imageNamed:@"plan_delete"] forState:UIControlStateNormal];
+//              break;
+//         }
+//        // ios 13
+//        // _UITableViewCellSwipeContainerView 是tableview 的子视图，UISwipeActionPullView是_UITableViewCellSwipeContainerView的子视图
+//         else if ([subview isKindOfClass:NSClassFromString(@"_UITableViewCellSwipeContainerView")] && [subview.subviews count] >= 1) {
+//             for (UIView *subview0 in subview.subviews){
+//                 if ([subview0 isKindOfClass:NSClassFromString(@"UISwipeActionPullView")] && [subview0.subviews count] >= 1){
+//
+//                     UIButton *deleteButton = subview0.subviews[0]; // 第一层视图
+//                     deleteButton.layer.masksToBounds = YES;
+//                     deleteButton.layer.cornerRadius = 12;
+//                     deleteButton.layer.backgroundColor = RGBA(223, 109, 53, 1).CGColor;
+//                     [deleteButton setBackgroundImage:[UIImage imageWithColor:UIColorFromHex(@"de6d3c") size:CGSizeMake(80, 135)] forState:UIControlStateNormal];
+//
+//
+//                     break;
+//                 }
+//             }
+//         }
+//
+//    }
+//}
+//
+//
+//+ (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size {
+//    if (!color || size.width <= 0 || size.height <= 0) return nil;
+//    CGRect rect = CGRectMake(0.0f, 0.0f, size.width, size.height);
+//    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//    CGContextSetFillColorWithColor(context, color.CGColor);
+//    CGContextFillRect(context, rect);
+//    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+//    return image;
+//}
+//
+//
+
 
 #pragma mark - tableview整个Section切圆角 方法一
 //- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {

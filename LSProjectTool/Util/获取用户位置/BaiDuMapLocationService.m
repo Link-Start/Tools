@@ -140,3 +140,28 @@
 
 
 @end
+
+/**
+ 
+1、百度地图SDK使用什么坐标系？
+ （1） 百度地图SDK在国内（包括港澳台），输入、输出默认使用BD09坐标；定位SDK默认输出是使用GCJ02坐标。
+ 自iOSv3.3起，支持一次声明为GCJ02坐标类型，全应用支持输入GCJ02坐标，返回GCJ02坐标。
+ （2） 海外地区，输入为WGS84坐标。
+ 
+2、 什么是国测局坐标、百度坐标、WGS84坐标？
+ 三种坐标系说明如下：
+ （1）WGS84：表示GPS获取的坐标；
+ （2）GCJ02：是由中国国家测绘局制订的地理信息系统的坐标系统。由WGS84坐标系经加密后的坐标系。
+ （3）BD09：为百度坐标系，在GCJ02坐标系基础上再次加密。其中bd09ll表示百度经纬度坐标，bd09mc表示百度墨卡托米制坐标；
+
+ 百度地图SDK在国内（包括港澳台）使用的是BD09坐标；在海外地区，统一使用WGS84坐标。开发者在使用百度地图相关服务时，请注意选择。
+  
+ 从其他体系的坐标迁移到百度坐标：百度地图开放平台提供了官方的坐标转换接口，请开发者直接选择使用。开发者切勿从非官方渠道获得坐标转换方法。
+ *  @brief 转换为百度经纬度的坐标
+ *  @param coordinate 待转换的经纬度
+ *  @param srctype    待转换坐标系类型
+ *  @param destype    目标百度坐标系类型（bd09ll,bd09mc）
+ *  @return 目标百度坐标系经纬度
+ + (CLLocationCoordinate2D) BMKLocationCoordinateConvert:(CLLocationCoordinate2D) coordinate SrcType:(BMKLocationCoordinateType)srctype DesType:(BMKLocationCoordinateType)destype;
+ 
+ */

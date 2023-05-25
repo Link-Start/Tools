@@ -22,11 +22,14 @@
 #import "AlipaySDK/AlipaySDK.h"
 #endif
 
+#if (__has_include(<YYKit/YYKit.h>) || __has_include("YYKit.h"))
+#import "YYKit.h"
+#endif
 
 
 #import <StoreKit/StoreKit.h> //苹果支付(内购)
 #import <UICKeyChainStore.h>
-#import <YYKit.h>
+
 //#import "ADFileManager.h"
 
 
@@ -100,6 +103,7 @@ static LSPayTools *_ls_payTools = nil;
     }];
 
     [WXApi registerApp:wx_appid universalLink:universalLink];//
+    [WXApi sendReq:nil completion:nil];
 
     //自检函数
     [WXApi checkUniversalLinkReady:^(WXULCheckStep step, WXCheckULStepResult* result) {
@@ -589,9 +593,9 @@ static LSPayTools *_ls_payTools = nil;
 -(void)buyProduct:(SKProduct *)product{
     // 1.创建票据
     NSString *userId = self.user_id;
-    NSString *orderId = self.orderNo;
+    NSString *orderNo = self.traderOrderNo;
     
-    NSString *userName = [NSString stringWithFormat:@"%@-%@",userId,orderId];
+    NSString *userName = [NSString stringWithFormat:@"%@-%@",userId,orderNo];
     SKMutablePayment *skpayment = [SKMutablePayment paymentWithProduct:product];
     skpayment.applicationUsername = userName;
     
@@ -618,6 +622,39 @@ static LSPayTools *_ls_payTools = nil;
 //    NSArray *transactions =[[NSArray alloc] initWithObjects:transaction, nil];
 //    [self paymentQueue:[SKPaymentQueue defaultQueue] updatedTransactions:transactions];
 //}
+
+
+///
+/// ！！！！！App Store 促销开发(https://juejin.cn/post/7229151797415575610)！！！！！！！
+///// 当用户从应用商店发起IAP购买时发送
+///// 当用户在App Store中开始应用程序内购买，并且交易在您的应用程序中继续时，会调用此委托方法。具体来说，如果您的应用程序已经安装，则会自动调用该方法。
+///// 如果用户在App Store中开始应用程序内购买时尚未安装您的应用程序，则用户将在应用程序安装完成后收到通知。当用户点击通知时，会调用此方法。否则，如果用户手动打开应用程序，则仅在购买开始后不久打开应用程序时调用此方法。
+///这个方法会返回商品信息,返回值 YES 则交给苹果处理该订单,直接调起支付流程,
+///如果返回 NO 的话,则不会调起支付流程,在里面我们可以增加自己的一些逻辑代码,比如判断当前用户是否已经登录了等等操作
+//- (BOOL)paymentQueue:(SKPaymentQueue *)queue shouldAddStorePayment:(SKPayment *)payment forProduct:(SKProduct *)product {
+// NSLog(@"AppStore 从促销点击购买处理");
+//    NSLog(@"商品信息 :%@", product);
+// 直接返回 NO,不交给苹果处理
+//    NSString *productID = product.productIdentifier;
+//    NSLog(@"AppStore 促销点击购买: productIdentifier - %@", productID);
+//
+//    // 记录当前事件
+//    [APPDELEGATE.appReqTools dealAppStoreBuyWithProductID:productID];
+//    // 判断当前是否登录
+//    BOOL result = [LBLoginHandler checkLogin];
+//    if (result == YES) {
+//        // 当前已登录直接处理
+//        NSLog(@"当前已登录,直接处理当前事件");
+//        [APPDELEGATE.appReqTools dealAllEvent];;
+//    } else {
+//        // 当前未登录
+//        NSLog(@"当前未登录,待登录成功后,处理跳转购买会员页面");
+//    }
+//
+//    return NO;
+//    // 这样就完成了 AppStore 内购促销开发
+//}
+
 
 #pragma mark -- 监听结果
 //判断交易状态：
@@ -690,13 +727,13 @@ static LSPayTools *_ls_payTools = nil;
 //持久化 当前正在交易绑定的业务订单
 - (void)saveCurrentTransationBindedOrderNo {
     NSLog(@"商品添加进列表");
-    if (!self.orderNo) {
+    if (!self.traderOrderNo) {
         NSLog(@"订单编号OrderNo 为空");
         return;
     }
     NSDictionary *orderDict = @{
         @"productId":self.product_Id,
-        @"orderNo":self.orderNo
+        @"orderNo":self.traderOrderNo
     };
 
     [[NSUserDefaults standardUserDefaults] setObject:orderDict forKey:@"persient.IAP.order"];
@@ -735,7 +772,7 @@ static LSPayTools *_ls_payTools = nil;
 // （14.）： 交易结束，当交易结束后还要后台服务器端去App Store上验证支付信息是否都正确，只有所有都正确后，我们就可以给用户发放我们的虚拟产品了。
 - (void)completeTransactionGoOnBackgroundServerVerify:(SKPaymentTransaction *)transaction {
 //    NSString *str = [[NSString alloc] initWithData:transaction.transactionReceipt encoding:NSUTF8StringEncoding];
-    NSLog(@"------ 完成交易调用的方法getApplePayDataToServerRequsetWith 1----------");
+    NSLog(@"------ 完成交易调用的方法 getApplePayDataToServerRequsetWith 1----------");
     // 获取设备端app的交易收据数据，使用NSBundle的方法定位app的收据，并用Base64编码。将此 Base64 编码数据发送到您的服务器。
     NSURL *receiptURL = [[NSBundle mainBundle] appStoreReceiptURL];
     NSData *receiptData = [NSData dataWithContentsOfURL:receiptURL];
@@ -762,7 +799,7 @@ static LSPayTools *_ls_payTools = nil;
 
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    if (!self.orderNo) { //没有订单号，(代表是之前验签失败的订单,是程序启动时苹果api自动检测到未完成订单过来的)
+    if (!self.traderOrderNo) { //没有订单号，(代表是之前验签失败的订单,是程序启动时苹果api自动检测到未完成订单过来的)
         //苹果检测到的未完成订单
         //1.从applicationUsername拿到参数信息
         //2.读取自己保存的订单数据，根据订单号进行比对
@@ -780,41 +817,43 @@ static LSPayTools *_ls_payTools = nil;
 
         //获取到前面放到applicationUsername里面的参数(订单号,userid,...等)
         NSArray *arr = [transaction.payment.applicationUsername componentsSeparatedByString:@"-"];
-        self.orderNo = @"";//self.traderOrderNo
+        self.traderOrderNo = @"";//self.traderOrderNo
         if (arr.count >= 4) {
             self.product_Id = arr[1];
-//            self.traderOrderNo = arr[2];
-//            self.orderSendTime = arr[3];
-//            self.tranAmt = arr[4];
+            self.traderOrderNo = arr[2];
+            self.orderSendTime = arr[3];
+            self.tranAmt = arr[4];
         }
         for (int i = 0; i < iap_array.count; i++) {
             NSDictionary *temDic = iap_array[i];
-            if ([temDic[@"traderOrderNo"] isEqualToString:self.orderNo]) {
+            if ([temDic[@"traderOrderNo"] isEqualToString:self.traderOrderNo]) {
                 dict = [NSMutableDictionary dictionaryWithDictionary:temDic];
                 break;
             }
         }
         
         if (!dict[@"traderOrderNo"]) {//如果之前没有保存过这条数据
-//            // 提交服务器验证之前，保存数据
-//            dict[@"product_id"] = transaction.payment.productIdentifier;// 内购产品编号
-//            dict[@"transaction_id"] = transaction.transactionIdentifier;//交易编号
-//            dict[@"receipt_data"] = receiptBase64String;
-//            dict[@"traderOrderNo"] = self.orderNo;//订单号
-//            dict[@"orderSendTime"] = self.orderSendTime;
-//            dict[@"tranAmt"] = self.tranAmt;//交易金额
-//            [self saveIAPArrayWithDict:dict];//保存到数组
+            // 提交服务器验证之前，保存数据
+            dict[@"product_id"] = transaction.payment.productIdentifier;// 内购产品编号
+            dict[@"transaction_id"] = transaction.transactionIdentifier;//交易编号
+            dict[@"receipt_data"] = receiptBase64String;
+            dict[@"traderOrderNo"] = self.traderOrderNo;//订单号
+            dict[@"orderSendTime"] = self.orderSendTime;
+            dict[@"tranAmt"] = self.tranAmt;//交易金额
+            
+            [self saveIAPArrayWithDict:dict];//保存到数组
         }
         
     } else {//有订单号，代表是正常流程下单过来的
         // 提交服务器验证之前，保存数据
-//        dict[@"product_id"] = transaction.payment.productIdentifier;// 内购产品编号
-//        dict[@"transaction_id"] = transaction.transactionIdentifier;//交易编号
-//        dict[@"receipt_data"] = receiptBase64String;
-//        dict[@"traderOrderNo"] = self.orderNo;//订单号
-//        dict[@"orderSendTime"] = self.orderSendTime;
-//        dict[@"tranAmt"] = self.tranAmt;//交易金额
-//        [self saveIAPArrayWithDict:dict];//保存到数组
+        dict[@"product_id"] = transaction.payment.productIdentifier;// 内购产品编号
+        dict[@"transaction_id"] = transaction.transactionIdentifier;//交易编号
+        dict[@"receipt_data"] = receiptBase64String;
+        dict[@"traderOrderNo"] = self.traderOrderNo;//订单号
+        dict[@"orderSendTime"] = self.orderSendTime;
+        dict[@"tranAmt"] = self.tranAmt;//交易金额
+        
+        [self saveIAPArrayWithDict:dict];//保存到数组
 ////        [self saveIAPDictWithTraderOrderNo:self.traderOrderNo dict:dict]//保存到字典
     }
 
@@ -826,8 +865,8 @@ static LSPayTools *_ls_payTools = nil;
 //            self.PaySuccessBlock(AppStorePaySuccess, @"内购交易成功", dict);
 //        }
 //
-//        [self finishAndRemoveTransaction:transaction];
-//
+//        [self finishAndRemoveTransaction:transaction];//从队列中删除已完成（即失败或已完成）的事务。
+//          //  内购交易成功， 根据订单号 删除保存的对应的数据
 //        [self removeIAPArrayObjectWithTraderOrderNo:self.traderOrderNo];
 ////        [self removeIAPDictObjectWithTraderOrderNo:self.traderOrderNo];//
 //
@@ -929,7 +968,25 @@ static LSPayTools *_ls_payTools = nil;
     NSData *new_data = [iap_dict modelToJSONData];
     [UICKeyChainStore setData:new_data forKey:@"apple.iap.pay.dict.hyh"];
 }
+/**
+ 
+ 21000: 未使用HTTP POST请求方法向App Store发送请求。
+ 21001: 此状态代码不再由App Store发送。
+ 21002: receipt-data属性中的数据格式错误，或者服务遇到了临时问题。再试一次。
+ 21003: 收据无法认证。
+ 21004: 您提供的共享密钥与您帐户的文件共享密钥不匹配。
+ 21005: 收据服务器暂时无法提供收据。再试一次。
+ 21006：  该收据有效，但订阅已过期。当此状态码返回到您的服务器时，收据数据也会被解码并作为响应的一部分返回。仅针对自动续订的iOS 6样式的交易收据返回。
+ 21007: 该收据来自测试环境，但是已发送到生产环境以进行验证。
+ 21008：  该收据来自生产环境，但是已发送到测试环境以进行验证。
+ 21009：  内部数据访问错误。稍后再试。
+ 21010: 找不到或删除了该用户帐户。
+ ————————————————
+ 原文链接：https://blog.csdn.net/qq1353424111/article/details/108714916
+ */
 
+#pragma mark - 苹果建议，先使用正式环境校验票据，如果验证失败，错误代码为‘Sandbox receipt used in production’,则应根据测试环境进行验证
+#pragma mark - 先验证正式服务器,如果正式服务器返回21007再去苹果测试服务器验证,沙盒测试环境苹果用的是测试服务器
 #pragma mark -- -- 本地验证 App Store票据  -- --
 #pragma mark - 本地校验
 /// 购买完成进行本地校验交易凭证（ 第二种，不需要服务器验证，自己在客户端验证，不安全，容易被破解，导致赚钱少哦）
@@ -978,7 +1035,7 @@ static LSPayTools *_ls_payTools = nil;
 
 
 //根据存储凭证存储Order
-    if (self.orderNo) {
+    if (self.traderOrderNo) {
         [self localVerify_saveOrderNoByInAppPurchase:transaction receiptDataBase64String:receiptBase64String];
     }
 
@@ -989,7 +1046,7 @@ static LSPayTools *_ls_payTools = nil;
 #pragma mark - 存储订单，防止走漏单流程时获取不到OrderNo, 且苹果返回的OrderNo为nil
 - (void)localVerify_saveOrderNoByInAppPurchase:(SKPaymentTransaction *)transaction receiptDataBase64String:(NSString *)receiptDataBase64String {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    NSString *orderNo = self.orderNo;
+    NSString *orderNo = self.traderOrderNo;
     NSString *savePath = [NSString stringWithFormat:@"%@/%@.plist", tempOrderPath, orderNo];
 
     [dict setValue:orderNo forKey:transaction.transactionIdentifier];//交易编号
@@ -1079,8 +1136,8 @@ static LSPayTools *_ls_payTools = nil;
     }
 
     if (orderNo == nil || orderNo.length == 0) {
-        if (self.orderNo) {
-            orderNo = self.orderNo;
+        if (self.traderOrderNo) {
+            orderNo = self.traderOrderNo;
         } else {
             if ([self getOrderWithTransactionId:transaction.transactionIdentifier].length > 0) {
                 orderNo = [self getOrderWithTransactionId:transaction.transactionIdentifier];
@@ -1264,10 +1321,70 @@ static LSPayTools *_ls_payTools = nil;
 #pragma mark -- 处理交易失败回调
 - (void)failedTransaction:(SKPaymentTransaction *)transaction {
     [MBProgressHUD hideAllHuds];
+    
+    NSLog(@"购买失败代码：%ld", transaction.error.code);
+    NSLog(@"失败错误：%@", transaction.error);
+    
+    
     if(transaction.error.code != SKErrorPaymentCancelled) {
         NSLog(@"购买失败");
         self.PayFailBlock?self.PayFailBlock(AppStorePayError, transaction.error.localizedDescription?:@"购买失败", nil):Nil;
-        [MBProgressHUD showError:@"购买失败"];//交易失败
+        
+        NSString *errorMsg = @"";
+        if (transaction.error.code == SKErrorUnknown) {
+            errorMsg = @"未知错误";
+        } else if (transaction.error.code == SKErrorClientInvalid) {
+            errorMsg = @"不允许客户端发出请求";
+        } else if (transaction.error.code == SKErrorPaymentInvalid) {
+            errorMsg = @"采购标识符无效";
+        } else if (transaction.error.code == SKErrorPaymentNotAllowed) {
+            errorMsg = @"不允许此设备付款";
+        } else if (transaction.error.code == SKErrorStoreProductNotAvailable) {
+            errorMsg = @"产品在当前店面中不可用";
+        } else if (transaction.error.code == SKErrorCloudServicePermissionDenied) {
+            errorMsg = @"用户不允许访问云服务信息";
+        } else if (transaction.error.code == SKErrorCloudServiceNetworkConnectionFailed) {
+            errorMsg = @"设备无法连接到网络";
+        } else if (transaction.error.code == SKErrorCloudServiceRevoked) {
+            errorMsg = @"用户已撤销使用此云服务的权限";
+        }
+        if (@available(iOS 12.2, *)) {
+            if (transaction.error.code == SKErrorPrivacyAcknowledgementRequired) {
+                errorMsg = @"用户需要确认苹果的隐私政策";
+            } else if (transaction.error.code == SKErrorUnauthorizedRequestData) {
+                errorMsg = @"应用程序正在尝试使用SKPayment的requestData属性，但没有相应的权限";
+            } else if (transaction.error.code == SKErrorInvalidOfferIdentifier) {
+                errorMsg = @"指定的订阅报价标识符无效";
+            } else if (transaction.error.code == SKErrorInvalidSignature) {
+                errorMsg = @"提供的加密签名无效";
+            } else if (transaction.error.code == SKErrorMissingOfferParams) {
+                errorMsg = @"缺少SKPaymentDiscount中的一个或多个参数";
+            } else if (transaction.error.code == SKErrorInvalidOfferPrice) {
+                errorMsg = @"所选报价的价格无效（例如低于当前基本订阅价格）";
+            } else if (transaction.error.code == SKErrorOverlayCancelled) {
+                errorMsg = @"SKOverlay，取消";
+            }
+        } else if (@available(iOS 14.0, *)) {
+            if (transaction.error.code == SKErrorOverlayInvalidConfiguration) {
+                errorMsg = @"SKOverlay，无效的配置";
+            } else if (transaction.error.code == SKErrorOverlayTimeout) {
+                errorMsg = @"SKOverlay，超时";
+            } else if (transaction.error.code == SKErrorIneligibleForOffer) {
+                errorMsg = @"用户没有资格享受订阅优惠";
+            } else if (transaction.error.code == SKErrorUnsupportedPlatform) {
+                errorMsg = @"不支持的平台";
+            }
+        } else if (@available(iOS 14.5, *)) {
+            if (transaction.error.code == SKErrorOverlayPresentedInBackgroundScene) {
+                errorMsg = @"客户端试图在UIWindowScene中而不是在前台显示SKOverlay";
+            }
+        } else {
+            
+        }
+        
+        [MBProgressHUD showError:[NSString stringWithFormat:@"%ld, %@", transaction.error.code, errorMsg]];//交易失败
+        
+//        [MBProgressHUD showError:@"购买失败"];//交易失败
     } else {
         NSLog(@"用户取消交易(取消购买)");
         self.PayFailBlock?self.PayFailBlock(AppStorePayCancel, transaction.error.localizedDescription?:@"用户取消交易", nil):Nil;

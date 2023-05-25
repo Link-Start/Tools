@@ -25,9 +25,13 @@
 NSString * const ZYNetworkAccessibilityChangedNotification = @"ZYNetworkAccessibilityChangedNotification";
 
 typedef NS_ENUM(NSInteger, ZYNetworkType) {
+    /// 未知
     ZYNetworkTypeUnknown ,
+    /// 离线
     ZYNetworkTypeOffline ,
+    /// WiFi
     ZYNetworkTypeWiFi    ,
+    /// 蜂窝数据
     ZYNetworkTypeCellularData ,
 };
 
@@ -272,6 +276,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
     self->_cellularData.cellularDataRestrictionDidUpdateNotifier = ^(CTCellularDataRestrictedState state) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [weakSelf startCheck];
+            
         });
     };
 }
@@ -290,40 +295,60 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 
 
 #pragma mark - Check Accessibility
+//iOS网络情况分类：
+//通过App应用设置网络使用权限（关闭、WLAN、WLAN与蜂窝移动网）
+//直接设置手机网络情况（飞行模式、无线局域网络、蜂窝移动网络）
 
 - (void)startCheck {
     
-    if ([self currentReachable]) {
-        /* 先用 currentReachable 判断，若返回的为 YES 则说明：
-         1. 用户选择了 「WALN 与蜂窝移动网」并处于其中一种网络环境下。
-         2. 用户选择了 「WALN」并处于 WALN 网络环境下。
-         
-         此时是有网络访问权限的，直接返回 ZYNetworkAccessible
-         **/
-        return [self notiWithAccessibleState:ZYNetworkAccessible];
-    }
+//    if ([self currentReachable]) {
+//        /* 先用 currentReachable 判断，若返回的为 YES 则说明：
+//         1. 用户选择了 「WALN 与蜂窝移动网」并处于其中一种网络环境下。
+//         2. 用户选择了 「WALN」并处于 WALN 网络环境下。
+//
+//         此时是有网络访问权限的，直接返回 ZYNetworkAccessible
+//         **/
+//        return [self notiWithAccessibleState:ZYNetworkAccessible];
+//    }
     
+    // state：通过App应用设置网络使用权限（关闭、WLAN、WLAN与蜂窝移动网）
     CTCellularDataRestrictedState state = _cellularData.restrictedState;
     
     switch (state) {
         case kCTCellularDataRestricted: {// 系统 API 返回 无蜂窝数据访问权限
+           
             
-            [self getCurrentNetworkType:^(ZYNetworkType type) {
-                /*  若用户是通过蜂窝数据 或 WLAN 上网，走到这里来 说明权限被关闭**/
-                
-                if (type == ZYNetworkTypeCellularData || type == ZYNetworkTypeWiFi) {
-                    [self notiWithAccessibleState:ZYNetworkRestricted];
-                } else {  // 可能开了飞行模式，无法判断
-                    [self notiWithAccessibleState:ZYNetworkUnknown];
-                }
-            }];
+//            [self getCurrentNetworkType:^(ZYNetworkType type) {
+//                /*  若用户是通过蜂窝数据 或 WLAN 上网，走到这里来 说明权限被关闭**/
+//
+//                if (type == ZYNetworkTypeCellularData || type == ZYNetworkTypeWiFi) {
+//                    [self notiWithAccessibleState:ZYNetworkRestricted];
+//                } else {  // 可能开了飞行模式，无法判断
+//                    [self notiWithAccessibleState:ZYNetworkUnknown];
+//                }
+//            }];
             
+            NSLog(@"权限被关闭 Restricrted");
+            // 说明：CTCellularData 只能检测蜂窝权限，不能检测WiFi权限
+            // 所以走到这里有两个条件：
+            // 条件1.通过App应用设置网络使用权限：关闭
+            // 条件2.通过App应用设置网络使用权限：WLAN（无论有没有链接WiFi）
+            // 所以要根据，另外的工具判断 WLAN的链接状态 ，如果没有没有链接WiFi，弹窗提醒
+            [self notiWithAccessibleState:ZYNetworkRestricted];
             break;
         }
-        case kCTCellularDataNotRestricted: // 系统 API 访问有有蜂窝数据访问权限，那就必定有 Wi-Fi 数据访问权限
-            [self notiWithAccessibleState:ZYNetworkAccessible];
+        case kCTCellularDataNotRestricted:
+            // 系统 API 访问有有蜂窝数据访问权限，那就必定有 Wi-Fi 数据访问权限
+//            [self notiWithAccessibleState:ZYNetworkAccessible];
+            
+            NSLog(@"权限开启 Not Restricted");
+            // 走到这里情况：
+            // 1.通过App应用设置网络使用权限：WLAN与蜂窝移动网
+            // 这里可以使用 AFNetworking/其他工具判断具体的网络状态
+            
             break;
         case kCTCellularDataRestrictedStateUnknown: {
+            NSLog(@"权限未知 Unknown");
             // CTCellularData 刚开始初始化的时候，可能会拿到 kCTCellularDataRestrictedStateUnknown 延迟一下再试就好了
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self startCheck];

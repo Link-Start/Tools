@@ -1,17 +1,17 @@
+////
+////  YYLabel+LXLAdpativeFont.h
+////  Pension
+////
+////  Created by 刘晓龙 on 2021/12/21.
+////  Copyright © 2021 ouba. All rights reserved.
+////
 //
-//  YYLabel+LXLAdpativeFont.h
-//  Pension
+//#import "YYLabel.h"
 //
-//  Created by 刘晓龙 on 2021/12/21.
-//  Copyright © 2021 ouba. All rights reserved.
+//NS_ASSUME_NONNULL_BEGIN
 //
-
-#import "YYLabel.h"
-
-NS_ASSUME_NONNULL_BEGIN
-
-@interface YYLabel (LXLAdpativeFont)
-
-@end
-
-NS_ASSUME_NONNULL_END
+//@interface YYLabel (LXLAdpativeFont)
+//
+//@end
+//
+//NS_ASSUME_NONNULL_END

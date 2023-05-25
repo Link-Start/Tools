@@ -13,6 +13,8 @@
 #import <AdSupport/AdSupport.h>
 #import <AppTrackingTransparency/AppTrackingTransparency.h>
 #import <IQKeyboardManager/IQKeyboardManager.h>
+// 网络权限状态
+#import <CoreTelephony/CTCellularData.h>
 
 /**
  打包测试时：
@@ -126,7 +128,7 @@
     [IQKeyboardManager sharedManager].toolbarTintColor = [UIColor redColor];
     
     //3. 设置 IQKeyBoardManager 触摸UITextField/View外部时退出键盘，默认为否
-    [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = NO;
+    [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
 //    [IQKeyboardManager sharedManager].resignFirstResponderGesture;
     //初始化时 resignFirstResponderGesture.enabled = shouldResignOnTouchOutside;
     //点击手势，在视图触摸时退出键盘。它是一个只读属性，仅当添加的手势与此手势发生冲突时，才用于添加/删除依赖项
@@ -183,12 +185,21 @@
     
 }
 
-- (void)xhLaunchAd:(XHLaunchAd *)launchAd clickAndOpenModel:(nonnull id)openModel clickPoint:(CGPoint)clickPoint {
-    
+// 已过期 方法
+//- (void)xhLaunchAd:(XHLaunchAd *)launchAd clickAndOpenModel:(nonnull id)openModel clickPoint:(CGPoint)clickPoint {
+//    NSString *urlStr = (NSString *)openModel;
+//    if (urlStr.length > 0) {
+//
+//    }
+//}
+// 新方法
+- (BOOL)xhLaunchAd:(XHLaunchAd *)launchAd clickAtOpenModel:(id)openModel clickPoint:(CGPoint)clickPoint {
     NSString *urlStr = (NSString *)openModel;
     if (urlStr.length > 0) {
        
     }
+    
+    return YES;
 }
 
 #pragma mark - 获取IDFA 权限
@@ -269,6 +280,65 @@
      }
 }
 
+// IDFV
+//// https://blog.csdn.net/yangxuan0261/article/details/113801704
+//// IDFV - Identifier For Vendor（应用开发商标识符）
+//    NSString *idfv = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+//    NSLog(@"--- idfv: %@", idfv);
+
+
+#pragma mark - 网络权限状态，联网权限
+//iOS网络情况分类：
+//通过App应用设置网络使用权限（关闭、WLAN、WLAN与蜂窝移动网）
+//直接设置手机网络情况（飞行模式、无线局域网络、蜂窝移动网络）
+
+//根据CTCellularData类获取网络权限状态以及监听状态改变回调（推荐)
+//添加CoreTelephony系统库，在AppDelegate.m里#import<CoreTelephony/CTCellularData.h>
+- (void)monitorNetworkPermissionStatus {
+   
+    if (__IPHONE_10_0) {
+      // 监听网络权限状态
+        
+    } else {
+        //
+    }
+}
+//CTCellularData在iOS9之前是私有类，权限设置是iOS10开始的，所以App Store审核没有问题
+// 获取网络权限状态，根据权限执行相互的交互
+- (void)networkStatus:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    //
+    CTCellularData *cellularData = [[CTCellularData alloc] init];
+    
+    // 此函数会在网络权限更改时再次调用
+    cellularData.cellularDataRestrictionDidUpdateNotifier = ^(CTCellularDataRestrictedState state) {
+        
+        switch (state) {
+            case kCTCellularDataRestrictedStateUnknown: {
+                //未知，第一次请求
+                NSLog(@"网络权限未知 Unknown");
+                
+            }
+                break;
+                
+            case kCTCellularDataRestricted: {
+                NSLog(@"网络权限被关闭 Restricrted");
+            }
+                break;
+                
+            case kCTCellularDataNotRestricted: {
+                NSLog(@"网络权限开启 NotRestricted");
+            }
+                break;
+                
+            default:
+                break;
+        }
+    };
+    
+}
+
+
 #pragma mark - 指定页面禁止使用第三方键盘
 //指定页面禁止使用第三方键盘
 - (BOOL)application:(UIApplication *)application shouldAllowExtensionPointIdentifier:(UIApplicationExtensionPointIdentifier)extensionPointIdentifier{
@@ -298,5 +368,40 @@
 //    }
 }
 #pragma mark - 支付宝初始化相关      支付宝不需要注册
+
+
+
+#pragma mark - URL Schemes
+// URL Types ----> URL Schemes
+//https://www.jianshu.com/p/ca7357ab4852
+//https://www.jianshu.com/p/f367b4a5e871
+//https://sspai.com/post/31500
+//https://sspai.com/post/44591
+// https://st3376519.huoban.com/share/1985010/VGi2N5Vf0C1MVnHCVWiBc8L9g15c9VGJbMGcFrb6/172707/list
+
+// 需要把你想要打开的app的schemes添加到白名单,否则跳不过去
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+//    NS_DEPRECATED_IOS(2_0, 9_0, "Please use application:openURL:options:") __TVOS_PROHIBITED;
+    
+    NSLog(@"%@", url);
+    
+    return YES;
+}
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation {
+//    NS_DEPRECATED_IOS(4_2, 9_0, "Please use application:openURL:options:") __TVOS_PROHIBITED;
+    
+    NSLog(@"%@", sourceApplication);
+    
+    return YES;
+}
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options {
+    // NS_AVAILABLE_IOS(9_0) ;
+    // no equiv. notification. return NO if the application can't open for some reason
+    
+    NSLog(@"%@", options);
+    
+    return YES;
+}
 
 @end

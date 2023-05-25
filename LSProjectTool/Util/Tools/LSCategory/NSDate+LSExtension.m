@@ -10,7 +10,7 @@
 
 #pragma mark - YYKit 时间分类
 /******************** YYKit 时间分类 ***********************/
-#import "YYKitMacro.h"
+//#import "YYKitMacro.h"
 #import <time.h>
 
 /******************** YYKit 时间分类 ***********************/
@@ -70,23 +70,6 @@ static const unsigned componentFlags = (NSCalendarUnitYear| NSCalendarUnitMonth 
     return newDate;
 }
 
-///获取当月的天数
-- (NSInteger)totaldaysInThisMonth:(NSDate *)date{
-    NSRange totaldaysInMonth = [[NSCalendar currentCalendar] rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:date];
-    return totaldaysInMonth.length;
-}
-
-///第一天是周几
-- (NSInteger)firstWeekdayInThisMonth:(NSDate *)date{
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    [calendar setFirstWeekday:1];//1.Sun. 2.Mon. 3.Thes. 4.Wed. 5.Thur. 6.Fri. 7.Sat.
-    // NSDateComponent 可以获得日期的详细信息，即日期的组成
-    NSDateComponents *comp = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:date];
-    [comp setDay:1];
-    NSDate *firstDayOfMonthDate = [calendar dateFromComponents:comp];
-    NSUInteger firstWeekday = [calendar ordinalityOfUnit:NSCalendarUnitWeekday inUnit:NSCalendarUnitWeekOfMonth forDate:firstDayOfMonthDate];
-    return firstWeekday - 1;
-}
 
 #pragma mark - 相对日期
 /**
@@ -892,14 +875,21 @@ static const unsigned componentFlags = (NSCalendarUnitYear| NSCalendarUnitMonth 
     return components.weekOfYear;
 }
 
-/**
- *  当前日期所在周的第几天
- *
- *  @return 第几天
- */
-- (NSInteger)weekday {
+
+/// 当前日期所在周的第几天，获取当前日期是周几
+/// 1、2、3、4、5、6、7 分别对应 周日、周一、周二、周三、周四、周五、周六
+- (NSInteger)ls_weekday {
     NSDateComponents *components = [[NSDate currentCalendar] components:componentFlags fromDate:self];
     return components.weekday;
+}
+- (NSInteger)ls_weekday_ {
+    NSArray *tempWeek = @[@"7",@"1",@"2",@"3",@"4",@"5",@"6"];
+    NSDateComponents *components = [[NSDate currentCalendar] components:componentFlags fromDate:self];
+    //  1、2、3、4、5、6、7 分别对应 周日、周一、周二、周三、周四、周五、周六
+    NSInteger week = [components weekday];
+    NSLog(@"---%ld",week);
+    //  调整后 1代表周一 , 0代表周日
+    return [tempWeek[week-1] integerValue];
 }
 
 /**
@@ -976,24 +966,46 @@ static const unsigned componentFlags = (NSCalendarUnitYear| NSCalendarUnitMonth 
     
     return otherDate;
 }
-
+/// 获取当前月份的天数
 - (NSInteger)totalDaysInMonth {
     NSInteger totalDays = [[NSCalendar currentCalendar] rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:self].length;
     return totalDays;
 }
+/// 获取指定月份的总 天数
+- (NSInteger)totaldaysInThisMonth:(NSDate *)date {
+    NSRange totaldaysInMonth = [[NSCalendar currentCalendar] rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:date];
+    return totaldaysInMonth.length;
+}
 
+/// 获取当前月份的第一天是周几
 - (NSInteger)firstWeekDayInMonth {
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    
     NSDateComponents *components = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:self];
     components.day = 1; // 定位到当月第一天
     NSDate *firstDay = [calendar dateFromComponents:components];
     
+    NSLog(@"第一天日期是：%@", firstDay);
+    NSLog(@"第一天日期是：%@", [firstDay stringWithFormat:@"yyyy-MM-dd HH:mm:ss"]);
+    
     // 默认一周第一天序号为 1 ，而日历中约定为 0 ，故需要减一
     NSInteger firstWeekday = [calendar ordinalityOfUnit:NSCalendarUnitWeekday inUnit:NSCalendarUnitWeekOfMonth forDate:firstDay] - 1;
-    
     return firstWeekday;
 }
+
+/// 获取指定月份的第一天是周几
+- (NSInteger)firstWeekdayInThisMonth:(NSDate *)date {
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    [calendar setFirstWeekday:1];//1.Sun. 2.Mon. 3.Thes. 4.Wed. 5.Thur. 6.Fri. 7.Sat.
+    // NSDateComponent 可以获得日期的详细信息，即日期的组成
+    NSDateComponents *comp = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:date];
+    [comp setDay:1];
+    NSDate *firstDayOfMonthDate = [calendar dateFromComponents:comp];
+    NSUInteger firstWeekday = [calendar ordinalityOfUnit:NSCalendarUnitWeekday inUnit:NSCalendarUnitWeekOfMonth forDate:firstDayOfMonthDate];
+    return firstWeekday - 1;
+}
+
+
+
 - (NSString *)lunarText {
     
     NSArray *dayArray  = @[@"初一", @"初二", @"初三", @"初四", @"初五", @"初六", @"初七", @"初八", @"初九", @"初十",@"十一", @"十二", @"十三", @"十四", @"十五", @"十六", @"十七", @"十八", @"十九", @"二十",@"廿一", @"廿二", @"廿三", @"廿四", @"廿五", @"廿六", @"廿七", @"廿八", @"廿九", @"三十"];

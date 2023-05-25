@@ -53,6 +53,56 @@
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:QQ_appId appSecret:QQ_appKey redirectURL:@"https://a.app.qq.com/o/simple.jsp?pkgname=com.hyh.ouba"];
 }
 
+
+/// 分享单个图片（支持UIImage，NSdata以及图片链接Url NSString类对象集合）,到对应平台
+/// 分享图片 到对应平台(UMSocialPlatformType)
+- (void)shareImageObjectToPlatformWithPlatForm:(NSInteger)platform shareImage:(id)shareImage thumImage:(id)thumImage {
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    //创建图片内容对象
+    UMShareImageObject *shareObject = [UMShareImageObject shareObjectWithTitle:@"" descr:@"" thumImage:thumImage]; //大图底部的小图标
+    
+    if ([(NSString *)shareImage containsString:@"http:"]) {
+        //当前网络请求是否用https
+        [UMSocialGlobal shareInstance].isUsingHttpsWhenShareContent = NO;
+    }
+    //分享单个图片（支持UIImage，NSdata以及图片链接Url NSString类对象集合）
+    shareObject.shareImage = shareImage;
+    //分享消息对象设置分享内容对象
+    messageObject.shareObject = shareObject;
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:platform messageObject:messageObject currentViewController:nil completion:^(id data, NSError *error) {
+        if (error) {
+            NSLog(@"************分享失败，错误信息(Share fail with error) ：%@*********",error);
+        } else {
+            NSLog(@"response data is %@",data);
+        }
+    }];
+}
+
+///分享
+/// 标题，描述，缩略图
+- (void)shareWithLink:(NSString *)link title:(NSString *)title descr:(NSString *)descr thumImage:(id)thumImage platform:(NSInteger)platform {
+    
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    //创建网页内容对象
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:title descr:descr thumImage:thumImage];
+    //设置网页地址，不能为空且长度不能超过10K
+    shareObject.webpageUrl = link;
+    //分享消息对象设置分享内容对象
+    messageObject.shareObject = shareObject;
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:platform messageObject:messageObject currentViewController:nil completion:^(id data, NSError *error) {
+        if (error) {
+            NSLog(@"************分享失败，错误信息(Share fail with error)： %@*********",error);
+        } else {
+            NSLog(@"response data is %@",data);
+        }
+    }];
+}
+
+
+
 @end
 
 /** iOS开发 友盟推送环境和打包类型 https://www.jianshu.com/p/138e551d6361

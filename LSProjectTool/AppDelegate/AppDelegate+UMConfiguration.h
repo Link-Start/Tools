@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface AppDelegate (UMConfiguration)
 
-///初始化友盟 UMeng
+/// 初始化友盟 UMeng
 -(void)initUMengConfiguration;
 
 @end

@@ -10,7 +10,7 @@
 
 #pragma mark - YYKit 时间分类
 /******************** YYKit 时间分类 ***********************/
-#import "YYKitMacro.h"
+//#import "YYKitMacro.h"
 #import <time.h>
 
 /******************** YYKit 时间分类 ***********************/
@@ -70,24 +70,6 @@ static const unsigned componentFlags = (NSCalendarUnitYear| NSCalendarUnitMonth 
     // 得到准确时间         返回以当前NSDate对象为基准，偏移多少秒后得到的新NSDate对象
     NSDate *newDate = [forDate dateByAddingTimeInterval:timeOffset];
     return newDate;
-}
-
-///获取当月的天数
-- (NSInteger)totaldaysInThisMonth:(NSDate *)date{
-    NSRange totaldaysInMonth = [[NSCalendar currentCalendar] rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:date];
-    return totaldaysInMonth.length;
-}
-
-///第一天是周几
-- (NSInteger)firstWeekdayInThisMonth:(NSDate *)date{
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    [calendar setFirstWeekday:1];//1.Sun. 2.Mon. 3.Thes. 4.Wed. 5.Thur. 6.Fri. 7.Sat.
-    // NSDateComponent 可以获得日期的详细信息，即日期的组成
-    NSDateComponents *comp = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:date];
-    [comp setDay:1];
-    NSDate *firstDayOfMonthDate = [calendar dateFromComponents:comp];
-    NSUInteger firstWeekday = [calendar ordinalityOfUnit:NSCalendarUnitWeekday inUnit:NSCalendarUnitWeekOfMonth forDate:firstDayOfMonthDate];
-    return firstWeekday - 1;
 }
 
 #pragma mark - 相对日期
@@ -894,14 +876,22 @@ static const unsigned componentFlags = (NSCalendarUnitYear| NSCalendarUnitMonth 
     return components.weekOfYear;
 }
 
-/**
- *  当前日期所在周的第几天
- *
- *  @return 第几天
- */
-- (NSInteger)weekday {
+
+/// 当前日期所在周的第几天，获取当前日期是周几
+/// 1、2、3、4、5、6、7 分别对应 周日、周一、周二、周三、周四、周五、周六
+- (NSInteger)ls_weekday {
     NSDateComponents *components = [[NSDate currentCalendar] components:componentFlags fromDate:self];
     return components.weekday;
+}
+/// 获取当前日期是周几
+- (NSInteger)weekday_ls {
+    NSArray *tempWeek = @[@"7",@"1",@"2",@"3",@"4",@"5",@"6"];
+    NSDateComponents *components = [[NSDate currentCalendar] components:componentFlags fromDate:self];
+    //  1、2、3、4、5、6、7 分别对应 周日、周一、周二、周三、周四、周五、周六
+    NSInteger week = [components weekday];
+    NSLog(@"---%ld",week);
+    //  调整后 1代表周一 , 0代表周日
+    return [tempWeek[week-1] integerValue];
 }
 
 /**
@@ -978,11 +968,17 @@ static const unsigned componentFlags = (NSCalendarUnitYear| NSCalendarUnitMonth 
     
     return otherDate;
 }
-
+/// 获取当月的天数
 - (NSInteger)totalDaysInMonth {
     NSInteger totalDays = [[NSCalendar currentCalendar] rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:self].length;
     return totalDays;
 }
+/// 获取当月的天数
+- (NSInteger)totaldaysInThisMonth:(NSDate *)date{
+    NSRange totaldaysInMonth = [[NSCalendar currentCalendar] rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:date];
+    return totaldaysInMonth.length;
+}
+
 
 - (NSInteger)firstWeekDayInMonth {
     NSCalendar *calendar = [NSCalendar currentCalendar];
@@ -996,6 +992,20 @@ static const unsigned componentFlags = (NSCalendarUnitYear| NSCalendarUnitMonth 
     
     return firstWeekday;
 }
+
+
+///第一天是周几
+- (NSInteger)firstWeekdayInThisMonth:(NSDate *)date{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    [calendar setFirstWeekday:1];//1.Sun. 2.Mon. 3.Thes. 4.Wed. 5.Thur. 6.Fri. 7.Sat.
+    // NSDateComponent 可以获得日期的详细信息，即日期的组成
+    NSDateComponents *comp = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:date];
+    [comp setDay:1];
+    NSDate *firstDayOfMonthDate = [calendar dateFromComponents:comp];
+    NSUInteger firstWeekday = [calendar ordinalityOfUnit:NSCalendarUnitWeekday inUnit:NSCalendarUnitWeekOfMonth forDate:firstDayOfMonthDate];
+    return firstWeekday - 1;
+}
+
 
 - (NSString *)lunarText {
     
@@ -1012,6 +1022,47 @@ static const unsigned componentFlags = (NSCalendarUnitYear| NSCalendarUnitMonth 
         return monthArray[localeComp.month-1];
     }
     return dayArray[localeComp.day-1];
+}
+
+#pragma mark -
+/// 获取当前日期月份的第一天日期
+- (NSString *)getCurrentMonthFirstDayWithFormat:(NSString *)format {
+    NSDate *newDate = self;
+    // 当前月份的持续秒数，(当前月份的总天数化成的总秒数)
+    NSTimeInterval interval = 0;
+    // 当前月份 的开始时间，(当前月份的第一天的日期)
+    NSDate *firstDate = nil;
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    // 获取 date 中指定的时间部分的开始时间和持续的秒数
+    BOOL bl = [calendar rangeOfUnit:NSCalendarUnitMonth startDate:&firstDate interval:&interval forDate:newDate];
+    if (bl) {
+        NSDateFormatter *myDateFormatter = [[NSDateFormatter alloc] init];
+        [myDateFormatter setDateFormat:format];
+        NSString *firstString = [myDateFormatter stringFromDate:firstDate];
+        return firstString;
+    }
+    return @"";
+}
+/// 获取当前日期月份的最后一天日期
+- (NSString *)getCurrentMonthLastDayWithFormat:(NSString *)format {
+    NSDate *newDate = self;
+    /// 当前月份的持续秒数，(当前月份的总天数化成的总秒数)
+    double interval = 0;
+    /// 当前月份 的开始时间，(当前月份的第一天的日期)
+    NSDate *firstDate = nil;
+    NSDate *lastDate = nil;
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    // 获取 date 中指定的时间部分的开始时间和持续的秒数
+    BOOL bl = [calendar rangeOfUnit:NSCalendarUnitMonth startDate:&firstDate interval:&interval forDate:newDate];
+    if (bl) {
+        // 当前 月份的第一天的日期，偏移 当前月份持续的总秒数   得到，当前月份的最后一天的日期
+        lastDate = [firstDate dateByAddingTimeInterval:interval - 1];
+        NSDateFormatter *myDateFormatter = [[NSDateFormatter alloc] init];
+        [myDateFormatter setDateFormat:format];
+        NSString *lastString = [myDateFormatter stringFromDate:lastDate];
+        return lastString;
+    }
+    return @"";
 }
 
 

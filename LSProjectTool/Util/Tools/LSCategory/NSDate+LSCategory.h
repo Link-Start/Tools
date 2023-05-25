@@ -201,7 +201,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///当前年的第几周
 @property (readonly) NSInteger weekOfYear;
 ///当前日期所在周的第几天
-@property (readonly) NSInteger weekday;
+@property (readonly) NSInteger ls_weekday;
 ///当前日期所在年的第几季度
 @property (readonly) NSInteger nthWeekday; // e.g. 2nd Tuesday of the month == 2
 ///当前日期的年

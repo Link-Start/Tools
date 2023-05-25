@@ -726,7 +726,7 @@
     
     //存储大小满1024进1
     while (convertedValue > 1024) {
-        convertedValue /= 1024;
+        convertedValue /= 1024.0f;
         
         multiplyFactor++;
     }
@@ -742,14 +742,14 @@
 /** 将文件大小转化成M单位或者B单位 */
 + (NSString *)getFileSizeString:(NSString *)size {
 //    if ([size floatValue] >= 1024*1024*1024) { // 大于1G，则转化成G单位的字符串
-//        return [NSString stringWithFormat:@"%.2fG",[size floatValue]/1024/1024/1024];
+//        return [NSString stringWithFormat:@"%.2fG",[size floatValue]/1024.00f/1024.00f/1024.00f];
 //    } else //&& [size floatValue] < 1024*1024*1024
     if ([size floatValue] >= 1024*1024) {//大于1M，则转化成M单位的字符串
-        return [NSString stringWithFormat:@"%.2fM",[size floatValue]/1024/1024];
+        return [NSString stringWithFormat:@"%.2fM",[size floatValue]/1024.00f/1024.00f];
     } else if ([size floatValue] >= 1024 && [size floatValue] < 1024*1024) { //不到1M,但是超过了1KB，则转化成KB单位
-        return [NSString stringWithFormat:@"%.2fK",[size floatValue]/1024];
+        return [NSString stringWithFormat:@"%.2fK",[size floatValue]/1024.00f];
     } else { //剩下的都是小于1K的，则转化成B单位
-        return [NSString stringWithFormat:@"%.2fB",[size floatValue]];
+        return [NSString stringWithFormat:@"%.2fB",[size floatValue]/1.00f];
     }
 }
 /** 将文件大小转化成不带单位的数字 */

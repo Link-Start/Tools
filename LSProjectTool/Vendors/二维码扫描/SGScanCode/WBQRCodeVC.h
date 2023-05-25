@@ -17,7 +17,7 @@ typedef void(^scanResult)(NSString *result);
 
 @interface WBQRCodeVC : UIViewController
 
-@property (nonatomic ,copy)scanResult scanResultBlock;
-@property (nonatomic ,assign)QRCodeScanJumpType jumpType;
+@property (nonatomic, copy) scanResult scanResultBlock;
+@property (nonatomic, assign) QRCodeScanJumpType jumpType;
 
 @end

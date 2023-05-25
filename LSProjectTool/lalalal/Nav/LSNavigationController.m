@@ -54,6 +54,7 @@
 }
 
 /// https://www.jianshu.com/p/3e1f0ce35bd5
+/// iOS15更新之后 导航条突然就白了,如果恰巧你的页面上有 ScorllView 的滑动视图的话,那么向上滑动时,你的导航栏又变了正常设置的颜色
 /// UINavigationBar
 /// iOS15 从 iOS 15 开始，UINavigationBar、UIToolbar 和 UITabBar 在控制器中关联滚动视图顶部或底部时使用
 /// 在iOS15中，UINavigationBar默认是透明的，有滑动时会逐渐变为模糊效果，

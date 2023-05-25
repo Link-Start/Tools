@@ -38,19 +38,37 @@ iPhoneXR           6.1英       896*414        @2x       828x1792
 #define DefineSystemSize_h
 //iOS11之前导航栏默认高度为64pt(这里高度指statusBar + NavigationBar)，iOS11之后如果设置了prefersLargeTitles = YES则为96pt，默认情况下还是64pt，但在iPhoneX上由于刘海的出现statusBar由以前的20pt变成了44pt，所以iPhoneX上高度变为88pt
 ////由于iPhone X、iPhone XS、iPhone XS Max、iPhone XR这些机型的navigationBar高度以及tabBar高度都一致，所以可以用来判断当前设备是否有“齐刘海”。
+/// 然而从iOS 14开始，全面屏iPhone的状态栏高度不一定是44了，比如下面就是这些设备在iOS 14.1上的状态栏高度。
+//设备                                    状态栏高度
+//iPhone XR/11                              48
+//iPhone X/11 Pro/11 Pro Max/12 mini        44
+//iPhone 12/12 Pro/Pro Max                  47
+
 
 //状态栏高度 20/44
 #define kLS_StatusBarHeight ([[UIApplication sharedApplication] statusBarFrame].size.height)
+///状态栏高度 , <语法糖>
+#define kLS_StatusBarHeight_ \
+    ({\
+        CGFloat statusBarHeight = 0;\
+        if (@available(iOS 13.0, *)) {\
+            statusBarHeight = [UIApplication sharedApplication].windows.firstObject.windowScene.statusBarManager.statusBarFrame.size.height;\
+        } else {\
+            statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;\
+        }\
+        statusBarHeight;\
+    })
+
 //navBar高度
 #define kLS_NavigationBarHeight 44.0
 //tabBar高度 49/83
 #define kLS_TabBarHeight ([[UIApplication sharedApplication] statusBarFrame].size.height>20?83:49)
 //顶部高度 64/96/88
 #define kLS_TopHeight (kLS_StatusBarHeight + kLS_NavigationBarHeight)
-//底部安全距离(Home Indicator的高度宏定义)
+//底部安全距离(Home Indicator的高度宏定义) (主指示器，官方叫HomeIndicator)
 #define kLS_iPhoneX_Home_Indicator_Height ([[UIApplication sharedApplication] statusBarFrame].size.height>20?34:0)
 
-//iPhoneX系列底部安全距离
+//iPhoneX系列底部安全距离 (主指示器，官方叫 HomeIndicator )
 #define kLS_iPhoneX_Series_Home_Indicator_Height ([[UIApplication sharedApplication] statusBarFrame].size.height>20?34:0)
 
 //横屏有工具栏 20 没有 0
@@ -59,17 +77,17 @@ iPhoneXR           6.1英       896*414        @2x       828x1792
 
 
 //获取屏幕宽高
-#if  IOS_VERSION_8_OR_LATER
-// 当前Xcode支持iOS8及以上
-#define kLS_ScreenWidth ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?[UIScreen mainScreen].nativeBounds.size.width/[UIScreen mainScreen].nativeScale:[UIScreen mainScreen].bounds.size.width)
-#define kLS_ScreenHeight ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?[UIScreen mainScreen].nativeBounds.size.height/[UIScreen mainScreen].nativeScale:[UIScreen mainScreen].bounds.size.height)
-#define kLS_Screen_Size ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?CGSizeMake([UIScreen mainScreen].nativeBounds.size.width/[UIScreen mainScreen].nativeScale,[UIScreen mainScreen].nativeBounds.size.height/[UIScreen mainScreen].nativeScale):[UIScreen mainScreen].bounds.size)
-#else //iOS8以前
-#define kLS_ScreenWidth ([[UIScreen mainScreen] bounds].size.width)
-#define kLS_ScreenHeight ([[UIScreen mainScreen] bounds].size.height)
-#define kLS_Screen_Size ([UIScreen mainScreen].bounds.size)
-#define kLS_Screen_Bounds ([UIScreen mainScreen].bounds)
-#endif
+//#if  IOS_VERSION_8_OR_LATER
+//// 当前Xcode支持iOS8及以上
+//#define kLS_ScreenWidth ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?[UIScreen mainScreen].nativeBounds.size.width/[UIScreen mainScreen].nativeScale:[UIScreen mainScreen].bounds.size.width)
+//#define kLS_ScreenHeight ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?[UIScreen mainScreen].nativeBounds.size.height/[UIScreen mainScreen].nativeScale:[UIScreen mainScreen].bounds.size.height)
+//#define kLS_Screen_Size ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?CGSizeMake([UIScreen mainScreen].nativeBounds.size.width/[UIScreen mainScreen].nativeScale,[UIScreen mainScreen].nativeBounds.size.height/[UIScreen mainScreen].nativeScale):[UIScreen mainScreen].bounds.size)
+//#else //iOS8以前
+#define kLS_ScreenWidth     ([[UIScreen mainScreen] bounds].size.width)
+#define kLS_ScreenHeight    ([[UIScreen mainScreen] bounds].size.height)
+#define kLS_Screen_Size     ([UIScreen mainScreen].bounds.size)
+#define kLS_Screen_Bounds   ([UIScreen mainScreen].bounds)
+//#endif
 
 
 //#define kLS_Iphone6ScaleWidth        (kLS_ScreenWidth/375.0f)
@@ -118,22 +136,22 @@ iPhoneXR           6.1英       896*414        @2x       828x1792
 #endif
 
 
-#define  adjustsScrollViewInsets(scrollView)\
-do {\
-_Pragma("clang diagnostic push")\
-_Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"")\
-if ([scrollView respondsToSelector:NSSelectorFromString(@"setContentInsetAdjustmentBehavior:")]) {\
-NSMethodSignature *signature = [UIScrollView instanceMethodSignatureForSelector:@selector(setContentInsetAdjustmentBehavior:)];\
-NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];\
-NSInteger argument = 2;\
-invocation.target = scrollView;\
-invocation.selector = @selector(setContentInsetAdjustmentBehavior:);\
-[invocation setArgument:&argument atIndex:2];\
-[invocation retainArguments];\
-[invocation invoke];\
-}\
-_Pragma("clang diagnostic pop")\
-} while (0)
+//#define  adjustsScrollViewInsets(scrollView)\
+//do {\
+//_Pragma("clang diagnostic push")\
+//_Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"")\
+//if ([scrollView respondsToSelector:NSSelectorFromString(@"setContentInsetAdjustmentBehavior:")]) {\
+//NSMethodSignature *signature = [UIScrollView instanceMethodSignatureForSelector:@selector(setContentInsetAdjustmentBehavior:)];\
+//NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];\
+//NSInteger argument = 2;\
+//invocation.target = scrollView;\
+//invocation.selector = @selector(setContentInsetAdjustmentBehavior:);\
+//[invocation setArgument:&argument atIndex:2];\
+//[invocation retainArguments];\
+//[invocation invoke];\
+//}\
+//_Pragma("clang diagnostic pop")\
+//} while (0)
 
 
 #endif /* DefineSystemSize_h */

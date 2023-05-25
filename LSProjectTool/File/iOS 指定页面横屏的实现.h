@@ -137,6 +137,19 @@ General-->Deployment Info: Device Orientation 只需要设置为Portrait,  其�
         [invocation setArgument:&val atIndex:2];
         [invocation invoke];
     }
+    if (@available(iOS 16.0, *)) {
+        // setNeedsUpdateOfSupportedInterfaceOrientations 方法是 UIViewController 的方法
+        [self setNeedsUpdateOfSupportedInterfaceOrientations];
+        NSArray *array = [[[UIApplication sharedApplication] connectedScenes] allObjects];
+        UIWindowScene *scene = [array firstObject];
+        // 屏幕方向
+        UIInterfaceOrientationMask orientation = self.isFullScreen ? UIInterfaceOrientationMaskLandscape:UIInterfaceOrientationMaskPortrait;
+        UIWindowSceneGeometryPreferencesIOS *geometryPreferencesIOS = [[UIWindowSceneGeometryPreferencesIOS alloc] initWithInterfaceOrientations:orientation];
+        // 开始切换
+        [scene requestGeometryUpdateWithPreferences:geometryPreferencesIOS errorHandler:^(NSError * _Nonnull error) {
+            NSLog(@"错误:%@", error);
+        }];
+    }
 }
 
 // 是否支持自动转屏

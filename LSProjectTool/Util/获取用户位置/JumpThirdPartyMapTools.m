@@ -19,6 +19,8 @@
 
 @implementation JumpThirdPartyMapTools
 
+// ******************************************************************************************************************
+// ******************************************************************************************************************
 #pragma mark - 导航方法
 -(void)navThirdMapWithLocation:(CLLocationCoordinate2D)endLocation endAddressStr:(NSString *)endAddress {
     
@@ -33,7 +35,7 @@
     if ( [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"http://maps.apple.com/"]]) {
         //苹果地图
         NSMutableDictionary *iosMapDic = [NSMutableDictionary dictionary];
-        iosMapDic[@"title"] = @"苹果地图";
+        iosMapDic[@"title"] = @"苹果自带地图";
         iosMapDic[@"url"]   = [NSString stringWithFormat:@"%f-%f",endLocation.latitude,endLocation.longitude];
         [maps addObject:iosMapDic];
     }
@@ -50,17 +52,23 @@
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"baidumap://"]]) {
         NSMutableDictionary *baiduMapDic = [NSMutableDictionary dictionary];
         baiduMapDic[@"title"] = @"百度地图";
-        NSString *urlString = [[NSString stringWithFormat:@"baidumap://map/direction?origin={{我的位置}}&destination=latlng:%f,%f|name:已选择的位置%@&mode=driving&coord_type=gcj02",endLocation.latitude,endLocation.longitude, self.endAddress] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//        NSString *urlString = [[NSString stringWithFormat:@"baidumap://map/direction?origin={{我的位置}}&destination=latlng:%f,%f|name:已选择的位置%@&mode=driving&coord_type=gcj02",endLocation.latitude,endLocation.longitude, self.endAddress] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        
+        NSString *urlString = [NSString stringWithFormat:@"baidumap://map/direction?origin={{我的位置}}&destination=latlng:%f,%f|name:已选择的位置%@&mode=driving&coord_type=gcj02",endLocation.latitude,endLocation.longitude, self.endAddress];
+        urlString = [self handleEncodeUrl:urlString];//对字符串中的中文进行编码处理
+        
         baiduMapDic[@"url"] = urlString;
         [maps addObject:baiduMapDic];
     }
     
 /**
      1. sourceApplication=%@&backScheme=%@
-     sourceApplication代表你自己APP的名称 会在之后跳回的时候显示出来 所以必须填写
-     backScheme是你APP的URL Scheme 不填是跳不回来的哟
+     sourceApplication代表你自己APP的名称 会在之后跳回的时候显示出来 所以必须填写------------->2022.4.12测试,不填也会显示app名称
+     backScheme是你APP的URL Scheme 不填是跳不回来的哟                                          ------------->2022.4.12测试,不填也可以跳回app
      2. dev=0 这里填0就行了，跟上面的gcj02一个意思 1代表wgs84 也用不上
-     3. dlat:经度，dlon:纬度，dname:目的地。t:交通方式。path:表示路线规划，改为navi为直接语音导航。
+     3. dlat:经度，dlon:纬度，dname:目的地。
+     4. t:交通方式。0:驾车，1:公交地铁，2:步行
+     5. path:表示路线规划，改为navi为直接语音导航。
 */
     //高德地图
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"iosamap://"]]) {
@@ -70,9 +78,17 @@
         //路线规划
 //        NSString *urlString = [[NSString stringWithFormat:@"iosamap://path?sourceApplication=%@&sid=BGVIS1&did=BGVIS2&dlat=%f&dlon=%f&dname=%@&dev=0&t=2",@"华品共享",endLocation.latitude,endLocation.longitude,self.endAddress] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         
+//1：iosamap://path?sourceApplication=%@&sid=BGVIS1&did=BGVIS2&dlat=%f&dlon=%f&dname=%@&dev=0&t=2
+//2：iosamap://navi?sourceApplication=%@&backScheme=%@&lat=%f&lon=%f&dev=0&style=2
+//3：iosamap://path?sourceApplication=&backScheme=&dlat=%f&dlon=%f&dev=0
         
         //语音导航
-        NSString *urlString = [[NSString stringWithFormat:@"iosamap://navi?sourceApplication=%@&backScheme=%@&lat=%f&lon=%f&dev=0&style=2",@"APPName",@"UrlAcheme",endLocation.latitude,endLocation.longitude] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//        NSString *urlString = [[NSString stringWithFormat:@"iosamap://navi?sourceApplication=%@&backScheme=%@&lat=%f&lon=%f&dev=0&style=2",@"APPName",@"UrlScheme",endLocation.latitude,endLocation.longitude] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        
+        //语音导航
+        NSString *urlString = [NSString stringWithFormat:@"iosamap://navi?sourceApplication=%@&backScheme=%@&lat=%f&lon=%f&dname=%@&dev=0&style=2",@"APPName",@"UrlScheme",endLocation.latitude,endLocation.longitude, self.endAddress];
+        urlString = [self handleEncodeUrl:urlString];//对字符串中的中文进行编码处理
+        
         gaodeMapDic[@"url"] = urlString;
         [maps addObject:gaodeMapDic];
     }
@@ -87,7 +103,11 @@
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"comgooglemaps://"]]) {
         NSMutableDictionary *googleMapDic = [NSMutableDictionary dictionary];
         googleMapDic[@"title"] = @"谷歌地图";
-        NSString *urlString = [[NSString stringWithFormat:@"comgooglemaps://?x-source=%@&x-success=%@&saddr=&daddr=%f,%f&directionsmode=driving",@"appName",@"urlScheme",endLocation.latitude, endLocation.longitude] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//        NSString *urlString = [[NSString stringWithFormat:@"comgooglemaps://?x-source=%@&x-success=%@&saddr=&daddr=%f,%f&directionsmode=driving",@"appName",@"urlScheme",endLocation.latitude, endLocation.longitude] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        
+        NSString *urlString = [NSString stringWithFormat:@"comgooglemaps://?x-source=%@&x-success=%@&saddr=&daddr=%f,%f&directionsmode=driving",@"appName",@"urlScheme",endLocation.latitude, endLocation.longitude];
+        urlString = [self handleEncodeUrl:urlString];//对字符串中的中文进行编码处理
+        
         googleMapDic[@"url"] = urlString;
         [maps addObject:googleMapDic];
     }
@@ -96,10 +116,15 @@
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"qqmap://"]]) {
         NSMutableDictionary *qqMapDic = [NSMutableDictionary dictionary];
         qqMapDic[@"title"] = @"腾讯地图";
-        NSString *urlString = [[NSString stringWithFormat:@"qqmap://map/routeplan?from=我的位置&type=drive&tocoord=%f,%f&to=%@&coord_type=1&policy=0",endLocation.latitude, endLocation.longitude, self.endAddress] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//        NSString *urlString = [[NSString stringWithFormat:@"qqmap://map/routeplan?from=我的位置&type=drive&tocoord=%f,%f&to=%@&coord_type=1&policy=0",endLocation.latitude, endLocation.longitude, self.endAddress] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        
+        NSString *urlString = [NSString stringWithFormat:@"qqmap://map/routeplan?from=我的位置&type=drive&tocoord=%f,%f&to=%@&coord_type=1&policy=0",endLocation.latitude, endLocation.longitude, self.endAddress];
+        urlString = [self handleEncodeUrl:urlString];//对字符串中的中文进行编码处理
+        
         qqMapDic[@"url"] = urlString;
         [maps addObject:qqMapDic];
     }
+    
     
     // 苹果
     //    NSString *urlString = [[NSString stringWithFormat:@"http://maps.apple.com/?saddr=%f,%f&daddr=%f,%f",startPoint.latitude,startPoint.longitude,endLocation.latitude, endLocation.longitude] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -133,7 +158,7 @@
         }];
         [alertVC addAction:cancleAct];
         
-        if ([self.delegate respondsToSelector:@selector(presentVC:)]) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(presentVC:)]) {
             [self.delegate presentVC:alertVC];
         }
         
@@ -166,5 +191,170 @@
                           };
     [MKMapItem openMapsWithItems:items launchOptions:dic];
 }
+
+// 中文编码处理
+- (NSString *)handleEncodeUrl:(NSString *)urlStr {
+    
+    NSString *newString = @"";
+    if ([[NSString alloc] respondsToSelector:@selector(stringByAddingPercentEncodingWithAllowedCharacters:)]) {
+        //对url中的中文进行转码
+        newString = [urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    } else {
+        newString = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    }
+    return newString;
+}
+
+// 打开 url
+- (void)openUrl:(NSString *)urlString {
+    
+    if (![[UIApplication  sharedApplication] canOpenURL:[NSURL URLWithString:urlString]]) {
+//        [BEEToast showOtherFailWithMessage:@"暂无法跳转!"];
+        NSLog(@"暂无法跳转!");
+        return;
+    }
+    
+//    if (@available(iOS 10.0, *)) {
+//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString] options:@{UIApplicationOpenURLOptionsSourceApplicationKey:@YES} completionHandler:nil];
+//    } else {
+//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+//    }
+    
+    if ([[UIApplication sharedApplication] respondsToSelector:@selector(openURL:options:completionHandler:)]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString] options:@{UIApplicationOpenURLOptionsSourceApplicationKey:@YES} completionHandler:nil];
+    } else {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+
+    }
+}
+
+
+// ******************************************************************************************************************
+// ******************************************************************************************************************
+
+
+
+/**
+ 高德导航：amap
+ 百度导航：baidu
+ 苹果自带导航
+ 
+ [LSJumpMapTools jumpMapNaviWithLatitude:self.model.order.pickUpLatitude.floatValue longitude:self.model.order.pickUpLongitude.floatValue andWithMapTitle:mapTitle];
+*/
+
+
++ (void)jumpMapNaviWithLatitude:(double)latitude longitude:(double)longitude andWithMapTitle:(NSString *)map_title andEndAddress:(NSString *)endAddress {
+    
+    if ([map_title isEqualToString:@"amap"]) {//高德导航
+        [self aNaviWithCoordinate:CLLocationCoordinate2DMake(latitude, longitude) endAddress:endAddress];
+    } else if ([map_title isEqualToString:@"baidu"]) {//百度导航
+        [self baiduNaviWithCoordinate:CLLocationCoordinate2DMake(latitude, longitude) endAddress:endAddress];
+    } else {
+        //苹果自带导航
+        [self appleNaiWithCoordinate:CLLocationCoordinate2DMake(latitude, longitude) endAddress:endAddress];
+    }
+}
+
+/// 唤醒苹果自带导航
++ (void)appleNaiWithCoordinate:(CLLocationCoordinate2D)coordinate endAddress:(NSString *)endAddress {
+    MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
+    MKMapItem *tolocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:coordinate addressDictionary:nil]];
+    tolocation.name = endAddress?:@"目的地";
+    [MKMapItem openMapsWithItems:@[currentLocation,tolocation] launchOptions:@{
+        MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeDriving,
+        MKLaunchOptionsShowsTrafficKey:[NSNumber numberWithBool:YES]}];
+}
+
+
+/// 高德导航
++ (void)aNaviWithCoordinate:(CLLocationCoordinate2D)coordinate endAddress:(NSString *)endAddress {
+//    NSString *urlString = [[NSString stringWithFormat:@"iosamap://path?sourceApplication= &backScheme= &dlat=%f&dlon=%f&dev=0",coordinate.latitude,coordinate.longitude]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+//    NSString *urlString = @"";
+//    if (@available(iOS 9.0, *)) {
+//        urlString = [[NSString stringWithFormat:@"iosamap://path?sourceApplication=&backScheme=&dlat=%f&dlon=%f&dev=0",coordinate.latitude,coordinate.longitude] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+//    } else {
+//       urlString = [[NSString stringWithFormat:@"iosamap://path?sourceApplication=&backScheme=&dlat=%f&dlon=%f&dev=0",coordinate.latitude,coordinate.longitude] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    }
+    
+    
+//    if (![[UIApplication  sharedApplication] canOpenURL:[NSURL URLWithString:urlsting]]) {
+////        [BEEToast showOtherFailWithMessage:@"暂无法跳转!"];
+//        NSLog(@"暂无法跳转!");
+//        return;
+//    }
+//
+//    if (@available(iOS 10.0, *)) {
+//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlsting] options:@{UIApplicationOpenURLOptionsSourceApplicationKey:@YES} completionHandler:nil];
+//    } else {
+//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlsting]];
+//    }
+    
+//------------------------------------------------------------------------------------------------------------
+    
+    //iosamap://path?sourceApplication=&backScheme=&dlat=%f&dlon=%f&dev=0
+    NSString *urlString = [NSString stringWithFormat:@"iosamap://path?sourceApplication=&backScheme=&dlat=%f&dlon=%f&dname=%@&dev=0",coordinate.latitude,coordinate.longitude, endAddress];
+    urlString = [self handleEncodeUrl:urlString];//对字符串中的中文进行编码处理
+    [self openUrl:urlString];//打开网址
+}
+
+/// 百度地图
++ (void)baiduNaviWithCoordinate:(CLLocationCoordinate2D)coordinate endAddress:(NSString *)endAddress {
+    //coord_type允许的值为bd09ll、gcj02、wgs84 如果你APP的地图SDK用的是百度地图SDK 请填bd09ll 否则 就填gcj02
+//    NSString *urlString =[[NSString stringWithFormat:@"baidumap://map/direction?origin={{我的位置}}&destination=name:已选择的位置|latlng:%f,%f&mode=driving&coord_type=bd09ll",coordinate.latitude,coordinate.longitude] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    if (![[UIApplication  sharedApplication] canOpenURL:[NSURL URLWithString:urlString]]) {
+////        [BEEToast showOtherFailWithMessage:@"暂无法跳转!"];
+//        NSLog(@"暂无法跳转!");
+//        return;
+//    }
+//    if (@available(iOS 10.0, *)) {
+//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlsting] options:@{UIApplicationOpenURLOptionsSourceApplicationKey:@YES} completionHandler:nil];
+//    } else {
+//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlsting]];
+//    }
+    
+//------------------------------------------------------------------------------------------------------------
+    
+    //coord_type允许的值为bd09ll、gcj02、wgs84 如果你APP的地图SDK用的是百度地图SDK 请填bd09ll 否则 就填gcj02
+    NSString *urlString = [NSString stringWithFormat:@"baidumap://map/direction?origin={{我的位置}}&destination=name:已选择的位置%@|latlng:%f,%f&mode=driving&coord_type=bd09ll", endAddress,coordinate.latitude,coordinate.longitude];
+    urlString = [self handleEncodeUrl:urlString];//对字符串中的中文进行编码处理
+    [self openUrl:urlString];//打开网址
+}
+
+// 中文编码处理
++ (NSString *)handleEncodeUrl:(NSString *)urlStr {
+    
+    NSString *newString = @"";
+    if ([[NSString alloc] respondsToSelector:@selector(stringByAddingPercentEncodingWithAllowedCharacters:)]) {
+        //对url中的中文进行转码
+        newString = [urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    } else {
+        newString = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    }
+    return newString;
+}
+
+// 打开 url
++ (void)openUrl:(NSString *)urlString {
+    
+    if (![[UIApplication  sharedApplication] canOpenURL:[NSURL URLWithString:urlString]]) {
+        //        [BEEToast showOtherFailWithMessage:@"暂无法跳转!"];
+        NSLog(@"暂无法跳转!");
+        return;
+    }
+    
+    //    if (@available(iOS 10.0, *)) {
+    //        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString] options:@{UIApplicationOpenURLOptionsSourceApplicationKey:@YES} completionHandler:nil];
+    //    } else {
+    //        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+    //    }
+    if ([[UIApplication sharedApplication] respondsToSelector:@selector(openURL:options:completionHandler:)]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString] options:@{UIApplicationOpenURLOptionsSourceApplicationKey:@YES} completionHandler:nil];
+    } else {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+    }
+}
+
+
 
 @end

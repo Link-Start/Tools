@@ -28,3 +28,9 @@
 - (instancetype)initWithFrame:(CGRect)frame numberOfStars:(NSInteger)numberOfStars isVariable:(BOOL)isVariable;
 
 @end
+
+/**
+ 
+ 
+ 
+ */

@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///服务器地址
 UIKIT_EXTERN NSString *const host_url;
 
+FOUNDATION_EXPORT NSString *const address_url;
 
 
 @end

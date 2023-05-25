@@ -13,7 +13,12 @@
 #import <CoreTelephony/CTCarrier.h>
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 
-
+// 高斯模糊
+#import <Accelerate/Accelerate.h>
+// 清理网页 web 缓存
+#import <WebKit/WebKit.h>
+// 清理 sd 缓存
+#import <SDWebImage/SDImageCache.h>
 
 @implementation Function
 
@@ -725,6 +730,13 @@ static inline long long HYHDateTimeStamp(NSString *DateStr) {
 
 ///*********** 清理缓存 方法 1 *****************/
 //使用SDWebImage清理缓存
+- (void)d {
+    
+    [[SDImageCache sharedImageCache] clearDiskOnCompletion:^{
+            
+    }];
+    [[SDImageCache sharedImageCache] clearMemory];
+}
 
 /*********** 清理缓存 方法 2 *****************/
 //2 Library，存储程序的默认设置或其它 状态信息
@@ -764,6 +776,82 @@ static inline long long HYHDateTimeStamp(NSString *DateStr) {
     NSLog(@"清理成功");
 }
 
+
+
+/// 清理web网页 缓存
+- (void)deleteWebCache:(void(^)(void))complete{
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 9.0) {
+        NSMutableSet *temWebsiteDataTypes = [WKWebsiteDataStore allWebsiteDataTypes].mutableCopy;//清除所有的web数据
+        //WKWebsiteDataTypeSessionStorage   WKWebsiteDataTypeLocalStorage  这两个不清除
+        if ([temWebsiteDataTypes containsObject:WKWebsiteDataTypeSessionStorage]) {
+            [temWebsiteDataTypes removeObject:WKWebsiteDataTypeSessionStorage];
+        }
+        if ([temWebsiteDataTypes containsObject:WKWebsiteDataTypeLocalStorage]) {
+            [temWebsiteDataTypes removeObject:WKWebsiteDataTypeLocalStorage];
+        }
+        
+        NSSet *websiteDataTypes = [NSSet setWithSet:temWebsiteDataTypes];
+        NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];
+        [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes modifiedSince:dateFrom completionHandler:^{
+            if (complete) {
+                complete();
+            }
+        }];
+ 
+        return ;
+    }
+     NSString*libraryPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,NSUserDomainMask,YES)objectAtIndex:0];
+     NSString*cookiesFolderPath = [libraryPath stringByAppendingString:@"/Cookies"];
+     NSError*errors;
+    [[NSFileManager defaultManager]removeItemAtPath:cookiesFolderPath error:&errors];
+    if (complete) {
+        complete();
+    }
+}
+
+//创建高斯模糊效果图片(不会卡)
++ (UIImage *)gsImage:(UIImage *)image withGsNumber:(CGFloat)blur {
+    if (blur < 0.f || blur > 1.f) {
+        blur = 0.5f;
+    }
+    int boxSize = (int)(blur * 40);
+    boxSize = boxSize - (boxSize % 2) + 1;
+    CGImageRef img = image.CGImage;
+    vImage_Buffer inBuffer, outBuffer;
+    vImage_Error error;
+    void *pixelBuffer;
+    //从CGImage中获取数据
+    CGDataProviderRef inProvider = CGImageGetDataProvider(img);
+    CFDataRef inBitmapData = CGDataProviderCopyData(inProvider);
+    //设置从CGImage获取对象的属性
+    inBuffer.width = CGImageGetWidth(img);
+    inBuffer.height = CGImageGetHeight(img);
+    inBuffer.rowBytes = CGImageGetBytesPerRow(img);
+    inBuffer.data = (void*)CFDataGetBytePtr(inBitmapData);
+    pixelBuffer = malloc(CGImageGetBytesPerRow(img) * CGImageGetHeight(img));
+    if(pixelBuffer == NULL)
+        NSLog(@"No pixelbuffer");
+    outBuffer.data = pixelBuffer;
+    outBuffer.width = CGImageGetWidth(img);
+    outBuffer.height = CGImageGetHeight(img);
+    outBuffer.rowBytes = CGImageGetBytesPerRow(img);
+    error = vImageBoxConvolve_ARGB8888(&inBuffer, &outBuffer, NULL, 0, 0, boxSize, boxSize, NULL, kvImageEdgeExtend);
+    if (error) {
+        NSLog(@"error from convolution %ld", error);
+    }
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef ctx = CGBitmapContextCreate( outBuffer.data, outBuffer.width, outBuffer.height, 8, outBuffer.rowBytes, colorSpace, kCGImageAlphaNoneSkipLast);
+    CGImageRef imageRef = CGBitmapContextCreateImage (ctx);
+    UIImage *returnImage = [UIImage imageWithCGImage:imageRef];
+    //clean up
+    CGContextRelease(ctx);
+    CGColorSpaceRelease(colorSpace);
+    free(pixelBuffer);
+    CFRelease(inBitmapData);
+    CGColorSpaceRelease(colorSpace);
+    CGImageRelease(imageRef);
+    return returnImage;
+}
 
 @end
 
