@@ -5,6 +5,9 @@
 //  Created by Alex Yang on 2018/1/10.
 //  Copyright © 2018年 Link-Start. All rights reserved.
 //
+// 创建.pch文件：
+//  1.commend+n -----> PCH File ------> Target -------> 确定
+//  2.Build Settings -->搜索prefix -->找到 Prefix Header 输入路径：$(SRCROOT)/项目名/PrefixHeader.pch
 
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
@@ -34,6 +37,7 @@
 
 
 
+#import "LSConstAppKey.h"
 
 
 #endif

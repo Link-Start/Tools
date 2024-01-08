@@ -121,6 +121,17 @@ General-->Deployment Info: Device Orientation 只需要设置为Portrait,  其�
 - (void)begainFullScreen {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.allowRotation = YES;
+    if (@available(iOS 16.0, *)) {
+        UIWindowScene *windowScene =
+            (UIWindowScene *)[UIApplication sharedApplication].connectedScenes.allObjects.firstObject;
+        for (UIWindow *windows in windowScene.windows) {
+            if ([windows.rootViewController respondsToSelector:NSSelectorFromString(@"setNeedsUpdateOfSupportedInterfaceOrientations")]) {
+                [windows.rootViewController performSelector:NSSelectorFromString(@"setNeedsUpdateOfSupportedInterfaceOrientations")];
+            }
+        }
+    } else {
+        // Fallback on earlier versions
+    }
 }
 
 // 退出全屏!!!!!!!!!!!! 这个方法在 关闭当前VC的方法(closeVC)里调用,在viewWillDisappear调用会有一个短暂的0.2秒左右的 View页面 残留

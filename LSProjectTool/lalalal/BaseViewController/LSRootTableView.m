@@ -563,6 +563,13 @@
             _ls_tableView.estimatedSectionFooterHeight = 0;
             _ls_tableView.rowHeight = UITableViewAutomaticDimension;//自动计算行高
         }
+        // 设置 rowHeight 比 tableView:heightForRowAtIndexPath:更加高效
+        _ls_tableView.rowHeight = 44;
+        
+        
+        // 设置 tableView:heightForRowAtIndexPath:代理方法后,rowHeight会无效
+        
+
         
         _ls_tableView.showsVerticalScrollIndicator = NO;
         _ls_tableView.showsHorizontalScrollIndicator = NO;
@@ -575,10 +582,13 @@
 //        _ls_tableView.delegate = self;
         
 #ifdef __IPHONE_11_0
+        if (@available(iOS 13.0, *)) {
+            _ls_tableView.automaticallyAdjustsScrollIndicatorInsets = false;
+        } else
         if (@available(iOS 11.0, *)) {
-            self.ls_tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+            _ls_tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         } else {
-            // Fallback on earlier versions
+            _ls_tableView.automaticallyAdjustsScrollIndicatorInsets = NO;
         }
         if(kDevice_Is_iPhoneX && CGRectGetHeight(self.view.frame) == kLS_ScreenHeight - kLS_TopHeight){
             self.ls_tableView.contentInset = UIEdgeInsetsMake(0, 0, kLS_iPhoneX_Home_Indicator_Height, 0);
@@ -616,6 +626,8 @@
 }
 
 
+
+
 /*
 #pragma mark - Navigation
 
@@ -627,3 +639,71 @@
 */
 
 @end
+
+
+/**
+ 
+ iOS UITableView获取特定位置的cell
+    https://blog.51cto.com/u_7583030/6391496
+
+ 
+ !!!!!!!!!!!!  !!!!!!!!!!!! 一、tableView双级联动
+ 以下两种效果比较类似，实现的关键在于都是需要获得在滑动过程中滑动到tableView顶部的cell的indexPath。
+
+ 方案一：获得当前可见的所有cell，然后取可见cell数组中的第一个cell就是目标cell，再根据cell获得indexPath。代码如下
+ 登录后复制
+ - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+
+   if (scrollView == _rightTableView && _isSelected == NO) {
+       //返回tableView可见的cell数组
+         NSArray * array = [_rightTableView visibleCells];
+        //返回cell的IndexPath
+         NSIndexPath * indexPath = [_rightTableView indexPathForCell:array.firstObject];
+         NSLog(@"滑到了第 %ld 组 %ld个",indexPath.section, indexPath.row);
+         _currentIndexPath = [NSIndexPath indexPathForRow:0 inSection:indexPath.section];
+         [_leftTableView reloadData];
+         [_leftTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:indexPath.section] atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
+     }
+
+ }
+
+ 方案二(推荐使用)：利用偏移量！偏移量的值实际上可以代表当时处于tableView顶部的cell在tableView上的相对位置， 那么我们就可以根据偏移量获得处于顶部的cell的indexPath。代码如下
+ 登录后复制
+ - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+
+    if (scrollView == _rightTableView && _isSelected == NO) {
+        //系统方法返回处于tableView某坐标处的cell的indexPath
+         NSIndexPath * indexPath = [_rightTableView indexPathForRowAtPoint:scrollView.contentOffset];
+         NSLog(@"滑到了第 %ld 组 %ld个",indexPath.section, indexPath.row);
+         _currentIndexPath = [NSIndexPath indexPathForRow:0 inSection:indexPath.section];
+         [_leftTableView reloadData];
+         [_leftTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:indexPath.section] atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
+     }
+
+ }
+ 
+ 
+ 
+ !!!!!!!!!!!!  !!!!!!!!!!!!  二、 获取处于UITableView中心的cell
+ 获取处于tableView中间cell的效果，用上述方案一比较麻烦：要考虑可见cell 的奇、偶个数问题，还有cell是否等高的情况；方案二用起来就快捷方便多了，取的cell的位置的纵坐标相当于在偏移量的基础上又增加了tableView高度的一半。代码如下：
+
+ 登录后复制
+ - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+
+     //获取处于UITableView中心的cell
+     //系统方法返回处于tableView某坐标处的cell的indexPath
+     NSIndexPath * middleIndexPath = [_rightTableView  indexPathForRowAtPoint:CGPointMake(0, scrollView.contentOffset.y + _rightTableView.frame.size.height/2)];
+     NSLog(@"中间的cell：第 %ld 组 %ld个",middleIndexPath.section, middleIndexPath.row);
+
+ }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ */

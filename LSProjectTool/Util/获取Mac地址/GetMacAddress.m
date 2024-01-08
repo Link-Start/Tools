@@ -50,6 +50,38 @@
     return address;
 }
 
+/// iPv4 地址： 
+- (NSString *)wiFiIPAddress {
+    @try {
+        NSString *ipAddress;
+        struct ifaddrs *interfaces;
+        struct ifaddrs *temp;
+        int Status = 0;
+        Status = getifaddrs(&interfaces);
+        if (Status == 0) {
+            temp = interfaces;
+            while(temp != NULL) {
+                if(temp->ifa_addr->sa_family == AF_INET) {
+                    if([[NSString stringWithUTF8String:temp->ifa_name] isEqualToString:@"en0"]) {
+                        ipAddress = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)temp->ifa_addr)->sin_addr)];
+                    }
+                }
+                temp = temp->ifa_next;
+            }
+        }
+        
+        freeifaddrs(interfaces);
+        
+        if (ipAddress == nil || ipAddress.length <= 0) {
+            return nil;
+        }
+        return ipAddress;
+    }
+    @catch (NSException *exception) {
+        return nil;
+    }
+}
+
 
 // Return the local MAC addy
 // Courtesy of FreeBSD hackers email list
@@ -173,5 +205,8 @@
     
     return macAddressString; 
 }
+
+
+
 
 @end

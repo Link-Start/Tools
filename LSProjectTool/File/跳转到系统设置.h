@@ -4,7 +4,7 @@
 
 
 ///进入系统设置选项
-- (void)ddddd {
+//- (void)ddddd {
     //    NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
     //        if ([[UIApplication sharedApplication] canOpenURL:url]) {
     //            [[UIApplication sharedApplication] openURL:url];
@@ -56,15 +56,15 @@
     //            [[UIApplication sharedApplication] openURL:url];
     //        }
     
-    //定位服务设置界面
-    NSURL *url = [NSURL URLWithString:@"prefs:root=LOCATION_SERVICES"];
-    if ([[UIApplication sharedApplication] canOpenURL:url])
-    {
-        [[UIApplication sharedApplication] openURL:url];
-    }
-    
-    
-}
+//    //定位服务设置界面
+//    NSURL *url = [NSURL URLWithString:@"prefs:root=LOCATION_SERVICES"];
+//    if ([[UIApplication sharedApplication] canOpenURL:url])
+//    {
+//        [[UIApplication sharedApplication] openURL:url];
+//    }
+//
+//
+//}
 
 
 

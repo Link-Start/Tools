@@ -33,9 +33,11 @@ typedef NS_ENUM(NSInteger,AlignType){
 /**
  
  
- // 获取collectionView的真实高度 -->>
+ // 获取collectionView的真实高度 -->>       ①
  // 1.[self.collectionView reloadData];
- // 2.[self getCollectionViewHeiht:YES];
+ // 2. [self.collectionView layoutIfNeeded];
+    [self.collectionView layoutSubviews];
+ // 3.[self getCollectionViewHeiht:YES];
  /// 获取collectionView的高度    是否返回高度
  - (void)getCollectionViewHeiht:(BOOL)returnUpdateHeight {
      dispatch_async(dispatch_get_main_queue(), ^{
@@ -45,6 +47,15 @@ typedef NS_ENUM(NSInteger,AlignType){
          }
      });
  }
+ 
+ 
+ // 获取collectionView的真实高度 -->>       ②
+ // 1.[self.collectionView reloadData];
+ // 2.[self.collectionView layoutIfNeeded];
+    [self.collectionView layoutSubviews];
+ // 3. 获取collectionView的高度
+ CGFloat height = self.collectionView.collectionViewLayout.collectionViewContentSize.height;
+
 
  
  - (CGSize)sizeThatFits:(CGSize)size{

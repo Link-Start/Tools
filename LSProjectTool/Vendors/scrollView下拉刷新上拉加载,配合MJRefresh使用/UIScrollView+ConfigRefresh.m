@@ -24,9 +24,6 @@ static NSArray *_animations;
 }
 
 
-
-
-
 /// 开始刷新
 - (void)beginRefreshing {
      [self.mj_header beginRefreshing];
@@ -100,6 +97,38 @@ static NSArray *_animations;
     self.mj_footer = gifFooter;
     [self configCompleteBlock];
 }
+
+/// 配置 上拉加载更多数据，
+/// 默认底部控件100%出现时才会自动刷新，
+/// 这里设置0.5，代表底部控件出现一半就会自动加载数据
+- (void)configAutoRefreshFooterRefresh:(void(^)(UIScrollView *scrollView))loadMoreBlock {
+    [self configAutoRefreshFooterRefresh:0.5 loadMoreBlock:loadMoreBlock];
+}
+/// 配置 上拉加载更多数据，
+/// triggerAutomaticallyRefreshPercent：默认底部控件100%出现时才会自动刷新
+- (void)configAutoRefreshFooterRefresh:(CGFloat)triggerAutomaticallyRefreshPercent loadMoreBlock:(void(^)(UIScrollView *scrollView))loadMoreBlock {
+    @weakify(self);
+    MJRefreshAutoGifFooter *gifFooter = [MJRefreshAutoGifFooter footerWithRefreshingBlock:^{
+         @strongify(self);
+           if (self.isRefreshing) {
+             return;
+           }
+           self.currentPage++;
+           self.isRefreshing = YES;
+           if (loadMoreBlock) {
+               loadMoreBlock(self);
+           }
+    }];
+    self.currentPage = 1;
+    [gifFooter setImages:_animations forState:MJRefreshStateRefreshing];
+    [gifFooter setImages:_animations forState:MJRefreshStatePulling];
+    [gifFooter setImages:_animations forState:MJRefreshStateIdle];
+    [gifFooter setImages:_animations forState:MJRefreshStateWillRefresh];
+    gifFooter.triggerAutomaticallyRefreshPercent = triggerAutomaticallyRefreshPercent;// 默认底部控件100%出现时才会自动刷新
+    self.mj_footer = gifFooter;
+    [self configCompleteBlock];
+}
+
 
 // 下拉刷新，加载数据
 - (void)loadData {

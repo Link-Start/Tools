@@ -8,6 +8,9 @@
 //  https://www.jianshu.com/p/4e03b45e687a
 //  http://www.jianshu.com/u/2a2051ad6a5d
 
+//正式环境：https://buy.itunes.apple.com/verifyReceipt
+//沙箱环境：https://sandbox.itunes.apple.com/verifyReceipt
+
 #import <Foundation/Foundation.h>
 
 
@@ -28,6 +31,9 @@ typedef NS_ENUM(NSUInteger, PayResultCode) {
     
     AppStorePaySuccess      = 1201,   /**内购支付成功*/
     AppStorePayError        = 1202,   /**内购支付失败*/
+//    AppStorePayError_ProductNull = 120201, /**无法获取产品(商品)信息*/
+//    AppStorePayError_ProductFail = 120202, /**产品(商品)信息错误*/
+//    AppStorePayError_ProductPriceChange = 1203,   /**内购产品价格有变化，登录开发者账号进行查看变动详情*/
     AppStorePayCancel       = 1203,   /**内购支付取消*/
     AppStore_Unsupport      = 1205,   /**< 内购支付不支持,不支持内购    */
     AppStore_NotAllow       = AppStore_Unsupport,

@@ -27,6 +27,7 @@
 
 #import "TZImagePickerController.h"
 
+//#include <cstddef>
 
 //#import "LSProjectTool-Swift.h"
 
@@ -173,8 +174,16 @@
     [self presentViewController:self animated:YES completion:nil];
     
     
-    
-
+    //Duration: 动画持续时间
+//delay: 动画执行延时
+//usingSpringWithDamping: 震动效果，范围 0.0f~1.0f，数值越小,「弹簧」的震动效果越明显.当“dampingRatio”为1时，动画将平滑地减速到其最终模型值，而不会振荡
+//initialSpringVelocity: 初始速度，数值越大一开始移动越快
+//options: 动画的过渡效果
+    [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:1.0 initialSpringVelocity:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+        
+    } completion:^(BOOL finished) {
+        
+    }];
     
     
 #pragma mark - ------
@@ -474,6 +483,18 @@
 - (void)begainFullScreen {
     AppDelegate * appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     appDelegate.allowRotation = YES;
+    
+    if (@available(iOS 16.0, *)) {
+        UIWindowScene *windowScene =
+            (UIWindowScene *)[UIApplication sharedApplication].connectedScenes.allObjects.firstObject;
+        for (UIWindow *windows in windowScene.windows) {
+            if ([windows.rootViewController respondsToSelector:NSSelectorFromString(@"setNeedsUpdateOfSupportedInterfaceOrientations")]) {
+                [windows.rootViewController performSelector:NSSelectorFromString(@"setNeedsUpdateOfSupportedInterfaceOrientations")];
+            }
+        }
+    } else {
+        // Fallback on earlier versions
+    }
 }
 
 // 关闭 屏幕旋转
@@ -481,28 +502,50 @@
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.allowRotation = NO;
      //强制归正：
-    if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
-        SEL selector = NSSelectorFromString(@"setOrientation:");
-        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[UIDevice instanceMethodSignatureForSelector:selector]];
-        [invocation setSelector:selector];
-        [invocation setTarget:[UIDevice currentDevice]];
-        int val = UIInterfaceOrientationPortrait;
-        [invocation setArgument:&val atIndex:2];
-        [invocation invoke];
-    }
-    
     if (@available(iOS 16.0, *)) {
-        // setNeedsUpdateOfSupportedInterfaceOrientations 方法是 UIViewController 的方法
-        [self setNeedsUpdateOfSupportedInterfaceOrientations];
-        NSArray *array = [[[UIApplication sharedApplication] connectedScenes] allObjects];
-        UIWindowScene *scene = [array firstObject];
-        // 屏幕方向
-        UIInterfaceOrientationMask orientation = self.isFullScreen ? UIInterfaceOrientationMaskLandscape:UIInterfaceOrientationMaskPortrait;
-        UIWindowSceneGeometryPreferencesIOS *geometryPreferencesIOS = [[UIWindowSceneGeometryPreferencesIOS alloc] initWithInterfaceOrientations:orientation];
-        // 开始切换
-        [scene requestGeometryUpdateWithPreferences:geometryPreferencesIOS errorHandler:^(NSError * _Nonnull error) {
-            NSLog(@"错误:%@", error);
-        }];
+        @try {
+            // 1.........................
+            //        // setNeedsUpdateOfSupportedInterfaceOrientations 方法是 UIViewController 的方法
+            //        [self setNeedsUpdateOfSupportedInterfaceOrientations];
+            //        NSArray *array = [[[UIApplication sharedApplication] connectedScenes] allObjects];
+            //        UIWindowScene *scene = [array firstObject];
+            //        // 屏幕方向
+            //        UIInterfaceOrientationMask orientation = self.isFullScreen ? UIInterfaceOrientationMaskLandscape:UIInterfaceOrientationMaskPortrait;
+            //        UIWindowSceneGeometryPreferencesIOS *geometryPreferencesIOS = [[UIWindowSceneGeometryPreferencesIOS alloc] initWithInterfaceOrientations:orientation];
+            //        // 开始切换
+            //        [scene requestGeometryUpdateWithPreferences:geometryPreferencesIOS errorHandler:^(NSError * _Nonnull error) {
+            //            NSLog(@"屏幕旋转失败，错误:%@", error);
+            //        }];
+            
+            // 2.........................
+            NSArray *array = [[[UIApplication sharedApplication] connectedScenes] allObjects];
+            UIWindowScene *ws = (UIWindowScene *)array[0];
+            Class GeometryPreferences = NSClassFromString(@"UIWindowSceneGeometryPreferencesIOS");
+            id geometryPreferences = [[GeometryPreferences alloc]init];
+            [geometryPreferences setValue:@(UIInterfaceOrientationMaskPortrait) forKey:@"interfaceOrientations"];
+            SEL sel_method = NSSelectorFromString(@"requestGeometryUpdateWithPreferences:errorHandler:");
+            void (^ErrorBlock)(NSError *err) = ^(NSError *err){};
+            if ([ws respondsToSelector:sel_method]) {
+                (((void (*)(id, SEL,id,id))[ws methodForSelector:sel_method])(ws, sel_method,geometryPreferences,ErrorBlock));
+            }
+            
+        } @catch (NSException *exception) {
+        } @finally {
+        }
+    } else {
+        if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
+            @try {
+                SEL selector = NSSelectorFromString(@"setOrientation:");
+                NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[UIDevice instanceMethodSignatureForSelector:selector]];
+                [invocation setSelector:selector];
+                [invocation setTarget:[UIDevice currentDevice]];
+                int val = UIInterfaceOrientationPortrait;
+                [invocation setArgument:&val atIndex:2];
+                [invocation invoke];
+            } @catch (NSException *exception) {
+            } @finally {
+            }
+        }
     }
 }
 // 状态条变化通知（在前台播放才去处理）
@@ -514,7 +557,16 @@
  *  屏幕方向发生变化会调用这里
  */
 - (void)onDeviceOrientationChange {
+    
+    // 在iOS 16中这里获取的为unknow......
     UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
+//    if (@available (iOS 13, *)) {
+//        orientation = [UIApplication sharedApplication].windows.firstObject.windowScene.interfaceOrientation;
+//    } else {
+////        orientation = [[UIApplication sharedApplication] statusBarOrientation];
+//    }
+    
+    
     if (orientation == UIDeviceOrientationFaceUp) {
         return;
     }

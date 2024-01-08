@@ -20,6 +20,7 @@
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView;
 
 
+// 将要结束拖动
 // 在 didEndDragging 前被调用，当 willEndDragging 方法中 velocity 为 CGPointZero
 //（结束拖动时两个方向都没有速度）时，didEndDragging 中的 decelerate 为 NO，即没有减速过程，
 //willBeginDecelerating 和 didEndDecelerating 也就不会被调用。反之，

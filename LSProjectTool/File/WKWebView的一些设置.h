@@ -161,4 +161,73 @@ iOS WKWebView 图片自适应并且 禁止页面缩放
 
 
 
+
+
+
+
+
+
+#pragma mark - 白屏问题 WKWebView 白屏问题
+
+情况一：内存占用过大，会执行webViewWebContentProcessDidTerminate进程终止方法。此方法适用于ios9.0以上， 出现此情况， 尽量将网络请求以及消耗内存的操作交给H5来实现。
+
+//进程终止(内存消耗过大导致白屏)
+- (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView {
+    [webView reload];
+}
+情况二： 退到后台，再次唤醒出现白屏， 需要判断webView是否处于白屏状态。
+方法1： 判断当前webView的title为空。 但是对于本来title就为空的页面不适用。
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (self.webView.title == nil || self.webView.title.length == 0) {
+        [self.webView reload];
+    }
+}
+方法2：判断当前webview的URL为空或about:blank。
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if ([self.webView.URL.absoluteString isEqualToString:@""] || self.webView.URL.absoluteString.length == 0) {
+        [self.webView reload];
+    }
+}
+方法3：通过执行JS代码document.body.innerHTML查看页面内容。
+
+//监听app进入前台通知
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appEnterPlayground) name:UIApplicationDidBecomeActiveNotification object:nil];
+
+- (void)appEnterPlayground {
+    [self.webView evaluateJavaScript:@"document.body.innerHTML"
+                   completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+        NSString *innerHTML = result;
+        if ([innerHTML isEqualToString:@""] || innerHTML.length == 0) {
+            [self.webView reload];
+        }
+    }];
+}
+以上三种方法并非绝对有效，只是针对特定的网页
+
+方法4：判断是否白屏方法
+
+- (BOOL)isBlankView:(UIView*)view {
+    Class wkCompositingView = NSClassFromString(@"WKCompositingView");
+    if ([view isKindOfClass:[wkCompositingView class]]) {
+        return NO;
+    }
+    for(UIView *subView in view.subviews) {
+        if (![self isBlankView:subView]) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
+作者：一念起
+链接：https://www.jianshu.com/p/e5f3ca12a11f
+来源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+
+
 #endif /* WKWebView______h */

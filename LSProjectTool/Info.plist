@@ -89,15 +89,23 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>wechat</string>
 		<string>weixin</string>
+		<string>weixinULAPI</string>
+		<string>weixinURLParamsAPI</string>
+		<string>safepay</string>
+		<string>jdpay</string>
 		<string>sinaweibohd</string>
 		<string>sinaweibo</string>
 		<string>sinaweibosso</string>
 		<string>weibosdk</string>
 		<string>weibosdk2.5</string>
+		<string>mqqopensdklaunchminiapp</string>
+		<string>mqqopensdkminiapp</string>
 		<string>mqqapi</string>
 		<string>mqq</string>
 		<string>mqqOpensdkSSoLogin</string>
@@ -187,10 +195,6 @@
 		<string>vkauthorize</string>
 		<string>twitter</string>
 		<string>twitterauth</string>
-		<string>baidumap</string>
-		<string>iosamap</string>
-		<string>qqmap</string>
-		<string>comgooglemasp</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

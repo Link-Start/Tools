@@ -146,4 +146,28 @@
 {
     return [self.attrsArray copy];
 }
+
+
+// https://www.jianshu.com/p/c97d23150b72
+// https://www.jianshu.com/p/1ea2edbed601
+// https://www.jianshu.com/p/4db0be2f4803
+// https://www.cnblogs.com/leo-92/p/4311379.html
+// UICollectionView等分有1px缝隙
+- (CGFloat)fixSlitWith:(CGRect)rect colCount:(CGFloat)colCount space:(CGFloat)space {
+    CGFloat totalSpace = (colCount - 1) * space;//总共留出的距离
+    CGFloat itemWidth = (rect.size.width - totalSpace) / colCount;// 按照真实屏幕算出的cell宽度 （iPhone6 375*667）93.75
+    CGFloat fixValue = 1 / [UIScreen mainScreen].scale; //(1px=0.5pt,6Plus为3px=1pt)
+    CGFloat realItemWidth = floor(itemWidth) + fixValue;//取整加fixValue  floor:如果参数是小数，则求最大的整数但不大于本身.
+    if (realItemWidth < itemWidth) {// 有可能原cell宽度小数点后一位大于0.5
+        realItemWidth += fixValue;
+    }
+    CGFloat realWidth = colCount * realItemWidth + totalSpace;//算出屏幕等分后满足1px=([UIScreen mainScreen].scale)pt实际的宽度,可能会超出屏幕,需要调整一下frame
+    CGFloat pointX = (realWidth - rect.size.width) / 2; //偏移距离
+    rect.origin.x = -pointX;//向左偏移
+    rect.size.width = realWidth;
+//    _rect = rect;
+    return realItemWidth; //每个cell的真实宽度
+}
+
+
 @end

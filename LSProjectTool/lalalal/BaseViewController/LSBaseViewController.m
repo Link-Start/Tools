@@ -234,6 +234,12 @@
             //服务器上传文件的字段和类型 上传图片，以文件流的格式
             [formData appendPartWithFileData:imageData name:imageKey fileName:fileName mimeType:@"image/png/file/jpg"];
         
+        // 这样也可以传
+//        for (NSData *filedata in filedatas) {
+//          NSString *fileName = [NSString stringWithFormat:@"chosedFile%d.jpg",[filedatas indexOfObject:filedata]];
+//          [formData appendPartWithFileData:filedata name:@"file" fileName:fileName mimeType:@"image/jpeg"];
+//        }
+        
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         //打印 上传进度
         NSLog(@"上传进度：%lf",1.0 * uploadProgress.completedUnitCount / uploadProgress.totalUnitCount);
@@ -277,7 +283,7 @@
 #pragma mark -- image转化成Base64位
 - (NSString *)imageChangeBase64: (UIImage *)image{
     
-    NSData   *imageData = nil;
+    NSData *imageData = nil;
     //方法1
     if (UIImagePNGRepresentation(image) == nil) {
         imageData = UIImageJPEGRepresentation(image, 1.0);
@@ -299,6 +305,15 @@
     
     return [NSString stringWithFormat:@"%@",[imageData base64EncodedStringWithOptions: 0]];
 }
+
+// base64 转图片
+- (UIImage *)base64ChangeImage:(NSString *)string {
+    
+    NSData *imageData = [[NSData alloc] initWithBase64EncodedString:string options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    UIImage *img = [UIImage imageWithData:imageData];
+    return img;
+}
+
 
 //+  (BOOL)imageHasAlpha:(UIImage *)image{
 //
@@ -639,6 +654,10 @@
     [super viewDidAppear:animated];
     NSLog(@"进入控制器：%@", [[self class] description]);
 }
+
+// https://www.jianshu.com/p/360f2bb06afa
+//在UIViewController的category中重写的dealloc方法，会导致键盘上的控制器UIInputWindowController,UICompatibilityInputViewController过度释放而崩溃
+// 解决办法： 去掉category中的dealloc方法
 - (void)dealloc {
     //移除通知
     NSLog(@"控制器被dealloc: %@", [[self class] description]);

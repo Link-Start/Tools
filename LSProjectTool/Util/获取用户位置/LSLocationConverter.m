@@ -192,4 +192,12 @@ static const double x_pi = M_PI  * 3000.0 / 180.0;
  注意点：若此时要对获取的坐标使用CLGeocoder类提供的方法- (void)reverseGeocodeLocation:(CLLocation *)location completionHandler:(CLGeocodeCompletionHandler)completionHandler转码成中文地理位置，就得先将GCJ-02的坐标转换成WGS1984坐标，然后再进行中文地址转码，因为CLGeocoder也是CoreLocation中的类，同样使用的是WGS1984坐标。
 
  3）同理，百度地图显示需要先将坐标转换为Bd-09坐标。
+ 
+ 
+ 
+ 
+ 
+ // 一些公司（比如高德，百度，腾讯）是先经度，再纬度，即Point(lng, lat)。但谷歌坐标的顺序恰好相反，是(lat, lng)。
+ 
+ 
  */

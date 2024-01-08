@@ -110,8 +110,8 @@
     @weakify(self);
     //Duration: 动画持续时间
 //delay: 动画执行延时
-//usingSpringWithDamping: 震动效果，范围 0~1，数值越小，震动效果越明显
-//initialSpringVelocity: 初始速度
+//usingSpringWithDamping: 震动效果，范围 0.0f~1.0f，数值越小,「弹簧」的震动效果越明显.当“dampingRatio”为1时，动画将平滑地减速到其最终模型值，而不会振荡
+//initialSpringVelocity: 初始速度，数值越大一开始移动越快
 //options: 动画的过渡效果
     [UIView animateWithDuration:0.6
                           delay:0

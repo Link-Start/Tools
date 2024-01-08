@@ -39,3 +39,39 @@ if (@available(iOS 10.0, *)) {
    <source src="https://xx.com.xxx.mp4" type="video/mp4">
 </video>
 /// ------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+https://github.com/yangKJ/Rickenbacker/blob/master/README_CN.md
+Mediatror
+
+该模块主要就是提供设计组件化中间层
+
+设计组件化中间层有两种比较有代表性的方案：
+
+基于URL注册跳转的方式，参考蘑菇街开源 MGJRouter
+基于Objective-C运行时的Mediator方式，参考 CTMediator
+简单谈谈二者优势区别：
+
+URL注册的方式在使用上非常繁琐而且很多时候其实没有必要。首先每一个页面跳转都需要事先注册好URL，这里会牵涉到非常多字符串硬编码。
+基于runtime的Mediator方式，首先它不需要注册，省去了很多比对字符串的过程，其次它可以非常容易的传递各种参数来进行组建间通信。
+因此这边最终选择提供方案也是Mediator方式；
+
+
+
+
+
+
+https://github.com/lyujunwei/MGJRouter
+已经有几款不错的 Router 了，如 JLRoutes, HHRouter, 但细看了下之后发现，还是不太满足需求。
+
+JLRoutes 的问题主要在于查找 URL 的实现不够高效，通过遍历而不是匹配。还有就是功能偏多。
+HHRouter 的 URL 查找是基于匹配，所以会更高效，MGJRouter 也是采用的这种方法，但它跟 ViewController 绑定地过于紧密，一定程度上降低了灵活性。
+
+于是就有了 MGJRouter。
+
+
+
+
+
+

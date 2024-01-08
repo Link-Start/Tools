@@ -81,13 +81,28 @@
     CGRect endFrame = [notif.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
 
 
-    [UIView animateWithDuration:duration animations:^{
+//    [UIView animateWithDuration:duration animations:^{
+//        CGFloat h = (kScreenHeight/2-endFrame.size.height-125);
+//        [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
+//            make.centerY.mas_equalTo(self.view.mas_centerY).mas_offset(h);
+//        }];
+//
+//    }];
+    
+    //Duration: 动画持续时间
+//delay: 动画执行延时
+//usingSpringWithDamping: 震动效果，范围 0.0f~1.0f，数值越小,「弹簧」的震动效果越明显.当“dampingRatio”为1时，动画将平滑地减速到其最终模型值，而不会振荡
+//initialSpringVelocity: 初始速度，数值越大一开始移动越快
+//options: 动画的过渡效果
+    [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:1.0 initialSpringVelocity:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         CGFloat h = (kScreenHeight/2-endFrame.size.height-125);
         [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(self.view.mas_centerY).mas_offset(h);
         }];
+    } completion:^(BOOL finished) {
         
     }];
+    
     [self.view layoutIfNeeded];
 }
 

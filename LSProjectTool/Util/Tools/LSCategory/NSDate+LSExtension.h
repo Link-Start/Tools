@@ -252,6 +252,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (long long)ls_timeStampFromDate:(NSDate *)date;
 
 
+#pragma mark -
+- (NSString *)ls_messageString;
+
 
 #pragma mark - YYKit 时间分类
 

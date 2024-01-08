@@ -19,7 +19,7 @@ NSString *const JPush_appKey = @"";
 ///友盟_appKey
 NSString *const UM_appKey = @"";
 /// 友盟_channel 渠道标识     可设置nil/@"" 表示"App Store".
-NSString *const UM_channel = @"";
+NSString *const UM_channel = @"App Store";
 
 
 ///微信_appId

@@ -25,3 +25,20 @@ pod 'FWPopupView'
 （2）纯swift项目中，通过cocoapods导入swift库时，必须使用use_frameworks!
 （3）只要是通过cocoapods导入swift库时，都必须使用use_frameworks!
 （4）使用动态链接库dynamic frameworks时，必须使用use_frameworks!
+
+
+！！！！！！
+#如果：
+#报错：The 'Pods-xx' target has transitive dependencies that include statically linked binaries: 
+# 报错：“Pods xx ”目标具有可传递的依赖项，其中包括静态链接的二进制文件：
+# 解决方法：在podfile中加入下面的代码
+pre_install do |installer|
+  # workaround for https://github.com/CocoaPods/CocoaPods/issues/3289
+  Pod::Installer::Xcode::TargetValidator.send(:define_method, :verify_no_static_framework_transitive_dependencies) {}
+end
+
+#再次执行pod install之后成功。
+#引用swift库时需要把#import改为@import
+#@import XXXX;
+
+# 解决方法：2.使用：use_frameworks! :linkage => :static

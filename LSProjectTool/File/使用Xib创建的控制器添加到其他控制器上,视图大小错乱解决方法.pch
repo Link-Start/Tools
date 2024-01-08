@@ -54,3 +54,62 @@ initWithCoder 是 nib loader 分配并初始化各个控件的时候由系统调
 
 
 awakeFromNib 则是当所有的 outlet 和事件都创建并绑定之后由系统调用的，这是获取 outlet 并且赋予默认值的好地方。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//设置VC的背景色
+
+//+ (void)load {
+//    //https://www.jianshu.com/p/46e5c52eee2b
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        Class class = [self class];
+//
+//        SEL originalSelector = @selector(viewDidLoad);
+//        SEL swizzledSelector = @selector(ghh_viewDidLoad);
+//
+//        Method originalMethod = class_getInstanceMethod(class, originalSelector);
+//        Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
+//
+//        BOOL didAddMethod =
+//        class_addMethod(class,
+//                        originalSelector,
+//                        method_getImplementation(swizzledMethod),
+//                        method_getTypeEncoding(swizzledMethod));
+//
+//        if (didAddMethod) {
+//            class_replaceMethod(class,
+//                                swizzledSelector,
+//                                method_getImplementation(originalMethod),
+//                                method_getTypeEncoding(originalMethod));
+//        } else {
+//            method_exchangeImplementations(originalMethod, swizzledMethod);
+//        }
+//    });
+//}
+//- (void)ghh_viewDidLoad {
+////    self.view.backgroundColor = [UIColor lightGrayColor];
+////    [self ghh_viewDidLoad];
+////    NSLog(@"%@ method did changed!", self);
+//    //https://www.jianshu.com/p/f26d0bf8aee7
+//    //设置背景颜色的时候把UIInputWindowController过滤
+//    // 过滤操作
+//        Class class = NSClassFromString(@"UIInputWindowController");
+//    if (self.class != class) {
+//        self.view.backgroundColor = [UIColor whiteColor];
+//    }
+//        NSLog(@"%@ method did changed!", self);
+//        [self ghh_viewDidLoad];
+//}

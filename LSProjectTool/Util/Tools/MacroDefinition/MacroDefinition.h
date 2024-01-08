@@ -149,13 +149,16 @@
 
 
 /* ******************图片 的宏定义 -- 优先使用前两种宏定义,性能高于后面***********************/
-///读取本地图片 定义UIImage对象 ext可为nil imgView.image = kLSLoadLocalImage(@"Default.png",nil);
+/// 读取本地图片 定义UIImage对象 ext可为nil imgView.image = kLSLoadLocalImage(@"Default.png",nil);
 #define kLS_LoadLocalImage(file,ext) [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:file ofType:ext]]
-//定义UIImage对象
+/// 定义UIImage对象
 #define kLS_ImageNamed(imageName) [UIImage imageNamed:[UIUtil imageName:imageName]]
-//可拉伸的图片
+/// 可拉伸的图片
 #define kLS_ResizableImage(name,top,left,bottom,right) [[UIImage imageNamed:name] resizableImageWithCapInsets:UIEdgeInsetsMake(top,left,bottom,right)]
 #define kLS_ResizableImageWithMode(name,top,left,bottom,right,mode) [[UIImage imageNamed:name] resizableImageWithCapInsets:UIEdgeInsetsMake(top,left,bottom,right) resizingMode:mode]
+/// 可拉伸的图片
+/// UIImageResizingModeStretch：拉伸模式，通过拉伸UIEdgeInsets指定的矩形区域来填充图片
+/// UIImageResizingModeTile：平铺模式，通过重复显示UIEdgeInsets指定的矩形区域来填充图片
 
 
 // 文件管理单例
@@ -213,6 +216,8 @@ textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:(te
 //#define kLS_changeTextFieldPlaceholderFont(textField, font) [textField setValue:font forKeyPath:@"_placeholderLabel.font"]
 
 
+
+/******************************************************************************************************************************************************************************************************/
 //openUrlString 打开网址
 #define kLS_OpenUrlString(urlString)\
     NSURL *str_URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@", urlString]];\
@@ -243,23 +248,38 @@ textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:(te
         NSLog(@"手机号码是空的");\
         return;\
     }\
-    NSString * phoneStr = [NSString stringWithFormat:@"tel:%@",phoneNumber];\
+    NSString *phoneStr = [NSString stringWithFormat:@"tel:%@", phoneNumber];\
     NSURL *takePhoneUrl = [NSURL URLWithString:phoneStr];\
     if ([[UIApplication sharedApplication] canOpenURL:takePhoneUrl]) {\
         if(@available(iOS 10.0, *)) {\
             [[UIApplication sharedApplication] openURL:takePhoneUrl options:@{UIApplicationOpenURLOptionsSourceApplicationKey:@YES} completionHandler:nil];\
         } else {\
-            [[UIApplication sharedApplication] openURL:str_URL];\
+            [[UIApplication sharedApplication] openURL:takePhoneUrl];\
         }\
     }
 
 
-
+//                   https://itunes.apple.com/app/idxxxx
 //打开appStore中的应用 https://itunes.apple.com/cn/app/idxxxxx?mt=8
 // 当前app 在 appStore中的下载地址 1515655040
 #define kLS_currentApplicationInAppStoreDownloadAddress(appleID) [NSString stringWithFormat:@"https://itunes.apple.com/cn/app/id%@?mt=8", appleID]
 
-//版本比较
+/// 去 appStore 中 评论，评分
+#define kLS_commentOnTheAppStore(appStore_Apple_ID) \
+    NSURL *str_URL = [NSURL URLWithString:[NSString stringWithFormat:@"itms-apps://itunes.apple.com/cn/app/id%@?mt=8&action=write-review", appStore_Apple_ID]];\
+    if ([[UIApplication sharedApplication] canOpenURL:str_URL]) {\
+        if(@available(iOS 10.0, *)) {\
+            [[UIApplication sharedApplication] openURL:str_URL options:@{UIApplicationOpenURLOptionsSourceApplicationKey:@YES} completionHandler:nil];\
+        } else {\
+            [[UIApplication sharedApplication] openURL:str_URL];\
+        }\
+    } else {\
+        NSLog(@"不能打开的地址urlString：%@", urlString);\
+    }
+    
+
+
+/// 版本比较，V1：            V2：
 #define kLS_VersionCompare(v1, v2)\
 if ([v1 compare:v2 options:NSNumericSearch] == NSOrderedDescending) {\
     NSLog(@"v1 > v2 (当前版本是最新)");\
@@ -294,20 +314,43 @@ if ([v1 compare:v2 options:NSNumericSearch] == NSOrderedDescending) {\
 #define kkLS_tableViewCellSectionHeaderFooterView_getFromCachePool(kHeaderFooterViewNameId) [tableView dequeueReusableHeaderFooterViewWithIdentifier:kHeaderFooterViewNameId];
 
 
+/// Xib注册 collectionView 的headerView
+#define kLS_collectionViewHeader_registerNib(collectonView, headViewName, headerViewId) \
+                        [collectonView registerNib:[UINib nibWithNibName:NSStringFromClass([headViewName class]) bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerViewId];
+/// Xib注册 collectionView 的footerView
+#define kLS_collectionViewFooter_registerNib(collectonView, footerViewName, footerViewId) \
+                        [collectonView registerNib:[UINib nibWithNibName:NSStringFromClass([footerViewName class]) bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:footerViewId];
 /// Xib 注册collectionViewCell
 #define kLS_collectionViewCell_registerNib(collectionView, cellName, cellIdentifiter) \
                          [collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([cellName class]) bundle:nil] forCellWithReuseIdentifier:cellIdentifiter];
+/// 纯代码注册 collectionView 的headerView
+#define kLS_collectionViewHeader_registerClass(collectonView, headViewName, headerViewId) \
+                        [collectonView registerClass:[headViewName class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerViewId];
+/// 纯代码注册 collectionView 的footerView
+#define kLS_collectionViewFooter_registerClass(collectonView, footerViewName, footerViewId) \
+                        [collectonView registerClass:[footerViewName class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:footerViewId];
 ///纯代码注册 collectionViewCell
 #define kLS_collectionViewCell_registerClass(collectionView, cellName, cellIdentifiter) \
                          [collectionView registerClass:[cellName class] forCellWithReuseIdentifier:cellIdentifiter];
 ///从缓存池获取 collectionViewCell
-#define kLS_collectionViewCell_getFromCachePool(cellIdentifiter) \
+#define kLS_collectionViewCell_getFromCachePool(collectionView, cellIdentifiter) \
                          [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifiter forIndexPath:indexPath];
+/// 从缓存池获取 collectionView的headerView
+#define kLS_collectionViewHeaderView_getFromCachePool(collectionView, headerViewId) \
+                         [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerViewId forIndexPath:indexPath];
+/// 从缓存池获取 collectionView的footerView
+#define kLS_collectionViewFooterView_getFromCachePool(collectionView, footerViewId) \
+                         [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:footerViewId forIndexPath:indexPath];
+
 
 
 /// Xib 加载View
 #define kLS_loadViewFromNibName(ViewName) \
                          [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([ViewName class]) owner:self options:nil] firstObject];
+/// 加载 Nib
+#define kLS_loadNibFromClass(className) \
+                        [UINib nibWithNibName:NSStringFromClass([className class]) bundle:nil]
+
 
 
 /// Xib 注册tableViewCellSectionHeaderView、 tableViewCellSectionFooterView
@@ -322,24 +365,56 @@ if ([v1 compare:v2 options:NSNumericSearch] == NSOrderedDescending) {\
 ///纯代码注册 tableViewCell cellID     kCellNameId 形式
 #define kLS_tableViewCell_registerClass_(tableView, cellName) \
                          [tableView registerClass:[cellName class] forCellReuseIdentifier:k##cellName##Id];
+
+/// Xib注册 collectionView 的headerView
+#define kLS_collectionViewHeader_registerNib_(collectonView, headViewName) \
+                        [collectonView registerNib:[UINib nibWithNibName:NSStringFromClass([headViewName class]) bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:k##headViewName##Id];
+/// Xib注册 collectionView 的footerView
+#define kLS_collectionViewFooter_registerNib_(collectonView, footerViewName) \
+                        [collectonView registerNib:[UINib nibWithNibName:NSStringFromClass([footerViewName class]) bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:k##footerViewName##Id];
 /// Xib 注册collectionViewCell
 #define kLS_collectionViewCell_registerNib_(collectionView, cellName) \
                         [collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([cellName class]) bundle:nil] forCellWithReuseIdentifier:k##cellName##Id];
 ///纯代码注册 collectionViewCell
 #define kLS_collectionViewCell_registerClass_(collectionView, cellName) \
                         [collectionView registerClass:[cellName class] forCellWithReuseIdentifier:k##cellName##Id];
+/// 纯代码注册 collectionView 的headerView
+#define kLS_collectionViewHeader_registerClass_(collectonView, headViewName) \
+                        [collectonView registerClass:[headViewName class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:k##headViewName##Id];
+/// 纯代码注册 collectionView 的footerView
+#define kLS_collectionViewFooter_registerClass_(collectonView, footerViewName) \
+                        [collectonView registerClass:[footerViewName class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:k##footerViewName##Id];
+
+
+
+
 
 ///从缓存池获取 tableViewCell
-#define kLS_tableViewCell_getFromCachePool_(cellName) \
+#define kLS_tableViewCell_getFromCachePool_(tableView, cellName) \
+                        [tableView dequeueReusableCellWithIdentifier:k##cellName##Id forIndexPath:indexPath];
+#define kLS_tableViewCell_getFromCachePool__(cellName) \
                         [tableView dequeueReusableCellWithIdentifier:k##cellName##Id forIndexPath:indexPath];
 ///从缓存池获取 tableViewCellSectionHeaderView、 tableViewCellSectionFooterView
-#define kkLS_tableViewCellSectionHeaderFooterView_getFromCachePool_(headerFooterViewName) \
+#define kkLS_tableViewCellSectionHeaderFooterView_getFromCachePool_(tableView, headerFooterViewName) \
+                        [tableView dequeueReusableHeaderFooterViewWithIdentifier:k##headerFooterViewName##Id];
+#define kkLS_tableViewCellSectionHeaderFooterView_getFromCachePool__(headerFooterViewName) \
                         [tableView dequeueReusableHeaderFooterViewWithIdentifier:k##headerFooterViewName##Id];
 
 ///从缓存池获取 collectionViewCell
-#define kLS_collectionViewCell_getFromCachePool_(cellName) \
+#define kLS_collectionViewCell_getFromCachePool_(collectionView, cellName) \
                         [collectionView dequeueReusableCellWithReuseIdentifier:k##cellName##Id forIndexPath:indexPath];
-
+#define kLS_collectionViewCell_getFromCachePool__(cellName) \
+                        [collectionView dequeueReusableCellWithReuseIdentifier:k##cellName##Id forIndexPath:indexPath];
+/// 从缓存池获取 collectionView的headerView
+#define kLS_collectionViewHeaderView_getFromCachePool_(collectionView, headerViewId) \
+                         [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerViewId forIndexPath:indexPath];
+#define kLS_collectionViewHeaderView_getFromCachePool__(headerViewId) \
+                         [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerViewId forIndexPath:indexPath];
+/// 从缓存池获取 collectionView的footerView
+#define kLS_collectionViewFooterView_getFromCachePool_(collectionView, footerViewId) \
+                         [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:footerViewId forIndexPath:indexPath];
+#define kLS_collectionViewFooterView_getFromCachePool__(footerViewId) \
+                         [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:footerViewId forIndexPath:indexPath];
 /******************************************************************************************************************************************************************************************************/
 
 /// 从当前导航栏 nav 中移除当前VC

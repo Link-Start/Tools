@@ -9,6 +9,30 @@
 // zIndex这个属性调整collectionview中的层级关系，cell是0，要想装饰视图在cell底部，就要把装饰视图的zindex调整到小于0
 // zIndex 这个属性可以在自定义卡片的时候 让中间的cell处于视图的最前面
 
+/**
+ https://www.jianshu.com/p/c54f52a1e72a
+ 
+ UICollectionViewFlowLayout: 确定网格视图的布局
+
+ 上下左右的间距: sectionInset(left, top, bottom, right)
+ 每一个Cell的大小: itemSize(width, height)
+ 横向Cell之间的间距: minimumInteritemSpacing
+ 纵向Cell之间的间距: minimumLineSpacing
+
+ */
+
+
+
+//上下左右的间距: sectionInset(left, top, bottom, right)
+//每一个Cell的大小: itemSize(width, height)
+//横向Cell之间的间距: minimumInteritemSpacing
+//纵向Cell之间的间距: minimumLineSpacing
+
+
+
+
+
+
 #import "LSRootCollectionView.h"
 
 @interface LSRootCollectionView ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
@@ -172,8 +196,8 @@
 //        // 8.设置分区(组)的EdgeInset（四边距）
 //        layout.sectionInset = UIEdgeInsetsMake(10, 20, 30, 40);
 //        // 9.10.设置分区的头视图和尾视图是否始终固定在屏幕上边和下边
-//        layout.sectionFootersPinToVisibleBounds = YES;
-//        layout.sectionHeadersPinToVisibleBounds = YES;
+//        layout.sectionFootersPinToVisibleBounds = YES; // 设置 headView 悬浮
+//        layout.sectionHeadersPinToVisibleBounds = YES; // 设置 footView 悬浮
 
         
         
@@ -189,10 +213,13 @@
         _ls_collectionView.scrollsToTop = YES;
         
 #ifdef __IPHONE_11_0
+        if (@available(iOS 13.0, *)) {
+            _ls_collectionView.automaticallyAdjustsScrollIndicatorInsets = false;
+        } else
         if (@available(iOS 11.0, *)) {
             _ls_collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         } else {
-            // Fallback on earlier versions
+            _ls_collectionView.automaticallyAdjustsScrollIndicatorInsets = NO;
         }
         if(kDevice_Is_iPhoneX && CGRectGetHeight(self.view.frame) == kLS_ScreenHeight - kLS_TopHeight){
             _ls_collectionView.contentInset = UIEdgeInsetsMake(0, 0, kLS_iPhoneX_Home_Indicator_Height, 0);

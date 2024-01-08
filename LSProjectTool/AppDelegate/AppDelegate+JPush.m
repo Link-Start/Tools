@@ -149,7 +149,7 @@
        }
     }
     
-    return idfaStr;
+    return idfaStr;// 
 }
 
 #pragma mark - 获取自定义消息推送内容

@@ -43,14 +43,23 @@
 - (void)addGestureRecognizer {
     //1:需要获取系统自带滑动手势的target对象
     id target = self.interactivePopGestureRecognizer.delegate;
-    //2:创建全屏滑动手势~调用系统自带滑动手势的target的action方法
-    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:target action:@selector(handleNavigationTransition:)];
+    //2:创建全屏滑动手势~调用系统自带滑动手势的target的action方法,
+    // NSSelectorFromString(@"handleNavigationTransition:")
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:target action:@selector(handleNavigationTransition:)];//
     //3:设置手势代理~拦截手势触发
     pan.delegate = self;//这里一定要设置pan.delegate = self, 不然程序会有假死的状况
     //4:给导航控制器的view添加全屏滑动手势
     [self.view addGestureRecognizer:pan];
     //5:将系统自带的滑动手势禁用
     self.interactivePopGestureRecognizer.enabled = NO;
+    
+//    //处理全屏返回
+//    UIGestureRecognizer *systemGes = self.interactivePopGestureRecognizer;
+//    id target =  systemGes.delegate;
+//    self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:target action:NSSelectorFromString(@"handleNavigationTransition:")];
+//    [self.interactivePopGestureRecognizer.view addGestureRecognizer:self.panGesture];
+//    self.panGesture.delegate = self;
+//    systemGes.enabled = NO;
 }
 
 /// https://www.jianshu.com/p/3e1f0ce35bd5
@@ -81,8 +90,8 @@
         UINavigationBarAppearance *appearance = [[UINavigationBarAppearance alloc] init];
         [appearance configureWithOpaqueBackground];//重置背景和阴影颜色
         appearance.titleTextAttributes = @{
-            NSFontAttributeName:[UIFont systemFontOfSize:18],//字体大小
-            NSForegroundColorAttributeName:[UIColor whiteColor]//字体颜色
+            NSFontAttributeName:[UIFont fontWithName:@".SFUIText-Semibold" size:17],//字体大小
+            NSForegroundColorAttributeName:[UIColor colorWithRed:0 green:0.48 blue:1 alpha:1]//字体颜色
         };
         appearance.backgroundColor = [UIColor whiteColor];//设置导航栏背景色
         appearance.shadowImage = [self barSpeLineWithColor:[UIColor clearColor]]; //设置导航栏下边界分割线透明
@@ -94,8 +103,8 @@
     else {
         //中间标题 字体设置为黑色 (查看图层: nav 默认的中间标题 字号17，黑色,粗体)
         NSDictionary *dic = @{
-            NSFontAttributeName:[UIFont boldSystemFontOfSize:17],
-            NSForegroundColorAttributeName:[UIColor blackColor]
+            NSFontAttributeName:[UIFont fontWithName:@".SFUIText-Semibold" size:17],
+            NSForegroundColorAttributeName:[UIColor colorWithRed:0 green:0.48 blue:1 alpha:1]
         };
         self.navigationBar.titleTextAttributes = dic;
     }
@@ -269,7 +278,7 @@
 //}
 
 #pragma mark - 右滑返回  2  判断(方法2)
-//防止scrollView手势覆盖侧滑手势[scrollView.panGestureRecognizerrequireGestureRecognizerToFail:self.navigationController.interactivePopGestureRecognizer];
+//防止scrollView手势覆盖侧滑手势[scrollView.panGestureRecognizer requireGestureRecognizerToFail:self.navigationController.interactivePopGestureRecognizer];
 //iOS自定义全屏返回与tableView左划删除手势冲突解决
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
     
@@ -298,7 +307,7 @@
                 }
                 return NO;
                 
-            }else{
+            } else {
                 return NO;
             }
         }

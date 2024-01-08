@@ -9,6 +9,36 @@
 #ifndef _____h
 #define _____h
 
+// https://www.jianshu.com/p/e8c38c44b15b
+// UIImageResizingModeStretch：拉伸模式，通过拉伸UIEdgeInsets指定的矩形区域来填充图片
+// UIImageResizingModeTile：平铺模式，通过重复显示UIEdgeInsets指定的矩形区域来填充图片
+
+// - (UIImage *)resizableImageWithCapInsets:(UIEdgeInsets)capInsets resizingMode:(UIImageResizingMode)resizingMode
+
+//该方法返回的是UIImage类型的对象,即返回经该方法拉伸后的图像
+//传入的第一个参数capInsets是UIEdgeInsets类型的数据,即原始图像要被保护的区域
+//这个参数是一个结构体,定义如下
+//typedef struct { CGFloat top, left , bottom, right ; } UIEdgeInsets;
+//该参数的意思是被保护的区域到原始图像外轮廓的上部,左部,底部,右部的直线距离
+//传入的第二个参数resizingMode是UIImageResizingMode类似的数据,即图像拉伸时选用的拉伸模式,
+//这个参数是一个枚举类型,有以下两种方式
+//UIImageResizingModeTile,     平铺
+//UIImageResizingModeStretch,  拉伸
+
+
+// 如果采用UIImageResizingModeStretch（拉伸模式），那么拉伸区域保存一个像素长或者宽最好，这样性能最优。至于平铺模式，则没有说明。
+
+
+
+
+
+
+
+
+
+
+//------------------------------------------------------------------------------------------------------------------/
+
 
 UIImage *image = [UIImage imageNamed:@"error"];
 

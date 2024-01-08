@@ -70,22 +70,22 @@
         return;
     }
     
-    // Remove all tag views
+    // 删除所有标记视图 Remove all tag views
     [_containerView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
-    // Add tag view
+    // 添加标记视图   Add tag view
     for (NSUInteger i = 0; i < [_dataSource numberOfTagsInTagCollectionView:self]; i++) {
         [_containerView addSubview:[_dataSource tagCollectionView:self tagViewForIndex:i]];
     }
     
-    // Update tag view frame
+    // 更新标记视图frame  Update tag view frame
     [self setNeedsLayoutTagViews];
     [self layoutTagViews];
 }
 
 - (NSInteger)indexOfTagAt:(CGPoint)point {
-    // We expect the point to be a point wrt to the TTGTagCollectionView.
-    // so convert this point first to a point wrt to the container view.
+    // 我们希望该点是写入TTGTagCollectionView的点 We expect the point to be a point wrt to the TTGTagCollectionView.
+    // 因此，首先将改点转移为容器视图的wrt点 so convert this point first to a point wrt to the container view.
     CGPoint convertedPoint = [self convertPoint:point toView:_containerView];
     for (NSUInteger i = 0; i < [self.dataSource numberOfTagsInTagCollectionView:self]; i++) {
         UIView *tagView = [self.dataSource tagCollectionView:self tagViewForIndex:i];
@@ -179,6 +179,7 @@
     [self invalidateIntrinsicContentSize];
 }
 
+/// 布局标记视图垂直方向
 - (void)layoutTagViewsForVerticalDirection {
     NSUInteger count = [_dataSource numberOfTagsInTagCollectionView:self];
     NSUInteger currentLineTagsCount = 0;
@@ -194,7 +195,7 @@
     NSMutableArray <NSArray <NSNumber *> *> *eachLineTagIndexs = [NSMutableArray new];
     NSMutableArray <NSNumber *> *tmpTagIndexNumbers = [NSMutableArray new];
     
-    // Get each line max height ,width and tag count
+    // 获取每条线的最大高度、宽度和标记数 Get each line max height ,width and tag count
     for (NSUInteger i = 0; i < count; i++) {
         CGSize tagSize = [_delegate tagCollectionView:self sizeForTagAtIndex:i];
 
@@ -210,7 +211,7 @@
             currentLineX = 0;
         }
         
-        // Line limit
+        // 行数限制 Line limit
         if (_numberOfLines != 0) {
             UIView *tagView = [_dataSource tagCollectionView:self tagViewForIndex:i];
             tagView.hidden = eachLineWidthNumbers.count >= _numberOfLines;
@@ -222,16 +223,16 @@
         [tmpTagIndexNumbers addObject:@(i)];
     }
     
-    // Add last
+    // 添加最后一个 Add last
     [eachLineMaxHeightNumbers addObject:@(currentLineMaxHeight)];
     [eachLineWidthNumbers addObject:@(currentLineX - _horizontalSpacing)];
     [eachLineTagCountNumbers addObject:@(currentLineTagsCount)];
     [eachLineTagIndexs addObject:tmpTagIndexNumbers];
     
-    // Actual number of lines
+    // 实际行数 Actual number of lines
     _actualNumberOfLines = eachLineTagCountNumbers.count;
     
-    // Line limit
+    // 行数限制 Line limit
     if (_numberOfLines != 0) {
         eachLineMaxHeightNumbers = [[eachLineMaxHeightNumbers subarrayWithRange:NSMakeRange(0, MIN(eachLineMaxHeightNumbers.count, _numberOfLines))] mutableCopy];
         eachLineWidthNumbers = [[eachLineWidthNumbers subarrayWithRange:NSMakeRange(0, MIN(eachLineWidthNumbers.count, _numberOfLines))] mutableCopy];
@@ -239,7 +240,7 @@
         eachLineTagIndexs = [[eachLineTagIndexs subarrayWithRange:NSMakeRange(0, MIN(eachLineTagIndexs.count, _numberOfLines))] mutableCopy];
     }
     
-    // Prepare
+    // 准备 Prepare
     [self layoutEachLineTagsWithMaxLineWidth:maxLineWidth
                                numberOfLines:eachLineTagCountNumbers.count
                            eachLineTagIndexs:eachLineTagIndexs
@@ -248,6 +249,7 @@
                            eachLineMaxHeight:eachLineMaxHeightNumbers];
 }
 
+/// 布局标记视图用于水平方向
 - (void)layoutTagViewsForHorizontalDirection {
     NSInteger count = [_dataSource numberOfTagsInTagCollectionView:self];
     _numberOfLines = _numberOfLines == 0 ? 1 : _numberOfLines;
@@ -261,7 +263,7 @@
     
     NSMutableArray <NSMutableArray <NSNumber *> *> *eachLineTagIndexs = [NSMutableArray new];
     
-    // Init each line
+    // 初始化每一行 Init each line
     for (NSInteger currentLine = 0; currentLine < _numberOfLines; currentLine++) {
         [eachLineMaxHeightNumbers addObject:@0];
         [eachLineWidthNumbers addObject:@0];
@@ -269,7 +271,7 @@
         [eachLineTagIndexs addObject:[NSMutableArray new]];
     }
     
-    // Add tags
+    // 添加标签 Add tags
     for (NSUInteger tagIndex = 0; tagIndex < count; tagIndex++) {
         NSUInteger currentLine = tagIndex % _numberOfLines;
         
@@ -290,7 +292,7 @@
         eachLineTagIndexs[currentLine] = currentLineTagIndexNumbers;
     }
     
-    // Remove extra space
+    // 删除多余空间 Remove extra space
     for (NSInteger currentLine = 0; currentLine < _numberOfLines; currentLine++) {
         CGFloat currentLineWidth = eachLineWidthNumbers[currentLine].floatValue;
         currentLineWidth -= _horizontalSpacing;
@@ -299,7 +301,7 @@
         maxLineWidth = MAX(currentLineWidth, maxLineWidth);
     }
     
-    // Prepare
+    // 准备 Prepare
     [self layoutEachLineTagsWithMaxLineWidth:maxLineWidth
                                numberOfLines:eachLineTagCountNumbers.count
                            eachLineTagIndexs:eachLineTagIndexs
@@ -308,6 +310,7 @@
                            eachLineMaxHeight:eachLineMaxHeightNumbers];
 }
 
+/// 布局具有最大线宽的每个线条标记
 - (void)layoutEachLineTagsWithMaxLineWidth:(CGFloat)maxLineWidth
                              numberOfLines:(NSUInteger)numberOfLines
                          eachLineTagIndexs:(NSArray <NSArray <NSNumber *> *> *)eachLineTagIndexs
@@ -322,7 +325,7 @@
         CGFloat currentLineWidth = eachLineWidth[currentLine].floatValue;
         CGFloat currentLineTagsCount = eachLineTagCount[currentLine].unsignedIntegerValue;
         
-        // Alignment x offset
+        // 对齐x偏移 Alignment x offset
         CGFloat currentLineXOffset = 0;
         CGFloat currentLineAdditionWidth = 0;
         CGFloat acturalHorizontalSpacing = _horizontalSpacing;
@@ -354,13 +357,14 @@
                     currentLine == numberOfLines - 1 &&
                     numberOfLines != 1) {
                     // Reset last line width for TTGTagCollectionAlignmentFillByExpandingWidthExceptLastLine
+                    // 重置 TTGTagCollectionAlignmentFillByExpandingWidthExceptLastLine 的最后一行宽度
                     currentLineAdditionWidth = 0;
                 }
                 
                 break;
         }
         
-        // Current line
+        // 当前行 Current line
         [eachLineTagIndexs[currentLine] enumerateObjectsUsingBlock:^(NSNumber * _Nonnull tagIndexNumber, NSUInteger idx, BOOL * _Nonnull stop) {
             NSUInteger tagIndex = tagIndexNumber.unsignedIntegerValue;
             
@@ -382,11 +386,11 @@
             currentLineX += tagSize.width + acturalHorizontalSpacing;
         }];
         
-        // Next line
+        // 下一行 Next line
         currentYBase += currentLineMaxHeight + _verticalSpacing;
     }
     
-    // Content size
+    // 内容大小 Content size
     maxLineWidth += _contentInset.right + _contentInset.left;
     CGSize contentSize = CGSizeMake(maxLineWidth, currentYBase - _verticalSpacing + _contentInset.bottom);
     if (!CGSizeEqualToSize(contentSize, _scrollView.contentSize)) {

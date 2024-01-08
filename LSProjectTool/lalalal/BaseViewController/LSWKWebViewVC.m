@@ -30,8 +30,14 @@
     [self addSubViews];
     [self addLayout];
     
-    [self.wkWebView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
+    // https://www.baishujun.com/archives/7059.html
+    // 指示是否允许对此WKWebView内的任何链接进行链接预览
+    // 设置NO,长按wkwebview网页中的链接再无反应！！
+    // 点击链接之后就会在app中打开相应网页，而不会跳转到app之外打开了。
+    self.wkWebView.allowsLinkPreview = NO;
     
+    
+    [self.wkWebView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
     [self.wkWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", self.urlString]]]];
 }
 
@@ -71,6 +77,23 @@
     "script.name = 'viewport';"
     "script.content=\"width=device-width, user-scalable=no\";" "document.getElementsByTagName('head')[0].appendChild(script);";
     [webView evaluateJavaScript:injectionJSString completionHandler:nil];
+    
+//
+//    //修改字体大小 300%
+//    //@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '200%'"
+//    [webView evaluateJavaScript:[NSString stringWithFormat:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '%.f%%'", 1.0] completionHandler:nil];
+//    [webView evaluateJavaScript:[NSString stringWithFormat:@"var objs=document.getElementsByTagName('img');for(var i=0;i++){var img=objs[i];img.style.maxWidth='%.f%%';img.style.height='auto';}", 1.0] completionHandler:nil];
+//
+    
+//    // -webkit-touch-callout: none; //禁用长按链接出现菜单
+//    // -webkit-user-select: none; // 禁用文本选择
+//    // -webkit-transform: scale(1) // 重置长按放大效果
+//    NSString *cssTouchCalloutNoneStr = @"-webkit-touch-callout: none;"
+//    "-webkit-user-select: none;";
+    
+    // 通过wkwebview来执行一次webkitTouchCallout，禁用系统默认菜单
+    NSString *webKitTouchCalloutStr = @"document.documentElement.style.webkitTouchCallout='none';";
+    [self.wkWebView evaluateJavaScript:webKitTouchCalloutStr completionHandler:nil];
     
     NSLog(@"加载完成");
     //加载完成后隐藏progressView
@@ -138,6 +161,9 @@
 - (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
     NSLog(@"加载失败,失败原因:%@",[error description]);
 }
+
+/// 内存占用过大，会执行webViewWebContentProcessDidTerminate进程终止方法。此方法适用于ios9.0以上， 出现此情况， 尽量将网络请求以及消耗内存的操作交给H5来实现。
+/// 进程终止(内存消耗过大导致白屏)
 - (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView {
     NSLog(@"网页加载内容进程终止");
 //    [webView reload];

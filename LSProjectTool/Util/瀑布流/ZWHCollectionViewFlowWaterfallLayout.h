@@ -4,7 +4,7 @@
 //  Created by ZWH on 2020/12/5.
 //  Copyright © 2020. All rights reserved.
 //
-//  CollectionViewshu竖排瀑布流+悬停布局(参考了CHTCollectionViewWaterfallLayout）
+//  CollectionView 竖排瀑布流+悬停布局(参考了CHTCollectionViewWaterfallLayout）
 //  https://github.com/ahehehehe/ZWHCollectionViewFlowWaterfallLayout
 
 #import <UIKit/UIKit.h>

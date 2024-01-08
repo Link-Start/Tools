@@ -279,11 +279,12 @@
 - (BOOL)ls_isShowOnWindow {
     //主窗口
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
-    
+    // 以主窗口左上角为坐标原点, 计算self的矩形框
     //相对于父控件转换之后的rect
     CGRect newRect = [keyWindow convertRect:self.frame fromView:self.superview];
     //主窗口的bounds
     CGRect winBounds = keyWindow.bounds;
+    // 主窗口的bounds 和 self的矩形框 是否有重叠
     //判断两个坐标系是否有交汇的地方，返回bool值
     BOOL isIntersects =  CGRectIntersectsRect(newRect, winBounds);
     if (self.hidden != YES && self.alpha >0.01 && self.window == keyWindow && isIntersects) {
@@ -409,6 +410,18 @@
     }
 }
 
+///移除所有的子视图 如果是弹窗视图AlertView,不能调用此方法,回导致弹窗子控件全部被移除而不能显示弹窗
+- (void)ls_removeAllSubViews_ {
+    [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+}
+
+///移除所有的子视图 如果是弹窗视图AlertView,不能调用此方法,回导致弹窗子控件全部被移除而不能显示弹窗
+- (void)ls_removeAllSubviews_ {
+    [self.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [obj removeFromSuperview];
+    }];
+}
+
 /// 更新尺寸，使用autolayout布局时需要刷新约束才能获取到真实的frame
 - (void)ls_updateFrame{
     [self updateConstraints];
@@ -471,5 +484,88 @@
     self.layer.mask = shape;
 }
 
+/**
+ 
+ CAGradientLayer可以通过colors属性设置多个有序渐变颜色，并在CALayer的坐标系内对渐变方向和渐变位置做调整。CALayer的坐标系用(x, y)表示，左上角为(0, 0)，右下角为(1, 1)， 如下：
+     (0,0)       (0.5,0)         (1,0)
+    (0,0.5)     (0.5,0.5)       (1,0.5)
+     (0,1)       (0.5,1)         (1,1)
+ 
+ 
+ 基于坐标系，可以通过startPoint和endPoint两个属性设置渐变方向。下面是一些常用的渐变方向实现方式：
+ 
+ // 从上至下（x相同，y控制方向）
+ gradientLayer.startPoint = CGPointMake(.0, .0);
+ gradientLayer.endPoint = CGPointMake(.0, 1.0);
+
+ // 从下至上（x相同，y控制方向）
+ gradientLayer.startPoint = CGPointMake(.0, 1.0);
+ gradientLayer.endPoint = CGPointMake(.0, .0);
+
+ // 从左至右（y相同，x控制方向）
+ gradientLayer.startPoint = CGPointMake(.0, .0);
+ gradientLayer.endPoint = CGPointMake(1.0, .0);
+
+ // 从右至左（y相同，x控制方向）
+ gradientLayer.startPoint = CGPointMake(1.0, .0);
+ gradientLayer.endPoint = CGPointMake(.0, .0);
+
+ // 从左上至右下（x和y控制方向）
+ gradientLayer.startPoint = CGPointMake(.0, .0);
+ gradientLayer.endPoint = CGPointMake(1.0, 1.0);
+ 基于坐标系，可以通过locations属性设置颜色组的渐变位置。locations的元素个数需要和colors一致，指明第n个颜色在何处与相邻的颜色开始渐变
+
+!!! 在不设置locations属性时，相邻颜色会充分渐变，也就是说在渐变方向上，不会存在同色值的相邻像素；
+ 而在指定了locations之后，第n个颜色会在第n个location处与相邻的颜色开始渐变，此location之外的区域是纯色
+
+ */
+
+// 渐变色
+- (CAGradientLayer *)ls_gradientLayerWithColors:(NSArray *)colors
+                                          frame:(CGRect)frm
+                                      locations:(NSArray *)locations
+                                     startPoint:(CGPoint)startPoint
+                                       endPoint:(CGPoint)endPoint {
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    if (colors == nil || [colors isKindOfClass:[NSNull class]] || colors.count == 0){
+        return nil;
+    }
+    if (locations == nil || [locations isKindOfClass:[NSNull class]] || locations.count == 0){
+        return nil;
+    }
+    NSMutableArray *colorsTemp = [NSMutableArray new];
+    for (UIColor *color in colors) {
+        if ([color isKindOfClass:[UIColor class]]) {
+            [colorsTemp addObject:(__bridge id)color.CGColor];
+        }
+    }
+    
+    gradientLayer.frame =  frm;
+    // 设置渐变颜色数组
+    gradientLayer.colors = colorsTemp;
+    // 设置渐变起始点
+    gradientLayer.startPoint = startPoint;
+    // 设置渐变结束点
+    gradientLayer.endPoint = endPoint;
+    // 设置渐变颜色分布区间，不设置则均匀分布
+    // gradientLayer.locations = @[@(0.0), @(1.0)];
+    gradientLayer.locations = locations;
+    // 设置渐变类型，不设置则按像素均匀变化
+    // gradientLayer.type = kCAGradientLayerAxial;// 按像素均匀变化
+    return gradientLayer;
+}
+
+// 渐变色
+- (void)ls_gradientBgColorWithColors:(NSArray *)colors
+                           locations:(NSArray *)locations
+                          startPoint:(CGPoint)startPoint
+                            endPoint:(CGPoint)endPoint {
+    CAGradientLayer *layer = [self ls_gradientLayerWithColors:colors
+                                                        frame:self.bounds
+                                                    locations:locations
+                                                   startPoint:startPoint
+                                                     endPoint:endPoint];
+    [self.layer insertSublayer:layer atIndex:0];
+}
 
 @end

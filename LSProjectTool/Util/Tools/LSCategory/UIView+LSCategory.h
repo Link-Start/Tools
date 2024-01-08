@@ -124,6 +124,22 @@ NS_ASSUME_NONNULL_BEGIN
                  viewRect:(CGRect)rect;
 
 
+/// 渐变色
+/// @param colors 设置渐变颜色数组，UIColor数组
+/// @param frm 设置渐变frame
+/// @param locations 设置渐变类型，不设置则按像素均匀变化
+/// @param startPoint 设置渐变起始点
+/// @param endPoint 设置渐变结束点
+- (CAGradientLayer *)ls_gradientLayerWithColors:(NSArray *)colors
+                                          frame:(CGRect)frm
+                                      locations:(NSArray *)locations
+                                     startPoint:(CGPoint)startPoint
+                                       endPoint:(CGPoint)endPoint;
+// 渐变色
+- (void)ls_gradientBgColorWithColors:(NSArray *)colors
+                           locations:(NSArray *)locations
+                          startPoint:(CGPoint)startPoint
+                            endPoint:(CGPoint)endPoint;
 @end
 
 NS_ASSUME_NONNULL_END

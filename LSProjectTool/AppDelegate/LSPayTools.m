@@ -460,6 +460,8 @@ static LSPayTools *_ls_payTools = nil;
 
    //移除上次未完成的交易订单XXXXXXXX      不能移除，移除的话,没有校验的订单会不见了，就丢单了,
 //    [self removeAllUncompleteTransactionBeforeStartNewTransaction];
+    
+    [self removeIAPArrayObjectWithTime:30*24*3600];//删除，保存超过30天的订单数据
 
     // 最好设置上
 //    [MBProgressHUD qucickTip:@"正在连接苹果商店…"];
@@ -487,39 +489,42 @@ static LSPayTools *_ls_payTools = nil;
     }
 }
 
-//#pragma mark -- 结束上次未完成的交易 防止串单
-//// 每次成功，都调用[[SKPaymentQueue defaultQueue] finishTransaction:trans];结束当前交易，就不会串单
-///// 结束上次未完成的交易 防止串单 (不能移除，移除的话,没有校验的订单会不见了，就丢单了)
-//- (void)removeAllUncompleteTransactionBeforeStartNewTransaction {
-//
-//    //以下方法中存储着未完成的单
-//    NSArray *transactions = [SKPaymentQueue defaultQueue].transactions;//好像这个数组里面只能存两条未完成的订单
-//    if (transactions.count > 0) {
-//        //监测是否有未完成的交易
-////        SKPaymentTransaction *trans = [transactions firstObject];
-////        if (trans.transactionState == SKPaymentTransactionStatePurchased) {
-////            [[SKPaymentQueue defaultQueue] finishTransaction:trans];
-////            return;
-////        } else {
-////                 SKPayment *payment = [SKPayment paymentWithProduct:requestProduct];
-////                  [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
-////                  [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
-////                  [[SKPaymentQueue defaultQueue] addPayment:payment];
-////         }
-//NSLog(@"🔥🔥🔥🔥🔥🔥🔥有历史未消耗订单 %ld🔥🔥🔥🔥🔥🔥🔥🔥", transactions.count);
+#pragma mark -- 结束上次未完成的交易 防止串单
+// 每次成功，都调用[[SKPaymentQueue defaultQueue] finishTransaction:trans];结束当前交易，就不会串单
+/// 结束上次未完成的交易 防止串单 (不能移除，移除的话,没有校验的订单会不见了，就丢单了)
+- (void)removeAllUncompleteTransactionBeforeStartNewTransaction {
 
-//        for (int i = 0; i < transactions.count; i++) {
-//            SKPaymentTransaction *trans = [transactions objectAtIndex:i];
-//            //Purchased:交易完成     Restored:已经购买过该商品
-//            if (trans.transactionState == SKPaymentTransactionStatePurchased || trans.transactionState == SKPaymentTransactionStateRestored) {
-//                [[SKPaymentQueue defaultQueue] finishTransaction:trans];
-//            }
-//        }
-//
-//    } else {
-//        NSLog(@"没有历史未消耗订单");
-//    }
-//}
+    //以下方法中存储着未完成的单
+    NSArray *transactions = [SKPaymentQueue defaultQueue].transactions;//好像这个数组里面只能存两条未完成的订单
+    if (transactions.count > 0) {
+        //监测是否有未完成的交易
+//        SKPaymentTransaction *trans = [transactions firstObject];
+//        if (trans.transactionState == SKPaymentTransactionStatePurchased) {
+//            [[SKPaymentQueue defaultQueue] finishTransaction:trans];
+//            return;
+//        } else {
+//                 SKPayment *payment = [SKPayment paymentWithProduct:requestProduct];
+//                  [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
+//                  [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
+//                  [[SKPaymentQueue defaultQueue] addPayment:payment];
+//         }
+NSLog(@"🔥🔥🔥🔥🔥🔥🔥有历史未消耗订单 %ld🔥🔥🔥🔥🔥🔥🔥🔥", transactions.count);
+
+        for (int i = 0; i < transactions.count; i++) {
+            SKPaymentTransaction *trans = [transactions objectAtIndex:i];
+            //Purchased:交易完成
+            //Restored:已经购买过该商品
+            if (trans.transactionState == SKPaymentTransactionStatePurchased ||
+                trans.transactionState == SKPaymentTransactionStateRestored) {
+                [[SKPaymentQueue defaultQueue] finishTransaction:trans];
+            }
+        }
+        [self removeIAPArrayAllObject];//删除保存的所有的对象
+        [self removeIAPDictAllObject];//删除所有保存的票据记录
+    } else {
+        NSLog(@"没有历史未消耗订单");
+    }
+}
 
 #pragma mark -- 发起购买请求
 /// 发起购买请求          请求对应的产品信息 获取内购项目信息
@@ -549,6 +554,7 @@ static LSPayTools *_ls_payTools = nil;
     NSLog(@"付费产品数量：%zd",productArr.count);
 
     SKProduct *product = nil;
+    
 
     for (SKProduct *pro in productArr) {
         NSLog(@"产品(商品)信息");
@@ -560,7 +566,7 @@ static LSPayTools *_ls_payTools = nil;
 
         // 11. 如果后台消费条目的ID与我这里需要的请求的一样（用于确保订单的正确性）
         if ([pro.productIdentifier isEqualToString:self.product_Id]) {
-            product = pro;
+            product = pro;//对应的产品
             break;
         }
     }
@@ -568,8 +574,29 @@ static LSPayTools *_ls_payTools = nil;
     if (!product) {
         NSLog(@"没有此商品");
         [MBProgressHUD showError:@"没有此商品"];
+        self.PayFailBlock?self.PayFailBlock(AppStorePayError, @"没有此商品", nil):Nil;
         return;
     }
+    // product.introductoryPrice：产品折扣价
+    if (product.price) { //对应的产品价格
+        // 传递过来的价格，
+        NSDecimalNumber *product_tranAmt = [NSDecimalNumber decimalNumberWithString:self.tranAmt locale:product.priceLocale];
+        NSDecimalNumber *multiply_ = [NSDecimalNumber decimalNumberWithString:@"100"];
+        // 乘       x100
+        NSDecimalNumber *product_price_multiply = [product.price decimalNumberByMultiplyingBy:multiply_];
+        
+        //传递过来的价格 和 苹果返回的产品价格不一样
+        if (product_price_multiply != product_tranAmt) {
+            NSLog(@"传递过来的价格 和 苹果返回的产品价格不一样");
+            NSLog(@"产品(商品)价格有变动，请登录开发者账号进行查看");
+            [MBProgressHUD showError:@"传递过来的价格 和 苹果返回的产品价格不一样"];
+            
+//            self.PayFailBlock?self.PayFailBlock(AppStorePayError_ProductPriceChange, @"产品(商品)价格有变动,购买失败", nil):Nil;
+            self.PayFailBlock?self.PayFailBlock(AppStorePayError, @"产品(商品)价格有变动,购买失败", nil):Nil;
+            return;
+        }
+    }
+    
 
     NSLog(@"---------发送购买请求------------");
     //发起内购请求
@@ -710,6 +737,17 @@ static LSPayTools *_ls_payTools = nil;
             case SKPaymentTransactionStateRestored: {//已经购买过该商品
                 NSLog(@"-----已经购买过该商品 --------");
                 [MBProgressHUD hideAllHuds];
+                
+//将当前用户已完成的事务添加回要重新完成的队列。将要求用户进行身份验证。
+//成功时，观察者将收到0个或多个-paymentQueue:updatedTransactions:，
+//然后是-paymentQueue RestoreCompletedTransactionsFinished:，
+//失败时将收到-paymentQueue:restoreCompletedTransaction FailedWithError:。
+//在部分成功的情况下，一些交易可能仍然可以交付。
+//                [queue restoreCompletedTransactions];//
+//                [queue restoreCompletedTransactionsWithApplicationUsername:@""];
+                
+                
+                
                 [self restoreTransaction:trans];
 //                [[SKPaymentQueue defaultQueue] finishTransaction:tran]; //消耗型商品不用写
             }
@@ -719,6 +757,7 @@ static LSPayTools *_ls_payTools = nil;
             }
                 break;
             default:
+                NSLog(@"内购结果，不在列出的选项中...");
                 break;
         }
     }
@@ -748,6 +787,56 @@ static LSPayTools *_ls_payTools = nil;
     }
     return nil;
 }
+
+// Sent when transactions are removed from the queue (via finishTransaction:).
+- (void)paymentQueue:(SKPaymentQueue *)queue removedTransactions:(NSArray<SKPaymentTransaction *> *)transactions {
+    NSLog(@"内购_当事务从队列中删除时发送");
+}
+
+// Sent when an error is encountered while adding transactions from the user's purchase history back to the queue.
+- (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error {
+    NSLog(@"内购_将用户的购买历史记录中的交易添加回队列时遇到错误时发送。%@", error);
+}
+
+// Sent when all transactions from the user's purchase history have successfully been added back to the queue.
+- (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue {
+    NSLog(@"内购_当用户购买历史记录中的所有交易都已成功添加回队列时发送。");
+}
+// Sent when the download state has changed.
+- (void)paymentQueue:(SKPaymentQueue *)queue updatedDownloads:(NSArray<SKDownload *> *)downloads {
+    NSLog(@"内购_下载状态更改时发送。");
+}
+// Sent when a user initiates an IAP buy from the App Store
+- (BOOL)paymentQueue:(SKPaymentQueue *)queue shouldAddStorePayment:(SKPayment *)payment forProduct:(SKProduct *)product {
+    NSLog(@"内购_当用户从应用商店发起IAP购买时发送");
+    return YES;
+}
+
+- (void)paymentQueueDidChangeStorefront:(SKPaymentQueue *)queue {
+    NSLog(@"内购_付款队列更改之前。");
+}
+// Sent when entitlements for a user have changed and access to the specified IAPs has been revoked.
+- (void)paymentQueue:(SKPaymentQueue *)queue didRevokeEntitlementsForProductIdentifiers:(NSArray<NSString *> *)productIdentifiers {
+    NSLog(@"内购_当用户的权限发生更改并且对指定IAP的访问被吊销时发送。");
+}
+
+// Sent when the storefront changes while a payment is processing.
+- (BOOL)paymentQueue:(SKPaymentQueue *)paymentQueue shouldContinueTransaction:(SKPaymentTransaction *)transaction inStorefront:(SKStorefront *)newStorefront  {
+   
+    NSLog(@"在处理付款时店面发生更改时发送。");
+    return YES;
+}
+
+// Sent if there is a pending price consent confirmation from the App Store for the current user. Return YES to immediately show the price consent UI. Return NO if you intend to show it at a later time. Defaults to YES.
+// This may be called at any time that you have transaction observers on the payment queue, so make sure to set the delegate before adding any transaction observers if you intend to implement this method.
+- (BOOL)paymentQueueShouldShowPriceConsent:(SKPaymentQueue *)paymentQueue {
+   //如果应用商店对当前用户有待定的价格同意确认，则发送。返回YES，立即显示价格同意界面。如果您打算稍后显示，请返回“否”。默认为YES。
+    //如果您在支付队列中有交易观察员，则可以随时调用此方法，因此如果您打算实现此方法，请确保在添加任何交易观察员之前设置委托。
+    
+    NSLog(@"如果应用商店对当前用户有待定的价格同意确认，则发送。返回YES.");
+    return YES;
+}
+
 
 #pragma mark -- 交易完成的回调
 #pragma mark -- -- 后台服务器端验证App Store票据  -- --
@@ -896,6 +985,7 @@ static LSPayTools *_ls_payTools = nil;
 
 
 #pragma mark - 保存票据、订单信息
+// TODO: - 将 票据,订单信息 整体作为array的一个元素放入数组保存
 /// 将票据、订单信息数据加入数组    保存到钥匙串中
 - (void)saveIAPArrayWithDict:(NSMutableDictionary *)dict {
     NSMutableArray *iap_dataArray = [self getIAPArrayData].mutableCopy;
@@ -934,9 +1024,46 @@ static LSPayTools *_ls_payTools = nil;
     NSData *new_data = [iap_dataArray modelToJSONData];
     [UICKeyChainStore setData:new_data forKey:@"apple.iap.pay.array.hyh"];
 }
+/// 根据过期时间删除保存的数据，overtime：超出时间：秒
+- (void)removeIAPArrayObjectWithTime:(NSInteger)overtime {
+    
+    NSMutableArray *iap_dataArray = [self getIAPArrayData].mutableCopy;
+    
+//    for (NSDictionary *dict in [iap_dataArray reverseObjectEnumerator]) {
+//        //订单发送时间
+//       long long orderSendTime = [self ls_timeStampFromDateString:dict[@"orderSendTime"] withFormat:@"yyyyMMddHHmmss"];
+//        long long currentTimeStamp = [[NSDate date] timeIntervalSince1970];
+//        if (currentTimeStamp - orderSendTime >= overtime) {
+//            [iap_dataArray removeObject:dict];
+//        }
+//    }
+    [iap_dataArray enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(id _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        //订单发送时间
+        NSDictionary *dict = obj;
+       long long orderSendTime = [self ls_timeStampFromDateString:dict[@"orderSendTime"] withFormat:@"yyyyMMddHHmmss"];
+        long long currentTimeStamp = [[NSDate date] timeIntervalSince1970];
+        if (currentTimeStamp - orderSendTime >= overtime) {
+            [iap_dataArray removeObject:dict];
+            NSLog(@"删除成功%@", dict[@"traderOrderNo"]);
+        }
+    }];
+    NSData *new_data = [iap_dataArray modelToJSONData];
+    [UICKeyChainStore setData:new_data forKey:@"apple.iap.pay.array.hyh"];
+}
+/// 将时间转换为时间戳
+- (long long)ls_timeStampFromDateString:(NSString *)dateString withFormat:(NSString *)format {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:format];
+    NSTimeZone *localTimeZone = [NSTimeZone localTimeZone];
+    [dateFormatter setTimeZone:localTimeZone];
+    NSDate *dateFormatted = [dateFormatter dateFromString:dateString];
+    ///时间戳    毫秒
+    long long timeStamp = (long)[dateFormatted timeIntervalSince1970];
+    return timeStamp;
+}
 
-
-/// 将票据、订单信息数据加入数组    保存到钥匙串中
+// TODO: - 将订单号作为key值,票据,订单信息作为value值，加入字典，保存
+/// 将票据、订单信息数据加入字典    保存到钥匙串中
 - (void)saveIAPDictWithTraderOrderNo:(NSString *)traderOrderNo dict:(NSMutableDictionary *)dict {
     NSMutableDictionary *iap_dict = [self getIAPDictData].mutableCopy;
     if (!iap_dict) {
@@ -1406,6 +1533,11 @@ static LSPayTools *_ls_payTools = nil;
     // 对于已购商品，处理恢复购买的逻辑
     [MBProgressHUD hideAllHuds];
 //    [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+    
+    
+    
+    
+    
     if ([SKPaymentQueue defaultQueue]) {
         [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
 //        [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];//一般用于非消耗商品，用来恢复购买。
@@ -1460,3 +1592,28 @@ static LSPayTools *_ls_payTools = nil;
 //这个代理方法里面就行操作
 
 @end
+
+
+/**
+ 
+ SKPaymentQueue.h
+ //canMakePayments：如果此设备无法或不允许付款，返回NO
+ //addPayment：将付款添加到服务器队列。付款被复制以将SKPaymentTransaction添加到交易数组中。同一笔付款可以多次添加以创建多笔交易。
+ //restoreCompletedTransactions：将当前用户已完成的事务添加回要重新完成的队列。将要求用户进行身份验证。成功时，观察者将收到0个或多个-paymentQueue:updatedTransactions:，然后是-paymentQueue RestoreCompletedTransactionsFinished:，失败时将收到-paymentQueue:restoreCompletedTransaction FailedWithError:。在部分成功的情况下，一些交易可能仍然可以交付。
+ //restoreCompletedTransactionsWithApplicationUsername：
+ //finishTransaction：从队列中删除已完成（即失败或已完成）的事务。试图完成采购事务将引发异常。
+ //startDownloads：启动给定的下载（SKDownload）。
+ //pauseDownloads：暂停/继续下载（SKDownload）
+ //resumeDownloads：
+ //cancelDownloads：取消下载（SKDownload）
+ //addTransactionObserver：观察员不予保留。只有当队列具有观察者时，事务数组才会与服务器同步。这可能需要用户进行身份验证。
+ //removeTransactionObserver：
+ // transactionObservers：可用的transactionObserver数组。不保留事务观察员
+ // transactions：未完成的SKPaymentTransactions数组。仅当队列具有观察者时有效。异步更新
+ //showPriceConsentOfNeed：如果StoreKit调用了SKPaymentQueueDelegate的“paymentQueueShouldShowPriceConsistent:”方法，而您返回“否”，则您可以使用此方法在以后显示更适合您的应用程序的价格同意UI。如果没有待定的价格同意书，这种方法将毫无作用。
+ //presentCodeRedemptionSheet：调用此方法让StoreKit提供一张表单，使用户可以兑换您的应用程序提供的代码。
+ 
+ 
+ 
+ 
+ */

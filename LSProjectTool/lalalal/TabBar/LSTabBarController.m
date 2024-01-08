@@ -78,13 +78,13 @@
         tabBarAppearance.backgroundColor = [UIColor whiteColor];// 背景色
         tabBarAppearance.shadowImage = [[UIImage alloc] init];//0xEEEEEE.image
         tabBarAppearance.shadowColor = [UIColor clearColor];
-        //设置选中的tabBar 字体 attributes
+        //设置选中的tabBar 字体 attributes    ，默认字体： .SFUIText-Medium 10
         tabBarAppearance.stackedLayoutAppearance.selected.titleTextAttributes = @{
-//            NSFontAttributeName:[UIFont systemFontOfSize:14],//字体大小，不设置默认系统大小
+//NSFontAttributeName:[UIFont [UIFont fontWithName:@".SFUIText-Medium" size:10]],//字体大小，不设置默认系统大小，medium 10
             NSForegroundColorAttributeName:[UIColor blackColor]//字体颜色
         };
 //        tabBarAppearance.stackedLayoutAppearance.normal.titleTextAttributes= @{
-//            NSFontAttributeName:[UIFont systemFontOfSize:18],
+//            NSFontAttributeName:[UIFont [UIFont fontWithName:@".SFUIText-Medium" size:10]],
 //            NSForegroundColorAttributeName:[UIColor blackColor]
 //        };
 

@@ -147,5 +147,54 @@ float hyphenationFactor;             // 连字属性 在iOS，唯一支持的值
 是苹果推荐的计算方法，显然会遇到段落格式问题，例如行间距、缩进等格式设置需求，attributes传进来的字典中，包含我们设置的字体及格式，其中NSParagraphStyleAttributeName是设置段落风格，NSFontAttributeName是设置字体。
 
 
+byWordWrapping ： 以单词为单位换行，以单词为单位截断。
+byCharWrapping ：以字符为单位换行，以字符为单位截断。
+byClipping ： 以单词为单位换行，以字符为单位截断。
+byTruncatingHead ： 以单词为单位换行, 如果是单行，则开始部分有省略号。如果是多行，则中间有省略号。
+byTruncatingTail ： 以单词为单位换行, 无论是单行还是多行，都是末尾有省略号。
+byTruncatingMiddle ： 以单词为单位换行, 无论是单行还是多行，都是中间有省略号
+
+
+
+
+
+
+UILineBreakModeWordWrap = 0,
+以单词为单位换行，以单词为单位截断。
+
+UILineBreakModeCharacterWrap,
+以字符为单位换行，以字符为单位截断。
+
+label.lineBreakMode = NSLineBreakByCharWrapping;
+以字符为显示单位显示，后面部分省略不显示。
+
+label.lineBreakMode = NSLineBreakByClipping;
+剪切与文本宽度相同的内容长度，后半部分被删除。
+
+label.lineBreakMode = NSLineBreakByTruncatingHead;
+前面部分文字以……方式省略，显示尾部文字内容。
+
+label.lineBreakMode = NSLineBreakByTruncatingMiddle;
+中间的内容以……方式省略，显示头尾的文字内容。
+
+label.lineBreakMode = NSLineBreakByTruncatingTail;
+结尾部分的内容以……方式省略，显示头的文字内容。
+
+label.lineBreakMode = NSLineBreakByWordWrapping;
+以单词为显示单位显示，后面部分省略不显示。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #endif /* ____h */

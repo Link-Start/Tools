@@ -13,6 +13,82 @@ Preferences :包含应用程序的偏好设置文件。您不应该直接创建�
 4. AppName.app 目录：这是应用程序的程序包目录，包含应用程序的本身。由于应用程序必须经过签名，所以您在运行时不能对这个目录中的内容进行修改，否则可能会使应用程序无法启动。
 
 
+沙盒中相关路径 介绍：：https://www.jianshu.com/p/32b932d2a216
+- AppName.app 应用程序的程序包目录，包含应用程序的本身。由于应用程序必须经过签名，所以不能在运行时对这个目录中的内容进行修改，否则会导致应用程序无法启动。
+- Documents/ 保存应用程序的重要数据文件和用户数据文件等。用户数据基本上都放在这个位置(例如从网上下载的图片或音乐文件)，该文件夹在应用程序更新时会自动备份，在连接iTunes时也可以自动同步备份其中的数据。
+- Library：这个目录下有两个子目录,可创建子文件夹。可以用来放置您希望被备份但不希望被用户看到的数据。该路径下的文件夹，除Caches以外，都会被iTunes备份.
+-   Library/Caches: 保存应用程序使用时产生的支持文件和缓存文件(保存应用程序再次启动过程中需要的信息)，还有日志文件最好也放在这个目录。iTunes 同步时不会备份该目录并且可能被其他工具清理掉其中的数据。
+-   Library/Preferences: 保存应用程序的偏好设置文件。NSUserDefaults类创建的数据和plist文件都放在这里。会被iTunes备份。
+- tmp/: 保存应用运行时所需要的临时数据。不会被iTunes备份。iPhone重启时，会被清空。
+
+
+1. NSUserDefaults
+NSUserDefaults 介绍
+
+- 在运行时，您使用对象从用户的默认数据库中读取应用程序使用的默认值。缓存信息，以避免每次需要默认值时都必须打开用户的默认数据库。设置默认值时，它将在您的流程中同步更改，并异步更改为持久性存储和其他流程。
+- NSUserDefaults： 默认对象必须是一个属性列表，也就是说，的一个实例（或对集合的实例的组合）NSData，NSString，NSNumber，NSDate，NSArray，或NSDictionary。如果要存储任何其他类型的对象，通常应将其归档以创建NSData的实例。
+- NSUserDefaults用来存储 用户设置 系统配置等一些小的数据。因为数据是明文存储在 plist 文件中，不安全，即使只是修改一个 key 都会 load 整个文件，数据多加载慢( 内存)，不适合存储大量数据。
+- 它是单例，也是线程安全的，是以键值对 key-value 的形式保存在沙盒中
+- 沙盒路径为 Library/Preferences。文件格式为 .plist
+- NSUserDefaults返回的值是不可改变的，即使存储的时候是可变的值。对相同的Key赋值约等于一次覆盖。
+
+//NSUserDefaults
+//setObject中的key和value可以为除了nil外的任何对象
+//setValue中的key只能为字符串 value可以为nil也可以为空对象[NSNull null]以及全部对象
+NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+[userDefault setObject:@"小明" forKey:@"name"];
+//app意外退出或者中断，数据不会被系统写入所以命令synchronize直接同步到文件里，来避免数据的丢失。
+[userDefault synchronize];
+
+//取出对应的Key也就是name
+[userDefault objectForKey:@"name"];
+
+NSLog(@"name = %@",[userDefault objectForKey:@"name"]);
+//打印  name = 小明
+2. plist文件
+plist文件 介绍
+
+- plist的文件名不能单独命名做"info"、"Info"之类的,是因为与系统属文件重名
+- 属性列表是一种XML格式的文件，拓展名为plist
+- 对象是NSString、NSDictionary、NSArray、NSData、NSNumber等类型，就可以使用writeToFile:atomically:方法直接将对象写到属性列表文件中
+- Plist不能存储自定义对象，成功后会写入到Documents文件中(app)
+- xcode中plist文件创建步骤：NewFile —— IOS —— Resource —— Property List
+
+NSString *cachePath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject;
+NSString *filePath = [cachePath stringByAppendingPathComponent:@"newInfo.plist"];
+
+NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+[dict setObject:@"小红" forKey:@"name"];
+[dict setObject:@"18" forKey:@"age"];
+[dict writeToFile:filePath atomically:YES];
+    
+NSDictionary *dics = [NSDictionary dictionaryWithContentsOfFile:filePath];
+NSLog(@"age:%@", [dics objectForKey:@"age"]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 获取路径
 ###############################################################################
