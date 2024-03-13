@@ -28,8 +28,9 @@ NS_ASSUME_NONNULL_BEGIN
  * 2.如果同意了下次启动不提示 的授权，则不会弹框给用户
  * 3.如果只同意了，则下次启动还要给用户弹框提示
  */
-
+/// 显示，隐私合规信息，弹窗
 + (void)handlePrivacyAgreeStatus;
+
 @end
 
 NS_ASSUME_NONNULL_END

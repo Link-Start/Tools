@@ -64,6 +64,8 @@
 /// 验证名称(只能由中英文、数字、下划线组成)
 - (BOOL)isValidName;
 
+//递归计算符合规定的文本长度
+- (NSString *)cutBeyondTextInLength:(NSInteger)maxLenth;
 
 /// 字符串转时间
 /// @param dateFormat 时间字符串
@@ -115,6 +117,18 @@
 /// @param font 字体
 /// @param lineSpacing 行间距
 - (NSInteger)boundingRectNumberOfLineWithSize:(CGSize)size font:(UIFont*)font lineSpacing:(CGFloat)lineSpacing;
+
+
+
+- (CGSize)textSizeIn:(CGSize)size font:(UIFont *)font;
+- (CGSize)textSizeIn:(CGSize)size font:(UIFont *)font breakMode:(NSLineBreakMode)breakMode;
+- (CGSize)textSizeIn:(CGSize)size font:(UIFont *)font breakMode:(NSLineBreakMode)breakMode align:(NSTextAlignment)alignment;
+
+
+
+
+
+
 
 
 @end

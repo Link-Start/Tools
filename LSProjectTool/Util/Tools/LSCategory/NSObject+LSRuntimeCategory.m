@@ -119,6 +119,11 @@
 //// 1. unrecognized selector sent to instance（找不到对象方法的实现）
 ///**
 // 消息转发机制中三大步骤：消息动态解析、消息接受者重定向、消息重定向。通过这三大步骤，可以让我们在程序找不到调用方法崩溃之前，拦截方法调用。
+//  没有方法的实现，程序会在运行时挂掉并抛出 unrecognized selector sent to … 的异常。但在异常抛出前，Objective-C 的运行时会给你三次拯救程序的机会：
+//  动态方法解析: Method resolution
+//  Fast forwarding
+//  Normal forwarding
+
 // 大致流程如下：
 // 消息动态解析：Objective-C 运行时会调用 +resolveInstanceMethod: 或者 +resolveClassMethod:，让你有机会提供一个函数实现。我们可以通过重写这两个方法，添加其他函数实现，并返回 YES， 那运行时系统就会重新启动一次消息发送的过程。若返回 NO 或者没有添加其他函数实现，则进入下一步。
 // 消息接受者重定向：如果当前对象实现了 forwardingTargetForSelector:，Runtime 就会调用这个方法，允许我们将消息的接受者转发给其他对象。如果这一步方法返回 nil，则进入下一步。

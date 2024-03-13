@@ -26,7 +26,7 @@
 #pragma mark NSObject中的ID属性对应着字典中的id
     [NSObject mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
         return @{
-                 @"ID" : @"id"
+                 @"Id" : @"id"
                  };
     }];
     

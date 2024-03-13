@@ -21,6 +21,7 @@
 
 
 #pragma mark - 返回，pop/dismiss
+///判断当前ViewController是push还是present的方式显示的
 - (void)judge {
     NSArray *viewcontrollers = self.navigationController.viewControllers;
     if (viewcontrollers.count > 1) {
@@ -34,8 +35,9 @@
     }
 }
 
-// 返回方法
+// 返回方法，(当根试图是present出来的时候,这个方法会有问题，会直接dismiss到 发起present的那个VC)
 - (void)ls_backButtonAction {//(当根试图是present出来的时候)这个方法会有问题
+    //presentingViewController: present出来本视图控制器的视图控制器
     if (self.presentingViewController) {
         [self dismissViewControllerAnimated:YES completion:nil];
     } else {
@@ -199,15 +201,13 @@
 
 /// 延迟 几秒， 后退几步
 - (void)ls_backSeveralSteps:(NSInteger)steps delay:(CGFloat)delay {
-    NSInteger subNum = self.navigationController.viewControllers.count;
-    if (steps >= subNum) {//如果后退太多，返回根试图控制器
-        NSLog(@"确定可以pop掉那么多控制器?");
-        [self ls_popToRootViewControllerDelay:delay];
-    } else {
-        UIViewController *VC = self.navigationController.viewControllers[subNum - steps - 1];
-        [self ls_popToViewController:VC delay:delay];
-    }
+    [self performSelector:@selector(ls_backSeveralStepsWithObject:) withObject:@(steps) afterDelay:delay];
 }
+- (void)ls_backSeveralStepsWithObject:(NSNumber *)steps {
+//    NSLog(@"参数：%@", steps);
+    [self ls_backSeveralSteps:steps.integerValue];
+}
+
 
 /// 延迟 几秒 popToVC
 - (void)ls_popToViewController:(UIViewController *)vc delay:(CGFloat)delay {
@@ -323,6 +323,17 @@
         [self.navigationController presentViewController:vc animated:YES completion:completion];
     }
 }
+/**
+ 
+ ///存在的问题： app当前显示的是弹窗界面，默认presnent出来的视图且modalPresentationStyle不是CurrentContext这这种，这个视图的presentingVC默认根控制器，例如存在tabbarVC的话就是tabbarVC，这个会造成一个问题：当这个视图dimiss的时候，会把所有的presentedVC都dimiss（其实调用dimiss的时候是调用当前视图的presentigngVC去dimiss,遵循随创建随释放）
+ /// 这个通过设置 definesPresentationContext = true,modalPresentationStyle = UIModalPresentationOverCurrentContext，这样当前视图的presentigngVC为 self.navigationController,
+ /// UIModalPresentationOverCurrentContext和 UIModalPresentationCurrentContext的区别是弹出的界面，前者不会把底部的视图stact移除，后者则会。
+ self.navigationController.definesPresentationContext = true;
+ self.navigationController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+ [self.fromViewController presentViewController:self.navigationController animated:animation completion:nil];
+ 
+ */
+
 
 
 #pragma mark - tabBar

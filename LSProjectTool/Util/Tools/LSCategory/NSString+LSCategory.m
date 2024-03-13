@@ -251,6 +251,21 @@
     return [predicate evaluateWithObject:self];
 }
 
+//递归计算符合规定的文本长度
+- (NSString *)cutBeyondTextInLength:(NSInteger)maxLenth {
+    
+    size_t length = strlen([self UTF8String]);
+    if (length > maxLenth) {
+        NSString *text = [self substringToIndex:self.length - 1];
+        return [text cutBeyondTextInLength:maxLenth];
+    } else {
+        return self;
+    }
+}
+
+
+
+
 /// 字符串转时间
 /// format 时间字符串
 - (NSDate *)dateWithFormat:(NSString *)dateFormat {
@@ -660,6 +675,41 @@ NS_INLINE CGSize calcTextSizeV2(CGSize fitsSize, id text, NSInteger numberOfLine
     return calcTextSize(fitsSize, text, numberOfLines, font, NSTextAlignmentNatural, NSLineBreakByTruncatingTail,0.0, CGSizeZero);
 }
 /*********************************************************************************************************************************************************************************************************************/
+
+
+/********************************************************************************************************************************************************************************************/
+/*************** NSString+TUICommon.h ***************/
+
+- (CGSize)textSizeIn:(CGSize)size font:(UIFont *)font {
+    return [self textSizeIn:size font:font breakMode:NSLineBreakByWordWrapping];
+}
+
+- (CGSize)textSizeIn:(CGSize)size font:(UIFont *)afont breakMode:(NSLineBreakMode)breakMode {
+    return [self textSizeIn:size font:afont breakMode:NSLineBreakByWordWrapping align:NSTextAlignmentLeft];
+}
+
+- (CGSize)textSizeIn:(CGSize)size font:(UIFont *)afont breakMode:(NSLineBreakMode)abreakMode align:(NSTextAlignment)alignment {
+    NSLineBreakMode breakMode = abreakMode;
+    UIFont *font = afont ? afont : [UIFont systemFontOfSize:14];
+
+    CGSize contentSize = CGSizeZero;
+
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineBreakMode = breakMode;
+    paragraphStyle.alignment = alignment;
+
+    NSDictionary* attributes = @{NSFontAttributeName:font, NSParagraphStyleAttributeName:paragraphStyle};
+    contentSize = [self boundingRectWithSize:size options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading) attributes:attributes context:nil].size;
+    contentSize = CGSizeMake((int)contentSize.width + 1, (int)contentSize.height + 1);
+    return contentSize;
+}
+/********************************************************************************************************************************************************************************************/
+
+
+
+
+
+
 
 
 @end

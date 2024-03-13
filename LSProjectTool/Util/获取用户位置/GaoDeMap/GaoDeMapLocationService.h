@@ -22,11 +22,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface GaoDeMapLocationService : NSObject
 
 @property (nonatomic ,strong) CLLocation *currentLocation;
-
+/// 逆地理信息
+@property (nonatomic, strong) AMapLocationReGeocode *regeocode;
 
 + (GaoDeMapLocationService *)shareInstanse;
+/// 开始定位
 - (void)startLocationServiceWithComplete:(void(^)(BOOL isSuccess))complete;
-/// 定位, 没有定位权限就弹窗提示
+/// 开始定位, 没有定位权限就弹窗提示
 - (void)startLocationServiceNoPermissionPopupTipsWithComplete:(void(^)(BOOL isSuccess))complete;
 - (NSNumber *)getCurrentLocationLatitude;
 - (NSNumber *)getCurrentLocationLongtitude;

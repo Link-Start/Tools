@@ -20,22 +20,17 @@
 
 @interface MBProgressHUD (Extension)
 
-/*!
- *  @brief 几秒后显示菊花
- *
- *  @param graceTime
- *
- *  @return
- */
+
+/// 几秒后显示菊花
+/// graceTime
 + (MBProgressHUD *)hud:(CGFloat)graceTime;
 
-/**
- *  快速显示某些信息
- *
- *  @param message 信息内容
- *
- *  @return 直接返回一个MBProgressHUD， 不需要手动关闭
- */
+/// 快速显示某些信息
+/// message 信息内容
+/// 直接返回一个MBProgressHUD， 不需要手动关闭
 + (MBProgressHUD *)qucickTip:(NSString *)message;
+
+/// 隐藏hud  移除hud
++ (void)hiddenHud:(MBProgressHUD *)hud;
 
 @end

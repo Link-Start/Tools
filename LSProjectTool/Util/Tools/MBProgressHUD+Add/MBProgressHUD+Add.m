@@ -39,7 +39,7 @@
 }
 
 // 网络请求频率很高，不必每次都创建\销毁一个hud，只需创建一个反复使用即可
-+ (MBProgressHUD *)hud{
++ (MBProgressHUD *)hud {
     //获取相关联的对象时使用Objective-C函数objc_getAssociatedObject
     MBProgressHUD *hud = objc_getAssociatedObject(self, _cmd);
     

@@ -85,5 +85,7 @@ typedef NS_ENUM(NSUInteger, LYWindowScreenLevel) {
 
 /// 删除所有缓存的弹框
 + (void)removeAllCacheQueueViews;
+
+
 @end
 

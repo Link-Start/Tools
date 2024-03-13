@@ -29,6 +29,8 @@
 // 如果采用UIImageResizingModeStretch（拉伸模式），那么拉伸区域保存一个像素长或者宽最好，这样性能最优。至于平铺模式，则没有说明。
 
 
+//_centerBgImgV = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"message_customIM_cell_center_gradientBgView"] resizableImageWithCapInsets:UIEdgeInsetsFromString(@"{20,10,20,10}") resizingMode:UIImageResizingModeStretch]];
+
 
 
 

@@ -14,8 +14,8 @@
 https://blog.51cto.com/u_15318120/3241314
 
 
-模态显示PresentModalViewController 原创
-wx6103b5205e1842021-07-31 17:01:23
+// 模态显示PresentModalViewController
+
 文章标签模态模态窗口视图控制器状态栏ipad文章分类运维阅读数1288
 1、主要用途
 弹出模态ViewController是IOS变成中很有用的一个技术，UIKit提供的一些专门用于模态显示的ViewController，如UIImagePickerController等。弹出模态ViewController
@@ -37,12 +37,7 @@ typedef enum {
     UIModalTransitionStyleCrossDissolve,   // 淡出效果（交叉溶解）
     UIModalTransitionStylePartialCurl      // 翻页效果
 } UIModalTransitionStyle;
-1.
-2.
-3.
-4.
-5.
-6.
+ 
 这四种风格在不受设备的限制，即不管是iPhone还是iPad都会根据我们指定的风格显示转场效果。
 4、Modal Presentation Styles（弹出风格）
 通过设置presenting VC的modalPresentationStyle属性，我们可以设置弹出View Controller时的风格，有以下四种风格，其定义如下：
@@ -52,12 +47,7 @@ typedef enum {
     UIModalPresentationFormSheet,
     UIModalPresentationCurrentContext,
 } UIModalPresentationStyle;
-1.
-2.
-3.
-4.
-5.
-6.
+
 4.1 UIModalPresentationFullScreen
 代表弹出VC时，presented VC充满全屏，如果弹出VC的wantsFullScreenLayout设置为YES的，则会填充到状态栏下边，否则不会填充到状态栏之下。
 4.2 UIModalPresentationPageSheet
@@ -72,8 +62,7 @@ typedef enum {
 6、获取不同的模态窗口(主要的属性)
 @property(nonatomic, readonly) UIViewController *presentedViewController ; // 当前控制器模态出的窗口
 @property(nonatomic, readonly) UIViewController *presentingViewController; // 模态出当前控制器的窗口
-1.
-2.
+ 
 7、处理模态窗口(主要的方法)
 // 显示想要显示的模态窗口
 - (void)presentViewController:(UIViewController *)viewControllerToPresent
@@ -86,17 +75,7 @@ typedef enum {
 
 // 当前控制器模态另一个窗口并传输数据时调用的方法
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)
-1.
-2.
-3.
-4.
-5.
-6.
-7.
-8.
-9.
-10.
-11.
+
 8、使用提醒
 presenting view controller Vs presented view controller
 当我们在view controller A中模态显示view controller B的时候，A就充当presenting view controller（弹出VC），而B就是presented view controller（被弹出VC）。官方文档建议这两者之间通过delegate实现交互，如果使用过UIImagePickerController从系统相册选取照片或者拍照，我们可以发现imagePickerController和弹出它的VC之间就是通过UIImagePickerControllerDelegate实现交互的。因此我们在实际应用用，最好也遵守这个原则，在被弹出的VC中定义delegate，然后在弹出VC中实现该代理，这样就可以比较方便的实现两者之间的交互。
@@ -112,18 +91,6 @@ navi.modalPresentationStyle = UIModalPresentationCurrentContext;
 [self.navigationController presentViewController:navi animated:YES completion:^{
     navi.navigationBarHidden = YES;
 }];
-1.
-2.
-3.
-4.
-5.
-6.
-7.
-8.
-9.
-10.
-11.
-
 
 
 

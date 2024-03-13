@@ -22,7 +22,7 @@
 // ******************************************************************************************************************
 // ******************************************************************************************************************
 #pragma mark - 导航方法
--(void)navThirdMapWithLocation:(CLLocationCoordinate2D)endLocation endAddressStr:(NSString *)endAddress {
+- (void)navThirdMapWithLocation:(CLLocationCoordinate2D)endLocation endAddressStr:(NSString *)endAddress {
     
     self.endAddress = endAddress; //目的地
     
@@ -32,7 +32,7 @@
     
     NSMutableArray *maps = [NSMutableArray array];
     //这个判断其实是不需要的(苹果地图系统有自带)
-    if ( [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"http://maps.apple.com/"]]) {
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"http://maps.apple.com/"]]) {
         //苹果地图
         NSMutableDictionary *iosMapDic = [NSMutableDictionary dictionary];
         iosMapDic[@"title"] = @"苹果自带地图";
@@ -224,7 +224,6 @@
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString] options:@{UIApplicationOpenURLOptionsSourceApplicationKey:@YES} completionHandler:nil];
     } else {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
-
     }
 }
 

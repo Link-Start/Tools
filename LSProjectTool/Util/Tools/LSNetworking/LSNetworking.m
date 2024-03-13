@@ -301,6 +301,7 @@ static inline NSString *cachePath() {
     //返回拼接后的网址
     return absouluteUrl;
 }
+
 ///使用UTF8 编码字符串
 + (NSString *)encodeUrl:(NSString *)urlStr {
     //使用系统方法对 字符串进行UTF+8编码
@@ -1419,13 +1420,13 @@ static inline NSString *cachePath() {
         
         // 当网络状态改变了, 就会调用这个block
         
-        if (status == AFNetworkReachabilityStatusNotReachable){ // 没有网络(断网)
+        if (status == AFNetworkReachabilityStatusNotReachable) { // 没有网络(断网)
             ls_networkStatus = LSNetworkStatusNotReachable;
-        }else if (status == AFNetworkReachabilityStatusUnknown){  // 未知网络
+        } else if (status == AFNetworkReachabilityStatusUnknown) {  // 未知网络
             ls_networkStatus = LSNetworkStatusUnknow;
-        }else if (status == AFNetworkReachabilityStatusReachableViaWWAN){// 手机自带网络
+        } else if (status == AFNetworkReachabilityStatusReachableViaWWAN) {// 手机自带网络
             ls_networkStatus = LSNetworkStatusReachableViaWWAN;
-        }else if (status == AFNetworkReachabilityStatusReachableViaWiFi){// WIFI
+        } else if (status == AFNetworkReachabilityStatusReachableViaWiFi) {// WIFI
             ls_networkStatus = LSNetworkStatusReachableViaWiFi;
         }
     }];
@@ -1471,4 +1472,6 @@ static inline NSString *cachePath() {
 //        NSLog(@"释放+++");
 //    }];
 }
+
+
 @end

@@ -145,6 +145,7 @@ PODS:
   - JQCollectionViewWaterfallLayout (0.2.0)
   - JQLaunchAdKit (3.1.7)
   - JSBadgeView (2.0.0)
+  - JVFloatLabeledTextField (1.2.2)
   - JXCategoryView (1.6.1)
   - JXCategoryViewExt (1.2.0):
     - JXCategoryViewExt/Core (= 1.2.0)
@@ -362,6 +363,16 @@ PODS:
   - LMJDropdownMenu (3.0.4)
   - lottie-ios (4.3.4)
   - LSAnimator (2.1.5)
+  - LSSafeProtector (2.1.4):
+    - LSSafeProtector/Core (= 2.1.4)
+    - LSSafeProtector/Foundation (= 2.1.4)
+    - LSSafeProtector/MRC (= 2.1.4)
+  - LSSafeProtector/Core (2.1.4)
+  - LSSafeProtector/Foundation (2.1.4):
+    - LSSafeProtector/Core
+  - LSSafeProtector/MRC (2.1.4):
+    - LSSafeProtector/Core
+    - LSSafeProtector/Foundation
   - LSTPopView (0.3.10):
     - LSTPopView/Code (= 0.3.10)
     - LSTTimer
@@ -855,6 +866,8 @@ PODS:
   - SJVideoPlayer/ResourceLoader (3.4.3):
     - SJBaseVideoPlayer (>= 3.7.5)
   - SnapKit (5.6.0)
+  - SQCombineRequest/SQCombineRequestCombine (1.0.1)
+  - SQScanView (1.0.3)
   - SSAlert (0.0.3)
   - STPopup (1.8.7)
   - SwiftyStoreKit (0.16.1)
@@ -925,7 +938,9 @@ PODS:
   - WZLBadge (1.2.6)
   - XHLaunchAd (3.9.12):
     - FLAnimatedImage (~> 1.0.12)
+  - XHPageControl (0.1.0)
   - XLForm (4.3.0)
+  - XXShield (2.3.1)
   - YBHandyList (1.0.5)
   - Yoga (1.14.0)
   - YPNavigationBarTransition (2.2.3)
@@ -933,11 +948,23 @@ PODS:
     - FMDB (~> 2.0)
   - YTKNetwork (3.0.6):
     - AFNetworking/NSURLSession (~> 4.0)
+  - YYAsyncLayer (1.0)
   - YYCache (1.0.4)
   - YYCategories (1.0.4):
     - YYCategories/no-arc (= 1.0.4)
   - YYCategories/no-arc (1.0.4)
+  - YYDispatchQueuePool (1.0)
+  - YYImage (1.0.4):
+    - YYImage/Core (= 1.0.4)
+  - YYImage/Core (1.0.4)
+  - YYImage/WebP (1.0.4):
+    - YYImage/Core
+  - YYKeyboardManager (1.0.1)
   - YYModel (1.0.4)
+  - YYText (1.0.7)
+  - YYWebImage (1.0.5):
+    - YYCache
+    - YYImage
   - ZFPlayer (4.1.4):
     - ZFPlayer/Core (= 4.1.4)
   - ZFPlayer/AVPlayer (4.1.4):
@@ -1082,6 +1109,7 @@ DEPENDENCIES:
   - JQCollectionViewWaterfallLayout
   - JQLaunchAdKit
   - JSBadgeView
+  - JVFloatLabeledTextField
   - JXCategoryView
   - JXCategoryViewExt
   - JXPagingView/Pager
@@ -1119,6 +1147,7 @@ DEPENDENCIES:
   - LMJDropdownMenu
   - lottie-ios
   - LSAnimator
+  - LSSafeProtector
   - LSTPopView
   - LYEmptyView
   - Masonry
@@ -1154,6 +1183,8 @@ DEPENDENCIES:
   - SJBaseVideoPlayer
   - SJStaticTableView
   - SJVideoPlayer
+  - SQCombineRequest/SQCombineRequestCombine
+  - SQScanView
   - SSAlert
   - STPopup
   - SwiftyStoreKit
@@ -1195,11 +1226,23 @@ DEPENDENCIES:
   - WRNavigationBar
   - WZLBadge
   - XHLaunchAd
+  - XHPageControl
   - XLForm
+  - XXShield
   - YBHandyList
   - YPNavigationBarTransition
   - YTKKeyValueStore
   - YTKNetwork
+  - YYAsyncLayer
+  - YYCache
+  - YYCategories
+  - YYDispatchQueuePool
+  - YYImage
+  - YYImage/WebP
+  - YYKeyboardManager
+  - YYModel
+  - YYText
+  - YYWebImage
   - ZFPlayer
   - ZFPlayer/AVPlayer
   - ZFPlayer/ControlView
@@ -1294,6 +1337,7 @@ SPEC REPOS:
     - JQCollectionViewWaterfallLayout
     - JQLaunchAdKit
     - JSBadgeView
+    - JVFloatLabeledTextField
     - JXCategoryView
     - JXCategoryViewExt
     - JXPagingView
@@ -1316,6 +1360,7 @@ SPEC REPOS:
     - LMJDropdownMenu
     - lottie-ios
     - LSAnimator
+    - LSSafeProtector
     - LSTPopView
     - LSTTimer
     - LYEmptyView
@@ -1363,6 +1408,8 @@ SPEC REPOS:
     - SJUIKit
     - SJVideoPlayer
     - SnapKit
+    - SQCombineRequest
+    - SQScanView
     - SSAlert
     - STPopup
     - SwiftyStoreKit
@@ -1400,15 +1447,23 @@ SPEC REPOS:
     - WRNavigationBar
     - WZLBadge
     - XHLaunchAd
+    - XHPageControl
     - XLForm
+    - XXShield
     - YBHandyList
     - Yoga
     - YPNavigationBarTransition
     - YTKKeyValueStore
     - YTKNetwork
+    - YYAsyncLayer
     - YYCache
     - YYCategories
+    - YYDispatchQueuePool
+    - YYImage
+    - YYKeyboardManager
     - YYModel
+    - YYText
+    - YYWebImage
     - ZFPlayer
     - ZJJTimeCountDown
     - ZJKitTool
@@ -1499,6 +1554,7 @@ SPEC CHECKSUMS:
   JQCollectionViewWaterfallLayout: 4282a4b91ee9dc55a089420acd37f6202b544a8d
   JQLaunchAdKit: 5e232ae3c2879708166b28d190c8695d667471bd
   JSBadgeView: 3f5691b7d1bfacfb0237d0eb3b8b1f9a10ecb3f7
+  JVFloatLabeledTextField: df48598472ee015701d509f43e59492a0d4ca208
   JXCategoryView: 7b1ee69ede4843c581688afe84d0f047723262f2
   JXCategoryViewExt: cf395acdac10524d20a9158eb487be7642c33cd7
   JXPagingView: 90924b364a2ff7e94db534fad1fa50925ff69ee4
@@ -1521,6 +1577,7 @@ SPEC CHECKSUMS:
   LMJDropdownMenu: 50c74e9d50a480c290fec47eb575826861d0823b
   lottie-ios: 3d98679b41fa6fd6aff2352b3953dbd3df8a397e
   LSAnimator: f24d46b5f9b1ecedba14dc76a18e8fe2bbf681ea
+  LSSafeProtector: b2e6c263079d365967cc4d19817b38291b5fcbe6
   LSTPopView: 9379f00f6ce7d1fc620b50ab00ed3ef97b2d4d52
   LSTTimer: caf8f02ff366ca175cf4c1778d26c166183c1b6f
   LYEmptyView: b6d418cfa38b78df0cf243f9a9c25ccbdc399922
@@ -1568,6 +1625,8 @@ SPEC CHECKSUMS:
   SJUIKit: a40111941e408cc17d4c1c23495aa92999e814b0
   SJVideoPlayer: 4f09814f58522e0975cb2dccfda925f6c8643467
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+  SQCombineRequest: 05ad6daa396896fe21193ff8ef9b84f31e61aa55
+  SQScanView: 622415fdb3bf370bb9ea49fac3818959572b1700
   SSAlert: 91db5db62fa8bb26504c3c2368cf33f3798d2796
   STPopup: a9045557bc48a0df51fbb7bf0544447c5fe84d34
   SwiftyStoreKit: 6b9c08810269f030586dac1fae8e75871a82e84a
@@ -1605,15 +1664,23 @@ SPEC CHECKSUMS:
   WRNavigationBar: 10bfdf96addf14d640d07c2ef08a029c18d8af10
   WZLBadge: 9ec779dcfd94c825518b395e8315fccaabff1bfa
   XHLaunchAd: 6320f9c68732667323072fc3a5f104e40fbe9cfe
+  XHPageControl: b8206ff1b447598cfc51c16b136aa6a89da303d4
   XLForm: a439f9512078ed538e8335c8b06d3f3286bbfd37
+  XXShield: c3095b2e1f0e29bc9f660be1eea01813b557cd99
   YBHandyList: bf0bf2803bb35569863fe63fd25f4541a4e5fe68
   Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
   YPNavigationBarTransition: d3d8c0e4cced41dec43647832bb45737d79cc8b0
   YTKKeyValueStore: 4d002941540dd5108fa23009b71e0f2f937f7a0f
   YTKNetwork: c16be90b06be003de9e9cd0d3b187cc8eaf35c04
+  YYAsyncLayer: df6b01ebc695c5f6b4c15dd5c23fa3e081eb25c0
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
+  YYDispatchQueuePool: 3dfb2274bcc74207688dde8ac6f7bdd46871dd7b
+  YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
+  YYKeyboardManager: ff53d2e80d1808567a7f004028bd200d9469a89f
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
+  YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
+  YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
   ZFPlayer: 5cf39e8d9f0c2394a014b0db4767b5b5a6bffe13
   ZJJTimeCountDown: 65f3a6c6e9ef67bf3906578b59c49c66155d8cc1
   ZJKitTool: 6d8763ce3f1570924ea106f28bfaf7b01d791a86
@@ -1627,6 +1694,6 @@ SPEC CHECKSUMS:
   ZXTableView: b7b2c8b421a83bb8159403feada1c73b7787a172
   ZYBannerView: 7a1c76cab9a5438bf5c7529b8fc99cacb5af5898
 
-PODFILE CHECKSUM: 1a06293da367a3e9dc358beb4fe87e548cdaae01
+PODFILE CHECKSUM: de1c66d9a5116ef6d522ce0aac9a121eeaac74cd
 
 COCOAPODS: 1.14.2

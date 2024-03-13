@@ -94,6 +94,8 @@
         }
         if (!error) {
             self.currentLocation = location;
+            self.regeocode = regeocode;//逆地理信息
+            NSLog(@"经度longitude:%f, 纬度latitude:%f,", location.coordinate.longitude, location.coordinate.latitude);
             if (complete) {
                 complete(YES);
             }
@@ -132,6 +134,8 @@
         }
         else { // 定位成功
             self.currentLocation = location;
+            self.regeocode = regeocode;//逆地理信息
+            NSLog(@"经度longitude:%f, 纬度latitude:%f,", location.coordinate.longitude, location.coordinate.latitude);
             if (complete) {
                 complete(YES);
             }
@@ -147,38 +151,14 @@
 ///
 - (void)amapLocationManager:(AMapLocationManager *)manager doRequireLocationAuth:(CLLocationManager *)locationManager {
     [locationManager requestWhenInUseAuthorization];// 使用期间使用位置信息, 可以更换
-    
 //    [locationManager requestAlwaysAuthorization];// 始终使用位置信息，
 }
-
-/// 连续定位回调函数.注意：本方法已被废弃，如果实现了amapLocationManager:didUpdateLocation:reGeocode:方法，则本方法将不会回调。
-- (void)amapLocationManager:(AMapLocationManager *)manager didUpdateLocation:(CLLocation *)location {
-    
-}
-
-/// 连续定位回调函数.注意：如果实现了本方法，则定位信息不会通过amapLocationManager:didUpdateLocation:方法回调。
-- (void)amapLocationManager:(AMapLocationManager *)manager didUpdateLocation:(CLLocation *)location reGeocode:(AMapLocationReGeocode *)reGeocode {
-    
-}
-
-/// 是否显示设备朝向校准
-- (BOOL)amapLocationManagerShouldDisplayHeadingCalibration:(AMapLocationManager *)manager {
-    return YES;
-}
-
-/// 设备方向改变时回调函数
-- (void)amapLocationManager:(AMapLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading {
-    
-}
-
-
 
 /// 定位权限状态改变时回调函数。注意：iOS13及之前版本回调
 - (void)amapLocationManager:(AMapLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
     NSLog(@"定位权限状态改变时回调函数。注意：iOS13及之前版本回调");
     if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse ||
         [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways) {
-//        return;
 //        [[NSNotificationCenter defaultCenter] postNotificationName:OPLocationAuthStatusChangeNotification object:nil];
     }
 }
@@ -188,19 +168,44 @@
     NSLog(@"定位权限状态改变时回调函数。注意：iOS14及之后版本回调");
     if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse ||
         [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways) {
-        
 //        [[NSNotificationCenter defaultCenter] postNotificationName:OPLocationAuthStatusChangeNotification object:nil];
     }
 }
 
+
+///// 连续定位回调函数.注意：本方法已被废弃，如果实现了amapLocationManager:didUpdateLocation:reGeocode:方法，则本方法将不会回调。
+//- (void)amapLocationManager:(AMapLocationManager *)manager didUpdateLocation:(CLLocation *)location {
+//    NSLog(@"连续定位回调函数.注意：本方法已被废弃，如果实现了amapLocationManager:didUpdateLocation:reGeocode:方法，则本方法将不会回调。");
+//}
+///// 连续定位回调函数.注意：如果实现了本方法，则定位信息不会通过amapLocationManager:didUpdateLocation:方法回调。
+//- (void)amapLocationManager:(AMapLocationManager *)manager didUpdateLocation:(CLLocation *)location reGeocode:(AMapLocationReGeocode *)reGeocode {
+//    NSLog(@"连续定位回调函数.注意：如果实现了本方法，则定位信息不会通过amapLocationManager:didUpdateLocation:方法回调。");
+//}
+//
+///// 是否显示设备朝向校准
+//- (BOOL)amapLocationManagerShouldDisplayHeadingCalibration:(AMapLocationManager *)manager {
+//    return YES;
+//}
+//
+///// 设备方向改变时回调函数
+//- (void)amapLocationManager:(AMapLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading {
+//    NSLog(@"设备方向改变时回调函数");
+//}
+
+
+
+
+
 /// 获取当前用户纬度
 - (NSNumber *)getCurrentLocationLatitude {
-    return self.currentLocation?@(self.currentLocation.coordinate.latitude):nil;
+//    return self.currentLocation?@(self.currentLocation.coordinate.latitude):nil;
+    return self.currentLocation?[NSNumber numberWithDouble:self.currentLocation.coordinate.latitude]:nil;
 }
 
 /// 获取当前用户经度
 - (NSNumber *)getCurrentLocationLongtitude {
-    return self.currentLocation?@(self.currentLocation.coordinate.longitude):nil;
+//    return self.currentLocation?@(self.currentLocation.coordinate.longitude):nil;
+    return self.currentLocation?[NSNumber numberWithDouble:self.currentLocation.coordinate.longitude]:nil;
 }
 
 

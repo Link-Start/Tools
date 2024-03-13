@@ -534,6 +534,7 @@
     }
 }
 
+//返回方法，(当根试图是present出来的时候,这个方法会有问题，会直接dismiss到 发起present的那个VC)
 - (void)backOut { //(当根试图是present出来的时候)这个方法会有问题
     //presentingViewController: present出来本视图控制器的视图控制器
     if (self.presentingViewController) {

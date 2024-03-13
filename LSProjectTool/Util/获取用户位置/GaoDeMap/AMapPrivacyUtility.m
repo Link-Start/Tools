@@ -11,22 +11,21 @@
 #import <AMapLocationKit/AMapLocationKit.h>
 @implementation AMapPrivacyUtility
 
+
+/// 显示，隐私合规信息，弹窗
 + (void)showPrivacyInfoInWindow:(UIWindow *)window {
     
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    
     paragraphStyle.alignment = NSTextAlignmentLeft;
+    NSString *explainStr = [NSString stringWithFormat:@"\n亲，感谢您对XXX一直以来的信任！我们依据最新的监管要求更新了%@《隐私权政策》，特向您说明如下\n1.为向您提供交易相关基本功能，我们会收集、使用必要的信息；\n2.基于您的明示授权，我们可能会获取您的位置（为您提供附近的商品、店铺及优惠资讯等）等信息，您有权拒绝或取消授权；\n3.我们会采取业界先进的安全措施保护您的信息安全；\n4.未经您同意，我们不会从第三方处获取、共享或向提供您的信息；", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"]];
     
-    NSMutableAttributedString *privacyInfo = [[NSMutableAttributedString alloc] initWithString:@"\n亲，感谢您对XXX一直以来的信任！我们依据最新的监管要求更新了XXX《隐私权政策》，特向您说明如下\n1.为向您提供交易相关基本功能，我们会收集、使用必要的信息；\n2.基于您的明示授权，我们可能会获取您的位置（为您提供附近的商品、店铺及优惠资讯等）等信息，您有权拒绝或取消授权；\n3.我们会采取业界先进的安全措施保护您的信息安全；\n4.未经您同意，我们不会从第三方处获取、共享或向提供您的信息；" attributes:@{
+    NSMutableAttributedString *privacyInfo = [[NSMutableAttributedString alloc] initWithString:explainStr attributes:@{
         NSParagraphStyleAttributeName:paragraphStyle,
     }];
-
     [privacyInfo addAttribute:NSLinkAttributeName
                         value:@"《隐私权政策》"
                         range:[[privacyInfo string] rangeOfString:@"《隐私权政策》"]];
-
     UIAlertController *privacyInfoController = [UIAlertController alertControllerWithTitle:@"温馨提示(隐私合规示例)" message:@"" preferredStyle:UIAlertControllerStyleAlert];
-
     [privacyInfoController setValue:privacyInfo forKey:@"attributedMessage"];
     
     

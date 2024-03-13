@@ -65,6 +65,7 @@
         }
         else { // 定位成功
             self.currentLocation = location;
+            NSLog(@"经度longitude:%f, 纬度latitude:%f,", location.location.coordinate.longitude, location.location.coordinate.latitude);
             if (complete) {
                 complete(YES);
             }
@@ -101,6 +102,7 @@
         }
         else { // 定位成功
             self.currentLocation = location;
+            NSLog(@"经度longitude:%f, 纬度latitude:%f,", location.location.coordinate.longitude, location.location.coordinate.latitude);
             if (complete) {
                 complete(YES);
             }

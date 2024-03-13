@@ -46,4 +46,29 @@
 //}
 
 
+
+// 禁止某一行移动，并且禁止其他cell移动到该cell的索引位置（这里禁止移动第一行）
+// sourceIndexPath：
+// proposedDestinationIndexPath：
+- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath {
+    
+    NSIndexPath *indexPath = nil;
+    
+    // 当结束移动时，判断结束时的位置，把移动的元素删除再加到结束的位置
+    if (proposedDestinationIndexPath.row < self.groupListArray.count) {
+        // 要求：第一个cell位置置顶，不可移动，所以当移动其他cell到该位置时，进行下列操作：
+        VisualPromotionGroupList *model = self.groupListArray[proposedDestinationIndexPath.row];
+        if (self.isEditing && (model.defaultFlag == 1)) {
+            return sourceIndexPath;
+        } else {
+            indexPath = proposedDestinationIndexPath;
+        }
+        return indexPath;
+    }
+    
+    return proposedDestinationIndexPath;
+}
+
+
+
 #endif /* UITableView_h */

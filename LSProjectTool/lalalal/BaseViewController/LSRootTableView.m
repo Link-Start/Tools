@@ -583,7 +583,7 @@
         
 #ifdef __IPHONE_11_0
         if (@available(iOS 13.0, *)) {
-            _ls_tableView.automaticallyAdjustsScrollIndicatorInsets = false;
+            _ls_tableView.automaticallyAdjustsScrollIndicatorInsets = NO;
         } else
         if (@available(iOS 11.0, *)) {
             _ls_tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;

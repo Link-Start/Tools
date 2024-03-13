@@ -13,6 +13,10 @@ def all_Pods
 	pod 'Alamofire'						#Swift中的优雅HTTP网络
 	pod 'AFNetworking+RetryPolicy'		#增加了为使用AFNetworking提出的请求设置重试逻辑的能力
 	#ObjcAssociatedObjectHelpers		#Objc关联对象助手
+	pod 'YTKNetwork'					#YTK 网络请求
+
+	# pod 'SQCombineRequest'							#自带网络请求工具、使用的是AFNetworking 4.0版本，如果冲突可以使用下面方式导入(https://www.jianshu.com/p/2419af38c318)
+	pod 'SQCombineRequest/SQCombineRequestCombine'	#不带网络工具，不依赖AFNetworking，要自己设置SQCombineRequestItem的netRequestTool属性
 
 
 	pod 'DZNEmptyDataSet'				#空白占位图
@@ -26,6 +30,7 @@ def all_Pods
 	pod 'Masonry'						#布局
 	pod 'SDAutoLayout'					#布局
 	pod 'MyLayout'						#MyLayout是一套iOS界面视图布局框架。
+	pod 'SQScanView'					#iOS 扫码，简单设置识别区域，一图多码https://www.jianshu.com/p/453dd245498d
 
 	# pod 'SDCycleScrollView'				# 轮播图
 	pod 'WMZBanner'						# 2021.10，cell偏移，好像还不支持masonary约束布局，最好用的轻量级轮播图+卡片样式+自定义样式,链式编程语法(可实现各种样式的轮播图,大多需要的功能都有)
@@ -34,21 +39,22 @@ def all_Pods
 	pod 'TYCyclePagerView'				# 轮播图，TYPageControl可修改大小
 	pod 'ZYBannerView'					# 简单易用, 显示内容定制性强的可循环轮播控件. 可以实现类似淘宝商品详情中侧拉进入详情页的功能.
 	pod 'EllipsePageControl'			# 椭圆形 长方形 PageControl 轮播图点
+	pod 'XHPageControl'					# 一个简洁好用的自定义UIPageControl（https://github.com/zxhkit/XHPageControl）
 
 	pod 'SDWebImage'					# 请求图片
 	pod 'SDWebImageWebPCoder'			# SDWebImage的WebP编码器插件，使用libwebp
 	pod 'MBProgressHUD'					# loading动画
+	pod 'SVProgressHUD'					# loading动画
 	pod 'NVActivityIndicatorView'		#加载动画集合 loading..动画  Swift语言
 	pod 'IQKeyboardManager'				#输入框键盘管理iOS8 and later
 	pod 'MJExtension'					#数据模型转换
 	pod 'KakaJSON'						# 纯Swift版的JSON与Model转换框架已经开源上架，如果你的项目是用Swift写的Model，墙裂推荐使用KakaJSON（https://github.com/kakaopensource/KakaJSON）
 	pod 'MJRefresh'						#刷新
 	pod 'ReactiveObjC'					#RAC
-	# pod 'YYKit'						#富文本,图片请求,模型转换
-	# pod 'YYImage', :git => 'https://github.com/QiuYeHong90/YYImage.git'
+	
 	pod 'SJAttributesFactory'			# OC，2019，iOS 富文本编辑, 让代码更清晰. 文本编辑, 高度计算, 正则匹配等待... 简便操作, 让你爽到爆!
 	# pod 'SJAttributesStringMaker'		# Swift，iOS 富文本编辑, 让代码更清晰. 文本编辑, 高度计算, 正则匹配等待... 简便操作, 让你爽到爆!
-	pod 'YTKNetwork'					#YTK 网络请求
+	
 	pod 'XHLaunchAd'					#开屏广告
 	pod 'JQLaunchAdKit'					#开屏广告、启动广告解决方案-支持静态/动态图片广告/mp4视频广告\n 特性: 1.支持静态/动态图片广告. 2.支持mp4视频广告. 3.支持全屏/半屏广告. 4.支持网络及本地资源. 5.兼容iPhone和iPad. 6.支持广告点击事件. 7.支持自定义跳过按钮,添加子视图. 8.支持设置数据等待时间. 9.自带图片/视频下载,缓存功能. 10.支持预缓存图片及视频. 11.支持设置完成动画. 12.支持清除指定资源缓存. 13.支持LaunchImage 和 LaunchScreen.storyboard. 14.等等等...
 	# pod 'AutoRotation'				#iOS 横竖屏切换解决方案https://www.jianshu.com/p/da1a03cc1f72
@@ -65,8 +71,8 @@ def all_Pods
 	pod 'FLAnimatedImage'				# gif播放
 
 	pod 'HMSegmentedControl'			#UISegmentedControl的高度可定制的下拉式更换件。
-	pod 'WMZDropDownMenu'				#筛选菜单,可悬浮,目前已实现闲鱼/美团/Boss直聘/京东/饿了么/淘宝/拼多多/赶集网/美图外卖等等的筛选菜单
-	pod 'WMZPageController'				#2022,分页控制器,替换UIPageController方案,具备完整的生命周期,多种指示器样式,多种标题样式,可悬浮,支持ios13暗黑模式(仿优酷,爱奇艺,今日头条,简书,京东等多种标题菜单) 
+	pod 'WMZDropDownMenu'				#2022，🌹一个能几乎实现所有App各种类型筛选菜单的控件,可悬浮,目前已实现闲鱼/美团/Boss直聘/京东/饿了么/淘宝/拼多多/赶集网/美图外卖等等的筛选菜单,可以自由调用代理实现自己想组装的筛选功能和UI,且控件的生命周期自动管理,悬浮自动管理🌹
+	pod 'WMZPageController'				#2022,分页控制器,替换UIPageController方案,具备完整的生命周期,多种指示器样式,多种标题样式,可悬浮,支持ios13暗黑模式(仿优酷,爱奇艺,今日头条,简书,京东等多种标题菜单) ，1.5.0版本后改动比较大,如需稳定请指定1.4.6
 	pod 'JXCategoryView'				#2022,强大且易于使用的类别视图（分段控制、分段视图、分页视图、页面控制）（APP分类切换滚动视图）
 	# pod 'JXSegmentedView'				#JXCategoryView的swift版本
 	pod 'JXCategoryViewExt' 			#该库是对JXCategoryView的扩展及优化，目前的JXCategoryView版本1.6.1，JXCategoryViewExt版本1.2.0，基础库：pod 'JXCategoryViewExt' 或 pod 'JXCategoryViewExt/Core'
@@ -75,9 +81,12 @@ def all_Pods
 	pod 'GKPageSmoothView'				#(主要参考了JXPagingView，在他的基础上做了修改)iOS类似微博、抖音、网易云等个人详情页滑动嵌套效果
 	pod 'SwipeTableView'				# 类似半糖、美丽说主页与QQ音乐歌曲列表布局效果，实现不同菜单的左右滑动切换，同时支持类似tableview的顶部工具栏悬停（既可以左右滑动，又可以上下滑动）。兼容下拉刷新，自定义 collectionview实现自适应 contentSize 还可实现瀑布流功能
 
+	pod 'GKVideoScrollView'				# iOS仿抖音等上下滑动切换视图，使用方式类似UITableView，支持不同cell切换
+	
 	pod 'CYLTabBarController'			#一行代码实现 Lottie 动画TabBar，支持中间带+号的TabBar样式，自带红点角标，支持动态刷新
 	pod 'lottie-ios'					#用于原生渲染After Effects矢量动画的iOS库(OC:2.5.3之前版本(, '~> 2.5.3')  swift:3.0之后)
 	pod 'FSTextView'					#placeholder和最大字数
+	pod 'JVFloatLabeledTextField'		#带有浮动标签的UITextField子类-灵感来自Matt D。史密斯的设计：http://dribbble.com/shots/1254439--GIF-Mobile-Form-Interaction?列表=用户
 	
 	pod 'ThinkVerb'						#iOS动画(链式语法)
 	# pod 'TTGTextTagCollectionView'		#流式标签
@@ -90,8 +99,8 @@ def all_Pods
 	# ZBWUnifiedStorage					# iOS 统一存储库。支持内存、持久化、钥匙串等多种方式存储；支持过期时间设置；支持多应用隔离。
 
 	pod 'dsBridge'						#三端易用的现代跨平台 Javascript bridge， 通过它，你可以在Javascript和原生之间同步或异步的调用彼此的函数.
-	# pod "XXShield"					#防止Crash
-	# pod 'LSSafeProtector'				#防止crash
+	pod "XXShield"					#防止Crash
+	pod 'LSSafeProtector'				#防止crash
 
 	# pod 'SKCalendarView'				#一个高可控性的日历基础组件
 	pod 'FSCalendar'					#一个完全可定制的iOS日历库，与Objective-C和Swift兼容
@@ -111,7 +120,15 @@ def all_Pods
 									# https://github.com/tbl00c/ZZUIHelper
 	pod 'ZJKitTool'			#ZJKitTool 可以更加便捷高效的添加UIKit控件,使用链式编程的思想，结合使用Masonry，以及其他工具类的简单使用,底层的封装.
 	
-	pod 'WMZTreeView'				#类似前端elementUI的树形控件,可自定义节点内容,支持无限极节点,可拖拽增删节点等等,非递归实现
+	pod 'WMZTreeView'		#类似前端elementUI的树形控件,可自定义节点内容,支持无限极节点,可拖拽增删节点等等,非递归实现
+
+	pod 'WMDragView'		# 2022，WMDragView致力于让任意View都可以自由悬浮拖曳（可拖动，悬浮按钮），类似于iOS的AssistiveTouch效果，微信浮窗。
+	pod 'MNFloatBtn'		# 2020，iOS全局悬浮按钮，显示 / 切换当前API环境与版本 ，掌握和测试撕逼主动权~
+	pod 'JhtFloatingBall'	# 2019，悬浮球/悬浮按钮/辅助按钮（类似于iOS系统自带的AssistiveTouch/京东/聚划算/建行等的辅助按钮）
+
+	pod 'CWLateralSlide'	# 2019，一行代码集成0耦合侧滑抽屉！
+
+
 
 	#热更新封装
 	# pod 'MangoFix'				#https://github.com/yanshuimu/MangoFixUtil
@@ -186,6 +203,8 @@ def all_Pods
 	pod 'HYBImageCliped'	#开源高效处理圆角的扩展，包括UIImageView、UIView、UIButton、UIImage的扩展API，可根据图片颜色生成图片带任意圆角，可给UIButton根据不同状态处理图片。所有生成图片都不会引起离屏渲染且不会引起离屏、图层混合，支持添加图片边框
 	pod 'HYBMasonryAutoCellHeight'	#基于Masonry自动计算行高的库
 
+	pod 'ZYCornerRadius'	#2018,避免为UIImageView设置圆角时触发离屏渲染所带来的性能损耗，两种工作方式：Category和UIImageView子类。
+
 	pod 'GLEnvs'	#只需一行代码，即可在运行时快速切换App环境和变量，也可即时设置环境及变量(https://github.com/GL9700/GLEnvs)
 
 	# pod 'LEGOImageEditor'	# 图片裁剪，支持大小缩放，设置大小，旋转角度，微调角度，裁剪图片
@@ -196,7 +215,8 @@ def all_Pods
 	pod 'GroupedData'		#GroupedData - 全网最好用的通讯录联系人排序算法，支持多语言索引排序,接入简单方便无耦合，只需Mode遵守Protocol即可实现排序（pod 更新至 0.0.1） https://github.com/ygf-git/GFGroupedData-master
 
 
-
+	pod 'CRBoxInputView'	# 2023，短信验证码输入框，支持密文模式.该组件适用于短信验证码，密码输入框，手机号码输入框这些场景。建议使用前运行Demo。常用功能在Demo中都有体现【https://github.com/CRAnimation/CRBoxInputView】
+	pod "JHVerificationCodeView"	# 2020，验证码输入框，验证码，code view，iOS验证码输入,密码输入框 【https://github.com/xjh093/JHVerificationCodeView】
 
 
 
@@ -278,6 +298,8 @@ def jiqimao_tools_ios	#机器猫工具库
 	########### 网络请求库 ###########
 	pod 'KJNetworkPlugin'				#一款纯OC版 批量 和 链式 插件版网络请求库
 
+	# pod 'KJNetworkPlugin/Chain'		#
+
 	########### 响应式插件版网络基础架构 swift ###########
 	pod 'RxNetworks'
 	# pod 'RxNetworks/MoyaNetwork'		# 导入网络架构API,该模块是基于Moya封装的网络API架构
@@ -330,6 +352,7 @@ def table_iOS_OC #tableView 的封装
 	pod 'RETableViewManager'		# 2016.UITableView的强大数据驱动内容管理器。允许轻松管理任何UITableView的内容，包括表单和列表.(https://github.com/romaonthego）
 	pod 'ZLCellDataSource'			#mvvm，mvp的应用。为viewcontroller瘦身，把tableview和collectionview的datasource提取出来，可节省1/3的代码量。
 	pod 'ZXTableView'				#快速、高效地构建TableView，节省80%以上重复代码，无需设置数据源和代理。(https://github.com/SmileZXLee/ZXTableView)
+	pod 'ZXSlideSelectTableView'	#基于ZXTableView快速实现tableView的构造,快速、轻松地实现滑动选择tableView，支持各种自定义显示效果
 	#HSSetTableViewController、TFTableview		#mvvm tableView封装
 	# pod 'TFTableViewDataSource'			#mvvm tableView封装
 	# pod 'RWTableView'			#参考mvvm tableView封装
@@ -359,6 +382,7 @@ def collection_iOS_OC #collection布局
 	pod 'ZLCollectionViewFlowLayout'		#瀑布流和标签用起来好像有问题，2022.03,基于UICollectionView实现，目前支持标签布局，列布局，百分比布局，定位布局，填充式布局，瀑布流布局等。支持纵向布局和横向布局，可以根据不同的section设置不同的布局，支持拖动cell，头部悬浮，设置section背景色和自定义section背景view，向自定义背景view传递自定义方法。功能强大，超过Android的recyclerview，实现了电影选座等高难度的布局。
 	pod 'JQCollectionViewWaterfallLayout'	#瀑布流布局,<垂直和水平滚动方向>
 	pod 'BMLongPressDragCellCollectionView'	#让你轻松实现类似支付宝的拖拽重排功能, 支持各种自定义操作。
+	pod 'SDMovableCellCollectionView'		#这是一个可移动的集合视图。您可以通过拖放单元格来对数据进行排序。
 
 	pod 'CHTCollectionViewWaterfallLayout'	#swift，瀑布流,<仅支持垂直滚动>，UICollectionView的瀑布（即类似Pinterest的）布局。
 	pod 'CHTCollectionViewWaterfallLayout/ObjC'	# OC 版本，仅支持垂直滚动。 UICollectionView的瀑布（即类似Pinterest的）布局。
@@ -379,6 +403,7 @@ def cycle_banner_iOS # 轮播图
 	pod 'SDCycleScrollView'				# 轮播图
 	pod 'WMZBanner'						# 2021.10，cell偏移，好像还不支持masonary约束布局，最好用的轻量级轮播图+卡片样式+自定义样式,链式编程语法(可实现各种样式的轮播图,大多需要的功能都有)
 	pod 'KJBannerView'					# 有点不好用，不如SDCycle用着好用，轮播图(看demo)
+	pod 'KJBannerView/Downloader'		# KJBannerView 轮播图要配合这个库使用
 	pod 'TYCyclePagerView'				# 轮播图，TYPageControl可修改大小
 	pod 'ZYBannerView'					# 简单易用, 显示内容定制性强的可循环轮播控件. 可以实现类似淘宝商品详情中侧拉进入详情页的功能.
 	pod 'EllipsePageControl'			# 椭圆形 长方形 PageControl 轮播图点
@@ -408,8 +433,27 @@ def image_photo_ios	# 照片选择、图片浏览
 	# pod 'YBImageBrowser/NOSD'
 	# pod 'YBImageBrowser/VideoNOSD'  //视频功能需添加
 
+	pod 'JPImageresizerView'		#2024,一个专门裁剪图片、GIF、视频的轮子😋 简单易用、功能丰富☕️（高自由度的参数设定、支持旋转和镜像翻转、蒙版、压缩等），能满足绝大部分裁剪的需求。[https://github.com/Rogue24/JPImageresizerView]
+
 
 	# pod 'XLPhotoBrowser+CoderXL'	#(不再维护)一个简单实用的图片浏览器,效果类似微信图片浏览器,支持弹出动画和回缩动画,支持多图浏览,支持本地和网络图片浏览,支持多种属性自定义(支持横竖屏)
+end
+
+def yyKit_tools # YYKit
+	# pod 'YYKit'						#富文本,图片请求,模型转换
+	# pod 'YYImage', :git => 'https://github.com/QiuYeHong90/YYImage.git'
+	pod 'YYModel'					# — 高性能的 iOS JSON 模型框架。
+	pod 'YYCache'					# — 高性能的 iOS 缓存框架。
+	pod 'YYImage'					# — 功能强大的 iOS 图像框架。
+	pod 'YYImage/WebP'				# => pod 配置并没有包含 WebP 组件, 如果你需要支持 WebP，可以在 Podfile 中添加 pod 'YYImage/WebP'。你可以调用 YYImageWebPAvailable() 来检查一下 WebP 组件是否被正确安装。
+	pod 'YYWebImage'				# — 高性能的 iOS 异步图像加载框架。
+	pod 'YYText'					# — 功能强大的 iOS 富文本框架。
+	pod 'YYKeyboardManager'			# — iOS 键盘监听管理工具。
+	pod 'YYDispatchQueuePool'		# — iOS 全局并发队列管理工具。
+	pod 'YYAsyncLayer'				# — iOS 异步绘制与显示的工具。
+	pod 'YYCategories'				# — 功能丰富的 Category 类型工具库。
+
+
 end
 
 def alertView_ios #弹窗
@@ -422,12 +466,15 @@ def alertView_ios #弹窗
 	pod 'FWPopupViewOC'		#信手拈来的OC弹窗库：1、继承 FWPopupBaseView 即可轻松实现各种位置、动画类型的弹窗；2、新功能引导弹窗
 	pod 'FWPopupView'		#swift版
 	pod 'STPopup'			#STPopup为iPhone和iPad提供STPopupController，它的工作原理与弹出式UINavigationController相同。它用Objective-C编写，并与Swift兼容。
+	pod 'SCLAlertView-Objective-C'	#美丽的动画警报视图。用Objective-C编写
+
 
 	pod 'Popover.OC'		#一款优雅好用的类似QQ和微信消息页面的右上角微型菜单弹窗, 最低支持iOS6
 	# pod 'FTPopOverMenu'	#类似QQ和微信消息页面的右上角微型菜单弹窗
 	pod 'LMJDropdownMenu'	#一个简单好用的下拉菜单控件,类似QQ和微信消息页面的右上角微型菜单弹窗,<<<顶部会多一个按钮(btn)，莫名其妙，奇奇怪怪的感觉>>>
 	pod 'KxMenu'			#类似QQ和微信消息页面的右上角微型菜单弹窗,https://github.com/kolyvan/kxmenu/
 	pod "DXPopover"			#使用UIKit的弹出窗口模拟Facebook应用程序弹出窗口,类似QQ右上角item弹窗
+	pod 'YBPopupMenu'		#2023， 快速集成popupMenu  【https://github.com/lyb5834/YBPopupMenu】
 
 
 	# pod 'QBPopupMenu'		#无需使用图片文件的 iOS 弹出式菜单.它的外观类似于iOS3 的UIMenuController(UIMenuController-iOS3~iOS16)
@@ -441,10 +488,11 @@ def alertView_ios #弹窗
 	pod 'CustomPopOverView'	#一款小巧灵活的自定义弹出视图, 可以做自定义AlertView、弹出窗口等等https://github.com/maltsugar/CustomPopOverView
 
 	pod 'HWPanModal'		#HWPanModal 用于从底部弹出控制器（UIViewController），并用拖拽手势来关闭控制器。提供了自定义视图大小和位置，高度自定义弹出视图的各个属性。
+	pod 'LNPopupController'	#一个用于将视图控制器显示为其他视图控制器弹出窗口的框架，就像Apple Music和Podcasts应用程序一样。
 
 
-
-
+	pod 'TFDropDownMenu'	# 2019，下拉菜单选择器，多级下拉式菜单选项，下拉式左右分区选择菜单
+	pod 'ZHFilterMenuView'	# 2020，一款类似贝壳找房的通用房屋筛选控件！提供新房、二手房、租房的完整筛选功能实现！当然不仅仅局限用于房屋筛选，也可用于其他类型的筛选！【https://github.com/hi-zhouyn/ZHFilterMenuView】
 
 end
 
@@ -486,10 +534,10 @@ def sj_videoPlayer #短视频播放器 可接入 ijkplayer aliplayer alivodplaye
 end
 
 def nav_iOS #导航栏nav
-	pod 'HBDNavigationBar'	#自定义UINavigationBar，用于在各种状态之间平稳切换，包括条形样式、条形色调颜色、背景图像、背景alpha、条形隐藏、标题文本属性、色调颜色、阴影隐藏...
+	pod 'HBDNavigationBar'	#2022，自定义UINavigationBar，用于在各种状态之间平稳切换，包括条形样式、条形色调颜色、背景图像、背景alpha、条形隐藏、标题文本属性、色调颜色、阴影隐藏...
 	pod 'HBDStatusBar'		#状态栏
 
-	pod 'YPNavigationBarTransition'	#
+	pod 'YPNavigationBarTransition'	# 2022，类似微信 UINavigationBar 效果的切换方案，支持任意透明半透明图片背景等等不同样式的 UINavigationBar 的切换。
 
 	pod 'ZXNavigationBarKit'		#2022，自定义导航条,比起系统UINavigationBar设置背景色，背景透明度更加方便
 	pod 'ZXNavigationBar'			#灵活轻量的自定义导航栏，导航栏属于控制器view，支持导航栏联动，一行代码实现【导航栏背景图片设置、导航栏渐变、折叠、修改Item大小和边距、自定义导航栏高度、全屏手势返回、pop拦截、仿系统导航栏历史堆栈】等各种效果
@@ -499,6 +547,8 @@ def nav_iOS #导航栏nav
 	pod 'KMNavigationBarTransition'	#一个用来统一管理导航栏转场以及当 push 或者 pop 的时候使动画效果更加顺滑的通用库，并且同时支持竖屏和横屏。你不用为这个库写一行代码，所有的改变都悄然发生。
 	pod "UINavigation-SXFixSpace"	#导航栏按钮位置偏移的解决方案,兼容iOS7~iOS15,可自定义间距
 
+	pod "RTRootNavigationController"	# 2023，隐含地让每个视图控制器都有自己的导航栏
+	
 		
 end
 
@@ -520,14 +570,14 @@ def animations_iOS	#动画，Animations
 	
 	pod "PulsingHalo"	#涟漪动画效果
 
-
 	pod 'JHChainableAnimations'	# 具有强大的可链接式动画，并且语法易于读/写，但是它不支持多链式动画，仅支持UIView不支持直接操作CALayer,不支持参数参数自动补全
 	# https://github.com/Lision/LSAnimator/blob/master/README_ZH-CN.md
 	pod 'LSAnimator'			# OC，基于 JHChainableAnimations，在其上扩充可控维度（支持多链式动画），支持 CALayer 与参数自动补全等功能。
 	# pod 'CoreAnimator'			# swift，基于 LSAnimator 上的简单封装，提供对于 Swift 更优雅的接口
 
-
-end
+	pod 'TLTransitions'			#2020，快速实现控制器的转场和View的快速popover显示，并支持自定义动画、手势退场【https://github.com/LoongerTao/TLTransitions】
+	pod 'GXTransition'			#2020，iOS常用转场动画（包括自定义和OC自带转场动画）
+end	
 
 
 def um_Pods    #### def 方法名第一个字母不能是大写字母
@@ -835,7 +885,7 @@ end
 
 
 
-def method_name # !!!!!!方法名称不能大写!!!!!!!!!!!!
+def method_name # !!!!!!方法名称不能以大写字母开头!!!!!!!!!!!!
 	
 end
 
@@ -844,8 +894,9 @@ end
 # Pods for LSProjectTool
 target 'LSProjectTool' do 								# 项目工程名
 	  # tx_IMSDK_UI														# 腾讯IM(含UI库)
-    all_Pods
+    all_Pods				#
     um_Pods					# 友盟
+    yyKit_tools				# YYKit
     jiqimao_tools_ios		# 工具库
     tencent_QMUI_iOS_tool	# 工具
     pp_tools_iOS			#

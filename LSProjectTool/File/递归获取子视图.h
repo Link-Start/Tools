@@ -40,8 +40,8 @@
 
 // 打印所有子视图
 [self getSub:self.navigationController.navigationBar andLevel:1];
-1
-2
+
+
 需要注意的是，我的level设置是从1开始的，这与方法中加空格时变量 i 起始的值是相呼应的，要改就要都改。
 
 这里我只打印了子view的类型，其实还可以知道它们的frame等信息，只需要在打印时将 subview.class 改成直接打印 subview 就可以了，就能得到这个 subview 的所有信息。

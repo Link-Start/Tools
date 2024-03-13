@@ -16,7 +16,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) BMKLocation *currentLocation;
 
 + (BaiDuMapLocationService *)shareInstance;
+/// 开始定位
 - (void)startLocationServiceWithComplete:(void(^)(BOOL isSuccess))complete;
+/// 开始定位, 没有定位权限就弹窗提示
+- (void)startLocationServiceNoPermissionPopupTipsWithComplete:(void(^)(BOOL isSuccess))complete;
+
 - (NSNumber *)getCurrentLocationLatitude;
 - (NSNumber *)getCurrentLocationLongtitude;
 
