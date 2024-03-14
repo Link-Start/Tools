@@ -840,46 +840,109 @@ __has_include("AMapLocationKit/AMapLocationKit.h"))
 //https://api.map.baidu.com/staticimage/v2?ak=E4805d16520de693a3fe707cdc962045&mcode=666666&center=116.403874,39.914888&width=300&height=200&zoom=11
 //
 ////http://www.5imoban.net/jiaocheng/hbuilder/2019/1227/3675.html
-////聊天发送位置可以用融云提供的sendLocationMessage方法。经纬度也好获取，但是，apicloud官方提供的截图工具，不能截取地图、视频。还好，百度和高德地图都提供了根据经纬度调用静态缩略图的接口，地址如下：
+////聊天发送位置可以用融云提供的sendLocationMessage方法。经纬度也好获取，但是，apicloud官方提供的截图工具，不能截取地图、视频。还好，百度和高德地图都提供了根据经纬度调用静态缩略图的接口，
+///百度地址如下：
 ////http://api.map.baidu.com/staticimage?center=获取的经度,获取的纬度&width=300&height=180&zoom=15&copyright=1
-////http://restapi.amap.com/v3/staticmap?location=获取的经度,获取的纬度&zoom=17&scale=2&size=150*150&key=ee95e52bf08006f63fd29bcfbcf21df0
-////
 ///https://api.map.baidu.com/staticimage/v2?ak=FU6PO4GTN9lpAZpckaMG4jRxNgCN5opf&mcode=666666&center=120.5750660400261,31.296921317623855&width=300&height=180&zoom=15&copyright=1
-///
-///
+/// 至于其他参数，
+/// 百度可参考：http://lbsyun.baidu.com/index.php?title=static
+//
+//参数名         必选  默认值           描述
+//ak             是    无      用户的访问密钥。支持浏览器端和服务端ak，网页应用推荐使用 服务端ak(sn校验方式）
+//mcode          否    无      安全码。若为Android/IOS SDK的ak, 该参数必需。
+//width          否    400     图片宽度。取值范围：(0, 1024]。Scale=2,取值范围：(0, 512]。
+//height         否    300     图片高度。取值范围：(0, 1024]。Scale=2,取值范围：(0, 512]。
+//center         否    北京     地图中心点位置，参数可以为经纬度坐标或名称。坐标格式：lng<经度>，lat<纬度>，例如116.43213,38.76623。
+//zoom           否    11      地图级别。高清图范围[3, 18]；低清图范围[3,19]
+//copyright      否    pl      静态图版权样式，0表示log+文字描述样式，1表示纯文字描述样式，默认为0。
+//dpiType        否    pl      手机屏幕类型。取值范围:{ph：高分屏，pl：低分屏(默认)}，高分屏即调用高清地图，低分屏为普通地图。
+//coordtype      否    bd09ll  静态图的坐标类型。\
+                               支持wgs84ll（wgs84坐标）/gcj02ll（国测局坐标）/bd09ll（百度经纬度）/bd09mc（百度墨卡托）。默认bd09ll（百度经纬度）
+//scale          否    null    返回图片大小会根据此标志调整。取值范围为1或2：\
+                               1表示返回的图片大小为size= width * height;\
+                               2表示返回图片为(width*2)*(height *2)，且zoom加1\
+                               注：如果zoom为最大级别，则返回图片为（width*2）*（height*2），zoom不变。
+//bbox           否    null    地图视野范围。格式：minX,minY;maxX,maxY。
+//markers        否    null    标注，可通过经纬度或地址/地名描述；多个标注之间用竖线分隔。
+//markerStyles   否    null    与markers有对应关系。markerStyles可设置默认图标样式和自定义图标样式。\
+                               其中设置默认图标样式时，可指定的属性包括size,label和color；\
+                               设置自定义图标时，可指定的属性包括url，注意，设置自定义图标时需要先传-1以此区分默认图标。\
+//labels         否    null    标签，可通过经纬度或地址/地名描述；多个标签之间用竖线分隔。坐标格式：lng<经度>，lat<纬度>，例如116.43213,38.76623。
+//labelStyles    否    null    标签样式 content, fontWeight,fontSize,fontColor,bgColor, border。与labels一一对应。
+//paths          否    null    折线，可通过经纬度或地址/地名描述；多个折线用竖线"|"分隔；每条折线的点用分号";"分隔；\
+                               点坐标用逗号","分隔。坐标格式：lng<经度>，lat<纬度>，例如116.43213,38.76623。
+//pathStyles     否    null    折线样式 color,weight,opacity[,fillColor]。
+
+
+
+
+
+
 ////高德地图带ICON的静态图示例：
 ////https://restapi.amap.com/v3/staticmap?markers=-1,http://www.5imoban.net/view/demoimg/jrzb_position_icon.png,0:116.37359,39.92437&key=ee95e52bf08006f63fd29bcfbcf21df0
-////
-////在使用时，只要将图片的src地址改成上面的地址，并且将上面的经纬度替换成您获取的经纬度即可，非常方便。
-////
-////至于其他参数，
-////    百度可参考：http://lbsyun.baidu.com/index.php?title=static
-////    高德可参考：https://lbs.amap.com/api/webservice/guide/api/staticmaps/
+///http://restapi.amap.com/v3/staticmap?location=获取的经度,获取的纬度&zoom=17&scale=2&size=150*150&key=ee95e52bf08006f63fd29bcfbcf21df0
+///https://restapi.amap.com/v3/staticmap?location=116.481485,39.990464&zoom=10&size=750*300&markers=mid,,A:116.481485,39.990464&key=<用户的key>
+///
+/// 在使用时，只要将图片的src地址改成上面的地址，并且将上面的经纬度替换成您获取的经纬度即可，非常方便。
+///
+/// 至于其他参数，
+/// 百度可参考：http://lbsyun.baidu.com/index.php?title=static
+/// 高德可参考：https://lbs.amap.com/api/webservice/guide/api/staticmaps/
 
+// 服务地址
+// URL：https://restapi.amap.com/v3/staticmap?parameters
+// 请求方式：GET
+// parameters代表请求参数，所有参数均使用和号字符(&)进行分隔。下面的列表枚举了这些参数及使用规则。
+
+// 请求参数
+
+//参数名称          含义              规则说明                                                  是否必填             默认值
+
+//key           用户唯一标识       用户在高德地图官网申请                                            必填               无
+//location      地图中心点         中心点坐标。规则：经度和纬度用","分隔\                            部分条件必填           无
+//                               经纬度小数点后不得超过6位。
+//zoom          地图级别           地图缩放级别:[1,17]                                             必填               无
+//size          地图大小           图片宽度*图片高度。最大值为1024*1024                               可选             400*400
+//scale         普通/高清          1:返回普通图；2:调用高清图，图片高度和宽度都增加一倍，\                可选                1
+//                                zoom也增加一倍（当zoom为最大值时，zoom不再改变）。
+//markers       标注              使用规则见markers详细说明，标注最大数10个                           可选                无
+//labels        标签              使用规则见labels详细说明，标签最大数10个                            可选                无
+//paths         折线              使用规则见paths详细说明，折线和多边形最大数4个                        可选                无
+//traffic       交通路况标识        底图是否展现实时路况。 可选值： 0，不展现；1，展现。                   可选                0
+//sig           数字签名            数字签名认证用户必填                                             可选                无
+
+// 注：如果有标注/标签/折线等覆盖物，则中心点（location）和地图级别（zoom）可选填。
+//    当请求中无location值时，地图区域以包含请求中所有的标注/标签/折线的几何中心为中心点；
+//    如请求中无zoom，地图区域以包含请求中所有的标注/标签/折线为准，系统计算出zoom值。
 
 //
-//参数名    必选    默认值    描述
-//ak    是    无    用户的访问密钥。支持浏览器端和服务端ak，网页应用推荐使用 服务端ak(sn校验方式）
-//mcode    否    无    安全码。若为Android/IOS SDK的ak, 该参数必需。
-//width    否    400    图片宽度。取值范围：(0, 1024]。Scale=2,取值范围：(0, 512]。
-//height    否    300    图片高度。取值范围：(0, 1024]。Scale=2,取值范围：(0, 512]。
-//center    否    北京    地图中心点位置，参数可以为经纬度坐标或名称。坐标格式：lng<经度>，lat<纬度>，例如116.43213,38.76623。
-//zoom    否    11    地图级别。高清图范围[3, 18]；低清图范围[3,19]
-//copyright    否    pl    静态图版权样式，0表示log+文字描述样式，1表示纯文字描述样式，默认为0。
-//dpiType    否    pl    手机屏幕类型。取值范围:{ph：高分屏，pl：低分屏(默认)}，高分屏即调用高清地图，低分屏为普通地图。
-//coordtype    否    bd09ll    静态图的坐标类型。支持wgs84ll（wgs84坐标）/gcj02ll（国测局坐标）/bd09ll（百度经纬度）/bd09mc（百度墨卡托）。默认bd09ll（百度经纬度）
-//scale    否    null    返回图片大小会根据此标志调整。取值范围为1或2：
-//1表示返回的图片大小为size= width * height;
-//2表示返回图片为(width*2)*(height *2)，且zoom加1
-//注：如果zoom为最大级别，则返回图片为（width*2）*（height*2），zoom不变。
-//
-//bbox    否    null    地图视野范围。格式：minX,minY;maxX,maxY。
-//markers    否    null    标注，可通过经纬度或地址/地名描述；多个标注之间用竖线分隔。
-//markerStyles    否    null    与markers有对应关系。markerStyles可设置默认图标样式和自定义图标样式。其中设置默认图标样式时，可指定的属性包括size,label和color；设置自定义图标时，可指定的属性包括url，注意，设置自定义图标时需要先传-1以此区分默认图标。
-//labels    否    null    标签，可通过经纬度或地址/地名描述；多个标签之间用竖线分隔。坐标格式：lng<经度>，lat<纬度>，例如116.43213,38.76623。
-//labelStyles    否    null    标签样式 content, fontWeight,fontSize,fontColor,bgColor, border。与labels一一对应。
-//paths    否    null    折线，可通过经纬度或地址/地名描述；多个折线用竖线"|"分隔；每条折线的点用分号";"分隔；点坐标用逗号","分隔。坐标格式：lng<经度>，lat<纬度>，例如116.43213,38.76623。
-//pathStyles    否    null    折线样式 color,weight,opacity[,fillColor]。
+// markers
+// 格式：
+// markers=markersStyle1:location1;location2..|markersStyle2:location3;location4..|markersStyleN:locationN;locationM..
+// location为经纬度信息，经纬度之间使用","分隔，不同的点使用";"分隔。 markersStyle可以使用系统提供的样式，也可以使用自定义图片。
+// 系统marersStyle：label，font ,bold, fontSize，fontColor，background。
+
+// 参数名称                说明                                                            默认值
+// size          可选值： small,mid,large                                                 small
+// color         选值范围：[0x000000, 0xffffff]\                                          0xFC6054
+//               例如：\
+                 0x000000 black,\
+                 0x008000 green,\
+                 0x800080 purple,\
+                 0xFFFF00 yellow,\
+                 0x0000FF blue,\
+                 0x808080 gray,\
+                 0xffa500 orange,\
+                 0xFF0000 red,\
+                 0xFFFFFF white
+// label        [0-9]、[A-Z]、[单个中文字] 当size为small时，图片不展现标注名。                    无
+
+
+// markers示例：  https://restapi.amap.com/v3/staticmap?markers=mid,0xFF0000,A:116.37359,39.92437;116.47359,39.92437&key=您的key  自定义markersStyle： -1，url，0。
+// -1表示为自定义图片，URL为图片的网址。自定义图片只支持PNG格式。
+// markers示例：   https://restapi.amap.com/v3/staticmap?markers=-1,https://a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png,0:116.37359,39.92437&key=您的key
+
+
 
 
 

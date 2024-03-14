@@ -72,11 +72,17 @@
     if (@available(iOS 13.0, *)) {
 //        /**********************/
 //        UINavigationBarAppearance *navBarAppearance = [[UINavigationBarAppearance alloc] init];
-//        //背景色
+//        // 背景色
+//       //[backgroundColor:注意这个属性在backgroundImage下(在某个界面单独设置导航栏颜色,直接使用backgroundColor无效,被backgroundImage遮住了)]
+//        //如果设置导航栏透明 ，也会无效。原因：新的导航栏 在加入 large 模式之后 apple 会对普通模式的 nav 的 _UIbarBackground 进行一次 alpha = 1 的设置。
+//        //解决方法：
+//        if (@available(iOS 15.0, *)) {//设置导航栏透明
+//            self.navigationController.navigationBar.subviews.firstObject.alpha = 0;
+//        }
 //        navBarAppearance.backgroundColor = [UIColor whiteColor];
-//        //去掉半透明效果,
+//        // 去掉半透明效果,backgroundEffect：基于backgroundColor或backgroundImage的磨砂效果
 //        navBarAppearance.backgroundEffect = nil;
-//        //  去除导航栏阴影（如果不设置clear，导航栏底下会有一条阴影线）
+//        // 去除导航栏阴影（如果不设置clear，导航栏底下会有一条阴影线）
 //        navBarAppearance.shadowColor = [UIColor clearColor];
 //        //字体颜色、尺寸等
 //        navBarAppearance.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
@@ -95,8 +101,9 @@
         };
         appearance.backgroundColor = [UIColor whiteColor];//设置导航栏背景色
         appearance.shadowImage = [self barSpeLineWithColor:[UIColor clearColor]]; //设置导航栏下边界分割线透明
+//        appearance.shadowColor = [UIColor clearColor]; //设置导航栏下边界分割线透明，(底部分割线阴影颜色)
         self.navigationBar.scrollEdgeAppearance = appearance;//带scroll滑动的页面
-        self.navigationBar.standardAppearance = appearance;//常规页面
+        self.navigationBar.standardAppearance = appearance;//常规页面.描述导航栏以标准高度
         
         /**********************/
     }
@@ -111,7 +118,9 @@
 }
 
 /***
- //https://www.jianshu.com/p/acb0d1d3efe9
+ 
+ // https://www.jianshu.com/p/acb0d1d3efe9
+ // https://www.cnblogs.com/eric-zhangy1992/p/15571539.html
  不透明导纯色航栏：
      //navigation标题文字颜色
      NSDictionary *dic = @{NSForegroundColorAttributeName : [UIColor blackColor],
@@ -121,8 +130,8 @@
          barApp.backgroundColor = [UIColor whiteColor];
          barApp.shadowColor = [UIColor whiteColor];
          barApp.titleTextAttributes = dic;
-         self.navigationController.navigationBar.scrollEdgeAppearance = barApp;
-         self.navigationController.navigationBar.standardAppearance = barApp;
+         self.navigationController.navigationBar.scrollEdgeAppearance = barApp;//带scroll滑动的页面
+         self.navigationController.navigationBar.standardAppearance = barApp;//常规页面。描述导航栏以标准高度
      }else{
          //背景色
          self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
@@ -138,15 +147,22 @@
  
  
  透明导航栏:
+ // 因为 scrollEdgeAppearance = nil ，
+ // 如果当前界面中使用可了 ScrollView ，当 ScrollView 向上滚动时 scrollEdgeAppearance 会默认使用 standardAppearance。
+ // 因此 backgroundEffect 和 shadowColor 也要显式设置为 nil ，防止 backgroundEffect、shadowColor 出现变成有颜色
+ 
      //navigation标题文字颜色
      NSDictionary *dic = @{NSForegroundColorAttributeName : [UIColor whiteColor],
                            NSFontAttributeName : [UIFont systemFontOfSize:18]};
      if (@available(iOS 15.0, *)) {
          UINavigationBarAppearance *barApp = [UINavigationBarAppearance new];
-         barApp.backgroundColor = [UIColor clearColor];
+         [barApp configureWithOpaqueBackground];//重置背景和阴影颜色
+         barApp.backgroundColor = [UIColor clearColor];//设置导航栏背景色
          barApp.titleTextAttributes = dic;
-         self.navigationController.navigationBar.scrollEdgeAppearance = nil;
-         self.navigationController.navigationBar.standardAppearance = barApp;
+         barApp.backgroundEffect = nil;//
+         barApp.shadowColor = nil;//
+         self.navigationController.navigationBar.scrollEdgeAppearance = nil;//带scroll滑动的页面
+         self.navigationController.navigationBar.standardAppearance = barApp;//常规页面。描述导航栏以标准高度
      }else{
          self.navigationController.navigationBar.titleTextAttributes = dic;
          [self.navigationBar setShadowImage:[UIImage new]];
@@ -156,6 +172,17 @@
      self.navigationController.navigationBar.translucent = YES;
      //navigation控件颜色
      self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+ 
+ 透明导航栏时动态修改颜色：
+    -(Void)setNavigationBarBackgroundColor:(UIColor *)color {
+         if (@available(iOS 15.0, *)) {
+             self.navigationController.navigationBar.standardAppearance.backgroundColor = color;
+             self.navigationController.navigationBar.scrollEdgeAppearance.backgroundColor = color;
+         }else{
+             self.navigationController.navigationBar.barTintColor = color;
+         }
+     }
+ 
  
  /////////////////////////////////--------------------->/////////////////////////////////
  之前有人遇到导航栏隐藏的返回按钮失效问题，备注里面也已经解决，并做出说明
@@ -171,6 +198,72 @@
          [[UINavigationBar appearance] setStandardAppearance:appearance];
      }
  **/
+
+/// 设置导航栏不透明
+- (void)setNavOpaque {
+    //navigation标题文字颜色
+    NSMutableDictionary *atrtDict = [NSMutableDictionary dictionary];
+    atrtDict[NSForegroundColorAttributeName] = [UIColor blackColor];
+    atrtDict[NSFontAttributeName] = [UIFont systemFontOfSize:18 weight:UIFontWeightMedium];
+    
+    if (@available(iOS 15.0, *)) {
+        UINavigationBarAppearance *appearance = [UINavigationBarAppearance new];
+        [appearance configureWithOpaqueBackground];//重置背景和阴影颜色
+        appearance.backgroundColor = [UIColor whiteColor];//设置导航栏背景色
+        appearance.shadowColor = [UIColor whiteColor];//设置导航栏下边界分割线透明
+        appearance.titleTextAttributes = atrtDict;
+        self.navigationController.navigationBar.scrollEdgeAppearance = appearance;//带scroll滑动的页面
+        self.navigationController.navigationBar.standardAppearance = appearance;//常规页面。描述导航栏以标准高度
+    } else {
+        //背景色
+        self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+        self.navigationController.navigationBar.titleTextAttributes = atrtDict;
+        [self.navigationBar setShadowImage:[UIImage new]];
+        [self.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    }
+    //不透明
+    self.navigationController.navigationBar.translucent = NO;
+    //navigation控件颜色
+    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+}
+
+/// 设置导航栏透明
+- (void)setNavClear {
+    //navigation标题文字颜色
+    NSMutableDictionary *atrtDict = [NSMutableDictionary dictionary];
+    atrtDict[NSForegroundColorAttributeName] = [UIColor whiteColor];
+    atrtDict[NSFontAttributeName] = [UIFont systemFontOfSize:18];
+    
+    if (@available(iOS 15.0, *)) {
+        UINavigationBarAppearance *barApp = [UINavigationBarAppearance new];
+        [barApp configureWithOpaqueBackground];//重置背景和阴影颜色
+        barApp.backgroundColor = [UIColor clearColor];//设置导航栏背景色
+        barApp.backgroundEffect = nil;//
+        barApp.shadowColor = nil;//设置导航栏下边界分割线透明
+        barApp.titleTextAttributes = atrtDict;
+        self.navigationController.navigationBar.scrollEdgeAppearance = nil;//带scroll滑动的页面
+        self.navigationController.navigationBar.standardAppearance = barApp;//常规页面。描述导航栏以标准高度
+    } else {
+        self.navigationController.navigationBar.titleTextAttributes = atrtDict;
+        [self.navigationBar setShadowImage:[UIImage new]];
+        [self.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    }
+    //透明
+    self.navigationController.navigationBar.translucent = YES;
+    //navigation控件颜色
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+}
+/// 透明导航栏时动态修改颜色：
+- (void)setNavigationBarBackgroundColor:(UIColor *)color {
+    if (@available(iOS 15.0, *)) {
+        self.navigationController.navigationBar.standardAppearance.backgroundColor = color;
+        self.navigationController.navigationBar.scrollEdgeAppearance.backgroundColor = color;
+    } else {
+        self.navigationController.navigationBar.barTintColor = color;
+    }
+}
+
+
 
 
 ///设置导航条
