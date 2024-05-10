@@ -1379,6 +1379,7 @@ static inline NSString *cachePath() {
             [MBProgressHUD qucickTip:@"方法不被允许"];
             break;
         case -500:
+        case -502:
             [MBProgressHUD qucickTip:@"服务器错误,服务暂不可用"];
             break;
         case -999:

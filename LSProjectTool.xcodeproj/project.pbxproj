@@ -129,6 +129,7 @@
 		A73C7A0E2AD639A700A916CA /* UIScrollView+LSConfigRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = A73C7A0D2AD639A700A916CA /* UIScrollView+LSConfigRefresh.m */; };
 		A748A0BF263D243300C7FFE7 /* YLWaterFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A748A0BD263D243200C7FFE7 /* YLWaterFlowLayout.m */; };
 		A74BDA3326EB905C00D8E083 /* CodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = A74BDA3226EB905C00D8E083 /* CodeView.m */; };
+		A74F992D2BAA86CF0039EF21 /* LSMKMapViewZoomLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = A74F992C2BAA86CF0039EF21 /* LSMKMapViewZoomLevel.m */; };
 		A74FA417268D6C0200A251DA /* NSObject+LSSelectorDefenderInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = A74FA416268D6C0200A251DA /* NSObject+LSSelectorDefenderInstance.m */; };
 		A74FA41A268D6C4400A251DA /* NSObject+LSMethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = A74FA419268D6C4400A251DA /* NSObject+LSMethodSwizzling.m */; };
 		A74FA41D268D6C9600A251DA /* NSObject+LSSelectorDefenderClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A74FA41C268D6C9600A251DA /* NSObject+LSSelectorDefenderClass.m */; };
@@ -315,6 +316,7 @@
 		A7B13D592AE0C48F004CA0AC /* AMapPrivacyUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B13D572AE0C48F004CA0AC /* AMapPrivacyUtility.m */; };
 		A7B13D5C2AE0C747004CA0AC /* GaoDeMapLocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B13D5B2AE0C747004CA0AC /* GaoDeMapLocationService.m */; };
 		A7B2DBEC27478740004AB297 /* FTPopOverMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B2DBEB27478740004AB297 /* FTPopOverMenu.m */; };
+		A7B93AFE2BB17DE90044B78B /* UINavigationBar+iOS11Spacing.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B93AFD2BB17DE90044B78B /* UINavigationBar+iOS11Spacing.m */; };
 		A7BA62E226BD1E4B00D49930 /* ScanSuccessJumpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BA62DC26BD1E4B00D49930 /* ScanSuccessJumpVC.m */; };
 		A7BA62E326BD1E4B00D49930 /* WCQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BA62DE26BD1E4B00D49930 /* WCQRCodeVC.m */; };
 		A7BA62E426BD1E4B00D49930 /* WBQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BA62E026BD1E4B00D49930 /* WBQRCodeVC.m */; };
@@ -341,6 +343,9 @@
 		A7D436712ADFA4FE00070366 /* UICollectionView+ARDynamicCacheHeightLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D436702ADFA4FD00070366 /* UICollectionView+ARDynamicCacheHeightLayoutCell.m */; };
 		A7D436742ADFA57900070366 /* RTLHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D436722ADFA57800070366 /* RTLHelper.m */; };
 		A7DB323F274C901A003EC5A2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7DB323E274C901A003EC5A2 /* WebKit.framework */; };
+		A7DE520A2BA443C60025BA4A /* SUPElementsFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DE52062BA443C50025BA4A /* SUPElementsFlowLayout.m */; };
+		A7DE520B2BA443C60025BA4A /* SUPHorizontalFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DE52082BA443C60025BA4A /* SUPHorizontalFlowLayout.m */; };
+		A7DE520C2BA443C60025BA4A /* SUPVerticalFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DE52092BA443C60025BA4A /* SUPVerticalFlowLayout.m */; };
 		A7DE94F32653E1E300110026 /* NSTimer+BlockTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DE94F22653E1E300110026 /* NSTimer+BlockTimer.m */; };
 		A7DE94F92653E27500110026 /* ProxyObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DE94F82653E27500110026 /* ProxyObject.m */; };
 		A7DE94FF2653E32F00110026 /* NormalTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DE94FE2653E32F00110026 /* NormalTimer.m */; };
@@ -701,6 +706,8 @@
 		A748A0BE263D243300C7FFE7 /* YLWaterFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLWaterFlowLayout.h; sourceTree = "<group>"; };
 		A74BDA3126EB905C00D8E083 /* CodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodeView.h; sourceTree = "<group>"; };
 		A74BDA3226EB905C00D8E083 /* CodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodeView.m; sourceTree = "<group>"; };
+		A74F992B2BAA86CF0039EF21 /* LSMKMapViewZoomLevel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSMKMapViewZoomLevel.h; sourceTree = "<group>"; };
+		A74F992C2BAA86CF0039EF21 /* LSMKMapViewZoomLevel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSMKMapViewZoomLevel.m; sourceTree = "<group>"; };
 		A74FA415268D6C0200A251DA /* NSObject+LSSelectorDefenderInstance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+LSSelectorDefenderInstance.h"; sourceTree = "<group>"; };
 		A74FA416268D6C0200A251DA /* NSObject+LSSelectorDefenderInstance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+LSSelectorDefenderInstance.m"; sourceTree = "<group>"; };
 		A74FA418268D6C4400A251DA /* NSObject+LSMethodSwizzling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+LSMethodSwizzling.h"; sourceTree = "<group>"; };
@@ -811,6 +818,7 @@
 		A795780E2B4501DB00E847AF /* TAPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAPageControl.h; sourceTree = "<group>"; };
 		A79650BB2638F33F0031932F /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
 		A79650E5263902F80031932F /* infoplist权限.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "infoplist权限.h"; sourceTree = "<group>"; };
+		A7996BA02BAD332E00DCF7DF /* 导航栏Nav.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "导航栏Nav.h"; sourceTree = "<group>"; };
 		A79AA9DE2823D9840049D0C9 /* YYDiskCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYDiskCache.m; sourceTree = "<group>"; };
 		A79AA9DF2823D9840049D0C9 /* YYKVStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYKVStorage.h; sourceTree = "<group>"; };
 		A79AA9E02823D9840049D0C9 /* YYCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYCache.m; sourceTree = "<group>"; };
@@ -1078,6 +1086,8 @@
 		A7B2DBEA27478740004AB297 /* FTPopOverMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPopOverMenu.h; sourceTree = "<group>"; };
 		A7B2DBEB27478740004AB297 /* FTPopOverMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPopOverMenu.m; sourceTree = "<group>"; };
 		A7B794832A0DD21700F16AEE /* UITextField自动补全输入.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextField自动补全输入.h"; sourceTree = "<group>"; };
+		A7B93AFC2BB17DE90044B78B /* UINavigationBar+iOS11Spacing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+iOS11Spacing.h"; sourceTree = "<group>"; };
+		A7B93AFD2BB17DE90044B78B /* UINavigationBar+iOS11Spacing.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+iOS11Spacing.m"; sourceTree = "<group>"; };
 		A7BA62CF26BCE70C00D49930 /* Xcode创建文件自定义头部注释.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Xcode创建文件自定义头部注释.h"; sourceTree = "<group>"; };
 		A7BA62DC26BD1E4B00D49930 /* ScanSuccessJumpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanSuccessJumpVC.m; sourceTree = "<group>"; };
 		A7BA62DD26BD1E4B00D49930 /* WBQRCodeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBQRCodeVC.h; sourceTree = "<group>"; };
@@ -1135,6 +1145,12 @@
 		A7D871B72B479222003864BA /* CommonInlineMethodTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonInlineMethodTools.h; sourceTree = "<group>"; };
 		A7DB323C274C8FF3003EC5A2 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		A7DB323E274C901A003EC5A2 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		A7DE52042BA443C40025BA4A /* SUPVerticalFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUPVerticalFlowLayout.h; sourceTree = "<group>"; };
+		A7DE52052BA443C50025BA4A /* SUPElementsFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUPElementsFlowLayout.h; sourceTree = "<group>"; };
+		A7DE52062BA443C50025BA4A /* SUPElementsFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUPElementsFlowLayout.m; sourceTree = "<group>"; };
+		A7DE52072BA443C60025BA4A /* SUPHorizontalFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUPHorizontalFlowLayout.h; sourceTree = "<group>"; };
+		A7DE52082BA443C60025BA4A /* SUPHorizontalFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUPHorizontalFlowLayout.m; sourceTree = "<group>"; };
+		A7DE52092BA443C60025BA4A /* SUPVerticalFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUPVerticalFlowLayout.m; sourceTree = "<group>"; };
 		A7DE94F12653E1E300110026 /* NSTimer+BlockTimer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSTimer+BlockTimer.h"; sourceTree = "<group>"; };
 		A7DE94F22653E1E300110026 /* NSTimer+BlockTimer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+BlockTimer.m"; sourceTree = "<group>"; };
 		A7DE94F72653E27500110026 /* ProxyObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProxyObject.h; sourceTree = "<group>"; };
@@ -1444,6 +1460,8 @@
 			children = (
 				085978D92023220B00CA056F /* LSNavigationController.h */,
 				085978DA2023220B00CA056F /* LSNavigationController.m */,
+				A7B93AFC2BB17DE90044B78B /* UINavigationBar+iOS11Spacing.h */,
+				A7B93AFD2BB17DE90044B78B /* UINavigationBar+iOS11Spacing.m */,
 			);
 			path = Nav;
 			sourceTree = "<group>";
@@ -1497,6 +1515,12 @@
 				A73982282B1E00CE004FADF2 /* LSPagingItemFlowLayout.m */,
 				A70709E12AB7F8590051A669 /* LSPagingEnabledFlowLayout.h */,
 				A70709E22AB7F8590051A669 /* LSPagingEnabledFlowLayout.m */,
+				A7DE52072BA443C60025BA4A /* SUPHorizontalFlowLayout.h */,
+				A7DE52082BA443C60025BA4A /* SUPHorizontalFlowLayout.m */,
+				A7DE52042BA443C40025BA4A /* SUPVerticalFlowLayout.h */,
+				A7DE52092BA443C60025BA4A /* SUPVerticalFlowLayout.m */,
+				A7DE52052BA443C50025BA4A /* SUPElementsFlowLayout.h */,
+				A7DE52062BA443C50025BA4A /* SUPElementsFlowLayout.m */,
 				A7CD30E72B022F9F0055BF3D /* UICollectionView-BMDynamicLayout */,
 			);
 			path = "瀑布流";
@@ -2564,6 +2588,8 @@
 				A7A7F4182B6740AA006FC7C3 /* GaoDeMapPrivacyUtility.m */,
 				A7B13D5A2AE0C747004CA0AC /* GaoDeMapLocationService.h */,
 				A7B13D5B2AE0C747004CA0AC /* GaoDeMapLocationService.m */,
+				A74F992B2BAA86CF0039EF21 /* LSMKMapViewZoomLevel.h */,
+				A74F992C2BAA86CF0039EF21 /* LSMKMapViewZoomLevel.m */,
 			);
 			path = GaoDeMap;
 			sourceTree = "<group>";
@@ -2901,6 +2927,7 @@
 				A7C1093E2B50CC4100F12D56 /* NSArray数据.h */,
 				A7585E2D2B635F4C00188F6D /* 获取TableView和CollectionView活跃的cell.h */,
 				A76D09802BA1498500CD2518 /* UITableViewd的cell里面嵌套collectionView.h */,
+				A7996BA02BAD332E00DCF7DF /* 导航栏Nav.h */,
 				A76692162A7CD56600BB995F /* URLScheme_1.png */,
 			);
 			path = File;
@@ -3698,7 +3725,9 @@
 				"${BUILT_PRODUCTS_DIR}/BeeHive/BeeHive.framework",
 				"${BUILT_PRODUCTS_DIR}/CCExcelView/CCExcelView.framework",
 				"${BUILT_PRODUCTS_DIR}/CHTCollectionViewWaterfallLayout/CHTCollectionViewWaterfallLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/CRBoxInputView/CRBoxInputView.framework",
 				"${BUILT_PRODUCTS_DIR}/CTMediator/CTMediator.framework",
+				"${BUILT_PRODUCTS_DIR}/CWLateralSlide/CWLateralSlide.framework",
 				"${BUILT_PRODUCTS_DIR}/CYLTabBarController/CYLTabBarController.framework",
 				"${BUILT_PRODUCTS_DIR}/CalendarLib/CalendarLib.framework",
 				"${BUILT_PRODUCTS_DIR}/ChainThen/ChainThen.framework",
@@ -3722,11 +3751,14 @@
 				"${BUILT_PRODUCTS_DIR}/FWPopupView/FWPopupView.framework",
 				"${BUILT_PRODUCTS_DIR}/FWPopupViewOC/FWPopupViewOC.framework",
 				"${BUILT_PRODUCTS_DIR}/GKCover/GKCover.framework",
+				"${BUILT_PRODUCTS_DIR}/GKNavigationBar/GKNavigationBar.framework",
 				"${BUILT_PRODUCTS_DIR}/GKPageScrollView/GKPageScrollView.framework",
 				"${BUILT_PRODUCTS_DIR}/GKPageSmoothView/GKPageSmoothView.framework",
 				"${BUILT_PRODUCTS_DIR}/GKPhotoBrowser/GKPhotoBrowser.framework",
 				"${BUILT_PRODUCTS_DIR}/GKSliderView/GKSliderView.framework",
+				"${BUILT_PRODUCTS_DIR}/GKVideoScrollView/GKVideoScrollView.framework",
 				"${BUILT_PRODUCTS_DIR}/GLEnvs/GLEnvs.framework",
+				"${BUILT_PRODUCTS_DIR}/GXTransition/GXTransition.framework",
 				"${BUILT_PRODUCTS_DIR}/GroupedData/GroupedData.framework",
 				"${BUILT_PRODUCTS_DIR}/HBDNavigationBar/HBDNavigationBar.framework",
 				"${BUILT_PRODUCTS_DIR}/HBDStatusBar/HBDStatusBar.framework",
@@ -3749,7 +3781,10 @@
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/JFCitySelector/JFCitySelector.framework",
 				"${BUILT_PRODUCTS_DIR}/JHChainableAnimations/JHChainableAnimations.framework",
+				"${BUILT_PRODUCTS_DIR}/JHVerificationCodeView/JHVerificationCodeView.framework",
 				"${BUILT_PRODUCTS_DIR}/JJCollectionViewRoundFlowLayout/JJCollectionViewRoundFlowLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/JNAPushPopCompletionBlock/JNAPushPopCompletionBlock.framework",
+				"${BUILT_PRODUCTS_DIR}/JPImageresizerView/JPImageresizerView.framework",
 				"${BUILT_PRODUCTS_DIR}/JQCollectionViewWaterfallLayout/JQCollectionViewWaterfallLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/JQLaunchAdKit/JQLaunchAdKit.framework",
 				"${BUILT_PRODUCTS_DIR}/JSBadgeView/JSBadgeView.framework",
@@ -3769,6 +3804,7 @@
 				"${BUILT_PRODUCTS_DIR}/LFPhoneInfo/LFPhoneInfo.framework",
 				"${BUILT_PRODUCTS_DIR}/LJContactManager/LJContactManager.framework",
 				"${BUILT_PRODUCTS_DIR}/LMJDropdownMenu/LMJDropdownMenu.framework",
+				"${BUILT_PRODUCTS_DIR}/LNPopupController/LNPopupController.framework",
 				"${BUILT_PRODUCTS_DIR}/LSAnimator/LSAnimator.framework",
 				"${BUILT_PRODUCTS_DIR}/LSSafeProtector/LSSafeProtector.framework",
 				"${BUILT_PRODUCTS_DIR}/LSTPopView/LSTPopView.framework",
@@ -3779,6 +3815,7 @@
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/MLeaksFinder/MLeaksFinder.framework",
+				"${BUILT_PRODUCTS_DIR}/MNFloatBtn/MNFloatBtn.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/MyLayout/MyLayout.framework",
@@ -3802,12 +3839,15 @@
 				"${BUILT_PRODUCTS_DIR}/RETableViewManager/RETableViewManager.framework",
 				"${BUILT_PRODUCTS_DIR}/REValidation/REValidation.framework",
 				"${BUILT_PRODUCTS_DIR}/RKNotificationHub/RKNotificationHub.framework",
+				"${BUILT_PRODUCTS_DIR}/RTRootNavigationController/RTRootNavigationController.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveObjC/ReactiveObjC.framework",
 				"${BUILT_PRODUCTS_DIR}/Rickenbacker/Rickenbacker.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SCLAlertView-Objective-C/SCLAlertView_Objective_C.framework",
 				"${BUILT_PRODUCTS_DIR}/SDAutoLayout/SDAutoLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/SDMovableCellCollectionView/SDMovableCellCollectionView.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImageWebPCoder/SDWebImageWebPCoder.framework",
 				"${BUILT_PRODUCTS_DIR}/SGQRCode/SGQRCode.framework",
@@ -3820,10 +3860,13 @@
 				"${BUILT_PRODUCTS_DIR}/SQScanView/SQScanView.framework",
 				"${BUILT_PRODUCTS_DIR}/SSAlert/SSAlert.framework",
 				"${BUILT_PRODUCTS_DIR}/STPopup/STPopup.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwipeTableView/SwipeTableView.framework",
 				"${BUILT_PRODUCTS_DIR}/TABAnimated/TABAnimated.framework",
+				"${BUILT_PRODUCTS_DIR}/TFDropDownMenu/TFDropDownMenu.framework",
+				"${BUILT_PRODUCTS_DIR}/TLTransitions/TLTransitions.framework",
 				"${BUILT_PRODUCTS_DIR}/TOSearchBar/TOSearchBar.framework",
 				"${BUILT_PRODUCTS_DIR}/TTCTool/TTCTool.framework",
 				"${BUILT_PRODUCTS_DIR}/TTGTagCollectionView/TTGTags.framework",
@@ -3838,6 +3881,7 @@
 				"${BUILT_PRODUCTS_DIR}/UITableViewDynamicLayoutCacheHeight/UITableViewDynamicLayoutCacheHeight.framework",
 				"${BUILT_PRODUCTS_DIR}/UIView+FDCollapsibleConstraints/UIView_FDCollapsibleConstraints.framework",
 				"${BUILT_PRODUCTS_DIR}/VVManager/VVManager.framework",
+				"${BUILT_PRODUCTS_DIR}/WMDragView/WMDragView.framework",
 				"${BUILT_PRODUCTS_DIR}/WMZBanner/WMZBanner.framework",
 				"${BUILT_PRODUCTS_DIR}/WMZDialog/WMZDialog.framework",
 				"${BUILT_PRODUCTS_DIR}/WMZDropDownMenu/WMZDropDownMenu.framework",
@@ -3851,6 +3895,7 @@
 				"${BUILT_PRODUCTS_DIR}/XLForm/XLForm.framework",
 				"${BUILT_PRODUCTS_DIR}/XXShield/XXShield.framework",
 				"${BUILT_PRODUCTS_DIR}/YBHandyList/YBHandyList.framework",
+				"${BUILT_PRODUCTS_DIR}/YBPopupMenu/YBPopupMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/YPNavigationBarTransition/YPNavigationBarTransition.framework",
 				"${BUILT_PRODUCTS_DIR}/YTKKeyValueStore/YTKKeyValueStore.framework",
 				"${BUILT_PRODUCTS_DIR}/YTKNetwork/YTKNetwork.framework",
@@ -3873,8 +3918,10 @@
 				"${BUILT_PRODUCTS_DIR}/ZXEmptyView/ZXEmptyView.framework",
 				"${BUILT_PRODUCTS_DIR}/ZXNavigationBar/ZXNavigationBar.framework",
 				"${BUILT_PRODUCTS_DIR}/ZXNavigationBarKit/ZXNavigationBarKit.framework",
+				"${BUILT_PRODUCTS_DIR}/ZXSlideSelectTableView/ZXSlideSelectTableView.framework",
 				"${BUILT_PRODUCTS_DIR}/ZXTableView/ZXTableView.framework",
 				"${BUILT_PRODUCTS_DIR}/ZYBannerView/ZYBannerView.framework",
+				"${BUILT_PRODUCTS_DIR}/ZYCornerRadius/ZYCornerRadius.framework",
 				"${BUILT_PRODUCTS_DIR}/dsBridge/dsBridge.framework",
 				"${BUILT_PRODUCTS_DIR}/libwebp/libwebp.framework",
 				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
@@ -3893,7 +3940,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BeeHive.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CCExcelView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CHTCollectionViewWaterfallLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CRBoxInputView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CTMediator.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CWLateralSlide.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CYLTabBarController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CalendarLib.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChainThen.framework",
@@ -3917,11 +3966,14 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FWPopupView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FWPopupViewOC.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GKCover.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GKNavigationBar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GKPageScrollView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GKPageSmoothView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GKPhotoBrowser.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GKSliderView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GKVideoScrollView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GLEnvs.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GXTransition.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GroupedData.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HBDNavigationBar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HBDStatusBar.framework",
@@ -3944,7 +3996,10 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JFCitySelector.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JHChainableAnimations.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JHVerificationCodeView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JJCollectionViewRoundFlowLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JNAPushPopCompletionBlock.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JPImageresizerView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JQCollectionViewWaterfallLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JQLaunchAdKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSBadgeView.framework",
@@ -3964,6 +4019,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LFPhoneInfo.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LJContactManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LMJDropdownMenu.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LNPopupController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LSAnimator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LSSafeProtector.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LSTPopView.framework",
@@ -3974,6 +4030,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MLeaksFinder.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MNFloatBtn.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MyLayout.framework",
@@ -3997,12 +4054,15 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RETableViewManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/REValidation.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RKNotificationHub.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RTRootNavigationController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveObjC.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rickenbacker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCLAlertView_Objective_C.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDAutoLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDMovableCellCollectionView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImageWebPCoder.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SGQRCode.framework",
@@ -4015,10 +4075,13 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQScanView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SSAlert.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/STPopup.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyStoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeTableView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TABAnimated.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TFDropDownMenu.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TLTransitions.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TOSearchBar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTCTool.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTGTags.framework",
@@ -4033,6 +4096,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UITableViewDynamicLayoutCacheHeight.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIView_FDCollapsibleConstraints.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VVManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WMDragView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WMZBanner.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WMZDialog.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WMZDropDownMenu.framework",
@@ -4046,6 +4110,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLForm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XXShield.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YBHandyList.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YBPopupMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YPNavigationBarTransition.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YTKKeyValueStore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YTKNetwork.framework",
@@ -4068,8 +4133,10 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZXEmptyView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZXNavigationBar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZXNavigationBarKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZXSlideSelectTableView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZXTableView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZYBannerView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZYCornerRadius.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/dsBridge.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libwebp.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
@@ -4091,7 +4158,6 @@
 				"${BUILT_PRODUCTS_DIR}/KJPlayer/KJPlayer.framework/DBPlayer.momd",
 				"${PODS_ROOT}/KJPlayer/Sources/MidiPlayer/KJMidiSource.bundle",
 				"${PODS_ROOT}/UMCCommonLog/UMCommonLog/UMCommonLog.bundle",
-				"${PODS_ROOT}/UMPush/UMPush/UMPushResource.bundle",
 				"${PODS_ROOT}/UMShare/UMShare/UMSocialUI/UMSocialSDKResources.bundle",
 				"${PODS_ROOT}/ZFPlayer/ZFPlayer/Classes/ControlView/ZFPlayer.bundle",
 			);
@@ -4102,7 +4168,6 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/DBPlayer.momd",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/KJMidiSource.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UMCommonLog.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UMPushResource.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UMSocialSDKResources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ZFPlayer.bundle",
 			);
@@ -4267,6 +4332,7 @@
 				A79AAA9A2823D9850049D0C9 /* YYFrameImage.m in Sources */,
 				A738BA0D2B0496B200B09222 /* DDAlertView.m in Sources */,
 				AE24FCDA1DAB411C00740806 /* SCMath.m in Sources */,
+				A7DE520A2BA443C60025BA4A /* SUPElementsFlowLayout.m in Sources */,
 				A79AAAAE2823D9850049D0C9 /* YYLabel.m in Sources */,
 				08197C8C1FE3564D00478FC4 /* ReachStateUnloaded.m in Sources */,
 				A7F5064223A386D800666F3B /* LSYTKRequest.m in Sources */,
@@ -4284,9 +4350,11 @@
 				A79AAAA12823D9850049D0C9 /* YYWebImageOperation.m in Sources */,
 				A7B0A92C2B18418400D9E122 /* MTCommonItem.m in Sources */,
 				487FC63D20BE937700FC19FA /* UIButton+UIControl_buttonCon.m in Sources */,
+				A7B93AFE2BB17DE90044B78B /* UINavigationBar+iOS11Spacing.m in Sources */,
 				A79AAABA2823D9850049D0C9 /* UIColor+YYAdd.m in Sources */,
 				3D4E321021F9A4CA00A3F063 /* LSWKWebViewVC.m in Sources */,
 				A782C9322AD8DDFF00A4F7AF /* MJDog.m in Sources */,
+				A7DE520B2BA443C60025BA4A /* SUPHorizontalFlowLayout.m in Sources */,
 				A77F5E7E265745D70002AD16 /* LSStringEnum.m in Sources */,
 				A7BA62E326BD1E4B00D49930 /* WCQRCodeVC.m in Sources */,
 				08F6585F1FF3D270007880CC /* UICollectionView+IndexPath.m in Sources */,
@@ -4300,6 +4368,7 @@
 				AEB4D3791DAA09EA0078A52D /* LSNetworking.m in Sources */,
 				A7B010642771AB0C00958AF8 /* UILabel+LXLAdpativeFont.m in Sources */,
 				A7C4A1E12AB2DD800046D04A /* fix_UIKeyboardTaskQueue.m in Sources */,
+				A74F992D2BAA86CF0039EF21 /* LSMKMapViewZoomLevel.m in Sources */,
 				A7B0A92E2B18418400D9E122 /* MTCommonButtonItem.m in Sources */,
 				A7A132E62A970DB000907F55 /* UIResponder+RWEvent.m in Sources */,
 				A79AAAB52823D9850049D0C9 /* YYTextAttribute.m in Sources */,
@@ -4428,6 +4497,7 @@
 				A79AAAD82823D9850049D0C9 /* YYThreadSafeDictionary.m in Sources */,
 				A7B13D5C2AE0C747004CA0AC /* GaoDeMapLocationService.m in Sources */,
 				A77BA17D23A870BE00316085 /* TTGTagCollectionView.m in Sources */,
+				A7DE520C2BA443C60025BA4A /* SUPVerticalFlowLayout.m in Sources */,
 				A7B0106A2771AB2300958AF8 /* UIButton+LXLAdpativeFont.m in Sources */,
 				A79AAACD2823D9850049D0C9 /* NSTimer+YYAdd.m in Sources */,
 				A77138EE280521FA00D3DB98 /* DSectionIndexItemView.m in Sources */,

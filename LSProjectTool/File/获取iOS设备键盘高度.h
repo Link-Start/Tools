@@ -169,6 +169,8 @@ CGFloat duration = [notif.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubl
 } completion:^(BOOL finished) {
     [self layoutIfNeeded];
 }];
+    
+    [self.view layoutIfNeeded];
 }
 
 //当键退出时调用
@@ -185,6 +187,8 @@ NSTimeInterval duration = [notif.userInfo[UIKeyboardAnimationDurationUserInfoKey
 } completion:^(BOOL finished) {
     [self layoutIfNeeded];
 }];
+    
+    [self.view layoutIfNeeded];
 }
 
 

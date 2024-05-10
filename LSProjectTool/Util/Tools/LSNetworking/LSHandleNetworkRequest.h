@@ -17,6 +17,7 @@ typedef NS_ENUM(NSUInteger, LSHTTPCodeStatus) {
     LSHTTPCodeStatusUnauthorized = 401,
 };
 
+
 static NSString * const _Nonnull LSHTTPCodeStatusStringMap[] = {
     [LSHTTPCodeStatusUnknown] = @"未知编码",
     [LSHTTPCodeStatusBadRequest] = @"服务器错误",

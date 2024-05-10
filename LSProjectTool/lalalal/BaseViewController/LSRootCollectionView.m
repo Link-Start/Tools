@@ -168,10 +168,10 @@
 
 
 #pragma mark -  https://www.jianshu.com/p/c53ba3a36fe8
-UICollectionView 的 拖放(dragDelegate&dropDelegate)
+// UICollectionView 的 拖放(dragDelegate&dropDelegate)
 
 
-UICollectionView 支持拖放操作，该API处理所显示的 Items 。为了支持拖动，定义一个 UICollectionViewDragDelegate 拖动委托对象，并将其分配给集合视图的 dragDelegate 属性。要处理掉落，定义一个 UICollectionViewDropDelegate 协议的对象，并将其分配给集合视图的 dropDelegate 属性。
+// UICollectionView 支持拖放操作，该API处理所显示的 Items 。为了支持拖动，定义一个 UICollectionViewDragDelegate 拖动委托对象，并将其分配给集合视图的 dragDelegate 属性。要处理掉落，定义一个 UICollectionViewDropDelegate 协议的对象，并将其分配给集合视图的 dropDelegate 属性。
 
 一、从集合视图中拖动 Items
 
@@ -400,8 +400,28 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos)
 
 
 
+// ------------------------------------------------------------------------------------------------------------------------------------
+#pragma mark - collectionView 使用 scrollToItemAtIndexPath 方法，滚动不到 headView的位置,只能滚动到具体的item的顶部
+// [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:index] atScrollPosition:UICollectionViewScrollPositionTop animated:YES]; // 只能滚动到 dui
+// 上面的代码会将UICollectionView中第index个section的第0个item所对应的区域滚动到顶部。
+// 但是，如果有headView，不会滚动到当前headView的顶部,只会滚动到index的第0个item的顶部
 
+// 改成下面这个方法，可以滚动到 当前headView的顶部，亲测有效， 2024.03.25 -------------
+//UICollectionViewLayoutAttributes *attributes = [_collectionView layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:index]];
+//CGRect rect = attributes.frame;
+//[_collectionView setContentOffset:CGPointMake(_collectionView.frame.origin.x, rect.origin.y - “header的高度”) animated:YES];
 
+// ------------------------------------------------------------------------------------------------------------------------------------
+UICollectionViewLayoutAttributes *attributes = [self.cityCollectionView layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:section]];
+CGRect rect = attributes.frame;
+CGFloat headView_h = 0;
+if (section == 0) {
+    headView_h = 0;
+} else {
+    headView_h = 35;
+}
+[self.cityCollectionView setContentOffset:CGPointMake(self.cityCollectionView.frame.origin.x, rect.origin.y - headView_h) animated:YES];
+// ------------------------------------------------------------------------------------------------------------------------------------
 
 
 

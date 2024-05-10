@@ -15,8 +15,8 @@ def all_Pods
 	#ObjcAssociatedObjectHelpers		#Objc关联对象助手
 	pod 'YTKNetwork'					#YTK 网络请求
 
-	# pod 'SQCombineRequest'							#自带网络请求工具、使用的是AFNetworking 4.0版本，如果冲突可以使用下面方式导入(https://www.jianshu.com/p/2419af38c318)
-	pod 'SQCombineRequest/SQCombineRequestCombine'	#不带网络工具，不依赖AFNetworking，要自己设置SQCombineRequestItem的netRequestTool属性
+	pod 'SQCombineRequest'							#自带网络请求工具、使用的是AFNetworking 4.0版本，如果冲突可以使用下面方式导入(https://www.jianshu.com/p/2419af38c318)
+	# pod 'SQCombineRequest/SQCombineRequestCombine'	#不带网络工具，不依赖AFNetworking，要自己设置SQCombineRequestItem的netRequestTool属性
 
 
 	pod 'DZNEmptyDataSet'				#空白占位图
@@ -246,7 +246,36 @@ def baidumap_ios #百度地图
 end
 def gaodemap_ios #高德地图
 
+	#iOS 定位
+	# https://lbs.amap.com/api/ios-sdk/guide/create-project/cocoapods
 
+	# 基础SDK： AMapFoundationKit.framework
+	pod 'AMaplocation'		#定位SDK，
+	pod 'AMapsearch'		#地图SDK搜索功能，<AMapSearchKit>
+	pod 'AMap3DMap'			#3D地图SDK，<MAMapKit>
+
+
+	####### IDFA 版本
+	# pod 'AMapLocation'			# 定位SDK，IDFA版本，
+	# pod 'AMapSearch'				# 搜索功能，IDFA版本，<AMapSearchKit>
+	# pod 'AMap2DMap'				# 2D地图SDK，IDFA版本，3D地图与2D地图不能同时使用，<MAMapKit>
+	# pod 'AMap3DMap'				# 3D地图SDK，IDFA版本，3D地图与2D地图不能同时使用，<MAMapKit>
+	# pod 'AMapNavi'				# AMapNavi，IDFA版本，已包含3D地图，无需单独引入3D地图
+
+	####### NO IDFA 版本
+	# pod 'AMapLocation-NO-IDFA'	# 定位SDK，NO-IDFA版本
+	# pod 'AMapSearch-NO-IDFA'		# 搜索功能，NO-IDFA版本
+	# pod 'AMap2DMap-NO-IDFA'		# 2D地图SDK，NO-IDFA版本，3D地图与2D地图不能同时使用
+	# pod 'AMap3DMap-NO-IDFA'		# 3D地图SDK，NO-IDFA版本，3D地图与2D地图不能同时使用
+	# pod 'AMapNavi-NO-IDFA'		# 导航SDK，NO-IDFA版本，已包含3D地图，无需单独引入3D地图
+
+
+	# 备注： 
+	# 1.pod 'AMapLocation' 命令还会引入基础 SDK(AMapFoundationKit.framework) !!!!!!!!!!!!!
+	# 2.SystemConfiguration.framework、CoreTelephony.framework、Security.framework 是为了统计app信息使用。
+	# 3.手动部署需要引入的资源文件包括：AMap.bundle，其中：AMap.bundle 在 MAMapKit.framework 包中，AMap.bundle资源文件中存储了定位、默认大头针标注视图等图片，可利用这些资源图片进行开发。
+	# 4.2D地图和3D地图的资源文件是不同的，在进行SDK切换时，需要同时更换对应的资源文件。
+	# 5.在TARGETS->Build Settings->Other Linker Flags 中添加-ObjC，字母 O 和 C 大写。
 end
 
 
@@ -492,7 +521,7 @@ def alertView_ios #弹窗
 
 
 	pod 'TFDropDownMenu'	# 2019，下拉菜单选择器，多级下拉式菜单选项，下拉式左右分区选择菜单
-	pod 'ZHFilterMenuView'	# 2020，一款类似贝壳找房的通用房屋筛选控件！提供新房、二手房、租房的完整筛选功能实现！当然不仅仅局限用于房屋筛选，也可用于其他类型的筛选！【https://github.com/hi-zhouyn/ZHFilterMenuView】
+	# pod 'ZHFilterMenuView'	# 2020，一款类似贝壳找房的通用房屋筛选控件！提供新房、二手房、租房的完整筛选功能实现！当然不仅仅局限用于房屋筛选，也可用于其他类型的筛选！【https://github.com/hi-zhouyn/ZHFilterMenuView】
 
 end
 
@@ -548,6 +577,13 @@ def nav_iOS #导航栏nav
 	pod "UINavigation-SXFixSpace"	#导航栏按钮位置偏移的解决方案,兼容iOS7~iOS15,可自定义间距
 
 	pod "RTRootNavigationController"	# 2023，隐含地让每个视图控制器都有自己的导航栏
+
+	# pod 'GKNavigationBarViewController' #2021,iOS自定义导航栏-导航栏联动，侵入性较高，推荐使用GKNavigationBar
+	pod 'GKNavigationBar'			# 2024,iOS自定义导航栏 - 导航栏联动效果，GKNavigationBarViewController的分类实现，耦合度底，使用更便捷
+	# pod 'GKNavigationBar/GestureHandle'	#只使用手势处理
+
+
+	pod 'JNAPushPopCompletionBlock'	# 2019.UINavigationController Push/Pop UIViewController的完成block
 	
 		
 end
@@ -998,6 +1034,8 @@ end
 	# end
 
 # 3.
+# (File not found: ../libarclite_iphonesimulator.a)
+# xcode 14.3更新后arc路径缺失导致pod的引用路径全部无法正常找到。这里需要重新创建该路径及文件或者将报错的 Cocopods 引入的库的最低版本改为 iOS 11.0即可。
 	post_install do |installer|
   		installer.pods_project.targets.each do |target|
     		target.build_configurations.each do |config|
@@ -1042,5 +1080,9 @@ end
 #@import XXXX;
 
 # 解决方法：2.使用：use_frameworks! :linkage => :static
+
+
+
+
 
 

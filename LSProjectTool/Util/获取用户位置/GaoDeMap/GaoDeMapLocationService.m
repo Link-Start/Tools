@@ -5,6 +5,25 @@
 //  Created by 刘晓龙 on 2023/10/19.
 //  Copyright © 2023 Link-Start. All rights reserved.
 //
+// https://www.cnblogs.com/fei-sky-001-o/articles/4953075.html
+// 苹果自带原生地图：
+//      <MapKit>:地图框架，显示地图
+//      <CoreLocation>:定位框架，没有地图时也可以使用定位.
+//
+//      #import <MapKit/MapKit.h>
+//      #import <MapKit/MKMapView.h>
+//
+// 高德地图官方SDK：
+//      MAMapKit.framework:高德地图的库文件，<MAMapKit>
+//      AMapSearchKit.framework:搜索库文件，<AMapSearchKit>
+//
+//      #import <MAMapKit/MAMapKit.h>
+//      #import <MAMapKit/MAMapView.h>
+//
+//      2D地图：显示出来地图字体莫名奇妙的大，地图还不能360°旋转
+
+
+
 
 #import "GaoDeMapLocationService.h"
 

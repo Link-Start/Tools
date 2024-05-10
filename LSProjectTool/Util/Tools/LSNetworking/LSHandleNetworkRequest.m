@@ -70,15 +70,16 @@
     id jsonResults = nil;
     
     if ([responseData isKindOfClass:[NSDictionary class]]) {//如果是字典
-        NSLog(@"返回原字典");
+        NSLog(@"原数据是 字典 类型");
         return responseData;
     } else if ([responseData isKindOfClass:[NSArray class]]) {//如果是数组
-        NSLog(@"返回原数组");
+        NSLog(@"原数据是 数组 类型");
         return responseData;
     } else if ([responseData isKindOfClass:[NSString class]]) {//如果是NSString类型
-        NSLog(@"字符串类型");
+        NSLog(@"原数据是 字符串 类型");
         jsonData = [(NSString *)responseData dataUsingEncoding:NSUTF8StringEncoding];
     } else if ([responseData isKindOfClass:[NSData class]]) {//如果是NSData 类型
+        NSLog(@"原数据是 NSData 类型");
         jsonData = responseData;
     }
     
@@ -208,6 +209,7 @@
             [MBProgressHUD qucickTip:@"方法不被允许"];
             break;
         case -500:
+        case -502:
             [MBProgressHUD qucickTip:@"服务器错误,服务暂不可用"];
             break;
         case -999:

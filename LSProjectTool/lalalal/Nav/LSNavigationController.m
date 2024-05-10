@@ -62,6 +62,36 @@
 //    systemGes.enabled = NO;
 }
 
+///设置导航条
+- (void)confitNav {
+    //设置板的背景图片
+    [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"顶部"] forBarMetrics:UIBarMetricsDefault];
+    // 设置navigationBar的背景颜色，根据需要自己设置
+    //    self.navigationBar.barTintColor = [UIColor clearColor];//导航栏背景
+    //设置左右字体的颜色
+    self.navigationBar.tintColor = [UIColor whiteColor];//着色，让返回栏图片渲染为白色
+    //中间标题 字体设置为白色
+    NSDictionary *dic = @{
+        NSForegroundColorAttributeName:[UIColor whiteColor]
+    };
+    //中间标题 字体设置
+    // 查看图层: nav 默认的中间标题 字号17，黑色,粗体
+//    NSDictionary *dic = @{
+//        NSFontAttributeName:[UIFont boldSystemFontOfSize:17],
+//        NSForegroundColorAttributeName:[UIColor blackColor]
+//    };
+    self.navigationBar.titleTextAttributes = dic;
+    
+    //打开毛玻璃效果
+    self.navigationBar.translucent = YES;//透明
+    
+#pragma mark - iOS隐藏导航条1px的底部横线 方法1 第二步
+    //    navBarHairlineImageView = [self findHairlineImageViewUnder:self.navigationBar];
+    
+        
+    [self adaptationiOS15]; //适配iOS15
+}
+
 /// https://www.jianshu.com/p/3e1f0ce35bd5
 /// iOS15更新之后 导航条突然就白了,如果恰巧你的页面上有 ScorllView 的滑动视图的话,那么向上滑动时,你的导航栏又变了正常设置的颜色
 /// UINavigationBar
@@ -199,27 +229,49 @@
      }
  **/
 
+#pragma mark - 设置导航栏 不透明
 /// 设置导航栏不透明
 - (void)setNavOpaque {
     //navigation标题文字颜色
-    NSMutableDictionary *atrtDict = [NSMutableDictionary dictionary];
-    atrtDict[NSForegroundColorAttributeName] = [UIColor blackColor];
-    atrtDict[NSFontAttributeName] = [UIFont systemFontOfSize:18 weight:UIFontWeightMedium];
+    NSMutableDictionary *attrDict = [NSMutableDictionary dictionary];
+    attrDict[NSForegroundColorAttributeName] = [UIColor blackColor];
+    attrDict[NSFontAttributeName] = [UIFont systemFontOfSize:18 weight:UIFontWeightMedium];
     
     if (@available(iOS 15.0, *)) {
         UINavigationBarAppearance *appearance = [UINavigationBarAppearance new];
         [appearance configureWithOpaqueBackground];//重置背景和阴影颜色
         appearance.backgroundColor = [UIColor whiteColor];//设置导航栏背景色
-        appearance.shadowColor = [UIColor whiteColor];//设置导航栏下边界分割线透明
-        appearance.titleTextAttributes = atrtDict;
+        appearance.shadowColor = [UIColor clearColor];//设置导航栏下边界分割线透明
+        appearance.titleTextAttributes = attrDict;
         self.navigationController.navigationBar.scrollEdgeAppearance = appearance;//带scroll滑动的页面
         self.navigationController.navigationBar.standardAppearance = appearance;//常规页面。描述导航栏以标准高度
+        
+//        [[[[self.navigationController.navigationBar subviews] objectAtIndex:0] subviews] objectAtIndex:0].hidden = YES;
+//        [[[[self.navigationController.navigationBar subviews] objectAtIndex:0] subviews] objectAtIndex:1].alpha = 0;
+        
+        UIView *barBackgroundView = self.navigationController.navigationBar.subviews.firstObject;
+        for (UIView *view in barBackgroundView.subviews) {
+            view.alpha = 0;
+        }
     } else {
-        //背景色
-        self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-        self.navigationController.navigationBar.titleTextAttributes = atrtDict;
+        self.navigationController.navigationBar.titleTextAttributes = attrDict;
         [self.navigationBar setShadowImage:[UIImage new]];
         [self.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+        
+            //背景色
+        self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+        
+//        // 设置导航栏imageView子视图的alpha。navigationBar上的subviews的第一个视图即为我们要的子视图
+//        // iOS11的导航栏视图结构发生了变化。需要做个判断
+//        if (@available(iOS 11.0, *)) {
+////            [self.navigationController.navigationBar.subviews.firstObject.subviews objectAtIndex:1].alpha = 0;
+        /////            [[[[[self.navigationController.navigationBar subviews] objectAtIndex:0] subviews] objectAtIndex:0] setHidden:YES];
+//            [[[[self.navigationController.navigationBar subviews] objectAtIndex:0] subviews] objectAtIndex:1].alpha = 0;
+//        } else {
+//            // 设置导航栏imageView子视图的alpha。
+//            // navigationBar上的subviews的第一个视图即为我们要的子视图
+//            self.navigationController.navigationBar.subviews.firstObject.alpha = 0;
+//        }
     }
     //不透明
     self.navigationController.navigationBar.translucent = NO;
@@ -227,28 +279,72 @@
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
 }
 
+#pragma mark - 设置导航栏 透明
+
+////背景色，translucent=NO，其他设置不变，改变这里的颜色，导航栏颜色就会变，变色区域高度64/。
+// self.navigationController.navigationBar.barTintColor = [UIColor clearColor];//
+// .barTintColor = [UIColor clearColor];.translucent=YES; 顶部导航栏位置会出现一块64的黑色区域，
+// .barTintColor = [UIColor clearColor];.translucent=NO;  顶部导航栏位置会显示 window.backgroundColor的颜色
+// .barTintColor = 其他颜色;.translucent=NO; 导航栏显示设置的颜色
+// .barTintColor = 其他颜色;.translucent=YES; 导航栏显示白色
+// .barTintColor = [[UIColor redColor] colorWithAlphaComponent:0.1];.translucent=NO; 小数0~1,无论怎么改都只显示设置的颜色，不会透明什么的
+// .barTintColor = [[UIColor redColor] colorWithAlphaComponent:0.1];.translucent=YES; 小数0~1,无论怎么改都只显示白色
+
+
 /// 设置导航栏透明
 - (void)setNavClear {
     //navigation标题文字颜色
-    NSMutableDictionary *atrtDict = [NSMutableDictionary dictionary];
-    atrtDict[NSForegroundColorAttributeName] = [UIColor whiteColor];
-    atrtDict[NSFontAttributeName] = [UIFont systemFontOfSize:18];
-    
+    NSMutableDictionary *attrDict = [NSMutableDictionary dictionary];
+    attrDict[NSForegroundColorAttributeName] = [UIColor whiteColor];
+    attrDict[NSFontAttributeName] = [UIFont systemFontOfSize:18];
+
     if (@available(iOS 15.0, *)) {
         UINavigationBarAppearance *barApp = [UINavigationBarAppearance new];
         [barApp configureWithOpaqueBackground];//重置背景和阴影颜色
         barApp.backgroundColor = [UIColor clearColor];//设置导航栏背景色
         barApp.backgroundEffect = nil;//
         barApp.shadowColor = nil;//设置导航栏下边界分割线透明
-        barApp.titleTextAttributes = atrtDict;
-        self.navigationController.navigationBar.scrollEdgeAppearance = nil;//带scroll滑动的页面
+        barApp.titleTextAttributes = attrDict;
+        self.navigationController.navigationBar.scrollEdgeAppearance = barApp;//带scroll滑动的页面
         self.navigationController.navigationBar.standardAppearance = barApp;//常规页面。描述导航栏以标准高度
+        
+//        [[[[self.navigationController.navigationBar subviews] objectAtIndex:0] subviews] objectAtIndex:0].hidden = YES;
+//        [[[[self.navigationController.navigationBar subviews] objectAtIndex:0] subviews] objectAtIndex:1].alpha = 0;
+        
+        UIView *barBackgroundView = self.navigationController.navigationBar.subviews.firstObject;
+        for (UIView *view in barBackgroundView.subviews) {
+            view.alpha = 0;
+        }
     } else {
-        self.navigationController.navigationBar.titleTextAttributes = atrtDict;
+        self.navigationController.navigationBar.titleTextAttributes = attrDict;
         [self.navigationBar setShadowImage:[UIImage new]];
         [self.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+        
+        //背景色，translucent=NO，其他设置不变，改变这里的颜色，导航栏颜色就会变，变色区域高度64/。
+        self.navigationController.navigationBar.barTintColor = [UIColor clearColor];//
+        // navigationBar.backgroundColor:是Bar的颜色，变色区域高度只有44。
+        //  barTintColor颜色设置为[UIColor clearColor]，translucent=YES，backgroundColor的颜色才会显示出来，而且只有44的高度
+//        self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];//
+        
+        // 设置导航栏imageView子视图的alpha。
+        // navigationBar上的subviews的第一个视图即为我们要的子视图
+        // iOS11的导航栏视图结构发生了变化。需要做个判断
+        if (@available(iOS 11.0, *)) {
+//            [[[[[self.navigationController.navigationBar subviews] objectAtIndex:0] subviews] objectAtIndex:0] setHidden:YES];
+//            [[[[self.navigationController.navigationBar subviews] objectAtIndex:0] subviews] objectAtIndex:1].alpha = 0;
+//            //            [self.navigationController.navigationBar.subviews.firstObject.subviews objectAtIndex:1].alpha = 0;
+            
+            UIView *barBackgroundView = self.navigationController.navigationBar.subviews.firstObject;
+            for (UIView *view in barBackgroundView.subviews) {
+                view.alpha = 0;
+            }
+        } else {
+            // 设置导航栏imageView子视图的alpha。
+            // navigationBar上的subviews的第一个视图即为我们要的子视图
+            self.navigationController.navigationBar.subviews.firstObject.alpha = 0;
+        }
     }
-    //透明
+    // 透明，打开毛玻璃效果，view会从VC顶部开始
     self.navigationController.navigationBar.translucent = YES;
     //navigation控件颜色
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
@@ -263,38 +359,167 @@
     }
 }
 
+// 用于动态改变导航栏透明度
+// 进去视图的时候，导航栏是透明的，随着tableview的滑动，导航栏渐渐变得不透明，有个颜色的渐变效果。可以在 scrollViewDidScroll:  中设置 代码如下：
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    CGFloat minAlphaOffset = -64;
+//    CGFloat maxAlphaOffset = 500;
+//    CGFloat offset = scrollView.contentOffset.y;
+//    CGFloat alpha = (offset - minAlphaOffset)/(maxAlphaOffset-minAlphaOffset);
+//
+//    if (@available(iOS 11.0, *)) {
+//        [[[[[self.navigationController.navigationBar subviews] objectAtIndex:0] subviews] objectAtIndex:0] setHidden:YES];
+//        [[[[self.navigationController.navigationBar subviews] objectAtIndex:0] subviews] objectAtIndex:1].alpha = alpha;
+//    } else {
+//        self.navigationController.navigationBar.subviews.firstObject.alpha = alpha;
+//    }
+//}
 
-
-
-///设置导航条
-- (void)confitNav {
-    //设置板的背景图片
-    [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"顶部"] forBarMetrics:UIBarMetricsDefault];
-    // 设置navigationBar的背景颜色，根据需要自己设置
-    //    self.navigationBar.barTintColor = [UIColor clearColor];//导航栏背景
-    //设置左右字体的颜色
-    self.navigationBar.tintColor = [UIColor whiteColor];//着色，让返回栏图片渲染为白色
-    //中间标题 字体设置为白色
-    NSDictionary *dic = @{
-        NSForegroundColorAttributeName:[UIColor whiteColor]
-    };
-    //中间标题 字体设置
-    // 查看图层: nav 默认的中间标题 字号17，黑色,粗体
-//    NSDictionary *dic = @{
-//        NSFontAttributeName:[UIFont boldSystemFontOfSize:17],
-//        NSForegroundColorAttributeName:[UIColor blackColor]
-//    };
-    self.navigationBar.titleTextAttributes = dic;
-    
-    //打开毛玻璃效果
-    self.navigationBar.translucent = YES;//透明
-    
-#pragma mark - iOS隐藏导航条1px的底部横线 方法1 第二步
-    //    navBarHairlineImageView = [self findHairlineImageViewUnder:self.navigationBar];
-    
+#pragma mark - 设置导航栏背景色，20240321，测试可用有效
+/// 设置导航栏背景色
+- (void)setNavBarBgColor:(UIColor *)barBgColor {
+    if (@available(iOS 15.0, *)) {
+        UINavigationBarAppearance *appearance = [UINavigationBarAppearance new];
+        [appearance configureWithOpaqueBackground];//重置背景和阴影颜色
+        appearance.backgroundColor = barBgColor;//设置导航栏背景色
+        appearance.backgroundEffect = nil;//
+        appearance.shadowColor = [UIColor clearColor];//设置导航栏下边界分割线透明
+        self.navigationController.navigationBar.scrollEdgeAppearance = appearance;//带scroll滑动的页面
+        self.navigationController.navigationBar.standardAppearance = appearance;//常规页面。描述导航栏以标准高度
         
-    [self adaptationiOS15]; //适配iOS15
+//        [[[[self.navigationController.navigationBar subviews] objectAtIndex:0] subviews] objectAtIndex:0].hidden = YES;
+//        [[[[self.navigationController.navigationBar subviews] objectAtIndex:0] subviews] objectAtIndex:1].alpha = 0;
+        
+        UIView *barBackgroundView = self.navigationController.navigationBar.subviews.firstObject;
+        for (UIView *view in barBackgroundView.subviews) {
+            view.alpha = 0;
+        }
+    } else {
+        //背景色
+        self.navigationController.navigationBar.barTintColor = barBgColor;
+        [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+        [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+        
+        // iOS11的导航栏视图结构发生了变化。需要做个判断
+        if (@available(iOS 11.0, *)) {
+            [[[[[self.navigationController.navigationBar subviews] objectAtIndex:0] subviews] objectAtIndex:0] setHidden:YES];
+            [[[[self.navigationController.navigationBar subviews] objectAtIndex:0] subviews] objectAtIndex:1].alpha = 0;
+        } else {
+            // 设置导航栏imageView子视图的alpha。
+            // navigationBar上的subviews的第一个视图即为我们要的子视图
+            self.navigationController.navigationBar.subviews.firstObject.alpha = 0;
+        }
+    }
+    
+    if ([barBgColor isEqual:[UIColor clearColor]]) {
+        //透明
+        self.navigationController.navigationBar.translucent = YES;
+    } else {
+        //不透明
+        self.navigationController.navigationBar.translucent = NO;
+    }
 }
+
+#pragma mark - 设置导航栏背景图片，20240321，测试可用有效
+/// 设置导航栏背景图片
+- (void)setNavBarBackgroundImage:(UIImage *)backgroundImage {
+    if (@available(iOS 15.0, *)) {
+        UINavigationBarAppearance *appearance = [UINavigationBarAppearance new];
+        [appearance configureWithOpaqueBackground];//重置背景和阴影颜色
+        appearance.backgroundColor = [UIColor clearColor];//设置导航栏背景色
+        appearance.backgroundEffect = nil;//
+        appearance.shadowColor = [UIColor clearColor];//设置导航栏下边界分割线透明
+        appearance.backgroundImage = backgroundImage;
+        self.navigationController.navigationBar.scrollEdgeAppearance = appearance;//带scroll滑动的页面
+        self.navigationController.navigationBar.standardAppearance = appearance;//常规页面。描述导航栏以标准高度
+        
+//        // 必须设置 这一层alpha=0或者hidden=YES，否则当页面有scrollView滑动的时候，这一层会挡住设置的背景图片
+//        // 设置 alpha=0和hidden=YES，可以达到同样的效果
+//        // alpha=0,图层还在,颜色透明度为0，不会挡住 设置的图片，
+//        // hidden=YES,图层被隐藏，不会挡住设置的图片
+//        [[[[self.navigationController.navigationBar subviews] objectAtIndex:0] subviews] objectAtIndex:0].alpha = 0;
+//        // [[[[self.navigationController.navigationBar subviews] objectAtIndex:0] subviews] objectAtIndex:0].hidden = YES;
+//
+////        [[[[self.navigationController.navigationBar subviews] objectAtIndex:0] subviews] objectAtIndex:1].alpha = 0;
+//        // nabBar的背景图片，这里就是设置的背景图片的那一层
+////        [[[[self.navigationController.navigationBar subviews] objectAtIndex:0] subviews] objectAtIndex:1].hidden = YES;
+        
+        UIView *barBackgroundView = self.navigationController.navigationBar.subviews.firstObject;
+        for (UIView *view in barBackgroundView.subviews) {
+            view.alpha = 0;
+        }
+        
+    } else {
+        //背景色
+        self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+        [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+        [self.navigationController.navigationBar setBackgroundImage:backgroundImage forBarMetrics:UIBarMetricsDefault];
+        
+        // iOS11的导航栏视图结构发生了变化。需要做个判断
+        if (@available(iOS 11.0, *)) {
+            [[[[[self.navigationController.navigationBar subviews] objectAtIndex:0] subviews] objectAtIndex:0] setHidden:YES];
+            [[[[self.navigationController.navigationBar subviews] objectAtIndex:0] subviews] objectAtIndex:1].alpha = 0;
+        } else {
+            // 设置导航栏imageView子视图的alpha。
+            // navigationBar上的subviews的第一个视图即为我们要的子视图
+            self.navigationController.navigationBar.subviews.firstObject.alpha = 0;
+        }
+    }
+    if (backgroundImage) {
+        //透明
+        self.navigationController.navigationBar.translucent = YES;
+    } else {
+        //不透明
+        self.navigationController.navigationBar.translucent = NO;
+    }
+}
+
+#pragma mark - 设置导航栏 透明度 alpha
+
+// 设置导航栏 透明度 alpha
+- (void)setBarBackgroundAlpha:(CGFloat)alpha {
+    
+    UIView *barBackgroundView = self.navigationController.navigationBar.subviews.firstObject;
+    if (@available(iOS 11.0, *)) {
+        for (UIView *view in barBackgroundView.subviews) {
+            view.alpha = alpha;
+        }
+    } else {
+        barBackgroundView.alpha = alpha;
+    }
+    
+    
+    if (alpha < 1) {
+        // 设置了.translucent=YES，就可以调控 alpha 的值看到透明的效果。
+        self.navigationController.navigationBar.translucent = YES;//透明，毛玻璃
+    } else {
+        // 设置了.translucent=NO，无论 alpha 的值设置多少，都不会有透明的效果。
+        self.navigationController.navigationBar.translucent = NO;//不透明
+    }
+}
+
+#pragma mark -  设置导航栏标题 字体和颜色，测试可用
+/// 设置导航栏标题 字体和颜色
+- (void)setNavBarTitleTextAttributes:(NSMutableDictionary *)attrDict {
+    
+    //navigation标题文字颜色
+    if (!attrDict || attrDict.allKeys.count == 0) {
+        attrDict = [NSMutableDictionary dictionary];
+        attrDict[NSForegroundColorAttributeName] = [UIColor whiteColor];
+        attrDict[NSFontAttributeName] = [UIFont systemFontOfSize:18];
+    }
+    
+    if (@available(iOS 15.0, *)) {
+        UINavigationBarAppearance *barApp = self.navigationController.navigationBar.standardAppearance;
+        barApp.titleTextAttributes = attrDict;
+        self.navigationController.navigationBar.standardAppearance = barApp;//常规页面。描述导航栏以标准高度
+        self.navigationController.navigationBar.scrollEdgeAppearance = barApp;//带scroll滑动的页面
+    } else {
+        self.navigationController.navigationBar.titleTextAttributes = attrDict;
+    }
+}
+
+
 #pragma mark - iOS隐藏导航条1px的底部横线 方法1 第三步
 ///实现找出底部横线的函数
 - (UIImageView *)findHairlineImageViewUnder:(UIView *)view {
