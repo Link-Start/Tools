@@ -51,7 +51,7 @@
 
  创建 UNNotificationServiceExtension，选择Activate，在在info.plist文件中添加http协议防止图片视频资源加载不了.(AppTransportSecuritySettings-AllowArbitraryLoads=YES)
     
- otificationService是通知拦截响应的类，Info.plist是NotificationsServiceExtension的配置信息。
+ NotificationService是通知拦截响应的类，Info.plist是NotificationsServiceExtension的配置信息。
  在NotificationService.m中，自动生成了contentHandler与bestAttemptContent两个属性。
     didReceiveNotificationRequest:withContentHandler与
     serviceExtensionTimeWillExpire方法。

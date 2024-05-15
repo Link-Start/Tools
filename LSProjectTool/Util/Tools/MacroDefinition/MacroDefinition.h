@@ -66,13 +66,15 @@
 
 #if DEBUG
 //0开发环境/测试环境 1正式环境
-#define currentEnvironment 0
-#define isProduction        NO
-#define isDebug             YES
+#define kLS_currentEnvironment 0
+#define kLS_isDebug             YES
+#define kLS_isRelease           NO
+#define kLS_isProduction        NO
 #else
-#define currentEnvironment 1
-#define isProduction        YES
-#define isDebug             NO
+#define kLS_currentEnvironment 1
+#define kLS_isDebug             NO
+#define kLS_isRelease           YES
+#define kLS_isProduction        YES
 #endif
 
 
