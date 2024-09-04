@@ -120,13 +120,10 @@ CustomCollectionView设置一个属性customScrollEnable，用来控制当与其
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRequireFailureOfGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
 
     if (self.customScrollEnable) {
-
-        returngestureRecognizer !=self.panGestureRecognizer;
-
+        return gestureRecognizer !=self.panGestureRecognizer;
     }
 
-    returngestureRecognizer ==self.panGestureRecognizer;
-
+    return gestureRecognizer ==self.panGestureRecognizer;
 }
 在父视图的scrollViewDidScroll
 

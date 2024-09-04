@@ -80,7 +80,7 @@
         tabBarAppearance.shadowColor = [UIColor clearColor];
         //设置选中的tabBar 字体 attributes    ，默认字体： .SFUIText-Medium 10
         tabBarAppearance.stackedLayoutAppearance.selected.titleTextAttributes = @{
-//NSFontAttributeName:[UIFont [UIFont fontWithName:@".SFUIText-Medium" size:10]],//字体大小，不设置默认系统大小，medium 10
+//NSFontAttributeName:[UIFont fontWithName:@".SFUIText-Medium" size:10],//字体大小，不设置默认系统大小，medium 10
             NSForegroundColorAttributeName:[UIColor blackColor]//字体颜色
         };
 //        tabBarAppearance.stackedLayoutAppearance.normal.titleTextAttributes= @{
@@ -159,6 +159,9 @@
     personalCenterNav.tabBarItem.selectedImage = [[UIImage imageNamed:@"底部-我的点击"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     self.viewControllers = @[homepageNav, bookingLaundryNav, personalCenterNav];
+    
+    // 设置图标大小 【负数：放大，正数：缩小】
+    self.tabBarItem.imageInsets = UIEdgeInsetsMake(-2, -2, -2, -2);
 
     
 //    [self setTabBarItem:homepageNav.tabBarItem
@@ -230,7 +233,10 @@
 //    
 //    //设置图片
 //    tabbarItem = [tabbarItem initWithTitle:title image:[[UIImage imageNamed:unselectedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:selectedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-//    
+
+//// 设置图标大小
+//tabBarItem.imageInsets = UIEdgeInsetsMake(-2, -2, -2, -2);
+//
 //    //未选中字体颜色
 //    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:unselectColor,NSFontAttributeName:[UIFont fontWithName:foneName size:size]} forState:UIControlStateNormal];
 //    

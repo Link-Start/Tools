@@ -23,15 +23,31 @@
 - (UIImage *)drawRectWithRoundedCorner {
     CGRect rect = CGRectMake(0.f, 0.f, 150.f, 150.f);
     UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:rect.size.width * 0.5];
-    UIGraphicsBeginImageContextWithOptions(rect.size, false, [UIScreen mainScreen].scale);
-    CGContextAddPath(UIGraphicsGetCurrentContext(), bezierPath.CGPath);
-    CGContextClip(UIGraphicsGetCurrentContext());
-    [self drawInRect:rect];
- 
-    CGContextDrawPath(UIGraphicsGetCurrentContext(), kCGPathFillStroke);
-    UIImage *output = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
     
+    UIImage *output;
+    if (@available(iOS 17.0, *)) { // iOS17.UIGraphicsBeginImageContext被deprecated了
+        UIGraphicsImageRendererFormat *format = [[UIGraphicsImageRendererFormat alloc] init];
+        format.opaque = false;
+        format.scale = [UIScreen mainScreen].scale;
+        UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:rect.size format:format];
+        output = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
+//            CGContextRef context = rendererContext.CGContext;
+            CGContextAddPath(UIGraphicsGetCurrentContext(), bezierPath.CGPath);
+            CGContextClip(UIGraphicsGetCurrentContext());
+            [self drawInRect:rect];
+            
+            CGContextDrawPath(UIGraphicsGetCurrentContext(), kCGPathFillStroke);
+        }];
+    } else {
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, [UIScreen mainScreen].scale);
+        CGContextAddPath(UIGraphicsGetCurrentContext(), bezierPath.CGPath);
+        CGContextClip(UIGraphicsGetCurrentContext());
+        [self drawInRect:rect];
+        
+        CGContextDrawPath(UIGraphicsGetCurrentContext(), kCGPathFillStroke);
+        output = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    }
     return output;
 }
 
@@ -124,10 +140,22 @@
     
     if (self.imageOrientation == UIImageOrientationUp) return self;
     
-    UIGraphicsBeginImageContextWithOptions(self.size, NO, self.scale);
-    [self drawInRect:(CGRect){0, 0, self.size}];
-    UIImage *normalizedImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    UIImage *normalizedImage;
+    if (@available(iOS 17.0, *)) { // iOS17.UIGraphicsBeginImageContext被deprecated了
+        UIGraphicsImageRendererFormat *format = [[UIGraphicsImageRendererFormat alloc] init];
+        format.opaque = NO;
+        format.scale = self.scale;
+        UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:self.size format:format];
+        normalizedImage = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
+//            CGContextRef context = rendererContext.CGContext;
+            [self drawInRect:(CGRect){0, 0, self.size}];
+        }];
+    } else {
+        UIGraphicsBeginImageContextWithOptions(self.size, NO, self.scale);
+        [self drawInRect:(CGRect){0, 0, self.size}];
+        normalizedImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    }
     return normalizedImage;
 }
 

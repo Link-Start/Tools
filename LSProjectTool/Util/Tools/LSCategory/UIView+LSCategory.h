@@ -140,6 +140,17 @@ NS_ASSUME_NONNULL_BEGIN
                            locations:(NSArray *)locations
                           startPoint:(CGPoint)startPoint
                             endPoint:(CGPoint)endPoint;
+
+
+
+/// 移除 view 上 添加的阴影
+- (void)removeSelfLayerShadow;
+
+/// 移除 view 上 添加的阴影
+- (void)removeViewLayerShadow:(UIView *)view;
+
+
+
 @end
 
 NS_ASSUME_NONNULL_END

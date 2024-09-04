@@ -247,12 +247,24 @@
             static dispatch_once_t onceToken;
             dispatch_once(&onceToken, ^{
                 CGRect rect = CGRectMake(0, 0, mag.width, mag.height);
-                UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
-                CGContextRef context = UIGraphicsGetCurrentContext();
-                [[UIColor colorWithWhite:1 alpha:0.8] set];
-                CGContextFillRect(context, rect);
-                placeholder = UIGraphicsGetImageFromCurrentImageContext();
-                UIGraphicsEndImageContext();
+                if (@available(iOS 17.0, *)) {
+                    UIGraphicsImageRendererFormat *format = [[UIGraphicsImageRendererFormat alloc] init];
+                    format.opaque = NO;
+                    format.scale = 0;
+                    UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:rect.size format:format];
+                    placeholder = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
+                        CGContextRef context = rendererContext.CGContext;
+                        [[UIColor colorWithWhite:1 alpha:0.8] set];
+                        CGContextFillRect(context, rect);
+                    }];
+                } else {
+                    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
+                    CGContextRef context = UIGraphicsGetCurrentContext();
+                    [[UIColor colorWithWhite:1 alpha:0.8] set];
+                    CGContextFillRect(context, rect);
+                    placeholder = UIGraphicsGetImageFromCurrentImageContext();
+                    UIGraphicsEndImageContext();
+                }
             });
             mag.captureFadeAnimation = YES;
             mag.snapshot = placeholder;
@@ -260,38 +272,78 @@
         }
         return rotation;
     }
-    
-    UIGraphicsBeginImageContextWithOptions(captureRect.size, NO, 0);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    if (!context) return rotation;
-    
-    CGPoint tp = CGPointMake(captureRect.size.width / 2, captureRect.size.height / 2);
-    tp = CGPointApplyAffineTransform(tp, CGAffineTransformMakeRotation(rotation));
-    CGContextRotateCTM(context, -rotation);
-    CGContextTranslateCTM(context, tp.x - captureCenter.x, tp.y - captureCenter.y);
-    
-    NSMutableArray *windows = app.windows.mutableCopy;
-    UIWindow *keyWindow = app.keyWindow;
-    if (![windows containsObject:keyWindow]) [windows addObject:keyWindow];
-    [windows sortUsingComparator:^NSComparisonResult(UIWindow *w1, UIWindow *w2) {
-        if (w1.windowLevel < w2.windowLevel) return NSOrderedAscending;
-        else if (w1.windowLevel > w2.windowLevel) return NSOrderedDescending;
-        return NSOrderedSame;
-    }];
-    UIScreen *mainScreen = [UIScreen mainScreen];
-    for (UIWindow *window in windows) {
-        if (window.hidden || window.alpha <= 0.01) continue;
-        if (window.screen != mainScreen) continue;
-        if ([window isKindOfClass:self.class]) break; //don't capture window above self
-        CGContextSaveGState(context);
-        CGContextConcatCTM(context, YYCGAffineTransformGetFromViews(window, self));
-        [window.layer renderInContext:context]; //render
-        //[window drawViewHierarchyInRect:window.bounds afterScreenUpdates:NO]; //slower when capture whole window
-        CGContextRestoreGState(context);
+    UIImage *image;
+    if (@available(iOS 17.0, *)) {
+        UIGraphicsImageRendererFormat *format = [[UIGraphicsImageRendererFormat alloc] init];
+        format.opaque = NO;
+        format.scale = 0;
+        UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:captureRect.size format:format];
+        image = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
+            CGContextRef context = rendererContext.CGContext;
+//            if (!context) { 
+// return rotation;
+//            }
+            if (context) {
+                CGPoint tp = CGPointMake(captureRect.size.width / 2, captureRect.size.height / 2);
+                tp = CGPointApplyAffineTransform(tp, CGAffineTransformMakeRotation(rotation));
+                CGContextRotateCTM(context, -rotation);
+                CGContextTranslateCTM(context, tp.x - captureCenter.x, tp.y - captureCenter.y);
+                
+                NSMutableArray *windows = app.windows.mutableCopy;
+                UIWindow *keyWindow = app.keyWindow;
+                if (![windows containsObject:keyWindow]) [windows addObject:keyWindow];
+                [windows sortUsingComparator:^NSComparisonResult(UIWindow *w1, UIWindow *w2) {
+                    if (w1.windowLevel < w2.windowLevel) return NSOrderedAscending;
+                    else if (w1.windowLevel > w2.windowLevel) return NSOrderedDescending;
+                    return NSOrderedSame;
+                }];
+                UIScreen *mainScreen = [UIScreen mainScreen];
+                for (UIWindow *window in windows) {
+                    if (window.hidden || window.alpha <= 0.01) continue;
+                    if (window.screen != mainScreen) continue;
+                    if ([window isKindOfClass:self.class]) break; //don't capture window above self
+                    CGContextSaveGState(context);
+                    CGContextConcatCTM(context, YYCGAffineTransformGetFromViews(window, self));
+                    [window.layer renderInContext:context]; //render
+                    //[window drawViewHierarchyInRect:window.bounds afterScreenUpdates:NO]; //slower when capture whole window
+                    CGContextRestoreGState(context);
+                }
+            } else {
+//                return rotation;
+            }
+        }];
+    } else {
+        UIGraphicsBeginImageContextWithOptions(captureRect.size, NO, 0);
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        if (!context) return rotation;
+        
+        CGPoint tp = CGPointMake(captureRect.size.width / 2, captureRect.size.height / 2);
+        tp = CGPointApplyAffineTransform(tp, CGAffineTransformMakeRotation(rotation));
+        CGContextRotateCTM(context, -rotation);
+        CGContextTranslateCTM(context, tp.x - captureCenter.x, tp.y - captureCenter.y);
+        
+        NSMutableArray *windows = app.windows.mutableCopy;
+        UIWindow *keyWindow = app.keyWindow;
+        if (![windows containsObject:keyWindow]) [windows addObject:keyWindow];
+        [windows sortUsingComparator:^NSComparisonResult(UIWindow *w1, UIWindow *w2) {
+            if (w1.windowLevel < w2.windowLevel) return NSOrderedAscending;
+            else if (w1.windowLevel > w2.windowLevel) return NSOrderedDescending;
+            return NSOrderedSame;
+        }];
+        UIScreen *mainScreen = [UIScreen mainScreen];
+        for (UIWindow *window in windows) {
+            if (window.hidden || window.alpha <= 0.01) continue;
+            if (window.screen != mainScreen) continue;
+            if ([window isKindOfClass:self.class]) break; //don't capture window above self
+            CGContextSaveGState(context);
+            CGContextConcatCTM(context, YYCGAffineTransformGetFromViews(window, self));
+            [window.layer renderInContext:context]; //render
+            //[window drawViewHierarchyInRect:window.bounds afterScreenUpdates:NO]; //slower when capture whole window
+            CGContextRestoreGState(context);
+        }
+        image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
     }
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
     if (mag.snapshot.size.width == 1) {
         mag.captureFadeAnimation = YES;
     }

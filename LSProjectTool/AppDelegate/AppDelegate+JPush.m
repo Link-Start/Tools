@@ -246,7 +246,13 @@
     //    NSString *sound = [aps valueForKey:@"sound"]; //播放的声音
     // 取得自定义字段内容，userInfo就是后台返回的JSON数据，是一个字典
     
-    application.applicationIconBadgeNumber = 0;
+    if (@available(iOS 17.0, *)) {
+        //iOS17.0，applicationIconBadgeNumber属性被废弃，
+        // 建议使用[UNUserNotificationCenter setBadgeCount:withCompletionHandler:]
+//
+    } else {
+        [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    }
     [JPUSHService handleRemoteNotification:userInfo];
 }
 ////当程序处于后台或者被杀死状态，收到远程通知后，当你进入程序时，就会调用
@@ -262,7 +268,13 @@
     //    NSInteger badge = [[aps valueForKey:@"badge"] integerValue];
     //    NSString *sound = [aps valueForKey:@"sound"]; //播放的声音
     // 取得自定义字段内容，userInfo就是后台返回的JSON数据，是一个字典
-    application.applicationIconBadgeNumber = 0;
+    if (@available(iOS 17.0, *)) {
+        //iOS17.0，applicationIconBadgeNumber属性被废弃，
+        // 建议使用[UNUserNotificationCenter setBadgeCount:withCompletionHandler:]
+//
+    } else {
+        [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    }
     
     if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) { //应用在前台
         UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"" message:@"" preferredStyle:UIAlertControllerStyleAlert];

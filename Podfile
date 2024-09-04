@@ -91,9 +91,13 @@ def all_Pods
 	pod 'ThinkVerb'						#iOS动画(链式语法)
 	# pod 'TTGTextTagCollectionView'		#流式标签
 	pod "TTGTagCollectionView"			#标签流显示控件，同时支持文字或自定义View(搜索历史、热门搜索)
+
 	pod 'WMZTags'						#2019，多功能标签，具备增加，删除，多选，单选等功能。 链式编程实现，所有属性均可自定义（不维护了）
-	pod 'WZLBadge'						#角标
-	pod 'RKNotificationHub'				#添加未读消息数显示提醒，为任何UIView添加一个通知角标
+	pod 'WZLBadge'						#2020,角标
+	pod 'RKNotificationHub'				#2018,添加未读消息数显示提醒，为任何UIView添加一个通知角标
+	pod 'JSBadgeView'					#2020,添加带动画效果的未读消息数提醒
+	pod 'PPBadgeView'					#iOS自定义Badge组件, 支持UIView, UITabBarItem, UIBarButtonItem
+
 	pod 'SGQRCode'						#【iOS 原生二维码生成与扫描 -> 高仿微信】
 	pod 'UICKeyChainStore'				# UICKeyChainStore是iOS、watchOS、tvOS和macOS上钥匙串的简单包装。使使用钥匙串API像NSUserDefaults一样简单。
 	# ZBWUnifiedStorage					# iOS 统一存储库。支持内存、持久化、钥匙串等多种方式存储；支持过期时间设置；支持多应用隔离。
@@ -513,7 +517,7 @@ def alertView_ios #弹窗
 	#LPFGuidView			#新功能引导，根据传入的视图（UIView子类）精确定位高亮显示，并自动生成遮罩蒙版。不必自己计算位置(https://github.com/lpfRoc/LPFGuidView)
 	#JMHoledView			#引导图,要填充孔的视图设计...
 	
-	pod 'JSBadgeView'		#添加带动画效果的未读消息数提醒
+	
 	pod 'CustomPopOverView'	#一款小巧灵活的自定义弹出视图, 可以做自定义AlertView、弹出窗口等等https://github.com/maltsugar/CustomPopOverView
 
 	pod 'HWPanModal'		#HWPanModal 用于从底部弹出控制器（UIViewController），并用拖拽手势来关闭控制器。提供了自定义视图大小和位置，高度自定义弹出视图的各个属性。

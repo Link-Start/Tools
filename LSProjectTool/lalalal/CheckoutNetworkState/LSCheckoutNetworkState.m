@@ -174,7 +174,7 @@
     //AFN 在 Reachability基础上做了一个自己的网络检查的库, 基本上一样
     //网络只有在startMonitoring完成后才可以使用检查网络状态
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
-    [[AFNetworkReachabilityManager sharedManager]setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         canCheckNetwork = YES;
     }];
     

@@ -568,4 +568,28 @@
     [self.layer insertSublayer:layer atIndex:0];
 }
 
+
+
+/// 在iOS中，如果你想移除view上添加的阴影，可以通过设置view的shadow相关属性为空值来实现。以下是一些常用的属性，你可以根据需要进行设置：
+/// 1.layer.shadowOpacity: 设置为0表示完全不显示阴影。
+/// 2.layer.shadowRadius: 设置阴影的模糊半径，设置为0可以移除阴影的模糊效果。
+/// 3.layer.shadowOffset: 设置阴影的偏移量，通常设置为CGSize.zero/CGSizeZero。
+/// 4.layer.shadowColor: 设置阴影的颜色，如果不想要阴影，可以将其设置为nil。
+
+/// 移除 view 上 添加的阴影
+- (void)removeSelfLayerShadow {
+    self.layer.shadowOpacity = 0;
+    self.layer.shadowRadius = 0;
+    self.layer.shadowOffset = CGSizeZero;
+    self.layer.shadowColor = nil;
+}
+
+/// 移除 view 上 添加的阴影
+- (void)removeViewLayerShadow:(UIView *)view {
+    view.layer.shadowOpacity = 0;
+    view.layer.shadowRadius = 0;
+    view.layer.shadowOffset = CGSizeZero;
+    view.layer.shadowColor = nil;
+}
+
 @end

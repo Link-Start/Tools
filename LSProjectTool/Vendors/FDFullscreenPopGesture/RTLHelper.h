@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "IContext.h"
+//#import "IContext.h"
 
 #define AppLanguage @"AppLanguage"
 #define ArabicLanguage @"ArabicLanguage"

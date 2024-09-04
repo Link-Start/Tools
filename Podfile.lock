@@ -1,5 +1,5 @@
 PODS:
-  - AAChartKit (7.3.0)
+  - AAChartKit (9.0.0)
   - ACActionSheet (1.0.6)
   - AFNetworking (4.0.1):
     - AFNetworking/NSURLSession (= 4.0.1)
@@ -23,50 +23,64 @@ PODS:
   - AMapFoundation (1.8.2)
   - AMapLocation (2.10.0):
     - AMapFoundation (>= 1.8.0)
-  - AMLeaksFinder (2.2.7)
+  - AMLeaksFinder (2.2.8)
   - BabyBluetooth (0.7.0)
   - BeeHive (1.6.0)
-  - BMKLocationKit (2.1.1)
+  - BMKLocationKit (2.1.2)
   - BMLongPressDragCellCollectionView (3.1.4)
-  - Booming/Cache (1.0.1):
+  - Booming/Cache (1.0.3):
     - Booming/Core
     - CacheX (~> 1.1.0)
-  - Booming/Core (1.0.1):
+  - Booming/Core (1.0.3):
     - Moya
-  - Booming/Debugging (1.0.1):
+  - Booming/Debugging (1.0.3):
     - Booming/Core
-  - Booming/Files (1.0.1):
+  - Booming/Files (1.0.3):
     - Booming/Core
-  - Booming/GZip (1.0.1):
+  - Booming/GZip (1.0.3):
     - Booming/Core
-  - Booming/Header (1.0.1):
+  - Booming/Header (1.0.3):
     - Booming/Core
-  - Booming/Indicator (1.0.1):
+  - Booming/Indicator (1.0.3):
     - Booming/Core
-  - Booming/Loading (1.0.1):
+  - Booming/Loading (1.0.3):
     - Booming/Core
     - MBProgressHUD
-  - Booming/Lottie (1.0.1):
+  - Booming/Lottie (1.0.3):
     - Booming/Core
     - lottie-ios
-  - Booming/Shared (1.0.1):
+  - Booming/Shared (1.0.3):
     - Booming/Core
-  - Booming/Warning (1.0.1):
+  - Booming/Warning (1.0.3):
     - Booming/Core
     - MBProgressHUD
-  - BRPickerView (2.8.1):
-    - BRPickerView/AddressPickerView (= 2.8.1)
-    - BRPickerView/Base (= 2.8.1)
-    - BRPickerView/DatePickerView (= 2.8.1)
-    - BRPickerView/StringPickerView (= 2.8.1)
-  - BRPickerView/AddressPickerView (2.8.1):
-    - BRPickerView/Base
-  - BRPickerView/Base (2.8.1)
-  - BRPickerView/DatePickerView (2.8.1):
-    - BRPickerView/Base
-  - BRPickerView/StringPickerView (2.8.1):
-    - BRPickerView/Base
-  - CacheX (1.1.0)
+  - BRPickerView (2.9.1):
+    - BRPickerView/All (= 2.9.1)
+  - BRPickerView/All (2.9.1):
+    - BRPickerView/Default
+    - BRPickerView/Deprecated
+  - BRPickerView/Core (2.9.1)
+  - BRPickerView/DatePicker (2.9.1):
+    - BRPickerView/Core
+  - BRPickerView/Default (2.9.1):
+    - BRPickerView/DatePicker
+    - BRPickerView/TextPicker
+  - BRPickerView/Deprecated (2.9.1):
+    - BRPickerView/Core
+    - BRPickerView/Deprecated/AddressPickerView (= 2.9.1)
+    - BRPickerView/Deprecated/Base (= 2.9.1)
+    - BRPickerView/Deprecated/StringPickerView (= 2.9.1)
+  - BRPickerView/Deprecated/AddressPickerView (2.9.1):
+    - BRPickerView/Core
+    - BRPickerView/Deprecated/Base
+  - BRPickerView/Deprecated/Base (2.9.1):
+    - BRPickerView/Core
+  - BRPickerView/Deprecated/StringPickerView (2.9.1):
+    - BRPickerView/Core
+    - BRPickerView/Deprecated/Base
+  - BRPickerView/TextPicker (2.9.1):
+    - BRPickerView/Core
+  - CacheX (1.1.1)
   - CalendarLib (2.0):
     - OrderedDictionary (~> 1.2)
     - OSCache (~> 1.2)
@@ -95,12 +109,12 @@ PODS:
   - DZNEmptyDataSet (1.8.1)
   - EBBannerView (1.1.2)
   - EllipsePageControl (0.0.4)
-  - Eureka (5.4.0)
+  - Eureka (5.5.0)
   - FBRetainCycleDetector (0.1.4)
   - FLAnimatedImage (1.0.17)
-  - FMDB (2.7.10):
-    - FMDB/standard (= 2.7.10)
-  - FMDB/standard (2.7.10)
+  - FMDB (2.7.11):
+    - FMDB/standard (= 2.7.11)
+  - FMDB/standard (2.7.11)
   - FMLayoutKit (1.2.0)
   - FMListPlaceholder (1.1.5)
   - Foggy (1.0.4)
@@ -111,34 +125,40 @@ PODS:
   - FWPopupViewOC (3.1.0):
     - Masonry
   - GKCover (3.0.1)
+  - GKLivePhotoManager (1.0.2)
   - GKNavigationBar (1.9.0):
     - GKNavigationBar/GestureHandle (= 1.9.0)
     - GKNavigationBar/NavigationBar (= 1.9.0)
   - GKNavigationBar/GestureHandle (1.9.0)
   - GKNavigationBar/NavigationBar (1.9.0)
-  - GKPageScrollView (1.9.3):
-    - GKPageScrollView/Objc (= 1.9.3)
-  - GKPageScrollView/Objc (1.9.3)
-  - GKPageSmoothView (1.9.3):
-    - GKPageSmoothView/Objc (= 1.9.3)
-  - GKPageSmoothView/Objc (1.9.3)
-  - GKPhotoBrowser (2.7.6):
-    - GKPhotoBrowser/Default (= 2.7.6)
-  - GKPhotoBrowser/AVPlayer (2.7.6):
+  - GKPageScrollView (1.9.6):
+    - GKPageScrollView/Objc (= 1.9.6)
+  - GKPageScrollView/Objc (1.9.6)
+  - GKPageSmoothView (1.9.6):
+    - GKPageSmoothView/Objc (= 1.9.6)
+  - GKPageSmoothView/Objc (1.9.6)
+  - GKPhotoBrowser (3.0.3):
+    - GKPhotoBrowser/Default (= 3.0.3)
+  - GKPhotoBrowser/AF (3.0.3):
+    - AFNetworking
+    - GKLivePhotoManager
     - GKPhotoBrowser/Core
-  - GKPhotoBrowser/Core (2.7.6)
-  - GKPhotoBrowser/Default (2.7.6):
+  - GKPhotoBrowser/AVPlayer (3.0.3):
+    - GKPhotoBrowser/Core
+  - GKPhotoBrowser/Core (3.0.3)
+  - GKPhotoBrowser/Default (3.0.3):
+    - GKPhotoBrowser/AF
     - GKPhotoBrowser/AVPlayer
     - GKPhotoBrowser/Progress
     - GKPhotoBrowser/SD
-  - GKPhotoBrowser/Progress (2.7.6):
+  - GKPhotoBrowser/Progress (3.0.3):
     - GKPhotoBrowser/Core
     - GKSliderView
-  - GKPhotoBrowser/SD (2.7.6):
+  - GKPhotoBrowser/SD (3.0.3):
     - GKPhotoBrowser/Core
     - SDWebImage (~> 5.0)
-  - GKSliderView (1.2.0)
-  - GKVideoScrollView (1.3.3)
+  - GKSliderView (1.2.2)
+  - GKVideoScrollView (1.3.4)
   - GLEnvs (1.5.9)
   - GroupedData (0.0.1)
   - GXTransition (1.0.5)
@@ -152,7 +172,7 @@ PODS:
   - HMSegmentedControl (1.5.6)
   - HSSetTableViewController (1.3.1):
     - SDWebImage
-  - HWPanModal (0.9.8)
+  - HWPanModal (0.9.9)
   - HXPhotoPicker (3.3.2):
     - HXPhotoPicker/Default (= 3.3.2)
   - HXPhotoPicker/Default (3.3.2)
@@ -165,12 +185,12 @@ PODS:
     - Masonry (~> 0.6)
   - HYBUnicodeReadable (1.3)
   - IAPHelper (1.1)
-  - IGListDiffKit (4.0.0)
-  - IGListKit (4.0.0):
-    - IGListDiffKit (= 4.0.0)
+  - IGListDiffKit (5.0.0)
+  - IGListKit (5.0.0):
+    - IGListDiffKit (= 5.0.0)
   - IJKMediaFramework (0.1.5)
   - IMYAOPTableView (2.1.3)
-  - IQKeyboardManager (6.5.18)
+  - IQKeyboardManager (6.5.19)
   - JCore (2.1.8)
   - JFCitySelector (0.3.4):
     - YYModel
@@ -179,17 +199,17 @@ PODS:
   - JHVerificationCodeView (1.3.7)
   - JJCollectionViewRoundFlowLayout (2.9.2)
   - JNAPushPopCompletionBlock (0.0.1)
-  - JPImageresizerView (1.11.1)
+  - JPImageresizerView (1.11.2)
   - JPush (3.2.8):
     - JCore (< 3.0.0, >= 2.0.0)
   - JQCollectionViewWaterfallLayout (0.2.0)
   - JQLaunchAdKit (3.1.7)
   - JSBadgeView (2.0.0)
   - JVFloatLabeledTextField (1.2.2)
-  - JXCategoryView (1.6.3)
-  - JXCategoryViewExt (1.2.1):
-    - JXCategoryViewExt/Core (= 1.2.1)
-  - JXCategoryViewExt/Core (1.2.1)
+  - JXCategoryView (1.6.8)
+  - JXCategoryViewExt (1.2.2):
+    - JXCategoryViewExt/Core (= 1.2.2)
+  - JXCategoryViewExt/Core (1.2.2)
   - JXPagingView/Pager (2.1.3)
   - JZNavigationExtension (2.1)
   - KakaJSON (1.1.2)
@@ -385,9 +405,9 @@ PODS:
   - LBXPermission/Photo (1.1.1)
   - LBXPermission/Reminder (1.1.1)
   - LBXPermission/Tracking (1.1.1)
-  - LEEAlert (1.7.0):
-    - LEEAlert/Privacy (= 1.7.0)
-  - LEEAlert/Privacy (1.7.0)
+  - LEEAlert (1.7.1):
+    - LEEAlert/Privacy (= 1.7.1)
+  - LEEAlert/Privacy (1.7.1)
   - LFPhoneInfo (0.1.9)
   - libwebp (1.3.2):
     - libwebp/demux (= 1.3.2)
@@ -436,9 +456,9 @@ PODS:
   - Moya/Core (15.0.0):
     - Alamofire (~> 5.0)
   - MyLayout (1.9.10)
-  - NVActivityIndicatorView (5.1.1):
-    - NVActivityIndicatorView/Base (= 5.1.1)
-  - NVActivityIndicatorView/Base (5.1.1)
+  - NVActivityIndicatorView (5.2.0):
+    - NVActivityIndicatorView/Base (= 5.2.0)
+  - NVActivityIndicatorView/Base (5.2.0)
   - ObjcAssociatedObjectHelpers (2.0.1):
     - ObjcAssociatedObjectHelpers/Core (= 2.0.1)
     - "ObjcAssociatedObjectHelpers/NSObject+Dictionary (= 2.0.1)"
@@ -455,7 +475,7 @@ PODS:
   - PPCounter (0.6.0)
   - PPGetAddressBook (0.2.8)
   - PPNumberButton (0.8.0)
-  - PPTextField (0.0.2)
+  - PPTextField (0.0.3)
   - PulsingHalo (0.2.10)
   - PureLayout (3.1.9)
   - PYSearch (0.9.1)
@@ -761,87 +781,81 @@ PODS:
     - REFormattedNumberField (~> 1.1.5)
     - REValidation (~> 0.1.4)
   - REValidation (0.1.4)
-  - Rickenbacker (1.1.4):
-    - Rickenbacker/Adapter (= 1.1.4)
-    - Rickenbacker/Boxs (= 1.1.4)
-    - Rickenbacker/DZNEmptyDataSet (= 1.1.4)
-    - Rickenbacker/Mediator (= 1.1.4)
-    - Rickenbacker/MJRefresh (= 1.1.4)
-    - Rickenbacker/Rx (= 1.1.4)
-  - Rickenbacker/Adapter (1.1.4):
-    - Rickenbacker/Rx
-  - Rickenbacker/Boxs (1.1.4)
-  - Rickenbacker/DZNEmptyDataSet (1.1.4):
-    - DZNEmptyDataSet
-    - Rickenbacker/Adapter
-  - Rickenbacker/Mediator (1.1.4)
-  - Rickenbacker/MJRefresh (1.1.4):
-    - MJRefresh
-    - Rickenbacker/Adapter
-  - Rickenbacker/Rx (1.1.4):
-    - Rickenbacker/Boxs
+  - Rickenbacker (1.1.6):
+    - Rickenbacker/Core (= 1.1.6)
+    - Rickenbacker/DZNEmptyDataSet (= 1.1.6)
+    - Rickenbacker/Mediator (= 1.1.6)
+    - Rickenbacker/MJRefresh (= 1.1.6)
+  - Rickenbacker/Core (1.1.6):
     - RxCocoa
     - RxSwift
+  - Rickenbacker/DZNEmptyDataSet (1.1.6):
+    - DZNEmptyDataSet
+    - Rickenbacker/Core
+  - Rickenbacker/Mediator (1.1.6)
+  - Rickenbacker/MJRefresh (1.1.6):
+    - MJRefresh
+    - Rickenbacker/Core
   - RKNotificationHub (2.0.5)
   - RTRootNavigationController (0.8.1):
     - RTRootNavigationController/Core (= 0.8.1)
   - RTRootNavigationController/Core (0.8.1)
-  - RxCocoa (6.6.0):
-    - RxRelay (= 6.6.0)
-    - RxSwift (= 6.6.0)
-  - RxNetworks (1.0.1):
-    - RxNetworks/Core (= 1.0.1)
-    - RxNetworks/HandyJSON (= 1.0.1)
-    - RxNetworks/Plugins (= 1.0.1)
-    - RxNetworks/RxSwift (= 1.0.1)
-  - RxNetworks/Core (1.0.1):
+  - RxCocoa (6.7.1):
+    - RxRelay (= 6.7.1)
+    - RxSwift (= 6.7.1)
+  - RxNetworks (1.0.2):
+    - RxNetworks/Core (= 1.0.2)
+    - RxNetworks/HandyJSON (= 1.0.2)
+    - RxNetworks/Plugins (= 1.0.2)
+    - RxNetworks/RxSwift (= 1.0.2)
+  - RxNetworks/Core (1.0.2):
     - Booming/Core
-  - RxNetworks/HandyJSON (1.0.1):
+  - RxNetworks/HandyJSON (1.0.2):
     - HandyJSON
-  - RxNetworks/Plugins (1.0.1):
-    - RxNetworks/Plugins/AnimatedLoading (= 1.0.1)
-    - RxNetworks/Plugins/Cache (= 1.0.1)
-    - RxNetworks/Plugins/Debugging (= 1.0.1)
-    - RxNetworks/Plugins/Files (= 1.0.1)
-    - RxNetworks/Plugins/GZip (= 1.0.1)
-    - RxNetworks/Plugins/Header (= 1.0.1)
-    - RxNetworks/Plugins/Indicator (= 1.0.1)
-    - RxNetworks/Plugins/Loading (= 1.0.1)
-    - RxNetworks/Plugins/Shared (= 1.0.1)
-    - RxNetworks/Plugins/Warning (= 1.0.1)
-  - RxNetworks/Plugins/AnimatedLoading (1.0.1):
+  - RxNetworks/Plugins (1.0.2):
+    - RxNetworks/Plugins/AnimatedLoading (= 1.0.2)
+    - RxNetworks/Plugins/Cache (= 1.0.2)
+    - RxNetworks/Plugins/Debugging (= 1.0.2)
+    - RxNetworks/Plugins/Files (= 1.0.2)
+    - RxNetworks/Plugins/GZip (= 1.0.2)
+    - RxNetworks/Plugins/Header (= 1.0.2)
+    - RxNetworks/Plugins/Indicator (= 1.0.2)
+    - RxNetworks/Plugins/Loading (= 1.0.2)
+    - RxNetworks/Plugins/Shared (= 1.0.2)
+    - RxNetworks/Plugins/Warning (= 1.0.2)
+  - RxNetworks/Plugins/AnimatedLoading (1.0.2):
     - Booming/Lottie
-  - RxNetworks/Plugins/Cache (1.0.1):
+  - RxNetworks/Plugins/Cache (1.0.2):
     - Booming/Cache
-  - RxNetworks/Plugins/Debugging (1.0.1):
+  - RxNetworks/Plugins/Debugging (1.0.2):
     - Booming/Debugging
-  - RxNetworks/Plugins/Files (1.0.1):
+  - RxNetworks/Plugins/Files (1.0.2):
     - Booming/Files
-  - RxNetworks/Plugins/GZip (1.0.1):
+  - RxNetworks/Plugins/GZip (1.0.2):
     - Booming/GZip
-  - RxNetworks/Plugins/Header (1.0.1):
+  - RxNetworks/Plugins/Header (1.0.2):
     - Booming/Header
-  - RxNetworks/Plugins/Indicator (1.0.1):
+  - RxNetworks/Plugins/Indicator (1.0.2):
     - Booming/Indicator
-  - RxNetworks/Plugins/Loading (1.0.1):
+  - RxNetworks/Plugins/Loading (1.0.2):
     - Booming/Loading
-  - RxNetworks/Plugins/Shared (1.0.1):
+  - RxNetworks/Plugins/Shared (1.0.2):
     - Booming/Shared
-  - RxNetworks/Plugins/Warning (1.0.1):
+  - RxNetworks/Plugins/Warning (1.0.2):
     - Booming/Warning
-  - RxNetworks/RxSwift (1.0.1):
+  - RxNetworks/RxSwift (1.0.2):
     - RxNetworks/Core
     - RxSwift
-  - RxRelay (6.6.0):
-    - RxSwift (= 6.6.0)
-  - RxSwift (6.6.0)
+  - RxRelay (6.7.1):
+    - RxSwift (= 6.7.1)
+  - RxSwift (6.7.1)
   - SCLAlertView-Objective-C (1.3.0)
   - SDAutoLayout (2.2.1)
   - SDMovableCellCollectionView (0.1.0)
-  - SDWebImage (5.19.1):
-    - SDWebImage/Core (= 5.19.1)
-  - SDWebImage/Core (5.19.1)
-  - SDWebImageWebPCoder (0.14.5):
+  - SDWebImage (5.19.6):
+    - SDWebImage/Core (= 5.19.6)
+  - SDWebImage/Core (5.19.6)
+  - SDWebImageWebPCoder (0.14.6):
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.17)
   - SGQRCode (4.1.0)
@@ -950,11 +964,11 @@ PODS:
   - TTCTool/TTCTransition (0.1.3)
   - TTGTagCollectionView (2.4.2)
   - TYCyclePagerView (1.2.0)
-  - TZImagePickerController (3.8.4):
-    - TZImagePickerController/Basic (= 3.8.4)
-    - TZImagePickerController/Location (= 3.8.4)
-  - TZImagePickerController/Basic (3.8.4)
-  - TZImagePickerController/Location (3.8.4)
+  - TZImagePickerController (3.8.7):
+    - TZImagePickerController/Basic (= 3.8.7)
+    - TZImagePickerController/Location (= 3.8.7)
+  - TZImagePickerController/Basic (3.8.7)
+  - TZImagePickerController/Location (3.8.7)
   - UICKeyChainStore (2.2.1)
   - UICountingLabel (1.2.0)
   - UINavigation-SXFixSpace (1.2.4)
@@ -965,9 +979,9 @@ PODS:
   - "UIView+FDCollapsibleConstraints (1.1)"
   - UMABTest (1.0.1):
     - UMCommon
-  - UMAPM (1.9.0)
+  - UMAPM (1.9.3)
   - UMCCommonLog (2.0.2)
-  - UMCommon (7.4.6):
+  - UMCommon (7.4.7):
     - UMDevice
   - UMCSecurityPlugins (1.0.6)
   - UMDevice (3.4.0)
@@ -975,19 +989,19 @@ PODS:
     - UMCommon
   - UMPush (4.1.1):
     - UMCommon
-  - UMShare/Core (6.10.10):
+  - UMShare/Core (6.10.12):
     - UMCommon
-  - UMShare/Social/ReducedQQ (6.10.10):
-    - UMCommon
-    - UMShare/Core
-  - UMShare/Social/ReducedWeChat (6.10.10):
+  - UMShare/Social/ReducedQQ (6.10.12):
     - UMCommon
     - UMShare/Core
-  - UMShare/Social/WeChat (6.10.10):
+  - UMShare/Social/ReducedWeChat (6.10.12):
+    - UMCommon
+    - UMShare/Core
+  - UMShare/Social/WeChat (6.10.12):
     - UMCommon
     - UMShare/Core
     - UMShare/Social/ReducedWeChat
-  - UMShare/UI (6.10.10):
+  - UMShare/UI (6.10.12):
     - UMCommon
     - UMShare/Core
   - VVManager (2.1.0)
@@ -1008,7 +1022,7 @@ PODS:
   - XLForm (4.3.0)
   - XXShield (2.3.1)
   - YBHandyList (1.0.5)
-  - YBPopupMenu (1.3.0)
+  - YBPopupMenu (1.3.1)
   - Yoga (1.14.0)
   - YPNavigationBarTransition (2.2.3)
   - YTKKeyValueStore (0.1.2):
@@ -1095,9 +1109,9 @@ PODS:
     - YYCategories
   - ZLCellDataSource (0.4.1)
   - ZLCollectionViewFlowLayout (1.4.9)
-  - ZLPhotoBrowser (4.5.1):
-    - ZLPhotoBrowser/Core (= 4.5.1)
-  - ZLPhotoBrowser/Core (4.5.1)
+  - ZLPhotoBrowser (4.5.4):
+    - ZLPhotoBrowser/Core (= 4.5.4)
+  - ZLPhotoBrowser/Core (4.5.4)
   - ZQSearch (0.1.9):
     - SDWebImage (>= 4.0)
   - ZXEmptyView (1.1.1)
@@ -1397,6 +1411,7 @@ SPEC REPOS:
     - FWPopupView
     - FWPopupViewOC
     - GKCover
+    - GKLivePhotoManager
     - GKNavigationBar
     - GKPageScrollView
     - GKPageSmoothView
@@ -1591,21 +1606,21 @@ SPEC REPOS:
     - ZYCornerRadius
 
 SPEC CHECKSUMS:
-  AAChartKit: 3c5759bcb4ed2d640d6f99db64f2a92c7ca78b09
+  AAChartKit: 5f7fe0e22cd22b70e8d1466129e295c6147d607e
   ACActionSheet: da1ed5ea2add6e36208eb0652e8803286a7100fb
   AFNetworking: 3bd23d814e976cd148d7d44c3ab78017b744cd58
   "AFNetworking+RetryPolicy": d823c39e54178c311931615507a54e401eda5055
   Alamofire: f36a35757af4587d8e4f4bfa223ad10be2422b8c
   AMapFoundation: 9885c48fc3a78fdfb84a0299a2293e56ea3c9fec
   AMapLocation: 5248aec2455ebb5d104b367813c946430a2ee033
-  AMLeaksFinder: 3cc57879fbca9fd4fefc147b14344d75b467489c
+  AMLeaksFinder: c06ab15486dff283e49943329c77497d11f0d06a
   BabyBluetooth: d50758aecf24d4a0ab9271d69f0f116d6bee51c9
   BeeHive: 64c01ddec33b9ef8813701e075eeb732327d0f75
-  BMKLocationKit: 32a981ceb683790f732e5df3ab1f25652557a5b1
+  BMKLocationKit: 7048cb9f9e6cd21d803a71013d175fce57db7f77
   BMLongPressDragCellCollectionView: 99f224009d4137999b35b8a810a54edc8b34eb85
-  Booming: a597edd5927ca2bedecb82bfea27b7586265ebbe
-  BRPickerView: 2531a2d4d0fea0b57a1c738de215af0f88863a2f
-  CacheX: 8db0e9d17717600be0b5c34bde7bc7522dbd9a3a
+  Booming: c6b71f3cb632ef560997a1e79429ab3b4b172f3c
+  BRPickerView: 6dd69ea2c48e0a0abf1d197a705050e13143ee63
+  CacheX: 9665503a86f9e38b3eb0c4ab14251649a79d292d
   CalendarLib: 040a8a655376581d8dc7c3c63196ddcf5223f471
   CCExcelView: 9037764648b9a605c66cf72e2f73e37815f15a95
   ChainThen: df7879abd0fe4a12f8fd092c87ccdf4b0f077aa9
@@ -1624,10 +1639,10 @@ SPEC CHECKSUMS:
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   EBBannerView: 268002f8d9d3e979cb8649cbfefd0da5ddef72b3
   EllipsePageControl: d6c436006d72119c6cbba45af6648d15a7af7d3a
-  Eureka: fadaa9fa3d6e402d3c60f78f24edf3d7bafc9c29
+  Eureka: 1c18c7fcd8f772cc2ca42d6be36292dffa77eecb
   FBRetainCycleDetector: 46f8179bbb1c587deee3ea838a1a3ee02acf5015
   FLAnimatedImage: bbf914596368867157cc71b38a8ec834b3eeb32b
-  FMDB: eae540775bf7d0c87a5af926ae37af69effe5a19
+  FMDB: 57486c1117fd8e0e6b947b2f54c3f42bf8e57a4e
   FMLayoutKit: 5ae34e3f6d7cbc79c112651ca390b79ac2a73c5b
   FMListPlaceholder: 17b3cb63922850e18ca97dd092a233ea3a80bc5a
   Foggy: 270fff1c7f306a3acaf13cb4d8b6a536293e6811
@@ -1636,12 +1651,13 @@ SPEC CHECKSUMS:
   FWPopupView: b96d7d46d4afaad8e99d2739f9118a3c43c63a7b
   FWPopupViewOC: 116094e33ba1f492e60c262a095a9ae6bfd0c715
   GKCover: 6486cf87c0a5cae4bb5c3a09e17925ad8b466412
+  GKLivePhotoManager: 203a3fc08563511b961c686e543d5560fa801331
   GKNavigationBar: 8f8de3179ee1afe737d43a546cfaec5a5f5e9160
-  GKPageScrollView: 6f300e20d0e149e110612a6c2bdaa16307bf4b7c
-  GKPageSmoothView: 95afc4750a6d06548489dfec5121034d833797db
-  GKPhotoBrowser: aa57bfcbcdba825927a22f5d7bfcb5b51a73fd0e
-  GKSliderView: 49480065d2155bbc219bde5f9136f785757ed8d4
-  GKVideoScrollView: 3bc1cecf6f6ce62e9308d8919b6325f72fa5a4a8
+  GKPageScrollView: 7efe6ea056d502770fa8146f96985a9ef2c641b8
+  GKPageSmoothView: b2588dac305e89c86a4a8be6e6a79275792fcc59
+  GKPhotoBrowser: 7719f044d94103d4b3e5d1cd11729e9be80dd8b4
+  GKSliderView: 94fab41465f2ba543200f04bee401020beab4041
+  GKVideoScrollView: f5e4fe290d7811665d4e3699293f1736b1e12cd6
   GLEnvs: fa412011e1b8b2eb38a105e465d93dbb18435c76
   GroupedData: 06b4543577206c2747caec04142de8c4d9444957
   GXTransition: 2b027f750a1d28fa2c679f60fe56dd1e14f2dd98
@@ -1652,7 +1668,7 @@ SPEC CHECKSUMS:
   HDListViewDiffer: f6af38559d7dbc37723b6aed8bdb604c1f78aa8a
   HMSegmentedControl: 34c1f54d822d8308e7b24f5d901ec674dfa31352
   HSSetTableViewController: e1845101c7b16c70d9f72dee63bab6f74bca8660
-  HWPanModal: 6951685ca7bdf147ff8a68e7d93d61f08a06dead
+  HWPanModal: b57a6717d3cdcd666bff44f9dd2a5be9f4d6f5d2
   HXPhotoPicker: 3d0526bc46cd2a4510a777d5f57dfad8e683fcfd
   HXPhotoPickerObjC: ca01803a5f8d48a43a8283eec2a632cfb0386b37
   HXRotationTool: 5daeceaa20cb0f62eb795d90238266f787437dd3
@@ -1660,11 +1676,11 @@ SPEC CHECKSUMS:
   HYBMasonryAutoCellHeight: 9296583777080d32ba6257f55e52b7334dd481fc
   HYBUnicodeReadable: ebffd6ee9a9eeb0e2a7788e45d3efe169340db45
   IAPHelper: fd74f53b0ac142eed085777b88b86a11746a2dd4
-  IGListDiffKit: 665d6cf43ce726e676013db9c7d6c4294259b6b2
-  IGListKit: fd5a5d21935298f5849fa49d426843cff97b77c7
+  IGListDiffKit: 02d937d7e714d6f558771f284ed80668d483b522
+  IGListKit: baf7e87b4c2262cd569c380e46ca5667a4a82c82
   IJKMediaFramework: f1119f6324c96bc4654f3045a5beaa95ba0596c0
   IMYAOPTableView: 54e24cecf7b0388fc3f21669d2e1a2a33d486674
-  IQKeyboardManager: 67f92bb29b650c094c40bd11c0545b47bdd25c5b
+  IQKeyboardManager: c8665b3396bd0b79402b4c573eac345a31c7d485
   JCore: a7f1dead960d77a97717c73ea8b0aa5b33706491
   JFCitySelector: 51452fcadaa180463901cd190149e5951623e477
   JHChainableAnimations: 0237489ed063f0ec5b351f5c7bb26c1891517074
@@ -1672,14 +1688,14 @@ SPEC CHECKSUMS:
   JHVerificationCodeView: ed16408d963962888c06c77bdc9addad645fdfa8
   JJCollectionViewRoundFlowLayout: c39b6467a4a588b134138398f71b9aa1521c1b07
   JNAPushPopCompletionBlock: bd4fb06d2f1317dd2798629c8c7b4ea0a21e4118
-  JPImageresizerView: 1048308d226d8d61bdfdd25eb8d41035d6bdffa1
+  JPImageresizerView: 55df6aeaf218ffec7d57c0a0d02ca898d227b808
   JPush: 8ce888d6dedfa417e90c8b6bc87405a16ce2e699
   JQCollectionViewWaterfallLayout: 4282a4b91ee9dc55a089420acd37f6202b544a8d
   JQLaunchAdKit: 5e232ae3c2879708166b28d190c8695d667471bd
   JSBadgeView: 3f5691b7d1bfacfb0237d0eb3b8b1f9a10ecb3f7
   JVFloatLabeledTextField: df48598472ee015701d509f43e59492a0d4ca208
-  JXCategoryView: 99cbbab7ed3fd2cb2484208c9f39461820d10a13
-  JXCategoryViewExt: c2d9630c604a763a5ee783872c9970f2c9591036
+  JXCategoryView: 262d503acea0b1278c79a1c25b7332ffaef4d518
+  JXCategoryViewExt: 5e8c00bd3f031d6ed403a95050cd1af30b847f77
   JXPagingView: afdd2e9af09c90160dd232b970d603cc6e7ddd0e
   JZNavigationExtension: 45284fc63ba48a9e55b020656d39c86b01ff6a63
   KakaJSON: cc5ff50a8c1cfbb09413db8496cb709a209e6137
@@ -1693,7 +1709,7 @@ SPEC CHECKSUMS:
   KSPhotoBrowser: 61059046ffdc6d8c47bc0a4ae4b5fef6395f7b53
   KxMenu: c025365712f55fa99feb7830fbb7dea0e912be72
   LBXPermission: e7f860ce1280599fc196a8c5dee713cbb81354d4
-  LEEAlert: 759f10b1a3c8123d88d40b685cbc43e6646b443c
+  LEEAlert: 79a42cf9b0b82b1d451f40f07558b101e5e00774
   LFPhoneInfo: 0b65b3165de77e03aaa2b2731c2ef8802958ee8d
   libwebp: 1786c9f4ff8a279e4dac1e8f385004d5fc253009
   LJContactManager: cebd9b2287b4aaa29b97789e7026e7c883426cbb
@@ -1714,7 +1730,7 @@ SPEC CHECKSUMS:
   MNFloatBtn: 9c5a2c398082db5b2590ec728983576e277258f0
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   MyLayout: 39ee012bd780936c973bdc5d8ce0f84e3de489d7
-  NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
+  NVActivityIndicatorView: fe52a6a68664c2df8991d7d9e3d86d8d19453c53
   ObjcAssociatedObjectHelpers: 686c291f292c26a49b9b1fa7d58130a8d35d59d2
   OrderedDictionary: 138c8d2e358d3a0c9adda15c6c7db24e8e3b09e6
   OSCache: 826996b68e8542a8a3d8af1ab0a0fc3070d8f357
@@ -1725,7 +1741,7 @@ SPEC CHECKSUMS:
   PPCounter: da37c0d8bfeeffe7ef4c331468203e17f2e30fbf
   PPGetAddressBook: e4b6b0a87e852df5d5b90c44ecd9ded7f6f1ccf6
   PPNumberButton: 4442ff64c21d91733057ca1b3dc05fb4df55f2c0
-  PPTextField: 34b5e67ba9892575134f6c351f11010503ea465c
+  PPTextField: 48fea74bb2982ab161de01f6a57491d01ac3fb00
   PulsingHalo: 1a9c6b65a8e12ac9eee1627fc8476efcce8e1918
   PureLayout: 5fb5e5429519627d60d079ccb1eaa7265ce7cf88
   PYSearch: 76dee18eea3309b60921a5d6a69390a63a5dda15
@@ -1734,18 +1750,18 @@ SPEC CHECKSUMS:
   REFormattedNumberField: 70fc5fb1218ebd5ee9983820defd12806d5c6ec6
   RETableViewManager: 0f24d796c42c0890d38c79cc9aeb3871e186726e
   REValidation: 38c4de1be58455f8b00aab208ac80db316a66b7f
-  Rickenbacker: 6b45f4820831ec710c57fa5ea468c5c85b60e7e2
+  Rickenbacker: 8cddd6e5791735cb129388dec9a2b5b5c8fb9138
   RKNotificationHub: e926748820d719f21ff374657a47fceefa1796b4
   RTRootNavigationController: ca443783baf6ff65a70c4d21ce0eedbbc1fec1fe
-  RxCocoa: 44a80de90e25b739b5aeaae3c8c371a32e3343cc
-  RxNetworks: 37aae47cb4c3f040a97fa805ab4402429df5025c
-  RxRelay: 45eaa5db8ee4fb50e5ebd57deec0159e97fa51e6
-  RxSwift: a4b44f7d24599f674deebd1818eab82e58410632
+  RxCocoa: f5609cb4637587a7faa99c5d5787e3ad582b75a4
+  RxNetworks: e634a349d7a8db631415961521e28a13f98216fb
+  RxRelay: 4151ba01152436b08271e08410135e099880eae5
+  RxSwift: b9a93a26031785159e11abd40d1a55bcb8057e52
   SCLAlertView-Objective-C: c17253cf0ce7543de3f9e4c7bd9341c1dd55c175
   SDAutoLayout: 8bf6b3bbc8b01f775d4defbb4fda2ace805461be
   SDMovableCellCollectionView: 4a5197c6a7f9f7d50a1a3c155ec2146598f494d0
-  SDWebImage: 40b0b4053e36c660a764958bff99eed16610acbb
-  SDWebImageWebPCoder: c94f09adbca681822edad9e532ac752db713eabf
+  SDWebImage: a79252b60f4678812d94316c91da69ec83089c9f
+  SDWebImageWebPCoder: e38c0a70396191361d60c092933e22c20d5b1380
   SGQRCode: 6ad664d63f38f2842503bc5087812c5a3136d924
   SJAttributesFactory: 16cd39e6c0e538933db05ddc06d23c8608b13216
   SJBaseVideoPlayer: f15debaa8c1e27b63bdefc8caeec515e9c71d079
@@ -1769,7 +1785,7 @@ SPEC CHECKSUMS:
   TTCTool: 0c349b891197f06604b75eafc80eb3f6e7fc2298
   TTGTagCollectionView: 0d4625aaf7ee3ad755c39d549368a4ce69bd17d1
   TYCyclePagerView: 2b051dade0615c70784aa34f40c646feeddb7344
-  TZImagePickerController: f1c9f1cae6ac0e30b31aaa9698f9bf4a7cf5b84f
+  TZImagePickerController: 5f35bb7266552e36ca834bafa955b869fe086124
   UICKeyChainStore: ba3bff2c762b12db1e516f395c837dd25298b05e
   UICountingLabel: 1db4e7d023e1762171eb226d6dff47a7a84f27aa
   UINavigation-SXFixSpace: 10f223253ebff2ceefa26694e23b7694269763c4
@@ -1777,14 +1793,14 @@ SPEC CHECKSUMS:
   UITableViewDynamicLayoutCacheHeight: 4fabd95e944317cc7cd7ead3c56915d9527432dd
   "UIView+FDCollapsibleConstraints": 9357eaf03b4e088263ab74a3b86a382a64ce38dd
   UMABTest: e35a7be1f4401640f780d95b403d98794d65c6aa
-  UMAPM: 7c164a13d61a0c99790b5aabbb5c546afa94aa8e
+  UMAPM: a52ef6d5be72dd11591b917d96df97627970dae6
   UMCCommonLog: bea707e50c85cef4b0eb47cc5c7226bb843245ca
-  UMCommon: 9399105b64e099c3c66aad21fc85ae695567a1f1
+  UMCommon: 8b4cd0423297c39bca6eea1ec896558b40e5bcf7
   UMCSecurityPlugins: 0831a08f3988f3cea9f1d3a7626cd9bee4fef150
   UMDevice: dcdf7ec167387837559d149fbc7d793d984faf82
   UMLink: d5047e2716c2571d120d890af0f7a41d1b5e5224
   UMPush: 057de32a6766ece4b23f308e5951fe92ccf7da26
-  UMShare: 92c3b9361204a63236d134b359775c3795297e88
+  UMShare: edb49e162824e2ddd61ef53a7c6e92d64f3c13b5
   VVManager: a42c835c1f566d96b62fbd2466bfc1187e1e4cd3
   WMDragView: 18f2c5d18c350ea4b0ac1cc64066abfe5caea443
   WMZBanner: 42d02896dc7a67a4d7a2ebe1ef5b7a79f8d2c540
@@ -1800,7 +1816,7 @@ SPEC CHECKSUMS:
   XLForm: a439f9512078ed538e8335c8b06d3f3286bbfd37
   XXShield: c3095b2e1f0e29bc9f660be1eea01813b557cd99
   YBHandyList: bf0bf2803bb35569863fe63fd25f4541a4e5fe68
-  YBPopupMenu: ace6d58993c6013e44eea203fd5d1e00a039a0b6
+  YBPopupMenu: e67e5af42cf242cee89a6dd0c38cb814a1e91c17
   Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
   YPNavigationBarTransition: d3d8c0e4cced41dec43647832bb45737d79cc8b0
   YTKKeyValueStore: 4d002941540dd5108fa23009b71e0f2f937f7a0f
@@ -1819,7 +1835,7 @@ SPEC CHECKSUMS:
   ZJKitTool: 6d8763ce3f1570924ea106f28bfaf7b01d791a86
   ZLCellDataSource: 7b78bded737174201489a8de478b55a9f2155bf8
   ZLCollectionViewFlowLayout: c99024652ce9f0c57d33ab53052c9b85e4a936b7
-  ZLPhotoBrowser: 4d859a9d6462ba055d817b2235278a7b74e69eff
+  ZLPhotoBrowser: 68ab8554845ce05a41d49f293a0e30beb519101f
   ZQSearch: de5e8f91ee215d891bb8345ecae9094d04fef73a
   ZXEmptyView: fef820f53b26eaa88261335066493090f625e914
   ZXNavigationBar: a8ceb13fe37f9ca894cf6ae22d805cbdbb9ad6b1
@@ -1829,6 +1845,6 @@ SPEC CHECKSUMS:
   ZYBannerView: 7a1c76cab9a5438bf5c7529b8fc99cacb5af5898
   ZYCornerRadius: f0af817be7805b5c63d793042ca7a03f81e14069
 
-PODFILE CHECKSUM: 76ef4ae898d1fdff7f2f3e9ba31b9986c3b21e14
+PODFILE CHECKSUM: 43a5f7eebac7b2c32c87c5dd55c744e383cb90ad
 
 COCOAPODS: 1.14.2

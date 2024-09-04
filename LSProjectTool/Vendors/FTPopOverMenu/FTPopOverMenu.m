@@ -781,6 +781,7 @@ typedef NS_ENUM(NSUInteger, FTPopOverMenuArrowDirection) {
         menuHeight = self.config.optionsListLimitHeight;
     }
     
+    // 判断箭头方向，
     if (senderRect.origin.y + senderRect.size.height/2  < KSCREEN_HEIGHT/2) {
         arrowDirection = FTPopOverMenuArrowDirectionUp;
         menuArrowPoint.y = 0;
@@ -792,10 +793,10 @@ typedef NS_ENUM(NSUInteger, FTPopOverMenuArrowDirection) {
     if (menuArrowPoint.x + self.config.menuWidth/2 + self.config.horizontalMargin > KSCREEN_WIDTH) {
         menuArrowPoint.x = MIN(menuArrowPoint.x - (KSCREEN_WIDTH - self.config.menuWidth - self.config.horizontalMargin), self.config.menuWidth - self.menuArrowWidth - self.config.horizontalMargin);
         menuX = KSCREEN_WIDTH - self.config.menuWidth - self.config.horizontalMargin;
-    }else if (menuArrowPoint.x - self.config.menuWidth/2 - self.config.horizontalMargin < 0){
+    } else if (menuArrowPoint.x - self.config.menuWidth/2 - self.config.horizontalMargin < 0) {
         menuArrowPoint.x = MAX(FTDefaultMenuCornerRadius + self.menuArrowWidth, menuArrowPoint.x - self.config.horizontalMargin);
         menuX = self.config.horizontalMargin;
-    }else{
+    } else {
         menuArrowPoint.x = self.config.menuWidth/2;
         menuX = senderRect.origin.x + (senderRect.size.width)/2 - self.config.menuWidth/2;
     }

@@ -310,10 +310,24 @@
 
 #pragma mark Private action
 - (UIImageView *)snapshotViewWithInputView:(UIView *)inputView {
-    UIGraphicsBeginImageContextWithOptions(inputView.bounds.size, NO, 0);
-    [inputView.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    
+    UIImage *image;
+    if (@available(iOS 17.0, *)) { // iOS17.UIGraphicsBeginImageContext被deprecated了
+        UIGraphicsImageRendererFormat *format = [[UIGraphicsImageRendererFormat alloc] init];
+        format.opaque = NO;
+        format.scale = 0;
+        UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:inputView.bounds.size format:format];
+        image = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
+            CGContextRef context = rendererContext.CGContext;
+            [inputView.layer renderInContext:context];
+        }];
+    } else {
+        UIGraphicsBeginImageContextWithOptions(inputView.bounds.size, NO, 0);
+        [inputView.layer renderInContext:UIGraphicsGetCurrentContext()];
+        image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    }
+    
     UIImageView *snapshot = [[UIImageView alloc] initWithImage:image];
     snapshot.alpha = 0.85;
     return snapshot;

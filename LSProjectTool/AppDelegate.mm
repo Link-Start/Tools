@@ -94,7 +94,15 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+    
+    if (@available(iOS 17.0, *)) {
+        //iOS17.0，applicationIconBadgeNumber属性被废弃，
+        // 建议使用[UNUserNotificationCenter setBadgeCount:withCompletionHandler:]
+//
+    } else {
+        
+        [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    }
 }
 
 /// app 将重新回到前台
@@ -103,12 +111,19 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     //当 App 刚刚启动，而不是从后台取出的时候，此方法不走
-    [application setApplicationIconBadgeNumber:0];
-//    if (@available(iOS 10.0, *)) {
-//        [UNUserNotificationCenter removeAllPendingNotificationRequests];
-//    } else {
+    if (@available(iOS 17.0, *)) {
+        //iOS17.0，applicationIconBadgeNumber属性被废弃，
+        // 建议使用[UNUserNotificationCenter setBadgeCount:withCompletionHandler:]
+//
+    } else {
+        [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    }
+    
+    if (@available(iOS 10.0, *)) {
+//        [UNUserNotificationCenter removeAllPendingNotificationRequests]
+    } else {
         [application cancelAllLocalNotifications];
-//    }
+    }
 }
 /**
  对比 applicationWillEnterForeground 和 applicationDidBecomeActive

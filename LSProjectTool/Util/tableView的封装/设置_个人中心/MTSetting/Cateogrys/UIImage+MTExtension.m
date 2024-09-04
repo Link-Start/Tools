@@ -44,13 +44,25 @@
 + (UIImage *)imageWithColor:(UIColor *)color
 {
     CGRect rect = CGRectMake(0, 0, 1, 1);
-    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
-    [color setFill];
-    UIRectFill(rect);
+    UIImage *image;
     
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
+    if (@available(iOS 17.0, *)) { // iOS17.UIGraphicsBeginImageContext被deprecated了
+        UIGraphicsImageRendererFormat *format = [[UIGraphicsImageRendererFormat alloc] init];
+        format.opaque = NO;
+        format.scale = 0;
+        UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:rect.size format:format];
+        image = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
+//            CGContextRef context = rendererContext.CGContext;
+            [color setFill];
+            UIRectFill(rect);
+        }];
+    } else {
+        UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
+        [color setFill];
+        UIRectFill(rect);
+        image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    }
     return image;
 }
 
@@ -75,11 +87,22 @@
         finalRect = CGRectMake(0, (size.height - finalH)/2, finalW, finalH);
     }
     
-    UIGraphicsBeginImageContextWithOptions(size, NO, 1.0f);
-    [self drawInRect:finalRect];
-    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
+    UIImage *img;
+    if (@available(iOS 17.0, *)) { // iOS17.UIGraphicsBeginImageContext被deprecated了
+        UIGraphicsImageRendererFormat *format = [[UIGraphicsImageRendererFormat alloc] init];
+        format.opaque = NO;
+        format.scale = 1.0f;
+        UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:size format:format];
+        img = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
+//            CGContextRef context = rendererContext.CGContext;
+            [self drawInRect:finalRect];
+        }];
+    } else {
+        UIGraphicsBeginImageContextWithOptions(size, NO, 1.0f);
+        [self drawInRect:finalRect];
+        img = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    }
     return img;
 }
 
@@ -171,30 +194,43 @@
 
 - (UIImage *)circleImage
 {
-    // 开始图形上下文
-    UIGraphicsBeginImageContextWithOptions(self.size, NO, 0.0);
     
-    // 获得图形上下文
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
-    
-    // 设置一个范围
-    CGRect rect = CGRectMake(0, 0, self.size.width, self.size.height);
-    
-    // 根据一个rect创建一个椭圆
-    CGContextAddEllipseInRect(ctx, rect);
-    
-    // 裁剪
-    CGContextClip(ctx);
-    
-    // 将原照片画到图形上下文
-    [self drawInRect:rect];
-    
-    // 从上下文上获取剪裁后的照片
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    
-    // 关闭上下文
-    UIGraphicsEndImageContext();
-    
+    UIImage *newImage;
+    if (@available(iOS 17.0, *)) { // iOS17.UIGraphicsBeginImageContext被deprecated了
+        UIGraphicsImageRendererFormat *format = [[UIGraphicsImageRendererFormat alloc] init];
+        format.opaque = NO;
+        format.scale = 0.0;
+        UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:self.size format:format];
+        newImage = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
+            CGContextRef ctx = rendererContext.CGContext;
+            // 设置一个范围
+            CGRect rect = CGRectMake(0, 0, self.size.width, self.size.height);
+            // 根据一个rect创建一个椭圆
+            CGContextAddEllipseInRect(ctx, rect);
+            // 裁剪
+            CGContextClip(ctx);
+            // 将原照片画到图形上下文
+            [self drawInRect:rect];
+        }];
+    } else {
+        
+        // 开始图形上下文
+        UIGraphicsBeginImageContextWithOptions(self.size, NO, 0.0);
+        // 获得图形上下文
+        CGContextRef ctx = UIGraphicsGetCurrentContext();
+        // 设置一个范围
+        CGRect rect = CGRectMake(0, 0, self.size.width, self.size.height);
+        // 根据一个rect创建一个椭圆
+        CGContextAddEllipseInRect(ctx, rect);
+        // 裁剪
+        CGContextClip(ctx);
+        // 将原照片画到图形上下文
+        [self drawInRect:rect];
+        // 从上下文上获取剪裁后的照片
+        newImage = UIGraphicsGetImageFromCurrentImageContext();
+        // 关闭上下文
+        UIGraphicsEndImageContext();
+    }
     return newImage;
 }
 

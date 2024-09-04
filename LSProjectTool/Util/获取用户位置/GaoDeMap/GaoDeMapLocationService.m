@@ -66,7 +66,7 @@
         _locationManager.locationTimeout = 10;
         //设置逆地理超时时间
         _locationManager.reGeocodeTimeout = 10;
-        
+         
         // 设置开启虚拟定位风险监测，可以根据需要开启
 //        _locationManager.detectRiskOfFakeLocation = NO;
         /////连续定位是否返回逆地理信息，默认NO。
@@ -178,7 +178,7 @@
     NSLog(@"定位权限状态改变时回调函数。注意：iOS13及之前版本回调");
     if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse ||
         [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways) {
-//        [[NSNotificationCenter defaultCenter] postNotificationName:OPLocationAuthStatusChangeNotification object:nil];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:OPLocationAuthStatusChangeNotification object:nil  userInfo:@{@"authStatus":@(status)}];
     }
 }
 
@@ -187,7 +187,10 @@
     NSLog(@"定位权限状态改变时回调函数。注意：iOS14及之后版本回调");
     if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse ||
         [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways) {
-//        [[NSNotificationCenter defaultCenter] postNotificationName:OPLocationAuthStatusChangeNotification object:nil];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:OPLocationAuthStatusChangeNotification object:nil  userInfo:@{@"authStatus":@([CLLocationManager authorizationStatus])}];
+        
+        // int status = (int)(notif.userInfo[@"authStatus"]);
+        //
     }
 }
 

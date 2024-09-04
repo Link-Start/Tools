@@ -103,11 +103,23 @@
 }
 
 - (UIImage *)stretchableWithImage:(UIImage *)image {
-    UIGraphicsBeginImageContextWithOptions(self.frame.size, NO, 0.f);
-    [image drawInRect:self.bounds];
-    UIImage *lastImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return lastImage;
+    if (@available(iOS 17.0, *)) {
+        UIGraphicsImageRendererFormat *format = [[UIGraphicsImageRendererFormat alloc] init];
+        format.opaque = NO;
+        format.scale = 0.f;
+        UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:self.frame.size format:format];
+        UIImage *lastImage = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
+//            CGContextRef context = rendererContext.CGContext;
+            [image drawInRect:self.bounds];
+        }];
+        return lastImage;
+    } else {
+        UIGraphicsBeginImageContextWithOptions(self.frame.size, NO, 0.f);
+        [image drawInRect:self.bounds];
+        UIImage *lastImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        return lastImage;
+    }
 }
 
 @end

@@ -128,10 +128,23 @@ typedef NS_ENUM(NSUInteger, XWDragCellCollectionViewScrollDirection) {
     _isPanning = YES;
     UICollectionViewCell *cell = [self cellForItemAtIndexPath:_originalIndexPath];
     UIImage *snap;
-    UIGraphicsBeginImageContextWithOptions(cell.bounds.size, 1.0f, 0);
-    [cell.layer renderInContext:UIGraphicsGetCurrentContext()];
-    snap = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    
+    if (@available(iOS 17.0, *)) { // iOS17.UIGraphicsBeginImageContext被deprecated了
+        UIGraphicsImageRendererFormat *format = [[UIGraphicsImageRendererFormat alloc] init];
+        format.opaque = 1.0f;
+        format.scale = 0;
+        UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:cell.bounds.size format:format];
+        snap = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
+            CGContextRef context = rendererContext.CGContext;
+            [cell.layer renderInContext:UIGraphicsGetCurrentContext()];
+        }];
+    } else {
+        UIGraphicsBeginImageContextWithOptions(cell.bounds.size, 1.0f, 0);
+        [cell.layer renderInContext:UIGraphicsGetCurrentContext()];
+        snap = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    }
+    
     UIView *tempMoveCell = [UIView new];
     tempMoveCell.layer.contents = (__bridge id)snap.CGImage;
     cell.hidden = YES;

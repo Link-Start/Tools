@@ -491,7 +491,7 @@ if ([v1 compare:v2 options:NSNumericSearch] == NSOrderedDescending) {\
 #pragma mark - Judge 判断
 // 判断它是否是空字符串。
 // 判断它是否是空字符串。undefined
-#define kLS_IsEmptyString(str) ((str == nil) || [str isKindOfClass:[NSNull class]] || (str == NULL) || ([str isEqualToString:@"null"])  || ([str isEqualToString:@"<null>"]) || ([str isEqualToString:@"<NULL>"]) || ([str isEqualToString:@"(null)"]) || ([str isEqualToString:@"(NULL)"]) || ([str isEqualToString:@"undefined"]) || ([str isKindOfClass:[NSString class]] && str.length <= 0))
+#define kLS_IsEmptyString(str) ((str == nil) || [str isKindOfClass:[NSNull class]] || (str == NULL) || ([str isEqualToString:@"null"]) || ([str isEqualToString:@"<null>"]) || ([str isEqualToString:@"<NULL>"]) || ([str isEqualToString:@"(null)"]) || ([str isEqualToString:@"(NULL)"]) || ([str isEqualToString:@"undefined"]) || ([str isKindOfClass:[NSString class]] && str.length <= 0))
 // 判断它是否为nil或null对象。
 #define kLS_IsEmptyObject(obj) ((obj == nil) || (obj == NULL) || [obj isKindOfClass:[NSNull class]])
 // 判断它是否是一个有效的字典。

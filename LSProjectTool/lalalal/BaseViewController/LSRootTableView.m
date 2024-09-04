@@ -45,6 +45,24 @@
 //    rect.origin.y          = rect.origin.y - [tableView contentOffset].y;
 //    CGRect imageViewRect   = imageView.frame;
 //    imageViewRect.origin.y = rect.origin.y + imageViewRect.origin.y + imageView.frame.size.height/2;
+    
+    
+    
+    
+    /// 滚动到某个section 的 sectionHeadView
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+//        [self.tableView reloadData];
+//        [self.tableView layoutIfNeeded];
+        
+//        if (section.row.count > 0) { // 分区section中的row > 0
+//            [self.tableView scrollToRow:0 inSection:self.tableView atScrollPosition:UITableViewScrollPositionTop animated:YES];
+//
+//        } else { // 分区section 中的 row = 0，用 scrollToRow 会崩溃
+//            CGRect headerViewFrame = [self.tableView rectForHeaderInSection:self.selectIndex];
+//            [self.tableView setContentOffset:CGPointMake(headerViewFrame.origin.x, headerViewFrame.origin.y) animated:YES];
+//        }
+    });
 }
 
 #pragma mark - 刷新

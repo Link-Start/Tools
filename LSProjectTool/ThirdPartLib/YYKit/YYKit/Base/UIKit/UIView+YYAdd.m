@@ -19,10 +19,22 @@ YYSYNTH_DUMMY_CLASS(UIView_YYAdd)
 @implementation UIView (YYAdd)
 
 - (UIImage *)snapshotImage {
-    UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.opaque, 0);
-    [self.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *snap = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    UIImage *snap;
+    if (@available(iOS 17.0, *)) {
+        UIGraphicsImageRendererFormat *format = [[UIGraphicsImageRendererFormat alloc] init];
+        format.opaque = self.opaque;
+        format.scale = 0;
+        UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:self.bounds.size format:format];
+        snap = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
+            CGContextRef context = rendererContext.CGContext;
+            [self.layer renderInContext:context];
+        }];
+    } else {
+        UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.opaque, 0);
+        [self.layer renderInContext:UIGraphicsGetCurrentContext()];
+        snap = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    }
     return snap;
 }
 
@@ -30,10 +42,22 @@ YYSYNTH_DUMMY_CLASS(UIView_YYAdd)
     if (![self respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)]) {
         return [self snapshotImage];
     }
-    UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.opaque, 0);
-    [self drawViewHierarchyInRect:self.bounds afterScreenUpdates:afterUpdates];
-    UIImage *snap = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    UIImage *snap;
+    if (@available(iOS 17.0, *)) {
+        UIGraphicsImageRendererFormat *format = [[UIGraphicsImageRendererFormat alloc] init];
+        format.opaque = self.opaque;
+        format.scale = 0;
+        UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:self.bounds.size format:format];
+        snap = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
+//            CGContextRef context = rendererContext.CGContext;
+            [self drawViewHierarchyInRect:self.bounds afterScreenUpdates:afterUpdates];
+        }];
+    } else {
+        UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.opaque, 0);
+        [self drawViewHierarchyInRect:self.bounds afterScreenUpdates:afterUpdates];
+        snap = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    }
     return snap;
 }
 

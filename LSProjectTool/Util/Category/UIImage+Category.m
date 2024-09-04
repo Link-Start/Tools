@@ -34,11 +34,26 @@
  */
 + (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size
 {
-    UIGraphicsBeginImageContextWithOptions(size, 0, [UIScreen mainScreen].scale);
-    [color set];
-    UIRectFill(CGRectMake(0, 0, size.width, size.height));
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    
+    UIImage *image;
+    
+    if (@available(iOS 17.0, *)) { // iOS17.UIGraphicsBeginImageContext被deprecated了
+        UIGraphicsImageRendererFormat *format = [[UIGraphicsImageRendererFormat alloc] init];
+        format.opaque = 0;
+        format.scale = [UIScreen mainScreen].scale;
+        UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:size format:format];
+        image = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
+//            CGContextRef context = rendererContext.CGContext;
+            [color set];
+            UIRectFill(CGRectMake(0, 0, size.width, size.height));
+        }];
+    } else {
+        UIGraphicsBeginImageContextWithOptions(size, 0, [UIScreen mainScreen].scale);
+        [color set];
+        UIRectFill(CGRectMake(0, 0, size.width, size.height));
+        image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    }
     return image;
 }
 /**
@@ -125,57 +140,113 @@
                           borderColor:(UIColor *)borderColor
                        borderLineJoin:(CGLineJoin)borderLineJoin {
     
-    UIGraphicsBeginImageContextWithOptions(self.size, NO, self.scale);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGRect rect = CGRectMake(0, 0, self.size.width, self.size.height);
-    CGContextScaleCTM(context, 1, -1);
-    CGContextTranslateCTM(context, 0, -rect.size.height);
+    UIImage *image;
     
-    CGFloat minSize = MIN(self.size.width, self.size.height);
-    if (borderWidth < minSize / 2) {
-        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectInset(rect, borderWidth, borderWidth) byRoundingCorners:corners cornerRadii:CGSizeMake(radius, borderWidth)];
-        [path closePath];
+    if (@available(iOS 17.0, *)) { // iOS17.UIGraphicsBeginImageContext被deprecated了
+        UIGraphicsImageRendererFormat *format = [[UIGraphicsImageRendererFormat alloc] init];
+        format.opaque = NO;
+        format.scale = self.scale;
+        UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:self.size format:format];
+        image = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
+            CGContextRef context = rendererContext.CGContext;
+            CGRect rect = CGRectMake(0, 0, self.size.width, self.size.height);
+            CGContextScaleCTM(context, 1, -1);
+            CGContextTranslateCTM(context, 0, -rect.size.height);
+            
+            CGFloat minSize = MIN(self.size.width, self.size.height);
+            if (borderWidth < minSize / 2) {
+                UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectInset(rect, borderWidth, borderWidth) byRoundingCorners:corners cornerRadii:CGSizeMake(radius, borderWidth)];
+                [path closePath];
+                
+                CGContextSaveGState(context);
+                [path addClip];
+                CGContextDrawImage(context, rect, self.CGImage);
+                CGContextRestoreGState(context);
+            }
+            
+            if (borderColor && borderWidth < minSize / 2 && borderWidth > 0) {
+                CGFloat strokeInset = (floor(borderWidth * self.scale) + 0.5) / self.scale;
+                CGRect strokeRect = CGRectInset(rect, strokeInset, strokeInset);
+                CGFloat strokeRadius = radius > self.scale / 2 ? radius - self.scale / 2 : 0;
+                UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:strokeRect byRoundingCorners:corners cornerRadii:CGSizeMake(strokeRadius, borderWidth)];
+                [path closePath];
+                
+                path.lineWidth = borderWidth;
+                path.lineJoinStyle = borderLineJoin;
+                [borderColor setStroke];
+                [path stroke];
+            }
+        }];
+    } else {
+        UIGraphicsBeginImageContextWithOptions(self.size, NO, self.scale);
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        CGRect rect = CGRectMake(0, 0, self.size.width, self.size.height);
+        CGContextScaleCTM(context, 1, -1);
+        CGContextTranslateCTM(context, 0, -rect.size.height);
         
-        CGContextSaveGState(context);
-        [path addClip];
-        CGContextDrawImage(context, rect, self.CGImage);
-        CGContextRestoreGState(context);
-    }
-    
-    if (borderColor && borderWidth < minSize / 2 && borderWidth > 0) {
-        CGFloat strokeInset = (floor(borderWidth * self.scale) + 0.5) / self.scale;
-        CGRect strokeRect = CGRectInset(rect, strokeInset, strokeInset);
-        CGFloat strokeRadius = radius > self.scale / 2 ? radius - self.scale / 2 : 0;
-        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:strokeRect byRoundingCorners:corners cornerRadii:CGSizeMake(strokeRadius, borderWidth)];
-        [path closePath];
+        CGFloat minSize = MIN(self.size.width, self.size.height);
+        if (borderWidth < minSize / 2) {
+            UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectInset(rect, borderWidth, borderWidth) byRoundingCorners:corners cornerRadii:CGSizeMake(radius, borderWidth)];
+            [path closePath];
+            
+            CGContextSaveGState(context);
+            [path addClip];
+            CGContextDrawImage(context, rect, self.CGImage);
+            CGContextRestoreGState(context);
+        }
         
-        path.lineWidth = borderWidth;
-        path.lineJoinStyle = borderLineJoin;
-        [borderColor setStroke];
-        [path stroke];
+        if (borderColor && borderWidth < minSize / 2 && borderWidth > 0) {
+            CGFloat strokeInset = (floor(borderWidth * self.scale) + 0.5) / self.scale;
+            CGRect strokeRect = CGRectInset(rect, strokeInset, strokeInset);
+            CGFloat strokeRadius = radius > self.scale / 2 ? radius - self.scale / 2 : 0;
+            UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:strokeRect byRoundingCorners:corners cornerRadii:CGSizeMake(strokeRadius, borderWidth)];
+            [path closePath];
+            
+            path.lineWidth = borderWidth;
+            path.lineJoinStyle = borderLineJoin;
+            [borderColor setStroke];
+            [path stroke];
+        }
+        
+        image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
     }
-    
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
     return image;
 }
 
 ///得到圆形图片
 - (UIImage *)getCircleImage {
     
-    UIGraphicsBeginImageContextWithOptions(self.size, NO, 0.0);
-    // 获取上下文
-    CGContextRef ctr = UIGraphicsGetCurrentContext();
-    // 设置圆形
-    CGRect rect = CGRectMake(0, 0, self.size.width, self.size.height);
-    CGContextAddEllipseInRect(ctr, rect);
-    // 裁剪
-    CGContextClip(ctr);
-    // 将图片画上去
-    [self drawInRect:rect];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
+    UIImage *image;
+    if (@available(iOS 17.0, *)) { // iOS17.UIGraphicsBeginImageContext被deprecated了
+        UIGraphicsImageRendererFormat *format = [[UIGraphicsImageRendererFormat alloc] init];
+        format.opaque = NO;
+        format.scale = 0.0;
+        UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:self.size format:format];
+        image = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
+            CGContextRef context = rendererContext.CGContext;
+            // 设置圆形
+            CGRect rect = CGRectMake(0, 0, self.size.width, self.size.height);
+            CGContextAddEllipseInRect(context, rect);
+            // 裁剪
+            CGContextClip(context);
+            // 将图片画上去
+            [self drawInRect:rect];
+        }];
+    } else {
+        UIGraphicsBeginImageContextWithOptions(self.size, NO, 0.0);
+        // 获取上下文
+        CGContextRef ctr = UIGraphicsGetCurrentContext();
+        // 设置圆形
+        CGRect rect = CGRectMake(0, 0, self.size.width, self.size.height);
+        CGContextAddEllipseInRect(ctr, rect);
+        // 裁剪
+        CGContextClip(ctr);
+        // 将图片画上去
+        [self drawInRect:rect];
+        image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    }
     return image;
 }
 

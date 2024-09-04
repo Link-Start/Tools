@@ -51,12 +51,27 @@ static NSString * const kSharedClearIconKey = @"SharedClearIcon";
     }
     
     CGRect frame = (CGRect){0, 0, (cornerRadius*2.0f) + 1, (cornerRadius*2.0f) + 1};
-    UIGraphicsBeginImageContextWithOptions(frame.size, NO, 0.0f);
-    UIBezierPath *path = [TOSearchBar bezierPathWithIOS7RoundedRect:frame cornerRadius:cornerRadius];
-    [[UIColor blackColor] set];
-    [path fill];
-    image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    
+    if (@available(iOS 17.0, *)) { // iOS17.UIGraphicsBeginImageContext被deprecated了
+        UIGraphicsImageRendererFormat *format = [[UIGraphicsImageRendererFormat alloc] init];
+        format.opaque = NO;
+        format.scale = 0.0f;
+        UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:frame.size format:format];
+        image = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
+//            CGContextRef context = rendererContext.CGContext;
+            UIBezierPath *path = [TOSearchBar bezierPathWithIOS7RoundedRect:frame cornerRadius:cornerRadius];
+            [[UIColor blackColor] set];
+            [path fill];
+        }];
+        
+    } else {
+        UIGraphicsBeginImageContextWithOptions(frame.size, NO, 0.0f);
+        UIBezierPath *path = [TOSearchBar bezierPathWithIOS7RoundedRect:frame cornerRadius:cornerRadius];
+        [[UIColor blackColor] set];
+        [path fill];
+        image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    }
     
     image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(cornerRadius, cornerRadius, cornerRadius, cornerRadius)];
@@ -73,49 +88,92 @@ static NSString * const kSharedClearIconKey = @"SharedClearIcon";
         return image;
     }
 
+    if (@available(iOS 17.0, *)) { // iOS17.UIGraphicsBeginImageContext被deprecated了
+        UIGraphicsImageRendererFormat *format = [[UIGraphicsImageRendererFormat alloc] init];
+        format.opaque = NO;
+        format.scale = 0.0f;
+        UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:(CGSize){14,14} format:format];
+        image = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
+            CGContextRef context = rendererContext.CGContext;
+            //// Circle Drawing
+            UIBezierPath* circlePath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(0.55, 0.55, 9.95, 9.95)];
+            CGContextSaveGState(context);
+            [circlePath addClip];
+            CGContextTranslateCTM(context, 1, 86);
+            CGContextScaleCTM(context, 1, -1);
+            CGContextTranslateCTM(context, 0, -image.size.height);
+            CGContextDrawImage(context, CGRectMake(0, 0, image.size.width, image.size.height), image.CGImage);
+            CGContextRestoreGState(context);
+            [UIColor.blackColor setStroke];
+            circlePath.lineWidth = 1.1;
+            [circlePath stroke];
+            
+            //// Handle Drawing
+            UIBezierPath* handlePath = [UIBezierPath bezierPath];
+            [handlePath moveToPoint: CGPointMake(13.21, 12.2)];
+            [handlePath addLineToPoint: CGPointMake(13.21, 12.2)];
+            [handlePath addCurveToPoint: CGPointMake(13.74, 12.73) controlPoint1: CGPointMake(13.74, 12.73) controlPoint2: CGPointMake(13.74, 12.73)];
+            [handlePath addLineToPoint: CGPointMake(13.74, 12.73)];
+            [handlePath addCurveToPoint: CGPointMake(13.74, 13.78) controlPoint1: CGPointMake(14.03, 13.02) controlPoint2: CGPointMake(14.03, 13.49)];
+            [handlePath addLineToPoint: CGPointMake(13.74, 13.78)];
+            [handlePath addLineToPoint: CGPointMake(13.74, 13.78)];
+            [handlePath addLineToPoint: CGPointMake(13.74, 13.78)];
+            [handlePath addLineToPoint: CGPointMake(13.74, 13.78)];
+            [handlePath addLineToPoint: CGPointMake(13.74, 13.78)];
+            [handlePath addCurveToPoint: CGPointMake(12.68, 13.78) controlPoint1: CGPointMake(13.45, 14.07) controlPoint2: CGPointMake(12.97, 14.07)];
+            [handlePath addLineToPoint: CGPointMake(12.68, 13.78)];
+            [handlePath addLineToPoint: CGPointMake(12.68, 13.78)];
+            [handlePath addLineToPoint: CGPointMake(8.33, 9.46)];
+            [handlePath addLineToPoint: CGPointMake(9.38, 8.41)];
+            [handlePath addLineToPoint: CGPointMake(13.21, 12.2)];
+            [handlePath closePath];
+            [UIColor.blackColor setFill];
+            [handlePath fill];
+        }];
+    } else
     if (@available(iOS 11.0, *)) {
-        UIGraphicsBeginImageContextWithOptions((CGSize){14,14}, NO, 0.0f);
-
-        CGContextRef context = UIGraphicsGetCurrentContext();
-        
-        //// Circle Drawing
-        UIBezierPath* circlePath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(0.55, 0.55, 9.95, 9.95)];
-        CGContextSaveGState(context);
-        [circlePath addClip];
-        CGContextTranslateCTM(context, 1, 86);
-        CGContextScaleCTM(context, 1, -1);
-        CGContextTranslateCTM(context, 0, -image.size.height);
-        CGContextDrawImage(context, CGRectMake(0, 0, image.size.width, image.size.height), image.CGImage);
-        CGContextRestoreGState(context);
-        [UIColor.blackColor setStroke];
-        circlePath.lineWidth = 1.1;
-        [circlePath stroke];
-        
-        
-        //// Handle Drawing
-        UIBezierPath* handlePath = [UIBezierPath bezierPath];
-        [handlePath moveToPoint: CGPointMake(13.21, 12.2)];
-        [handlePath addLineToPoint: CGPointMake(13.21, 12.2)];
-        [handlePath addCurveToPoint: CGPointMake(13.74, 12.73) controlPoint1: CGPointMake(13.74, 12.73) controlPoint2: CGPointMake(13.74, 12.73)];
-        [handlePath addLineToPoint: CGPointMake(13.74, 12.73)];
-        [handlePath addCurveToPoint: CGPointMake(13.74, 13.78) controlPoint1: CGPointMake(14.03, 13.02) controlPoint2: CGPointMake(14.03, 13.49)];
-        [handlePath addLineToPoint: CGPointMake(13.74, 13.78)];
-        [handlePath addLineToPoint: CGPointMake(13.74, 13.78)];
-        [handlePath addLineToPoint: CGPointMake(13.74, 13.78)];
-        [handlePath addLineToPoint: CGPointMake(13.74, 13.78)];
-        [handlePath addLineToPoint: CGPointMake(13.74, 13.78)];
-        [handlePath addCurveToPoint: CGPointMake(12.68, 13.78) controlPoint1: CGPointMake(13.45, 14.07) controlPoint2: CGPointMake(12.97, 14.07)];
-        [handlePath addLineToPoint: CGPointMake(12.68, 13.78)];
-        [handlePath addLineToPoint: CGPointMake(12.68, 13.78)];
-        [handlePath addLineToPoint: CGPointMake(8.33, 9.46)];
-        [handlePath addLineToPoint: CGPointMake(9.38, 8.41)];
-        [handlePath addLineToPoint: CGPointMake(13.21, 12.2)];
-        [handlePath closePath];
-        [UIColor.blackColor setFill];
-        [handlePath fill];
-
-        image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
+            UIGraphicsBeginImageContextWithOptions((CGSize){14,14}, NO, 0.0f);
+            
+            CGContextRef context = UIGraphicsGetCurrentContext();
+            
+            //// Circle Drawing
+            UIBezierPath* circlePath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(0.55, 0.55, 9.95, 9.95)];
+            CGContextSaveGState(context);
+            [circlePath addClip];
+            CGContextTranslateCTM(context, 1, 86);
+            CGContextScaleCTM(context, 1, -1);
+            CGContextTranslateCTM(context, 0, -image.size.height);
+            CGContextDrawImage(context, CGRectMake(0, 0, image.size.width, image.size.height), image.CGImage);
+            CGContextRestoreGState(context);
+            [UIColor.blackColor setStroke];
+            circlePath.lineWidth = 1.1;
+            [circlePath stroke];
+            
+            
+            //// Handle Drawing
+            UIBezierPath* handlePath = [UIBezierPath bezierPath];
+            [handlePath moveToPoint: CGPointMake(13.21, 12.2)];
+            [handlePath addLineToPoint: CGPointMake(13.21, 12.2)];
+            [handlePath addCurveToPoint: CGPointMake(13.74, 12.73) controlPoint1: CGPointMake(13.74, 12.73) controlPoint2: CGPointMake(13.74, 12.73)];
+            [handlePath addLineToPoint: CGPointMake(13.74, 12.73)];
+            [handlePath addCurveToPoint: CGPointMake(13.74, 13.78) controlPoint1: CGPointMake(14.03, 13.02) controlPoint2: CGPointMake(14.03, 13.49)];
+            [handlePath addLineToPoint: CGPointMake(13.74, 13.78)];
+            [handlePath addLineToPoint: CGPointMake(13.74, 13.78)];
+            [handlePath addLineToPoint: CGPointMake(13.74, 13.78)];
+            [handlePath addLineToPoint: CGPointMake(13.74, 13.78)];
+            [handlePath addLineToPoint: CGPointMake(13.74, 13.78)];
+            [handlePath addCurveToPoint: CGPointMake(12.68, 13.78) controlPoint1: CGPointMake(13.45, 14.07) controlPoint2: CGPointMake(12.97, 14.07)];
+            [handlePath addLineToPoint: CGPointMake(12.68, 13.78)];
+            [handlePath addLineToPoint: CGPointMake(12.68, 13.78)];
+            [handlePath addLineToPoint: CGPointMake(8.33, 9.46)];
+            [handlePath addLineToPoint: CGPointMake(9.38, 8.41)];
+            [handlePath addLineToPoint: CGPointMake(13.21, 12.2)];
+            [handlePath closePath];
+            [UIColor.blackColor setFill];
+            [handlePath fill];
+            
+            image = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
     }
     else { // iOS 10 and down
         UIGraphicsBeginImageContextWithOptions((CGSize){15,15}, NO, 0.0f);
@@ -158,6 +216,50 @@ static NSString * const kSharedClearIconKey = @"SharedClearIcon";
         return image;
     }
 
+    if (@available(iOS 17.0, *)) { // iOS17.UIGraphicsBeginImageContext被deprecated了
+        UIGraphicsImageRendererFormat *format = [[UIGraphicsImageRendererFormat alloc] init];
+        format.opaque = NO;
+        format.scale = 0.0f;
+        UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:(CGSize){16,16} format:format];
+        image = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
+            CGContextRef context = rendererContext.CGContext;
+            
+            //// Bezier 2 Drawing
+            UIBezierPath* deletePath = [UIBezierPath bezierPath];
+            [deletePath moveToPoint: CGPointMake(10.96, 4.31)];
+            [deletePath addCurveToPoint: CGPointMake(10.47, 4.53) controlPoint1: CGPointMake(10.76, 4.33) controlPoint2: CGPointMake(10.6, 4.4)];
+            [deletePath addCurveToPoint: CGPointMake(8, 7) controlPoint1: CGPointMake(10.47, 4.53) controlPoint2: CGPointMake(10.47, 4.53)];
+            [deletePath addCurveToPoint: CGPointMake(5.53, 4.53) controlPoint1: CGPointMake(7.15, 6.15) controlPoint2: CGPointMake(5.53, 4.53)];
+            [deletePath addCurveToPoint: CGPointMake(4.89, 4.32) controlPoint1: CGPointMake(5.35, 4.35) controlPoint2: CGPointMake(5.11, 4.28)];
+            [deletePath addCurveToPoint: CGPointMake(4.47, 4.53) controlPoint1: CGPointMake(4.73, 4.34) controlPoint2: CGPointMake(4.59, 4.41)];
+            [deletePath addCurveToPoint: CGPointMake(4.47, 5.59) controlPoint1: CGPointMake(4.18, 4.82) controlPoint2: CGPointMake(4.18, 5.3)];
+            [deletePath addCurveToPoint: CGPointMake(6.94, 8.06) controlPoint1: CGPointMake(4.47, 5.59) controlPoint2: CGPointMake(4.47, 5.59)];
+            [deletePath addCurveToPoint: CGPointMake(5.85, 9.15) controlPoint1: CGPointMake(6.63, 8.37) controlPoint2: CGPointMake(6.23, 8.77)];
+            [deletePath addCurveToPoint: CGPointMake(4.53, 10.47) controlPoint1: CGPointMake(5.17, 9.83) controlPoint2: CGPointMake(4.53, 10.47)];
+            [deletePath addCurveToPoint: CGPointMake(4.53, 11.53) controlPoint1: CGPointMake(4.24, 10.76) controlPoint2: CGPointMake(4.24, 11.24)];
+            [deletePath addCurveToPoint: CGPointMake(5.59, 11.53) controlPoint1: CGPointMake(4.82, 11.82) controlPoint2: CGPointMake(5.3, 11.82)];
+            [deletePath addCurveToPoint: CGPointMake(8, 9.12) controlPoint1: CGPointMake(5.59, 11.53) controlPoint2: CGPointMake(5.59, 11.53)];
+            [deletePath addCurveToPoint: CGPointMake(8.43, 9.55) controlPoint1: CGPointMake(8.13, 9.25) controlPoint2: CGPointMake(8.28, 9.4)];
+            [deletePath addCurveToPoint: CGPointMake(10.41, 11.53) controlPoint1: CGPointMake(9.29, 10.41) controlPoint2: CGPointMake(10.41, 11.53)];
+            [deletePath addCurveToPoint: CGPointMake(11.47, 11.53) controlPoint1: CGPointMake(10.7, 11.82) controlPoint2: CGPointMake(11.18, 11.82)];
+            [deletePath addCurveToPoint: CGPointMake(11.47, 10.47) controlPoint1: CGPointMake(11.76, 11.24) controlPoint2: CGPointMake(11.76, 10.76)];
+            [deletePath addCurveToPoint: CGPointMake(9.06, 8.06) controlPoint1: CGPointMake(11.47, 10.47) controlPoint2: CGPointMake(11.47, 10.47)];
+            [deletePath addCurveToPoint: CGPointMake(11.53, 5.59) controlPoint1: CGPointMake(9.91, 7.21) controlPoint2: CGPointMake(11.53, 5.59)];
+            [deletePath addCurveToPoint: CGPointMake(11.53, 4.53) controlPoint1: CGPointMake(11.81, 5.31) controlPoint2: CGPointMake(11.82, 4.85)];
+            [deletePath addCurveToPoint: CGPointMake(10.92, 4.31) controlPoint1: CGPointMake(11.34, 4.36) controlPoint2: CGPointMake(11.13, 4.29)];
+            [deletePath addLineToPoint: CGPointMake(10.96, 4.31)];
+            [deletePath closePath];
+            [deletePath moveToPoint: CGPointMake(16, 8)];
+            [deletePath addCurveToPoint: CGPointMake(8, 16) controlPoint1: CGPointMake(16, 12.42) controlPoint2: CGPointMake(12.42, 16)];
+            [deletePath addCurveToPoint: CGPointMake(0, 8) controlPoint1: CGPointMake(3.58, 16) controlPoint2: CGPointMake(0, 12.42)];
+            [deletePath addCurveToPoint: CGPointMake(3.13, 1.65) controlPoint1: CGPointMake(0, 5.41) controlPoint2: CGPointMake(1.23, 3.11)];
+            [deletePath addCurveToPoint: CGPointMake(8, 0) controlPoint1: CGPointMake(4.48, 0.61) controlPoint2: CGPointMake(6.17, 0)];
+            [deletePath addCurveToPoint: CGPointMake(16, 8) controlPoint1: CGPointMake(12.42, 0) controlPoint2: CGPointMake(16, 3.58)];
+            [deletePath closePath];
+            [UIColor.blackColor setFill];
+            [deletePath fill];
+        }];
+    } else
     if (@available(iOS 11.0, *)) {
         UIGraphicsBeginImageContextWithOptions((CGSize){16,16}, NO, 0.0f);
         
