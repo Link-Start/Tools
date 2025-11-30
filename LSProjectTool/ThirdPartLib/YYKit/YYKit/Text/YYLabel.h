@@ -134,12 +134,16 @@ NS_ASSUME_NONNULL_BEGIN
  将新值设置为此属性还将替换“text”、“font”、“textColor”的值，
  `text对齐方式`和标签中的其他属性。
  
+ @discussion它只支持CoreText和YYTextAttribute中声明的属性。
+ 有关设置属性的更方便的方法，请参阅“NSAttributedString+YYText”。
  */
 @property (nullable, nonatomic, copy) NSAttributedString *attributedText;
 
 /**
  The technique to use for wrapping and truncating the label's text.
  Default is NSLineBreakByTruncatingTail.
+ 用于包装和截断标签文本的技术。
+ 默认设置为NSLineBreakByTruncatingTail。
  */
 @property (nonatomic) NSLineBreakMode lineBreakMode;
 

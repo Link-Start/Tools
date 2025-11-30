@@ -1,5 +1,5 @@
 PODS:
-  - AAChartKit (9.0.0)
+  - AAChartKit (9.2.0)
   - ACActionSheet (1.0.6)
   - AFNetworking (4.0.1):
     - AFNetworking/NSURLSession (= 4.0.1)
@@ -19,14 +19,14 @@ PODS:
   - AFNetworking/Serialization (4.0.1)
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
-  - Alamofire (5.9.1)
+  - Alamofire (5.10.2)
   - AMapFoundation (1.8.2)
-  - AMapLocation (2.10.0):
+  - AMapLocation (2.11.0):
     - AMapFoundation (>= 1.8.0)
   - AMLeaksFinder (2.2.8)
   - BabyBluetooth (0.7.0)
   - BeeHive (1.6.0)
-  - BMKLocationKit (2.1.2)
+  - BMKLocationKit (2.1.3)
   - BMLongPressDragCellCollectionView (3.1.4)
   - Booming/Cache (1.0.3):
     - Booming/Core
@@ -54,31 +54,31 @@ PODS:
   - Booming/Warning (1.0.3):
     - Booming/Core
     - MBProgressHUD
-  - BRPickerView (2.9.1):
-    - BRPickerView/All (= 2.9.1)
-  - BRPickerView/All (2.9.1):
+  - BRPickerView (2.9.9):
+    - BRPickerView/All (= 2.9.9)
+  - BRPickerView/All (2.9.9):
     - BRPickerView/Default
     - BRPickerView/Deprecated
-  - BRPickerView/Core (2.9.1)
-  - BRPickerView/DatePicker (2.9.1):
+  - BRPickerView/Core (2.9.9)
+  - BRPickerView/DatePicker (2.9.9):
     - BRPickerView/Core
-  - BRPickerView/Default (2.9.1):
+  - BRPickerView/Default (2.9.9):
     - BRPickerView/DatePicker
     - BRPickerView/TextPicker
-  - BRPickerView/Deprecated (2.9.1):
+  - BRPickerView/Deprecated (2.9.9):
     - BRPickerView/Core
-    - BRPickerView/Deprecated/AddressPickerView (= 2.9.1)
-    - BRPickerView/Deprecated/Base (= 2.9.1)
-    - BRPickerView/Deprecated/StringPickerView (= 2.9.1)
-  - BRPickerView/Deprecated/AddressPickerView (2.9.1):
-    - BRPickerView/Core
-    - BRPickerView/Deprecated/Base
-  - BRPickerView/Deprecated/Base (2.9.1):
-    - BRPickerView/Core
-  - BRPickerView/Deprecated/StringPickerView (2.9.1):
+    - BRPickerView/Deprecated/AddressPickerView (= 2.9.9)
+    - BRPickerView/Deprecated/Base (= 2.9.9)
+    - BRPickerView/Deprecated/StringPickerView (= 2.9.9)
+  - BRPickerView/Deprecated/AddressPickerView (2.9.9):
     - BRPickerView/Core
     - BRPickerView/Deprecated/Base
-  - BRPickerView/TextPicker (2.9.1):
+  - BRPickerView/Deprecated/Base (2.9.9):
+    - BRPickerView/Core
+  - BRPickerView/Deprecated/StringPickerView (2.9.9):
+    - BRPickerView/Core
+    - BRPickerView/Deprecated/Base
+  - BRPickerView/TextPicker (2.9.9):
     - BRPickerView/Core
   - CacheX (1.1.1)
   - CalendarLib (2.0):
@@ -86,9 +86,10 @@ PODS:
     - OSCache (~> 1.2)
   - CCExcelView (1.0.8)
   - ChainThen (0.0.2)
-  - Charts (3.6.0):
-    - Charts/Core (= 3.6.0)
-  - Charts/Core (3.6.0)
+  - Charts (4.1.0):
+    - Charts/Core (= 4.1.0)
+  - Charts/Core (4.1.0):
+    - SwiftAlgorithms (~> 1.0)
   - CHTCollectionViewWaterfallLayout (0.9.10):
     - CHTCollectionViewWaterfallLayout/Swift (= 0.9.10)
   - CHTCollectionViewWaterfallLayout/ObjC (0.9.10)
@@ -112,58 +113,66 @@ PODS:
   - Eureka (5.5.0)
   - FBRetainCycleDetector (0.1.4)
   - FLAnimatedImage (1.0.17)
-  - FMDB (2.7.11):
-    - FMDB/standard (= 2.7.11)
-  - FMDB/standard (2.7.11)
+  - FMDB (2.7.12):
+    - FMDB/standard (= 2.7.12)
+  - FMDB/Core (2.7.12)
+  - FMDB/standard (2.7.12):
+    - FMDB/Core
   - FMLayoutKit (1.2.0)
   - FMListPlaceholder (1.1.5)
   - Foggy (1.0.4)
   - FSCalendar (2.8.4)
+  - FSPagerView (0.8.3)
   - FSTextView (1.8)
   - FWPopupView (4.2.2):
     - SnapKit
   - FWPopupViewOC (3.1.0):
     - Masonry
   - GKCover (3.0.1)
-  - GKLivePhotoManager (1.0.2)
-  - GKNavigationBar (1.9.0):
-    - GKNavigationBar/GestureHandle (= 1.9.0)
-    - GKNavigationBar/NavigationBar (= 1.9.0)
-  - GKNavigationBar/GestureHandle (1.9.0)
-  - GKNavigationBar/NavigationBar (1.9.0)
-  - GKPageScrollView (1.9.6):
-    - GKPageScrollView/Objc (= 1.9.6)
-  - GKPageScrollView/Objc (1.9.6)
-  - GKPageSmoothView (1.9.6):
-    - GKPageSmoothView/Objc (= 1.9.6)
-  - GKPageSmoothView/Objc (1.9.6)
-  - GKPhotoBrowser (3.0.3):
-    - GKPhotoBrowser/Default (= 3.0.3)
-  - GKPhotoBrowser/AF (3.0.3):
+  - GKLivePhotoManager (1.0.7)
+  - GKNavigationBar (1.9.7):
+    - GKNavigationBar/GestureHandle (= 1.9.7)
+    - GKNavigationBar/NavigationBar (= 1.9.7)
+  - GKNavigationBar/GestureHandle (1.9.7)
+  - GKNavigationBar/NavigationBar (1.9.7)
+  - GKPageScrollView (2.0.0):
+    - GKPageScrollView/Objc (= 2.0.0)
+  - GKPageScrollView/Objc (2.0.0)
+  - GKPageSmoothView (2.0.0):
+    - GKPageSmoothView/Objc (= 2.0.0)
+  - GKPageSmoothView/Objc (2.0.0)
+  - GKPhotoBrowser (3.2.8):
+    - GKPhotoBrowser/Default (= 3.2.8)
+  - GKPhotoBrowser/AF (3.2.8):
     - AFNetworking
     - GKLivePhotoManager
     - GKPhotoBrowser/Core
-  - GKPhotoBrowser/AVPlayer (3.0.3):
+  - GKPhotoBrowser/AVPlayer (3.2.8):
     - GKPhotoBrowser/Core
-  - GKPhotoBrowser/Core (3.0.3)
-  - GKPhotoBrowser/Default (3.0.3):
+  - GKPhotoBrowser/Core (3.2.8):
+    - GKPhotoBrowser/Resources
+  - GKPhotoBrowser/Cover (3.2.8):
+    - GKPhotoBrowser/Core
+  - GKPhotoBrowser/Default (3.2.8):
     - GKPhotoBrowser/AF
     - GKPhotoBrowser/AVPlayer
+    - GKPhotoBrowser/Cover
     - GKPhotoBrowser/Progress
     - GKPhotoBrowser/SD
-  - GKPhotoBrowser/Progress (3.0.3):
+  - GKPhotoBrowser/Progress (3.2.8):
     - GKPhotoBrowser/Core
     - GKSliderView
-  - GKPhotoBrowser/SD (3.0.3):
+  - GKPhotoBrowser/Resources (3.2.8)
+  - GKPhotoBrowser/SD (3.2.8):
     - GKPhotoBrowser/Core
     - SDWebImage (~> 5.0)
-  - GKSliderView (1.2.2)
+  - GKSliderView (1.2.3)
   - GKVideoScrollView (1.3.4)
   - GLEnvs (1.5.9)
   - GroupedData (0.0.1)
   - GXTransition (1.0.5)
   - HandyJSON (5.0.2)
-  - HBDNavigationBar (1.9.6)
+  - HBDNavigationBar (1.9.10)
   - HBDStatusBar (1.2.0)
   - HDCollectionView (0.7.7):
     - HDListViewDiffer
@@ -173,9 +182,28 @@ PODS:
   - HSSetTableViewController (1.3.1):
     - SDWebImage
   - HWPanModal (0.9.9)
-  - HXPhotoPicker (3.3.2):
-    - HXPhotoPicker/Default (= 3.3.2)
-  - HXPhotoPicker/Default (3.3.2)
+  - HXPhotoPicker (5.0.4):
+    - HXPhotoPicker/Default (= 5.0.4)
+  - HXPhotoPicker/Camera (5.0.4):
+    - HXPhotoPicker/Camera/Lite (= 5.0.4)
+    - HXPhotoPicker/Camera/Location (= 5.0.4)
+  - HXPhotoPicker/Camera/Lite (5.0.4):
+    - HXPhotoPicker/Core
+  - HXPhotoPicker/Camera/Location (5.0.4):
+    - HXPhotoPicker/Camera/Lite
+  - HXPhotoPicker/Core (5.0.4):
+    - HXPhotoPicker/Resources
+  - HXPhotoPicker/Default (5.0.4):
+    - HXPhotoPicker/Camera
+    - HXPhotoPicker/Editor
+    - HXPhotoPicker/Picker
+  - HXPhotoPicker/Editor (5.0.4):
+    - HXPhotoPicker/EditorView
+  - HXPhotoPicker/EditorView (5.0.4):
+    - HXPhotoPicker/Core
+  - HXPhotoPicker/Picker (5.0.4):
+    - HXPhotoPicker/Core
+  - HXPhotoPicker/Resources (5.0.4)
   - HXPhotoPickerObjC (3.3.4):
     - HXPhotoPickerObjC/Default (= 3.3.4)
   - HXPhotoPickerObjC/Default (3.3.4)
@@ -185,9 +213,9 @@ PODS:
     - Masonry (~> 0.6)
   - HYBUnicodeReadable (1.3)
   - IAPHelper (1.1)
-  - IGListDiffKit (5.0.0)
-  - IGListKit (5.0.0):
-    - IGListDiffKit (= 5.0.0)
+  - IGListDiffKit (5.1.0)
+  - IGListKit (5.1.0):
+    - IGListDiffKit (= 5.1.0)
   - IJKMediaFramework (0.1.5)
   - IMYAOPTableView (2.1.3)
   - IQKeyboardManager (6.5.19)
@@ -195,11 +223,12 @@ PODS:
   - JFCitySelector (0.3.4):
     - YYModel
   - JHChainableAnimations (3.0.1)
+  - JHNoDataEmptyView (1.1.1)
   - JhtFloatingBall (1.0.3)
   - JHVerificationCodeView (1.3.7)
   - JJCollectionViewRoundFlowLayout (2.9.2)
   - JNAPushPopCompletionBlock (0.0.1)
-  - JPImageresizerView (1.11.2)
+  - JPImageresizerView (1.13.2)
   - JPush (3.2.8):
     - JCore (< 3.0.0, >= 2.0.0)
   - JQCollectionViewWaterfallLayout (0.2.0)
@@ -405,26 +434,26 @@ PODS:
   - LBXPermission/Photo (1.1.1)
   - LBXPermission/Reminder (1.1.1)
   - LBXPermission/Tracking (1.1.1)
-  - LEEAlert (1.7.1):
-    - LEEAlert/Privacy (= 1.7.1)
-  - LEEAlert/Privacy (1.7.1)
+  - LEEAlert (1.8.2):
+    - LEEAlert/Privacy (= 1.8.2)
+  - LEEAlert/Privacy (1.8.2)
   - LFPhoneInfo (0.1.9)
-  - libwebp (1.3.2):
-    - libwebp/demux (= 1.3.2)
-    - libwebp/mux (= 1.3.2)
-    - libwebp/sharpyuv (= 1.3.2)
-    - libwebp/webp (= 1.3.2)
-  - libwebp/demux (1.3.2):
+  - libwebp (1.5.0):
+    - libwebp/demux (= 1.5.0)
+    - libwebp/mux (= 1.5.0)
+    - libwebp/sharpyuv (= 1.5.0)
+    - libwebp/webp (= 1.5.0)
+  - libwebp/demux (1.5.0):
     - libwebp/webp
-  - libwebp/mux (1.3.2):
+  - libwebp/mux (1.5.0):
     - libwebp/demux
-  - libwebp/sharpyuv (1.3.2)
-  - libwebp/webp (1.3.2):
+  - libwebp/sharpyuv (1.5.0)
+  - libwebp/webp (1.5.0):
     - libwebp/sharpyuv
   - LJContactManager (1.0.7)
   - LMJDropdownMenu (3.0.4)
   - LNPopupController (2.10.29)
-  - lottie-ios (4.4.1)
+  - lottie-ios (4.5.2)
   - LSAnimator (2.1.5)
   - LSSafeProtector (2.1.4):
     - LSSafeProtector/Core (= 2.1.4)
@@ -447,7 +476,7 @@ PODS:
   - MBProgressHUD (1.2.0)
   - MGSwipeTableCell (1.6.14)
   - MJExtension (3.3.0)
-  - MJRefresh (3.7.6)
+  - MJRefresh (3.7.9)
   - MLeaksFinder (1.0.0):
     - FBRetainCycleDetector
   - MNFloatBtn (2.3.0)
@@ -479,74 +508,77 @@ PODS:
   - PulsingHalo (0.2.10)
   - PureLayout (3.1.9)
   - PYSearch (0.9.1)
-  - QMUIKit (4.6.0):
-    - QMUIKit/QMUIComponents (= 4.6.0)
-    - QMUIKit/QMUICore (= 4.6.0)
-    - QMUIKit/QMUILog (= 4.6.0)
-    - QMUIKit/QMUIMainFrame (= 4.6.0)
-    - QMUIKit/QMUIResources (= 4.6.0)
-    - QMUIKit/QMUIWeakObjectContainer (= 4.6.0)
-  - QMUIKit/QMUIComponents (4.6.0):
-    - QMUIKit/QMUIComponents/NavigationBarTransition (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUIAlertController (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUIAnimation (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUIAppearance (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUIAssetLibrary (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUIBadge (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUIButton (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUICAAnimationExtension (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUICALayerExtension (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUICellHeightCache (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUICellHeightKeyCache (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUICellSizeKeyCache (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUICollectionViewPagingLayout (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUIConsole (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUIDialogViewController (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUIEmotionInputManager (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUIEmotionView (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUIEmptyView (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUIFloatLayoutView (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUIGridView (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUIImagePickerLibrary (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUIImagePreviewView (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUIKeyboardManager (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUILabel (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUILogManagerViewController (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUILogWithConfigurationSupported (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUIMarqueeLabel (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUIModalPresentationViewController (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUIMoreOperationController (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUIMultipleDelegates (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUINavigationButton (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUINavigationTitleView (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUIOrderedDictionary (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUIPieProgressView (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUIPopupContainerView (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUIPopupMenuView (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUIScrollAnimator (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUISearchBar (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUISearchController (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUISegmentedControl (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUIStaticTableView (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUITableView (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUITableViewCell (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUITableViewHeaderFooterView (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUITableViewProtocols (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUITestView (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUITextField (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUITextView (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUITheme (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUITips (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUIToastView (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUIToolbarButton (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUIWindowSizeMonitor (= 4.6.0)
-    - QMUIKit/QMUIComponents/QMUIZoomImageView (= 4.6.0)
+  - QMUIKit (4.8.0):
+    - QMUIKit/QMUIComponents (= 4.8.0)
+    - QMUIKit/QMUICore (= 4.8.0)
+    - QMUIKit/QMUILog (= 4.8.0)
+    - QMUIKit/QMUIMainFrame (= 4.8.0)
+    - QMUIKit/QMUIResources (= 4.8.0)
+    - QMUIKit/QMUIWeakObjectContainer (= 4.8.0)
+  - QMUIKit/QMUIComponents (4.8.0):
+    - QMUIKit/QMUIComponents/NavigationBarTransition (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUIAlertController (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUIAnimation (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUIAppearance (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUIAssetLibrary (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUIBadge (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUIButton (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUICAAnimationExtension (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUICALayerExtension (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUICellHeightCache (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUICellHeightKeyCache (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUICellSizeKeyCache (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUICheckbox (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUICollectionViewPagingLayout (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUIConsole (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUIDialogViewController (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUIEmotionInputManager (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUIEmotionView (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUIEmptyView (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUIFloatLayoutView (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUIGridView (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUIImagePickerLibrary (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUIImagePreviewView (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUIKeyboardManager (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUILabel (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUILayouter (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUILogManagerViewController (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUILogWithConfigurationSupported (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUIMarqueeLabel (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUIModalPresentationViewController (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUIMoreOperationController (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUIMultipleDelegates (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUINavigationButton (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUINavigationTitleView (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUIOrderedDictionary (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUIPieProgressView (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUIPopupContainerView (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUIPopupMenuView (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUIScrollAnimator (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUISearchBar (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUISearchController (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUISegmentedControl (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUISheetPresentation (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUIStaticTableView (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUITableView (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUITableViewCell (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUITableViewHeaderFooterView (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUITableViewProtocols (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUITestView (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUITextField (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUITextView (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUITheme (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUITips (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUIToastView (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUIToolbarButton (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUIWindowSizeMonitor (= 4.8.0)
+    - QMUIKit/QMUIComponents/QMUIZoomImageView (= 4.8.0)
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/NavigationBarTransition (4.6.0):
+  - QMUIKit/QMUIComponents/NavigationBarTransition (4.8.0):
     - QMUIKit/QMUIComponents/QMUINavigationTitleView
     - QMUIKit/QMUICore
     - QMUIKit/QMUIMainFrame
-  - QMUIKit/QMUIComponents/QMUIAlertController (4.6.0):
+  - QMUIKit/QMUIComponents/QMUIAlertController (4.8.0):
     - QMUIKit/QMUIComponents/QMUIAppearance
     - QMUIKit/QMUIComponents/QMUIButton
     - QMUIKit/QMUIComponents/QMUIKeyboardManager
@@ -554,36 +586,41 @@ PODS:
     - QMUIKit/QMUIComponents/QMUIModalPresentationViewController
     - QMUIKit/QMUIComponents/QMUITextField
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUIAnimation (4.6.0):
+  - QMUIKit/QMUIComponents/QMUIAnimation (4.8.0):
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUIAppearance (4.6.0):
+  - QMUIKit/QMUIComponents/QMUIAppearance (4.8.0):
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUIAssetLibrary (4.6.0):
+  - QMUIKit/QMUIComponents/QMUIAssetLibrary (4.8.0):
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUIBadge (4.6.0):
+  - QMUIKit/QMUIComponents/QMUIBadge (4.8.0):
     - QMUIKit/QMUIComponents/QMUILabel
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUIButton (4.6.0):
+  - QMUIKit/QMUIComponents/QMUIButton (4.8.0):
+    - QMUIKit/QMUIComponents/QMUILayouter
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUICAAnimationExtension (4.6.0):
+  - QMUIKit/QMUIComponents/QMUICAAnimationExtension (4.8.0):
     - QMUIKit/QMUIComponents/QMUIMultipleDelegates
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUICALayerExtension (4.6.0):
+  - QMUIKit/QMUIComponents/QMUICALayerExtension (4.8.0):
     - QMUIKit/QMUIComponents/QMUIMultipleDelegates
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUICellHeightCache (4.6.0):
+  - QMUIKit/QMUIComponents/QMUICellHeightCache (4.8.0):
     - QMUIKit/QMUIComponents/QMUITableViewProtocols
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUICellHeightKeyCache (4.6.0):
+  - QMUIKit/QMUIComponents/QMUICellHeightKeyCache (4.8.0):
     - QMUIKit/QMUIComponents/QMUIMultipleDelegates
     - QMUIKit/QMUIComponents/QMUITableViewProtocols
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUICellSizeKeyCache (4.6.0):
+  - QMUIKit/QMUIComponents/QMUICellSizeKeyCache (4.8.0):
     - QMUIKit/QMUIComponents/QMUIMultipleDelegates
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUICollectionViewPagingLayout (4.6.0):
+  - QMUIKit/QMUIComponents/QMUICheckbox (4.8.0):
+    - QMUIKit/QMUIComponents/QMUIButton
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUIConsole (4.6.0):
+    - QMUIKit/QMUIResources
+  - QMUIKit/QMUIComponents/QMUICollectionViewPagingLayout (4.8.0):
+    - QMUIKit/QMUICore
+  - QMUIKit/QMUIComponents/QMUIConsole (4.8.0):
     - QMUIKit/QMUIComponents/QMUIButton
     - QMUIKit/QMUIComponents/QMUICAAnimationExtension
     - QMUIKit/QMUIComponents/QMUICellHeightKeyCache
@@ -594,7 +631,7 @@ PODS:
     - QMUIKit/QMUIComponents/QMUITextView
     - QMUIKit/QMUICore
     - QMUIKit/QMUIResources
-  - QMUIKit/QMUIComponents/QMUIDialogViewController (4.6.0):
+  - QMUIKit/QMUIComponents/QMUIDialogViewController (4.8.0):
     - QMUIKit/QMUIComponents/QMUIAppearance
     - QMUIKit/QMUIComponents/QMUIButton
     - QMUIKit/QMUIComponents/QMUILabel
@@ -605,22 +642,22 @@ PODS:
     - QMUIKit/QMUIComponents/QMUITextField
     - QMUIKit/QMUICore
     - QMUIKit/QMUIMainFrame
-  - QMUIKit/QMUIComponents/QMUIEmotionInputManager (4.6.0):
+  - QMUIKit/QMUIComponents/QMUIEmotionInputManager (4.8.0):
     - QMUIKit/QMUIComponents/QMUIEmotionView
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUIEmotionView (4.6.0):
+  - QMUIKit/QMUIComponents/QMUIEmotionView (4.8.0):
     - QMUIKit/QMUIComponents/QMUIButton
     - QMUIKit/QMUICore
     - QMUIKit/QMUIResources
-  - QMUIKit/QMUIComponents/QMUIEmptyView (4.6.0):
+  - QMUIKit/QMUIComponents/QMUIEmptyView (4.8.0):
     - QMUIKit/QMUIComponents/QMUIAppearance
     - QMUIKit/QMUIComponents/QMUIButton
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUIFloatLayoutView (4.6.0):
+  - QMUIKit/QMUIComponents/QMUIFloatLayoutView (4.8.0):
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUIGridView (4.6.0):
+  - QMUIKit/QMUIComponents/QMUIGridView (4.8.0):
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUIImagePickerLibrary (4.6.0):
+  - QMUIKit/QMUIComponents/QMUIImagePickerLibrary (4.8.0):
     - QMUIKit/QMUIComponents/QMUIAlertController
     - QMUIKit/QMUIComponents/QMUIAppearance
     - QMUIKit/QMUIComponents/QMUIAssetLibrary
@@ -633,7 +670,7 @@ PODS:
     - QMUIKit/QMUICore
     - QMUIKit/QMUIMainFrame
     - QMUIKit/QMUIResources
-  - QMUIKit/QMUIComponents/QMUIImagePreviewView (4.6.0):
+  - QMUIKit/QMUIComponents/QMUIImagePreviewView (4.8.0):
     - QMUIKit/QMUIComponents/QMUIAppearance
     - QMUIKit/QMUIComponents/QMUIButton
     - QMUIKit/QMUIComponents/QMUICollectionViewPagingLayout
@@ -642,89 +679,101 @@ PODS:
     - QMUIKit/QMUIComponents/QMUIZoomImageView
     - QMUIKit/QMUICore
     - QMUIKit/QMUIMainFrame
-  - QMUIKit/QMUIComponents/QMUIKeyboardManager (4.6.0):
+  - QMUIKit/QMUIComponents/QMUIKeyboardManager (4.8.0):
     - QMUIKit/QMUIComponents/QMUIAppearance
     - QMUIKit/QMUIComponents/QMUIMultipleDelegates
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUILabel (4.6.0):
+  - QMUIKit/QMUIComponents/QMUILabel (4.8.0):
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUILogManagerViewController (4.6.0):
+  - QMUIKit/QMUIComponents/QMUILayouter (4.8.0):
+    - QMUIKit/QMUICore
+  - QMUIKit/QMUIComponents/QMUILogManagerViewController (4.8.0):
     - QMUIKit/QMUIComponents/QMUIPopupMenuView
     - QMUIKit/QMUIComponents/QMUISearchController
     - QMUIKit/QMUIComponents/QMUIStaticTableView
     - QMUIKit/QMUIComponents/QMUITableView
     - QMUIKit/QMUICore
     - QMUIKit/QMUIMainFrame
-  - QMUIKit/QMUIComponents/QMUILogWithConfigurationSupported (4.6.0):
+  - QMUIKit/QMUIComponents/QMUILogWithConfigurationSupported (4.8.0):
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUIMarqueeLabel (4.6.0):
+  - QMUIKit/QMUIComponents/QMUIMarqueeLabel (4.8.0):
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUIModalPresentationViewController (4.6.0):
+  - QMUIKit/QMUIComponents/QMUIModalPresentationViewController (4.8.0):
     - QMUIKit/QMUIComponents/QMUIAppearance
     - QMUIKit/QMUIComponents/QMUIKeyboardManager
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUIMoreOperationController (4.6.0):
+  - QMUIKit/QMUIComponents/QMUIMoreOperationController (4.8.0):
     - QMUIKit/QMUIComponents/QMUIAppearance
     - QMUIKit/QMUIComponents/QMUIButton
     - QMUIKit/QMUIComponents/QMUIModalPresentationViewController
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUIMultipleDelegates (4.6.0):
+  - QMUIKit/QMUIComponents/QMUIMultipleDelegates (4.8.0):
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUINavigationButton (4.6.0):
+  - QMUIKit/QMUIComponents/QMUINavigationButton (4.8.0):
     - QMUIKit/QMUICore
     - QMUIKit/QMUIMainFrame
-  - QMUIKit/QMUIComponents/QMUINavigationTitleView (4.6.0):
+  - QMUIKit/QMUIComponents/QMUINavigationTitleView (4.8.0):
     - QMUIKit/QMUIComponents/QMUIAppearance
     - QMUIKit/QMUIComponents/QMUIButton
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUIOrderedDictionary (4.6.0):
+  - QMUIKit/QMUIComponents/QMUIOrderedDictionary (4.8.0):
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUIPieProgressView (4.6.0):
+  - QMUIKit/QMUIComponents/QMUIPieProgressView (4.8.0):
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUIPopupContainerView (4.6.0):
+  - QMUIKit/QMUIComponents/QMUIPopupContainerView (4.8.0):
     - QMUIKit/QMUIComponents/QMUIAppearance
     - QMUIKit/QMUICore
     - QMUIKit/QMUIMainFrame
-  - QMUIKit/QMUIComponents/QMUIPopupMenuView (4.6.0):
+  - QMUIKit/QMUIComponents/QMUIPopupMenuView (4.8.0):
     - QMUIKit/QMUIComponents/QMUIButton
+    - QMUIKit/QMUIComponents/QMUICheckbox
+    - QMUIKit/QMUIComponents/QMUILabel
+    - QMUIKit/QMUIComponents/QMUILayouter
     - QMUIKit/QMUIComponents/QMUIPopupContainerView
+    - QMUIKit/QMUIComponents/QMUITableView
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUIScrollAnimator (4.6.0):
+  - QMUIKit/QMUIComponents/QMUIScrollAnimator (4.8.0):
     - QMUIKit/QMUIComponents/QMUIMultipleDelegates
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUISearchBar (4.6.0):
+  - QMUIKit/QMUIComponents/QMUISearchBar (4.8.0):
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUISearchController (4.6.0):
+  - QMUIKit/QMUIComponents/QMUISearchController (4.8.0):
     - QMUIKit/QMUIComponents/QMUIEmptyView
     - QMUIKit/QMUIComponents/QMUISearchBar
     - QMUIKit/QMUICore
     - QMUIKit/QMUIMainFrame
-  - QMUIKit/QMUIComponents/QMUISegmentedControl (4.6.0):
+  - QMUIKit/QMUIComponents/QMUISegmentedControl (4.8.0):
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUIStaticTableView (4.6.0):
+  - QMUIKit/QMUIComponents/QMUISheetPresentation (4.8.0):
+    - QMUIKit/QMUIComponents/QMUIButton
+    - QMUIKit/QMUIComponents/QMUIMultipleDelegates
+    - QMUIKit/QMUIComponents/QMUINavigationButton
+    - QMUIKit/QMUICore
+    - QMUIKit/QMUIMainFrame
+  - QMUIKit/QMUIComponents/QMUIStaticTableView (4.8.0):
     - QMUIKit/QMUIComponents/QMUIMultipleDelegates
     - QMUIKit/QMUIComponents/QMUITableViewCell
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUITableView (4.6.0):
+  - QMUIKit/QMUIComponents/QMUITableView (4.8.0):
     - QMUIKit/QMUIComponents/QMUITableViewProtocols
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUITableViewCell (4.6.0):
+  - QMUIKit/QMUIComponents/QMUITableViewCell (4.8.0):
     - QMUIKit/QMUIComponents/QMUIButton
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUITableViewHeaderFooterView (4.6.0):
+  - QMUIKit/QMUIComponents/QMUITableViewHeaderFooterView (4.8.0):
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUITableViewProtocols (4.6.0):
+  - QMUIKit/QMUIComponents/QMUITableViewProtocols (4.8.0):
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUITestView (4.6.0):
+  - QMUIKit/QMUIComponents/QMUITestView (4.8.0):
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUITextField (4.6.0):
+  - QMUIKit/QMUIComponents/QMUITextField (4.8.0):
     - QMUIKit/QMUIComponents/QMUIMultipleDelegates
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUITextView (4.6.0):
+  - QMUIKit/QMUIComponents/QMUITextView (4.8.0):
     - QMUIKit/QMUIComponents/QMUILabel
     - QMUIKit/QMUIComponents/QMUIMultipleDelegates
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUITheme (4.6.0):
+  - QMUIKit/QMUIComponents/QMUITheme (4.8.0):
     - QMUIKit/QMUIComponents/QMUIAlertController
     - QMUIKit/QMUIComponents/QMUIBadge
     - QMUIKit/QMUIComponents/QMUIButton
@@ -742,29 +791,29 @@ PODS:
     - QMUIKit/QMUIComponents/QMUITextView
     - QMUIKit/QMUIComponents/QMUIToastView
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUITips (4.6.0):
+  - QMUIKit/QMUIComponents/QMUITips (4.8.0):
     - QMUIKit/QMUIComponents/QMUIToastView
     - QMUIKit/QMUICore
     - QMUIKit/QMUIResources
-  - QMUIKit/QMUIComponents/QMUIToastView (4.6.0):
+  - QMUIKit/QMUIComponents/QMUIToastView (4.8.0):
     - QMUIKit/QMUIComponents/QMUIKeyboardManager
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUIToolbarButton (4.6.0):
+  - QMUIKit/QMUIComponents/QMUIToolbarButton (4.8.0):
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUIWindowSizeMonitor (4.6.0):
+  - QMUIKit/QMUIComponents/QMUIWindowSizeMonitor (4.8.0):
     - QMUIKit/QMUICore
-  - QMUIKit/QMUIComponents/QMUIZoomImageView (4.6.0):
+  - QMUIKit/QMUIComponents/QMUIZoomImageView (4.8.0):
     - QMUIKit/QMUIComponents/QMUIAssetLibrary
     - QMUIKit/QMUIComponents/QMUIButton
     - QMUIKit/QMUIComponents/QMUIEmptyView
     - QMUIKit/QMUIComponents/QMUIPieProgressView
     - QMUIKit/QMUICore
     - QMUIKit/QMUIResources
-  - QMUIKit/QMUICore (4.6.0):
+  - QMUIKit/QMUICore (4.8.0):
     - QMUIKit/QMUILog
     - QMUIKit/QMUIWeakObjectContainer
-  - QMUIKit/QMUILog (4.6.0)
-  - QMUIKit/QMUIMainFrame (4.6.0):
+  - QMUIKit/QMUILog (4.8.0)
+  - QMUIKit/QMUIMainFrame (4.8.0):
     - QMUIKit/QMUIComponents/QMUIEmptyView
     - QMUIKit/QMUIComponents/QMUIKeyboardManager
     - QMUIKit/QMUIComponents/QMUIMultipleDelegates
@@ -773,8 +822,8 @@ PODS:
     - QMUIKit/QMUIComponents/QMUITableViewHeaderFooterView
     - QMUIKit/QMUICore
     - QMUIKit/QMUILog
-  - QMUIKit/QMUIResources (4.6.0)
-  - QMUIKit/QMUIWeakObjectContainer (4.6.0)
+  - QMUIKit/QMUIResources (4.8.0)
+  - QMUIKit/QMUIWeakObjectContainer (4.8.0)
   - ReactiveObjC (3.1.1)
   - REFormattedNumberField (1.1.6)
   - RETableViewManager (1.7):
@@ -800,9 +849,9 @@ PODS:
   - RTRootNavigationController (0.8.1):
     - RTRootNavigationController/Core (= 0.8.1)
   - RTRootNavigationController/Core (0.8.1)
-  - RxCocoa (6.7.1):
-    - RxRelay (= 6.7.1)
-    - RxSwift (= 6.7.1)
+  - RxCocoa (6.9.0):
+    - RxRelay (= 6.9.0)
+    - RxSwift (= 6.9.0)
   - RxNetworks (1.0.2):
     - RxNetworks/Core (= 1.0.2)
     - RxNetworks/HandyJSON (= 1.0.2)
@@ -846,16 +895,16 @@ PODS:
   - RxNetworks/RxSwift (1.0.2):
     - RxNetworks/Core
     - RxSwift
-  - RxRelay (6.7.1):
-    - RxSwift (= 6.7.1)
-  - RxSwift (6.7.1)
-  - SCLAlertView-Objective-C (1.3.0)
+  - RxRelay (6.9.0):
+    - RxSwift (= 6.9.0)
+  - RxSwift (6.9.0)
+  - SCLAlertView-Objective-C (1.4.1)
   - SDAutoLayout (2.2.1)
   - SDMovableCellCollectionView (0.1.0)
-  - SDWebImage (5.19.6):
-    - SDWebImage/Core (= 5.19.6)
-  - SDWebImage/Core (5.19.6)
-  - SDWebImageWebPCoder (0.14.6):
+  - SDWebImage (5.21.4):
+    - SDWebImage/Core (= 5.21.4)
+  - SDWebImage/Core (5.21.4)
+  - SDWebImageWebPCoder (0.15.0):
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.17)
   - SGQRCode (4.1.0)
@@ -864,29 +913,29 @@ PODS:
     - SJAttributesFactory/UIKitText (= 2.1.1)
   - SJAttributesFactory/Deprecated (2.1.1)
   - SJAttributesFactory/UIKitText (2.1.1)
-  - SJBaseVideoPlayer (3.7.6):
+  - SJBaseVideoPlayer (3.7.7.1):
     - Masonry
-    - SJBaseVideoPlayer/AVPlayer (= 3.7.6)
-    - SJBaseVideoPlayer/Common (= 3.7.6)
+    - SJBaseVideoPlayer/AVPlayer (= 3.7.7.1)
+    - SJBaseVideoPlayer/Common (= 3.7.7.1)
     - SJUIKit/AttributesFactory (>= 0.0.0.38)
     - SJUIKit/ObserverHelper
     - SJUIKit/Queues
     - SJUIKit/SQLite3
-  - SJBaseVideoPlayer/AVPlayer (3.7.6):
+  - SJBaseVideoPlayer/AVPlayer (3.7.7.1):
     - Masonry
     - SJBaseVideoPlayer/Common
     - SJUIKit/AttributesFactory (>= 0.0.0.38)
     - SJUIKit/ObserverHelper
     - SJUIKit/Queues
     - SJUIKit/SQLite3
-  - SJBaseVideoPlayer/Common (3.7.6):
+  - SJBaseVideoPlayer/Common (3.7.7.1):
     - Masonry
     - SJBaseVideoPlayer/ResourceLoader
     - SJUIKit/AttributesFactory (>= 0.0.0.38)
     - SJUIKit/ObserverHelper
     - SJUIKit/Queues
     - SJUIKit/SQLite3
-  - SJBaseVideoPlayer/ResourceLoader (3.7.6):
+  - SJBaseVideoPlayer/ResourceLoader (3.7.7.1):
     - Masonry
     - SJUIKit/AttributesFactory (>= 0.0.0.38)
     - SJUIKit/ObserverHelper
@@ -924,7 +973,7 @@ PODS:
     - SJVideoPlayer/Common
   - SJVideoPlayer/ResourceLoader (3.4.3):
     - SJBaseVideoPlayer (>= 3.7.5)
-  - SnapKit (5.6.0)
+  - SnapKit (5.7.1)
   - SQCombineRequest (1.0.1):
     - SQCombineRequest/SQCombineRequestNetTool (= 1.0.1)
   - SQCombineRequest/SQCombineRequestCombine (1.0.1)
@@ -934,7 +983,10 @@ PODS:
   - SQScanView (1.0.3)
   - SSAlert (0.0.3)
   - STPopup (1.8.7)
-  - SVProgressHUD (2.2.5)
+  - SVProgressHUD (2.3.1):
+    - SVProgressHUD/Core (= 2.3.1)
+  - SVProgressHUD/Core (2.3.1)
+  - SwiftAlgorithms (1.0.0)
   - SwiftyStoreKit (0.16.1)
   - SwipeTableView (0.2.6)
   - TABAnimated (2.6.6)
@@ -953,7 +1005,7 @@ PODS:
     - TLTransitions/Config
   - TLTransitions/TransitionView (1.5.1):
     - TLTransitions/Config
-  - Toast-Swift (5.0.1)
+  - Toast-Swift (5.1.1)
   - TOSearchBar (1.0.3)
   - TTCTool/TagChannelManager (0.1.3):
     - Masonry
@@ -964,11 +1016,11 @@ PODS:
   - TTCTool/TTCTransition (0.1.3)
   - TTGTagCollectionView (2.4.2)
   - TYCyclePagerView (1.2.0)
-  - TZImagePickerController (3.8.7):
-    - TZImagePickerController/Basic (= 3.8.7)
-    - TZImagePickerController/Location (= 3.8.7)
-  - TZImagePickerController/Basic (3.8.7)
-  - TZImagePickerController/Location (3.8.7)
+  - TZImagePickerController (3.8.9):
+    - TZImagePickerController/Basic (= 3.8.9)
+    - TZImagePickerController/Location (= 3.8.9)
+  - TZImagePickerController/Basic (3.8.9)
+  - TZImagePickerController/Location (3.8.9)
   - UICKeyChainStore (2.2.1)
   - UICountingLabel (1.2.0)
   - UINavigation-SXFixSpace (1.2.4)
@@ -979,29 +1031,30 @@ PODS:
   - "UIView+FDCollapsibleConstraints (1.1)"
   - UMABTest (1.0.1):
     - UMCommon
-  - UMAPM (1.9.3)
+  - UMAPM (2.0.7):
+    - UMCommon
   - UMCCommonLog (2.0.2)
-  - UMCommon (7.4.7):
+  - UMCommon (7.5.5):
     - UMDevice
   - UMCSecurityPlugins (1.0.6)
   - UMDevice (3.4.0)
-  - UMLink (1.2.0):
+  - UMLink (1.3.0):
     - UMCommon
-  - UMPush (4.1.1):
+  - UMPush (4.1.3):
     - UMCommon
-  - UMShare/Core (6.10.12):
+  - UMShare/Core (6.10.15):
     - UMCommon
-  - UMShare/Social/ReducedQQ (6.10.12):
-    - UMCommon
-    - UMShare/Core
-  - UMShare/Social/ReducedWeChat (6.10.12):
+  - UMShare/Social/ReducedQQ (6.10.15):
     - UMCommon
     - UMShare/Core
-  - UMShare/Social/WeChat (6.10.12):
+  - UMShare/Social/ReducedWeChat (6.10.15):
+    - UMCommon
+    - UMShare/Core
+  - UMShare/Social/WeChat (6.10.15):
     - UMCommon
     - UMShare/Core
     - UMShare/Social/ReducedWeChat
-  - UMShare/UI (6.10.12):
+  - UMShare/UI (6.10.15):
     - UMCommon
     - UMShare/Core
   - VVManager (2.1.0)
@@ -1022,7 +1075,7 @@ PODS:
   - XLForm (4.3.0)
   - XXShield (2.3.1)
   - YBHandyList (1.0.5)
-  - YBPopupMenu (1.3.1)
+  - YBPopupMenu (1.3.2)
   - Yoga (1.14.0)
   - YPNavigationBarTransition (2.2.3)
   - YTKKeyValueStore (0.1.2):
@@ -1056,6 +1109,9 @@ PODS:
   - ZFPlayer/ijkplayer (4.1.4):
     - IJKMediaFramework
     - ZFPlayer/Core
+  - ZHHRootNavigationController (0.0.7):
+    - ZHHRootNavigationController/Core (= 0.0.7)
+  - ZHHRootNavigationController/Core (0.0.7)
   - ZJJTimeCountDown (1.0.3)
   - ZJKitTool (2.6.0):
     - Masonry
@@ -1109,9 +1165,9 @@ PODS:
     - YYCategories
   - ZLCellDataSource (0.4.1)
   - ZLCollectionViewFlowLayout (1.4.9)
-  - ZLPhotoBrowser (4.5.4):
-    - ZLPhotoBrowser/Core (= 4.5.4)
-  - ZLPhotoBrowser/Core (4.5.4)
+  - ZLPhotoBrowser (4.7.3):
+    - ZLPhotoBrowser/Core (= 4.7.3)
+  - ZLPhotoBrowser/Core (4.7.3)
   - ZQSearch (0.1.9):
     - SDWebImage (>= 4.0)
   - ZXEmptyView (1.1.1)
@@ -1161,6 +1217,7 @@ DEPENDENCIES:
   - FMListPlaceholder
   - Foggy
   - FSCalendar
+  - FSPagerView
   - FSTextView
   - FWPopupView
   - FWPopupViewOC
@@ -1193,6 +1250,7 @@ DEPENDENCIES:
   - JCore (~> 2.1.4-noidfa)
   - JFCitySelector
   - JHChainableAnimations
+  - JHNoDataEmptyView
   - JhtFloatingBall
   - JHVerificationCodeView
   - JJCollectionViewRoundFlowLayout
@@ -1281,6 +1339,7 @@ DEPENDENCIES:
   - SJBaseVideoPlayer
   - SJStaticTableView
   - SJVideoPlayer
+  - SnapKit
   - SQCombineRequest
   - SQScanView
   - SSAlert
@@ -1350,6 +1409,7 @@ DEPENDENCIES:
   - ZFPlayer/AVPlayer
   - ZFPlayer/ControlView
   - ZFPlayer/ijkplayer
+  - ZHHRootNavigationController
   - ZJJTimeCountDown
   - ZJKitTool
   - ZLCellDataSource
@@ -1407,6 +1467,7 @@ SPEC REPOS:
     - FMListPlaceholder
     - Foggy
     - FSCalendar
+    - FSPagerView
     - FSTextView
     - FWPopupView
     - FWPopupViewOC
@@ -1444,6 +1505,7 @@ SPEC REPOS:
     - JCore
     - JFCitySelector
     - JHChainableAnimations
+    - JHNoDataEmptyView
     - JhtFloatingBall
     - JHVerificationCodeView
     - JJCollectionViewRoundFlowLayout
@@ -1534,6 +1596,7 @@ SPEC REPOS:
     - SSAlert
     - STPopup
     - SVProgressHUD
+    - SwiftAlgorithms
     - SwiftyStoreKit
     - SwipeTableView
     - TABAnimated
@@ -1591,6 +1654,7 @@ SPEC REPOS:
     - YYText
     - YYWebImage
     - ZFPlayer
+    - ZHHRootNavigationController
     - ZJJTimeCountDown
     - ZJKitTool
     - ZLCellDataSource
@@ -1606,25 +1670,25 @@ SPEC REPOS:
     - ZYCornerRadius
 
 SPEC CHECKSUMS:
-  AAChartKit: 5f7fe0e22cd22b70e8d1466129e295c6147d607e
+  AAChartKit: e3384633481b9e9727a10859649bef7782467ec2
   ACActionSheet: da1ed5ea2add6e36208eb0652e8803286a7100fb
   AFNetworking: 3bd23d814e976cd148d7d44c3ab78017b744cd58
   "AFNetworking+RetryPolicy": d823c39e54178c311931615507a54e401eda5055
-  Alamofire: f36a35757af4587d8e4f4bfa223ad10be2422b8c
+  Alamofire: 7193b3b92c74a07f85569e1a6c4f4237291e7496
   AMapFoundation: 9885c48fc3a78fdfb84a0299a2293e56ea3c9fec
-  AMapLocation: 5248aec2455ebb5d104b367813c946430a2ee033
+  AMapLocation: 8c46dbe995333ad6cae147d54a7307a577020be0
   AMLeaksFinder: c06ab15486dff283e49943329c77497d11f0d06a
   BabyBluetooth: d50758aecf24d4a0ab9271d69f0f116d6bee51c9
   BeeHive: 64c01ddec33b9ef8813701e075eeb732327d0f75
-  BMKLocationKit: 7048cb9f9e6cd21d803a71013d175fce57db7f77
+  BMKLocationKit: 79689c9898474cbad4a93a5f0cc06c8c97fa2b02
   BMLongPressDragCellCollectionView: 99f224009d4137999b35b8a810a54edc8b34eb85
   Booming: c6b71f3cb632ef560997a1e79429ab3b4b172f3c
-  BRPickerView: 6dd69ea2c48e0a0abf1d197a705050e13143ee63
+  BRPickerView: 84b2effb81f3b9ebd27f1d31de867ae0b37024f7
   CacheX: 9665503a86f9e38b3eb0c4ab14251649a79d292d
   CalendarLib: 040a8a655376581d8dc7c3c63196ddcf5223f471
   CCExcelView: 9037764648b9a605c66cf72e2f73e37815f15a95
   ChainThen: df7879abd0fe4a12f8fd092c87ccdf4b0f077aa9
-  Charts: 888b39ae772b3dc79d0a0e659f0419ff9bd3e963
+  Charts: ce0768268078eee0336f122c3c4ca248e4e204c5
   CHTCollectionViewWaterfallLayout: b989a459788d7657ac010e03bc0f7eedca95a420
   CRBoxInputView: 2380c292aabbf786fe923776f111ba3053438fba
   CTMediator: 3f3578b525b3a46a7a2f92a99922ec40363f4269
@@ -1642,53 +1706,55 @@ SPEC CHECKSUMS:
   Eureka: 1c18c7fcd8f772cc2ca42d6be36292dffa77eecb
   FBRetainCycleDetector: 46f8179bbb1c587deee3ea838a1a3ee02acf5015
   FLAnimatedImage: bbf914596368867157cc71b38a8ec834b3eeb32b
-  FMDB: 57486c1117fd8e0e6b947b2f54c3f42bf8e57a4e
+  FMDB: 728731dd336af3936ce00f91d9d8495f5718a0e6
   FMLayoutKit: 5ae34e3f6d7cbc79c112651ca390b79ac2a73c5b
   FMListPlaceholder: 17b3cb63922850e18ca97dd092a233ea3a80bc5a
   Foggy: 270fff1c7f306a3acaf13cb4d8b6a536293e6811
   FSCalendar: 2d1d0d9398f12d439f55c1fe0f01525b151b8260
+  FSPagerView: 670405b2f18e2a87fa37f20b00de783e562c25a8
   FSTextView: 9e2ca07bb6bb0fb7e77b49b2717adf81f3c620b5
   FWPopupView: b96d7d46d4afaad8e99d2739f9118a3c43c63a7b
   FWPopupViewOC: 116094e33ba1f492e60c262a095a9ae6bfd0c715
   GKCover: 6486cf87c0a5cae4bb5c3a09e17925ad8b466412
-  GKLivePhotoManager: 203a3fc08563511b961c686e543d5560fa801331
-  GKNavigationBar: 8f8de3179ee1afe737d43a546cfaec5a5f5e9160
-  GKPageScrollView: 7efe6ea056d502770fa8146f96985a9ef2c641b8
-  GKPageSmoothView: b2588dac305e89c86a4a8be6e6a79275792fcc59
-  GKPhotoBrowser: 7719f044d94103d4b3e5d1cd11729e9be80dd8b4
-  GKSliderView: 94fab41465f2ba543200f04bee401020beab4041
+  GKLivePhotoManager: 7fba1ae3eebbbd9323320e137a88a231bc5af5fa
+  GKNavigationBar: b32ca32122b2a9c3e36d10e23039402fb8d17420
+  GKPageScrollView: 90f5f69dd0457aeb3b20e098d4c0dbac5832090a
+  GKPageSmoothView: 4076b14f34912628692762ee1c68d70f40c5ddb0
+  GKPhotoBrowser: 5df74bd87613896269fe4ba1244c32e1b4a0c824
+  GKSliderView: 7c6f853afeb0ae370bb8dce76ec669d6e9109d1d
   GKVideoScrollView: f5e4fe290d7811665d4e3699293f1736b1e12cd6
   GLEnvs: fa412011e1b8b2eb38a105e465d93dbb18435c76
   GroupedData: 06b4543577206c2747caec04142de8c4d9444957
   GXTransition: 2b027f750a1d28fa2c679f60fe56dd1e14f2dd98
   HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
-  HBDNavigationBar: a997b65ab7194271e5584b87a952fc851832f692
+  HBDNavigationBar: 822fc52ced15c1b9b1a898d60e44b76094a4977a
   HBDStatusBar: c20ec077f26fa09948399d55d91d5900378494a7
   HDCollectionView: 3fcc3d7cc309b7d4d66ecec60ef41f1bb38b7788
   HDListViewDiffer: f6af38559d7dbc37723b6aed8bdb604c1f78aa8a
   HMSegmentedControl: 34c1f54d822d8308e7b24f5d901ec674dfa31352
   HSSetTableViewController: e1845101c7b16c70d9f72dee63bab6f74bca8660
   HWPanModal: b57a6717d3cdcd666bff44f9dd2a5be9f4d6f5d2
-  HXPhotoPicker: 3d0526bc46cd2a4510a777d5f57dfad8e683fcfd
+  HXPhotoPicker: 540bbc16498430a5fd286d50a7b9cba808dad2c4
   HXPhotoPickerObjC: ca01803a5f8d48a43a8283eec2a632cfb0386b37
   HXRotationTool: 5daeceaa20cb0f62eb795d90238266f787437dd3
   HYBImageCliped: 22d14431324bc9d056353d6f1490a3bd03fc7dff
   HYBMasonryAutoCellHeight: 9296583777080d32ba6257f55e52b7334dd481fc
   HYBUnicodeReadable: ebffd6ee9a9eeb0e2a7788e45d3efe169340db45
   IAPHelper: fd74f53b0ac142eed085777b88b86a11746a2dd4
-  IGListDiffKit: 02d937d7e714d6f558771f284ed80668d483b522
-  IGListKit: baf7e87b4c2262cd569c380e46ca5667a4a82c82
+  IGListDiffKit: f3e9bb6b993a6127a25234e1713fbf32f26a6c63
+  IGListKit: d753b3d4df9edb381af491109d11a1084fad5f67
   IJKMediaFramework: f1119f6324c96bc4654f3045a5beaa95ba0596c0
   IMYAOPTableView: 54e24cecf7b0388fc3f21669d2e1a2a33d486674
   IQKeyboardManager: c8665b3396bd0b79402b4c573eac345a31c7d485
   JCore: a7f1dead960d77a97717c73ea8b0aa5b33706491
   JFCitySelector: 51452fcadaa180463901cd190149e5951623e477
   JHChainableAnimations: 0237489ed063f0ec5b351f5c7bb26c1891517074
+  JHNoDataEmptyView: 794363bf275696364dd9f0449960189b905b9446
   JhtFloatingBall: 5a8d8fe6d331cd763eab5c2e81daa6fdaa89fd36
   JHVerificationCodeView: ed16408d963962888c06c77bdc9addad645fdfa8
   JJCollectionViewRoundFlowLayout: c39b6467a4a588b134138398f71b9aa1521c1b07
   JNAPushPopCompletionBlock: bd4fb06d2f1317dd2798629c8c7b4ea0a21e4118
-  JPImageresizerView: 55df6aeaf218ffec7d57c0a0d02ca898d227b808
+  JPImageresizerView: 463b724b9dc8d10c38e6d30396ec0aa44fca03eb
   JPush: 8ce888d6dedfa417e90c8b6bc87405a16ce2e699
   JQCollectionViewWaterfallLayout: 4282a4b91ee9dc55a089420acd37f6202b544a8d
   JQLaunchAdKit: 5e232ae3c2879708166b28d190c8695d667471bd
@@ -1709,13 +1775,13 @@ SPEC CHECKSUMS:
   KSPhotoBrowser: 61059046ffdc6d8c47bc0a4ae4b5fef6395f7b53
   KxMenu: c025365712f55fa99feb7830fbb7dea0e912be72
   LBXPermission: e7f860ce1280599fc196a8c5dee713cbb81354d4
-  LEEAlert: 79a42cf9b0b82b1d451f40f07558b101e5e00774
+  LEEAlert: b0bbaaa8fba0819247a02d3fbca2cb94bef741f2
   LFPhoneInfo: 0b65b3165de77e03aaa2b2731c2ef8802958ee8d
-  libwebp: 1786c9f4ff8a279e4dac1e8f385004d5fc253009
+  libwebp: 02b23773aedb6ff1fd38cec7a77b81414c6842a8
   LJContactManager: cebd9b2287b4aaa29b97789e7026e7c883426cbb
   LMJDropdownMenu: 50c74e9d50a480c290fec47eb575826861d0823b
   LNPopupController: 7f64391076386a5a89d36b243352a9dd7510a2e8
-  lottie-ios: e047b1d2e6239b787cc5e9755b988869cf190494
+  lottie-ios: 96784afc26ea031d3e2b6cae342a4b8915072489
   LSAnimator: f24d46b5f9b1ecedba14dc76a18e8fe2bbf681ea
   LSSafeProtector: b2e6c263079d365967cc4d19817b38291b5fcbe6
   LSTPopView: 9379f00f6ce7d1fc620b50ab00ed3ef97b2d4d52
@@ -1725,7 +1791,7 @@ SPEC CHECKSUMS:
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   MGSwipeTableCell: d99ed6466f393b71cd488c6f798ba112ff5d1d01
   MJExtension: 01704cca2b60a214c10761b6491eab74069d68a9
-  MJRefresh: 2fe7fb43a5167ceda20bb7e63f130c04fd1814a5
+  MJRefresh: ff9e531227924c84ce459338414550a05d2aea78
   MLeaksFinder: 8c435bd2f6d070af18cff082b503b21adc130fc0
   MNFloatBtn: 9c5a2c398082db5b2590ec728983576e277258f0
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
@@ -1745,7 +1811,7 @@ SPEC CHECKSUMS:
   PulsingHalo: 1a9c6b65a8e12ac9eee1627fc8476efcce8e1918
   PureLayout: 5fb5e5429519627d60d079ccb1eaa7265ce7cf88
   PYSearch: 76dee18eea3309b60921a5d6a69390a63a5dda15
-  QMUIKit: 6321cf1124623d686a9ec0a79a7cc59d0d64a52c
+  QMUIKit: 3c622fe3c55c0dccfad750634bd9ee5e7ade9a53
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
   REFormattedNumberField: 70fc5fb1218ebd5ee9983820defd12806d5c6ec6
   RETableViewManager: 0f24d796c42c0890d38c79cc9aeb3871e186726e
@@ -1753,39 +1819,40 @@ SPEC CHECKSUMS:
   Rickenbacker: 8cddd6e5791735cb129388dec9a2b5b5c8fb9138
   RKNotificationHub: e926748820d719f21ff374657a47fceefa1796b4
   RTRootNavigationController: ca443783baf6ff65a70c4d21ce0eedbbc1fec1fe
-  RxCocoa: f5609cb4637587a7faa99c5d5787e3ad582b75a4
+  RxCocoa: ac16414696ae706516be3e1ab00fcce5bdc9be8a
   RxNetworks: e634a349d7a8db631415961521e28a13f98216fb
-  RxRelay: 4151ba01152436b08271e08410135e099880eae5
-  RxSwift: b9a93a26031785159e11abd40d1a55bcb8057e52
-  SCLAlertView-Objective-C: c17253cf0ce7543de3f9e4c7bd9341c1dd55c175
+  RxRelay: 6b0c930e5cef57d5fe2032571e5e65b78e3cbdb1
+  RxSwift: 31649ace6aceeb422e16ff71c60804f9c3281ed9
+  SCLAlertView-Objective-C: 4ec1ad92da50bb999fd9e56a754c67807b05e75c
   SDAutoLayout: 8bf6b3bbc8b01f775d4defbb4fda2ace805461be
   SDMovableCellCollectionView: 4a5197c6a7f9f7d50a1a3c155ec2146598f494d0
-  SDWebImage: a79252b60f4678812d94316c91da69ec83089c9f
-  SDWebImageWebPCoder: e38c0a70396191361d60c092933e22c20d5b1380
+  SDWebImage: d0184764be51240d49c761c37f53dd017e1ccaaf
+  SDWebImageWebPCoder: 0e06e365080397465cc73a7a9b472d8a3bd0f377
   SGQRCode: 6ad664d63f38f2842503bc5087812c5a3136d924
   SJAttributesFactory: 16cd39e6c0e538933db05ddc06d23c8608b13216
-  SJBaseVideoPlayer: f15debaa8c1e27b63bdefc8caeec515e9c71d079
+  SJBaseVideoPlayer: b3122de12225b27b71bd9a8a1f08f4dcf2f4e5ec
   SJStaticTableView: b04329ab8bf5823463468a06650bf00090008fed
   SJUIKit: a40111941e408cc17d4c1c23495aa92999e814b0
   SJVideoPlayer: 4f09814f58522e0975cb2dccfda925f6c8643467
-  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+  SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
   SQCombineRequest: 05ad6daa396896fe21193ff8ef9b84f31e61aa55
   SQScanView: 622415fdb3bf370bb9ea49fac3818959572b1700
   SSAlert: 91db5db62fa8bb26504c3c2368cf33f3798d2796
   STPopup: a9045557bc48a0df51fbb7bf0544447c5fe84d34
-  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  SVProgressHUD: 4837c74bdfe2e51e8821c397825996a8d7de6e22
+  SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
   SwiftyStoreKit: 6b9c08810269f030586dac1fae8e75871a82e84a
   SwipeTableView: 67d8a2e6e18bd38c188fd4fabda0b278eaa08d2f
   TABAnimated: 75fece541a774193565697c7a11539d3c6f631b3
   TFDropDownMenu: 714ebed4d0735974720c22ed5141ee11891d0a7e
   ThinkVerb: 942c70b3a7862c88ee858cc32de46ac87129ec32
   TLTransitions: 1e631a3c0b41a7a1671aa0b1a62f456b26221bd7
-  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
+  Toast-Swift: 7a03a532afe3a560d4044bc7c237e2864d295173
   TOSearchBar: ee22b7ade729521b6ace523cea0ce97d23ab3cd9
   TTCTool: 0c349b891197f06604b75eafc80eb3f6e7fc2298
   TTGTagCollectionView: 0d4625aaf7ee3ad755c39d549368a4ce69bd17d1
   TYCyclePagerView: 2b051dade0615c70784aa34f40c646feeddb7344
-  TZImagePickerController: 5f35bb7266552e36ca834bafa955b869fe086124
+  TZImagePickerController: 456f470b5dea97b37226ec7a694994a8663340b2
   UICKeyChainStore: ba3bff2c762b12db1e516f395c837dd25298b05e
   UICountingLabel: 1db4e7d023e1762171eb226d6dff47a7a84f27aa
   UINavigation-SXFixSpace: 10f223253ebff2ceefa26694e23b7694269763c4
@@ -1793,14 +1860,14 @@ SPEC CHECKSUMS:
   UITableViewDynamicLayoutCacheHeight: 4fabd95e944317cc7cd7ead3c56915d9527432dd
   "UIView+FDCollapsibleConstraints": 9357eaf03b4e088263ab74a3b86a382a64ce38dd
   UMABTest: e35a7be1f4401640f780d95b403d98794d65c6aa
-  UMAPM: a52ef6d5be72dd11591b917d96df97627970dae6
+  UMAPM: ba9fbebe8dd2048b251c332ab0afc86e1ba5ea63
   UMCCommonLog: bea707e50c85cef4b0eb47cc5c7226bb843245ca
-  UMCommon: 8b4cd0423297c39bca6eea1ec896558b40e5bcf7
+  UMCommon: db7379bf52a5d6fcd798384539704998224b8be0
   UMCSecurityPlugins: 0831a08f3988f3cea9f1d3a7626cd9bee4fef150
   UMDevice: dcdf7ec167387837559d149fbc7d793d984faf82
-  UMLink: d5047e2716c2571d120d890af0f7a41d1b5e5224
-  UMPush: 057de32a6766ece4b23f308e5951fe92ccf7da26
-  UMShare: edb49e162824e2ddd61ef53a7c6e92d64f3c13b5
+  UMLink: 6c43368c378c2b7e20ed8427f896e9810e419ca1
+  UMPush: 5d4c4c28f050bf3898ddce00210432050cf8aead
+  UMShare: e8448c955153770c40a87fa26267bddf8c5b0691
   VVManager: a42c835c1f566d96b62fbd2466bfc1187e1e4cd3
   WMDragView: 18f2c5d18c350ea4b0ac1cc64066abfe5caea443
   WMZBanner: 42d02896dc7a67a4d7a2ebe1ef5b7a79f8d2c540
@@ -1816,7 +1883,7 @@ SPEC CHECKSUMS:
   XLForm: a439f9512078ed538e8335c8b06d3f3286bbfd37
   XXShield: c3095b2e1f0e29bc9f660be1eea01813b557cd99
   YBHandyList: bf0bf2803bb35569863fe63fd25f4541a4e5fe68
-  YBPopupMenu: e67e5af42cf242cee89a6dd0c38cb814a1e91c17
+  YBPopupMenu: fd583834518d8aeb36d29a54c940b8e405d42c2d
   Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
   YPNavigationBarTransition: d3d8c0e4cced41dec43647832bb45737d79cc8b0
   YTKKeyValueStore: 4d002941540dd5108fa23009b71e0f2f937f7a0f
@@ -1831,11 +1898,12 @@ SPEC CHECKSUMS:
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
   ZFPlayer: 5cf39e8d9f0c2394a014b0db4767b5b5a6bffe13
+  ZHHRootNavigationController: 9fd1003336f954c3c609b2984e62b2c4dfff5db7
   ZJJTimeCountDown: 65f3a6c6e9ef67bf3906578b59c49c66155d8cc1
   ZJKitTool: 6d8763ce3f1570924ea106f28bfaf7b01d791a86
   ZLCellDataSource: 7b78bded737174201489a8de478b55a9f2155bf8
   ZLCollectionViewFlowLayout: c99024652ce9f0c57d33ab53052c9b85e4a936b7
-  ZLPhotoBrowser: 68ab8554845ce05a41d49f293a0e30beb519101f
+  ZLPhotoBrowser: d5928f08485c90a0b349a3a1e804e82c83ccf193
   ZQSearch: de5e8f91ee215d891bb8345ecae9094d04fef73a
   ZXEmptyView: fef820f53b26eaa88261335066493090f625e914
   ZXNavigationBar: a8ceb13fe37f9ca894cf6ae22d805cbdbb9ad6b1
@@ -1845,6 +1913,6 @@ SPEC CHECKSUMS:
   ZYBannerView: 7a1c76cab9a5438bf5c7529b8fc99cacb5af5898
   ZYCornerRadius: f0af817be7805b5c63d793042ca7a03f81e14069
 
-PODFILE CHECKSUM: 43a5f7eebac7b2c32c87c5dd55c744e383cb90ad
+PODFILE CHECKSUM: ebd20153901bbd64c9e4254fe3aab03f5c56d498
 
-COCOAPODS: 1.14.2
+COCOAPODS: 1.16.2

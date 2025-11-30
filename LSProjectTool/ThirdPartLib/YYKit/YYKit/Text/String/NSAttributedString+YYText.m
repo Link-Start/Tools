@@ -890,8 +890,6 @@ return style. _attr_;
     [self setLineSpacing:lineSpacing range:NSMakeRange(0, self.length)];
 }
 
-- setattach
-
 - (void)setParagraphSpacing:(CGFloat)paragraphSpacing {
     [self setParagraphSpacing:paragraphSpacing range:NSMakeRange(0, self.length)];
 }

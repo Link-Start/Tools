@@ -124,7 +124,6 @@
 		A738BA0C2B0496B200B09222 /* DDTextFieldAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A738BA012B0496B200B09222 /* DDTextFieldAlertView.m */; };
 		A738BA0D2B0496B200B09222 /* DDAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A738BA052B0496B200B09222 /* DDAlertView.m */; };
 		A738BA0E2B0496B200B09222 /* DDTextViewAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A738BA062B0496B200B09222 /* DDTextViewAlertView.m */; };
-		A738BA102B04976D00B09222 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A738BA0F2B04976D00B09222 /* README.md */; };
 		A73982292B1E00CE004FADF2 /* LSPagingItemFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A73982282B1E00CE004FADF2 /* LSPagingItemFlowLayout.m */; };
 		A73B3E6827EC664C00A80D50 /* BaiDuMapLocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = A73B3E6727EC664C00A80D50 /* BaiDuMapLocationService.m */; };
 		A73C39DB23A76262005F50D6 /* CFGradientLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A73C39DA23A76262005F50D6 /* CFGradientLabel.m */; };
@@ -232,7 +231,6 @@
 		A77139052805225600D3DB98 /* CYCustomSectionIndexCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A77139002805225600D3DB98 /* CYCustomSectionIndexCell.m */; };
 		A7713907280522F000D3DB98 /* DSectionIndexItemView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A7713906280522F000D3DB98 /* DSectionIndexItemView.bundle */; };
 		A773F83428C5EBF800A8F29C /* ZYNetworkAccessibility.m in Sources */ = {isa = PBXBuildFile; fileRef = A773F83228C5EBF800A8F29C /* ZYNetworkAccessibility.m */; };
-		A773F83528C5EBF800A8F29C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A773F83328C5EBF800A8F29C /* README.md */; };
 		A77629BD2A0C93E300CC3756 /* UITextField+LSDeleteBackward.m in Sources */ = {isa = PBXBuildFile; fileRef = A77629BC2A0C93E300CC3756 /* UITextField+LSDeleteBackward.m */; };
 		A77629C02A0CB8CA00CC3756 /* LSTextFieldDeleteBackward.m in Sources */ = {isa = PBXBuildFile; fileRef = A77629BF2A0CB8CA00CC3756 /* LSTextFieldDeleteBackward.m */; };
 		A77629C32A0CBB7F00CC3756 /* UITextField+LSCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = A77629C22A0CBB7F00CC3756 /* UITextField+LSCursor.m */; };
@@ -3666,7 +3664,6 @@
 				A704199B2806C7D900913743 /* JhtStar.bundle in Resources */,
 				AEB4D37B1DAA09EA0078A52D /* MBProgressHUD.bundle in Resources */,
 				A7AD9A8B283F63E100414EE6 /* oubabuyer@2x.png in Resources */,
-				A738BA102B04976D00B09222 /* README.md in Resources */,
 				A72CE8E82A80EEFC00CD917F /* TOSearchBarLocalizable.strings in Resources */,
 				AECFA2501D376C5F005F5DE6 /* LaunchScreen.storyboard in Resources */,
 				AED9083C1D3CB35700E00C02 /* Localizable.strings in Resources */,
@@ -3676,7 +3673,6 @@
 				AE0C7D9C1E0BBE750051269F /* link.html in Resources */,
 				A71D6EF527225799002746E4 /* DCURLRouter.plist in Resources */,
 				A7AA34FA2679F6D90043716A /* DIN-Regular-2.otf in Resources */,
-				A773F83528C5EBF800A8F29C /* README.md in Resources */,
 				A7713907280522F000D3DB98 /* DSectionIndexItemView.bundle in Resources */,
 				3DB5DC082216E77500069E5F /* 银行卡号和名称(字典).html in Resources */,
 				A7AA34FC2679F6D90043716A /* DIN-Black-2.otf in Resources */,
@@ -3757,6 +3753,7 @@
 				"${BUILT_PRODUCTS_DIR}/FMLayoutKit/FMLayoutKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FMListPlaceholder/FMListPlaceholder.framework",
 				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
+				"${BUILT_PRODUCTS_DIR}/FSPagerView/FSPagerView.framework",
 				"${BUILT_PRODUCTS_DIR}/FSTextView/FSTextView.framework",
 				"${BUILT_PRODUCTS_DIR}/FWPopupView/FWPopupView.framework",
 				"${BUILT_PRODUCTS_DIR}/FWPopupViewOC/FWPopupViewOC.framework",
@@ -3765,6 +3762,7 @@
 				"${BUILT_PRODUCTS_DIR}/GKNavigationBar/GKNavigationBar.framework",
 				"${BUILT_PRODUCTS_DIR}/GKPageScrollView/GKPageScrollView.framework",
 				"${BUILT_PRODUCTS_DIR}/GKPageSmoothView/GKPageSmoothView.framework",
+				"${BUILT_PRODUCTS_DIR}/GKPhotoBrowser/GKPhotoBrowser.framework",
 				"${BUILT_PRODUCTS_DIR}/GKSliderView/GKSliderView.framework",
 				"${BUILT_PRODUCTS_DIR}/GKVideoScrollView/GKVideoScrollView.framework",
 				"${BUILT_PRODUCTS_DIR}/GLEnvs/GLEnvs.framework",
@@ -3791,9 +3789,11 @@
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/JFCitySelector/JFCitySelector.framework",
 				"${BUILT_PRODUCTS_DIR}/JHChainableAnimations/JHChainableAnimations.framework",
+				"${BUILT_PRODUCTS_DIR}/JHNoDataEmptyView/JHNoDataEmptyView.framework",
 				"${BUILT_PRODUCTS_DIR}/JHVerificationCodeView/JHVerificationCodeView.framework",
 				"${BUILT_PRODUCTS_DIR}/JJCollectionViewRoundFlowLayout/JJCollectionViewRoundFlowLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/JNAPushPopCompletionBlock/JNAPushPopCompletionBlock.framework",
+				"${BUILT_PRODUCTS_DIR}/JPImageresizerView/JPImageresizerView.framework",
 				"${BUILT_PRODUCTS_DIR}/JQCollectionViewWaterfallLayout/JQCollectionViewWaterfallLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/JQLaunchAdKit/JQLaunchAdKit.framework",
 				"${BUILT_PRODUCTS_DIR}/JSBadgeView/JSBadgeView.framework",
@@ -3871,6 +3871,7 @@
 				"${BUILT_PRODUCTS_DIR}/STPopup/STPopup.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftAlgorithms/Algorithms.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwipeTableView/SwipeTableView.framework",
 				"${BUILT_PRODUCTS_DIR}/TABAnimated/TABAnimated.framework",
@@ -3918,6 +3919,7 @@
 				"${BUILT_PRODUCTS_DIR}/YYText/YYText.framework",
 				"${BUILT_PRODUCTS_DIR}/YYWebImage/YYWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Yoga/yoga.framework",
+				"${BUILT_PRODUCTS_DIR}/ZHHRootNavigationController/ZHHRootNavigationController.framework",
 				"${BUILT_PRODUCTS_DIR}/ZJJTimeCountDown/ZJJTimeCountDown.framework",
 				"${BUILT_PRODUCTS_DIR}/ZJKitTool/ZJKitTool.framework",
 				"${BUILT_PRODUCTS_DIR}/ZLCellDataSource/ZLCellDataSource.framework",
@@ -3971,6 +3973,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMLayoutKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMListPlaceholder.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSCalendar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSPagerView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSTextView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FWPopupView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FWPopupViewOC.framework",
@@ -3979,6 +3982,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GKNavigationBar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GKPageScrollView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GKPageSmoothView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GKPhotoBrowser.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GKSliderView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GKVideoScrollView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GLEnvs.framework",
@@ -4005,9 +4009,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JFCitySelector.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JHChainableAnimations.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JHNoDataEmptyView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JHVerificationCodeView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JJCollectionViewRoundFlowLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JNAPushPopCompletionBlock.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JPImageresizerView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JQCollectionViewWaterfallLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JQLaunchAdKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSBadgeView.framework",
@@ -4085,6 +4091,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/STPopup.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Algorithms.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyStoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeTableView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TABAnimated.framework",
@@ -4132,6 +4139,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYText.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/yoga.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZHHRootNavigationController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZJJTimeCountDown.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZJKitTool.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZLCellDataSource.framework",
@@ -4161,27 +4169,23 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-LSProjectTool/Pods-LSProjectTool-resources.sh",
-				"${PODS_ROOT}/GKPhotoBrowser/GKPhotoBrowser/GKPhotoBrowser.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/GKPhotoBrowser/GKPhotoBrowser.Privacy.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/JPImageresizerView/JPImageresizerView_Privacy.bundle",
 				"${PODS_ROOT}/KJBannerView/Sources/KJBannerView/KJBannerView.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/KJPlayer/KJPlayer.bundle",
 				"${BUILT_PRODUCTS_DIR}/KJPlayer/KJPlayer.framework/DBPlayer.momd",
 				"${PODS_ROOT}/KJPlayer/Sources/MidiPlayer/KJMidiSource.bundle",
 				"${PODS_ROOT}/UMCCommonLog/UMCommonLog/UMCommonLog.bundle",
+				"${PODS_ROOT}/UMPush/UMPush/UMPushResource.bundle",
 				"${PODS_ROOT}/UMShare/UMShare/UMSocialUI/UMSocialSDKResources.bundle",
 				"${PODS_ROOT}/ZFPlayer/ZFPlayer/Classes/ControlView/ZFPlayer.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GKPhotoBrowser.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GKPhotoBrowser.Privacy.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JPImageresizerView_Privacy.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/KJBannerView.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/KJPlayer.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/DBPlayer.momd",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/KJMidiSource.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UMCommonLog.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UMPushResource.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UMSocialSDKResources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ZFPlayer.bundle",
 			);
@@ -4881,7 +4885,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_ENTITLEMENTS = LSProjectTool/LSProjectTool.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
@@ -4925,7 +4928,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_ENTITLEMENTS = LSProjectTool/LSProjectTool.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;

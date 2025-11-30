@@ -99,20 +99,36 @@ CGRect rc = [self.view convertRect:btn.frame fromView:btn.superview];
 iOS裁剪图片方式
 //返回裁剪区域图片
 
--(UIImage*)clicpViewWithRect:(CGRect)aRect { //arect 想要截图的区域
-    CGFloat scale = [UIScreen mainScreen].scale;
-    aRect.origin.x*= scale;
-    aRect.origin.y*= scale;
-    aRect.size.width*= scale;
-    aRect.size.height*= scale;
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(self.view.width, self.view.height), YES, scale);
-    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    CGImageRefimageRef = viewImage.CGImage;
-    CGImageRef imageRefRect =CGImageCreateWithImageInRect(imageRef, aRect);
-    UIImage*sendImage = [[UIImagealloc]initWithCGImage:imageRefRect];
-    returnsendImage;
+- (UIImage*)clicpViewWithRect:(CGRect)aRect { //arect 想要截图的区域
+    
+        CGFloat scale = [UIScreen mainScreen].scale;
+        aRect.origin.x*= scale;
+        aRect.origin.y*= scale;
+        aRect.size.width*= scale;
+        aRect.size.height*= scale;
+    
+    UIImage *image;
+    if (@available(iOS 17.0, *)) { // iOS17.UIGraphicsBeginImageContext被deprecated了
+        UIGraphicsImageRendererFormat *format = [[UIGraphicsImageRendererFormat alloc] init];
+        format.opaque = YES;
+        format.scale = scale;
+        UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:CGSizeMake(self.view.width, self.view.height) format:format];
+        image = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
+            CGContextRef context = rendererContext.CGContext;
+            [self.view.layer renderInContext:context];
+        }];
+    } else {
+            UIGraphicsBeginImageContextWithOptions(CGSizeMake(self.view.width, self.view.height), YES, scale);
+            [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+            image = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+    }
+    
+    CGImageRef imageRef = image.CGImage;
+    CGImageRef imageRefRect = CGImageCreateWithImageInRect(imageRef, aRect);
+    UIImage *sendImage = [[UIImage alloc] initWithCGImage:imageRefRect];
+    
+        return sendImage;
 }
 
 第一种方法

@@ -31,12 +31,11 @@
         format.scale = [UIScreen mainScreen].scale;
         UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:rect.size format:format];
         output = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
-//            CGContextRef context = rendererContext.CGContext;
-            CGContextAddPath(UIGraphicsGetCurrentContext(), bezierPath.CGPath);
-            CGContextClip(UIGraphicsGetCurrentContext());
+            CGContextRef context = rendererContext.CGContext;
+            CGContextAddPath(context, bezierPath.CGPath);
+            CGContextClip(context);
             [self drawInRect:rect];
-            
-            CGContextDrawPath(UIGraphicsGetCurrentContext(), kCGPathFillStroke);
+            CGContextDrawPath(context, kCGPathFillStroke);
         }];
     } else {
         UIGraphicsBeginImageContextWithOptions(rect.size, false, [UIScreen mainScreen].scale);

@@ -259,6 +259,7 @@ static LSPayTools *_ls_payTools = nil;
  * @param resp具体的回应内容，是自动释放的
  */
 - (void)onResp:(BaseResp *)resp {
+    
 #if DEBUG
         NSLog(@"微信支付 错误码:%d  错误提示字符串:%@", resp.errCode, resp.errStr);
 #endif

@@ -84,11 +84,11 @@
             sectionInset = [self.delegate collectionView:self.collectionView layout:self insetForSectionAtIndex:section];
         }
         
-        // 行距
+        // 行距,上下item之间的距离
         if ([self.delegate respondsToSelector:@selector(collectionView:layout:minimumLineSpacingForSectionAtIndex:)]) {
             minimumLineSpacing = [self.delegate collectionView:self.collectionView layout:self minimumLineSpacingForSectionAtIndex:section];
         }
-        // 列距
+        // 列距,左右item之间的距离
         if ([self.delegate respondsToSelector:@selector(collectionView:layout:minimumInteritemSpacingForSectionAtIndex:)]) {
             minimumInteritemSpacing = [self.delegate collectionView:self.collectionView layout:self minimumInteritemSpacingForSectionAtIndex:section];
         }

@@ -391,12 +391,22 @@
 
 #pragma mark -
 /// 获取当前控制器
-- (UIViewController*)ls_getCurrentViewController {
-    ///获取keyWindow
-    UIWindow *window = [UIApplication sharedApplication].delegate.window;
+- (UIViewController *)ls_getCurrentViewController {
+    
+    UIWindow *window;
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 130000 // iOS 13及以上版本
+    window = self.view.window; // SceneDelegate中的self指向当前场景代理实例
     if (!window) {
         window = [UIApplication sharedApplication].keyWindow;
     }
+#else
+    iOS 12及以下版本
+    ///获取keyWindow
+    window = [UIApplication sharedApplication].keyWindow;
+    if (!window) {
+        window = [UIApplication sharedApplication].delegate.window;
+    }
+#endif
     //app默认windowLevel是UIWindowLevelNormal，如果不是，找到UIWindowLevelNormal的
     if (window.windowLevel != UIWindowLevelNormal) {
         NSArray *windows = [[UIApplication sharedApplication] windows];
@@ -453,7 +463,106 @@
     //否则返回本身
     return viewController;
 }
+//if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+//let statusBarManager = windowScene.statusBarManager
+//if let statusBarFrame = statusBarManager?.statusBarFrame {
+//    // 使用statusBarFrame
+//}
+//}
+//if #available(iOS 13.0, *) {
+//    if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+//        let statusBarManager = windowScene.statusBarManager
+//        if let statusBarFrame = statusBarManager?.statusBarFrame {
+//            // 使用statusBarFrame
+//        }
+//    }
+//} else {
+//    if let statusBarFrame = UIApplication.shared.keyWindow?.windowScene?.statusBarManager?.statusBarFrame {
+//        // 使用statusBarFrame
+//    }
+//}
+//let statusBarHeight: CGFloat = {
+//    if #available(iOS 13.0, *) {
+//        let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+//        return scene?.statusBarManager?.statusBarFrame.height ?? 0
+//    } else {
+//        return UIApplication.shared.statusBarFrame.height
+//    }
+//}()
+//CGFloat statusBarHeight() {
+//    if (@available(iOS 13.0, *)) {
+//        UIWindowScene *windowScene = (UIWindowScene *)[UIApplication sharedApplication].connectedScenes.anyObject;
+//        return windowScene.statusBarManager.statusBarFrame.size.height;
+//    } else {
+//        return [UIApplication sharedApplication].statusBarFrame.size.height;
+//    }
+//}
 
+//class ViewController: UIViewController {
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        if #available(iOS 13.0, *) {
+//            NotificationCenter.default.addObserver(self, selector: #selector(statusBarFrameDidChange), name: UIApplication.didChangeStatusBarFrameNotification, object: nil)
+//        }
+//    }
+//    @objc func statusBarFrameDidChange(notification: NSNotification) {
+//        let statusBarHeight = UIApplication.shared.statusBarFrame.height
+//        print("Status Bar Height: $statusBarHeight)")
+//    }
+//}
+//- (void)viewDidLoad {
+//    [super viewDidLoad];
+//    if (@available(iOS 13.0, *)) {
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusBarFrameDidChange:) name:UIApplicationDidChangeStatusBarFrameNotification object:nil];
+//    }
+//}
+//- (void)statusBarFrameDidChange:(NSNotification *)notification {
+//    CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+//    NSLog(@"Status Bar Height: %f", statusBarHeight);
+//}
+//代码需置于viewDidAppear中以确保窗口对象可用 。 ‌
+//iPhone不支持多窗口功能，相关方法仅适用于iPad
+
+- (void)getCurrentSceneWindows {
+    // currently connected UIScene
+    UIWindowScene *currentScene = (UIWindowScene *)[[UIApplication sharedApplication] connectedScenes].anyObject;
+    UIWindow *window = currentScene.windows.firstObject;
+}
+
+
+- (CGFloat)getCurrentStatusBarHeight {
+    CGFloat statusBarHeight = 0;
+    UIWindowScene *currentScene;
+    
+    if (@available(iOS 13.0, *)) {
+        currentScene = [UIApplication sharedApplication].windows.firstObject.windowScene;
+        if (!currentScene) {
+            currentScene = (UIWindowScene *)[UIApplication sharedApplication].connectedScenes.anyObject;
+         }
+         statusBarHeight = currentScene.statusBarManager.statusBarFrame.size.height;
+    } else {
+        statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+    }
+    return statusBarHeight;
+}
+
+#ifndef kLS_StatusBarHeight_
+#define kLS_StatusBarHeight_ \
+    ({\
+        CGFloat statusBarHeight = 0;\
+        if (@available(iOS 13.0, *)) {\
+            UIWindowScene *currentScene;\
+            currentScene = [UIApplication sharedApplication].windows.firstObject.windowScene;\
+            if (!currentScene) {\
+                currentScene = (UIWindowScene *)[UIApplication sharedApplication].connectedScenes.anyObject;\
+             }\
+            statusBarHeight = currentScene.statusBarManager.statusBarFrame.size.height;\
+        } else {\
+            statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;\
+        }\
+        statusBarHeight;\
+    })
+#endif
 
 #pragma mark -
 ///判断当前UIViewController 是否正在显示。

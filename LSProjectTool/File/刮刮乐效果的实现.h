@@ -38,18 +38,34 @@
     CGPoint cententPoint = [touch locationInView:self.imageView];
     // 设置清除点的大小
     CGRect  rect = CGRectMake(cententPoint.x, cententPoint.y, 20, 20);
-    // 默认是去创建一个透明的视图
-    UIGraphicsBeginImageContextWithOptions(self.imageView.bounds.size, NO, 0);
-    // 获取上下文(画板)
-    CGContextRef ref = UIGraphicsGetCurrentContext();
-    // 把imageView的layer映射到上下文中
-    [self.imageView.layer renderInContext:ref];
-    // 清除划过的区域
-    CGContextClearRect(ref, rect);
-    // 获取图片
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    // 结束图片的画板, (意味着图片在上下文中消失)
-    UIGraphicsEndImageContext();
+    
+    UIImage *image;
+    if (@available(iOS 17.0, *)) { // iOS17.UIGraphicsBeginImageContext被deprecated了
+        UIGraphicsImageRendererFormat *format = [[UIGraphicsImageRendererFormat alloc] init];
+        format.opaque = NO;
+        format.scale = 0;
+        UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:self.imageView.bounds.size format:format];
+        image = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
+            CGContextRef context = rendererContext.CGContext;
+            // 把imageView的layer映射到上下文中
+            [self.imageView.layer renderInContext:context];
+            // 清除划过的区域
+            CGContextClearRect(ref, rect);
+        }];
+    } else {
+        // 默认是去创建一个透明的视图
+        UIGraphicsBeginImageContextWithOptions(self.imageView.bounds.size, NO, 0);
+        // 获取上下文(画板)
+        CGContextRef ref = UIGraphicsGetCurrentContext();
+        // 把imageView的layer映射到上下文中
+        [self.imageView.layer renderInContext:ref];
+        // 清除划过的区域
+        CGContextClearRect(ref, rect);
+        // 获取图片
+        image = UIGraphicsGetImageFromCurrentImageContext();
+        // 结束图片的画板, (意味着图片在上下文中消失)
+        UIGraphicsEndImageContext();
+    }
     
     self.imageView.image = image;
 }

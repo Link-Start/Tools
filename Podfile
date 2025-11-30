@@ -1,6 +1,6 @@
 
 source 'https://github.com/CocoaPods/Specs.git'			#知名依赖库的来源地址
-platform :ios, '11.0' #'9.0'	#平台ios,版本9.0 #取消对本行的注释以定义项目的全局平台
+platform :ios, '13.0' #'9.0'	#平台ios,版本9.0 #取消对本行的注释以定义项目的全局平台
 inhibit_all_warnings!	#忽略引入库的所有警告
 use_frameworks!			#如果您不使用swift并且不想使用动态框架，请对本行进行注释。
 # 默认情况下，通过 CocoaPods 添加的第三方源码库都为动态库，因为在 Xcode 9 之前，不支持 Swift 静态库编译，CocoaPods 的 Profile 中会默认添加 use_frameworks! 标记，要转成静态库，只需要把 use_frameworks! 改成 use_frameworks! :linkage => :static。
@@ -20,9 +20,10 @@ def all_Pods
 
 
 	pod 'DZNEmptyDataSet'				#空白占位图
-	pod 'LYEmptyView'					#iOS一行代码集成空白页面占位图(无数据、无网络占位图)
+	pod 'LYEmptyView'					#iOS一行代码集成空白页面占位图(无数据、无网ƒ络占位图)
 	pod 'ZXEmptyView'					#【支持tableView、collectionView、scrollView和普通View】轻松构建无数据、网络错误等占位图，简单易用，快速实现各种自定义效果！支持在根控制器中统一设置项目所有页面的空数据图，tableView与collectionView空数据图自动显示与隐藏，一劳永逸！
 	pod 'FMListPlaceholder'				#一个优雅的占位图解决方案。适用于 UITableView 和 UICollectionView。
+	pod 'JHNoDataEmptyView'
 
 	pod 'TABAnimated'					#一个由iOS原生组件映射出骨架屏的框架，包含快速植入，低耦合，兼容复杂视图等特点，提供国内主流骨架屏动画的加载方案，同时支持上拉加载更多、自定制动画。
 										# https://github.com/tigerAndBull/TABAnimated
@@ -30,6 +31,9 @@ def all_Pods
 	pod 'Masonry'						#布局
 	pod 'SDAutoLayout'					#布局
 	pod 'MyLayout'						#MyLayout是一套iOS界面视图布局框架。
+	pod 'SnapKit'                     #适用于iOS和OS X的Swift自动布局DSL
+  #SwifterSwift 是 500 多个原生 Swift 扩展的集合，为 iOS、macOS、tvOS、watchOS 和 Linux 提供了（超过 500 个）适用于各种原生数据类型、UIKit 和 Cocoa 类的便捷方法、语法糖和性能改进。
+  
 	pod 'SQScanView'					#iOS 扫码，简单设置识别区域，一图多码https://www.jianshu.com/p/453dd245498d
 
 	# pod 'SDCycleScrollView'				# 轮播图
@@ -40,6 +44,7 @@ def all_Pods
 	pod 'ZYBannerView'					# 简单易用, 显示内容定制性强的可循环轮播控件. 可以实现类似淘宝商品详情中侧拉进入详情页的功能.
 	pod 'EllipsePageControl'			# 椭圆形 长方形 PageControl 轮播图点
 	pod 'XHPageControl'					# 一个简洁好用的自定义UIPageControl（https://github.com/zxhkit/XHPageControl）
+	pod 'FSPagerView'
 
 	pod 'SDWebImage'					# 请求图片
 	pod 'SDWebImageWebPCoder'			# SDWebImage的WebP编码器插件，使用libwebp
@@ -422,8 +427,10 @@ def collection_iOS_OC #collection布局
 	
 	pod 'JJCollectionViewRoundFlowLayout'	# JJCollectionViewRoundFlowLayout可设置CollectionView的BackgroundColor、Cell的对齐方式，可跟据用户Cell个数计算背景图尺寸，可自定义是否包括计算CollectionViewHeaderView、CollectionViewFootererView或只计算Cells。设置简单，可自定义背景颜色偏移，设置显示方向（竖向、横向）显示,不同Section设置不同的背景颜色，设置Cell的对齐方式，支持左对齐，右对齐，居中。
 											# (OC：https://github.com/kingjiajie/JJCollectionViewRoundFlowLayout)
+											# 2025.11.24使用简单，可用
 	
 	pod 'DYWaterFallFlowLayout'				# 可设置不同分组等高或等宽或分页的瀑布流
+
 
 
 	# pod 'CollectionSwipableCellExtension', :git => 'https://github.com/KosyanMedia/CollectionSwipableCellExtension.git'	# swift，UICollectionView和UITableView的可刷按钮，左滑按钮
@@ -588,7 +595,9 @@ def nav_iOS #导航栏nav
 
 
 	pod 'JNAPushPopCompletionBlock'	# 2019.UINavigationController Push/Pop UIViewController的完成block
-	
+
+	pod 'ZHHRootNavigationController' #自定义导航控制器，支持每个视图控制器独立导航栏，全屏滑动返回、可配置滑动范围，并支持右侧边缘左滑 push 控制器。
+									  # iOS 13.0+
 		
 end
 
@@ -969,6 +978,34 @@ target 'LSProjectTool' do 								# 项目工程名
   end
 end
 
+install! 'cocoapods', #这些配置通常使用默认值即可
+  :clean => true, #安装过程中清理未使用的文件，删除podspec和项目支持的平台指定的pod未使用的任何文件
+  :deterministic_uuids => true, #为Pods项目生成确定的UUID，这有助于保持项目文件的稳定性
+  :integrate_targets => true, #将已安装的pod集成到你的Xcode项目中。如果设为false，Pod会被下载但不会集成到项目中
+  :warn_for_unused_master_specs_repo => false, #屏蔽关于未使用master specs仓库的警告
+  :lock_pod_sources => false #经常修改pod库中的文件，可以将 :lock_pod_sources 设为 false 来避免频繁的解锁提示
+
+# 常用配置项说明：
+# clean：是否清理未使用的文件，默认true
+# deterministic_uuids：是否生成确定性UUID，默认true
+# integrate_targets：是否将pod集成到项目中，默认true
+# lock_pod_sources：是否锁定pod源文件，默认true
+# warn_for_unused_master_specs_repo：是否显示未使用master仓库警告
+
+
+
+#以下这段代码是CocoaPods的post_install钩子，用于在pod安装完成后修改项目的构建设置
+# 代码功能详解：
+# 1）.post_install钩子：在CocoaPods完成依赖安装后自动执行
+# 2）.遍历所有target：对项目中的每个pod目标进行配置
+# 3）.设置排除架构：清除了模拟器架构排除列表，解决M1芯片兼容性问题
+# 	  'EXCLUDED_ARCHS[sdk=iphonesimulator*]' = '' 确保模拟器能正常运行
+#     架构兼容性修复，这个设置清除了模拟器架构排除列表，特别适合解决M1/M2芯片Mac上的模拟器运行问题
+# 4）.统一部署目标：将所有pod的最低iOS版本设置为11.0,避免不同pod库使用不同iOS版本导致的编译冲突
+#     config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
+#     将所有pod库的最低iOS版本统一设置为11.0，避免不同库使用不同版本导致的编译冲突
+# 使用位置：
+# 这段代码应该放在Podfile文件的末尾，在所有target定义和install配置之后。
 
 #6.
 # post_install do |installer|
@@ -1043,6 +1080,7 @@ end
 	post_install do |installer|
   		installer.pods_project.targets.each do |target|
     		target.build_configurations.each do |config|
+    			config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = ''
       			config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
     		end
   		end

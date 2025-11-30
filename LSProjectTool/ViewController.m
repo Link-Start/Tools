@@ -204,6 +204,13 @@
 //            NSLog(@"跳转 网络权限 之后");
 //        }
 //    }];
+    
+    
+    NSString *urlStr = @"http://139.196.169.216:10018/auth/v3.1/user/sendVerifiyCode";
+    
+//    [LSNetworking  ]
+    
+    
 }
 
 - (NSString *)obfuscate:(NSString *)string withKey:(NSString *)key

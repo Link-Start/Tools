@@ -24,14 +24,26 @@ UIImageWriteToSavedPhotosAlbum(image, self, nil, nil); //保存的路径
 
 //   UIGraphicsBeginImageContext(CGSizeMake(view.bounds.size.width, view.bounds.size.height));//模糊图
     
-//    UIGraphicsBeginImageContextWithOptions(CGSize size, BOOL opaque, CGFloat scale)
-//    opaque 透明度，不透明设为YES；
-//    scale  缩放因子，设0时系统自动设置缩放比例图片清晰；设1.0时模糊
-    UIGraphicsBeginImageContextWithOptions(view.bounds.size, NO, 0.0);//原图_高清图
-    
-    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    UIImage *image;
+    if (@available(iOS 17.0, *)) { // iOS17.UIGraphicsBeginImageContext被deprecated了
+        UIGraphicsImageRendererFormat *format = [[UIGraphicsImageRendererFormat alloc] init];
+        format.opaque = NO;
+        format.scale = 0.0;
+        UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:view.bounds.size format:format];
+        image = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
+            CGContextRef context = rendererContext.CGContext;
+            [view.layer renderInContext:context];
+        }];
+    } else {
+        //    UIGraphicsBeginImageContextWithOptions(CGSize size, BOOL opaque, CGFloat scale)
+        //    opaque 透明度，不透明设为YES；
+        //    scale  缩放因子，设0时系统自动设置缩放比例图片清晰；设1.0时模糊
+        UIGraphicsBeginImageContextWithOptions(view.bounds.size, NO, 0.0);//原图_高清图
+        
+        [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+        image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    }
     return image;
 }
 

@@ -45,19 +45,29 @@ iPhoneXR           6.1英       896*414        @2x       828x1792
 //iPhone 12/12 Pro/Pro Max                  47
 
 
-//状态栏高度 20/44
-#define kLS_StatusBarHeight ([[UIApplication sharedApplication] statusBarFrame].size.height)
+#ifndef kLS_StatusBarHeight_
 ///状态栏高度 , <语法糖>
 #define kLS_StatusBarHeight_ \
     ({\
         CGFloat statusBarHeight = 0;\
         if (@available(iOS 13.0, *)) {\
-            statusBarHeight = [UIApplication sharedApplication].windows.firstObject.windowScene.statusBarManager.statusBarFrame.size.height;\
+            UIWindowScene *currentScene;\
+            currentScene = [UIApplication sharedApplication].windows.firstObject.windowScene;\
+            if (!currentScene) {\
+                currentScene = (UIWindowScene *)[UIApplication sharedApplication].connectedScenes.anyObject;\
+             }\
+            statusBarHeight = currentScene.statusBarManager.statusBarFrame.size.height;\
         } else {\
             statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;\
         }\
         statusBarHeight;\
     })
+#endif
+
+#ifndef kLS_StatusBarHeight
+//状态栏高度 20/44
+#define kLS_StatusBarHeight ([[UIApplication sharedApplication] statusBarFrame].size.height)
+#endif
 
 //navBar高度
 #define kLS_NavigationBarHeight 44.0
