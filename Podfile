@@ -396,6 +396,7 @@ def table_iOS_OC #tableView 的封装
 	# pod 'RWTableView'			#参考mvvm tableView封装
 	#IGListKitDemoOC
 	pod 'YBHandyList'		#让 UITableView/UICollectionView 更加简单优雅,轻易实现列表动态化、模块化、MVVM 架构
+	pod 'IQListKit'			#模型驱动的UITableView/UICollectionView
 
 
 	pod 'SJStaticTableView'			#2017.基于MVVM，用于快速搭建设置页，个人信息页表格等静态表格的框架
