@@ -41,6 +41,8 @@
 		08F658601FF3D270007880CC /* UIViewController+AlertViewAndActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6585D1FF3D270007880CC /* UIViewController+AlertViewAndActionSheet.m */; };
 		08FB5E24202DA8B1003F1132 /* LSButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FB5E20202DA8B0003F1132 /* LSButton.m */; };
 		08FB5E25202DA8B1003F1132 /* LSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FB5E23202DA8B1003F1132 /* LSLabel.m */; };
+		251B8C1A7099F4C187797D4B /* Pods_LSProjectToolTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7128DA83436120F806972C75 /* Pods_LSProjectToolTests.framework */; };
+		2C08B2D58BB651303C16F77D /* Pods_LSProjectToolUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E621858B5B835B01E42B24E7 /* Pods_LSProjectToolUITests.framework */; };
 		3D2005C721F9C97E0010425C /* LSConstAppKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2005C621F9C97E0010425C /* LSConstAppKey.m */; };
 		3D2005CA21F9CA970010425C /* LSConstUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2005C921F9CA970010425C /* LSConstUrl.m */; };
 		3D2156DA21F09A54006EDACE /* JsonTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2156D921F09A54006EDACE /* JsonTools.m */; };
@@ -73,7 +75,6 @@
 		487FC63D20BE937700FC19FA /* UIButton+UIControl_buttonCon.m in Sources */ = {isa = PBXBuildFile; fileRef = 487FC63B20BE937700FC19FA /* UIButton+UIControl_buttonCon.m */; };
 		48B715482184710900A32E5D /* UISearchBar+LSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B715472184710900A32E5D /* UISearchBar+LSExtension.m */; };
 		48C35B7F2137E71700B0AA2B /* LocationTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 48C35B7E2137E71700B0AA2B /* LocationTransform.m */; };
-		83124E4D88DC06B1792327A8 /* Pods_LSProjectTool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C53BE9EC7EC41315362254 /* Pods_LSProjectTool.framework */; };
 		A7029FB9266F200600D42B84 /* ZYNetworkAccessibility.m in Sources */ = {isa = PBXBuildFile; fileRef = A7029FB8266F200600D42B84 /* ZYNetworkAccessibility.m */; };
 		A70419872806BB2C00913743 /* HCSStarRatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = A70419862806BB2C00913743 /* HCSStarRatingView.m */; };
 		A704198F2806C12E00913743 /* HCSStarRatingView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A704198E2806C12E00913743 /* HCSStarRatingView.bundle */; };
@@ -357,7 +358,6 @@
 		A7F8328A2A67CA1F00C7F7C7 /* UIDevice+SHInterfaceOrientationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F832882A67CA1F00C7F7C7 /* UIDevice+SHInterfaceOrientationManager.m */; };
 		A7F8328B2A67CA1F00C7F7C7 /* UIViewController+SHInterfaceOrientationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F832892A67CA1F00C7F7C7 /* UIViewController+SHInterfaceOrientationManager.m */; };
 		A7F8328F2A67CA5300C7F7C7 /* UIInterface+HXRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F8328D2A67CA5300C7F7C7 /* UIInterface+HXRotation.m */; };
-		AAFFC729DCEA40F0A2B0D88D /* Pods_LSProjectToolTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCC4DBE5D19BF7E0AAFF332D /* Pods_LSProjectToolTests.framework */; };
 		AE0C7D9C1E0BBE750051269F /* link.html in Resources */ = {isa = PBXBuildFile; fileRef = AE0C7D9B1E0BBE750051269F /* link.html */; };
 		AE0C7D9E1E0BC2A50051269F /* link.js in Resources */ = {isa = PBXBuildFile; fileRef = AE0C7D9D1E0BC2A50051269F /* link.js */; };
 		AE24FCDA1DAB411C00740806 /* SCMath.m in Sources */ = {isa = PBXBuildFile; fileRef = AE24FCD91DAB411C00740806 /* SCMath.m */; };
@@ -418,7 +418,7 @@
 		AECFA25B1D376C5F005F5DE6 /* LSProjectToolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AECFA25A1D376C5F005F5DE6 /* LSProjectToolTests.m */; };
 		AECFA2661D376C5F005F5DE6 /* LSProjectToolUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = AECFA2651D376C5F005F5DE6 /* LSProjectToolUITests.m */; };
 		AED9083C1D3CB35700E00C02 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AED9083E1D3CB35700E00C02 /* Localizable.strings */; };
-		E46E18DF084539324454B871 /* Pods_LSProjectToolUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 821E60571B22AEE397AB4EE2 /* Pods_LSProjectToolUITests.framework */; };
+		F278A1034D1C7B8F146F8A8E /* Pods_LSProjectTool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EC078536BBD0AF581FD8BFA /* Pods_LSProjectTool.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -592,9 +592,12 @@
 		48C35B7D2137E71700B0AA2B /* LocationTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationTransform.h; sourceTree = "<group>"; };
 		48C35B7E2137E71700B0AA2B /* LocationTransform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationTransform.m; sourceTree = "<group>"; };
 		48F64E9220E205C1009BA3A1 /* UIScrollVIew代理方法.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollVIew代理方法.h"; sourceTree = "<group>"; };
-		77D6B28DC7A1EE10042FC61F /* Pods-LSProjectToolTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LSProjectToolTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LSProjectToolTests/Pods-LSProjectToolTests.debug.xcconfig"; sourceTree = "<group>"; };
-		821E60571B22AEE397AB4EE2 /* Pods_LSProjectToolUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LSProjectToolUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9669D094AB10EBCD586505F1 /* Pods-LSProjectTool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LSProjectTool.release.xcconfig"; path = "Pods/Target Support Files/Pods-LSProjectTool/Pods-LSProjectTool.release.xcconfig"; sourceTree = "<group>"; };
+		4EC078536BBD0AF581FD8BFA /* Pods_LSProjectTool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LSProjectTool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		559AE3D231C33B6735C5004E /* Pods-LSProjectTool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LSProjectTool.debug.xcconfig"; path = "Target Support Files/Pods-LSProjectTool/Pods-LSProjectTool.debug.xcconfig"; sourceTree = "<group>"; };
+		7128DA83436120F806972C75 /* Pods_LSProjectToolTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LSProjectToolTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A1F8EBB86233E130E9B0466 /* Pods-LSProjectToolUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LSProjectToolUITests.release.xcconfig"; path = "Target Support Files/Pods-LSProjectToolUITests/Pods-LSProjectToolUITests.release.xcconfig"; sourceTree = "<group>"; };
+		8D1F87485B631FE03DD02F3A /* Pods-LSProjectToolTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LSProjectToolTests.debug.xcconfig"; path = "Target Support Files/Pods-LSProjectToolTests/Pods-LSProjectToolTests.debug.xcconfig"; sourceTree = "<group>"; };
+		997997BBBEEEB1A704651378 /* Pods-LSProjectTool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LSProjectTool.release.xcconfig"; path = "Target Support Files/Pods-LSProjectTool/Pods-LSProjectTool.release.xcconfig"; sourceTree = "<group>"; };
 		A7029FB7266F200600D42B84 /* ZYNetworkAccessibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYNetworkAccessibility.h; sourceTree = "<group>"; };
 		A7029FB8266F200600D42B84 /* ZYNetworkAccessibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYNetworkAccessibility.m; sourceTree = "<group>"; };
 		A70419852806BB2C00913743 /* HCSStarRatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSStarRatingView.h; sourceTree = "<group>"; };
@@ -1330,12 +1333,9 @@
 		AED908401D3CB48900E00C02 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		AED908411D3CB48900E00C02 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		AEE9A6971DD07F9E000990C5 /* 获取iOS设备键盘高度.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "获取iOS设备键盘高度.h"; sourceTree = "<group>"; };
-		B2C53BE9EC7EC41315362254 /* Pods_LSProjectTool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LSProjectTool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C69ABA5E6EE0EAF0C5A71735 /* Pods-LSProjectTool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LSProjectTool.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LSProjectTool/Pods-LSProjectTool.debug.xcconfig"; sourceTree = "<group>"; };
-		DB0A56D400258C26CC378921 /* Pods-LSProjectToolUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LSProjectToolUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LSProjectToolUITests/Pods-LSProjectToolUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		DCC4DBE5D19BF7E0AAFF332D /* Pods_LSProjectToolTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LSProjectToolTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FDEAC8A311A145A80907489D /* Pods-LSProjectToolUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LSProjectToolUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LSProjectToolUITests/Pods-LSProjectToolUITests.release.xcconfig"; sourceTree = "<group>"; };
-		FE31EAEFFFA43EE6B03170CD /* Pods-LSProjectToolTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LSProjectToolTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LSProjectToolTests/Pods-LSProjectToolTests.release.xcconfig"; sourceTree = "<group>"; };
+		BBE8302706F06E337C406516 /* Pods-LSProjectToolUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LSProjectToolUITests.debug.xcconfig"; path = "Target Support Files/Pods-LSProjectToolUITests/Pods-LSProjectToolUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		CBCAF28CA8B23B20AE131F3E /* Pods-LSProjectToolTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LSProjectToolTests.release.xcconfig"; path = "Target Support Files/Pods-LSProjectToolTests/Pods-LSProjectToolTests.release.xcconfig"; sourceTree = "<group>"; };
+		E621858B5B835B01E42B24E7 /* Pods_LSProjectToolUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LSProjectToolUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1371,7 +1371,7 @@
 				A70CFF5326A6B5DC008F47AA /* libc++.tbd in Frameworks */,
 				486443932119CC7100C3B9BF /* libresolv.tbd in Frameworks */,
 				AE24FCE21DAB41FB00740806 /* libz.tbd in Frameworks */,
-				83124E4D88DC06B1792327A8 /* Pods_LSProjectTool.framework in Frameworks */,
+				F278A1034D1C7B8F146F8A8E /* Pods_LSProjectTool.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1379,7 +1379,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AAFFC729DCEA40F0A2B0D88D /* Pods_LSProjectToolTests.framework in Frameworks */,
+				251B8C1A7099F4C187797D4B /* Pods_LSProjectToolTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1387,7 +1387,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E46E18DF084539324454B871 /* Pods_LSProjectToolUITests.framework in Frameworks */,
+				2C08B2D58BB651303C16F77D /* Pods_LSProjectToolUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1662,9 +1662,9 @@
 				486443862119CC1C00C3B9BF /* CoreTelephony.framework */,
 				486443842119CC1300C3B9BF /* CoreFoundation.framework */,
 				486443822119CC0B00C3B9BF /* CFNetwork.framework */,
-				B2C53BE9EC7EC41315362254 /* Pods_LSProjectTool.framework */,
-				DCC4DBE5D19BF7E0AAFF332D /* Pods_LSProjectToolTests.framework */,
-				821E60571B22AEE397AB4EE2 /* Pods_LSProjectToolUITests.framework */,
+				4EC078536BBD0AF581FD8BFA /* Pods_LSProjectTool.framework */,
+				7128DA83436120F806972C75 /* Pods_LSProjectToolTests.framework */,
+				E621858B5B835B01E42B24E7 /* Pods_LSProjectToolUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1675,6 +1675,19 @@
 				48F64E9220E205C1009BA3A1 /* UIScrollVIew代理方法.h */,
 			);
 			path = "UI控件";
+			sourceTree = "<group>";
+		};
+		4AA7F7DA6AB7B73C27C99805 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				559AE3D231C33B6735C5004E /* Pods-LSProjectTool.debug.xcconfig */,
+				997997BBBEEEB1A704651378 /* Pods-LSProjectTool.release.xcconfig */,
+				8D1F87485B631FE03DD02F3A /* Pods-LSProjectToolTests.debug.xcconfig */,
+				CBCAF28CA8B23B20AE131F3E /* Pods-LSProjectToolTests.release.xcconfig */,
+				BBE8302706F06E337C406516 /* Pods-LSProjectToolUITests.debug.xcconfig */,
+				7A1F8EBB86233E130E9B0466 /* Pods-LSProjectToolUITests.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		A7029FB6266F200600D42B84 /* ZYNetworkAccessibility */ = {
@@ -2939,19 +2952,6 @@
 			path = File;
 			sourceTree = "<group>";
 		};
-		AE8C7433567BD08FC5858970 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				C69ABA5E6EE0EAF0C5A71735 /* Pods-LSProjectTool.debug.xcconfig */,
-				9669D094AB10EBCD586505F1 /* Pods-LSProjectTool.release.xcconfig */,
-				77D6B28DC7A1EE10042FC61F /* Pods-LSProjectToolTests.debug.xcconfig */,
-				FE31EAEFFFA43EE6B03170CD /* Pods-LSProjectToolTests.release.xcconfig */,
-				DB0A56D400258C26CC378921 /* Pods-LSProjectToolUITests.debug.xcconfig */,
-				FDEAC8A311A145A80907489D /* Pods-LSProjectToolUITests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		AE94D4CF1DB4747D001EBF6E /* 文件管理 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3421,7 +3421,7 @@
 				A70B202D2A84CECD00C5BAE5 /* LSNotificationService */,
 				AECFA23E1D376C5F005F5DE6 /* Products */,
 				486443812119CC0B00C3B9BF /* Frameworks */,
-				AE8C7433567BD08FC5858970 /* Pods */,
+				4AA7F7DA6AB7B73C27C99805 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -3524,13 +3524,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AECFA26A1D376C5F005F5DE6 /* Build configuration list for PBXNativeTarget "LSProjectTool" */;
 			buildPhases = (
-				BA9B95A648B7A7ABA20A9C76 /* [CP] Check Pods Manifest.lock */,
+				0BF6601C86DC7017C629EBE6 /* [CP] Check Pods Manifest.lock */,
 				AECFA2391D376C5F005F5DE6 /* Sources */,
 				AECFA23A1D376C5F005F5DE6 /* Frameworks */,
 				AECFA23B1D376C5F005F5DE6 /* Resources */,
-				445FED9E83BC539325DD3A73 /* [CP] Copy Pods Resources */,
-				007B9141E505E74056475F9D /* [CP] Embed Pods Frameworks */,
 				A70B20352A84CECD00C5BAE5 /* Embed Foundation Extensions */,
+				D793E0739AAA08ADFE00F6DE /* [CP] Embed Pods Frameworks */,
+				3C26696FDC9BD91DC72FEEB5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3546,7 +3546,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AECFA26D1D376C5F005F5DE6 /* Build configuration list for PBXNativeTarget "LSProjectToolTests" */;
 			buildPhases = (
-				D93F460A56D9E61C4893C15C /* [CP] Check Pods Manifest.lock */,
+				70C3CED702D155CD02258F55 /* [CP] Check Pods Manifest.lock */,
 				AECFA2521D376C5F005F5DE6 /* Sources */,
 				AECFA2531D376C5F005F5DE6 /* Frameworks */,
 				AECFA2541D376C5F005F5DE6 /* Resources */,
@@ -3565,7 +3565,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AECFA2701D376C5F005F5DE6 /* Build configuration list for PBXNativeTarget "LSProjectToolUITests" */;
 			buildPhases = (
-				E2EE469DFE7A77F75ACCDC69 /* [CP] Check Pods Manifest.lock */,
+				9E92526E0D9661B69D3D4BCF /* [CP] Check Pods Manifest.lock */,
 				AECFA25D1D376C5F005F5DE6 /* Sources */,
 				AECFA25E1D376C5F005F5DE6 /* Frameworks */,
 				AECFA25F1D376C5F005F5DE6 /* Resources */,
@@ -3712,7 +3712,105 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		007B9141E505E74056475F9D /* [CP] Embed Pods Frameworks */ = {
+		0BF6601C86DC7017C629EBE6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LSProjectTool-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3C26696FDC9BD91DC72FEEB5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LSProjectTool/Pods-LSProjectTool-resources.sh",
+				"${PODS_ROOT}/KJBannerView/Sources/KJBannerView/KJBannerView.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/KJPlayer/KJPlayer.bundle",
+				"${BUILT_PRODUCTS_DIR}/KJPlayer/KJPlayer.framework/DBPlayer.momd",
+				"${PODS_ROOT}/KJPlayer/Sources/MidiPlayer/KJMidiSource.bundle",
+				"${PODS_ROOT}/UMCCommonLog/UMCommonLog/UMCommonLog.bundle",
+				"${PODS_ROOT}/UMPush/UMPush/UMPushResource.bundle",
+				"${PODS_ROOT}/UMShare/UMShare/UMSocialUI/UMSocialSDKResources.bundle",
+				"${PODS_ROOT}/ZFPlayer/ZFPlayer/Classes/ControlView/ZFPlayer.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/KJBannerView.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/KJPlayer.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/DBPlayer.momd",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/KJMidiSource.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UMCommonLog.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UMPushResource.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UMSocialSDKResources.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ZFPlayer.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LSProjectTool/Pods-LSProjectTool-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		70C3CED702D155CD02258F55 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LSProjectToolTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9E92526E0D9661B69D3D4BCF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LSProjectToolUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D793E0739AAA08ADFE00F6DE /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3725,9 +3823,11 @@
 				"${BUILT_PRODUCTS_DIR}/AFNetworking+RetryPolicy/AFNetworking_RetryPolicy.framework",
 				"${BUILT_PRODUCTS_DIR}/AMLeaksFinder/AMLeaksFinder.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AppRouter/AppRouter.framework",
 				"${BUILT_PRODUCTS_DIR}/BMLongPressDragCellCollectionView/BMLongPressDragCellCollectionView.framework",
 				"${BUILT_PRODUCTS_DIR}/BRPickerView/BRPickerView.framework",
 				"${BUILT_PRODUCTS_DIR}/BabyBluetooth/BabyBluetooth.framework",
+				"${BUILT_PRODUCTS_DIR}/BadgeSwift/BadgeSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/BeeHive/BeeHive.framework",
 				"${BUILT_PRODUCTS_DIR}/CCExcelView/CCExcelView.framework",
 				"${BUILT_PRODUCTS_DIR}/CHTCollectionViewWaterfallLayout/CHTCollectionViewWaterfallLayout.framework",
@@ -3736,10 +3836,11 @@
 				"${BUILT_PRODUCTS_DIR}/CWLateralSlide/CWLateralSlide.framework",
 				"${BUILT_PRODUCTS_DIR}/CYLTabBarController/CYLTabBarController.framework",
 				"${BUILT_PRODUCTS_DIR}/CalendarLib/CalendarLib.framework",
-				"${BUILT_PRODUCTS_DIR}/ChainThen/ChainThen.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/CustomPopOverView/CustomPopOverView.framework",
+				"${BUILT_PRODUCTS_DIR}/DBCameraButton/DBCameraButton.framework",
 				"${BUILT_PRODUCTS_DIR}/DCURLRouter/DCURLRouter.framework",
+				"${BUILT_PRODUCTS_DIR}/DGCharts/DGCharts.framework",
 				"${BUILT_PRODUCTS_DIR}/DXPopover/DXPopover.framework",
 				"${BUILT_PRODUCTS_DIR}/DYWaterFallFlowLayout/DYWaterFallFlowLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
@@ -3772,6 +3873,7 @@
 				"${BUILT_PRODUCTS_DIR}/HBDStatusBar/HBDStatusBar.framework",
 				"${BUILT_PRODUCTS_DIR}/HDCollectionView/HDCollectionView.framework",
 				"${BUILT_PRODUCTS_DIR}/HDListViewDiffer/HDListViewDiffer.framework",
+				"${BUILT_PRODUCTS_DIR}/HHRouter/HHRouter.framework",
 				"${BUILT_PRODUCTS_DIR}/HMSegmentedControl/HMSegmentedControl.framework",
 				"${BUILT_PRODUCTS_DIR}/HSSetTableViewController/HSSetTableViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/HWPanModal/HWPanModal.framework",
@@ -3786,12 +3888,28 @@
 				"${BUILT_PRODUCTS_DIR}/IGListDiffKit/IGListDiffKit.framework",
 				"${BUILT_PRODUCTS_DIR}/IGListKit/IGListKit.framework",
 				"${BUILT_PRODUCTS_DIR}/IMYAOPTableView/IMYAOPTableView.framework",
+				"${BUILT_PRODUCTS_DIR}/IQAPIClient/IQAPIClient.framework",
+				"${BUILT_PRODUCTS_DIR}/IQAudioRecorderController/IQAudioRecorderController.framework",
+				"${BUILT_PRODUCTS_DIR}/IQDropDownTextField/IQDropDownTextField.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardCore/IQKeyboardCore.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardNotification/IQKeyboardNotification.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardReturnManager/IQKeyboardReturnManager.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardToolbar/IQKeyboardToolbar.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardToolbarManager/IQKeyboardToolbarManager.framework",
+				"${BUILT_PRODUCTS_DIR}/IQListKit/IQListKit.framework",
+				"${BUILT_PRODUCTS_DIR}/IQMediaPickerController/IQMediaPickerController.framework",
+				"${BUILT_PRODUCTS_DIR}/IQPullToRefresh/IQPullToRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/IQTextInputViewNotification/IQTextInputViewNotification.framework",
+				"${BUILT_PRODUCTS_DIR}/IQTextView/IQTextView.framework",
+				"${BUILT_PRODUCTS_DIR}/IQUtility/IQUtility.framework",
 				"${BUILT_PRODUCTS_DIR}/JFCitySelector/JFCitySelector.framework",
 				"${BUILT_PRODUCTS_DIR}/JHChainableAnimations/JHChainableAnimations.framework",
 				"${BUILT_PRODUCTS_DIR}/JHNoDataEmptyView/JHNoDataEmptyView.framework",
 				"${BUILT_PRODUCTS_DIR}/JHVerificationCodeView/JHVerificationCodeView.framework",
 				"${BUILT_PRODUCTS_DIR}/JJCollectionViewRoundFlowLayout/JJCollectionViewRoundFlowLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/JLRoutes/JLRoutes.framework",
 				"${BUILT_PRODUCTS_DIR}/JNAPushPopCompletionBlock/JNAPushPopCompletionBlock.framework",
 				"${BUILT_PRODUCTS_DIR}/JPImageresizerView/JPImageresizerView.framework",
 				"${BUILT_PRODUCTS_DIR}/JQCollectionViewWaterfallLayout/JQCollectionViewWaterfallLayout.framework",
@@ -3801,8 +3919,8 @@
 				"${BUILT_PRODUCTS_DIR}/JXCategoryView/JXCategoryView.framework",
 				"${BUILT_PRODUCTS_DIR}/JXCategoryViewExt/JXCategoryViewExt.framework",
 				"${BUILT_PRODUCTS_DIR}/JXPagingView/JXPagingView.framework",
+				"${BUILT_PRODUCTS_DIR}/JXSegmentedView/JXSegmentedView.framework",
 				"${BUILT_PRODUCTS_DIR}/JZNavigationExtension/JZNavigationExtension.framework",
-				"${BUILT_PRODUCTS_DIR}/KJExceptionDemo/KJExceptionDemo.framework",
 				"${BUILT_PRODUCTS_DIR}/KMNavigationBarTransition/KMNavigationBarTransition.framework",
 				"${BUILT_PRODUCTS_DIR}/KNPhotoBrowser/KNPhotoBrowser.framework",
 				"${BUILT_PRODUCTS_DIR}/KSPhotoBrowser/KSPhotoBrowser.framework",
@@ -3840,6 +3958,7 @@
 				"${BUILT_PRODUCTS_DIR}/PPNumberButton/PPNumberButton.framework",
 				"${BUILT_PRODUCTS_DIR}/PPTextField/PPTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/PYSearch/PYSearch.framework",
+				"${BUILT_PRODUCTS_DIR}/Pageboy/Pageboy.framework",
 				"${BUILT_PRODUCTS_DIR}/Popover.OC/Popover_OC.framework",
 				"${BUILT_PRODUCTS_DIR}/PulsingHalo/PulsingHalo.framework",
 				"${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework",
@@ -3850,11 +3969,14 @@
 				"${BUILT_PRODUCTS_DIR}/RKNotificationHub/RKNotificationHub.framework",
 				"${BUILT_PRODUCTS_DIR}/RTRootNavigationController/RTRootNavigationController.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveObjC/ReactiveObjC.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactiveSwift/ReactiveSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Rickenbacker/Rickenbacker.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxFlow/RxFlow.framework",
 				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SCLAlertView-Objective-C/SCLAlertView_Objective_C.framework",
+				"${BUILT_PRODUCTS_DIR}/SCSiriWaveformView/SCSiriWaveformView.framework",
 				"${BUILT_PRODUCTS_DIR}/SDAutoLayout/SDAutoLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/SDMovableCellCollectionView/SDMovableCellCollectionView.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
@@ -3865,6 +3987,7 @@
 				"${BUILT_PRODUCTS_DIR}/SJStaticTableView/SJStaticTableView.framework",
 				"${BUILT_PRODUCTS_DIR}/SJUIKit/SJUIKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SJVideoPlayer/SJVideoPlayer.framework",
+				"${BUILT_PRODUCTS_DIR}/SPAlertController/SPAlertController.framework",
 				"${BUILT_PRODUCTS_DIR}/SQCombineRequest/SQCombineRequest.framework",
 				"${BUILT_PRODUCTS_DIR}/SQScanView/SQScanView.framework",
 				"${BUILT_PRODUCTS_DIR}/SSAlert/SSAlert.framework",
@@ -3872,6 +3995,7 @@
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftAlgorithms/Algorithms.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftRouter/SwiftRouter.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwipeTableView/SwipeTableView.framework",
 				"${BUILT_PRODUCTS_DIR}/TABAnimated/TABAnimated.framework",
@@ -3882,6 +4006,7 @@
 				"${BUILT_PRODUCTS_DIR}/TTGTagCollectionView/TTGTags.framework",
 				"${BUILT_PRODUCTS_DIR}/TYCyclePagerView/TYCyclePagerView.framework",
 				"${BUILT_PRODUCTS_DIR}/TZImagePickerController/TZImagePickerController.framework",
+				"${BUILT_PRODUCTS_DIR}/Tabman/Tabman.framework",
 				"${BUILT_PRODUCTS_DIR}/ThinkVerb/ThinkVerb.framework",
 				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
 				"${BUILT_PRODUCTS_DIR}/UICKeyChainStore/UICKeyChainStore.framework",
@@ -3890,6 +4015,7 @@
 				"${BUILT_PRODUCTS_DIR}/UITableView+FDTemplateLayoutCell/UITableView_FDTemplateLayoutCell.framework",
 				"${BUILT_PRODUCTS_DIR}/UITableViewDynamicLayoutCacheHeight/UITableViewDynamicLayoutCacheHeight.framework",
 				"${BUILT_PRODUCTS_DIR}/UIView+FDCollapsibleConstraints/UIView_FDCollapsibleConstraints.framework",
+				"${BUILT_PRODUCTS_DIR}/URLNavigator/URLNavigator.framework",
 				"${BUILT_PRODUCTS_DIR}/VVManager/VVManager.framework",
 				"${BUILT_PRODUCTS_DIR}/WMDragView/WMDragView.framework",
 				"${BUILT_PRODUCTS_DIR}/WMZBanner/WMZBanner.framework",
@@ -3934,6 +4060,7 @@
 				"${BUILT_PRODUCTS_DIR}/ZYBannerView/ZYBannerView.framework",
 				"${BUILT_PRODUCTS_DIR}/ZYCornerRadius/ZYCornerRadius.framework",
 				"${BUILT_PRODUCTS_DIR}/dsBridge/dsBridge.framework",
+				"${BUILT_PRODUCTS_DIR}/ios-voice-processor/ios_voice_processor.framework",
 				"${BUILT_PRODUCTS_DIR}/libwebp/libwebp.framework",
 				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
 			);
@@ -3945,9 +4072,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking_RetryPolicy.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AMLeaksFinder.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppRouter.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BMLongPressDragCellCollectionView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BRPickerView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BabyBluetooth.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BadgeSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BeeHive.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CCExcelView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CHTCollectionViewWaterfallLayout.framework",
@@ -3956,10 +4085,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CWLateralSlide.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CYLTabBarController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CalendarLib.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChainThen.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CustomPopOverView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DBCameraButton.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DCURLRouter.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DGCharts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DXPopover.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DYWaterFallFlowLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
@@ -3992,6 +4122,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HBDStatusBar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HDCollectionView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HDListViewDiffer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HHRouter.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HMSegmentedControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HSSetTableViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HWPanModal.framework",
@@ -4006,12 +4137,28 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IGListDiffKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IGListKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IMYAOPTableView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQAPIClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQAudioRecorderController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQDropDownTextField.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardNotification.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardReturnManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardToolbar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardToolbarManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQListKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQMediaPickerController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQPullToRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQTextInputViewNotification.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQTextView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQUtility.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JFCitySelector.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JHChainableAnimations.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JHNoDataEmptyView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JHVerificationCodeView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JJCollectionViewRoundFlowLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JLRoutes.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JNAPushPopCompletionBlock.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JPImageresizerView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JQCollectionViewWaterfallLayout.framework",
@@ -4021,8 +4168,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JXCategoryView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JXCategoryViewExt.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JXPagingView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JXSegmentedView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JZNavigationExtension.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KJExceptionDemo.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KMNavigationBarTransition.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KNPhotoBrowser.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KSPhotoBrowser.framework",
@@ -4060,6 +4207,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PPNumberButton.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PPTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PYSearch.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pageboy.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Popover_OC.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PulsingHalo.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureLayout.framework",
@@ -4070,11 +4218,14 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RKNotificationHub.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RTRootNavigationController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveObjC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rickenbacker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxFlow.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCLAlertView_Objective_C.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCSiriWaveformView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDAutoLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDMovableCellCollectionView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
@@ -4085,6 +4236,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SJStaticTableView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SJUIKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SJVideoPlayer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SPAlertController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQCombineRequest.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQScanView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SSAlert.framework",
@@ -4092,6 +4244,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Algorithms.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftRouter.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyStoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeTableView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TABAnimated.framework",
@@ -4102,6 +4255,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTGTags.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TYCyclePagerView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TZImagePickerController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Tabman.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ThinkVerb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICKeyChainStore.framework",
@@ -4110,6 +4264,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UITableView_FDTemplateLayoutCell.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UITableViewDynamicLayoutCacheHeight.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIView_FDCollapsibleConstraints.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/URLNavigator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VVManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WMDragView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WMZBanner.framework",
@@ -4154,98 +4309,13 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZYBannerView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZYCornerRadius.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/dsBridge.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ios_voice_processor.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libwebp.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LSProjectTool/Pods-LSProjectTool-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		445FED9E83BC539325DD3A73 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-LSProjectTool/Pods-LSProjectTool-resources.sh",
-				"${PODS_ROOT}/KJBannerView/Sources/KJBannerView/KJBannerView.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/KJPlayer/KJPlayer.bundle",
-				"${BUILT_PRODUCTS_DIR}/KJPlayer/KJPlayer.framework/DBPlayer.momd",
-				"${PODS_ROOT}/KJPlayer/Sources/MidiPlayer/KJMidiSource.bundle",
-				"${PODS_ROOT}/UMCCommonLog/UMCommonLog/UMCommonLog.bundle",
-				"${PODS_ROOT}/UMPush/UMPush/UMPushResource.bundle",
-				"${PODS_ROOT}/UMShare/UMShare/UMSocialUI/UMSocialSDKResources.bundle",
-				"${PODS_ROOT}/ZFPlayer/ZFPlayer/Classes/ControlView/ZFPlayer.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/KJBannerView.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/KJPlayer.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/DBPlayer.momd",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/KJMidiSource.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UMCommonLog.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UMPushResource.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UMSocialSDKResources.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ZFPlayer.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LSProjectTool/Pods-LSProjectTool-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BA9B95A648B7A7ABA20A9C76 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-LSProjectTool-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D93F460A56D9E61C4893C15C /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-LSProjectToolTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E2EE469DFE7A77F75ACCDC69 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-LSProjectToolUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -4879,7 +4949,7 @@
 		};
 		AECFA26B1D376C5F005F5DE6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C69ABA5E6EE0EAF0C5A71735 /* Pods-LSProjectTool.debug.xcconfig */;
+			baseConfigurationReference = 559AE3D231C33B6735C5004E /* Pods-LSProjectTool.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -4922,7 +4992,7 @@
 		};
 		AECFA26C1D376C5F005F5DE6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9669D094AB10EBCD586505F1 /* Pods-LSProjectTool.release.xcconfig */;
+			baseConfigurationReference = 997997BBBEEEB1A704651378 /* Pods-LSProjectTool.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -4964,7 +5034,7 @@
 		};
 		AECFA26E1D376C5F005F5DE6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 77D6B28DC7A1EE10042FC61F /* Pods-LSProjectToolTests.debug.xcconfig */;
+			baseConfigurationReference = 8D1F87485B631FE03DD02F3A /* Pods-LSProjectToolTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = LSProjectToolTests/Info.plist;
@@ -4977,7 +5047,7 @@
 		};
 		AECFA26F1D376C5F005F5DE6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FE31EAEFFFA43EE6B03170CD /* Pods-LSProjectToolTests.release.xcconfig */;
+			baseConfigurationReference = CBCAF28CA8B23B20AE131F3E /* Pods-LSProjectToolTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = LSProjectToolTests/Info.plist;
@@ -4990,7 +5060,7 @@
 		};
 		AECFA2711D376C5F005F5DE6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DB0A56D400258C26CC378921 /* Pods-LSProjectToolUITests.debug.xcconfig */;
+			baseConfigurationReference = BBE8302706F06E337C406516 /* Pods-LSProjectToolUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = LSProjectToolUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -5002,7 +5072,7 @@
 		};
 		AECFA2721D376C5F005F5DE6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FDEAC8A311A145A80907489D /* Pods-LSProjectToolUITests.release.xcconfig */;
+			baseConfigurationReference = 7A1F8EBB86233E130E9B0466 /* Pods-LSProjectToolUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = LSProjectToolUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

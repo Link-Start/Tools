@@ -1,5 +1,5 @@
 
-source 'https://github.com/CocoaPods/Specs.git'			#知名依赖库的来源地址
+source 'https://cdn.cocoapods.org/'			#知名依赖库的来源地址
 platform :ios, '13.0' #'9.0'	#平台ios,版本9.0 #取消对本行的注释以定义项目的全局平台
 inhibit_all_warnings!	#忽略引入库的所有警告
 use_frameworks!			#如果您不使用swift并且不想使用动态框架，请对本行进行注释。
@@ -14,6 +14,15 @@ def all_Pods
 	pod 'AFNetworking+RetryPolicy'		#增加了为使用AFNetworking提出的请求设置重试逻辑的能力
 	#ObjcAssociatedObjectHelpers		#Objc关联对象助手
 	pod 'YTKNetwork'					#YTK 网络请求
+
+	pod 'Moya'
+	# or 
+	pod 'Moya/RxSwift'
+	# or
+	pod 'Moya/ReactiveSwift'
+	# or
+	pod 'Moya/Combine'
+
 
 	pod 'SQCombineRequest'							#自带网络请求工具、使用的是AFNetworking 4.0版本，如果冲突可以使用下面方式导入(https://www.jianshu.com/p/2419af38c318)
 	# pod 'SQCombineRequest/SQCombineRequestCombine'	#不带网络工具，不依赖AFNetworking，要自己设置SQCombineRequestItem的netRequestTool属性
@@ -44,18 +53,45 @@ def all_Pods
 	pod 'ZYBannerView'					# 简单易用, 显示内容定制性强的可循环轮播控件. 可以实现类似淘宝商品详情中侧拉进入详情页的功能.
 	pod 'EllipsePageControl'			# 椭圆形 长方形 PageControl 轮播图点
 	pod 'XHPageControl'					# 一个简洁好用的自定义UIPageControl（https://github.com/zxhkit/XHPageControl）
-	pod 'FSPagerView'
+	pod 'FSPagerView'					#广告轮播图
 
 	pod 'SDWebImage'					# 请求图片
 	pod 'SDWebImageWebPCoder'			# SDWebImage的WebP编码器插件，使用libwebp
-	pod 'MBProgressHUD'					# loading动画
+	# pod 'MBProgressHUD'					# loading动画
+	pod 'MBProgressHUD', :git => 'https://github.com/jdg/MBProgressHUD.git', :branch => 'master'
 	pod 'SVProgressHUD'					# loading动画
 	pod 'NVActivityIndicatorView'		#加载动画集合 loading..动画  Swift语言
 	pod 'IQKeyboardManager'				#输入框键盘管理iOS8 and later
+	pod 'IQKeyboardManagerSwift'
+	pod 'IQListKit'
+	pod 'IQPullToRefresh'
+	pod 'IQDropDownTextField'
+	pod 'IQAPIClient'
+	pod 'IQUtility'
+	pod 'IQAudioRecorderController'
+	pod 'IQMediaPickerController'
+
+
 	pod 'MJExtension'					#数据模型转换
 	pod 'KakaJSON'						# 纯Swift版的JSON与Model转换框架已经开源上架，如果你的项目是用Swift写的Model，墙裂推荐使用KakaJSON（https://github.com/kakaopensource/KakaJSON）
 	pod 'MJRefresh'						#刷新
 	pod 'ReactiveObjC'					#RAC
+	pod 'RxSwift'
+  	pod 'RxCocoa'                     # 用于 UIKit/AppKit 的扩展
+
+  	#SwifterSwift 是 500 多个原生 Swift 扩展的集合，为 iOS、macOS、tvOS、watchOS 和 Linux 提供了（超过 500 个）适用于各种原生数据类型、UIKit 和 Cocoa 类的便捷方法、语法糖和性能改进。
+  # pod 'SwifterSwift/SwiftStdlib'
+  # pod 'SwifterSwift/Foundation'
+  # pod 'SwifterSwift/UIKit'
+  # pod 'SwifterSwift/CoreGraphics'
+  # pod 'SwifterSwift/CoreAnimation'
+  # pod 'SwifterSwift/Dispatch'
+  # pod 'SwifterSwift/WebKit'
+  # pod 'BonMot'
+
+  	# pod 'SoundControlKit'               #Swift软件包，用于在iOS应用程序中无缝录制和播放音频
+  	pod 'ios-voice-processor'             #专为实时语音音频处理而设计的异步iOS音频录制库
+  	
 	
 	pod 'SJAttributesFactory'			# OC，2019，iOS 富文本编辑, 让代码更清晰. 文本编辑, 高度计算, 正则匹配等待... 简便操作, 让你爽到爆!
 	# pod 'SJAttributesStringMaker'		# Swift，iOS 富文本编辑, 让代码更清晰. 文本编辑, 高度计算, 正则匹配等待... 简便操作, 让你爽到爆!
@@ -68,10 +104,15 @@ def all_Pods
 	# 组件化框架：MJRouter、CTMediator、BeeHive
 	pod 'DCURLRouter'					# URL路由：通过自定义URL实现控制器之间的跳转
 	# pod 'MGJRouter'					# URL路由：一个高效/灵活的 iOS URL Router(2015)
-	# pod 'JLRoutes'					# URL路由：
-	# pod 'HHRouter'					# URL路由：
+	pod 'JLRoutes'					# URL路由：
+	pod 'HHRouter'					# URL路由：
 	pod 'CTMediator'					# target-action：主要采用target-action的方式实现组件化，自身的功能独立，不需要依赖任何组件模块
 	pod 'BeeHive'						# protocol class：阿里的BeeHive。BeeHive借鉴了Spring Service、Apache DSO的架构理念，采用AOP+扩展App生命周期API形式，将业务功能、基础功能模块以模块方式以解决大型应用中的复杂问题，并让模块之间以Service形式调用，将复杂问题切分，以AOP方式模块化服务。
+										# swift 路由
+	pod 'URLNavigator'					# URLNavigator (与 DCURLRouter 功能相似，支持参数解析、URL匹配等) GitHub: https://github.com/devxoul/URLNavigator
+	pod 'RxFlow'						# 基于 RxSwift 的响应式路由 .https://github.com/RxSwiftCommunity/RxFlow
+	pod 'SwiftRouter'					# GitHub: https://github.com/skyline75489/SwiftRouter
+	pod 'AppRouter'						# GitHub: https://github.com/martinnormark/AppRouter
 
 	pod 'FLAnimatedImage'				# gif播放
 
@@ -85,6 +126,16 @@ def all_Pods
 	pod 'GKPageScrollView'				#(主要参考了JXPagingView，在他的基础上做了修改)iOS类似微博、抖音、网易云等个人详情页滑动嵌套效果
 	pod 'GKPageSmoothView'				#(主要参考了JXPagingView，在他的基础上做了修改)iOS类似微博、抖音、网易云等个人详情页滑动嵌套效果
 	pod 'SwipeTableView'				# 类似半糖、美丽说主页与QQ音乐歌曲列表布局效果，实现不同菜单的左右滑动切换，同时支持类似tableview的顶部工具栏悬停（既可以左右滑动，又可以上下滑动）。兼容下拉刷新，自定义 collectionview实现自适应 contentSize 还可实现瀑布流功能
+
+
+  	pod 'Tabman'                        #带有交互式指示条的强大分页视图控制器
+  	pod 'Pageboy'                       #一个简单、信息量大的页面视图控制器
+  
+  	pod 'JXCategoryView'                #分类切换滚动视图,OC
+  	pod 'JXPagingView/Pager'            # OC
+  	pod 'JXSegmentedView'               #分类切换滚动视图,swift
+  	pod 'JXPagingView/Paging'           # swift
+
 
 	pod 'GKVideoScrollView'				# iOS仿抖音等上下滑动切换视图，使用方式类似UITableView，支持不同cell切换
 	
@@ -102,6 +153,7 @@ def all_Pods
 	pod 'RKNotificationHub'				#2018,添加未读消息数显示提醒，为任何UIView添加一个通知角标
 	pod 'JSBadgeView'					#2020,添加带动画效果的未读消息数提醒
 	pod 'PPBadgeView'					#iOS自定义Badge组件, 支持UIView, UITabBarItem, UIBarButtonItem
+	pod 'BadgeSwift'                    #角标
 
 	pod 'SGQRCode'						#【iOS 原生二维码生成与扫描 -> 高仿微信】
 	pod 'UICKeyChainStore'				# UICKeyChainStore是iOS、watchOS、tvOS和macOS上钥匙串的简单包装。使使用钥匙串API像NSUserDefaults一样简单。
@@ -169,7 +221,8 @@ def all_Pods
   	pod 'BabyBluetooth','~> 0.7.0'	#一个非常容易使用的蓝牙库,
   	pod 'AAChartKit'				# 图表库 极其精美而又强大的跨平台数据可视化图表框架,支持柱状图、条形图、OC (pod 'AAChartKit', :git => 'https://github.com/AAChartModel/AAChartKit.git')
   	pod 'Charts'					# 图表：折线图、柱状图、饼图	swift，不支持模拟器(i386)	
-  	# pod 'DGCharts'					# Charts																		
+  	pod 'DGCharts'					# Charts
+  	pod 'DGCharts'					#																		
   	pod 'PNChart'					#
 
   	pod 'LFPhoneInfo'				#iOS快速获取硬件信息(获取网络运营商、网络状态、设备局域网 IP、是否越狱https://github.com/muzipiao/LFPhoneInfo)
@@ -318,9 +371,19 @@ def jiqimao_tools_ios	#机器猫工具库
 	# pod 'KJEmitterView/Opencv'		# 图片处理   Opencv图片模块该模块需要引入OpenCV库
 	# pod 'KJEmitterView/LeetCode'		# LeetCode算法模块
 	# pod 'KJEmitterView/Classes'		# 粒子效果模块
-	pod 'ChainThen'						#UIKit快捷链式创建
-	pod 'KJExceptionDemo'				#Crash防护
-	pod 'Foggy'						# 自动防护异常崩溃(未捕获的Objective-C异常(NSException),通过向自己发送SIGABRT信号导致程序崩溃)
+	# pod 'ChainThen'						#UIKit快捷链式创建
+	# pod 'KJExceptionDemo'				#Crash防护
+	# pod 'Foggy'						# 自动防护异常崩溃(未捕获的Objective-C异常(NSException),通过向自己发送SIGABRT信号导致程序崩溃)
+
+	pod 'HollowCodable'					#Codable：
+	pod 'Booming'						#导入网络架构API
+	pod 'NetworkCachePlugin'			#缓存插件
+	pod 'NetworkHudsPlugin'				#加加载动画插件
+	pod 'RxNetworks/RxSwift'			#响应式网络
+	pod 'RxNetworks/HandyJSON'			#数据解析
+	pod 'RxNetworks/RxSwift'			#响应式模块
+
+
 	# 说是不再维护 分离为新的库 KJCategories
 	# ---------------------------------------------------------------------------------------
 
@@ -339,7 +402,7 @@ def jiqimao_tools_ios	#机器猫工具库
 	# pod 'KJNetworkPlugin/Chain'		#
 
 	########### 响应式插件版网络基础架构 swift ###########
-	pod 'RxNetworks'
+	# pod 'RxNetworks'
 	# pod 'RxNetworks/MoyaNetwork'		# 导入网络架构API,该模块是基于Moya封装的网络API架构
 	# pod 'RxNetworks/HandyJSON'			# 导入数据解析,
 	# pod 'RxNetworks/MoyaPlugins'# 该模块主要就是基于moya封装网络相关插件
@@ -458,10 +521,31 @@ end
 
 def image_photo_ios	# 照片选择、图片浏览
 	pod 'TZImagePickerController'	#照片选择器
+	# pod 'TZImagePickerController/Basic' # No location code 照片选择器
 	pod 'ZLPhotoBrowser'			#照片选择器(4.0.0版本以后由Swift重新编写，该库OC版本不再维护)
 	# pod 'ZLPhotoBrowser-objc'		#照片选择器 (OC)
+
 	pod 'HXPhotoPicker'				#照片选择器 
 	pod 'HXPhotoPickerObjC'			#
+	#   # iOS 10.0+ 默认不支持GIF和网络图片
+  pod 'HXPhotoPicker'
+#   #使用`SwiftyGif`加载GIF图片
+#   pod 'HXPhotoPicker/SwiftyGif'
+# #使用`SDWebImage`加载GIF/网络图片
+#   pod 'HXPhotoPicker/SDWebImage'
+# #使用`Kingfisher v6.0.0`加载GIF/网络图片
+#   # pod 'HXPhotoPicker/Kingfisher'
+# #相机不包含定位功能
+#   pod 'HXPhotoPicker/NoLocation'
+# # #只有选择器
+# #   pod 'HXPhotoPicker/Picker'
+# # #只有编辑器
+# #   pod 'HXPhotoPicker/Editor'
+# # #只有相机
+# #   pod 'HXPhotoPicker/Camera'
+# #不包含定位功能
+#   pod 'HXPhotoPicker/Camera/Lite'
+
 	pod 'GKPhotoBrowser'			#iOS仿微信、今日头条等图片浏览器
 	pod 'KNPhotoBrowser'			#图片浏览器(本地和网络) ,视频浏览器 (本地和网络), 无耦合性,自定义控件,资源路径保存和获取, 完美适配 iPhone 以及 iPad ,屏幕旋转功能.
 
@@ -509,6 +593,10 @@ def alertView_ios #弹窗
 	pod 'STPopup'			#STPopup为iPhone和iPad提供STPopupController，它的工作原理与弹出式UINavigationController相同。它用Objective-C编写，并与Swift兼容。
 	pod 'SCLAlertView-Objective-C'	#美丽的动画警报视图。用Objective-C编写
 
+  # pod 'SDCAlertView'                    #弹窗
+  # pod 'SCLAlertView'                    #弹窗
+  # pod 'MMPopupView'
+  	pod 'SPAlertController'                 #提醒对话框，风格和微信原生几乎零误差。简书地址:www.jianshu.com/p/f55b98c352a7
 
 	pod 'Popover.OC'		#一款优雅好用的类似QQ和微信消息页面的右上角微型菜单弹窗, 最低支持iOS6
 	# pod 'FTPopOverMenu'	#类似QQ和微信消息页面的右上角微型菜单弹窗
@@ -519,7 +607,7 @@ def alertView_ios #弹窗
 
 
 	# pod 'QBPopupMenu'		#无需使用图片文件的 iOS 弹出式菜单.它的外观类似于iOS3 的UIMenuController(UIMenuController-iOS3~iOS16)
-
+	# pod 'QBPopupMenuSwift'
 
 	pod 'GKCover'			#一行代码显示遮罩视图，让你的弹窗更easy!
 	#LPFGuidView			#新功能引导，根据传入的视图（UIView子类）精确定位高亮显示，并自动生成遮罩蒙版。不必自己计算位置(https://github.com/lpfRoc/LPFGuidView)
@@ -884,15 +972,17 @@ def tx_IM_DevelopPods	#https://cloud.tencent.com/document/product/269/37060
 # 	2. 修改您Podfile中每个组件的本地路径， 路径修改为TUIKit文件夹相对您工程Podfile文件的路径 
 # 如 Demo中的  pod 'TUICore', :path => "../TUIKit/TUICore"
 # 说明： 示例图片中的TUIKit文件夹位于 Podfile的 上一层级（父目录），此时 我们使用 pod 'TUICore', :path => "../TUIKit/TUICore"
+# :path参数指定的是相对于Podfile所在目录的路径.
 # ---------------------------------------------------------------------------------------
 # 其他相对路径的表示如下：
 # 父目录： pod 'TUICore', :path => "../TUIKit/TUICore"
 # 当前目录： pod 'TUICore', :path => "TUIKit/TUICore"				# 经实践 当前目录 TUIKit前面不能加 /
 # 子目录：  pod 'TUICore', :path => "./TUIKit/TUICore"
+# 看到一个说法："./" 和不加前缀在CocoaPods路径指定中效果是一样的，都是相对路径。！！！！！！！！！！！！！！！！！！！
 # ---------------------------------------------------------------------------------------
 # 使用 DevelopPods源码集成 时，不能将文件拖入项目(不能使用copy if need)，直接将文件夹放到项目目录中，然后 path 中写对路径就行了，
 # 使用 DevelopPods源码集成 时，如果将文件拖入了项目，会报错：文件重复定义【Duplicate interface definition for class】
-
+#
 
 
 # 必须含有 .podspec  文件才能使用DevelopPods源码集成方式,
@@ -1000,7 +1090,7 @@ install! 'cocoapods', #这些配置通常使用默认值即可
 # 1）.post_install钩子：在CocoaPods完成依赖安装后自动执行
 # 2）.遍历所有target：对项目中的每个pod目标进行配置
 # 3）.设置排除架构：清除了模拟器架构排除列表，解决M1芯片兼容性问题
-# 	  'EXCLUDED_ARCHS[sdk=iphonesimulator*]' = '' 确保模拟器能正常运行
+# 	  'EXCLUDED_ARCHS[sdk=iphonesimulator*]' = ' 确保模拟器能正常运行
 #     架构兼容性修复，这个设置清除了模拟器架构排除列表，特别适合解决M1/M2芯片Mac上的模拟器运行问题
 # 4）.统一部署目标：将所有pod的最低iOS版本设置为11.0,避免不同pod库使用不同iOS版本导致的编译冲突
 #     config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'

@@ -102,6 +102,29 @@
     }
 }
 
+//-----------------------------------------------------------------------
++ (NSUInteger)hideAllHUDsForView:(UIView *)view animated:(BOOL)animated {
+    NSArray *huds = [MBProgressHUD allHUDsForView:view];
+    for (MBProgressHUD *hud in huds) {
+        hud.removeFromSuperViewOnHide = YES;
+//        [hud hide:animated];
+        [hud hideAnimated:animated];
+    }
+    return [huds count];
+}
+
++ (NSArray *)allHUDsForView:(UIView *)view {
+    NSMutableArray *huds = [NSMutableArray array];
+    NSArray *subviews = view.subviews;
+    for (UIView *aView in subviews) {
+        if ([aView isKindOfClass:self]) {
+            [huds addObject:aView];
+        }
+    }
+    return [NSArray arrayWithArray:huds];
+}
+//-----------------------------------------------------------------------
+
 
 
 @end

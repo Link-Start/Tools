@@ -16,8 +16,8 @@
 
  上下左右的间距: sectionInset(left, top, bottom, right)
  每一个Cell的大小: itemSize(width, height)
- 横向Cell之间的间距: minimumInteritemSpacing
- 纵向Cell之间的间距: minimumLineSpacing
+ 横向Cell之间的间距: minimumInteritemSpacing，左右item之间的距离
+ 纵向Cell之间的间距: minimumLineSpacing，上下item之间的距离
 
  */
 
@@ -25,8 +25,8 @@
 
 //上下左右的间距: sectionInset(left, top, bottom, right)
 //每一个Cell的大小: itemSize(width, height)
-//横向Cell之间的间距: minimumInteritemSpacing
-//纵向Cell之间的间距: minimumLineSpacing
+//横向Cell之间的间距: minimumInteritemSpacing，左右item之间的距离
+//纵向Cell之间的间距: minimumLineSpacing，上下item之间的距离
 
 
 

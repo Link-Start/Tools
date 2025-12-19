@@ -159,6 +159,7 @@ __has_include("AMapLocationKit/AMapLocationKit.h"))
     }
     //
     if (@available(iOS 11.0, *)){
+        //防止系统自动调整 UIScrollView 的内容边距（contentInset），避免因安全区域（如状态栏、导航栏、底部虚拟Home键）导致的布局错位或内容被遮挡。
         //UIScrollViewContentInsetAdjustmentNever:contentInset 不会被调整
         //UIScrollViewContentInsetAdjustmentAlways:contentInset 始终会被scrollView的safeAreaInsets来调整
         [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
@@ -173,8 +174,15 @@ __has_include("AMapLocationKit/AMapLocationKit.h"))
         
         UITableView.appearance.tableHeaderView.frame = CGRectMake(0, 0, kLS_ScreenWidth, CGFLOAT_MIN);
         UITableView.appearance.tableFooterView.frame = CGRectMake(0, 0, kLS_ScreenWidth, CGFLOAT_MIN);
+        UITableView.appearance.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0];
+        UITableView.appearance.backgroundView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0];
+        UICollectionView.appearance.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0];
+        UICollectionView.appearance.backgroundView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0];
     }
     
+    if (@available(iOS 15.0, *)) {
+        UITableView.appearance.sectionHeaderTopPadding = 0;
+    }
     
     
     //关闭程序中的暗黑模式
@@ -237,6 +245,50 @@ __has_include("AMapLocationKit/AMapLocationKit.h"))
     
     //    // 6.  IQKeyBoardManager 的右边的 Done 按钮的响应事件doneAction 事件未公开API,不过可以通过代理
     //    - (void)textFieldDidEndEditing:(UITextField *)textField
+    
+    
+//    
+////    // 启用 IQKeyboardManager
+//    IQKeyboardManager.shared.isEnabled = YES;
+//    // 启用工具栏（显示 Done 按钮）
+//    IQKeyboardManager.shared.enableAutoToolbar = YES;
+//    // 其他配置可选
+//    IQKeyboardManager.shared.resignOnTouchOutside = YES;
+//    IQKeyboardManager.shared.toolbarConfiguration.tintColor = UIColor_00CBE0;
+////    // 防止键盘弹起时scrollView位置偏移
+////    IQKeyboardManager.shared.layoutIfNeededOnUpdate = YES;
+//
+////    // 修复键盘收起后位置偏移问题
+//////    IQKeyboardManager.shared.shouldResignOnTouchOutside = YES;
+////    IQKeyboardManager.shared.toolbarDoneBarButtonItemText = @"完成"
+////    IQKeyboardManager.shared.toolbarConfiguration.doneBarButtonConfiguration = @"";
+////    IQKeyboardManager.shared.toolbarDoneBarButtonItem?.setTitleColor(.white, for: .normal) // 设置Done按钮文字颜色
+////    IQKeyboardManager.shared.toolbarDoneBarButtonItem?.backgroundColor = .blue // 设置Done按钮背景色
+//    // 键盘收起后恢复原始滚动位置
+//    [UIScrollView appearance].iq_ignoreContentInsetAdjustment = YES;// 保持原始内边距，不随键盘变化
+////    [UIScrollView appearance].iq_ignoreScrollingAdjustment = YES;// 在控制器中禁用特定滚动视图的自动滚动
+//    [UIScrollView appearance].iq_restoreContentOffset = YES; // 键盘收起后恢复原始滚动位置
+//    
+    // 设置键盘在 拖拽时 自动收起
+    [UIScrollView appearance].keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
+    
+    
+//    [[IQKeyboardManager sharedManager] setEnable:YES];
+//    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:YES];
+//    [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
+//    [IQKeyboardManager sharedManager].toolbarTintColor = UIColor_00CBE0;
+//    [IQKeyboardManager sharedManager].layoutIfNeededOnUpdate = YES;
+//
+//    // 在控制器中禁用特定滚动视图的自动滚动
+//    self.scrollView.shouldIgnoreScrollingAdjustment = true
+//    [UIScrollView appearance].shouldIgnoreScrollingAdjustment = YES;
+//    // 保持原始内边距，不随键盘变化
+//    self.scrollView.shouldIgnoreContentInsetAdjustment = true
+    [UIScrollView appearance].shouldIgnoreContentInsetAdjustment = YES;
+    // 键盘收起后恢复原始滚动位置
+//    self.scrollView.shouldRestoreScrollViewContentOffset = true
+    [UIScrollView appearance].shouldRestoreScrollViewContentOffset = YES;
+    
 }
 
 #pragma mark - 开屏广告
